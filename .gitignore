@@ -1,0 +1,40 @@
+# deps
+node_modules
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# next
+.next
+out
+build
+dist
+
+# runtime
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# tooling
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+.turbo
+coverage
+
+# os
+.DS_Store
+.idea
+.vscode

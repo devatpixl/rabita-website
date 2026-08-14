@@ -1,0 +1,140 @@
+// Full §7 sketch. No migration run in phase 2 — routes hit stubs and return
+// synthetic ids. Phase 3 flips the datasource to postgresql and prisma
+// migrate wires each model. Kept together in one file so the whole domain
+// is visible; splitting per model buys nothing at this size.
+//
+// fnrEncrypted is the sensitive column. Tax deduction requires the donor's
+// fødselsnummer be reported to Skatteetaten. Encryption at rest (KMS-held
+// key), column-level access restriction, retention policy, DPA and EEA
+// hosting must all be in place before this column is populated. Design it
+// in now (§7) or the donation flow gets rebuilt later.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Campaign {
+  id            String   @id @default(cuid())
+  goalNok       Int
+  raisedNok     Int
+  lastMonthNok  Int
+  phase         String
+  subCampaign   String?
+  updatedAt     DateTime @updatedAt
+}
+
+model Donation {
+  id                  String   @id @default(cuid())
+  amountNok           Int
+  recurring           Boolean  @default(false)
+  isZakat             Boolean  @default(false)
+  designation         String?
+  dedicationName      String?
+  dedicationRelation  String?
+  provider            String
+  status              String
+  createdAt           DateTime @default(now())
+  donor               Donor?   @relation(fields: [donorId], references: [id])
+  donorId             String?
+}
+
+model Donor {
+  id              String     @id @default(cuid())
+  name            String
+  email           String?
+  phone           String?
+  fnrEncrypted    String?    // §7 — encrypt at rest, restrict access, retention policy
+  taxOptIn        Boolean    @default(false)
+  createdAt       DateTime   @default(now())
+  donations       Donation[]
+  memberships     Member[]
+}
+
+model Member {
+  id             String   @id @default(cuid())
+  tier           String   // ordinary | voting | youth
+  votingEligible Boolean  @default(false)
+  paidUntil      DateTime?
+  donorId        String
+  donor          Donor    @relation(fields: [donorId], references: [id])
+  createdAt      DateTime @default(now())
+}
+
+model PrayerTime {
+  id       String   @id @default(cuid())
+  date     DateTime @unique
+  fajr     String
+  sunrise  String
+  dhuhr    String
+  asr      String
+  maghrib  String
+  isha     String
+  jumaTime String?
+}
+
+model Event {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  startsAt  DateTime
+  location  String
+  capacity  Int
+  body      String
+  createdAt DateTime @default(now())
+  rsvps     Rsvp[]
+}
+
+model Rsvp {
+  id               String   @id @default(cuid())
+  name             String
+  email            String
+  phone            String?
+  count            Int      @default(1)
+  // Explicit newsletter opt-in captured at RSVP time. GDPR: default
+  // false, must be user-ticked. Never pre-check the box in the UI.
+  newsletterOptIn  Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  eventId          String
+  event            Event    @relation(fields: [eventId], references: [id])
+}
+
+model VisitRequest {
+  id             String   @id @default(cuid())
+  groupType      String
+  size           Int
+  preferredDates String
+  contact        String
+  status         String   @default("new")
+  createdAt      DateTime @default(now())
+}
+
+model ServiceRequest {
+  id        String   @id @default(cuid())
+  kind      String   // nikah | janaza | shahada | counselling | hajj-umrah
+  contact   String
+  notes     String
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+}
+
+model Dedication {
+  id        String   @id @default(cuid())
+  name      String
+  relation  String?
+  message   String?
+  createdAt DateTime @default(now())
+  // Linked to a donation once the payment lands; nullable until then.
+  donationId String?
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+  confirmed Boolean  @default(false)
+}

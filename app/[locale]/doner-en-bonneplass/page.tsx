@@ -1,0 +1,100 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+import { PageHeader } from '@/components/page-header';
+import { Section, SectionBody, SectionHeading } from '@/components/primitives';
+import { RenderingPlaceholder } from '@/components/rendering-placeholder';
+import { openGiveSheet } from '@/components/giving-sheet';
+
+// §4.05 + §5. Sadaqa jariya flow. Name entered and acknowledged, something
+// to send to the family afterwards. Kept on one page for phase-2 shipping;
+// phase-3 adds the certificate email delivery.
+export default function SadaqaPage() {
+  const t = useTranslations('sadaqaPage');
+  const [name, setName] = useState('');
+  const [relation, setRelation] = useState('');
+  const [message, setMessage] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || submitting) return;
+    setSubmitting(true);
+    try {
+      // Persist dedication (stub). Real endpoint arrives in phase 3 alongside
+      // certificate email.
+      await fetch('/api/dedications', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ name, relation, message }),
+      });
+      // Store selection in URL hash so the giving sheet can read it in phase 3.
+      openGiveSheet();
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <main>
+      <PageHeader
+        eyebrow={t('eyebrow')}
+        title={t('title')}
+        lede={t('lede')}
+      />
+
+      <Section tone="paper">
+        <SectionBody>
+          <div className="grid gap-10 md:grid-cols-12 md:items-center">
+            <div className="md:col-span-5">
+              <RenderingPlaceholder ratio="portrait" caption="Photograph · prayer space, pending" />
+            </div>
+            <form onSubmit={onSubmit} className="md:col-span-7 space-y-5">
+              <SectionHeading>{t('formHeading')}</SectionHeading>
+              <p className="text-body text-ink-60">{t('formLede')}</p>
+
+              <label className="block">
+                <span className="mb-1 block text-[13px] text-ink-60">{t('fields.name')}</span>
+                <input
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="min-h-11 w-full border border-rule bg-paper px-3 py-2 text-body outline-none focus:border-ink"
+                />
+              </label>
+
+              <label className="block">
+                <span className="mb-1 block text-[13px] text-ink-60">{t('fields.relation')}</span>
+                <input
+                  value={relation}
+                  onChange={(e) => setRelation(e.target.value)}
+                  className="min-h-11 w-full border border-rule bg-paper px-3 py-2 text-body outline-none focus:border-ink"
+                />
+              </label>
+
+              <label className="block">
+                <span className="mb-1 block text-[13px] text-ink-60">{t('fields.message')}</span>
+                <textarea
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  rows={4}
+                  className="w-full border border-rule bg-paper px-3 py-2 text-body outline-none focus:border-ink"
+                />
+              </label>
+
+              <button
+                type="submit"
+                disabled={!name.trim() || submitting}
+                className="min-h-12 rounded-btn bg-gold-deep px-5 py-3 text-[15px] font-semibold text-paper hover:bg-ink transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {t('primary')}
+              </button>
+              <p className="text-[13px] text-ink-60">{t('note')}</p>
+            </form>
+          </div>
+        </SectionBody>
+      </Section>
+    </main>
+  );
+}

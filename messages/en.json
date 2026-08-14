@@ -1,0 +1,960 @@
+{
+  "meta": {
+    "siteTitle": "Rabita — Mosque and cultural centre in Oslo",
+    "siteDescription": "Rabita is building a new mosque and cultural centre at Calmeyers gate 8, Oslo. We are raising 100 million kroner to build it."
+  },
+  "hero": {
+    "eyebrow": "Calmeyers gate 8, Oslo",
+    "credLine": "FOUNDED 1987 · OSLO'S FIRST MOSQUE ACROSS NATIONALITIES",
+    "headline": "The site is ready. Now we raise the building.",
+    "headlineBefore": "A mosque, a school, a library, a kitchen. ",
+    "headlineAccent": "One address.",
+    "headlineAfter": "",
+    "subhead": "Seven floors at Calmeyers gate 8, open to the congregation and to the city around it. Your gift builds them — prayer space by prayer space, desk by desk, shelf by shelf.",
+    "phaseLine": "Phase 1 · Foundations underway",
+    "cta": {
+      "primary": "See the project",
+      "secondary": "Meet the congregation"
+    }
+  },
+  "utility": {
+    "prayer": {
+      "jumua": "Friday",
+      "hourUnit": "h",
+      "minuteUnit": "m",
+      "nextLabel": "next",
+      "fullWeek": "See the full week",
+      "panelLabel": "Prayer times",
+      "elapsedLabel": "Time since previous prayer",
+      "expandLabel": "Show all prayer times",
+      "names": {
+        "fajr": "Fajr",
+        "sunrise": "Sunrise",
+        "dhuhr": "Dhuhr",
+        "asr": "Asr",
+        "maghrib": "Maghrib",
+        "isha": "Isha",
+        "jumua": "Jumu'ah"
+      }
+    },
+    "textsize": {
+      "label": "Text size",
+      "sizes": { "sm": "Small", "md": "Regular", "lg": "Large" }
+    }
+  },
+  "nav": {
+    "wordmark": "Rabita",
+    "orgName": "Det Islamske Forbundet",
+    "skipToContent": "Skip to content",
+    "give": "Give",
+    "prayerTimes": "Prayer times",
+    "openDaily": "OPEN DAILY",
+    "items": {
+      "project": "The mosque project",
+      "worship": "Prayer and services",
+      "education": "Education",
+      "visit": "Visit us",
+      "about": "About us"
+    }
+  },
+  "giving": {
+    "freqMonthly": "Monthly",
+    "freqOnce": "One time",
+    "customLabel": "Other",
+    "customPlaceholder": "e.g. 750",
+    "zakatLabel": "This is zakat",
+    "primaryMonthly": "Give <amount></amount> kr/mo with Vipps",
+    "primaryOnce": "Give <amount></amount> kr with Vipps",
+    "secondary": "Card, AvtaleGiro or bank",
+    "trust": "Approved for tax deduction. Org.nr. {orgNr}.",
+    "corporate": "Give as a company",
+    "chipAria": "Select {amount} kroner",
+    "impact": {
+      "monthlyLow": "{amount} kr a month keeps the prayer hall lit for a week.",
+      "monthlyMid": "500 kr a month for three years funds a prayer space.",
+      "monthlyHigh": "{amount} kr a month for three years funds several prayer spaces and a desk in the school.",
+      "onceLow": "{amount} kr contributes to materials for the new prayer hall.",
+      "onceMid": "{amount} kr funds a prayer space as sadaqa jariya.",
+      "onceHigh": "25 000 kr funds a desk in the school where 400 children are taught every year."
+    },
+    "openSheet": "Open giving",
+    "closeSheet": "Close",
+    "sheetTitle": "Give to Rabita",
+    "question": "How often will you give?",
+    "wizard": {
+      "back": "Back",
+      "continue": "Continue",
+      "stepAmount": "AMOUNT",
+      "stepPayment": "PAYMENT",
+      "stepDetails": "YOUR DETAILS",
+      "stepLabel": "STEP {n} OF {total} · {label}",
+      "stepAnnounce": "Step {n} of {total}: {label}",
+      "step2Title": "How would you like to pay?",
+      "step3Title": "Who shall we thank?",
+      "recommended": "Recommended",
+      "methods": {
+        "vipps": {
+          "name": "Vipps",
+          "detail": "Fastest — signs you in and returns your details from the app."
+        },
+        "card": {
+          "name": "Card",
+          "detail": "Visa or Mastercard, single donation or monthly."
+        },
+        "avtalegiro": {
+          "name": "AvtaleGiro",
+          "detail": "Recurring donation from your Norwegian bank account."
+        },
+        "bank": {
+          "name": "Bank transfer",
+          "detail": "Traditional bank transfer with a KID number."
+        }
+      },
+      "fields": {
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email",
+        "mobile": "Mobile number",
+        "fnr": "Fødselsnummer",
+        "fnrHint": "Only needed for tax deduction — reported to Skatteetaten. Not required to give.",
+        "fnrDisabled": "This field will collect once the payment integration is live. Hidden until then.",
+        "consent": "I have read and agree to the privacy policy.",
+        "optional": "optional"
+      },
+      "errors": {
+        "required": "Required",
+        "email": "Enter a valid email address",
+        "mobile": "Enter a valid mobile number",
+        "fnr": "Fødselsnummer must be 11 digits",
+        "consent": "You need to agree to continue"
+      },
+      "give": "Give <amount></amount> kr",
+      "giveMonthly": "Give <amount></amount> kr/mo",
+      "todoSubmit": "Payment integration not yet wired — the button on this final step is a placeholder."
+    }
+  },
+  "meter": {
+    "label": "Raised so far",
+    "eyebrow": "Build fund",
+    "updated": "Updated {date}",
+    "of": "of",
+    "financed": "financed",
+    "give": "Give a gift",
+    "phase": "Phase 1 · foundations",
+    "lastUpdated": "Last updated {date}",
+    "lastMonth": "+{amount} kr last month",
+    "note": "The total updates automatically.",
+    "phases": {
+      "fundament": "Foundation",
+      "interior": "Interior",
+      "ferdigstillelse": "Completion"
+    },
+    "sub": {
+      "label": "Sub-campaign",
+      "body": "The foundation is being poured this year. This is the sub-goal we are working toward now."
+    }
+  },
+  "trust": {
+    "taxDeductible": "Tax deduction up to 25 000 kr/year",
+    "audited": "Audited accounts",
+    "permit": "Building permit from Oslo Planning Authority",
+    "orgNr": "Org.nr. {orgNr}",
+    "secure": "Secure payment"
+  },
+  "qibla": {
+    "qibla": "Qibla",
+    "fromHere": "From your location",
+    "fromOslo": "From Oslo"
+  },
+  "compareSlider": {
+    "beforeCaption": "The site today · photograph pending",
+    "afterCaption": "The building at dusk · Norconsult",
+    "handleLabel": "Drag to compare"
+  },
+  "foundationWall": {
+    "eyebrowEmpty": "THE FOUNDATION — SOON",
+    "emptyState": "Names will be published when construction begins, once the first donors who have consented to be listed are on record.",
+    "eyebrow": "{count} NAMES AND GROWING",
+    "headline": "The names are set into the <em>foundation</em>.",
+    "body": "Gifts over 10 000 kr are recorded permanently, in the order they arrived.",
+    "counter": "{count} names · {nok} kr",
+    "search": "Find a name",
+    "searchAria": "Search for a name on the foundation",
+    "anonymousBlockAria": "Anonymous gift",
+    "phaseLabel": "{name} · {count}",
+    "ctaPrimary": "Give in someone's name",
+    "ctaSecondary": "See all names",
+    "phases": {
+      "fundament": "FOUNDATION",
+      "reisning": "RISING",
+      "ferdigstillelse": "COMPLETION",
+      "grunnstein": "Foundation"
+    },
+    "heading": "Foundation stones.",
+    "lede": "Gifts over {threshold} kr are recorded permanently. The names here follow the phases of the build — foundation, rising, completion.",
+    "anonymous": "Anonymous",
+    "kicker": "Your name here — gifts over 10 000 kr are recorded permanently, with the option of a memorial line or an anonymous entry.",
+    "kickerCta": "Give at this level"
+  },
+  "impactStory": {
+    "eyebrow": "Four chapters",
+    "heading": "A place where <em>life</em> happens.",
+    "lede": "Four stories from a congregation that already is a family — and shows up for the city around it. The building we are raising makes room for all of it.",
+    "chapterLabel": "Chapter {n}",
+    "items": {
+      "family": {
+        "time": "Always",
+        "title": "One family. Together for what is <em>right</em>.",
+        "body": "Four thousand members, forty nationalities, one community. We stand together — in prayer and in learning, in joy and in grief, with each other and with our neighbours. To belong here is to belong to something larger than yourself.",
+        "tag": "Community"
+      },
+      "learning": {
+        "time": "Weekdays",
+        "title": "Lectures, conversations, and teaching.",
+        "body": "Evening talks on mental health, Quran classes for children, Arabic for beginners, calligraphy, philosophy. Nineteen teachers, four hundred pupils, waiting lists in every class. What is said here stays with you.",
+        "tag": "Learning"
+      },
+      "volunteer": {
+        "time": "When it's needed",
+        "title": "We show up — for each other, and for the city.",
+        "body": "Volunteers in yellow vests hand out meals, coordinate with the district, and stand with neighbours in good times and hard ones. Rabita isn't only a place you come to — it's a place you come from, to help.",
+        "tag": "Volunteer"
+      },
+      "sadaqa": {
+        "time": "Always",
+        "title": "Sadaqa jariya — a gift that <em>lasts</em>.",
+        "body": "The prayer rug is perhaps the most-used object in the mosque. Each place in the new hall can be given in the name of someone we've lost. The names stand as long as the building stands.",
+        "tag": "Jariya"
+      }
+    }
+  },
+  "zoomParallax": {
+    "statement": {
+      "before": "Oslo's first mosque belonging to no single nationality. ",
+      "accent": "Now we are making room for everyone it brought together.",
+      "after": ""
+    },
+    "sectionLabel": "Rabita — architectural narrative"
+  },
+  "buildingRises": {
+    "eyebrow": "The building rises",
+    "heading": "From foundation to prayer hall.",
+    "lede": "Scroll to see the building take shape — seven floors above and below the street, each with its purpose. Every kroner builds a layer."
+  },
+  "building": {
+    "eyebrow": "The building rises",
+    "heading": "From foundation to <em>prayer hall</em>.",
+    "etasje": "Floor {n}",
+    "svg": {
+      "groundLevel": "STREET LEVEL · CALMEYERS GATE",
+      "plot": "PLOT · 6 762 M²",
+      "floorsUp": "FLOORS TO RISE",
+      "belowGround": "two below street"
+    },
+    "intro": {
+      "eyebrow": "Calmeyers gate 8",
+      "headlineLine1": "The site is ready.",
+      "headlineLine2": "Now we raise the building.",
+      "body": "The old mosque was demolished during Ramadan 2025. Seven floors are to go up — scroll to watch them arrive."
+    },
+    "floors": {
+      "prayer": {
+        "name": "PRAYER HALL",
+        "fact": "500 women · 2 000 men",
+        "headline": "500 places for <em>women</em>.",
+        "body": "Today the number is 100. Men go from 500 to 2 000, across three floors."
+      },
+      "school": {
+        "name": "SCHOOL",
+        "fact": "400 pupils · 19 teachers",
+        "headline": "Norway's largest school in Arabic.",
+        "body": "Nineteen teachers, four hundred pupils, waiting lists in every class. Real daylight classrooms."
+      },
+      "library": {
+        "name": "LIBRARY",
+        "fact": "reading hall · seminar rooms",
+        "headline": "A library open to the whole district.",
+        "body": "Reading hall, seminar rooms, a youth section. Somewhere to study that isn't home."
+      },
+      "youth": {
+        "name": "YOUTH CLUB",
+        "fact": "offices · studio",
+        "headline": "Somewhere to be on a Friday night.",
+        "body": "Youth club, offices for volunteers, and a studio for podcasts and recordings."
+      },
+      "entrance": {
+        "name": "ENTRANCE · CAFÉ",
+        "fact": "open to the whole city",
+        "headline": "An <em>open</em> ground floor onto Calmeyers gate.",
+        "body": "Café, reception and the main entrance for the congregation and the city. No threshold."
+      },
+      "p1": {
+        "name": "PARKING",
+        "fact": "40 spaces",
+        "headline": "Parking and building services.",
+        "body": "First basement: visitor parking, ventilation, electrical supply for the building above."
+      },
+      "p2": {
+        "name": "PARKING",
+        "fact": "storage · services",
+        "headline": "The foundation we pour this year.",
+        "body": "Second basement: storage for the school and library, and the technical installations that keep the building warm."
+      }
+    }
+  },
+  "giftLadder": {
+    "eyebrow": "WHAT YOUR GIFT BUILDS",
+    "heading": "The budget is costed room by <em>room</em>.",
+    "anchorLabel": "FULL TAX DEDUCTION",
+    "cta": "Choose an amount",
+    "footnote": "Tax deductible up to 25 000 kr per year.",
+    "items": {
+      "prayer": {
+        "title": "One square metre of prayer hall floor",
+        "meta": "500 kr a month for three years funds one place"
+      },
+      "shelf": {
+        "title": "A shelf section in the library",
+        "meta": "Around 120 volumes · floor 02"
+      },
+      "desk": {
+        "title": "A desk in the school",
+        "meta": "Where 400 children are taught every year · maximum yearly deduction"
+      },
+      "panel": {
+        "title": "A panel in the facade",
+        "meta": "The geometry that gives the building its identity · your name recorded"
+      }
+    },
+    "units": {
+      "prayer": "m²",
+      "shelf": "shelves",
+      "desk": "desks",
+      "panel": "panels"
+    },
+    "totalSuffix": "total",
+    "alt": {
+      "prayer": "Prayer hall floor",
+      "shelf": "Library shelving",
+      "desk": "Classroom desk",
+      "panel": "Facade panel from within"
+    }
+  },
+  "floors": {
+    "eyebrow": "The building, floor by floor",
+    "heading": "Six floors above ground, two below. 6 762 square metres.",
+    "attribution": "Architect: {architect}. The Alhambra references are visible, but the building also speaks Norwegian — in materials, daylight and its relationship to the street.",
+    "floorLabel": "Floor {floor}",
+    "items": {
+      "basements": {
+        "title": "Parking, plant rooms and storage",
+        "body": "Two lower floors for parking, mechanical installations and storage for the library and the school."
+      },
+      "ground": {
+        "title": "Entrance, café and reception",
+        "body": "Open ground floor onto Calmeyers gate. Café, reception and the main entrance for the congregation and visitors alike."
+      },
+      "first": {
+        "title": "Library, youth club and study space",
+        "body": "A library open to the whole district and a youth club — somewhere for teenagers to be on a Friday evening."
+      },
+      "second": {
+        "title": "The school: 400 pupils, 19 teachers",
+        "body": "Norway's largest school for teaching Arabic to non-Arabic speakers. Classrooms, staff room and meeting rooms."
+      },
+      "top": {
+        "title": "Prayer halls for women and men, 15 apartments",
+        "body": "500 places for women (up from 100), 2 000 for men (up from 500). Fifteen rental apartments secure the running costs so the centre does not have to fundraise for maintenance again in ten years."
+      }
+    }
+  },
+  "sadaqa": {
+    "mark": "Jariya · lasting",
+    "bullets": {
+      "family": "An acknowledgement is sent to the family with your message and the name.",
+      "certificate": "A digital certificate you can print or forward.",
+      "transparent": "An open record of where the prayer space sits in the building."
+    },
+    "primary": "Sponsor a prayer space",
+    "secondary": "Give a gift"
+  },
+  "whereMoneyGoes": {
+    "eyebrow": "Where the money goes",
+    "heading": "Every krone is <em>accounted</em> for.",
+    "runningCost": "The old mosque consumed most of the organisation's resources in maintenance. Rental apartments are part of the new building specifically so that never happens again.",
+    "rentalApartmentsLabel": "Rental apartments",
+    "cards": {
+      "tax": {
+        "title": "Tax deduction",
+        "body": "Approved for tax deduction up to {cap} kr per year. We report the amount to the Norwegian Tax Administration annually.",
+        "cta": "How it works"
+      },
+      "accounts": {
+        "title": "Audited accounts",
+        "body": "Annual accounts are audited by a state-authorised auditor and are publicly available.",
+        "cta": "Download the accounts"
+      },
+      "permit": {
+        "title": "Building permit",
+        "body": "The building has been approved by the Oslo Planning and Building Authority. The permit is public.",
+        "cta": "View the permit"
+      },
+      "org": {
+        "title": "The organisation",
+        "body": "Rabita was founded in {founded} as the first mosque in Oslo not tied to a single nationality. Org.nr. {orgNr}.",
+        "cta": "About us"
+      }
+    }
+  },
+  "congregationToday": {
+    "statement": {
+      "before": "What ",
+      "accent": "Calmeyers gate 8",
+      "after": " is for."
+    },
+    "carouselLabel": "The congregation today — photographs",
+    "prev": "Previous photograph",
+    "next": "Next photograph",
+    "goto": "Go to slide {n}",
+    "slides": {
+      "daily": {
+        "title": "Five prayers",
+        "figureLabel": "times a day",
+        "sentence": "The building never really closes — first light through isha. (draft)"
+      },
+      "school": {
+        "title": "The weekend school",
+        "figureLabel": "pupils · 19 teachers",
+        "sentence": "Norway's largest Arabic school runs from the top floor every Saturday. (draft)"
+      },
+      "friday": {
+        "title": "Friday prayer",
+        "figureLabel": "places for women, 500 → 2 000 for men",
+        "sentence": "The old hall fills long before the khutba. The new one is designed for who actually shows up. (draft)"
+      },
+      "iftar": {
+        "title": "Street iftar",
+        "sentence": "For eight nights of Ramadan the block eats together — whoever they are, whatever they believe. (draft)"
+      },
+      "visits": {
+        "title": "School and university visits",
+        "figureLabel": "visitors a year",
+        "sentence": "Every school, every university, welcome to sit down for a conversation. (draft)"
+      },
+      "services": {
+        "title": "Funerals and marriages",
+        "sentence": "We hold nikah, we bury the dead, we sit with people in hard weeks. (draft)"
+      }
+    }
+  },
+  "prayerVisit": {
+    "eyebrow": "Prayer and visit",
+    "heading": "What's happening today — and how to drop in.",
+    "todayHeading": "Prayer times today",
+    "visitHeading": "Address and group visits",
+    "groupsBody": "We host schools, universities and other groups for tours and conversation. Short visits are free; longer programmes are arranged 14 days ahead.",
+    "bookGroup": "Book a group visit",
+    "directions": "Directions",
+    "fullWeek": "See the full week",
+    "names": {
+      "fajr": "Fajr",
+      "sunrise": "Sunrise",
+      "dhuhr": "Dhuhr",
+      "asr": "Asr",
+      "maghrib": "Maghrib",
+      "isha": "Isha",
+      "jumua": "Jumu'ah (Friday)"
+    }
+  },
+  "events": {
+    "eyebrow": "NEXT EVENT",
+    "heading": "What's happening at the mosque.",
+    "featuredLabel": "NEXT EVENT",
+    "timeAt": "{venue} · {time}",
+    "capacity": "{n} of {total} places",
+    "cta": "Sign up",
+    "waitlist": "Join the waitlist",
+    "all": "All events",
+    "emptyState": "Nothing on the calendar right now. Subscribe to the newsletter to hear about the next one.",
+    "items": {
+      "iftar": {
+        "title": "Iftar for the district",
+        "body": "Open iftar meal during Ramadan. Everyone welcome regardless of faith."
+      },
+      "openHouse": {
+        "title": "Open house: the building and the plan",
+        "body": "Tour with the project lead, Q&A. Open to members, neighbours and the press."
+      },
+      "schoolVisit": {
+        "title": "School visit — religion and ethics",
+        "body": "Programme for upper secondary schools. We walk through the mosque's role in Oslo since 1987."
+      },
+      "lecture": {
+        "title": "Lecture: civil society and belonging",
+        "body": "Monthly conversations across generations. Free entry, open capacity."
+      }
+    },
+    "sheet": {
+      "title": "Sign up for the event",
+      "close": "Close",
+      "nameLabel": "Name",
+      "emailLabel": "Email",
+      "phoneLabel": "Phone",
+      "optional": "optional",
+      "countLabel": "Number of places",
+      "newsletter": "Send me the newsletter",
+      "submit": "Confirm signup",
+      "submitting": "Sending …",
+      "errorGeneric": "Something went wrong. Try again in a moment.",
+      "confirmationTitle": "Thanks — you're on the list.",
+      "confirmationBody": "We'll send a confirmation to your email and a reminder the day before the event.",
+      "confirmationClose": "Close"
+    }
+  },
+  "newsEvents": {
+    "eyebrow": "News and events",
+    "heading": "What's happening at the mosque in the next weeks.",
+    "all": "All events",
+    "rsvp": "RSVP",
+    "items": {
+      "ramadan": {
+        "title": "Iftar for the district",
+        "body": "Open iftar meal during the school month. Everyone welcome regardless of faith. Seats 250."
+      },
+      "lecture": {
+        "title": "Open house: the building and the plan",
+        "body": "Tour with the project lead, Q&A. Open to members, neighbours and the press."
+      },
+      "school": {
+        "title": "School visit — religion and ethics",
+        "body": "Weekly programme for upper secondary schools. We walk through the mosque's role in Oslo since 1987."
+      }
+    }
+  },
+  "membership": {
+    "eyebrow": "NOTICE · ANNUAL MEETING 2027",
+    "headline": "The building isn't decided by us. It's decided by the <em>members</em>.",
+    "body": "The annual meeting elects the board. The board decides what the seven floors are used for. A voting membership is one voice in that room.",
+    "priceNote": "kr a year · one vote",
+    "ctaPrimary": "Get a vote",
+    "ctaSecondary": "Free membership",
+    "venueLabel": "THE MEETING IS HELD",
+    "venueLine": "{venue} · {time}",
+    "gridLabel": "ELIGIBLE TO VOTE",
+    "captionAfterN": "of {total} members hold a vote today.",
+    "gridAria": "{n} of {total} members hold a vote.",
+    "heading": "Become a member. Vote at the AGM. Volunteer.",
+    "lede": "Membership keeps the organisation's democracy alive. Membership for children and youth is free.",
+    "join": "Become a member",
+    "tiers": {
+      "ordinary": {
+        "name": "Ordinary membership",
+        "body": "Free. Newsletter and invitations, no voting rights.",
+        "b1": "Newsletter and invitations",
+        "b2": "No annual fee"
+      },
+      "voting": {
+        "name": "Voting membership",
+        "body": "Voting rights at the AGM and eligibility to stand for the board.",
+        "b1": "Vote and eligibility",
+        "b2": "Annual renewal"
+      },
+      "youth": {
+        "name": "Under 15",
+        "body": "Free for children under 15. Includes invitations to age-grouped gatherings.",
+        "b1": "Under 15 years old",
+        "b2": "Approved by a guardian"
+      }
+    }
+  },
+  "footer": {
+    "give": {
+      "eyebrow": "Contribute",
+      "heading": "Build something that <em>outlives</em> you.",
+      "body": "Vipps, card, AvtaleGiro and bank transfer. Everything goes into the same accounts, the same audit trail.",
+      "primary": "Give a gift",
+      "moreWays": "All ways to give"
+    },
+    "vipps": "Vipps",
+    "bankAccount": "Account",
+    "iban": "IBAN",
+    "orgNr": "Org.nr.",
+    "contact": { "heading": "Contact" },
+    "newsletter": {
+      "heading": "Newsletter",
+      "body": "One email a month — a photo from the site and what's happening next.",
+      "placeholder": "you@example.com",
+      "submit": "Subscribe"
+    },
+    "legal": {
+      "heading": "Documents and links",
+      "privacy": "Privacy and accessibility",
+      "accounts": "Audited accounts",
+      "permit": "Building permit",
+      "donors": "Donors",
+      "about": "About Rabita"
+    }
+  },
+  "donorsPage": {
+    "eyebrow": "Donors",
+    "title": "The foundation.",
+    "lede": "This is where donors who have consented to be named will be listed. The page is empty until construction begins and the first records are in place."
+  },
+  "projectPage": {
+    "eyebrow": "The project",
+    "title": "One building. One address. A generation.",
+    "lede": "A new mosque and cultural centre at Calmeyers gate 8. Programme, budget and timeline are public.",
+    "facts": {
+      "heading": "Key figures",
+      "building": "Building",
+      "floors": "Floors (above/below)",
+      "architect": "Architect",
+      "startConstruction": "Construction start",
+      "completion": "Completion",
+      "completionNote": "The final completion date is updated in step with the build phases."
+    },
+    "capacity": {
+      "heading": "Capacity",
+      "women": "Women (prayer)",
+      "men": "Men (prayer)",
+      "school": "The school",
+      "pupils": "pupils",
+      "teachers": "teachers"
+    },
+    "ways": {
+      "heading": "Ways to give",
+      "once": { "title": "One time", "body": "A single gift — ideal for larger amounts or memorial gifts." },
+      "monthly": { "title": "Monthly", "body": "The building stands for many years. Monthly gives the most to the budget." },
+      "sadaqa": { "title": "Sadaqa jariya", "body": "Sponsor a prayer space in the name of someone you have lost." },
+      "company": { "title": "Company", "body": "A company gift is a conversation, not a checkout. Write to us." }
+    }
+  },
+  "givePage": {
+    "title": "Build with us.",
+    "cardHeading": "Choose amount and method",
+    "cardLede": "Monthly or one-time. Vipps is fastest, card works too.",
+    "routes": {
+      "heading": "Five routes to give",
+      "cta": "Open",
+      "once": { "title": "One time", "body": "A single gift, any amount." },
+      "monthly": { "title": "Monthly", "body": "A standing order gives the build predictability." },
+      "sadaqa": { "title": "Sadaqa jariya", "body": "A prayer space in someone's name." },
+      "company": { "title": "Company", "body": "For businesses that want to support the project." },
+      "legacy": { "title": "Legacy", "body": "Include us in your will. We help with the formalities." }
+    },
+    "direct": {
+      "heading": "Direct to account",
+      "body": "Vipps, account number, IBAN and SWIFT for international transfers.",
+      "account": "Account number"
+    }
+  },
+  "sadaqaPage": {
+    "eyebrow": "Sadaqa jariya",
+    "title": "Sponsor a prayer space.",
+    "lede": "Enter the name. We acknowledge receipt, the family gets a message, and you can follow the build as the space takes shape.",
+    "formHeading": "For whom?",
+    "formLede": "All fields are optional except the name.",
+    "fields": {
+      "name": "Name",
+      "relation": "Relationship (e.g. mother, brother, friend)",
+      "message": "Short message (optional)"
+    },
+    "primary": "Continue to amount",
+    "note": "We store the name only for the purpose of the donation and do not share it."
+  },
+  "wmgPage": {
+    "eyebrow": "Open books",
+    "title": "Where the money goes.",
+    "lede": "Accounts, permits, tax deduction and running costs. Everything here is public or downloadable.",
+    "tax": {
+      "heading": "Tax deduction",
+      "body": "We are approved for tax deduction on gifts up to {cap} kr per year. We report to the Norwegian Tax Administration annually — you don't have to do anything.",
+      "taxCapLabel": "Max per year",
+      "perYear": "per donor"
+    },
+    "accounts": {
+      "heading": "Audited accounts",
+      "body": "Annual accounts are audited by a state-authorised auditor and published here.",
+      "year": "Fiscal year"
+    },
+    "permit": {
+      "heading": "Building permit",
+      "body": "The building has been approved by the Oslo Planning and Building Authority. The permit is available here as a PDF.",
+      "cta": "Download the permit (PDF)"
+    },
+    "org": {
+      "heading": "The organisation",
+      "body": "Rabita was founded in {founded} as the first mosque in Oslo not tied to a single nationality. Org.nr. {orgNr}. The board is elected by members at the AGM."
+    }
+  },
+  "privacyPage": {
+    "eyebrow": "Privacy and accessibility",
+    "title": "Short and simple.",
+    "lede": "We collect as little as possible, store it securely, and build the site so it works for everyone.",
+    "privacy": {
+      "heading": "Privacy",
+      "controller": "The data controller is Rabita, org.nr. {orgNr}, at Calmeyers gate 8, Oslo.",
+      "dataWeCollect": "We store name, email, phone number and donation details to process gifts and tax deductions. Site analytics are anonymous.",
+      "fnr": "National identity number is collected only where you opt in for tax deduction. It is encrypted at rest, access-restricted, and deleted after the statutory period.",
+      "hosting": "The site is hosted in the EEA. We do not use third-party tracking before you consent.",
+      "rights": "You have the right to access, rectify and delete. Write to us and we reply within 30 days.",
+      "contact": "Questions?"
+    },
+    "a11y": {
+      "heading": "Universal design",
+      "wcag": "We build to WCAG 2.1 AA. Where anything falls short, write to us — we fix on a rolling basis.",
+      "list": {
+        "contrast": "Colour contrast is tested, with particular attention to the gold accent.",
+        "keyboard": "All functionality is keyboard-operable, including the giving sheet (Escape closes).",
+        "textsize": "Text size controls at the top of every page, remembered on your device.",
+        "rtl": "The site is built with logical properties, so right-to-left for Arabic works naturally.",
+        "altText": "Images and illustrations have alt text; pure decoration is hidden from screen readers."
+      },
+      "feedback": "Feedback? Write to us — we prioritise all accessibility reports."
+    }
+  },
+  "requestForm": {
+    "name": "Name",
+    "contact": "Email or phone",
+    "contactPlaceholder": "you@example.com or +47 …",
+    "preferred": "Preferred time (optional)",
+    "preferredPlaceholder": "e.g. Saturday afternoon",
+    "notes": {
+      "nikah": "Tell us briefly about the planned date and number of attendees.",
+      "janaza": "Family contact and what has already been arranged.",
+      "shahada": "Briefly about your background and whether you want witnesses.",
+      "counselling": "Briefly what the conversation should be about.",
+      "hajj-umrah": "Number of travellers, planned dates and any agency involved.",
+      "visit": "Type of group, number and age of attendees.",
+      "contact": "What is the enquiry about?"
+    },
+    "submit": "Send",
+    "privacy": "We reply within 3 working days. See privacy for how we store your data.",
+    "doneTitle": "We have received your enquiry.",
+    "doneBody": "You will hear from us within 3 working days. Please check your spam folder."
+  },
+  "bonnetiderPage": {
+    "eyebrow": "Prayer times",
+    "title": "This week",
+    "lede": "Times shown are for Oslo and update daily. Jumu'ah at 13:30.",
+    "day": "Day",
+    "sunrise": "Sunrise",
+    "jumua": "Jumu'ah",
+    "note": "Times are static for now. An automated feed is wired when the source is chosen.",
+    "days": { "mon": "Monday", "tue": "Tuesday", "wed": "Wednesday", "thu": "Thursday", "fri": "Friday", "sat": "Saturday", "sun": "Sunday" }
+  },
+  "medlemskapPage": {
+    "eyebrow": "Membership",
+    "title": "Become a member of Rabita.",
+    "lede": "Children and youth membership is free. Voting membership is 1 000 kr per year and renews annually.",
+    "choose": "Choose membership",
+    "tiers": {
+      "ordinary": { "name": "Ordinary", "price": "0 kr", "body": "Newsletter and invitations. No voting rights." },
+      "voting": { "name": "Voting", "price": "1 000 kr", "body": "Voting rights at the AGM and eligibility to stand for the board." },
+      "youth": { "name": "Under 15", "price": "0 kr", "body": "Approved by a guardian. Age-appropriate activities." }
+    },
+    "form": {
+      "heading": "Your details",
+      "name": "Full name",
+      "email": "Email",
+      "phone": "Phone (optional)",
+      "guardian": "Guardian (name and phone)",
+      "submitFree": "Join",
+      "submitPay": "Join and pay 1 000 kr",
+      "note": "National identity number is not required for membership. Privacy applies."
+    },
+    "done": { "title": "You are registered.", "body": "Check your email — we send confirmation shortly." }
+  },
+  "newsPage": {
+    "eyebrow": "News",
+    "title": "Latest from Rabita.",
+    "lede": "The build, events, and matters that concern the congregation.",
+    "read": "Read",
+    "items": {
+      "foundation": { "title": "The foundation stone is laid" },
+      "library": { "title": "New library collection for the district" },
+      "agm": { "title": "AGM 2026 — calendar and agenda" }
+    }
+  },
+  "eventsPage": {
+    "eyebrow": "Events",
+    "title": "Upcoming events.",
+    "lede": "Open to members, neighbours and guests. No registration fee.",
+    "rsvp": "RSVP",
+    "name": "Name",
+    "email": "Email",
+    "count": "Number of seats",
+    "doneTitle": "RSVP registered.",
+    "doneBody": "We send confirmation by email. See you there.",
+    "items": {
+      "ramadan": { "title": "Iftar for the district", "body": "Open meal, everyone welcome." },
+      "lecture": { "title": "Open house: the building and the plan", "body": "Tour and Q&A with the project lead." },
+      "school": { "title": "School visit — religion and ethics", "body": "Weekly programme for upper secondary schools." }
+    }
+  },
+  "visitPage": {
+    "eyebrow": "Visit us",
+    "title": "Drop in. We're happy to show you around.",
+    "lede": "Open every day. Groups arrange in advance; short visits are free.",
+    "addressHeading": "Address and hours",
+    "formHeading": "Book a group visit",
+    "groups": "We host schools, universities, press and other groups. Shorter visits don't need advance booking."
+  },
+  "educationPage": {
+    "eyebrow": "Education",
+    "title": "Norway's largest Arabic school — and more.",
+    "lede": "Arabic, Quran, youth programme and calligraphy. Classes every week of the year.",
+    "stats": {
+      "pupils": "pupils",
+      "teachers": "teachers",
+      "school": "school (largest of its kind)",
+      "classes": "classes"
+    },
+    "programs": {
+      "heading": "Programmes",
+      "items": {
+        "arabic": { "title": "Arabic for non-Arabic speakers", "body": "Beginner to advanced. Weekly classes throughout the school year." },
+        "quran": { "title": "Quran and tajweed", "body": "Pronunciation, recognition and memorisation. Children and adults in separate groups." },
+        "youth": { "title": "Youth programme", "body": "Social gatherings and projects for teenagers. Friday evenings." },
+        "calligraphy": { "title": "Calligraphy", "body": "Introduction and practice in classical Arabic calligraphy." }
+      }
+    }
+  },
+  "servicesIndex": {
+    "eyebrow": "Services",
+    "title": "Nikah, janaza, shahada and more.",
+    "lede": "We provide religious services to members and to others who wish. All enquiries are handled discreetly.",
+    "more": "More and request",
+    "detail": {
+      "what": "What we offer",
+      "request": "Send an enquiry"
+    },
+    "items": {
+      "nikah": {
+        "title": "Nikah — wedding ceremony",
+        "body": "Islamic marriage, with or without legal registration.",
+        "longBody": "We host nikah both at the mosque and elsewhere by arrangement. Witnesses and imam are coordinated. Legal registration is handled through the Norwegian civil registry; we help with the formalities."
+      },
+      "janaza": {
+        "title": "Janaza — funeral",
+        "body": "Washing, prayer and coordination with the cemetery.",
+        "longBody": "The janaza service is available 24 hours. We help with practical arrangements with Alfaset cemetery and other burial grounds in Oslo. No cost for members."
+      },
+      "shahada": {
+        "title": "Shahada — declaration of faith",
+        "body": "For those who wish to take shahada, with witnesses.",
+        "longBody": "We host both private and public shahada ceremonies. Get in touch to arrange a time — we provide witnesses if needed and offer brief guidance afterwards."
+      },
+      "counselling": {
+        "title": "Counselling and conversations",
+        "body": "Confidential conversations with an imam or female counsellor.",
+        "longBody": "We offer both short and longer conversations, individually or as a couple. All enquiries are confidential. We can offer both a male imam and a female counsellor."
+      },
+      "hajj-umrah": {
+        "title": "Hajj and umrah",
+        "body": "Information, preparation and referrals.",
+        "longBody": "Rabita does not organise trips itself, but we help with preparation, information and referrals to experienced agencies and imams accompanying groups."
+      }
+    }
+  },
+  "aboutPage": {
+    "eyebrow": "About us",
+    "title": "Rabita since 1987.",
+    "lede": "From a flat in Grønland to one of the largest and oldest mosques in Norway.",
+    "facts": {
+      "founded": "Founded",
+      "members": "members",
+      "nationalities": "nationalities"
+    },
+    "history": {
+      "p1": "Rabita was founded in 1987 as the first mosque in Oslo not tied to a single nationality. The idea was simple: a place for Muslims in Norway, regardless of where they came from.",
+      "p2": "The congregation grew, the school was established, and the cultural centre became part of civil society in Oslo. The old building ran out of space long ago.",
+      "p3": "In October {year} King Harald V and Crown Prince Haakon visited the mosque — the first royal visit to a mosque in Norway. We continue to work with the same aim: a place where faith and civic life belong together."
+    },
+    "board": {
+      "heading": "The board",
+      "body": "The board is elected by members at the AGM. Full names of each board member are published after the next AGM.",
+      "tbd": "Name to follow",
+      "roles": {
+        "chair": "Chair",
+        "vice": "Vice chair",
+        "treasurer": "Treasurer",
+        "secretary": "Secretary",
+        "member": "Board member",
+        "member2": "Board member"
+      }
+    },
+    "legal": {
+      "heading": "Documents",
+      "statutes": "Statutes",
+      "annual": "Annual report",
+      "press": "Press enquiries"
+    }
+  },
+  "contactPage": {
+    "eyebrow": "Contact",
+    "title": "Write to us.",
+    "lede": "For gifts, membership, services or press — we reply within 3 working days.",
+    "directHeading": "Direct",
+    "formHeading": "Send an enquiry",
+    "note": "For urgent matters (janaza), please call reception."
+  },
+  "volunteerPage": {
+    "eyebrow": "Volunteer",
+    "title": "Help run Rabita.",
+    "lede": "We need volunteers for events, teaching, the library and much more. No commitment until you and we agree on what fits.",
+    "formHeading": "Sign up",
+    "name": "Name",
+    "contact": "Email or phone",
+    "interests": "What would you contribute?",
+    "availability": "How much time do you have?",
+    "submit": "Sign me up",
+    "areas": {
+      "events": "Events",
+      "teaching": "Teaching",
+      "library": "Library",
+      "youth": "Youth work",
+      "construction": "Build and site liaison",
+      "admin": "Administration"
+    },
+    "done": { "title": "Thank you. You're registered.", "body": "We'll be in touch for a short conversation when we have something concrete to offer." }
+  },
+  "consent": {
+    "title": "We use cookies.",
+    "body": "The site works without tracking. With your consent we turn on anonymous measurement that helps us see if the site works.",
+    "acceptAll": "Accept all",
+    "rejectAll": "Reject",
+    "customise": "Customise",
+    "less": "Hide options",
+    "save": "Save preferences",
+    "categories": {
+      "essential": {
+        "name": "Essential",
+        "body": "Required for the site to work (language, session, accessibility settings)."
+      },
+      "measurement": {
+        "name": "Measurement",
+        "body": "Anonymous usage statistics. Not shared with third parties for advertising."
+      }
+    }
+  },
+  "mobile": {
+    "vipps": "Give with Vipps ({number})",
+    "pick": "Pick amount"
+  },
+  "notFound": {
+    "title": "This page does not exist.",
+    "body": "The address may be old, or it may be mistyped.",
+    "back": "To the front page"
+  },
+  "thanks": {
+    "eyebrow": "Thank you",
+    "headline": "Thank you. Your gift is registered.",
+    "receipt": "A receipt has been sent to the email you provided. You will also find it in your account.",
+    "nextMilestone": "Next milestone: the foundation is poured in Q2 2026. We will send you a photo from the site when it happens.",
+    "sharePrompt": "Share the campaign with two people you know. It is the simplest way to help further.",
+    "shareWhatsapp": "Share on WhatsApp",
+    "shareEmail": "Share by email",
+    "back": "Back to the front page"
+  }
+}
