@@ -52,9 +52,9 @@ export default async function AboutPage({
         <SectionBody>
           <SectionHeading>{t('legal.heading')}</SectionHeading>
           <ul className="mt-6 space-y-4 text-body text-ink">
-            <li><a href="#statuter" className="underline underline-offset-4">{t('legal.statutes')}</a></li>
-            <li><a href="#arsrapport" className="underline underline-offset-4">{t('legal.annual')}</a></li>
-            <li><a href="#press" className="underline underline-offset-4">{t('legal.press')}</a></li>
+            <li><a href="#statuter" className="inline-flex min-h-11 items-center underline underline-offset-4">{t('legal.statutes')}</a></li>
+            <li><a href="#arsrapport" className="inline-flex min-h-11 items-center underline underline-offset-4">{t('legal.annual')}</a></li>
+            <li><a href="#press" className="inline-flex min-h-11 items-center underline underline-offset-4">{t('legal.press')}</a></li>
           </ul>
         </SectionBody>
       </Section>

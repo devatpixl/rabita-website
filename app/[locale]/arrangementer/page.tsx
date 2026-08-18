@@ -37,7 +37,7 @@ export default async function EventsPage({
                 </p>
                 <h2 className="mb-3 font-serif text-card text-ink">{t(`items.${e.key}.title`)}</h2>
                 <p className="mb-6 text-body text-ink-60">{t(`items.${e.key}.body`)}</p>
-                <Link href={`/${l}/arrangementer/${e.slug}`} className="text-body font-semibold text-ink underline underline-offset-4">
+                <Link href={`/${l}/arrangementer/${e.slug}`} className="inline-flex min-h-11 min-w-11 items-center justify-center text-body font-semibold text-ink underline underline-offset-4">
                   {t('rsvp')}
                 </Link>
               </li>

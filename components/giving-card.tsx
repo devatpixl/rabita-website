@@ -325,7 +325,7 @@ export function GivingCard({ onSubmit, initialAmount }: Props) {
       <header className="px-6 pt-5 pb-4 border-b border-rule">
         <ProgressBar current={step} total={TOTAL_STEPS} viaProvider={vippsFillsDetails} />
         <div className="mt-4">
-          <span className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-gold">
+          <span className="font-mono text-[0.75rem] uppercase tracking-[0.18em] text-gold">
             {t('wizard.stepLabel', {
               n: step,
               total: TOTAL_STEPS,
@@ -439,7 +439,7 @@ export function GivingCard({ onSubmit, initialAmount }: Props) {
 
       {/* Trust rail — unchanged. */}
       <footer className="border-t border-rule bg-paper-2/40 px-6 py-3">
-        <p className="flex items-center gap-3 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-ink-60">
+        <p className="flex items-center gap-3 font-mono text-[0.75rem] uppercase tracking-[0.18em] text-ink-60">
           <PadlockIcon className="h-3.5 w-3.5 shrink-0" />
           <span>{t('trust', { orgNr: CAMPAIGN.orgNr })}</span>
         </p>
@@ -580,7 +580,7 @@ function StepAmount({
               aria-selected={selected}
               onClick={() => setFrequency(f)}
               className={cn(
-                'relative z-10 flex-1 min-h-10 rounded-btn text-[14px] transition-colors border-[1.5px]',
+                'relative z-10 flex-1 min-h-11 rounded-btn text-[14px] transition-colors border-[1.5px]',
                 selected
                   ? 'bg-paper border-ink text-ink font-medium'
                   : 'bg-transparent border-transparent text-ink-60 hover:text-ink',
@@ -743,7 +743,7 @@ function StepPayment({ method, setMethod, t }: StepPaymentProps) {
                 {t(`wizard.methods.${m}.name`)}
               </span>
               {isVipps && (
-                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold-deep">
+                <span className="font-mono text-[12px] uppercase tracking-[0.14em] text-gold-deep">
                   {t('wizard.recommended')}
                 </span>
               )}
@@ -829,7 +829,7 @@ function StepDetails({
         <label className="block">
           <span className="block text-[13px] text-ink-60 mb-1">
             {t('wizard.fields.fnr')}{' '}
-            <span className="text-[11px] uppercase tracking-widest text-ink-60/70">
+            <span className="text-[12px] uppercase tracking-widest text-ink-60/70">
               ({t('wizard.fields.optional')})
             </span>
           </span>

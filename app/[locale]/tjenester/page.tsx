@@ -27,7 +27,7 @@ export default async function ServicesIndex({
               <li key={s} className="border-t border-rule pt-6">
                 <h2 className="mb-2 font-serif text-card text-ink">{t(`items.${s}.title`)}</h2>
                 <p className="mb-4 text-body text-ink-60">{t(`items.${s}.body`)}</p>
-                <Link href={`/${l}/tjenester/${s}`} className="text-body font-semibold text-ink underline underline-offset-4">
+                <Link href={`/${l}/tjenester/${s}`} className="inline-flex min-h-11 items-center text-body font-semibold text-ink underline underline-offset-4">
                   {t('more')}
                 </Link>
               </li>

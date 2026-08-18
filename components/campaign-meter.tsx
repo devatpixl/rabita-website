@@ -35,7 +35,7 @@ export async function CampaignMeter() {
       <div className="mx-auto max-w-6xl px-6">
         {/* Eyebrow row — gold-deep pulse dot + mono editorial dateline.
            Red retired; the signal now sits inside the brand palette. */}
-        <div className="mb-16 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-60">
+        <div className="mb-16 flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.14em] text-ink-60">
           <span className="pulse-dot text-gold-deep" aria-hidden />
           <span className="text-gold-deep">{t('eyebrow')}</span>
           <span aria-hidden className="text-ink-60/50">·</span>
@@ -47,7 +47,7 @@ export async function CampaignMeter() {
           <div>
             <div className="mb-6 flex items-center gap-3">
               <span aria-hidden className="h-px w-10 bg-gold" />
-              <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-gold-deep">
+              <span className="font-mono text-[12px] uppercase tracking-[0.16em] text-gold-deep">
                 {t('label')}
               </span>
             </div>
@@ -113,7 +113,7 @@ export async function CampaignMeter() {
 
           {/* RIGHT column — sub-campaign card on paper-2, roomier */}
           <aside className="rounded-2xl bg-paper-2 p-8 md:p-10 flex flex-col">
-            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-gold-deep">
+            <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-gold-deep">
               {t('sub.label')} · {SUB_CAMPAIGN.name}
             </p>
             <p className="mt-6 flex items-baseline gap-3 font-serif tabular-nums text-ink">

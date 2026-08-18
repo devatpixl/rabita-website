@@ -71,12 +71,12 @@ export function Footer() {
             <p className="mb-1">{CAMPAIGN.address}</p>
             <p className="mb-4 text-ink-60">{CAMPAIGN.postalCity}</p>
             <p className="mb-1">
-              <a href={`tel:${CAMPAIGN.contactPhone.replace(/\s/g, '')}`} className="hover:underline">
+              <a href={`tel:${CAMPAIGN.contactPhone.replace(/\s/g, '')}`} className="inline-flex min-h-11 items-center hover:underline">
                 {CAMPAIGN.contactPhone}
               </a>
             </p>
             <p>
-              <a href={`mailto:${CAMPAIGN.contactEmail}`} className="hover:underline">
+              <a href={`mailto:${CAMPAIGN.contactEmail}`} className="inline-flex min-h-11 items-center hover:underline">
                 {CAMPAIGN.contactEmail}
               </a>
             </p>
@@ -114,10 +114,11 @@ export function Footer() {
           <p className="mb-3 text-[13px] font-semibold text-ink">
             {t('legal.heading')}
           </p>
+          {/* inline-flex, because min-height does nothing to an inline box */}
           <ul className="space-y-2 text-body">
-            <li><Link href={`/${locale}/personvern-og-tilgjengelighet`} className="hover:underline">{t('legal.privacy')}</Link></li>
-            <li><Link href={`/${locale}/givere`} className="hover:underline">{t('legal.donors')}</Link></li>
-            <li><Link href={`/${locale}/om-oss`} className="hover:underline">{t('legal.about')}</Link></li>
+            <li><Link href={`/${locale}/personvern-og-tilgjengelighet`} className="inline-flex min-h-11 items-center hover:underline">{t('legal.privacy')}</Link></li>
+            <li><Link href={`/${locale}/givere`} className="inline-flex min-h-11 items-center hover:underline">{t('legal.donors')}</Link></li>
+            <li><Link href={`/${locale}/om-oss`} className="inline-flex min-h-11 items-center hover:underline">{t('legal.about')}</Link></li>
           </ul>
           <div className="mt-6">
             <LanguageSwitcher />

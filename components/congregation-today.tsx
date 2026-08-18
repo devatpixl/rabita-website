@@ -245,9 +245,16 @@ export function CongregationToday() {
                     aria-label={t('goto', { n: i + 1 })}
                     onClick={() => goTo(i)}
                     className={cn(isActive ? 'bg-gold-deep' : 'bg-rule')}
+                    // Padding grows the touch area to 44px; the negative margin gives the space back.
                     style={{
+                      boxSizing: 'content-box',
                       height: '2px',
                       width: isActive ? '44px' : '26px',
+                      paddingBlock: '21px',
+                      marginBlock: '-21px',
+                      paddingInline: '3px',
+                      marginInline: '-3px',
+                      backgroundClip: 'content-box',
                       transitionProperty: reduced ? 'none' : 'width, background-color',
                       transitionDuration: '320ms',
                       transitionTimingFunction: CURVE,

@@ -26,12 +26,12 @@ export default async function ContactPage({
                 <p>{CAMPAIGN.address}</p>
                 <p className="text-ink-60">{CAMPAIGN.postalCity}</p>
                 <p className="mt-3">
-                  <a href={`tel:${CAMPAIGN.contactPhone.replace(/\s/g, '')}`} className="hover:underline">
+                  <a href={`tel:${CAMPAIGN.contactPhone.replace(/\s/g, '')}`} className="inline-flex min-h-11 items-center hover:underline">
                     {CAMPAIGN.contactPhone}
                   </a>
                 </p>
                 <p>
-                  <a href={`mailto:${CAMPAIGN.contactEmail}`} className="hover:underline">
+                  <a href={`mailto:${CAMPAIGN.contactEmail}`} className="inline-flex min-h-11 items-center hover:underline">
                     {CAMPAIGN.contactEmail}
                   </a>
                 </p>

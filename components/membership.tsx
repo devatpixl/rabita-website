@@ -103,7 +103,7 @@ export async function Membership() {
               </Link>
               <Link
                 href={`/${locale}/medlemskap`}
-                className="text-[14px] text-paper underline decoration-gold decoration-1 underline-offset-4"
+                className="inline-flex min-h-11 items-center text-[14px] text-paper underline decoration-gold decoration-1 underline-offset-4"
               >
                 {t('ctaSecondary')}
               </Link>
@@ -112,7 +112,7 @@ export async function Membership() {
 
           {/* Right column — the notice card */}
           <aside className="rounded-lg bg-[#1C2E3A] p-[1.3rem]">
-            <p className="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-gold-deep">
+            <p className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-gold-deep">
               {t('venueLabel')}
             </p>
             <p className="mt-2 font-serif text-[34px] leading-[1.05] text-paper tabular-nums">
@@ -120,13 +120,13 @@ export async function Membership() {
               <br />
               {year}
             </p>
-            <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.14em] text-dusk-60">
+            <p className="mt-3 font-mono text-[12px] uppercase tracking-[0.14em] text-dusk-60">
               {t('venueLine', { venue: agm.venue, time: agm.time })}
             </p>
 
             <div className="mt-5 h-px w-full bg-[#2A3A44]" />
 
-            <p className="mt-5 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-gold-deep">
+            <p className="mt-5 font-mono text-[0.75rem] uppercase tracking-[0.14em] text-gold-deep">
               {t('gridLabel')}
             </p>
 

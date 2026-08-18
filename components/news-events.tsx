@@ -37,7 +37,7 @@ export async function NewsEvents() {
           </div>
           <Link
             href={`/${locale}/arrangementer`}
-            className="text-body font-semibold text-ink underline underline-offset-4 hover:decoration-2"
+            className="inline-flex min-h-11 items-center text-body font-semibold text-ink underline underline-offset-4 hover:decoration-2"
           >
             {t('all')}
           </Link>

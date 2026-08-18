@@ -51,7 +51,7 @@ export async function PrayerVisit() {
             </ul>
             <Link
               href={`/${locale}/bonnetider`}
-              className="mt-4 inline-block text-body font-semibold text-ink underline underline-offset-4 hover:decoration-2"
+              className="mt-4 inline-flex min-h-11 items-center text-body font-semibold text-ink underline underline-offset-4 hover:decoration-2"
             >
               {t('fullWeek')}
             </Link>

@@ -208,14 +208,13 @@ export async function WhereMoneyGoes() {
               </p>
               <Link
                 href={c.href}
-                className="inline-block font-semibold text-gold-deep border-b border-rule"
+                className="inline-flex min-h-11 items-center font-semibold text-gold-deep"
                 style={{
-                  marginTop: '14px',
+                  marginTop: '4px',
                   fontSize: '14px',
-                  paddingBottom: '1px',
                 }}
               >
-                {t(`cards.${c.key}.cta`)} →
+                <span className="border-b border-rule pb-px">{t(`cards.${c.key}.cta`)} →</span>
               </Link>
             </li>
           ))}

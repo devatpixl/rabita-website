@@ -1,10 +1,10 @@
-import Link from 'next/link';
 import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
 import { PageHeader } from '@/components/page-header';
 import { Section, SectionBody } from '@/components/primitives';
 
 // News index. Kept static in phase 2 — a real CMS is a phase-4+ decision
 // (§13.5 blocker: who updates the site after handover).
+// No article pages exist yet, so these are entries rather than links.
 const POSTS = [
   { slug: 'grunnsteinen', date: '2026-07-12', key: 'foundation' as const },
   { slug: 'nytt-bibliotek-partnerskap', date: '2026-06-01', key: 'library' as const },
@@ -32,13 +32,12 @@ export default async function NewsPage({
           <ul className="divide-y divide-rule border-y border-rule">
             {POSTS.map((p) => (
               <li key={p.slug}>
-                <Link href={`/${l}/aktuelt/${p.slug}`} className="grid gap-4 py-6 md:grid-cols-12 md:items-baseline hover:bg-paper-2">
+                <div className="grid gap-4 py-6 md:grid-cols-12 md:items-baseline">
                   <p className="md:col-span-3 text-[13px] text-ink-60 tabular-nums">
                     {fmt.format(new Date(p.date))}
                   </p>
-                  <h2 className="md:col-span-7 font-serif text-card text-ink">{t(`items.${p.key}.title`)}</h2>
-                  <p className="md:col-span-2 text-end text-[13px] text-ink-60">{t('read')}</p>
-                </Link>
+                  <h2 className="md:col-span-9 font-serif text-card text-ink">{t(`items.${p.key}.title`)}</h2>
+                </div>
               </li>
             ))}
           </ul>

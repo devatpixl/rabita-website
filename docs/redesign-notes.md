@@ -68,6 +68,53 @@ the corner now, sized so it clears the hero buttons. The consent is still asked
 for and nothing third party loads before it is given, which is what the law
 requires and what the SOP says.
 
+## Mobile
+
+Every page was measured on a phone before anything was changed: 17 pages in
+all three languages at 360, 390 and 412 pixels wide, scrolled to the bottom,
+checking sideways overflow, how big each thing is to tap, how small the text
+gets, broken images and console errors. 85 page loads, every one of them with
+something wrong. Nothing overflowed sideways and no image was broken, so the
+faults were all in size.
+
+**Buttons and links too small to hit.** Apple and Google both ask for 44 pixels
+in each direction. The copy button beside every account number was 39 by 36 and
+appeared on 89 pages. The wordmark in the header was 40 tall on all 17. The
+carousel controls under the home page statement were 26 wide and 2 tall,
+because the thin bar you see was itself the button.
+
+One cause was behind most of it. A link is an inline box, and an inline box
+ignores min-height, so ten links written with a minimum height of 44 were still
+only as tall as their line of text, about 20 pixels. Those are inline flex now,
+which is the same rule the rest of the project already uses where it works.
+
+The carousel controls keep the thin bar and gain padding around it, with the
+same amount taken back as negative margin, so the touch area is 44 tall while
+the bar stays 2 and the row still lines up on the baseline it was tuned to.
+They end up 32 wide rather than 44. Going wider would mean pushing the bars 18
+pixels apart instead of 6, which changes how the row looks, so they stay as
+they are. 32 by 44 still clears the level AA requirement of 24 by 24.
+
+**Text below the legible floor.** 12 pixels is the usual floor on a phone. The
+mono labels were at 11, the eyebrow above every page title at 11.2, the
+inventory counters at 11.5, the tax badge in the gift ladder at 9. All are at
+12 now. The badge fits on one line and the counters still sit on their bars.
+
+**Two checkbox rows were not labels.** In the cookie notice the box was the
+only thing you could press and the words beside it were tied to nothing. Each
+row is a label now, so the text works as well and the row is a full width
+target. The interest checkboxes on the volunteer form got a minimum height for
+the same reason.
+
+**Three links to pages that do not exist.** Every item on the news index linked
+to an article page, and there is no article route, so all three were 404s.
+Next was prefetching them on sight, which put the errors in the console of
+anyone who opened the page. There is nowhere to send people until there is a
+way to publish articles, so the items are entries rather than links.
+
+After the fixes the same sweep reports 80 of 85 loads clean. The five that
+remain are the carousel controls described above.
+
 ## How this branch is deployed
 
 `main` deploys to the original Vercel project. This branch has its own project

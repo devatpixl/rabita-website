@@ -173,7 +173,7 @@ function LeftPanel({ step, activeFloor }: { step: number; activeFloor: number })
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col gap-6"
           >
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold-deep">
+            <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-gold-deep">
               {t('intro.eyebrow')}
             </p>
             <h3 className="font-serif text-[clamp(1.75rem,3.2vw,2.25rem)] leading-[1.15] text-ink tracking-[-0.01em] max-w-[16ch]">
@@ -199,7 +199,7 @@ function LeftPanel({ step, activeFloor }: { step: number; activeFloor: number })
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-col gap-6"
             >
-              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold-deep">
+              <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-gold-deep">
                 {t('etasje', { n: floor.levelLabel })}
               </p>
               <h3 className="font-serif text-[clamp(1.75rem,3.2vw,2.25rem)] leading-[1.15] text-ink tracking-[-0.01em] max-w-[16ch] text-balance">

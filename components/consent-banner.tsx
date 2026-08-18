@@ -80,25 +80,25 @@ export function ConsentBanner() {
             <p className="mt-1 text-[0.85rem] leading-snug text-ink-60">{t('body')}</p>
             {detailOpen && (
               <div className="mt-4 space-y-3 border-t border-rule pt-4 text-body text-ink">
-                <div className="flex items-start gap-3">
+                <label className="flex min-h-11 items-start gap-3">
                   <input type="checkbox" checked disabled className="mt-1 h-5 w-5 accent-ink" />
-                  <div>
-                    <p className="font-semibold">{t('categories.essential.name')}</p>
-                    <p className="text-ink-60">{t('categories.essential.body')}</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
+                  <span>
+                    <span className="block font-semibold">{t('categories.essential.name')}</span>
+                    <span className="block text-ink-60">{t('categories.essential.body')}</span>
+                  </span>
+                </label>
+                <label className="flex min-h-11 items-start gap-3">
                   <input
                     type="checkbox"
                     checked={measurement}
                     onChange={(e) => setMeasurement(e.target.checked)}
                     className="mt-1 h-5 w-5 accent-ink"
                   />
-                  <div>
-                    <p className="font-semibold">{t('categories.measurement.name')}</p>
-                    <p className="text-ink-60">{t('categories.measurement.body')}</p>
-                  </div>
-                </div>
+                  <span>
+                    <span className="block font-semibold">{t('categories.measurement.name')}</span>
+                    <span className="block text-ink-60">{t('categories.measurement.body')}</span>
+                  </span>
+                </label>
               </div>
             )}
           </div>

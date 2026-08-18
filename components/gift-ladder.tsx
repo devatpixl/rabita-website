@@ -198,7 +198,7 @@ function LadderRow({
             <span
               className="font-mono uppercase text-gold-deep whitespace-nowrap leading-none"
               style={{
-                fontSize: '9px',
+                fontSize: '12px',
                 letterSpacing: '0.1em',
                 marginBottom: '6px',
               }}

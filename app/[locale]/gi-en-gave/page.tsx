@@ -62,7 +62,7 @@ export default async function GiveIndexPage({
                 <p className="mb-4 text-body text-ink-60">{t(`routes.${r.hash}.body`)}</p>
                 <Link
                   href={r.href}
-                  className="text-body font-semibold text-ink underline underline-offset-4"
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center text-body font-semibold text-ink underline underline-offset-4"
                 >
                   {t('routes.cta')}
                 </Link>

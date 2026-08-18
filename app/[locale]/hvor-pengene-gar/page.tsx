@@ -70,7 +70,7 @@ export default async function WhereMoneyGoesPage({
           <p className="mt-6 max-w-prose text-body text-ink">{t('permit.body')}</p>
           <Link
             href="#permit-pdf"
-            className="mt-6 inline-block text-body font-semibold text-ink underline underline-offset-4"
+            className="mt-6 inline-flex min-h-11 items-center text-body font-semibold text-ink underline underline-offset-4"
           >
             {t('permit.cta')}
           </Link>

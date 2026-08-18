@@ -101,7 +101,7 @@ export function NavBar() {
         >
         <LinkVT
           href={`/${locale}`}
-          className="vt-wordmark flex items-center gap-3 whitespace-nowrap"
+          className="vt-wordmark flex min-h-11 items-center gap-3 whitespace-nowrap"
           aria-label={`${t('orgName')} — ${t('wordmark')}`}
         >
           <Image
@@ -116,7 +116,7 @@ export function NavBar() {
             <span className="text-[13px] md:text-[14px] lg:text-[15px] font-bold tracking-[-0.01em]">
               {t('orgName')}
             </span>
-            <span className="text-[11px] md:text-[12px] font-normal text-ink-60 tracking-normal">
+            <span className="text-[12px] font-normal text-ink-60 tracking-normal">
               {t('wordmark')}
             </span>
           </span>

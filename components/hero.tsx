@@ -167,7 +167,7 @@ export async function Hero() {
         <div className="grid w-full items-center gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:gap-20">
           <div>
             <p
-              className="eyebrow-bar font-mono text-[0.7rem] uppercase tracking-[0.16em] text-gold"
+              className="eyebrow-bar font-mono text-[0.75rem] uppercase tracking-[0.16em] text-gold"
               style={{ whiteSpace: 'nowrap' }}
             >
               <span>{credHead}</span>

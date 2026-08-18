@@ -94,7 +94,7 @@ export function QiblaCompass() {
         >
           {t('qibla')} · <span className="tabular-nums">{rounded}°</span>
         </span>
-        <span className="text-[11px] text-ink-60">
+        <span className="text-[12px] text-ink-60">
           {source === 'user' ? t('fromHere') : t('fromOslo')}
         </span>
       </div>

@@ -30,7 +30,7 @@ export default async function PrivacyPage({
             <p>{t('privacy.rights')}</p>
             <p>
               {t('privacy.contact')}{' '}
-              <a href={`mailto:${CAMPAIGN.contactEmail}`} className="underline">
+              <a href={`mailto:${CAMPAIGN.contactEmail}`} className="inline-flex min-h-11 items-center underline">
                 {CAMPAIGN.contactEmail}
               </a>
             </p>

@@ -72,7 +72,7 @@ export function InventoryBar({
     <div ref={barRef} className="w-full flex flex-col gap-[7px]">
       <p
         className="font-mono leading-none whitespace-nowrap"
-        style={{ fontSize: '11.5px' }}
+        style={{ fontSize: '12px' }}
       >
         {hasFunded ? (
           <>

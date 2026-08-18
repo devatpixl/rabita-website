@@ -59,7 +59,7 @@ export default async function ThankYouPage({
         <div className="mt-10">
           <Link
             href={`/${locale}`}
-            className="text-body font-semibold text-ink underline underline-offset-4"
+            className="inline-flex min-h-11 items-center text-body font-semibold text-ink underline underline-offset-4"
           >
             {t('back')}
           </Link>

@@ -118,7 +118,7 @@ export function RsvpSheet() {
             {event ? event.title : t('title')}
           </h2>
           {event && (
-            <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-60">
+            <p className="mt-1 font-mono text-[12px] uppercase tracking-[0.12em] text-ink-60">
               {event.dateLabel}
             </p>
           )}

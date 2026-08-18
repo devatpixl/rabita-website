@@ -98,7 +98,7 @@ export function DesktopNav() {
                 aria-current={isCurrent(key) ? 'page' : undefined}
                 onFocus={() => open(key)}
                 className={cn(
-                  'relative block whitespace-nowrap py-2 font-mono text-[0.72rem] uppercase tracking-[0.14em] transition-colors duration-200',
+                  'relative block whitespace-nowrap py-2 font-mono text-[0.75rem] uppercase tracking-[0.14em] transition-colors duration-200',
                   active || isCurrent(key) ? 'text-gold-deep' : 'text-ink hover:text-gold-deep',
                 )}
               >
@@ -165,7 +165,7 @@ function MegaPanel({ navKey, onNavigate }: { navKey: NavKey; onNavigate: () => v
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
     >
-      <p className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-ink-60">
+      <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60">
         {t('overview')} {t(`items.${navKey}`)}
       </p>
       <ul className="mt-5 grid gap-x-10 gap-y-1 md:grid-cols-2 lg:grid-cols-3">
@@ -267,7 +267,7 @@ export function MobileNav() {
               transition={{ type: 'spring', stiffness: 260, damping: 30 }}
             >
               <div className="flex items-center justify-between border-b border-rule px-5 py-3">
-                <span className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-ink-60">
+                <span className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60">
                   {t('wordmark')}
                 </span>
                 <button

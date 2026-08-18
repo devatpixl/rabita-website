@@ -81,7 +81,7 @@ async function FeaturedEvent({ event, locale }: { event: EventRecord; locale: Ap
   return (
     <div className="grid grid-cols-1 items-start gap-8 border-y border-rule py-10 md:grid-cols-[auto_1fr]">
       <div className="min-w-[9rem]">
-        <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-gold-deep">
+        <p className="font-mono text-[12px] uppercase tracking-[0.14em] text-gold-deep">
           {t('featuredLabel')}
         </p>
         <p className="mt-3 font-serif text-[clamp(2rem,4vw,2.75rem)] leading-[1.05] text-ink tabular-nums">
@@ -89,7 +89,7 @@ async function FeaturedEvent({ event, locale }: { event: EventRecord; locale: Ap
           <br />
           {year}
         </p>
-        <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-60">
+        <p className="mt-3 font-mono text-[12px] uppercase tracking-[0.14em] text-ink-60">
           {t('timeAt', { time: event.time, venue: event.location })}
         </p>
       </div>
@@ -136,7 +136,7 @@ async function CapacityBar({
 
   return (
     <div className="mt-5 max-w-md">
-      <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-60 tabular-nums">
+      <p className="mb-2 font-mono text-[12px] uppercase tracking-[0.14em] text-ink-60 tabular-nums">
         {t('capacity', { n: nStr, total: totalStr })}
       </p>
       <div

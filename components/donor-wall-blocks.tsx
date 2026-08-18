@@ -99,11 +99,11 @@ export function DonorWallBlocks({
         {courses.map((course) => (
           <section key={course.phase}>
             <div className="mb-5 flex items-baseline gap-4">
-              <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-gold-deep">
+              <span className="font-mono text-[12px] uppercase tracking-[0.14em] text-gold-deep">
                 {course.label}
               </span>
               <span aria-hidden className="h-px flex-1 bg-gradient-to-r from-gold/70 via-gold/25 to-gold/0" />
-              <span className="font-mono text-[11px] tabular-nums text-ink-60">
+              <span className="font-mono text-[12px] tabular-nums text-ink-60">
                 {course.entries.length}
               </span>
             </div>
@@ -181,7 +181,7 @@ function NameBlock({
     >
       <span className="text-[13.5px] text-ink">{entry.name}</span>
       {entry.qualifier && (
-        <span className="mt-1 font-mono text-[10px] uppercase tracking-[0.08em] text-gold-deep">
+        <span className="mt-1 font-mono text-[12px] uppercase tracking-[0.08em] text-gold-deep">
           {entry.qualifier}
         </span>
       )}

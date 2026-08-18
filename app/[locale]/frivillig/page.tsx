@@ -73,7 +73,7 @@ export default function VolunteerPage() {
                 <legend className="mb-3 text-[13px] text-ink-60">{t('interests')}</legend>
                 <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
                   {AREAS.map((a) => (
-                    <label key={a} className="flex items-start gap-2 text-body">
+                    <label key={a} className="flex min-h-11 items-start gap-2 text-body">
                       <input type="checkbox" checked={interests.has(a)} onChange={() => toggle(a)}
                         className="mt-1 h-5 w-5 accent-ink" />
                       <span>{t(`areas.${a}`)}</span>
