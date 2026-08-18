@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { useLocale, useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
@@ -76,7 +77,7 @@ export function DesktopNav() {
       <nav
         aria-label="Primary"
         className="hidden md:flex items-center"
-        style={{ marginInlineStart: '56px', gap: '32px' }}
+        style={{ marginInlineStart: '48px', gap: '28px' }}
         onMouseLeave={close}
       >
         {NAV_KEYS.map((key) => {
@@ -89,7 +90,7 @@ export function DesktopNav() {
                 aria-current={isCurrent(key) ? 'page' : undefined}
                 onFocus={() => open(key)}
                 className={cn(
-                  'relative block whitespace-nowrap py-2 text-[15px] transition-colors duration-200',
+                  'relative block whitespace-nowrap py-2 font-mono text-[0.72rem] uppercase tracking-[0.14em] transition-colors duration-200',
                   active || isCurrent(key) ? 'text-gold-deep' : 'text-ink hover:text-gold-deep',
                 )}
               >
@@ -98,7 +99,7 @@ export function DesktopNav() {
                   <motion.span
                     layoutId={reduced ? undefined : 'nav-rule'}
                     aria-hidden
-                    className="absolute inset-x-0 -bottom-0.5 block h-px bg-gold-deep"
+                    className="absolute inset-x-0 bottom-0 block h-[1.5px] bg-gold-deep"
                     transition={{ type: 'spring', stiffness: 520, damping: 42 }}
                   />
                 )}
@@ -120,7 +121,7 @@ export function DesktopNav() {
             onMouseLeave={close}
             className="absolute inset-x-0 top-full hidden border-b border-rule bg-paper shadow-[0_24px_48px_-32px_rgba(0,0,0,0.35)] md:block"
           >
-            <div className="mx-auto max-w-6xl px-6 py-8">
+            <div className="mx-auto w-full max-w-[112rem] px-6 md:px-10 lg:px-14 py-8">
               <MegaPanel navKey={openKey} onNavigate={() => setOpenKey(null)} />
             </div>
           </motion.div>
@@ -184,6 +185,9 @@ export function MobileNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [section, setSection] = useState<NavKey | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     setOpen(false);
@@ -216,11 +220,13 @@ export function MobileNav() {
         <span aria-hidden className="mt-[6px] block h-px w-6 bg-ink" />
       </button>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            key="mobile-nav"
-            className="fixed inset-0 z-[60] md:hidden"
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                key="mobile-nav"
+                className="fixed inset-0 z-[60] md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -303,10 +309,12 @@ export function MobileNav() {
                   );
                 })}
               </ul>
-            </motion.div>
-          </motion.div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body,
         )}
-      </AnimatePresence>
     </>
   );
 }

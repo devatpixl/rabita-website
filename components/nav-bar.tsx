@@ -87,7 +87,7 @@ export function NavBar() {
         {t('skipToContent')}
       </a>
 
-      <div className="mx-auto flex max-w-6xl items-center px-6 py-3">
+      <div className="mx-auto w-full max-w-[112rem] px-6 md:px-10 lg:px-14 flex items-center py-3">
         {/* Wordmark — mark + two-line stacked org name (matches the
            official brand lockup: "Det Islamske Forbundet" set bold in
            sans, with "Rabita" underneath at regular weight). No
@@ -156,15 +156,18 @@ export function NavBar() {
             type="button"
             onClick={() => openGiveSheet()}
             style={{ opacity: 1 }}
-            className="inline-flex items-center min-h-11 rounded-btn bg-gold-deep text-paper px-5 py-2 text-[15px] font-semibold transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99] whitespace-nowrap"
+            className="inline-flex items-center gap-2 min-h-11 rounded-btn bg-gold-deep text-paper px-5 py-2 text-[15px] font-semibold transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99] whitespace-nowrap"
           >
             {t('give')}
+            <span aria-hidden className="rtl:rotate-180">
+              &rarr;
+            </span>
           </button>
 
           {/* Mono hours block — hidden below xl. */}
           <div
-            className="hidden xl:block text-end font-mono uppercase text-ink-60 whitespace-nowrap"
-            style={{ fontSize: '11px', lineHeight: 1.4, letterSpacing: '0.06em' }}
+            className="hidden xl:block text-end font-mono uppercase text-ink-60/70 whitespace-nowrap"
+            style={{ fontSize: '10px', lineHeight: 1.35, letterSpacing: '0.1em' }}
           >
             <div>{t('openDaily')}</div>
             <div className="tabular-nums">06:00–22:00</div>
