@@ -55,7 +55,98 @@
       "education": "Undervisning",
       "visit": "Besøk oss",
       "about": "Om oss"
-    }
+    },
+
+      "menu": {
+        "project": [
+          {
+            "label": "Bygget",
+            "blurb": "Sju etasjer, tegninger og tidslinje",
+            "href": "/moskeprosjektet"
+          },
+          {
+            "label": "Hvor pengene går",
+            "blurb": "Regnskap, revisjon og skattefradrag",
+            "href": "/hvor-pengene-gar"
+          },
+          {
+            "label": "Giverne",
+            "blurb": "Navnene på grunnmuren",
+            "href": "/givere"
+          },
+          {
+            "label": "Doner en bønneplass",
+            "blurb": "Sadaqa jariya i et navn",
+            "href": "/doner-en-bonneplass"
+          },
+          {
+            "label": "Gi en gave",
+            "blurb": "Vipps, kort eller bank",
+            "href": "/gi-en-gave"
+          }
+        ],
+        "worship": [
+          {
+            "label": "Bønnetider",
+            "blurb": "Hele uken og fredagsbønnen",
+            "href": "/bonnetider"
+          },
+          {
+            "label": "Tjenester",
+            "blurb": "Nikah, janaza, shahada og rådgivning",
+            "href": "/tjenester"
+          }
+        ],
+        "education": [
+          {
+            "label": "Undervisning",
+            "blurb": "Arabisk, Koran og kurs for voksne",
+            "href": "/undervisning"
+          }
+        ],
+        "visit": [
+          {
+            "label": "Besøk oss",
+            "blurb": "Åpningstider, adresse og omvisning",
+            "href": "/besok-oss"
+          },
+          {
+            "label": "Arrangementer",
+            "blurb": "Id, iftar, foredrag og familiedager",
+            "href": "/arrangementer"
+          }
+        ],
+        "about": [
+          {
+            "label": "Om oss",
+            "blurb": "Historien fra 1987 og styret",
+            "href": "/om-oss"
+          },
+          {
+            "label": "Aktuelt",
+            "blurb": "Nytt fra menigheten og bygget",
+            "href": "/aktuelt"
+          },
+          {
+            "label": "Bli medlem",
+            "blurb": "Medlemskap og kontingent",
+            "href": "/medlemskap"
+          },
+          {
+            "label": "Bli frivillig",
+            "blurb": "Der det trengs folk",
+            "href": "/frivillig"
+          },
+          {
+            "label": "Kontakt",
+            "blurb": "Ring, skriv eller kom innom",
+            "href": "/kontakt"
+          }
+        ]
+      },
+      "overview": "Se alt i",
+      "closeMenu": "Lukk menyen",
+      "openMenu": "Åpne menyen"
   },
   "giving": {
     "freqMonthly": "Månedlig",

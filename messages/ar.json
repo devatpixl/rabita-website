@@ -55,7 +55,98 @@
       "education": "التعليم",
       "visit": "زُر رابطة",
       "about": "من نحن"
-    }
+    },
+
+      "menu": {
+        "project": [
+          {
+            "label": "المبنى",
+            "blurb": "سبعة طوابق والرسوم والجدول الزمني",
+            "href": "/moskeprosjektet"
+          },
+          {
+            "label": "أين تذهب الأموال",
+            "blurb": "الحسابات والتدقيق والخصم الضريبي",
+            "href": "/hvor-pengene-gar"
+          },
+          {
+            "label": "المتبرعون",
+            "blurb": "الأسماء على جدار الأساس",
+            "href": "/givere"
+          },
+          {
+            "label": "تبرّع بموضع صلاة",
+            "blurb": "صدقة جارية باسم من تحب",
+            "href": "/doner-en-bonneplass"
+          },
+          {
+            "label": "تبرّع",
+            "blurb": "عبر Vipps أو البطاقة أو المصرف",
+            "href": "/gi-en-gave"
+          }
+        ],
+        "worship": [
+          {
+            "label": "أوقات الصلاة",
+            "blurb": "الأسبوع كاملاً وصلاة الجمعة",
+            "href": "/bonnetider"
+          },
+          {
+            "label": "الخدمات",
+            "blurb": "النكاح والجنازة والشهادة والإرشاد",
+            "href": "/tjenester"
+          }
+        ],
+        "education": [
+          {
+            "label": "التعليم",
+            "blurb": "العربية والقرآن ودورات للكبار",
+            "href": "/undervisning"
+          }
+        ],
+        "visit": [
+          {
+            "label": "زورونا",
+            "blurb": "أوقات الفتح والعنوان والجولات",
+            "href": "/besok-oss"
+          },
+          {
+            "label": "الفعاليات",
+            "blurb": "العيد والإفطار والمحاضرات وأيام العائلة",
+            "href": "/arrangementer"
+          }
+        ],
+        "about": [
+          {
+            "label": "من نحن",
+            "blurb": "الحكاية منذ ١٩٨٧ ومجلس الإدارة",
+            "href": "/om-oss"
+          },
+          {
+            "label": "أخبار",
+            "blurb": "من الجماعة ومن ورشة البناء",
+            "href": "/aktuelt"
+          },
+          {
+            "label": "انضم إلينا",
+            "blurb": "العضوية والاشتراك",
+            "href": "/medlemskap"
+          },
+          {
+            "label": "تطوّع",
+            "blurb": "حيث نحتاج إليك",
+            "href": "/frivillig"
+          },
+          {
+            "label": "تواصل",
+            "blurb": "اتصل أو اكتب أو مرّ بيننا",
+            "href": "/kontakt"
+          }
+        ]
+      },
+      "overview": "اطلع على كل شيء في",
+      "closeMenu": "إغلاق القائمة",
+      "openMenu": "فتح القائمة"
   },
   "giving": {
     "freqMonthly": "شهرياً",

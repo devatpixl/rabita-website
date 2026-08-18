@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { motion } from 'motion/react';
 import { useTranslations } from 'next-intl';
 
 // §8 GDPR: granular consent as a first-class component, not a plugin
@@ -58,19 +59,25 @@ export function ConsentBanner() {
   if (!visible) return null;
 
   return (
-    <div
+    // A card in the corner rather than a bar across the whole foot of the
+    // page. The consent still has to be asked for, but it no longer covers a
+    // strip of whatever the reader came to look at.
+    <motion.div
       role="dialog"
       aria-live="polite"
       aria-labelledby="consent-title"
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-rule bg-paper shadow-lg"
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.32, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed bottom-0 z-50 w-full border-t border-rule bg-paper shadow-[0_24px_48px_-24px_rgba(0,0,0,0.35)] sm:bottom-4 sm:start-4 sm:w-[min(23rem,calc(100vw-2rem))] sm:rounded-lg sm:border"
     >
-      <div className="mx-auto max-w-6xl px-6 py-4">
-        <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-          <div className="max-w-2xl">
+      <div className="px-4 py-3.5">
+        <div className="flex flex-col gap-3">
+          <div>
             <p id="consent-title" className="font-serif text-card text-ink">
               {t('title')}
             </p>
-            <p className="mt-1 text-body text-ink-60">{t('body')}</p>
+            <p className="mt-1 text-[0.85rem] leading-snug text-ink-60">{t('body')}</p>
             {detailOpen && (
               <div className="mt-4 space-y-3 border-t border-rule pt-4 text-body text-ink">
                 <div className="flex items-start gap-3">
@@ -120,6 +127,6 @@ export function ConsentBanner() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

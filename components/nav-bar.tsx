@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { openGiveSheet } from './giving-sheet';
 import { LinkVT } from './link-vt';
+import { DesktopNav, MobileNav } from './nav-menu';
 import { PrayerPanelBody } from './prayer-panel-body';
 import {
   PRAYER_PANEL_ID,
@@ -28,14 +29,6 @@ import { cn } from '@/lib/cn';
 // sticky container grows and pushes page content down naturally. The
 // panel is never absolute/fixed overlay.
 
-const ROUTE_SLUGS = {
-  project: '/moskeprosjektet',
-  worship: '/tjenester',
-  education: '/undervisning',
-  visit: '/besok-oss',
-  about: '/om-oss',
-} as const;
-
 type PrayerKey = 'fajr' | 'sunrise' | 'dhuhr' | 'asr' | 'maghrib' | 'isha';
 const ORDER: PrayerKey[] = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'];
 
@@ -58,7 +51,6 @@ export function NavBar() {
   const t = useTranslations('nav');
   const tPrayer = useTranslations('utility.prayer');
   const locale = useLocale();
-  const p = (slug: string) => `/${locale}${slug}`;
   const { open, toggle, stripInView, registerNavTrigger } = usePrayerPanel();
 
   const compactTriggerRef = useRef<HTMLButtonElement | null>(null);
@@ -123,31 +115,7 @@ export function NavBar() {
           </span>
         </LinkVT>
 
-        {/* Primary nav — left-aligned, 56px after wordmark, 32px gap.
-           TEMP: links rendered as inert <span>s while only the home
-           page is being shown for boss review. Restore <LinkVT ... />
-           to re-enable navigation. */}
-        <nav
-          aria-label="Primary"
-          className="hidden md:flex items-center"
-          style={{ marginInlineStart: '56px', gap: '32px' }}
-        >
-          {(Object.keys(ROUTE_SLUGS) as (keyof typeof ROUTE_SLUGS)[]).map((key) => (
-            <span
-              key={key}
-              aria-disabled="true"
-              className="text-ink whitespace-nowrap select-none"
-              style={{
-                fontSize: '15px',
-                letterSpacing: 'normal',
-                pointerEvents: 'none',
-                cursor: 'default',
-              }}
-            >
-              {t(`items.${key}`)}
-            </span>
-          ))}
-        </nav>
+        <DesktopNav />
 
         {/* Right cluster */}
         <div
@@ -201,6 +169,9 @@ export function NavBar() {
             <div>{t('openDaily')}</div>
             <div className="tabular-nums">06:00–22:00</div>
           </div>
+        </div>
+        <div className="ms-auto md:hidden">
+          <MobileNav />
         </div>
       </div>
 

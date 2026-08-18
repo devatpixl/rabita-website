@@ -62,10 +62,11 @@ const SCRIM_VERTICAL =
 
 const IMAGE_FILTER = `saturate(${HERO_ART.saturate}) contrast(${HERO_ART.contrast}) brightness(${HERO_ART.brightness})`;
 
-// The hero sits in the same container as every section below it, so the
-// headline starts where their headings start and the card ends where their
-// content ends. It used to run 570px wider and pad its own left to fake
-// that alignment, which left a large gap down the left of the hero only.
+// The hero gets a narrower gutter than the rest of the page on purpose. A
+// full bleed photograph with a card on it can carry more width than a column
+// of prose can, and the sections below keep their own measure. What it does
+// not do any more is pad its own left to line up with them, which is what
+// left the large gap.
 
 export async function Hero() {
   const t = await getTranslations('hero');
@@ -143,7 +144,7 @@ export async function Hero() {
       </div>
 
       <div
-        className="relative z-10 mx-auto flex w-full max-w-6xl flex-col justify-center px-6 pt-8 pb-10 md:pt-10 md:pb-12"
+        className="relative z-10 mx-auto flex w-full max-w-[112rem] flex-col justify-center px-6 pt-8 pb-10 md:px-10 md:pt-10 md:pb-12 lg:px-14"
         style={{
           minHeight: `min(calc(100svh - ${HEADER_H}px), ${980 - HEADER_H}px)`,
         }}

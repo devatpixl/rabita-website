@@ -55,7 +55,98 @@
       "education": "Education",
       "visit": "Visit us",
       "about": "About us"
-    }
+    },
+
+      "menu": {
+        "project": [
+          {
+            "label": "The building",
+            "blurb": "Seven floors, drawings and timeline",
+            "href": "/moskeprosjektet"
+          },
+          {
+            "label": "Where the money goes",
+            "blurb": "Accounts, audit and tax relief",
+            "href": "/hvor-pengene-gar"
+          },
+          {
+            "label": "The donors",
+            "blurb": "Names on the foundation wall",
+            "href": "/givere"
+          },
+          {
+            "label": "Donate a prayer space",
+            "blurb": "Sadaqa jariya in a name",
+            "href": "/doner-en-bonneplass"
+          },
+          {
+            "label": "Give",
+            "blurb": "Vipps, card or bank",
+            "href": "/gi-en-gave"
+          }
+        ],
+        "worship": [
+          {
+            "label": "Prayer times",
+            "blurb": "The whole week and Friday prayer",
+            "href": "/bonnetider"
+          },
+          {
+            "label": "Services",
+            "blurb": "Nikah, janaza, shahada and counselling",
+            "href": "/tjenester"
+          }
+        ],
+        "education": [
+          {
+            "label": "Teaching",
+            "blurb": "Arabic, Qur'an and adult courses",
+            "href": "/undervisning"
+          }
+        ],
+        "visit": [
+          {
+            "label": "Visit us",
+            "blurb": "Hours, address and guided visits",
+            "href": "/besok-oss"
+          },
+          {
+            "label": "Events",
+            "blurb": "Eid, iftar, lectures and family days",
+            "href": "/arrangementer"
+          }
+        ],
+        "about": [
+          {
+            "label": "About us",
+            "blurb": "The story from 1987 and the board",
+            "href": "/om-oss"
+          },
+          {
+            "label": "News",
+            "blurb": "From the congregation and the build",
+            "href": "/aktuelt"
+          },
+          {
+            "label": "Become a member",
+            "blurb": "Membership and the fee",
+            "href": "/medlemskap"
+          },
+          {
+            "label": "Volunteer",
+            "blurb": "Where people are needed",
+            "href": "/frivillig"
+          },
+          {
+            "label": "Contact",
+            "blurb": "Call, write or come by",
+            "href": "/kontakt"
+          }
+        ]
+      },
+      "overview": "See everything in",
+      "closeMenu": "Close the menu",
+      "openMenu": "Open the menu"
   },
   "giving": {
     "freqMonthly": "Monthly",
