@@ -62,21 +62,10 @@ const SCRIM_VERTICAL =
 
 const IMAGE_FILTER = `saturate(${HERO_ART.saturate}) contrast(${HERO_ART.contrast}) brightness(${HERO_ART.brightness})`;
 
-// The hero container is wider than the standard site container so the
-// card can sit against the right edge, but its LEFT edge is pushed in
-// by the same amount as the standard `max-w-6xl px-6` container so the
-// headline lines up vertically with every section below it. The maths:
-//
-//   standard content left  = (100vw − 1152) / 2 + 24
-//   hero container width   = min(1720, 100vw − 96)
-//   hero container left    = (100vw − heroWidth) / 2
-//   hero grid pad-left     = standard content left − hero container left
-//                          = (heroWidth − 1152) / 2 + 24   (when positive)
-//
-// Applied as inline style because Tailwind can't build arbitrary calc()
-// chains dynamically without a full class-safelist round-trip.
-const HERO_CONTAINER_MAX = 'min(1720px, calc(100vw - 96px))';
-const HERO_GRID_PADDING_LEFT = `max(0px, calc((${HERO_CONTAINER_MAX} - 1152px) / 2 + 24px))`;
+// The hero sits in the same container as every section below it, so the
+// headline starts where their headings start and the card ends where their
+// content ends. It used to run 570px wider and pad its own left to fake
+// that alignment, which left a large gap down the left of the hero only.
 
 export async function Hero() {
   const t = await getTranslations('hero');
@@ -154,18 +143,12 @@ export async function Hero() {
       </div>
 
       <div
-        className="relative z-10 mx-auto flex flex-col justify-center pt-8 pb-10 md:pt-10 md:pb-12"
+        className="relative z-10 mx-auto flex w-full max-w-6xl flex-col justify-center px-6 pt-8 pb-10 md:pt-10 md:pb-12"
         style={{
-          maxWidth: HERO_CONTAINER_MAX,
           minHeight: `min(calc(100svh - ${HEADER_H}px), ${980 - HEADER_H}px)`,
         }}
       >
-        <div
-          className="grid w-full items-center gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:gap-20"
-          style={{
-            paddingLeft: `max(24px, ${HERO_GRID_PADDING_LEFT})`,
-          }}
-        >
+        <div className="grid w-full items-center gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:gap-20">
           <div>
             <p
               className="eyebrow-bar font-mono text-[0.7rem] uppercase tracking-[0.16em] text-gold"
