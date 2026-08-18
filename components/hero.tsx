@@ -60,6 +60,17 @@ const scrimHorizontal = (rtl: boolean) =>
 const SCRIM_VERTICAL =
   'linear-gradient(180deg, rgba(22,36,46,0.55) 0, rgba(22,36,46,0) 220px)';
 
+// The photograph used to stop dead on the section edge, cutting the people in
+// it through the chest with flat colour underneath. This resolves the foot of
+// the picture into dusk, which is what the next section is painted, so the two
+// meet instead of one being guillotined by the other.
+const SCRIM_FOOT =
+  'linear-gradient(0deg,' +
+  ' rgb(22,36,46) 0%,' +
+  ' rgba(22,36,46,0.86) 18%,' +
+  ' rgba(22,36,46,0.45) 42%,' +
+  ' rgba(22,36,46,0) 78%)';
+
 const IMAGE_FILTER = `saturate(${HERO_ART.saturate}) contrast(${HERO_ART.contrast}) brightness(${HERO_ART.brightness})`;
 
 // The hero gets a narrower gutter than the rest of the page on purpose. A
@@ -141,6 +152,10 @@ export async function Hero() {
         />
         <div className="absolute inset-0" style={{ background: scrimHorizontal(isRtl) }} />
         <div className="absolute inset-0" style={{ background: SCRIM_VERTICAL }} />
+        <div
+          className="absolute inset-x-0 bottom-0 h-[38%]"
+          style={{ background: SCRIM_FOOT }}
+        />
       </div>
 
       <div

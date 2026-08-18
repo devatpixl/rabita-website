@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { motion, useReducedMotion } from 'motion/react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { openGiveSheet } from './giving-sheet';
@@ -52,6 +53,7 @@ export function NavBar() {
   const tPrayer = useTranslations('utility.prayer');
   const locale = useLocale();
   const { open, toggle, stripInView, registerNavTrigger } = usePrayerPanel();
+  const reduced = useReducedMotion();
 
   const compactTriggerRef = useRef<HTMLButtonElement | null>(null);
   const [now, setNow] = useState<Date | null>(null);
@@ -92,6 +94,11 @@ export function NavBar() {
            official brand lockup: "Det Islamske Forbundet" set bold in
            sans, with "Rabita" underneath at regular weight). No
            underline. Whole block links to home. */}
+        <motion.div
+          initial={reduced ? false : { opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
         <LinkVT
           href={`/${locale}`}
           className="vt-wordmark flex items-center gap-3 whitespace-nowrap"
@@ -114,6 +121,7 @@ export function NavBar() {
             </span>
           </span>
         </LinkVT>
+        </motion.div>
 
         <DesktopNav />
 

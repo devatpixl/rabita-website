@@ -84,7 +84,14 @@ export function DesktopNav() {
           const active = openKey === key;
           const index = String(i + 1).padStart(2, '0');
           return (
-            <div key={key} className="group relative" onMouseEnter={() => open(key)}>
+            <motion.div
+              key={key}
+              className="group relative"
+              onMouseEnter={() => open(key)}
+              initial={reduced ? false : { opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.35 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+            >
               <LinkVT
                 href={`/${locale}${NAV_ROOT[key]}`}
                 aria-expanded={active}
@@ -118,7 +125,7 @@ export function DesktopNav() {
                   />
                 )}
               </LinkVT>
-            </div>
+            </motion.div>
           );
         })}
       </nav>
