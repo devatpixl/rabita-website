@@ -99,7 +99,11 @@ export function ImpactStory() {
           {/* Sticky photo column */}
           <div className="md:col-span-6">
             <div className="md:sticky md:top-24">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-paper shadow-[0_20px_60px_-20px_rgba(0,0,0,0.35)]">
+              {/* Capped so the whole photo is on screen at 100% zoom. The column is
+                     wide enough for a 665px tall 4:5 crop, which is taller than a
+                     laptop viewport once the sticky offset is taken off. The width
+                     is capped instead of the height so the crop stays 4:5. */}
+              <div className="relative mx-auto aspect-[4/5] w-full overflow-hidden rounded-2xl bg-paper shadow-[0_20px_60px_-20px_rgba(0,0,0,0.35)] md:max-w-[calc((100svh-8rem)*0.8)]">
                 {CHAPTERS.map((c) => (
                   <div
                     key={c.key}
