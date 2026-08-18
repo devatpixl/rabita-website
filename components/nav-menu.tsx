@@ -80,10 +80,11 @@ export function DesktopNav() {
         style={{ marginInlineStart: '48px', gap: '28px' }}
         onMouseLeave={close}
       >
-        {NAV_KEYS.map((key) => {
+        {NAV_KEYS.map((key, i) => {
           const active = openKey === key;
+          const index = String(i + 1).padStart(2, '0');
           return (
-            <div key={key} className="relative" onMouseEnter={() => open(key)}>
+            <div key={key} className="group relative" onMouseEnter={() => open(key)}>
               <LinkVT
                 href={`/${locale}${NAV_ROOT[key]}`}
                 aria-expanded={active}
@@ -94,7 +95,20 @@ export function DesktopNav() {
                   active || isCurrent(key) ? 'text-gold-deep' : 'text-ink hover:text-gold-deep',
                 )}
               >
-                {t(`items.${key}`)}
+                <span className="flex items-baseline gap-1.5">
+                  <span
+                    aria-hidden
+                    className={cn(
+                      'text-[0.6rem] tabular-nums transition-colors duration-200',
+                      active || isCurrent(key) ? 'text-gold-deep' : 'text-gold-deep/60',
+                    )}
+                  >
+                    {index}
+                  </span>
+                  <span className="transition-transform duration-200 group-hover:-translate-y-px">
+                    {t(`items.${key}`)}
+                  </span>
+                </span>
                 {(active || isCurrent(key)) && (
                   <motion.span
                     layoutId={reduced ? undefined : 'nav-rule'}
@@ -121,7 +135,7 @@ export function DesktopNav() {
             onMouseLeave={close}
             className="absolute inset-x-0 top-full hidden border-b border-rule bg-paper shadow-[0_24px_48px_-32px_rgba(0,0,0,0.35)] md:block"
           >
-            <div className="mx-auto w-full max-w-[112rem] px-6 md:px-10 lg:px-14 py-8">
+            <div className="mx-auto w-full max-w-[112rem] px-6 md:px-10 lg:px-20 py-8">
               <MegaPanel navKey={openKey} onNavigate={() => setOpenKey(null)} />
             </div>
           </motion.div>
@@ -260,18 +274,24 @@ export function MobileNav() {
               </div>
 
               <ul className="px-5 pb-10">
-                {NAV_KEYS.map((key) => {
+                {NAV_KEYS.map((key, i) => {
                   const items = t.raw(`menu.${key}`) as Item[];
                   const expanded = section === key;
+                  const index = String(i + 1).padStart(2, '0');
                   return (
                     <li key={key} className="border-b border-rule">
                       <button
                         type="button"
                         onClick={() => setSection(expanded ? null : key)}
                         aria-expanded={expanded}
-                        className="flex min-h-14 w-full items-center justify-between gap-4 text-start font-serif text-[1.1rem] text-ink"
+                        className="flex min-h-14 w-full items-center justify-between gap-4 text-start text-ink"
                       >
-                        {t(`items.${key}`)}
+                        <span className="flex items-baseline gap-2.5">
+                          <span aria-hidden className="font-mono text-[0.6rem] tabular-nums text-gold-deep/70">
+                            {index}
+                          </span>
+                          <span className="font-serif text-[1.1rem]">{t(`items.${key}`)}</span>
+                        </span>
                         <span
                           aria-hidden
                           className={cn(

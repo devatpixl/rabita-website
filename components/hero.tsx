@@ -144,7 +144,7 @@ export async function Hero() {
       </div>
 
       <div
-        className="relative z-10 mx-auto flex w-full max-w-[112rem] flex-col justify-center px-6 pt-8 pb-10 md:px-10 md:pt-10 md:pb-12 lg:px-14"
+        className="relative z-10 mx-auto flex w-full max-w-[112rem] flex-col justify-center px-6 pt-8 pb-10 md:px-10 md:pt-10 md:pb-12 lg:px-20"
         style={{
           minHeight: `min(calc(100svh - ${HEADER_H}px), ${980 - HEADER_H}px)`,
         }}
