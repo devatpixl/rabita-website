@@ -16,7 +16,7 @@ export function PageHeader({
 }) {
   return (
     <header className="bg-paper">
-      <div className="shell py-section-md">
+      <div className="mx-auto max-w-6xl px-6 py-section-md">
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
         <h1 className="mt-3 font-serif text-display text-ink">{title}</h1>
         {lede && (
@@ -24,7 +24,7 @@ export function PageHeader({
         )}
         {children && <div className="mt-8">{children}</div>}
       </div>
-      <div className="shell">
+      <div className="mx-auto max-w-6xl px-6">
         <hr className="border-rule" />
       </div>
     </header>

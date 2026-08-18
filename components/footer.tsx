@@ -20,7 +20,7 @@ export function Footer() {
     <footer className="border-t border-rule bg-paper text-ink">
       {/* Second giving block */}
       <div className="border-b border-rule">
-        <div className="shell grid gap-10 py-section-md md:grid-cols-12 md:items-center">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-section-md md:grid-cols-12 md:items-center">
           <div className="md:col-span-6">
             <p className="mb-3 text-label uppercase tracking-widest text-gold">
               {t('give.eyebrow')}
@@ -61,7 +61,7 @@ export function Footer() {
       </div>
 
       {/* Contact + newsletter + legal */}
-      <div className="shell grid gap-10 py-section-md md:grid-cols-12">
+      <div className="mx-auto grid max-w-6xl gap-10 px-6 py-section-md md:grid-cols-12">
         <div className="md:col-span-4">
           <p className="mb-3 text-[13px] font-semibold text-ink">
             {t('contact.heading')}
@@ -126,7 +126,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-rule">
-        <div className="shell py-6 flex flex-wrap items-center justify-between gap-6">
+        <div className="mx-auto max-w-6xl px-6 py-6 flex flex-wrap items-center justify-between gap-6">
           <p className="font-mono text-label uppercase tracking-widest text-ink-60">
             © {new Date().getFullYear()} Rabita · Org.nr. {CAMPAIGN.orgNr}
           </p>

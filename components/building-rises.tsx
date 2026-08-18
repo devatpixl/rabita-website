@@ -101,8 +101,8 @@ export function BuildingRises() {
           reduced ? 'min-h-screen py-16' : 'sticky top-0 h-screen',
         )}
       >
-        <header className="shrink-0 pt-6 md:pt-8">
-          <div className="shell">
+        <header className="shrink-0 px-6 pt-6 md:pt-8">
+          <div className="mx-auto max-w-6xl">
             <Eyebrow>{t('eyebrow')}</Eyebrow>
             <h2
               id="building-rises-heading"
@@ -115,8 +115,8 @@ export function BuildingRises() {
           </div>
         </header>
 
-        <div className="flex-1 min-h-0 pb-6 md:pb-8 mt-4 md:mt-6">
-          <div className="shell h-full">
+        <div className="flex-1 min-h-0 px-6 pb-6 md:pb-8 mt-4 md:mt-6">
+          <div className="mx-auto max-w-6xl h-full">
             <div className="grid gap-6 md:grid-cols-12 md:items-stretch h-full">
               <div className="md:col-span-4 lg:col-span-3 flex md:items-center">
                 <LeftPanel step={effectiveStep} activeFloor={activeFloor} />

@@ -60,7 +60,7 @@ export async function Membership() {
       id="medlemskap"
       className="bg-dusk text-paper py-16 md:py-20"
     >
-      <div className="shell">
+      <div className="mx-auto max-w-6xl px-6">
         <Eyebrow tone="gold">{t('eyebrow')}</Eyebrow>
 
         <div className="mt-8 grid grid-cols-1 items-stretch gap-10 md:grid-cols-[1fr_0.82fr]">

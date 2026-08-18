@@ -49,12 +49,9 @@ const config: Config = {
         label: ['0.8125rem', { lineHeight: '1.2', letterSpacing: '0.08em' }],
       },
       spacing: {
-        // Fluid so a phone does not get 128px of padding above and below
-        // every section. The top of each clamp is his original figure, so
-        // nothing changes on a desktop.
-        'section-sm': 'clamp(3rem, 7vw, 6rem)',
-        'section-md': 'clamp(3.5rem, 8vw, 8rem)',
-        'section-lg': 'clamp(4rem, 9vw, 10rem)',
+        'section-sm': '6rem',
+        'section-md': '8rem',
+        'section-lg': '10rem',
       },
       borderRadius: {
         chip: '4px',
