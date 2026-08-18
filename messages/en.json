@@ -10,7 +10,7 @@
     "headlineBefore": "A mosque, a school, a library, a kitchen. ",
     "headlineAccent": "One address.",
     "headlineAfter": "",
-    "subhead": "Seven floors at Calmeyers gate 8, open to the congregation and to the city around it. Your gift builds them — prayer space by prayer space, desk by desk, shelf by shelf.",
+    "subhead": "Seven floors at Calmeyers gate 8, open to the congregation and to the city around it. Your gift builds them: prayer space by prayer space, desk by desk, shelf by shelf.",
     "phaseLine": "Phase 1 · Foundations underway",
     "cta": {
       "primary": "See the project",
@@ -95,7 +95,7 @@
       "methods": {
         "vipps": {
           "name": "Vipps",
-          "detail": "Fastest — signs you in and returns your details from the app."
+          "detail": "Fastest. Signs you in and returns your details from the app."
         },
         "card": {
           "name": "Card",
@@ -116,7 +116,7 @@
         "email": "Email",
         "mobile": "Mobile number",
         "fnr": "Fødselsnummer",
-        "fnrHint": "Only needed for tax deduction — reported to Skatteetaten. Not required to give.",
+        "fnrHint": "Only needed for tax deduction, reported to Skatteetaten. Not required to give.",
         "fnrDisabled": "This field will collect once the payment integration is live. Hidden until then.",
         "consent": "I have read and agree to the privacy policy.",
         "optional": "optional"
@@ -130,7 +130,7 @@
       },
       "give": "Give <amount></amount> kr",
       "giveMonthly": "Give <amount></amount> kr/mo",
-      "todoSubmit": "Payment integration not yet wired — the button on this final step is a placeholder."
+      "todoSubmit": "Payment integration not yet wired. The button on this final step is a placeholder."
     }
   },
   "meter": {
@@ -191,7 +191,7 @@
       "grunnstein": "Foundation"
     },
     "heading": "Foundation stones.",
-    "lede": "Gifts over {threshold} kr are recorded permanently. The names here follow the phases of the build — foundation, rising, completion.",
+    "lede": "Gifts over {threshold} kr are recorded permanently. The names here follow the phases of the build: foundation, rising, completion.",
     "anonymous": "Anonymous",
     "kicker": "Your name here — gifts over 10 000 kr are recorded permanently, with the option of a memorial line or an anonymous entry.",
     "kickerCta": "Give at this level"
@@ -199,13 +199,13 @@
   "impactStory": {
     "eyebrow": "Four chapters",
     "heading": "A place where <em>life</em> happens.",
-    "lede": "Four stories from a congregation that already is a family — and shows up for the city around it. The building we are raising makes room for all of it.",
+    "lede": "Four stories from a congregation that already is a family, and shows up for the city around it. The building we are raising makes room for all of it.",
     "chapterLabel": "Chapter {n}",
     "items": {
       "family": {
         "time": "Always",
         "title": "One family. Together for what is <em>right</em>.",
-        "body": "Four thousand members, forty nationalities, one community. We stand together — in prayer and in learning, in joy and in grief, with each other and with our neighbours. To belong here is to belong to something larger than yourself.",
+        "body": "Four thousand members, forty nationalities, one community. We stand together, in prayer and in learning, in joy and in grief, with each other and with our neighbours. To belong here is to belong to something larger than yourself.",
         "tag": "Community"
       },
       "learning": {
@@ -217,7 +217,7 @@
       "volunteer": {
         "time": "When it's needed",
         "title": "We show up — for each other, and for the city.",
-        "body": "Volunteers in yellow vests hand out meals, coordinate with the district, and stand with neighbours in good times and hard ones. Rabita isn't only a place you come to — it's a place you come from, to help.",
+        "body": "Volunteers in yellow vests hand out meals, coordinate with the district, and stand with neighbours in good times and hard ones. Rabita isn't only a place you come to. It's a place you come from, to help.",
         "tag": "Volunteer"
       },
       "sadaqa": {
@@ -239,7 +239,7 @@
   "buildingRises": {
     "eyebrow": "The building rises",
     "heading": "From foundation to prayer hall.",
-    "lede": "Scroll to see the building take shape — seven floors above and below the street, each with its purpose. Every kroner builds a layer."
+    "lede": "Scroll to see the building take shape, seven floors above and below the street, each with its purpose. Every kroner builds a layer."
   },
   "building": {
     "eyebrow": "The building rises",
@@ -255,7 +255,7 @@
       "eyebrow": "Calmeyers gate 8",
       "headlineLine1": "The site is ready.",
       "headlineLine2": "Now we raise the building.",
-      "body": "The old mosque was demolished during Ramadan 2025. Seven floors are to go up — scroll to watch them arrive."
+      "body": "The old mosque was demolished during Ramadan 2025. Seven floors are to go up. Scroll to watch them arrive."
     },
     "floors": {
       "prayer": {
@@ -343,7 +343,7 @@
   "floors": {
     "eyebrow": "The building, floor by floor",
     "heading": "Six floors above ground, two below. 6 762 square metres.",
-    "attribution": "Architect: {architect}. The Alhambra references are visible, but the building also speaks Norwegian — in materials, daylight and its relationship to the street.",
+    "attribution": "Architect: {architect}. The Alhambra references are visible, but the building also speaks Norwegian, in materials, daylight and its relationship to the street.",
     "floorLabel": "Floor {floor}",
     "items": {
       "basements": {
@@ -356,7 +356,7 @@
       },
       "first": {
         "title": "Library, youth club and study space",
-        "body": "A library open to the whole district and a youth club — somewhere for teenagers to be on a Friday evening."
+        "body": "A library open to the whole district and a youth club, somewhere for teenagers to be on a Friday evening."
       },
       "second": {
         "title": "The school: 400 pupils, 19 teachers",
@@ -420,7 +420,7 @@
       "daily": {
         "title": "Five prayers",
         "figureLabel": "times a day",
-        "sentence": "The building never really closes — first light through isha. (draft)"
+        "sentence": "The building never really closes, first light through isha. (draft)"
       },
       "school": {
         "title": "The weekend school",
@@ -434,7 +434,7 @@
       },
       "iftar": {
         "title": "Street iftar",
-        "sentence": "For eight nights of Ramadan the block eats together — whoever they are, whatever they believe. (draft)"
+        "sentence": "For eight nights of Ramadan the block eats together, whoever they are, whatever they believe. (draft)"
       },
       "visits": {
         "title": "School and university visits",
@@ -582,7 +582,7 @@
     "contact": { "heading": "Contact" },
     "newsletter": {
       "heading": "Newsletter",
-      "body": "One email a month — a photo from the site and what's happening next.",
+      "body": "One email a month, a photo from the site and what's happening next.",
       "placeholder": "you@example.com",
       "submit": "Subscribe"
     },
@@ -623,7 +623,7 @@
     },
     "ways": {
       "heading": "Ways to give",
-      "once": { "title": "One time", "body": "A single gift — ideal for larger amounts or memorial gifts." },
+      "once": { "title": "One time", "body": "A single gift, ideal for larger amounts or memorial gifts." },
       "monthly": { "title": "Monthly", "body": "The building stands for many years. Monthly gives the most to the budget." },
       "sadaqa": { "title": "Sadaqa jariya", "body": "Sponsor a prayer space in the name of someone you have lost." },
       "company": { "title": "Company", "body": "A company gift is a conversation, not a checkout. Write to us." }
@@ -668,7 +668,7 @@
     "lede": "Accounts, permits, tax deduction and running costs. Everything here is public or downloadable.",
     "tax": {
       "heading": "Tax deduction",
-      "body": "We are approved for tax deduction on gifts up to {cap} kr per year. We report to the Norwegian Tax Administration annually — you don't have to do anything.",
+      "body": "We are approved for tax deduction on gifts up to {cap} kr per year. We report to the Norwegian Tax Administration annually. You don't have to do anything.",
       "taxCapLabel": "Max per year",
       "perYear": "per donor"
     },
@@ -702,7 +702,7 @@
     },
     "a11y": {
       "heading": "Universal design",
-      "wcag": "We build to WCAG 2.1 AA. Where anything falls short, write to us — we fix on a rolling basis.",
+      "wcag": "We build to WCAG 2.1 AA. Where anything falls short, write to us. We fix on a rolling basis.",
       "list": {
         "contrast": "Colour contrast is tested, with particular attention to the gold accent.",
         "keyboard": "All functionality is keyboard-operable, including the giving sheet (Escape closes).",
@@ -710,7 +710,7 @@
         "rtl": "The site is built with logical properties, so right-to-left for Arabic works naturally.",
         "altText": "Images and illustrations have alt text; pure decoration is hidden from screen readers."
       },
-      "feedback": "Feedback? Write to us — we prioritise all accessibility reports."
+      "feedback": "Feedback? Write to us. We prioritise all accessibility reports."
     }
   },
   "requestForm": {
@@ -763,7 +763,7 @@
       "submitPay": "Join and pay 1 000 kr",
       "note": "National identity number is not required for membership. Privacy applies."
     },
-    "done": { "title": "You are registered.", "body": "Check your email — we send confirmation shortly." }
+    "done": { "title": "You are registered.", "body": "Check your email. We send confirmation shortly." }
   },
   "newsPage": {
     "eyebrow": "News",
@@ -843,7 +843,7 @@
       "shahada": {
         "title": "Shahada — declaration of faith",
         "body": "For those who wish to take shahada, with witnesses.",
-        "longBody": "We host both private and public shahada ceremonies. Get in touch to arrange a time — we provide witnesses if needed and offer brief guidance afterwards."
+        "longBody": "We host both private and public shahada ceremonies. Get in touch to arrange a time. We provide witnesses if needed and offer brief guidance afterwards."
       },
       "counselling": {
         "title": "Counselling and conversations",
@@ -869,7 +869,7 @@
     "history": {
       "p1": "Rabita was founded in 1987 as the first mosque in Oslo not tied to a single nationality. The idea was simple: a place for Muslims in Norway, regardless of where they came from.",
       "p2": "The congregation grew, the school was established, and the cultural centre became part of civil society in Oslo. The old building ran out of space long ago.",
-      "p3": "In October {year} King Harald V and Crown Prince Haakon visited the mosque — the first royal visit to a mosque in Norway. We continue to work with the same aim: a place where faith and civic life belong together."
+      "p3": "In October {year} King Harald V and Crown Prince Haakon visited the mosque, the first royal visit to a mosque in Norway. We continue to work with the same aim: a place where faith and civic life belong together."
     },
     "board": {
       "heading": "The board",
@@ -894,7 +894,7 @@
   "contactPage": {
     "eyebrow": "Contact",
     "title": "Write to us.",
-    "lede": "For gifts, membership, services or press — we reply within 3 working days.",
+    "lede": "Gifts, membership, services or press. We reply within 3 working days.",
     "directHeading": "Direct",
     "formHeading": "Send an enquiry",
     "note": "For urgent matters (janaza), please call reception."

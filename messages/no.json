@@ -10,7 +10,7 @@
     "headlineBefore": "En moské. En skole. Et bibliotek. Et kjøkken. ",
     "headlineAccent": "Én adresse.",
     "headlineAfter": "",
-    "subhead": "Sju etasjer i Calmeyers gate 8, åpne for menigheten og for byen rundt. Gaven din bygger dem — bønnerom for bønnerom, pult for pult, hylle for hylle.",
+    "subhead": "Sju etasjer i Calmeyers gate 8, åpne for menigheten og for byen rundt. Gaven din bygger dem: bønnerom for bønnerom, pult for pult, hylle for hylle.",
     "phaseLine": "Fase 1 · Fundamentering pågår",
     "cta": {
       "primary": "Se prosjektet",
@@ -95,7 +95,7 @@
       "methods": {
         "vipps": {
           "name": "Vipps",
-          "detail": "Raskest — logger deg inn og henter opplysningene dine fra appen."
+          "detail": "Raskest. Logger deg inn og henter opplysningene dine fra appen."
         },
         "card": {
           "name": "Kort",
@@ -116,7 +116,7 @@
         "email": "E-post",
         "mobile": "Mobilnummer",
         "fnr": "Fødselsnummer",
-        "fnrHint": "Kun for skattefradrag — rapporteres til Skatteetaten. Ikke påkrevd for å gi.",
+        "fnrHint": "Kun for skattefradrag, rapporteres til Skatteetaten. Ikke påkrevd for å gi.",
         "fnrDisabled": "Dette feltet aktiveres når betalingsintegrasjonen er på plass. Skjult inntil da.",
         "consent": "Jeg har lest og godtar personvernerklæringen.",
         "optional": "valgfritt"
@@ -130,7 +130,7 @@
       },
       "give": "Gi <amount></amount> kr",
       "giveMonthly": "Gi <amount></amount> kr/mnd",
-      "todoSubmit": "Betalingsintegrasjonen er ikke koblet på ennå — knappen på siste steg er en plassholder."
+      "todoSubmit": "Betalingsintegrasjonen er ikke koblet på ennå. Knappen på siste steg er en plassholder."
     }
   },
   "meter": {
@@ -191,7 +191,7 @@
       "grunnstein": "Grunnstein"
     },
     "heading": "Fundamentsteiner.",
-    "lede": "Gaver over {threshold} kr registreres varig. Navnene her følger byggets faser — grunnstein, reisning, ferdigstillelse.",
+    "lede": "Gaver over {threshold} kr registreres varig. Navnene her følger byggets faser: grunnstein, reisning, ferdigstillelse.",
     "anonymous": "Anonym",
     "kicker": "Ditt navn her – gaver over 10 000 kr registreres varig, med muligheten til å oppgi et minneord eller å bidra anonymt.",
     "kickerCta": "Bidra på nivået"
@@ -199,13 +199,13 @@
   "impactStory": {
     "eyebrow": "Fire kapitler",
     "heading": "Et sted der <em>livet</em> skjer.",
-    "lede": "Fire fortellinger fra en menighet som allerede er en familie – og som stiller opp for byen rundt seg. Bygget vi reiser, gir plass til alt dette.",
+    "lede": "Fire fortellinger fra en menighet som allerede er en familie, og som stiller opp for byen rundt seg. Bygget vi reiser, gir plass til alt dette.",
     "chapterLabel": "Kapittel {n}",
     "items": {
       "family": {
         "time": "Alltid",
         "title": "Én familie. Sammen for det som er <em>rett</em>.",
-        "body": "Fire tusen medlemmer, førti nasjonaliteter, ett fellesskap. Vi står sammen – i bønn og i lære, i glede og i sorg, med hverandre og med naboene våre. Å høre til her, betyr å høre til noe større enn seg selv.",
+        "body": "Fire tusen medlemmer, førti nasjonaliteter, ett fellesskap. Vi står sammen, i bønn og i lære, i glede og i sorg, med hverandre og med naboene våre. Å høre til her, betyr å høre til noe større enn seg selv.",
         "tag": "Fellesskap"
       },
       "learning": {
@@ -217,7 +217,7 @@
       "volunteer": {
         "time": "Når det trengs",
         "title": "Vi stiller opp – for hverandre og for byen.",
-        "body": "Frivillige i gule vester deler ut mat, koordinerer med bydelen, og står med naboer i medgang og motgang. Rabita er ikke bare et sted man kommer til – det er et sted man kommer fra, for å hjelpe.",
+        "body": "Frivillige i gule vester deler ut mat, koordinerer med bydelen, og står med naboer i medgang og motgang. Rabita er ikke bare et sted man kommer til. Det er et sted man kommer fra, for å hjelpe.",
         "tag": "Frivillig"
       },
       "sadaqa": {
@@ -239,7 +239,7 @@
   "buildingRises": {
     "eyebrow": "Bygget reiser seg",
     "heading": "Fra fundament til bønnesal.",
-    "lede": "Bla for å se hvordan bygget tar form – syv etasjer over og under gaten, hver med sin funksjon. Hver krone bygger et lag."
+    "lede": "Bla for å se hvordan bygget tar form, syv etasjer over og under gaten, hver med sin funksjon. Hver krone bygger et lag."
   },
   "building": {
     "eyebrow": "Bygget reiser seg",
@@ -255,7 +255,7 @@
       "eyebrow": "Calmeyers gate 8",
       "headlineLine1": "Tomten er klar.",
       "headlineLine2": "Nå reiser vi bygget.",
-      "body": "Den gamle moskeen ble revet i ramadan 2025. Sju etasjer skal opp — scroll for å se dem komme."
+      "body": "Den gamle moskeen ble revet i ramadan 2025. Sju etasjer skal opp. Scroll for å se dem komme."
     },
     "floors": {
       "prayer": {
@@ -343,7 +343,7 @@
   "floors": {
     "eyebrow": "Bygget, etasje for etasje",
     "heading": "Seks etasjer over bakken, to under. 6 762 kvadratmeter.",
-    "attribution": "Arkitekt: {architect}. Referansene til Alhambra er tydelige, men bygget snakker også norsk – i materialbruk, dagslys og forholdet til gaten.",
+    "attribution": "Arkitekt: {architect}. Referansene til Alhambra er tydelige, men bygget snakker også norsk, i materialbruk, dagslys og forholdet til gaten.",
     "floorLabel": "Etasje {floor}",
     "items": {
       "basements": {
@@ -420,7 +420,7 @@
       "daily": {
         "title": "Fem bønner",
         "figureLabel": "ganger om dagen",
-        "sentence": "Bygget stenger aldri helt — fra første lys til isha. (utkast)"
+        "sentence": "Bygget stenger aldri helt, fra første lys til isha. (utkast)"
       },
       "school": {
         "title": "Helgeskolen",
@@ -582,7 +582,7 @@
     "contact": { "heading": "Kontakt" },
     "newsletter": {
       "heading": "Nyhetsbrev",
-      "body": "Ett brev i måneden – et bilde fra tomten og hva som skjer neste steg.",
+      "body": "Ett brev i måneden, et bilde fra tomten og hva som skjer neste steg.",
       "placeholder": "din@epost.no",
       "submit": "Meld på"
     },
@@ -623,7 +623,7 @@
     },
     "ways": {
       "heading": "Ways du kan bidra",
-      "once": { "title": "Én gang", "body": "Gi et engangsbidrag – ideelt for større summer eller minneord." },
+      "once": { "title": "Én gang", "body": "Gi et engangsbidrag, ideelt for større summer eller minneord." },
       "monthly": { "title": "Månedlig", "body": "Bygget står i mange år. Månedlig gir mest til budsjettet." },
       "sadaqa": { "title": "Sadaqa jariya", "body": "Doner en bønneplass i navnet til noen du har mistet." },
       "company": { "title": "Bedrift", "body": "Bedriftsbidrag er en samtale, ikke en checkout. Skriv til oss." }
@@ -702,7 +702,7 @@
     },
     "a11y": {
       "heading": "Universell utforming",
-      "wcag": "Vi bygger etter WCAG 2.1 AA. Der noe ikke oppfyller kravene, skriv til oss – vi retter fortløpende.",
+      "wcag": "Vi bygger etter WCAG 2.1 AA. Der noe ikke oppfyller kravene, skriv til oss. Vi retter fortløpende.",
       "list": {
         "contrast": "Fargekontrast er testet, med særlig oppmerksomhet mot gulltonen.",
         "keyboard": "Alle funksjoner kan brukes med tastatur, inkludert giver-arket (Escape lukker).",
@@ -710,7 +710,7 @@
         "rtl": "Nettsiden er bygget med logiske egenskaper, så høyre-mot-venstre for arabisk fungerer naturlig.",
         "altText": "Bilder og illustrasjoner har alt-tekst; ren dekor er skjult for skjermlesere."
       },
-      "feedback": "Har du innspill? Skriv til oss – vi behandler alle henvendelser om universell utforming som prioritet."
+      "feedback": "Har du innspill? Skriv til oss. Vi behandler alle henvendelser om universell utforming som prioritet."
     }
   },
   "requestForm": {
@@ -763,7 +763,7 @@
       "submitPay": "Meld inn og betal 1 000 kr",
       "note": "Fødselsnummer trengs ikke for å bli medlem. Personvern gjelder."
     },
-    "done": { "title": "Vi har registrert deg.", "body": "Sjekk e-posten – vi sender bekreftelse straks." }
+    "done": { "title": "Vi har registrert deg.", "body": "Sjekk e-posten. Vi sender bekreftelse straks." }
   },
   "newsPage": {
     "eyebrow": "Aktuelt",
@@ -843,7 +843,7 @@
       "shahada": {
         "title": "Shahada – bekjennelse",
         "body": "For deg som ønsker å ta shahada, med vitner.",
-        "longBody": "Vi tar imot både private og offentlige shahada-seremonier. Ta kontakt for å avtale tid – vi ordner vitner ved behov og gir kort veiledning i etterkant."
+        "longBody": "Vi tar imot både private og offentlige shahada-seremonier. Ta kontakt for å avtale tid. Vi ordner vitner ved behov og gir kort veiledning i etterkant."
       },
       "counselling": {
         "title": "Sjelesorg og samtaler",
@@ -869,7 +869,7 @@
     "history": {
       "p1": "Rabita ble stiftet i 1987 som den første moskeen i Oslo ikke tilknyttet én nasjonalitet. Det ideelle var enkelt: et sted for muslimer i Norge, uavhengig av hvor de kom fra.",
       "p2": "Menigheten vokste, skolen ble etablert, og kultursenteret ble en del av Oslos sivilsamfunn. Den gamle bygningen tok slutt på plassen for lenge siden.",
-      "p3": "I oktober {year} besøkte kong Harald V og kronprins Haakon moskeen – første kongelige besøk til en moské i Norge. Vi arbeider fortsatt med samme mål: å være et sted hvor tro og medborgerskap går sammen."
+      "p3": "I oktober {year} besøkte kong Harald V og kronprins Haakon moskeen, det første kongelige besøket til en moské i Norge. Vi arbeider fortsatt med samme mål: å være et sted hvor tro og medborgerskap går sammen."
     },
     "board": {
       "heading": "Styret",
@@ -894,7 +894,7 @@
   "contactPage": {
     "eyebrow": "Kontakt",
     "title": "Skriv til oss.",
-    "lede": "For gaver, medlemskap, tjenester eller presse – vi svarer innen 3 virkedager.",
+    "lede": "Gaver, medlemskap, tjenester eller presse. Vi svarer innen 3 virkedager.",
     "directHeading": "Direkte",
     "formHeading": "Send henvendelse",
     "note": "For hastesaker (janaza), ring resepsjonen."
