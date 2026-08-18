@@ -178,6 +178,7 @@
       "stepAmount": "BELØP",
       "stepPayment": "BETALING",
       "stepDetails": "DINE OPPLYSNINGER",
+      "providerFillsDetails": "Vipps fyller inn navn og e-post for deg, så siste steg tas i appen.",
       "stepLabel": "STEG {n} AV {total} · {label}",
       "stepAnnounce": "Steg {n} av {total}: {label}",
       "step2Title": "Hvordan vil du betale?",

@@ -178,6 +178,7 @@
       "stepAmount": "المبلغ",
       "stepPayment": "الدفع",
       "stepDetails": "بياناتك",
+      "providerFillsDetails": "يملأ Vipps اسمك وبريدك، فتتم الخطوة الأخيرة داخل التطبيق.",
       "stepLabel": "الخطوة {n} من {total} · {label}",
       "stepAnnounce": "الخطوة {n} من {total}: {label}",
       "step2Title": "كيف تودّ الدفع؟",

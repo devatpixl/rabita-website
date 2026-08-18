@@ -178,6 +178,7 @@
       "stepAmount": "AMOUNT",
       "stepPayment": "PAYMENT",
       "stepDetails": "YOUR DETAILS",
+      "providerFillsDetails": "Vipps fills in your name and email, so the last stage happens in the app.",
       "stepLabel": "STEP {n} OF {total} · {label}",
       "stepAnnounce": "Step {n} of {total}: {label}",
       "step2Title": "How would you like to pay?",

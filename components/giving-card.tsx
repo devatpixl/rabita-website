@@ -122,10 +122,13 @@ export function GivingCard({ onSubmit, initialAmount }: Props) {
   const [entered, setEntered] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
-  // Total steps depends on selected method AND the current step —
-  // on step 1 the flow is always 3 (no method commitment yet). Only
-  // AFTER Vipps is chosen (step 2+) does the count drop to 2.
-  const totalSteps: 2 | 3 = step >= 2 && method === 'vipps' ? 2 : 3;
+  // Three stages, always: amount, payment, then who to thank. The count used
+  // to drop to two the moment Vipps was the chosen method, so pressing
+  // Continue on "step 1 of 3" landed the donor on "step 2 of 2" and the
+  // denominator moved under them. Vipps does not remove the third stage, it
+  // fills it in from the app, and the bar says so instead.
+  const TOTAL_STEPS = 3;
+  const vippsFillsDetails = method === 'vipps';
 
   // Amount preset sync from openGiveSheet(amount).
   useEffect(() => {
@@ -320,12 +323,12 @@ export function GivingCard({ onSubmit, initialAmount }: Props) {
     <div className="w-full bg-paper text-ink flex flex-col">
       {/* Header — progress + step label + heading. */}
       <header className="px-6 pt-5 pb-4 border-b border-rule">
-        <ProgressBar current={step} total={totalSteps} />
+        <ProgressBar current={step} total={TOTAL_STEPS} viaProvider={vippsFillsDetails} />
         <div className="mt-4">
           <span className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-gold">
             {t('wizard.stepLabel', {
               n: step,
-              total: totalSteps,
+              total: TOTAL_STEPS,
               label: stepLabelText,
             })}
           </span>
@@ -341,7 +344,7 @@ export function GivingCard({ onSubmit, initialAmount }: Props) {
         <p className="sr-only" aria-live="polite">
           {t('wizard.stepAnnounce', {
             n: step,
-            total: totalSteps,
+            total: TOTAL_STEPS,
             label: stepLabelText,
           })}
         </p>
@@ -380,7 +383,14 @@ export function GivingCard({ onSubmit, initialAmount }: Props) {
             />
           )}
           {step === 2 && (
-            <StepPayment method={method} setMethod={setMethod} t={t} />
+            <>
+              <StepPayment method={method} setMethod={setMethod} t={t} />
+              {vippsFillsDetails && (
+                <p className="mt-4 text-[0.85rem] leading-snug text-ink-60">
+                  {t('wizard.providerFillsDetails')}
+                </p>
+              )}
+            </>
           )}
           {step === 3 && (
             <StepDetails
@@ -484,7 +494,15 @@ function AnimatedHeight({
 // design language as the congregation carousel: --rule track, active
 // + completed in --gold-deep.
 // ─────────────────────────────────────────────────────────────────
-function ProgressBar({ current, total }: { current: number; total: number }) {
+function ProgressBar({
+  current,
+  total,
+  viaProvider,
+}: {
+  current: number;
+  total: number;
+  viaProvider?: boolean;
+}) {
   return (
     <div
       className="flex items-center w-full"
@@ -493,10 +511,16 @@ function ProgressBar({ current, total }: { current: number; total: number }) {
     >
       {Array.from({ length: total }).map((_, i) => {
         const done = i + 1 <= current;
+        // the last stage is handled inside the payment app, so it is drawn
+        // as waiting rather than as a stage the donor still has to fill in
+        const handedOff = viaProvider && i + 1 === total && !done;
         return (
           <span
             key={i}
-            className={cn('flex-1 h-full', done ? 'bg-gold-deep' : 'bg-rule')}
+            className={cn(
+              'flex-1 h-full',
+              done ? 'bg-gold-deep' : handedOff ? 'bg-gold-deep/30' : 'bg-rule',
+            )}
             style={{ transition: 'background-color 220ms ease-out' }}
           />
         );

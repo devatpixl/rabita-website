@@ -87,7 +87,7 @@ export function NavBar() {
         {t('skipToContent')}
       </a>
 
-      <div className="mx-auto w-full max-w-[112rem] px-6 md:px-10 lg:px-20 flex items-center py-3">
+      <div className="mx-auto w-full max-w-[112rem] px-6 md:px-10 lg:px-24 flex items-center py-4">
         {/* Wordmark — mark + two-line stacked org name (matches the
            official brand lockup: "Det Islamske Forbundet" set bold in
            sans, with "Rabita" underneath at regular weight). No
@@ -103,7 +103,7 @@ export function NavBar() {
             width={40}
             height={40}
             priority
-            className="h-9 w-9 md:h-10 md:w-10"
+            className="h-10 w-10 md:h-11 md:w-11"
           />
           <span className="flex flex-col font-sans text-ink leading-tight">
             <span className="text-[13px] md:text-[14px] lg:text-[15px] font-bold tracking-[-0.01em]">
@@ -164,14 +164,6 @@ export function NavBar() {
             </span>
           </button>
 
-          {/* Mono hours block — hidden below xl. */}
-          <div
-            className="hidden xl:block text-end font-mono uppercase text-ink-60/70 whitespace-nowrap"
-            style={{ fontSize: '10px', lineHeight: 1.35, letterSpacing: '0.1em' }}
-          >
-            <div>{t('openDaily')}</div>
-            <div className="tabular-nums">06:00–22:00</div>
-          </div>
         </div>
         <div className="ms-auto md:hidden">
           <MobileNav />
