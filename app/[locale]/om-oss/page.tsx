@@ -41,7 +41,7 @@ export default async function AboutPage({
             {(['chair', 'vice', 'treasurer', 'secretary', 'member', 'member2'] as const).map((k) => (
               <li key={k} className="border-t border-rule pt-6">
                 <p className="text-[13px] text-ink-60">{t(`board.roles.${k}`)}</p>
-                <p className="mt-2 font-serif text-card text-ink">— {t('board.tbd')}</p>
+                <p className="mt-2 font-serif text-card text-ink">{t('board.tbd')}</p>
               </li>
             ))}
           </ul>

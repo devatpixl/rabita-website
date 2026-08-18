@@ -140,7 +140,7 @@ export function BuildingRises() {
         <li>{t('intro.headlineLine1')} {t('intro.headlineLine2')}. {t('intro.body')}</li>
         {[...FLOORS].reverse().map((f) => (
           <li key={f.key}>
-            {f.levelLabel} — {t(`floors.${f.key}.name`)}, {t(`floors.${f.key}.fact`)}
+            {f.levelLabel}: {t(`floors.${f.key}.name`)}, {t(`floors.${f.key}.fact`)}
           </li>
         ))}
       </ol>
