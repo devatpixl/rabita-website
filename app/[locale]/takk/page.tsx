@@ -20,7 +20,7 @@ export default async function ThankYouPage({
 
   return (
     <main className="bg-paper">
-      <div className="mx-auto max-w-3xl px-6 py-section-lg">
+      <div className="shell max-w-3xl py-section-lg">
         <p className="mb-4 text-[13px] text-gold">
           {t('eyebrow')}
         </p>

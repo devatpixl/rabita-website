@@ -29,7 +29,7 @@ export async function TrustBand() {
       <h2 id="trust-heading" className="sr-only">
         {t('secure')}
       </h2>
-      <div className="mx-auto max-w-6xl px-6 py-6">
+      <div className="shell py-6">
         <ul className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
           {items.map((item, i) => (
             <li key={item.key} className="flex items-center gap-3">

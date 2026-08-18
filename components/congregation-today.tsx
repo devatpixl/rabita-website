@@ -204,7 +204,7 @@ export function CongregationToday() {
            align-items: baseline; the indicator wrapper's vertical
            centre is nudged onto the statement's text baseline (see
            the transform inside). */}
-        <div className="mx-auto max-w-6xl w-full px-6">
+        <div className="shell w-full">
           <div className="flex items-baseline justify-between" style={{ gap: '32px' }}>
             <h2
               className="font-serif text-ink text-balance"
@@ -394,7 +394,7 @@ export function CongregationToday() {
            (down from 20) so the larger heading above fits the budget
            at 1280×800. */}
         <div
-          className="mx-auto max-w-6xl w-full px-6"
+          className="shell w-full"
           style={{ marginTop: '16px' }}
           aria-live="polite"
         >

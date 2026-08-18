@@ -4,6 +4,21 @@
 
 :root {
   color-scheme: light;
+
+  /* One shell for the whole site. The hero already used this width so the
+     card could reach the right edge; every section now uses it too, so the
+     left edge of a heading is the left edge of everything above and below
+     it. The gutter grows with the screen rather than sitting at a fixed
+     24px, which is what left the wide dead margins. */
+  --shell-max: 1720px;
+  --shell-gutter: clamp(1.5rem, 3vw, 3rem);
+}
+
+/* The container. Width rather than padding, so a child sits flush against
+   the same edge the hero card does. */
+.shell {
+  width: min(var(--shell-max), calc(100% - var(--shell-gutter) * 2));
+  margin-inline: auto;
 }
 
 ::selection {

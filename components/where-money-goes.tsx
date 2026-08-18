@@ -48,7 +48,7 @@ export async function WhereMoneyGoes() {
     <Section
       id="hvor-pengene-gar"
       tone="paper-2"
-      className="relative isolate overflow-hidden scroll-mt-20 !pt-[88px] !pb-[88px]"
+      className="relative isolate overflow-hidden scroll-mt-20 !py-section-sm"
     >
       {/* Ornament — inline SVG pattern, section-local. Absolute, behind
          content via -z-10. Aria-hidden. Wrapper opacity 0.55. Mask

@@ -105,7 +105,7 @@ export function PrayerPanelBody() {
         transitionDuration: '120ms',
       }}
     >
-      <div className="mx-auto max-w-6xl px-6 py-6">
+      <div className="shell py-6">
         <dl className="grid grid-cols-2 min-[600px]:grid-cols-3 min-[900px]:grid-cols-6 gap-x-6 gap-y-4">
           {ORDER.map((key) => {
             const isNext = key === nextKey;

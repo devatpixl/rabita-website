@@ -64,7 +64,7 @@ export function ConsentBanner() {
       aria-labelledby="consent-title"
       className="fixed inset-x-0 bottom-0 z-50 border-t border-rule bg-paper shadow-lg"
     >
-      <div className="mx-auto max-w-6xl px-6 py-4">
+      <div className="shell py-4">
         <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
           <div className="max-w-2xl">
             <p id="consent-title" className="font-serif text-card text-ink">

@@ -30,7 +30,7 @@ export default async function GiveIndexPage({
   return (
     <main>
       <div className="relative bg-ink text-paper">
-        <div className="mx-auto flex min-h-[60vh] max-w-6xl items-end px-6 py-section-lg">
+        <div className="shell flex min-h-[60vh] items-end py-section-lg">
           <div className="max-w-3xl">
             <Eyebrow className="text-gold">{CAMPAIGN.address}</Eyebrow>
             <h1 className="mt-4 font-serif text-display leading-none">{t('title')}</h1>

@@ -95,7 +95,7 @@ export function NavBar() {
         {t('skipToContent')}
       </a>
 
-      <div className="mx-auto flex max-w-6xl items-center px-6 py-3">
+      <div className="shell flex items-center py-3">
         {/* Wordmark — mark + two-line stacked org name (matches the
            official brand lockup: "Det Islamske Forbundet" set bold in
            sans, with "Rabita" underneath at regular weight). No

@@ -41,7 +41,7 @@ export function CampaignStrip() {
 
   return (
     <div className="sticky top-0 z-30 border-b border-rule bg-paper/95 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-2 text-[12px] text-ink-60">
+      <div className="shell flex items-center justify-between gap-4 py-2 text-[12px] text-ink-60">
         <div className="flex items-center gap-3 tabular-nums">
           <span className="text-ink">{formatAmount(locale, raised)} kr</span>
           <span aria-hidden className="text-rule">·</span>
