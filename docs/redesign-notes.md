@@ -495,6 +495,31 @@ Nothing was cut from the content; the gift cards are square rather than 4:5,
 the visit photograph is 16:10 rather than 4:3, and the register and events rows
 are on a tighter rhythm.
 
+### The header contracts before it opens, and the gallery is a grid
+
+**The header animation was only half the move.** It started as a pill and
+opened, where what was wanted is the bar pulling in to a pill first and then
+opening back out. Three keyframes now: full width, in to a 41 percent inset
+pill, back out. Recorded from the first frame, the inset peaks around 24 to 37
+percent depending on how busy the main thread is at load, then returns to zero.
+
+That change caught a real bug of my own making. The animation was set to `both`,
+so the final keyframe's `clip-path: inset(0)` stayed on the header for good,
+and a clip on the header clips anything drawn below it. The desktop mega panel
+hangs 275px past the header's own box, so it was being clipped away entirely
+and the whole navigation was invisible on hover. It is `backwards` now, so the
+clip is released when the animation ends and the settled value is `none`.
+
+**The gallery tiles overlapped and were all different sizes.** Six tiles ran
+from 15vh to 45vh, positioned by hand, and two of them crossed. They are one
+size on a row above and a row below the centre, and every gap measures 40 to
+41px, horizontally and vertically.
+
+**The carousel had gone small.** Clearing the header cost the rail its height
+and the pictures read as zoomed out. The rail is back to 52svh, 468px at a
+900px viewport, and the section still fits: heading clear of the header, last
+line 120px clear of the fold.
+
 ## How this branch is deployed
 
 `main` deploys to the original Vercel project. This branch has its own project

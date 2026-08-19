@@ -31,7 +31,7 @@ type SlideKey = (typeof SLIDE_KEYS)[number];
 const TOTAL = SLIDE_KEYS.length;
 const HALF = Math.floor(TOTAL / 2);
 
-const CARD_H = 'clamp(340px, 46svh, 600px)';
+const CARD_H = 'clamp(380px, 52svh, 660px)';
 const CARD_W = `calc(${CARD_H} * 0.75)`;
 const GAP_PX = 48;
 const INNER_SCALE = 0.70;
@@ -218,7 +218,7 @@ export function CongregationToday() {
           // 1280×800 doesn't fit at 40/40. Padding is the least
           // load-bearing spec dimension to trim.
           paddingTop: '96px',
-          paddingBottom: '32px',
+          paddingBottom: '24px',
         }}
       >
         {/* Statement + indicator row — one row, container-bound.
