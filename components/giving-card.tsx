@@ -122,11 +122,7 @@ export function GivingCard({ onSubmit, initialAmount }: Props) {
   const [entered, setEntered] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
-  // Three stages, always: amount, payment, then who to thank. The count used
-  // to drop to two the moment Vipps was the chosen method, so pressing
-  // Continue on "step 1 of 3" landed the donor on "step 2 of 2" and the
-  // denominator moved under them. Vipps does not remove the third stage, it
-  // fills it in from the app, and the bar says so instead.
+  // Three stages always: amount, payment, then who to thank. The count never shrinks mid flow.
   const TOTAL_STEPS = 3;
   const vippsFillsDetails = method === 'vipps';
 
@@ -511,8 +507,7 @@ function ProgressBar({
     >
       {Array.from({ length: total }).map((_, i) => {
         const done = i + 1 <= current;
-        // the last stage is handled inside the payment app, so it is drawn
-        // as waiting rather than as a stage the donor still has to fill in
+        // The last stage happens inside the payment app, so it is drawn as handed off rather than dropped.
         const handedOff = viaProvider && i + 1 === total && !done;
         return (
           <span

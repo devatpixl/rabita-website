@@ -5,17 +5,7 @@ import Link from 'next/link';
 import { motion, useInView, useReducedMotion } from 'motion/react';
 import { useTranslations } from 'next-intl';
 
-// The four assurances under "where the money goes", as a register rather than
-// four paragraphs in a grid.
-//
-// The content is all verifiable claims: a tax approval, an audit, a permit, an
-// org number. Setting them as rows in a register, each with the rule drawn
-// across it and its own stamp, says that in the layout instead of leaving the
-// reader to notice it. Same copy, same links, same order.
-//
-// The rules draw in sequence on entry, which is the one moment of movement;
-// after that the section is still. Under reduced motion the rules are simply
-// there.
+// The four assurances as a register, since they are all verifiable claims rather than paragraphs.
 
 type Card = { key: 'tax' | 'accounts' | 'permit' | 'org'; href: string };
 

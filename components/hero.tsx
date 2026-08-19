@@ -60,10 +60,7 @@ const scrimHorizontal = (rtl: boolean) =>
 const SCRIM_VERTICAL =
   'linear-gradient(180deg, rgba(22,36,46,0.55) 0, rgba(22,36,46,0) 220px)';
 
-// The photograph used to stop dead on the section edge, cutting the people in
-// it through the chest with flat colour underneath. This resolves the foot of
-// the picture into dusk, which is what the next section is painted, so the two
-// meet instead of one being guillotined by the other.
+// A scrim at the foot so the photograph resolves into the section below instead of stopping dead.
 const SCRIM_FOOT =
   'linear-gradient(0deg,' +
   ' rgb(22,36,46) 0%,' +
@@ -73,11 +70,7 @@ const SCRIM_FOOT =
 
 const IMAGE_FILTER = `saturate(${HERO_ART.saturate}) contrast(${HERO_ART.contrast}) brightness(${HERO_ART.brightness})`;
 
-// The hero gets a narrower gutter than the rest of the page on purpose. A
-// full bleed photograph with a card on it can carry more width than a column
-// of prose can, and the sections below keep their own measure. What it does
-// not do any more is pad its own left to line up with them, which is what
-// left the large gap.
+// The hero keeps a narrower gutter than the sections below, since a full bleed photo carries more width.
 
 export async function Hero() {
   const t = await getTranslations('hero');

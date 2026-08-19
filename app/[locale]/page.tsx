@@ -28,10 +28,7 @@ import { ZoomParallax } from '@/components/zoom-parallax';
 //   10 Events
 //   11 Membership (dusk)
 //   12 Trust band  (Footer lives in the locale layout, not here)
-//
-// Tone runs dusk, dusk, then eight sections of warm off white before the
-// membership band. Six is on dusk to break that run; the three paper tints
-// are within a few percent of each other and do not read as a change.
+// Six is on dusk to break the run of warm off white through the middle of the page.
 export default async function HomePage({
   params,
 }: {

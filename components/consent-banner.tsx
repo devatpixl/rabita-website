@@ -59,9 +59,7 @@ export function ConsentBanner() {
   if (!visible) return null;
 
   return (
-    // A card in the corner rather than a bar across the whole foot of the
-    // page. The consent still has to be asked for, but it no longer covers a
-    // strip of whatever the reader came to look at.
+    // A card in the corner rather than a bar across the foot, sized to clear the hero buttons.
     <motion.div
       role="dialog"
       aria-live="polite"

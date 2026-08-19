@@ -3,17 +3,7 @@
 import { useId } from 'react';
 import { cn } from '@/lib/cn';
 
-// A circular seal that sits on the corner of a photograph, the label running
-// round its edge and the star mark at its centre.
-//
-// Used once on the page, on the visit photograph, where it does a real job:
-// the thing a reader most needs to know about dropping in is that the door is
-// open every day, and that sits better on the picture than as another line of
-// body text under it.
-//
-// The ring turns on a CSS animation rather than a library, since nothing else
-// about it needs to be scripted, and stops entirely under reduced motion. Paper
-// at 92 percent so the photograph still reads through it.
+// A circular seal for the corner of a photograph. Turns once every 44s, still under reduced motion.
 
 export function RotatingSeal({
   label,

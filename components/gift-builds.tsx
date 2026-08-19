@@ -11,19 +11,7 @@ import { Accent } from './accent';
 import { Eyebrow, SectionBody } from './primitives';
 import { openGiveSheet } from './giving-sheet';
 
-// What your gift builds. Same four costed items and the same copy the ladder
-// used, shown as photographs, which is the version Rabita asked for.
-//
-// The behaviour is the one from the other build. A spine draws across the top,
-// the cards lift in one after another, each picture wipes up inside its frame,
-// each figure counts up, and pointing at one card pulls the other three back.
-// It replays whenever the section is entered, from either direction, because a
-// once-only reveal is invisible to anyone who scrolls up to look again.
-//
-// On dusk on purpose. Between Four chapters and the events list the page ran
-// eight sections of warm off white, and the three paper tints sit within a few
-// percent of each other, so the middle of the page read as one surface. Dusk is
-// already in the palette.
+// What your gift builds. Same costed items as the ladder, shown as photographs, on dusk to break the run of paper sections.
 const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
 const CURVE = [0.16, 1, 0.3, 1] as const;
 
@@ -138,8 +126,7 @@ export function GiftBuilds() {
                       delay: still ? 0 : 0.2 + i * 0.09,
                     }}
                   >
-                    {/* Pulling the others back lives on its own element, so it
-                       never fights the entrance transform above it. */}
+                    {/* Pulling the others back lives on its own element, so it never fights the entrance transform above it. */}
                     <span
                       className="block"
                       style={{

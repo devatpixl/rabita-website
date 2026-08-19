@@ -4,6 +4,7 @@ import { formatAmount, formatDate } from '@/lib/format';
 import type { AppLocale } from '@/i18n/routing';
 import { AnimatedProgress } from './animated-progress';
 import { FundingScale } from './funding-scale';
+import { GoalLattice } from './goal-lattice';
 import { Counter } from './counter';
 import { GiveCTA } from './give-cta';
 import { cn } from '@/lib/cn';
@@ -80,6 +81,8 @@ export async function CampaignMeter() {
                 current: p.key === active,
               }))}
             />
+
+            <GoalLattice className="mt-16" percent={pct} caption={t('lattice')} />
           </div>
 
           {/* RIGHT column — sub-campaign card on paper-2, roomier */}

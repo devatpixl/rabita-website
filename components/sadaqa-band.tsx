@@ -15,19 +15,7 @@ import { Eyebrow, SectionBody } from './primitives';
 import { GiveCTA } from './give-cta';
 import { cn } from '@/lib/cn';
 
-// Sadaqa jariya, the dedication ask, as its own section. Impact story names it
-// as chapter four, but naming a thing and asking for it are different jobs, and
-// the ask had nowhere to live on the home page.
-//
-// Behaviour carried over from the other build: the section's own trip past the
-// window is divided between the rooms, so scrolling walks through them. Touch,
-// keyboard or the picker take over the moment they are used, and from then on
-// the scroll leaves it alone. Each room travels sideways with the picture
-// lagging the frame it sits in, which is what gives the move some depth rather
-// than reading as a slide deck.
-//
-// Rooms are renders because these rooms do not exist yet, and all four are
-// people free, which is the standing rule for render imagery here.
+// The dedication ask. Scrolling the section walks the rooms; touch, keyboard or the picker take over.
 const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
 const SLIDE = 0.8;
 const TRAVEL = [0.45, 0.02, 0.18, 1] as const;
@@ -141,8 +129,7 @@ export function SadaqaBand() {
                   exit="leave"
                   transition={{ duration: still ? 0 : SLIDE, ease: [...TRAVEL] }}
                 >
-                  {/* The picture lags the frame it sits in, which is what gives
-                     the travel depth instead of a flat slide. */}
+                  {/* The picture lags the frame it sits in, which is what gives the travel depth instead of a flat slide. */}
                   <motion.div
                     className="absolute inset-0"
                     custom={dir * away}

@@ -3,16 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/cn';
 
-// The campaign read as a surveyor's scale rather than a progress bar. The
-// rule runs the whole goal, the phase years sit on it as station marks, and
-// a gold run is drawn from zero to where the money currently stands, with a
-// marker that travels with it and settles.
-//
-// Two reasons for the scale over a bar. It is the same drawing language as
-// the cross-section above it, hairlines and mono ticks, so the page reads as
-// one document. And it puts the phases on the same line as the money, so a
-// reader can see which phase the raised figure has actually reached instead
-// of comparing two separate graphics.
+// The campaign as a surveyor's scale: the goal is the rule, the phases are stations on it.
 
 type Station = { at: number; year: string; label: string; current: boolean };
 
@@ -52,8 +43,7 @@ export function FundingScale({
     return () => io.disconnect();
   }, [target]);
 
-  // The run draws, then the marker catches up a beat later, which reads as
-  // the marker being carried by the line rather than racing it.
+  // The run draws, then the marker catches up a beat later, which reads as the marker being carried by the line rather than racing it.
   const draw = 'cubic-bezier(0.22, 1, 0.36, 1)';
 
   return (

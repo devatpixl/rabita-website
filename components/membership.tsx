@@ -4,6 +4,7 @@ import { membership } from '@/lib/membership';
 import type { AppLocale } from '@/i18n/routing';
 import { Accent } from './accent';
 import { Eyebrow } from './primitives';
+import { DaysUntil } from './days-until';
 import { SeatGrid } from './seat-grid';
 
 // §4.10 (rebuilt). Membership as an AGM convening notice, not a pricing
@@ -123,6 +124,7 @@ export async function Membership() {
             <p className="mt-3 font-mono text-[12px] uppercase tracking-[0.14em] text-dusk-60">
               {t('venueLine', { venue: agm.venue, time: agm.time })}
             </p>
+            <DaysUntil iso={agm.date} />
 
             <div className="mt-5 h-px w-full bg-[#2A3A44]" />
 

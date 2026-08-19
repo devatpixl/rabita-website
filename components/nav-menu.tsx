@@ -21,10 +21,7 @@ export const NAV_ROOT: Record<NavKey, string> = {
 
 type Item = { label: string; blurb: string; href: string };
 
-// Desktop nav. Hovering a heading opens a panel under the bar; the gold rule
-// slides between headings rather than cutting to each one, so the eye keeps
-// its place. Opening is delayed slightly and closing more so, which stops the
-// panel flickering when the pointer crosses a gap between two headings.
+// Desktop nav. Hover opens a panel; the gold rule slides between headings and closing is delayed.
 export function DesktopNav() {
   const t = useTranslations('nav');
   const locale = useLocale();
@@ -198,8 +195,7 @@ function MegaPanel({ navKey, onNavigate }: { navKey: NavKey; onNavigate: () => v
   );
 }
 
-// Mobile nav. There was none: the primary nav was hidden below md and nothing
-// replaced it, so a phone could only reach the home page and the give sheet.
+// Mobile nav. There was none below md, so a phone could only reach the home page.
 export function MobileNav() {
   const t = useTranslations('nav');
   const locale = useLocale();

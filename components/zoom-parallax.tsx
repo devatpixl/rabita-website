@@ -33,8 +33,7 @@ import { cn } from '@/lib/cn';
 
 const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
 
-// Feathered edges, so a tile dissolves into the dusk instead of stopping on a
-// hard rectangle. One gradient per axis, intersected.
+// Feathered edges, so a tile dissolves into the dusk instead of stopping on a hard rectangle.
 const EDGE =
   'linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%),' +
   ' linear-gradient(to bottom, transparent 0, #000 3%, #000 97%, transparent 100%)';
@@ -134,9 +133,7 @@ export function ZoomParallax() {
     offset: ['start start', 'end end'],
   });
 
-  // Wheel and trackpad deltas arrive in lumps, and seven layers scaling
-  // straight off the raw value step visibly. A stiff spring evens the value
-  // out without letting the tiles trail behind the scroll.
+  // Wheel deltas arrive in lumps, so a stiff spring evens them out without trailing the scroll.
   const progress = useSpring(scrollYProgress, {
     stiffness: 260,
     damping: 44,

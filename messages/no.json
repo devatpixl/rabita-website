@@ -226,6 +226,7 @@
     }
   },
   "meter": {
+    "lattice": "Hvert merke er 1 000 000 kr",
     "label": "Samlet inn",
     "eyebrow": "Byggeregnskap",
     "updated": "Oppdatert {date}",
@@ -660,6 +661,7 @@
     }
   },
   "membership": {
+    "countdown": "om {n} dager",
     "eyebrow": "INNKALLING · ÅRSMØTET 2027",
     "headline": "Bygget bestemmes ikke av oss. Det bestemmes av <em>medlemmene</em>.",
     "body": "Årsmøtet velger styret. Styret bestemmer hva de sju etasjene brukes til. Ett medlemskap med stemmerett er én stemme i det rommet.",

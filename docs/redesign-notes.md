@@ -428,6 +428,36 @@ not on Tailwind's opacity scale. The seal's disc rendered fully transparent and
 looked like a stacking bug for two attempts. Arbitrary opacities need the
 bracket form.
 
+### The build fund, and the meeting notice
+
+**The build fund needed weight.** The scale carries the phases but it is a
+hairline, so the section still read as a number over a thin line with half a
+column doing nothing under it. The goal is drawn as a hundred marks now, one
+for each million kroner, in the diamond lattice the facade is made of. Twenty
+six light up in order when the section arrives.
+
+A percentage is a fact you have to convert before it means anything. A field of
+a hundred marks with twenty six lit is a picture of how much is still dark,
+which is the argument the section is making. The geometry is not decoration
+either: the facade is a diamond lattice, and every mark is one panel of it.
+
+**The meeting notice was a date poster.** A date tells a reader when the
+meeting is, not whether to do anything about it yet, and the whole section
+argues that a vote has to be bought before the doors close. It carries the days
+remaining now, live, and renders nothing once the date has passed rather than
+counting into the negative.
+
+### Comments
+
+Every comment added on this branch is one line. The blocks that had grown to
+four and nine lines are gone.
+
+Worth recording: the first pass at this collapsed the other build's comments as
+well, including the eight step description at the top of the building section
+and the layout maths in the hero. Those were restored and only the comments
+added on this branch were touched. The homepage section map is his structure
+and stays as a map.
+
 ## How this branch is deployed
 
 `main` deploys to the original Vercel project. This branch has its own project

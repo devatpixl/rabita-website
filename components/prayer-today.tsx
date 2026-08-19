@@ -7,17 +7,7 @@ import { useRef } from 'react';
 import { PRAYER_TIMES_TODAY } from '@/lib/campaign';
 import { cn } from '@/lib/cn';
 
-// Today's prayer times, as a thing that is happening rather than a table of
-// figures. The row you are inside is marked and carries a line that fills as
-// the window runs down, and the row you are waiting for counts down to itself.
-//
-// This is the most used thing on a mosque site, and the flat list gave a
-// reader no answer to the only question they arrive with, which is how long
-// they have. Everything else here is unchanged: same times, same order, same
-// tabular figures.
-//
-// Recomputed every 30 seconds, which is cheap and crosses a boundary cleanly.
-// The clock runs under reduced motion too; only the entrance stagger drops.
+// Prayer times as a thing happening: the window you are in fills, the next one counts down.
 
 const ORDER = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'] as const;
 type Key = (typeof ORDER)[number];

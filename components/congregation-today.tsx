@@ -133,9 +133,7 @@ export function CongregationToday() {
     return () => el.removeEventListener('keydown', onKey);
   }, [isRtl, next, prev]);
 
-  // Sideways trackpad scroll moves the rail. Passive, because the page does
-  // nothing with a horizontal delta anyway, and locked briefly so one long
-  // swipe does not run through every slide.
+  // Sideways trackpad scroll moves the rail, locked briefly so one swipe is one slide.
   useEffect(() => {
     const el = regionRef.current;
     if (!el) return;
@@ -151,8 +149,7 @@ export function CongregationToday() {
     return () => el.removeEventListener('wheel', onWheel);
   }, [isRtl, next, prev]);
 
-  // One gesture, one slide. Pointer events cover mouse, pen and touch, so a
-  // drag on a laptop behaves like a flick on a phone.
+  // One gesture, one slide. Pointer events cover mouse, pen and touch alike.
   const onPointerDown = (e: React.PointerEvent) => {
     if (e.pointerType === 'mouse' && e.button !== 0) return;
     dragStartX.current = e.clientX;
@@ -163,8 +160,7 @@ export function CongregationToday() {
     const dx = e.clientX - dragStartX.current;
     dragStartX.current = null;
     if (Math.abs(dx) < 45) return;
-    // The click that follows would jump to whichever card the pointer landed
-    // on, so swallow it.
+    // Swallow the click that follows, or it jumps to whichever card the pointer landed on.
     cameFromDrag.current = true;
     window.setTimeout(() => { cameFromDrag.current = false; }, 0);
     const forward = isRtl ? dx > 0 : dx < 0;

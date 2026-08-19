@@ -48,10 +48,7 @@ const config: Config = {
         body: ['1rem', { lineHeight: '1.6' }],
         label: ['0.8125rem', { lineHeight: '1.2', letterSpacing: '0.08em' }],
       },
-      // Section rhythm. Two sections meeting put their padding back to back,
-      // so a 10rem opener meant 320px of empty page between one block of
-      // content and the next. Pulled in one step; the ratio between the three
-      // is unchanged, so nothing has to be retuned per section.
+      // Section rhythm. Two sections meeting stack their padding, so a 10rem opener meant 320px of empty page.
       spacing: {
         'section-sm': '4.5rem',
         'section-md': '6rem',

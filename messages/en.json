@@ -226,6 +226,7 @@
     }
   },
   "meter": {
+    "lattice": "Each mark is 1 000 000 kr",
     "label": "Raised so far",
     "eyebrow": "Build fund",
     "updated": "Updated {date}",
@@ -660,6 +661,7 @@
     }
   },
   "membership": {
+    "countdown": "{n} days away",
     "eyebrow": "NOTICE · ANNUAL MEETING 2027",
     "headline": "The building isn't decided by us. It's decided by the <em>members</em>.",
     "body": "The annual meeting elects the board. The board decides what the seven floors are used for. A voting membership is one voice in that room.",
