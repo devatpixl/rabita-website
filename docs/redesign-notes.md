@@ -346,6 +346,39 @@ those rooms do not exist to photograph, and all four are people free. Every
 image is referenced once, from a small map at the top of each component, so
 swapping them later is a filename change and nothing else.
 
+### Both carried sections now behave the way they did
+
+They were ported as static blocks first, which lost the point of them. The
+behaviour is back, taken from the other build rather than reinvented.
+
+**What your gift builds.** A spine draws across the top, the four cards lift in
+one after another about 90ms apart, each picture wipes up inside its frame on a
+clip path, and each figure counts up from zero on its own stagger. Pointing at
+one card pulls the other three back, dimmed and slightly blurred, and the card
+under the pointer raises its ask. It replays whenever the section is entered
+from either direction, because a once-only reveal is invisible to anyone who
+scrolls back up to look again. Each card opens the giving sheet with its own
+amount already filled in.
+
+**Sadaqa jariya.** The section's own trip past the window is divided between
+the four rooms, so scrolling walks through them. Touch, keyboard or the picker
+take over the moment they are used and the scroll leaves it alone from then on.
+Each room travels sideways with the picture lagging the frame it sits in, which
+is what gives the move depth instead of reading as a slide deck. The four
+tracks under the picture fill as you get to them. Arabic travels the other way.
+
+Both fall to their finished state under reduced motion, with every duration at
+zero rather than a fast version of the same move.
+
+### Section rhythm
+
+Two sections meeting put their padding back to back, so the 10rem opener meant
+320px of empty page between one block of content and the next. The scale is
+pulled in one step, 6/8/10rem to 4.5/6/7rem, and the ratio between the three is
+unchanged so nothing had to be retuned per section. The meter was overriding
+the token with a raw py-32 that is now larger than the token itself, so it
+follows the scale again. Total vertical padding down the page is 1 536px.
+
 ## How this branch is deployed
 
 `main` deploys to the original Vercel project. This branch has its own project

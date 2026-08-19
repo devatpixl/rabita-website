@@ -32,7 +32,7 @@ export async function CampaignMeter() {
   const active: PhaseKey = currentPhaseKey();
 
   return (
-    <section id="byggeregnskap" aria-labelledby="meter-heading" className="bg-paper py-section-lg md:py-32">
+    <section id="byggeregnskap" aria-labelledby="meter-heading" className="bg-paper py-section-lg">
       <div className="mx-auto max-w-6xl px-6">
         {/* Eyebrow row — gold-deep pulse dot + mono editorial dateline.
            Red retired; the signal now sits inside the brand palette. */}

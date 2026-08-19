@@ -1,26 +1,36 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { useTranslations } from 'next-intl';
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+} from 'motion/react';
+import { useLocale, useTranslations } from 'next-intl';
 import { Accent } from './accent';
 import { Eyebrow, SectionBody } from './primitives';
 import { GiveCTA } from './give-cta';
 import { cn } from '@/lib/cn';
 
-// Sadaqa jariya, the dedication ask, as its own section. Impact story already
-// names it as chapter four, but naming a thing and asking for it are different
-// jobs, and the ask had nowhere to live on the home page.
+// Sadaqa jariya, the dedication ask, as its own section. Impact story names it
+// as chapter four, but naming a thing and asking for it are different jobs, and
+// the ask had nowhere to live on the home page.
 //
-// Asymmetric on purpose: argument on one side, room on the other. Every
-// section between the building and the footer is a heading over a full width
-// block, so a two column split with the picture carrying one half reads
-// differently without leaving the house style.
+// Behaviour carried over from the other build: the section's own trip past the
+// window is divided between the rooms, so scrolling walks through them. Touch,
+// keyboard or the picker take over the moment they are used, and from then on
+// the scroll leaves it alone. Each room travels sideways with the picture
+// lagging the frame it sits in, which is what gives the move some depth rather
+// than reading as a slide deck.
 //
 // Rooms are renders because these rooms do not exist yet, and all four are
 // people free, which is the standing rule for render imagery here.
 const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
+const SLIDE = 0.8;
+const TRAVEL = [0.45, 0.02, 0.18, 1] as const;
 
 const ROOMS = [
   { key: 'mainHall', src: '/photos/room-main-hall.webp' },
@@ -31,9 +41,50 @@ const ROOMS = [
 
 export function SadaqaBand() {
   const t = useTranslations('sadaqaBand');
+  const locale = useLocale();
+  const rtl = locale === 'ar';
   const reduced = useReducedMotion();
-  const [active, setActive] = useState(0);
-  const room = ROOMS[active];
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const still = mounted && reduced === true;
+
+  const box = useRef<HTMLDivElement>(null);
+  const [index, setIndex] = useState(0);
+  const [dir, setDir] = useState(1);
+  const [manual, setManual] = useState(false);
+  const count = ROOMS.length;
+
+  const go = useCallback(
+    (n: number, d: number) => {
+      setManual(true);
+      setDir(d);
+      setIndex((n + count) % count);
+    },
+    [count],
+  );
+  const next = useCallback(() => go(index + 1, 1), [index, go]);
+  const prev = useCallback(() => go(index - 1, -1), [index, go]);
+
+  // The section's own trip past the window, divided between the rooms.
+  const { scrollYProgress } = useScroll({
+    target: box,
+    offset: ['start 88%', 'end 12%'],
+  });
+
+  useMotionValueEvent(scrollYProgress, 'change', (v) => {
+    if (manual || still) return;
+    const n = Math.min(count - 1, Math.max(0, Math.floor(v * count)));
+    setIndex((was) => {
+      if (n === was) return was;
+      setDir(n > was ? 1 : -1);
+      return n;
+    });
+  });
+
+  // In Arabic the whole thing reads the other way, so forward travels the other way.
+  const away = rtl ? -1 : 1;
+  const room = ROOMS[index];
+  const touchX = useRef(0);
 
   return (
     <section
@@ -60,65 +111,116 @@ export function SadaqaBand() {
             </div>
           </div>
 
-          {/* The room */}
-          <div className="md:col-span-7">
+          {/* The rooms */}
+          <div
+            ref={box}
+            className="md:col-span-7"
+            onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
+            onTouchEnd={(e) => {
+              const d = touchX.current - e.changedTouches[0].clientX;
+              if (Math.abs(d) > 55) (d * away > 0 ? next : prev)();
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'ArrowRight') (rtl ? prev : next)();
+              if (e.key === 'ArrowLeft') (rtl ? next : prev)();
+            }}
+          >
             <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-paper-2">
-              <AnimatePresence mode="wait" initial={false}>
+              <AnimatePresence initial={false} custom={dir * away}>
                 <motion.div
                   key={room.key}
-                  className="absolute inset-0"
-                  initial={reduced ? false : { opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  custom={dir * away}
+                  className="absolute inset-0 overflow-hidden"
+                  variants={{
+                    enter: (d: number) => ({ x: still ? 0 : `${d * 100}%` }),
+                    rest: { x: 0 },
+                    leave: (d: number) => ({ x: still ? 0 : `${d * -100}%` }),
+                  }}
+                  initial="enter"
+                  animate="rest"
+                  exit="leave"
+                  transition={{ duration: still ? 0 : SLIDE, ease: [...TRAVEL] }}
                 >
-                  <Image
-                    src={room.src}
-                    alt={t(`rooms.${room.key}.alt`)}
-                    fill
-                    sizes="(min-width: 768px) 58vw, 90vw"
-                    className="object-cover"
-                    style={{ filter: GRADE }}
-                  />
+                  {/* The picture lags the frame it sits in, which is what gives
+                     the travel depth instead of a flat slide. */}
+                  <motion.div
+                    className="absolute inset-0"
+                    custom={dir * away}
+                    variants={{
+                      enter: (d: number) => ({
+                        x: still ? 0 : `${d * -26}%`,
+                        scale: still ? 1 : 1.06,
+                      }),
+                      rest: { x: 0, scale: 1 },
+                      leave: (d: number) => ({
+                        x: still ? 0 : `${d * 26}%`,
+                        scale: still ? 1 : 1.06,
+                      }),
+                    }}
+                    transition={{ duration: still ? 0 : SLIDE, ease: [...TRAVEL] }}
+                  >
+                    <Image
+                      src={room.src}
+                      alt={t(`rooms.${room.key}.alt`)}
+                      fill
+                      sizes="(min-width: 768px) 58vw, 90vw"
+                      className="object-cover"
+                      style={{ filter: GRADE }}
+                      priority={index === 0}
+                    />
+                  </motion.div>
                 </motion.div>
               </AnimatePresence>
+
+              {/* Corner rules, the same frame gesture the chapter photo uses */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute start-4 top-4 z-10 h-8 w-8 border-s border-t border-gold/70"
+              />
+              <span
+                aria-hidden
+                className="pointer-events-none absolute bottom-4 end-4 z-10 h-8 w-8 border-b border-e border-gold/70"
+              />
             </div>
 
-            {/* Room picker. Each tab keeps its own rule, which is the tab as
-               much as the label is, so the set reads as a strip of options. */}
-            <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-4">
-              {ROOMS.map((r, i) => {
-                const on = i === active;
-                return (
-                  <li key={r.key}>
-                    <button
-                      type="button"
-                      onClick={() => setActive(i)}
-                      aria-pressed={on}
-                      className="group block w-full text-start"
-                    >
+            {/* One track per room, marking where the scroll has got to */}
+            <ul
+              className="mt-5 grid gap-x-6 gap-y-2"
+              style={{ gridTemplateColumns: `repeat(${count}, minmax(0, 1fr))` }}
+            >
+              {ROOMS.map((r, i) => (
+                <li key={r.key}>
+                  <button
+                    type="button"
+                    onClick={() => go(i, i > index ? 1 : -1)}
+                    aria-current={i === index}
+                    className="group block w-full text-start"
+                  >
+                    <span aria-hidden className="block h-[2px] w-full overflow-hidden bg-rule">
                       <span
-                        aria-hidden
-                        className={cn(
-                          'block h-[2px] w-full transition-colors duration-300',
-                          on ? 'bg-gold-deep' : 'bg-rule group-hover:bg-gold/60',
-                        )}
+                        className="block h-full bg-gold-deep transition-[width] duration-500 ease-out"
+                        style={{ width: i <= index ? '100%' : '0%' }}
                       />
-                      <span
-                        className={cn(
-                          'mt-3 flex min-h-11 items-start text-[14px] transition-colors duration-200',
-                          on ? 'font-semibold text-ink' : 'text-ink-60 group-hover:text-ink',
-                        )}
-                      >
-                        {t(`rooms.${r.key}.label`)}
-                      </span>
-                    </button>
-                  </li>
-                );
-              })}
+                    </span>
+                    <span
+                      className={cn(
+                        'mt-3 flex min-h-11 items-start text-[14px] leading-tight transition-colors duration-200',
+                        i === index
+                          ? 'font-semibold text-ink'
+                          : 'text-ink-60 group-hover:text-ink',
+                      )}
+                    >
+                      {t(`rooms.${r.key}.label`)}
+                    </span>
+                  </button>
+                </li>
+              ))}
             </ul>
 
-            <p className="mt-2 text-[14px] leading-relaxed text-ink-60" aria-live="polite">
+            <p
+              className="mt-2 min-h-[3rem] text-[14px] leading-relaxed text-ink-60"
+              aria-live="polite"
+            >
               {t(`rooms.${room.key}.caption`)}
             </p>
           </div>
