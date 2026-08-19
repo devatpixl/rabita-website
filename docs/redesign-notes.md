@@ -294,6 +294,26 @@ school's two figures pressed harder against the right wall than the classrooms
 did against the left. The youth floor sat 41 from the top of its band and 12
 from the bottom.
 
+### The build fund reads as a survey line
+
+The campaign section had a three segment bar and, under it, a separate row of
+years. Two graphics for one idea, and the reader had to compare them to work
+out which phase the money had reached.
+
+It is one scale now. The rule runs the whole goal, the phase years sit on it
+as station marks, and a gold run is drawn from zero to where the money stands,
+carrying a marker that settles at the end of the draw. A tick at the far end
+states the goal, so the run is measured against something.
+
+The scale rather than a bar for two reasons. It is the same drawing language
+as the cross-section directly above it, hairlines and mono ticks, so the two
+sections read as one document. And it puts the phases and the money on the
+same line, so which phase the raised figure has actually reached is something
+you see rather than something you calculate.
+
+Drawn on view, once, and the whole thing renders in its final state under
+reduced motion.
+
 ## How this branch is deployed
 
 `main` deploys to the original Vercel project. This branch has its own project

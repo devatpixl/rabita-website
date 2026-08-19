@@ -3,6 +3,7 @@ import { CAMPAIGN, PHASES, SUB_CAMPAIGN, currentPhaseKey, type PhaseKey } from '
 import { formatAmount, formatDate } from '@/lib/format';
 import type { AppLocale } from '@/i18n/routing';
 import { AnimatedProgress } from './animated-progress';
+import { FundingScale } from './funding-scale';
 import { Counter } from './counter';
 import { GiveCTA } from './give-cta';
 import { cn } from '@/lib/cn';
@@ -68,47 +69,17 @@ export async function CampaignMeter() {
               <span className="text-ink font-semibold">{pctInt} %</span> {t('financed')}
             </p>
 
-            {/* Segmented phase bar — taller, more breathing room */}
-            <div className="mt-14 flex gap-3 h-4">
-              {PHASES.map((p, i) => {
-                const start = (i * 100) / PHASES.length;
-                const end = ((i + 1) * 100) / PHASES.length;
-                const local = Math.min(100, Math.max(0, ((pct - start) / (end - start)) * 100));
-                return (
-                  <AnimatedProgress
-                    key={p.year}
-                    percent={local}
-                    className="flex-1 h-full bg-rule rounded"
-                    fillClassName="bg-gradient-to-r from-gold-deep to-gold rounded"
-                  />
-                );
-              })}
-            </div>
-            <ol className="mt-5 flex gap-3">
-              {PHASES.map((p) => {
-                const isCurrent = p.key === active;
-                return (
-                  <li key={p.year} className="flex-1">
-                    <div
-                      className={cn(
-                        'text-[15px] tabular-nums',
-                        isCurrent ? 'text-ink font-semibold' : 'text-ink-60/50',
-                      )}
-                    >
-                      {p.year}
-                    </div>
-                    <div
-                      className={cn(
-                        'text-[15px] mt-1',
-                        isCurrent ? 'text-ink' : 'text-ink-60/50',
-                      )}
-                    >
-                      {tPhase(p.key)}
-                    </div>
-                  </li>
-                );
-              })}
-            </ol>
+            <FundingScale
+              className="mt-16"
+              percent={pct}
+              pctLabel={`${pctInt} %`}
+              stations={PHASES.map((p, i) => ({
+                at: (i * 100) / PHASES.length,
+                year: String(p.year),
+                label: tPhase(p.key),
+                current: p.key === active,
+              }))}
+            />
           </div>
 
           {/* RIGHT column — sub-campaign card on paper-2, roomier */}
