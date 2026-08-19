@@ -36,7 +36,7 @@ export async function EventsSchedule() {
   return (
     <Section id="arrangementer" tone="paper">
       <SectionBody>
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
           <div>
             <Eyebrow>{t('eyebrow')}</Eyebrow>
             <SectionHeading className="mt-3">{t('heading')}</SectionHeading>
@@ -46,7 +46,7 @@ export async function EventsSchedule() {
         <FeaturedEvent event={featured} locale={locale} />
 
         {rest.length > 0 && (
-          <ul className="mt-14">
+          <ul className="mt-10">
             {rest.map((e) => (
               <li key={e.slug}>
                 <EventRow event={e} locale={locale} />
@@ -55,7 +55,7 @@ export async function EventsSchedule() {
           </ul>
         )}
 
-        <div className="mt-10">
+        <div className="mt-8">
           <Link
             href={`/${locale}/arrangementer`}
             className="inline-flex min-h-12 items-center rounded-btn border border-ink px-5 py-3 text-body font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
@@ -79,7 +79,7 @@ async function FeaturedEvent({ event, locale }: { event: EventRecord; locale: Ap
   };
 
   return (
-    <div className="grid grid-cols-1 items-start gap-8 border-y border-rule py-10 md:grid-cols-[auto_1fr]">
+    <div className="grid grid-cols-1 items-start gap-8 border-y border-rule py-7 md:grid-cols-[auto_1fr]">
       <div className="min-w-[9rem]">
         <p className="font-mono text-[12px] uppercase tracking-[0.14em] text-gold-deep">
           {t('featuredLabel')}

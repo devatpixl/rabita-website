@@ -23,7 +23,7 @@ export function AssuranceRegister({
   const still = reduced === true;
 
   return (
-    <ul ref={root} className="mt-16">
+    <ul ref={root} className="mt-12">
       {cards.map((c, i) => (
         <li key={c.key} className="group relative">
           {/* The rule is the register line. It draws, then the row sits on it. */}
@@ -40,7 +40,7 @@ export function AssuranceRegister({
             />
           </span>
 
-          <div className="grid gap-x-10 gap-y-3 py-8 md:grid-cols-12 md:items-baseline">
+          <div className="grid gap-x-10 gap-y-3 py-6 md:grid-cols-12 md:items-baseline">
             <div className="flex items-baseline gap-4 md:col-span-3">
               <span className="font-mono text-label uppercase tracking-widest text-gold-deep">
                 {(i + 1).toString().padStart(2, '0')}

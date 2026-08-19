@@ -31,7 +31,7 @@ type SlideKey = (typeof SLIDE_KEYS)[number];
 const TOTAL = SLIDE_KEYS.length;
 const HALF = Math.floor(TOTAL / 2);
 
-const CARD_H = 'clamp(400px, 58svh, 700px)';
+const CARD_H = 'clamp(340px, 46svh, 600px)';
 const CARD_W = `calc(${CARD_H} * 0.75)`;
 const GAP_PX = 48;
 const INNER_SCALE = 0.70;
@@ -217,7 +217,7 @@ export function CongregationToday() {
           // stacking adds ~12px vs the prior below-carousel layout, and
           // 1280×800 doesn't fit at 40/40. Padding is the least
           // load-bearing spec dimension to trim.
-          paddingTop: '32px',
+          paddingTop: '96px',
           paddingBottom: '32px',
         }}
       >

@@ -93,7 +93,7 @@ export function GiftBuilds() {
           </h2>
         </div>
 
-        <div ref={root} className="mt-14">
+        <div ref={root} className="mt-10">
           {/* The spine, drawn once the cards are in place */}
           <div className="relative mb-10 hidden h-px w-full bg-paper/15 lg:block">
             <motion.span
@@ -104,7 +104,7 @@ export function GiftBuilds() {
             />
           </div>
 
-          <ul className="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
             {GIFTS.map((g, i) => {
               const dimmed = focused !== null && focused !== i;
               return (
@@ -147,7 +147,7 @@ export function GiftBuilds() {
                         </span>
                       </span>
 
-                      <span className="relative block aspect-[4/5] overflow-hidden rounded-lg bg-dusk">
+                      <span className="relative block aspect-[1/1] overflow-hidden rounded-lg bg-dusk">
                         <motion.span
                           className="absolute inset-0 block"
                           initial={{ clipPath: still ? 'inset(0% 0 0 0)' : 'inset(100% 0 0 0)' }}
@@ -207,7 +207,7 @@ export function GiftBuilds() {
             })}
           </ul>
 
-          <p className="mt-12 text-[13.5px] text-dusk-60">{t('footnote')}</p>
+          <p className="mt-9 text-[13.5px] text-dusk-60">{t('footnote')}</p>
         </div>
       </SectionBody>
     </section>

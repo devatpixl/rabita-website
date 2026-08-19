@@ -458,6 +458,43 @@ and the layout maths in the hero. Those were restored and only the comments
 added on this branch were touched. The homepage section map is his structure
 and stays as a map.
 
+### Review pass: corners, sizes, header, heights
+
+**The hero card had square corners.** It is rounded, but a scrollbar was
+rendering inside the rounded box and squaring the top corner. The bar is hidden
+on that card, and native scrollbar arrows are switched off site wide, since the
+theming did not cover them.
+
+**One gallery tile was a third of its neighbours.** 15vh by 15vw against 25 to
+45vh everywhere else. It is 25vh by 22vw.
+
+**The header opens on load.** It arrives clipped to a pill in the middle of the
+bar and spreads to full width, once, over 1.1 seconds after a short hold. Done
+with clip-path so nothing reflows, and it does not run at all under reduced
+motion.
+
+**The congregation section put its own heading under the header.** The pane
+filled the viewport from its very top, so the sticky header covered the
+statement and the caption fell off the bottom. It clears the header now and the
+rail gives back the height that costs. Measured at 900px: heading at 112px,
+last line 151px clear of the fold.
+
+**The seal is gone** from the visit photograph.
+
+**Section heights.** Sections that ran over one screen make a reader scroll to
+read one idea. Measured in screens at 1920 by 900, before and after:
+
+| section | before | after |
+| --- | --- | --- |
+| What your gift builds | 1.10 | 1.00 |
+| Where the money goes | 1.11 | 1.02 |
+| Prayer and visit | 1.27 | 1.14 |
+| Events | 1.17 | 1.11 |
+
+Nothing was cut from the content; the gift cards are square rather than 4:5,
+the visit photograph is 16:10 rather than 4:3, and the register and events rows
+are on a tighter rhythm.
+
 ## How this branch is deployed
 
 `main` deploys to the original Vercel project. This branch has its own project

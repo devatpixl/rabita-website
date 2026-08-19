@@ -263,7 +263,7 @@ export function ZoomParallax() {
                 i === 3 && '[&>div]:!left-[27.5vw] [&>div]:!h-[25vh] [&>div]:!w-[25vw]',
                 i === 4 && '[&>div]:!top-[27.5vh] [&>div]:!left-[5vw] [&>div]:!h-[25vh] [&>div]:!w-[20vw]',
                 i === 5 && '[&>div]:!top-[27.5vh] [&>div]:!-left-[22.5vw] [&>div]:!h-[25vh] [&>div]:!w-[30vw]',
-                i === 6 && '[&>div]:!top-[22.5vh] [&>div]:!left-[25vw] [&>div]:!h-[15vh] [&>div]:!w-[15vw]',
+                i === 6 && '[&>div]:!top-[24vh] [&>div]:!left-[24vw] [&>div]:!h-[25vh] [&>div]:!w-[22vw]',
               )}
             >
               <div

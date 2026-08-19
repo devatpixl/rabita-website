@@ -83,7 +83,7 @@ export function NavBar() {
   return (
     <header
       data-prayer-panel-scope
-      className="sticky top-0 z-40 border-b border-rule bg-paper/95 backdrop-blur"
+      className="header-open sticky top-0 z-40 border-b border-rule bg-paper/95 backdrop-blur"
     >
       <a
         href="#main"

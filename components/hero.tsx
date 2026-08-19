@@ -241,7 +241,7 @@ export async function Hero() {
                 className="absolute inset-0 translate-y-2 translate-x-2 rounded-2xl bg-paper-deep border-t border-gold/40"
               />
               <div
-                className="relative rounded-2xl overflow-y-auto bg-paper text-ink border border-gold/30 shadow-[0_1px_2px_rgba(0,0,0,0.06),0_8px_24px_-10px_rgba(0,0,0,0.35),0_28px_60px_-24px_rgba(0,0,0,0.4)]"
+                className="no-scrollbar relative rounded-2xl overflow-y-auto bg-paper text-ink border border-gold/30 shadow-[0_1px_2px_rgba(0,0,0,0.06),0_8px_24px_-10px_rgba(0,0,0,0.35),0_28px_60px_-24px_rgba(0,0,0,0.4)]"
                 style={{
                   maxHeight: `calc(100svh - ${HEADER_H}px - 96px)`,
                 }}
