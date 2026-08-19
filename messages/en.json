@@ -499,6 +499,10 @@
       }
     }
   },
+  "zoomBand": {
+    "heading": "Seven floors, one address, open to the whole <em>city</em>.",
+    "alt": "The Rabita facade at dusk, its diamond lattice lit from within"
+  },
   "whereMoneyGoes": {
     "eyebrow": "Where the money goes",
     "heading": "Every krone is <em>accounted</em> for.",

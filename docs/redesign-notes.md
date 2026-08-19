@@ -520,6 +520,34 @@ and the pictures read as zoomed out. The rail is back to 52svh, 468px at a
 900px viewport, and the section still fits: heading clear of the header, last
 line 120px clear of the fold.
 
+### The zoom band, the pill header, and the gallery again
+
+**Zoom band.** New full bleed section after prayer and visit. Four rooms sit
+around the centre and fall back, scaling out and fading, while the facade comes
+forward out of a small frame and opens to fill the screen, its picture pushing
+in from 1.24 to 1 as it goes. Corners feathered into the dusk so no plate has a
+cut edge, and the corner radius flattens as the frame fills. A line arrives once
+the facade has taken the frame. Everything is scroll driven off the section's
+own trip past the window; under reduced motion it renders in its finished
+state.
+
+**The header is a floating pill first.** Three attempts to get this right, and
+the last one found the actual problem. The clip was working the whole time. The
+page behind the header is the same paper colour as the header, so a header
+clipped to a pill is invisible: there is nothing to see it against. The pill
+carries a drop-shadow at the middle keyframe, which follows the clipped
+silhouette rather than the element box, and it reads immediately.
+
+The strip and the bar are separate elements and cannot be wrapped, because a
+wrapper would bound the sticky header to its own height and the bar would stop
+sticking. They animate on the same clock instead, the strip taking the rounded
+top and the bar the rounded bottom, so the two read as one capsule.
+
+**The gallery, again.** The even grid lost the scattered character that was the
+point of it. Sizes vary again, from 391 by 220 to 550 by 258, and the gaps do
+not: every one measures 55 to 58px, horizontally and vertically. Random in the
+sizes, regular in the spacing.
+
 ## How this branch is deployed
 
 `main` deploys to the original Vercel project. This branch has its own project

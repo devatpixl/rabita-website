@@ -12,6 +12,7 @@ import { PrayerVisit } from '@/components/prayer-visit';
 import { SadaqaBand } from '@/components/sadaqa-band';
 import { TrustBand } from '@/components/trust-band';
 import { WhereMoneyGoes } from '@/components/where-money-goes';
+import { ZoomBand } from '@/components/zoom-band';
 import { ZoomParallax } from '@/components/zoom-parallax';
 
 // Homepage section order — ordering ONLY. Do not restyle in this file.
@@ -25,6 +26,7 @@ import { ZoomParallax } from '@/components/zoom-parallax';
 //   07 Where the money goes
 //   08 Sadaqa jariya
 //   09 Prayer times + visit
+//   09b Zoom band (dusk, full bleed)
 //   10 Events
 //   11 Membership (dusk)
 //   12 Trust band  (Footer lives in the locale layout, not here)
@@ -49,6 +51,7 @@ export default async function HomePage({
       <MotionRise><WhereMoneyGoes /></MotionRise>
       <MotionRise><SadaqaBand /></MotionRise>
       <MotionRise><PrayerVisit /></MotionRise>
+      <ZoomBand />
       <MotionRise><EventsSchedule /></MotionRise>
       <MotionRise><Membership /></MotionRise>
       <TrustBand />

@@ -499,6 +499,10 @@
       }
     }
   },
+  "zoomBand": {
+    "heading": "Sju etasjer, én adresse, åpen for hele <em>byen</em>.",
+    "alt": "Rabita-fasaden i skumringen, med diamantgitteret opplyst innenfra"
+  },
   "whereMoneyGoes": {
     "eyebrow": "Hvor pengene går",
     "heading": "Hver krone er <em>gjort rede</em> for.",

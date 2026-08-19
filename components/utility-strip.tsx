@@ -46,7 +46,7 @@ export function UtilityStrip() {
     <div
       ref={rootRef}
       data-prayer-panel-scope
-      className="relative hidden md:block border-b border-gold bg-paper-deep"
+      className="header-open-top relative hidden md:block border-b border-gold bg-paper-deep"
     >
       <div className="mx-auto w-full max-w-[112rem] px-6 md:px-10 lg:px-24 flex min-h-11 items-center justify-between gap-6">
         <PrayerTimesWidget />

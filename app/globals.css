@@ -273,21 +273,46 @@ dialog {
 
 
 /* On load the bar pulls in to a pill, then opens. backwards, not both, or the held clip hides the mega panel. */
-@keyframes header-open {
+@keyframes header-open-top {
   0% {
     clip-path: inset(0 0 0 0 round 0);
+    filter: drop-shadow(0 0 0 rgba(26, 26, 24, 0));
     animation-timing-function: cubic-bezier(0.5, 0, 0.75, 0);
   }
-  38% {
-    clip-path: inset(0 41% 0 41% round 999px);
+  40% {
+    clip-path: inset(9px 30% 0 30% round 999px 999px 0 0);
+    filter: drop-shadow(0 10px 26px rgba(26, 26, 24, 0.3));
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
   100% {
     clip-path: inset(0 0 0 0 round 0);
+    filter: drop-shadow(0 0 0 rgba(26, 26, 24, 0));
   }
 }
+
+@keyframes header-open-bottom {
+  0% {
+    clip-path: inset(0 0 0 0 round 0);
+    filter: drop-shadow(0 0 0 rgba(26, 26, 24, 0));
+    animation-timing-function: cubic-bezier(0.5, 0, 0.75, 0);
+  }
+  40% {
+    clip-path: inset(0 30% 9px 30% round 0 0 999px 999px);
+    filter: drop-shadow(0 10px 26px rgba(26, 26, 24, 0.3));
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  100% {
+    clip-path: inset(0 0 0 0 round 0);
+    filter: drop-shadow(0 0 0 rgba(26, 26, 24, 0));
+  }
+}
+
+/* Two elements, one silhouette: the strip takes the rounded top, the bar the rounded bottom. */
+.header-open-top {
+  animation: header-open-top 1500ms linear 150ms backwards;
+}
 .header-open {
-  animation: header-open 1700ms linear 120ms backwards;
+  animation: header-open-bottom 1500ms linear 150ms backwards;
 }
 
 /* A scrollbar inside a rounded box squares its corners. */
@@ -305,7 +330,8 @@ dialog {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .header-open {
+  .header-open,
+  .header-open-top {
     animation: none;
   }
 }
