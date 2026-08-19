@@ -226,6 +226,32 @@ Checked at 900, 820, 740 and 680px viewport heights: no clipping at any of
 them. The labels do keep shrinking with the drawing on very short windows,
 which is inherent to a pinned section that fits one screen.
 
+### Second follow up
+
+**The street label was in a 24 unit gap.** Between the ground floor furniture,
+which ends at y 496, and the ground line at 520, there are 24 units. At 15 the
+label needed 20 of them and touched both. The two ground annotations are 13
+now, a step under the floor labels, which is the hierarchy the drawing wants
+anyway: a reader takes the floor names first. Measured after the change: the
+street label clears the furniture by 3 and the line by 3, and the plot
+dimension clears the line by 6 and the parking bays by 10.
+
+**The chapter caption was wider than its photo.** The photo is capped so it
+fits the viewport, the caption was not, so on any window where the cap bound
+the caption ran wider than the picture it belongs to. It takes the same measure
+now, and the two line up at every height tested.
+
+**The photo hung from a fixed offset.** It sat 96px below the top with all the
+slack underneath it. The sticky block now fills the band under the header and
+centres its own content, so the gap above and below match within about 3px at
+940, 870, 800 and 740px viewport heights.
+
+**Dead space between chapters.** 192px between panels left a visibly empty
+column beside the photo. It is 128px, the list padding halved, and the section
+foot matches its head. The section is 2 396px rather than 2 780px and all four
+chapters still take their turn as you scroll, which was worth checking, since
+the tracking depends on a panel dominating the middle of the viewport.
+
 ## How this branch is deployed
 
 `main` deploys to the original Vercel project. This branch has its own project

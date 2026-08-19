@@ -83,7 +83,7 @@ export function ImpactStory() {
   const activeIndex = CHAPTERS.findIndex((c) => c.key === active);
 
   return (
-    <section id="menigheten-forteller" className="bg-paper-2 pt-section-sm pb-section-lg">
+    <section id="menigheten-forteller" className="bg-paper-2 pt-section-sm pb-section-sm">
       <SectionBody>
         <div className="mb-16 max-w-3xl">
           <Eyebrow>{t('eyebrow')}</Eyebrow>
@@ -98,12 +98,12 @@ export function ImpactStory() {
         <div className="grid gap-10 md:grid-cols-12">
           {/* Sticky photo column */}
           <div className="md:col-span-6">
-            <div className="md:sticky md:top-24">
+            <div className="md:sticky md:top-20 md:h-[calc(100svh-5rem)] md:flex md:flex-col md:justify-center">
               {/* Capped so the whole photo is on screen at 100% zoom. The column is
                      wide enough for a 665px tall 4:5 crop, which is taller than a
                      laptop viewport once the sticky offset is taken off. The width
                      is capped instead of the height so the crop stays 4:5. */}
-              <div className="relative mx-auto aspect-[4/5] w-full overflow-hidden rounded-2xl bg-paper shadow-[0_20px_60px_-20px_rgba(0,0,0,0.35)] md:max-w-[calc((100svh-11rem)*0.8)]">
+              <div className="relative mx-auto aspect-[4/5] w-full overflow-hidden rounded-2xl bg-paper shadow-[0_20px_60px_-20px_rgba(0,0,0,0.35)] md:max-w-[calc((100svh-10rem)*0.8)]">
                 {CHAPTERS.map((c) => (
                   <div
                     key={c.key}
@@ -135,7 +135,7 @@ export function ImpactStory() {
 
               {/* Chapter counter under photo — mirrors the mono treatment
                  used elsewhere for tabular figures. */}
-              <div className="mt-5 flex items-center gap-4 font-mono text-label uppercase tracking-widest">
+              <div className="mx-auto mt-5 flex w-full items-center gap-4 font-mono text-label uppercase tracking-widest md:max-w-[calc((100svh-10rem)*0.8)]">
                 <span className="shrink-0 text-gold-deep tabular-nums">
                   {(activeIndex + 1).toString().padStart(2, '0')} / {CHAPTERS.length.toString().padStart(2, '0')}
                 </span>
@@ -146,7 +146,7 @@ export function ImpactStory() {
           </div>
 
           {/* Scrolling chapter panels */}
-          <ol className="md:col-span-6 space-y-32 md:space-y-48 md:py-32">
+          <ol className="md:col-span-6 space-y-24 md:space-y-32 md:py-16">
             {CHAPTERS.map((c, i) => (
               <li
                 key={c.key}

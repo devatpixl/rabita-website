@@ -316,10 +316,10 @@ function BuildingSVG({
       />
       <text
         x={BUILDING_X + 4}
-        y={GROUND_Y - 10}
+        y={GROUND_Y - 8}
         fill={INK}
         fontFamily="var(--font-mono)"
-        fontSize={15}
+        fontSize={13}
         letterSpacing="0.07em"
       >
         {labelT('svg.groundLevel')}
@@ -349,20 +349,20 @@ function BuildingSVG({
       {/* TOMT label — on the ground line, knocked out of what is behind it */}
       <g>
         <rect
-          x={BUILDING_RIGHT - 202}
-          y={GROUND_Y + 5}
-          width={198}
-          height={22}
+          x={BUILDING_RIGHT - 152}
+          y={GROUND_Y + 4}
+          width={148}
+          height={20}
           fill="#F2EEE7"
         />
         <text
           x={BUILDING_RIGHT - 8}
-          y={GROUND_Y + 21}
+          y={GROUND_Y + 19}
           textAnchor="end"
           fill={INK_60}
           fontFamily="var(--font-mono)"
-          fontSize={17}
-          letterSpacing="0.14em"
+          fontSize={13}
+          letterSpacing="0.1em"
         >
           {labelT('svg.plot')}
         </text>
