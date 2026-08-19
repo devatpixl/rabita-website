@@ -58,7 +58,7 @@ export function activeFloorFromStep(step: number): number {
 // size to a much smaller number than the column could hold. With
 // a shorter viewBox the SVG scales to its container's height and
 // arrives wider on screen. Building coordinates unchanged.
-export const BUILDING_VIEWBOX = { w: 620, h: 700 } as const;
+export const BUILDING_VIEWBOX = { w: 700, h: 700 } as const;
 export const BUILDING_X = 40;
 export const BUILDING_W = 320;
 export const BUILDING_RIGHT = BUILDING_X + BUILDING_W; // 360

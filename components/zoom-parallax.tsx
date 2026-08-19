@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Accent } from './accent';
 import { cn } from '@/lib/cn';
@@ -33,6 +33,18 @@ import { cn } from '@/lib/cn';
 
 const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
 
+// Feathered edges, so a tile dissolves into the dusk instead of stopping on a
+// hard rectangle. One gradient per axis, intersected.
+const EDGE =
+  'linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%),' +
+  ' linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%)';
+const FEATHER = {
+  maskImage: EDGE,
+  WebkitMaskImage: EDGE,
+  maskComposite: 'intersect',
+  WebkitMaskComposite: 'source-in',
+} as const;
+
 type Img = { src: string; alt: string; width: number; height: number };
 
 // Centre first (index 0, scale 4, fills the screen). Then six tiles
@@ -54,43 +66,43 @@ type Img = { src: string; alt: string; width: number; height: number };
 const IMAGES: Img[] = [
   {
     src: '/photos/zoom-mihrab.webp',
-    alt: 'Interior of the main prayer hall — mihrab in fretwork wood, diamond-panelled marble walls, worshippers on the green carpet',
+    alt: 'Interior of the main prayer hall, mihrab in fretwork wood, diamond-panelled marble walls, worshippers on the green carpet',
     width: 2800,
     height: 1562,
   },
   {
     src: '/photos/zoom-facade.webp',
-    alt: 'The Rabita facade at dusk — geometric lattice windows glowing over the wet Oslo street',
+    alt: 'The Rabita facade at dusk, geometric lattice windows glowing over the wet Oslo street',
     width: 1600,
     height: 882,
   },
   {
     src: '/photos/zoom-minaret.webp',
-    alt: 'The rooftop minaret at sunset — sculpted brass against a violet sky',
+    alt: 'The rooftop minaret at sunset, sculpted brass against a violet sky',
     width: 1600,
     height: 898,
   },
   {
-    src: '/photos/zoom-imam.webp',
-    alt: 'Imam meeting room — Qur’an on the table, a discussion in progress with a member',
-    width: 1200,
-    height: 673,
+    src: '/photos/zoom-qibla-wall.webp',
+    alt: 'The qibla wall, fretwork mihrab in wood and gold against diamond lit marble',
+    width: 1800,
+    height: 1011,
   },
   {
-    src: '/photos/zoom-cafe.webp',
-    alt: 'Rabita cafe interior — diamond-shaped windows in walnut framing, Moroccan tiled floor',
-    width: 1400,
-    height: 786,
+    src: '/photos/zoom-prayer-hall.webp',
+    alt: 'The main prayer hall, green carpet and slim columns under a ringed light',
+    width: 1800,
+    height: 1011,
   },
   {
     src: '/photos/zoom-garden.webp',
-    alt: 'Rooftop garden and inner courtyard from above — fountain, planters, and the minaret at daylight',
+    alt: 'Rooftop garden and inner courtyard from above, fountain, planters, and the minaret at daylight',
     width: 1600,
     height: 898,
   },
   {
     src: '/photos/zoom-wudu.webp',
-    alt: 'Ablution room — geometric wall panels in white and gold, marble floor',
+    alt: 'Ablution room, geometric wall panels in white and gold, marble floor',
     width: 1400,
     height: 786,
   },
@@ -122,13 +134,23 @@ export function ZoomParallax() {
     offset: ['start start', 'end end'],
   });
 
+  // Wheel and trackpad deltas arrive in lumps, and seven layers scaling
+  // straight off the raw value step visibly. A stiff spring evens the value
+  // out without letting the tiles trail behind the scroll.
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 260,
+    damping: 44,
+    mass: 0.3,
+    restDelta: 0.0005,
+  });
+
   // Scale ramps per the reference (scale4 for centre, higher for the
   // outer tiles so they punch through faster).
-  const scale4 = useTransform(scrollYProgress, [0, 1], [1, 4]);
-  const scale5 = useTransform(scrollYProgress, [0, 1], [1, 5]);
-  const scale6 = useTransform(scrollYProgress, [0, 1], [1, 6]);
-  const scale8 = useTransform(scrollYProgress, [0, 1], [1, 8]);
-  const scale9 = useTransform(scrollYProgress, [0, 1], [1, 9]);
+  const scale4 = useTransform(progress, [0, 1], [1, 4]);
+  const scale5 = useTransform(progress, [0, 1], [1, 5]);
+  const scale6 = useTransform(progress, [0, 1], [1, 6]);
+  const scale8 = useTransform(progress, [0, 1], [1, 8]);
+  const scale9 = useTransform(progress, [0, 1], [1, 9]);
   const scales = [scale4, scale5, scale6, scale5, scale6, scale8, scale9];
 
   // Payoff: dusk overlay finishes fading in BEFORE the statement
@@ -137,9 +159,9 @@ export function ZoomParallax() {
   // muted (0.90, up from 0.86 — graffiti wall + winter sky still
   // fought white serif at 0.86). Motion under the text continues,
   // which is intended, but no bright pixel ever reaches the type.
-  const overlayOpacity = useTransform(scrollYProgress, [0.44, 0.72], [0, 0.9]);
-  const statementOpacity = useTransform(scrollYProgress, [0.72, 0.95], [0, 1]);
-  const statementY = useTransform(scrollYProgress, [0.72, 0.95], [12, 0]);
+  const overlayOpacity = useTransform(progress, [0.44, 0.72], [0, 0.9]);
+  const statementOpacity = useTransform(progress, [0.72, 0.95], [0, 1]);
+  const statementY = useTransform(progress, [0.72, 0.95], [12, 0]);
 
   const stmtBefore = t('statement.before');
   const stmtAccent = t('statement.accent');
@@ -236,7 +258,7 @@ export function ZoomParallax() {
           return (
             <motion.div
               key={i}
-              style={{ scale }}
+              style={{ scale, willChange: 'transform' }}
               className={cn(
                 'absolute top-0 flex h-full w-full items-center justify-center',
                 i === 1 && '[&>div]:!-top-[30vh] [&>div]:!left-[5vw] [&>div]:!h-[30vh] [&>div]:!w-[35vw]',
@@ -247,15 +269,17 @@ export function ZoomParallax() {
                 i === 6 && '[&>div]:!top-[22.5vh] [&>div]:!left-[25vw] [&>div]:!h-[15vh] [&>div]:!w-[15vw]',
               )}
             >
-              <div className="relative h-[25vh] w-[25vw] overflow-hidden">
+              <div
+                className="relative h-[25vh] w-[25vw] overflow-hidden"
+                style={FEATHER}
+              >
                 <Image
                   src={img.src}
                   alt={img.alt}
                   width={img.width}
                   height={img.height}
                   priority={i === 0}
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                  sizes={i === 0 ? '100vw' : '(min-width: 768px) 40vw, 90vw'}
+                  sizes={i === 0 ? '100vw' : '(min-width: 768px) 60vw, 90vw'}
                   className="h-full w-full object-cover"
                   style={{ filter: GRADE }}
                 />

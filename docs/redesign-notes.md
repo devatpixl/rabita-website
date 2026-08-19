@@ -115,6 +115,82 @@ way to publish articles, so the items are entries rather than links.
 After the fixes the same sweep reports 80 of 85 loads clean. The five that
 remain are the carousel controls described above.
 
+## The home page passes
+
+A round of review on the desktop home page. Each item below was something that
+looked wrong on screen rather than something the code said was wrong.
+
+**The header did not arrive as one move.** The wordmark animated as a single
+block on its own timing while the five nav headings came in staggered on
+another. The mark and the two lines of the name now use the curve and the
+duration the headings use, landing just before them, so the header resolves
+top left to right instead of in two unrelated pieces.
+
+**Scrollbars read as browser chrome.** The page scrollbar and the one inside
+the give card were both default grey against warm paper. They take the paper
+colour now, with the thumb inset behind a paper coloured border so it floats
+in the gutter, and gold on hover. Same treatment as the other Rabita build.
+
+**The zoom gallery stepped.** Seven layers scale at once off the raw scroll
+value, and wheel deltas arrive in lumps, so the tiles moved in visible steps.
+The value goes through a stiff spring now, which evens it out without letting
+the tiles trail the scroll, and each tile is marked as its own compositor
+layer. Six of the seven images were also being deferred despite being on
+screen from the first frame, so they decoded late; they load with the rest.
+
+**Two renders had people in them.** The cafe and the imam meeting room were
+both crowd scenes, and the brief is architecture without faces. They are
+replaced with the main prayer hall and the qibla wall, both from the official
+Norconsult set and both empty. Worth knowing for next time: almost every
+render in that set is populated. These two are among the very few that are
+not.
+
+**Tiles ended on a hard rectangle.** Every gallery tile now carries a feathered
+edge, so it dissolves into the dusk behind it instead of cutting off.
+
+**Dashes.** Forty nine strings still used one, in headings as well as
+paragraphs. All of them are gone. A pause inside a sentence takes a comma or a
+full stop, a definition takes a colon, and an eyebrow takes the middot the rest
+of the site already uses. Arabic uses its own comma.
+
+**Placeholders were live.** Every one of the six carousel sentences ended with
+"(draft)", in all three languages. Removed.
+
+**The carousel caption ran on.** "Five prayers", the numeral 5 and "times a
+day" sat on one baseline with a 24px hole between them, and the title repeated
+the figure. The figure is its own line under the title now: numeral in gold,
+label in mono caps, the same shape on every slide whether or not the slide has
+a figure. The title is "Daily prayer", so the 5 is not saying the same thing
+twice. The Friday label carried the men's capacity as well as the women's,
+which was too much for one label, so the men's figure moved into the sentence.
+
+**The carousel needed arrows.** It now takes a drag, a sideways trackpad swipe
+or a flick, in any of the three languages, and the arrows are gone. The dots
+stay, so there is still a visible control. Dragging an image used to start the
+browser's own drag and kill the gesture; the pointer is captured and the native
+drag refused.
+
+**The chapter caption was two loose words.** "02 / 04" and the tag sat at
+opposite ends of a wide column with nothing between them. A hairline joins
+them into one caption under the photo. The animation is untouched.
+
+**Four chapters opened on 160px of nothing.** The section above it ends on a
+full bleed dusk band, which is already a hard stop, so the section does not
+need a full opening measure on top of it. Cut to 96px.
+
+**The building section pinned under the header.** It pinned to the top of the
+viewport while the site header is sticky and 77px tall, so the eyebrow and the
+heading sat behind it for the whole section. It pins below the header now.
+
+**Three labels in the building drawing collided.** The label column had 178
+units before the neighbouring building and the longest fact line needs about
+157, so "reading hall, seminar rooms" landed on the neighbour; the canvas is
+wider and the neighbour moved out with it. "-01" is wider than "00", so the
+level number ran into the floor name; the numbers are right aligned and every
+row now has the same gap. The plot dimension sat a third of the way into the
+-01 level, on top of the parking bays; it moved onto the ground line, where it
+belongs, with a knockout so it stays readable over the excavation hatching.
+
 ## How this branch is deployed
 
 `main` deploys to the original Vercel project. This branch has its own project

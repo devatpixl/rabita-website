@@ -1,6 +1,6 @@
 {
   "meta": {
-    "siteTitle": "Rabita — Moské og kultursenter i Oslo",
+    "siteTitle": "Rabita: Moské og kultursenter i Oslo",
     "siteDescription": "Rabita reiser et nytt moské- og kultursenter i Calmeyers gate 8, Oslo. Vi samler inn 100 millioner kroner til byggingen."
   },
   "hero": {
@@ -264,7 +264,7 @@
     "handleLabel": "Dra for å sammenligne"
   },
   "foundationWall": {
-    "eyebrowEmpty": "GRUNNMUREN — SNART",
+    "eyebrowEmpty": "GRUNNMUREN · SNART",
     "emptyState": "Navnene publiseres når byggingen starter, når de første giverne som har samtykket til å stå oppført er registrert.",
     "eyebrow": "{count} NAVN OG VOKSENDE",
     "headline": "Navnene ligger i <em>grunnmuren</em>.",
@@ -285,7 +285,7 @@
     "heading": "Fundamentsteiner.",
     "lede": "Gaver over {threshold} kr registreres varig. Navnene her følger byggets faser: grunnstein, reisning, ferdigstillelse.",
     "anonymous": "Anonym",
-    "kicker": "Ditt navn her – gaver over 10 000 kr registreres varig, med muligheten til å oppgi et minneord eller å bidra anonymt.",
+    "kicker": "Ditt navn her. Gaver over 10 000 kr registreres varig, med muligheten til å oppgi et minneord eller å bidra anonymt.",
     "kickerCta": "Bidra på nivået"
   },
   "impactStory": {
@@ -308,13 +308,13 @@
       },
       "volunteer": {
         "time": "Når det trengs",
-        "title": "Vi stiller opp – for hverandre og for byen.",
+        "title": "Vi stiller opp, for hverandre og for byen.",
         "body": "Frivillige i gule vester deler ut mat, koordinerer med bydelen, og står med naboer i medgang og motgang. Rabita er ikke bare et sted man kommer til. Det er et sted man kommer fra, for å hjelpe.",
         "tag": "Frivillig"
       },
       "sadaqa": {
         "time": "Alltid",
-        "title": "Sadaqa jariya — en gave som <em>varer</em>.",
+        "title": "Sadaqa jariya, en gave som <em>varer</em>.",
         "body": "Bønneteppet er kanskje det mest brukte objektet i moskeen. Hver plass i den nye salen kan gis i navnet til noen som ikke lenger er blant oss. Navnene blir stående så lenge bygget står.",
         "tag": "Jariya"
       }
@@ -326,7 +326,7 @@
       "accent": "Nå bygger vi huset som rommer alle.",
       "after": ""
     },
-    "sectionLabel": "Rabita — arkitektonisk narrativ"
+    "sectionLabel": "Rabita · arkitektonisk narrativ"
   },
   "buildingRises": {
     "eyebrow": "Bygget reiser seg",
@@ -504,44 +504,44 @@
       "accent": "Calmeyers gate 8",
       "after": " brukes til."
     },
-    "carouselLabel": "Menigheten i dag — bilder",
+    "carouselLabel": "Menigheten i dag, bilder",
     "prev": "Forrige bilde",
     "next": "Neste bilde",
     "goto": "Gå til bilde {n}",
     "slides": {
       "daily": {
-        "title": "Fem bønner",
+        "title": "Daglig bønn",
         "figureLabel": "ganger om dagen",
-        "sentence": "Bygget stenger aldri helt, fra første lys til isha. (utkast)"
+        "sentence": "Bygget stenger aldri helt, fra første lys til isha."
       },
       "school": {
         "title": "Helgeskolen",
         "figureLabel": "elever · 19 lærere",
-        "sentence": "Norges største arabiskskole holder til her hver lørdag. (utkast)"
+        "sentence": "Norges største arabiskskole holder til her hver lørdag."
       },
       "friday": {
         "title": "Fredagsbønn",
-        "figureLabel": "plasser for kvinner, 500 → 2 000 for menn",
-        "sentence": "Den gamle salen fylles lenge før khutbaen. Den nye er tegnet for dem som faktisk kommer. (utkast)"
+        "figureLabel": "plasser for kvinner",
+        "sentence": "Den gamle salen fylles lenge før khutbaen. Den nye er tegnet for dem som faktisk kommer. Plassene for menn går fra 500 til 2 000."
       },
       "iftar": {
         "title": "Gateiftar",
-        "sentence": "I åtte netter i ramadan spiser hele kvartalet sammen, uansett hvem de er, uansett hva de tror på. (utkast)"
+        "sentence": "I åtte netter i ramadan spiser hele kvartalet sammen, uansett hvem de er, uansett hva de tror på."
       },
       "visits": {
         "title": "Skole- og universitetsbesøk",
         "figureLabel": "besøkende i året",
-        "sentence": "Hver skole, hvert universitet, alle er velkomne til å sette seg ned og snakke. (utkast)"
+        "sentence": "Hver skole, hvert universitet, alle er velkomne til å sette seg ned og snakke."
       },
       "services": {
         "title": "Begravelser og vielser",
-        "sentence": "Vi holder nikah, vi begraver de døde, vi sitter med folk i vanskelige uker. (utkast)"
+        "sentence": "Vi holder nikah, vi begraver de døde, vi sitter med folk i vanskelige uker."
       }
     }
   },
   "prayerVisit": {
     "eyebrow": "Bønn og besøk",
-    "heading": "Hva som skjer i dag – og hvordan komme innom.",
+    "heading": "Hva som skjer i dag, og hvordan komme innom.",
     "todayHeading": "Bønnetider i dag",
     "visitHeading": "Adresse og gruppebesøk",
     "groupsBody": "Vi tar imot skoler, universiteter og andre grupper for omvisning og samtale. Kortere besøk er gratis; lengre opplegg avtales med 14 dagers varsel.",
@@ -578,7 +578,7 @@
         "body": "Omvisning med prosjektleder, spørsmål og svar. Åpent for medlemmer, naboer og presse."
       },
       "schoolVisit": {
-        "title": "Skolebesøk – religion og etikk",
+        "title": "Skolebesøk: religion og etikk",
         "body": "Program for videregående skoler. Vi går gjennom moskeens rolle i Oslo siden 1987."
       },
       "lecture": {
@@ -598,7 +598,7 @@
       "submit": "Meld meg på",
       "submitting": "Sender …",
       "errorGeneric": "Noe gikk galt. Prøv igjen om et øyeblikk.",
-      "confirmationTitle": "Takk – du er meldt på.",
+      "confirmationTitle": "Takk, du er meldt på.",
       "confirmationBody": "Vi sender en bekreftelse til e-posten din og en påminnelse dagen før arrangementet.",
       "confirmationClose": "Lukk"
     }
@@ -618,7 +618,7 @@
         "body": "Omvisning med prosjektleder, spørsmål og svar. Åpent for medlemmer, naboer og presse."
       },
       "school": {
-        "title": "Skolebesøk – religion og etikk",
+        "title": "Skolebesøk: religion og etikk",
         "body": "Ukentlig program for videregående skoler. Vi går gjennom moskeens rolle i Oslo siden 1987."
       }
     }
@@ -865,7 +865,7 @@
     "items": {
       "foundation": { "title": "Grunnsteinen er lagt" },
       "library": { "title": "Ny biblioteksamling for bydelen" },
-      "agm": { "title": "Årsmøte 2026 – kalender og saksliste" }
+      "agm": { "title": "Årsmøte 2026: kalender og saksliste" }
     }
   },
   "eventsPage": {
@@ -881,7 +881,7 @@
     "items": {
       "ramadan": { "title": "Iftar for hele bydelen", "body": "Åpent måltid, alle velkomne." },
       "lecture": { "title": "Åpent hus: bygget og planen", "body": "Omvisning og spørsmål med prosjektleder." },
-      "school": { "title": "Skolebesøk – religion og etikk", "body": "Ukentlig program for videregående skoler." }
+      "school": { "title": "Skolebesøk: religion og etikk", "body": "Ukentlig program for videregående skoler." }
     }
   },
   "visitPage": {
@@ -894,7 +894,7 @@
   },
   "educationPage": {
     "eyebrow": "Undervisning",
-    "title": "Norges største skole i arabisk – og mer.",
+    "title": "Norges største skole i arabisk, og mer.",
     "lede": "Arabisk, Quran, ungdomsprogram og kalligrafi. Klasser hver uke i året.",
     "stats": {
       "pupils": "elever",
@@ -923,17 +923,17 @@
     },
     "items": {
       "nikah": {
-        "title": "Nikah – ekteskapsseremoni",
+        "title": "Nikah: ekteskapsseremoni",
         "body": "Islamsk vielse, med eller uten juridisk registrering.",
         "longBody": "Vi arrangerer nikah både på moskeen og på andre steder etter avtale. Vitner og imam koordineres. Juridisk registrering håndteres via norsk folkeregister; vi hjelper med formalia."
       },
       "janaza": {
-        "title": "Janaza – begravelse",
+        "title": "Janaza: begravelse",
         "body": "Vasking, bønn og koordinering med gravlund.",
         "longBody": "Janaza-tjenesten er tilgjengelig døgnet rundt. Vi hjelper med praktiske avtaler mot Alfaset gravlund og andre begravelsesplasser i Oslo. Ingen kostnad for medlemmer."
       },
       "shahada": {
-        "title": "Shahada – bekjennelse",
+        "title": "Shahada: bekjennelse",
         "body": "For deg som ønsker å ta shahada, med vitner.",
         "longBody": "Vi tar imot både private og offentlige shahada-seremonier. Ta kontakt for å avtale tid. Vi ordner vitner ved behov og gir kort veiledning i etterkant."
       },

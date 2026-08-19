@@ -1,6 +1,6 @@
 {
   "meta": {
-    "siteTitle": "Rabita — Mosque and cultural centre in Oslo",
+    "siteTitle": "Rabita: Mosque and cultural centre in Oslo",
     "siteDescription": "Rabita is building a new mosque and cultural centre at Calmeyers gate 8, Oslo. We are raising 100 million kroner to build it."
   },
   "hero": {
@@ -264,7 +264,7 @@
     "handleLabel": "Drag to compare"
   },
   "foundationWall": {
-    "eyebrowEmpty": "THE FOUNDATION — SOON",
+    "eyebrowEmpty": "THE FOUNDATION · SOON",
     "emptyState": "Names will be published when construction begins, once the first donors who have consented to be listed are on record.",
     "eyebrow": "{count} NAMES AND GROWING",
     "headline": "The names are set into the <em>foundation</em>.",
@@ -285,7 +285,7 @@
     "heading": "Foundation stones.",
     "lede": "Gifts over {threshold} kr are recorded permanently. The names here follow the phases of the build: foundation, rising, completion.",
     "anonymous": "Anonymous",
-    "kicker": "Your name here — gifts over 10 000 kr are recorded permanently, with the option of a memorial line or an anonymous entry.",
+    "kicker": "Your name here. Gifts over 10 000 kr are recorded permanently, with the option of a memorial line or an anonymous entry.",
     "kickerCta": "Give at this level"
   },
   "impactStory": {
@@ -308,13 +308,13 @@
       },
       "volunteer": {
         "time": "When it's needed",
-        "title": "We show up — for each other, and for the city.",
+        "title": "We show up, for each other and for the city.",
         "body": "Volunteers in yellow vests hand out meals, coordinate with the district, and stand with neighbours in good times and hard ones. Rabita isn't only a place you come to. It's a place you come from, to help.",
         "tag": "Volunteer"
       },
       "sadaqa": {
         "time": "Always",
-        "title": "Sadaqa jariya — a gift that <em>lasts</em>.",
+        "title": "Sadaqa jariya, a gift that <em>lasts</em>.",
         "body": "The prayer rug is perhaps the most-used object in the mosque. Each place in the new hall can be given in the name of someone we've lost. The names stand as long as the building stands.",
         "tag": "Jariya"
       }
@@ -326,7 +326,7 @@
       "accent": "Now we are making room for everyone it brought together.",
       "after": ""
     },
-    "sectionLabel": "Rabita — architectural narrative"
+    "sectionLabel": "Rabita · architectural narrative"
   },
   "buildingRises": {
     "eyebrow": "The building rises",
@@ -504,44 +504,44 @@
       "accent": "Calmeyers gate 8",
       "after": " is for."
     },
-    "carouselLabel": "The congregation today — photographs",
+    "carouselLabel": "The congregation today, photographs",
     "prev": "Previous photograph",
     "next": "Next photograph",
     "goto": "Go to slide {n}",
     "slides": {
       "daily": {
-        "title": "Five prayers",
+        "title": "Daily prayer",
         "figureLabel": "times a day",
-        "sentence": "The building never really closes, first light through isha. (draft)"
+        "sentence": "The building never really closes, first light through isha."
       },
       "school": {
         "title": "The weekend school",
         "figureLabel": "pupils · 19 teachers",
-        "sentence": "Norway's largest Arabic school runs from the top floor every Saturday. (draft)"
+        "sentence": "Norway's largest Arabic school runs from the top floor every Saturday."
       },
       "friday": {
         "title": "Friday prayer",
-        "figureLabel": "places for women, 500 → 2 000 for men",
-        "sentence": "The old hall fills long before the khutba. The new one is designed for who actually shows up. (draft)"
+        "figureLabel": "places for women",
+        "sentence": "The old hall fills long before the khutba. The new one is designed for who actually shows up. Room for men goes from 500 to 2 000."
       },
       "iftar": {
         "title": "Street iftar",
-        "sentence": "For eight nights of Ramadan the block eats together, whoever they are, whatever they believe. (draft)"
+        "sentence": "For eight nights of Ramadan the block eats together, whoever they are, whatever they believe."
       },
       "visits": {
         "title": "School and university visits",
         "figureLabel": "visitors a year",
-        "sentence": "Every school, every university, welcome to sit down for a conversation. (draft)"
+        "sentence": "Every school, every university, welcome to sit down for a conversation."
       },
       "services": {
         "title": "Funerals and marriages",
-        "sentence": "We hold nikah, we bury the dead, we sit with people in hard weeks. (draft)"
+        "sentence": "We hold nikah, we bury the dead, we sit with people in hard weeks."
       }
     }
   },
   "prayerVisit": {
     "eyebrow": "Prayer and visit",
-    "heading": "What's happening today — and how to drop in.",
+    "heading": "What's happening today, and how to drop in.",
     "todayHeading": "Prayer times today",
     "visitHeading": "Address and group visits",
     "groupsBody": "We host schools, universities and other groups for tours and conversation. Short visits are free; longer programmes are arranged 14 days ahead.",
@@ -578,7 +578,7 @@
         "body": "Tour with the project lead, Q&A. Open to members, neighbours and the press."
       },
       "schoolVisit": {
-        "title": "School visit — religion and ethics",
+        "title": "School visit: religion and ethics",
         "body": "Programme for upper secondary schools. We walk through the mosque's role in Oslo since 1987."
       },
       "lecture": {
@@ -598,7 +598,7 @@
       "submit": "Confirm signup",
       "submitting": "Sending …",
       "errorGeneric": "Something went wrong. Try again in a moment.",
-      "confirmationTitle": "Thanks — you're on the list.",
+      "confirmationTitle": "Thanks, you're on the list.",
       "confirmationBody": "We'll send a confirmation to your email and a reminder the day before the event.",
       "confirmationClose": "Close"
     }
@@ -618,7 +618,7 @@
         "body": "Tour with the project lead, Q&A. Open to members, neighbours and the press."
       },
       "school": {
-        "title": "School visit — religion and ethics",
+        "title": "School visit: religion and ethics",
         "body": "Weekly programme for upper secondary schools. We walk through the mosque's role in Oslo since 1987."
       }
     }
@@ -865,7 +865,7 @@
     "items": {
       "foundation": { "title": "The foundation stone is laid" },
       "library": { "title": "New library collection for the district" },
-      "agm": { "title": "AGM 2026 — calendar and agenda" }
+      "agm": { "title": "AGM 2026: calendar and agenda" }
     }
   },
   "eventsPage": {
@@ -881,7 +881,7 @@
     "items": {
       "ramadan": { "title": "Iftar for the district", "body": "Open meal, everyone welcome." },
       "lecture": { "title": "Open house: the building and the plan", "body": "Tour and Q&A with the project lead." },
-      "school": { "title": "School visit — religion and ethics", "body": "Weekly programme for upper secondary schools." }
+      "school": { "title": "School visit: religion and ethics", "body": "Weekly programme for upper secondary schools." }
     }
   },
   "visitPage": {
@@ -894,7 +894,7 @@
   },
   "educationPage": {
     "eyebrow": "Education",
-    "title": "Norway's largest Arabic school — and more.",
+    "title": "Norway's largest Arabic school, and more.",
     "lede": "Arabic, Quran, youth programme and calligraphy. Classes every week of the year.",
     "stats": {
       "pupils": "pupils",
@@ -923,17 +923,17 @@
     },
     "items": {
       "nikah": {
-        "title": "Nikah — wedding ceremony",
+        "title": "Nikah: wedding ceremony",
         "body": "Islamic marriage, with or without legal registration.",
         "longBody": "We host nikah both at the mosque and elsewhere by arrangement. Witnesses and imam are coordinated. Legal registration is handled through the Norwegian civil registry; we help with the formalities."
       },
       "janaza": {
-        "title": "Janaza — funeral",
+        "title": "Janaza: funeral",
         "body": "Washing, prayer and coordination with the cemetery.",
         "longBody": "The janaza service is available 24 hours. We help with practical arrangements with Alfaset cemetery and other burial grounds in Oslo. No cost for members."
       },
       "shahada": {
-        "title": "Shahada — declaration of faith",
+        "title": "Shahada: declaration of faith",
         "body": "For those who wish to take shahada, with witnesses.",
         "longBody": "We host both private and public shahada ceremonies. Get in touch to arrange a time. We provide witnesses if needed and offer brief guidance afterwards."
       },

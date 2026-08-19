@@ -47,19 +47,19 @@ const PHOTOS: Record<SlideKey, { src: string; alt: string; width: number; height
   },
   school: {
     src: '/photos/learning-lecture.webp',
-    alt: 'Weekend-school session at Rabita — teachers at the front, pupils following the lesson',
+    alt: 'Weekend-school session at Rabita, teachers at the front, pupils following the lesson',
     width: 1200,
     height: 1600,
   },
   friday: {
     src: '/photos/prayer-mat-underpass.webp',
-    alt: 'Rabita Friday prayer at capacity — worshippers bowing on prayer mats, imam leading at the front',
+    alt: 'Rabita Friday prayer at capacity, worshippers bowing on prayer mats, imam leading at the front',
     width: 799,
     height: 1066,
   },
   iftar: {
     src: '/photos/hero-iftar.webp',
-    alt: 'Street iftar in Grønland, Oslo — long shared tables, neighbours breaking fast together',
+    alt: 'Street iftar in Grønland, Oslo, long shared tables, neighbours breaking fast together',
     width: 2560,
     height: 1707,
   },
@@ -71,7 +71,7 @@ const PHOTOS: Record<SlideKey, { src: string; alt: string; width: number; height
   },
   services: {
     src: '/photos/family-together.webp',
-    alt: 'A family gathered at Rabita — three generations in the paper-lit hall after a service',
+    alt: 'A family gathered at Rabita, three generations in the paper-lit hall after a service',
     width: 933,
     height: 1400,
   },
@@ -97,7 +97,9 @@ export function CongregationToday() {
   const [active, setActive] = useState(0);
   const [reduced, setReduced] = useState(false);
   const regionRef = useRef<HTMLDivElement>(null);
-  const touchStartX = useRef<number | null>(null);
+  const dragStartX = useRef<number | null>(null);
+  const wheelLock = useRef(false);
+  const cameFromDrag = useRef(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -131,14 +133,40 @@ export function CongregationToday() {
     return () => el.removeEventListener('keydown', onKey);
   }, [isRtl, next, prev]);
 
-  const onTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0]?.clientX ?? null;
+  // Sideways trackpad scroll moves the rail. Passive, because the page does
+  // nothing with a horizontal delta anyway, and locked briefly so one long
+  // swipe does not run through every slide.
+  useEffect(() => {
+    const el = regionRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaX) < 24 || Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+      if (wheelLock.current) return;
+      wheelLock.current = true;
+      window.setTimeout(() => { wheelLock.current = false; }, 420);
+      const forward = isRtl ? e.deltaX < 0 : e.deltaX > 0;
+      if (forward) next(); else prev();
+    };
+    el.addEventListener('wheel', onWheel, { passive: true });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, [isRtl, next, prev]);
+
+  // One gesture, one slide. Pointer events cover mouse, pen and touch, so a
+  // drag on a laptop behaves like a flick on a phone.
+  const onPointerDown = (e: React.PointerEvent) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    dragStartX.current = e.clientX;
+    e.currentTarget.setPointerCapture?.(e.pointerId);
   };
-  const onTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current == null) return;
-    const dx = (e.changedTouches[0]?.clientX ?? touchStartX.current) - touchStartX.current;
-    touchStartX.current = null;
-    if (Math.abs(dx) < 40) return;
+  const endDrag = (e: React.PointerEvent) => {
+    if (dragStartX.current == null) return;
+    const dx = e.clientX - dragStartX.current;
+    dragStartX.current = null;
+    if (Math.abs(dx) < 45) return;
+    // The click that follows would jump to whichever card the pointer landed
+    // on, so swallow it.
+    cameFromDrag.current = true;
+    window.setTimeout(() => { cameFromDrag.current = false; }, 0);
     const forward = isRtl ? dx > 0 : dx < 0;
     if (forward) next(); else prev();
   };
@@ -288,12 +316,15 @@ export function CongregationToday() {
             aria-roledescription="carousel"
             aria-label={t('carouselLabel')}
             tabIndex={0}
-            onTouchStart={onTouchStart}
-            onTouchEnd={onTouchEnd}
-            className="relative outline-none focus-visible:ring-1 focus-visible:ring-gold-deep/40"
+            onPointerDown={onPointerDown}
+            onPointerUp={endDrag}
+            onPointerCancel={() => { dragStartX.current = null; }}
+            onDragStart={(e) => e.preventDefault()}
+            className="relative select-none outline-none focus-visible:ring-1 focus-visible:ring-gold-deep/40 cursor-grab active:cursor-grabbing"
             style={{
               height: CARD_H,
               overflow: 'visible',
+              touchAction: 'pan-y',
             }}
           >
             {SLIDE_KEYS.map((key, i) => {
@@ -320,7 +351,7 @@ export function CongregationToday() {
                 <div
                   key={key}
                   aria-hidden={!isCenter}
-                  onClick={clickable ? () => goTo(i) : undefined}
+                  onClick={clickable ? () => { if (!cameFromDrag.current) goTo(i); } : undefined}
                   className="absolute top-1/2 left-1/2"
                   style={{
                     width: CARD_W,
@@ -373,27 +404,6 @@ export function CongregationToday() {
             })}
           </div>
 
-          {/* Chevrons — sit at the viewport edges with a 24px inset so
-             they don't touch the browser chrome. Above the full-bleed
-             clip. */}
-          <button
-            type="button"
-            aria-label={t('prev')}
-            onClick={prev}
-            className="absolute top-1/2 -translate-y-1/2 h-11 w-11 flex items-center justify-center text-gold-deep hover:text-ink transition-colors z-10"
-            style={{ insetInlineStart: '24px' }}
-          >
-            <Chevron dir="start" mirror={isRtl} />
-          </button>
-          <button
-            type="button"
-            aria-label={t('next')}
-            onClick={next}
-            className="absolute top-1/2 -translate-y-1/2 h-11 w-11 flex items-center justify-center text-gold-deep hover:text-ink transition-colors z-10"
-            style={{ insetInlineEnd: '24px' }}
-          >
-            <Chevron dir="end" mirror={isRtl} />
-          </button>
         </div>
 
         {/* Text block — title + figure on one baseline-aligned line,
@@ -452,28 +462,25 @@ function TextBlock({
 }) {
   return (
     <div className="flex flex-col items-center">
-      <div
-        className="flex items-baseline justify-center flex-wrap"
-        style={{ columnGap: '24px', rowGap: '4px' }}
+      <h3
+        className="font-serif text-ink"
+        style={{
+          fontSize: 'clamp(22px, 2vw, 30px)',
+          fontWeight: 600,
+          lineHeight: 1.2,
+        }}
       >
-        <h3
-          className="font-serif text-ink"
-          style={{
-            fontSize: 'clamp(22px, 2vw, 30px)',
-            fontWeight: 600,
-            lineHeight: 1.2,
-          }}
-        >
-          {title}
-        </h3>
-        {figure.kind !== 'none' && (
+        {title}
+      </h3>
+      {figure.kind !== 'none' && (
+        <div style={{ marginTop: '12px' }}>
           <FigureInline figure={figure} />
-        )}
-      </div>
+        </div>
+      )}
       <p
         className="text-ink-60"
         style={{
-          marginTop: '10px',
+          marginTop: '14px',
           fontSize: 'clamp(14px, 1.1vw, 15px)',
           lineHeight: 1.62,
           maxWidth: '62ch',
@@ -487,9 +494,9 @@ function TextBlock({
 
 function FigureInline({ figure }: { figure: Extract<Figure, { kind: 'single' | 'delta' }> }) {
   const numeralStyle: React.CSSProperties = {
-    fontSize: 'clamp(24px, 2vw, 32px)',
+    fontSize: 'clamp(26px, 2.2vw, 36px)',
     fontWeight: 600,
-    lineHeight: 1.2,
+    lineHeight: 1,
     fontVariantNumeric: 'tabular-nums',
     letterSpacing: '-0.01em',
   };
@@ -499,7 +506,7 @@ function FigureInline({ figure }: { figure: Extract<Figure, { kind: 'single' | '
       style={{ columnGap: '10px' }}
     >
       {figure.kind === 'single' ? (
-        <span className="text-ink" style={numeralStyle}>
+        <span className="text-gold-deep" style={numeralStyle}>
           {figure.value}
         </span>
       ) : (
@@ -512,37 +519,17 @@ function FigureInline({ figure }: { figure: Extract<Figure, { kind: 'single' | '
           >
             →
           </span>
-          <span className="text-ink" style={numeralStyle}>
+          <span className="text-gold-deep" style={numeralStyle}>
             {figure.after}
           </span>
         </>
       )}
       <span
-        className="font-sans text-ink-60"
-        style={{ fontSize: '12px', lineHeight: 1.4 }}
+        className="font-mono uppercase text-ink-60"
+        style={{ fontSize: '12px', lineHeight: 1.4, letterSpacing: '0.12em' }}
       >
         {figure.label}
       </span>
     </span>
-  );
-}
-
-function Chevron({ dir, mirror }: { dir: 'start' | 'end'; mirror: boolean }) {
-  const path = dir === 'start' ? 'M15 18l-6-6 6-6' : 'M9 18l6-6-6-6';
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      width="20"
-      height="20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-      style={mirror ? { transform: 'scaleX(-1)' } : undefined}
-    >
-      <path d={path} />
-    </svg>
   );
 }

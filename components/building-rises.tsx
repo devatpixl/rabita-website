@@ -50,7 +50,7 @@ const GOLD_DEEP = '#9B7F4A';
 const LEFT_NB_X = 0;
 const LEFT_NB_W = 32;
 const LEFT_NB_TOP = 256;
-const RIGHT_NB_X = 584;
+const RIGHT_NB_X = 664;
 const RIGHT_NB_W = 36;
 const RIGHT_NB_TOP = 200;
 
@@ -98,7 +98,7 @@ export function BuildingRises() {
       <div
         className={cn(
           'flex flex-col overflow-hidden',
-          reduced ? 'min-h-screen py-16' : 'sticky top-0 h-screen',
+          reduced ? 'min-h-screen py-16' : 'sticky top-20 h-[calc(100svh-5rem)]',
         )}
       >
         <header className="shrink-0 px-6 pt-6 md:pt-8">
@@ -346,18 +346,27 @@ function BuildingSVG({
         );
       })}
 
-      {/* TOMT label — under the plot, mono */}
-      <text
-        x={BUILDING_X + BUILDING_W / 2}
-        y={GROUND_Y + 32}
-        textAnchor="middle"
-        fill={INK_60}
-        fontFamily="var(--font-mono)"
-        fontSize={10}
-        letterSpacing="0.14em"
-      >
-        {labelT('svg.plot')}
-      </text>
+      {/* TOMT label — on the ground line, knocked out of what is behind it */}
+      <g>
+        <rect
+          x={BUILDING_X + BUILDING_W / 2 - 78}
+          y={GROUND_Y + 6}
+          width={156}
+          height={16}
+          fill="#F2EEE7"
+        />
+        <text
+          x={BUILDING_X + BUILDING_W / 2}
+          y={GROUND_Y + 18}
+          textAnchor="middle"
+          fill={INK_60}
+          fontFamily="var(--font-mono)"
+          fontSize={10}
+          letterSpacing="0.14em"
+        >
+          {labelT('svg.plot')}
+        </text>
+      </g>
 
       {/* -------------------------------------------------------------------
          GHOST outline — full height ghost of the finished building.
@@ -449,8 +458,9 @@ function BuildingSVG({
           strokeWidth={1}
         />
         <text
-          x={LABEL_X}
+          x={LABEL_X + 24}
           y={BUILDING_TOP - 23}
+          textAnchor="end"
           fill={GOLD_DEEP}
           fontFamily="var(--font-mono)"
           fontSize={9}
@@ -459,7 +469,7 @@ function BuildingSVG({
           07
         </text>
         <text
-          x={LABEL_X + 22}
+          x={LABEL_X + 32}
           y={BUILDING_TOP - 23}
           fill={INK}
           fontFamily="var(--font-mono)"
@@ -469,7 +479,7 @@ function BuildingSVG({
           {labelT('svg.floorsUp')}
         </text>
         <text
-          x={LABEL_X + 22}
+          x={LABEL_X + 32}
           y={BUILDING_TOP - 10}
           fill={INK_60}
           fontFamily="var(--font-mono)"
@@ -656,8 +666,9 @@ function BuildingSVG({
               }}
             />
             <text
-              x={LABEL_X}
+              x={LABEL_X + 24}
               y={y - 3}
+              textAnchor="end"
               fill={numberFill}
               fontFamily="var(--font-mono)"
               fontSize={9}
@@ -667,7 +678,7 @@ function BuildingSVG({
               {f.levelLabel}
             </text>
             <text
-              x={LABEL_X + 22}
+              x={LABEL_X + 32}
               y={y - 3}
               fill={nameFill}
               fontFamily="var(--font-mono)"
@@ -678,7 +689,7 @@ function BuildingSVG({
               {labelT(`floors.${f.key}.name`)}
             </text>
             <text
-              x={LABEL_X + 22}
+              x={LABEL_X + 32}
               y={y + 10}
               fill={factFill}
               fontFamily="var(--font-mono)"

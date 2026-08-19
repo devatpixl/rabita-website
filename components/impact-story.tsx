@@ -83,7 +83,7 @@ export function ImpactStory() {
   const activeIndex = CHAPTERS.findIndex((c) => c.key === active);
 
   return (
-    <section id="menigheten-forteller" className="bg-paper-2 py-section-lg">
+    <section id="menigheten-forteller" className="bg-paper-2 pt-section-sm pb-section-lg">
       <SectionBody>
         <div className="mb-16 max-w-3xl">
           <Eyebrow>{t('eyebrow')}</Eyebrow>
@@ -135,11 +135,12 @@ export function ImpactStory() {
 
               {/* Chapter counter under photo — mirrors the mono treatment
                  used elsewhere for tabular figures. */}
-              <div className="mt-4 flex items-center justify-between font-mono text-label uppercase tracking-widest">
-                <span className="text-gold-deep tabular-nums">
+              <div className="mt-5 flex items-center gap-4 font-mono text-label uppercase tracking-widest">
+                <span className="shrink-0 text-gold-deep tabular-nums">
                   {(activeIndex + 1).toString().padStart(2, '0')} / {CHAPTERS.length.toString().padStart(2, '0')}
                 </span>
-                <span className="text-ink-60">{t(`items.${active}.tag`)}</span>
+                <span aria-hidden className="h-px flex-1 bg-rule" />
+                <span className="shrink-0 text-ink-60">{t(`items.${active}.tag`)}</span>
               </div>
             </div>
           </div>

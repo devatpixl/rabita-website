@@ -15,6 +15,9 @@ import {
 import { PRAYER_TIMES_TODAY } from '@/lib/campaign';
 import { cn } from '@/lib/cn';
 
+// Same curve the nav headings use, so the header resolves as one move.
+const WORDMARK_EASE = [0.22, 1, 0.36, 1] as const;
+
 // Primary bar (§2). Restructured header:
 //   left    logo + wordmark  (no underline under Rabita)
 //   then    nav items, LEFT-aligned, 48px after the wordmark, 28px gap
@@ -94,34 +97,48 @@ export function NavBar() {
            official brand lockup: "Det Islamske Forbundet" set bold in
            sans, with "Rabita" underneath at regular weight). No
            underline. Whole block links to home. */}
-        <motion.div
-          initial={reduced ? false : { opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        >
         <LinkVT
           href={`/${locale}`}
           className="vt-wordmark flex min-h-11 items-center gap-3 whitespace-nowrap"
-          aria-label={`${t('orgName')} — ${t('wordmark')}`}
+          aria-label={`${t('orgName')}, ${t('wordmark')}`}
         >
-          <Image
-            src="/logo/rabita-mark-256.png"
-            alt=""
-            width={40}
-            height={40}
-            priority
-            className="h-10 w-10 md:h-11 md:w-11"
-          />
+          {/* Mark, then each line of the name, on the curve and duration the
+             nav headings use. They land just before the headings start at
+             0.35, so the lockup reads first and the menu follows it. */}
+          <motion.span
+            initial={reduced ? false : { opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.06, ease: WORDMARK_EASE }}
+            className="flex"
+          >
+            <Image
+              src="/logo/rabita-mark-256.png"
+              alt=""
+              width={40}
+              height={40}
+              priority
+              className="h-10 w-10 md:h-11 md:w-11"
+            />
+          </motion.span>
           <span className="flex flex-col font-sans text-ink leading-tight">
-            <span className="text-[13px] md:text-[14px] lg:text-[15px] font-bold tracking-[-0.01em]">
+            <motion.span
+              initial={reduced ? false : { opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.14, ease: WORDMARK_EASE }}
+              className="text-[13px] md:text-[14px] lg:text-[15px] font-bold tracking-[-0.01em]"
+            >
               {t('orgName')}
-            </span>
-            <span className="text-[12px] font-normal text-ink-60 tracking-normal">
+            </motion.span>
+            <motion.span
+              initial={reduced ? false : { opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2, ease: WORDMARK_EASE }}
+              className="text-[12px] font-normal text-ink-60 tracking-normal"
+            >
               {t('wordmark')}
-            </span>
+            </motion.span>
           </span>
         </LinkVT>
-        </motion.div>
 
         <DesktopNav />
 
