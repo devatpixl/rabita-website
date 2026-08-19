@@ -470,6 +470,34 @@
     "primary": "Sponsor a prayer space",
     "secondary": "Give a gift"
   },
+  "sadaqaBand": {
+    "eyebrow": "Sadaqa jariya",
+    "heading": "Give a place to pray in the name of someone you have <em>lost</em>.",
+    "body": "A gift that stays. For as long as somebody prays in this room, it counts. You write the name yourself, and we send you something to pass on to the family.",
+    "cta": "Give a place to pray",
+    "rooms": {
+      "mainHall": {
+        "label": "The main hall",
+        "caption": "Prayer space over three floors, under the ringed light, with the mihrab at the far end.",
+        "alt": "The main prayer hall, ringed light above the fretwork mihrab"
+      },
+      "womensHall": {
+        "label": "The women's hall",
+        "caption": "Its own entrance, its own hall, and a view down into the main room.",
+        "alt": "The women's prayer hall, green carpet under a diamond lit wall"
+      },
+      "qibla": {
+        "label": "The qibla wall",
+        "caption": "Fretwork wood and gold, lit through the marble behind it.",
+        "alt": "The qibla wall seen from above, fretwork arches in wood and gold"
+      },
+      "lowerHall": {
+        "label": "The lower hall",
+        "caption": "Opens when the main room fills, which on a Friday is most weeks.",
+        "alt": "The lower prayer hall, seen from its entrance"
+      }
+    }
+  },
   "whereMoneyGoes": {
     "eyebrow": "Where the money goes",
     "heading": "Every krone is <em>accounted</em> for.",

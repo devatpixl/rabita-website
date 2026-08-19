@@ -470,6 +470,34 @@
     "primary": "Doner en bønneplass",
     "secondary": "Gi en gave"
   },
+  "sadaqaBand": {
+    "eyebrow": "Sadaqa jariya",
+    "heading": "Gi en bønneplass i navnet til noen du har <em>mistet</em>.",
+    "body": "En gave som blir værende. Så lenge noen ber i dette rommet, teller den. Du skriver navnet selv, og vi sender deg noe du kan gi videre til familien.",
+    "cta": "Gi en bønneplass",
+    "rooms": {
+      "mainHall": {
+        "label": "Hovedsalen",
+        "caption": "Bønnerom over tre etasjer, under lyskronen, med mihraben innerst.",
+        "alt": "Hovedbønnesalen, lyskrone over mihraben i utskjært tre"
+      },
+      "womensHall": {
+        "label": "Kvinnesalen",
+        "caption": "Egen inngang, egen sal, og utsyn ned i hovedrommet.",
+        "alt": "Kvinnenes bønnesal, grønt teppe under en diamantbelyst vegg"
+      },
+      "qibla": {
+        "label": "Qibla-veggen",
+        "caption": "Utskjært tre og gull, opplyst gjennom marmoren bak.",
+        "alt": "Qibla-veggen sett ovenfra, buer i tre og gull"
+      },
+      "lowerHall": {
+        "label": "Underetasjen",
+        "caption": "Åpner når hovedrommet fylles, som på en fredag er de fleste uker.",
+        "alt": "Bønnesalen i underetasjen, sett fra inngangen"
+      }
+    }
+  },
   "whereMoneyGoes": {
     "eyebrow": "Hvor pengene går",
     "heading": "Hver krone er <em>gjort rede</em> for.",

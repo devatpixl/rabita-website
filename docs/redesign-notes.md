@@ -314,6 +314,38 @@ you see rather than something you calculate.
 Drawn on view, once, and the whole thing renders in its final state under
 reduced motion.
 
+### Two sections carried over from the other build
+
+Rabita said they liked two sections on the second build, so both are here now,
+in this project's typography, palette and primitives rather than the other
+one's.
+
+**What your gift builds** replaces the gift ladder at slot six. Same four
+costed items, same amounts out of `lib/gifts.ts`, same copy out of
+`giftLadder`, shown as photographs rather than as a stack of figures. Nothing
+was invented; only the presentation changed.
+
+**Sadaqa jariya** is new, at slot eight. The dedication ask was named as
+chapter four of Impact story but had nowhere on the home page to actually ask,
+which is a different job. Argument on the left, room on the right, four rooms
+behind a picker.
+
+**On the sections all looking alike.** They did. Measured down the page, the
+tone ran dusk, dusk, then eight sections of warm off white before the
+membership band. The three paper tints are #FAF8F4, #F2EEE7 and #EDE6D7, which
+are within a few percent of each other and do not read as a change of surface
+at all. What your gift builds sits on dusk, which breaks that run in the
+middle and uses a colour already in the palette. The longest unbroken paper
+run is four sections now instead of eight.
+
+**On the photographs.** The folder of real Rabita photography turned out to
+hold aliases rather than files, 235 of 236, so nothing in it can be used until
+it is re-exported. The four gift cards use real photographs of the congregation
+that are not on the site anywhere else. The four rooms use renders, because
+those rooms do not exist to photograph, and all four are people free. Every
+image is referenced once, from a small map at the top of each component, so
+swapping them later is a filename change and nothing else.
+
 ## How this branch is deployed
 
 `main` deploys to the original Vercel project. This branch has its own project
