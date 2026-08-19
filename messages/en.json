@@ -507,22 +507,26 @@
       "tax": {
         "title": "Tax deduction",
         "body": "Approved for tax deduction up to {cap} kr per year. We report the amount to the Norwegian Tax Administration annually.",
-        "cta": "How it works"
+        "cta": "How it works",
+        "stamp": "Approved"
       },
       "accounts": {
         "title": "Audited accounts",
         "body": "Annual accounts are audited by a state-authorised auditor and are publicly available.",
-        "cta": "Download the accounts"
+        "cta": "Download the accounts",
+        "stamp": "Audited"
       },
       "permit": {
         "title": "Building permit",
         "body": "The building has been approved by the Oslo Planning and Building Authority. The permit is public.",
-        "cta": "View the permit"
+        "cta": "View the permit",
+        "stamp": "Public"
       },
       "org": {
         "title": "The organisation",
         "body": "Rabita was founded in {founded} as the first mosque in Oslo not tied to a single nationality. Org.nr. {orgNr}.",
-        "cta": "About us"
+        "cta": "About us",
+        "stamp": "Since 1987"
       }
     }
   },
@@ -568,6 +572,9 @@
     }
   },
   "prayerVisit": {
+    "now": "Now",
+    "untilHm": "in {h}h {m}m",
+    "untilM": "in {m}m",
     "eyebrow": "Prayer and visit",
     "heading": "What's happening today, and how to drop in.",
     "todayHeading": "Prayer times today",

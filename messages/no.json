@@ -507,22 +507,26 @@
       "tax": {
         "title": "Skattefradrag",
         "body": "Godkjent for skattefradrag opp til {cap} kr per år. Vi rapporterer beløpet til Skatteetaten hvert år.",
-        "cta": "Sånn fungerer det"
+        "cta": "Sånn fungerer det",
+        "stamp": "Godkjent"
       },
       "accounts": {
         "title": "Reviderte regnskap",
         "body": "Årsregnskap revideres av statsautorisert revisor og er offentlig tilgjengelig.",
-        "cta": "Last ned regnskapet"
+        "cta": "Last ned regnskapet",
+        "stamp": "Revidert"
       },
       "permit": {
         "title": "Byggetillatelse",
         "body": "Bygget er godkjent av Plan- og bygningsetaten i Oslo. Tillatelsen er offentlig.",
-        "cta": "Se tillatelsen"
+        "cta": "Se tillatelsen",
+        "stamp": "Offentlig"
       },
       "org": {
         "title": "Organisasjonen",
         "body": "Rabita ble stiftet i {founded} som den første moskeen i Oslo ikke tilknyttet én nasjonalitet. Org.nr. {orgNr}.",
-        "cta": "Om oss"
+        "cta": "Om oss",
+        "stamp": "Siden 1987"
       }
     }
   },
@@ -568,6 +572,9 @@
     }
   },
   "prayerVisit": {
+    "now": "Nå",
+    "untilHm": "om {h}t {m}m",
+    "untilM": "om {m}m",
     "eyebrow": "Bønn og besøk",
     "heading": "Hva som skjer i dag, og hvordan komme innom.",
     "todayHeading": "Bønnetider i dag",

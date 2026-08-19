@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
-import { CAMPAIGN, PRAYER_TIMES_TODAY } from '@/lib/campaign';
-import { PrayerHairline } from './prayer-hairline';
+import { CAMPAIGN } from '@/lib/campaign';
+import { PrayerToday } from './prayer-today';
 import { Eyebrow, Section, SectionBody, SectionHeading } from './primitives';
 
 // §4.08. Full week, Friday time, opening hours, address, booking form for
@@ -11,15 +11,6 @@ import { Eyebrow, Section, SectionBody, SectionHeading } from './primitives';
 export async function PrayerVisit() {
   const t = await getTranslations('prayerVisit');
   const locale = await getLocale();
-
-  const times: { key: string; name: string; time: string }[] = [
-    { key: 'fajr', name: t('names.fajr'), time: PRAYER_TIMES_TODAY.fajr },
-    { key: 'sunrise', name: t('names.sunrise'), time: PRAYER_TIMES_TODAY.sunrise },
-    { key: 'dhuhr', name: t('names.dhuhr'), time: PRAYER_TIMES_TODAY.dhuhr },
-    { key: 'asr', name: t('names.asr'), time: PRAYER_TIMES_TODAY.asr },
-    { key: 'maghrib', name: t('names.maghrib'), time: PRAYER_TIMES_TODAY.maghrib },
-    { key: 'isha', name: t('names.isha'), time: PRAYER_TIMES_TODAY.isha },
-  ];
 
   return (
     <Section id="bonn-og-besok" tone="paper-2">
@@ -32,23 +23,7 @@ export async function PrayerVisit() {
         <div className="grid gap-10 md:grid-cols-12">
           <div id="bonnetider" className="md:col-span-5">
             <h3 className="mb-4 font-serif text-card text-ink">{t('todayHeading')}</h3>
-            <PrayerHairline />
-            <ul className="divide-y divide-rule border-y border-rule">
-              {times.map(({ key, name, time }) => (
-                <li
-                  key={key}
-                  data-prayer={key}
-                  className="flex items-baseline justify-between py-3 text-body tabular-nums"
-                >
-                  <span className="text-ink">{name}</span>
-                  <span className="text-ink-60">{time}</span>
-                </li>
-              ))}
-              <li id="fredagsbonn" className="flex items-baseline justify-between py-3 text-body tabular-nums bg-paper">
-                <span className="text-ink font-semibold">{t('names.jumua')}</span>
-                <span className="text-ink font-semibold">{PRAYER_TIMES_TODAY.jumua}</span>
-              </li>
-            </ul>
+            <PrayerToday />
             <Link
               href={`/${locale}/bonnetider`}
               className="mt-4 inline-flex min-h-11 items-center text-body font-semibold text-ink underline underline-offset-4 hover:decoration-2"

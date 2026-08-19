@@ -379,6 +379,25 @@ unchanged so nothing had to be retuned per section. The meter was overriding
 the token with a raw py-32 that is now larger than the token itself, so it
 follows the scale again. Total vertical padding down the page is 1 536px.
 
+### Two dry sections given something to do
+
+**Prayer times.** The most used thing on a mosque site was a flat list of six
+figures, which answers none of the questions a reader actually arrives with.
+The window you are inside is marked now, with a line under it that fills as
+that window runs down, and the next prayer counts itself down beside its time.
+Recomputed every 30 seconds. Same times, same order, same tabular figures; the
+clock keeps running under reduced motion and only the entrance stagger drops.
+
+**Where the money goes.** The four assurances were four paragraphs in a two by
+two grid. They are all verifiable claims, a tax approval, an audit, a permit,
+an org number, so they are a register now: one row each, the rule drawn across
+it in sequence on entry, a mono stamp saying what the row is evidence of, and
+the link with its arrow. Same copy, same links, same order. The layout says
+what the section is for instead of leaving the reader to work it out.
+
+One regression caught on the way: the stamps went in at 0.7rem, which renders
+at 11.2px and is under the floor the rest of the site keeps. They are 0.75rem.
+
 ## How this branch is deployed
 
 `main` deploys to the original Vercel project. This branch has its own project

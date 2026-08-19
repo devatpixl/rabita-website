@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
+import { AssuranceRegister } from './assurance-register';
 import { CAMPAIGN } from '@/lib/campaign';
 import { formatAmount } from '@/lib/format';
 import type { AppLocale } from '@/i18n/routing';
@@ -162,63 +163,15 @@ export async function WhereMoneyGoes() {
           </p>
         </div>
 
-        {/* Trust items — 2 columns at md+, numeral row → hairline row
-           = 62px. Each item: 1px --rule hairline top spanning the full
-           column, 14px to mono counter, 10px to heading, 8px to body,
-           14px to link. Body is capped at 46ch so it doesn't run to
-           the full column width at 1440px+. */}
-        <ul
-          className="grid grid-cols-1 md:grid-cols-2"
-          style={{ marginTop: '62px', columnGap: '64px', rowGap: '56px' }}
-        >
-          {cards.map((c, i) => (
-            <li
-              key={c.key}
-              className="border-t border-rule"
-              style={{ paddingTop: '14px' }}
-            >
-              <span className="font-mono text-label uppercase tracking-widest text-gold-deep">
-                {(i + 1).toString().padStart(2, '0')}
-              </span>
-              <h3
-                className="font-serif text-ink"
-                style={{
-                  marginTop: '10px',
-                  fontSize: '18px',
-                  fontWeight: 600,
-                  lineHeight: 1.25,
-                }}
-              >
-                {t(`cards.${c.key}.title`)}
-              </h3>
-              <p
-                className="text-ink-60"
-                style={{
-                  marginTop: '8px',
-                  fontSize: '14px',
-                  lineHeight: 1.62,
-                  maxWidth: '46ch',
-                }}
-              >
-                {t(`cards.${c.key}.body`, {
-                  orgNr: CAMPAIGN.orgNr,
-                  founded: CAMPAIGN.foundedYear,
-                  cap: CAMPAIGN.taxDeductionCapNok.toLocaleString('nb-NO'),
-                })}
-              </p>
-              <Link
-                href={c.href}
-                className="inline-flex min-h-11 items-center font-semibold text-gold-deep"
-                style={{
-                  marginTop: '4px',
-                  fontSize: '14px',
-                }}
-              >
-                <span className="border-b border-rule pb-px">{t(`cards.${c.key}.cta`)} →</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <AssuranceRegister
+          cards={cards}
+          values={{
+            orgNr: CAMPAIGN.orgNr,
+            founded: CAMPAIGN.foundedYear,
+            cap: CAMPAIGN.taxDeductionCapNok.toLocaleString('nb-NO'),
+          }}
+        />
+
       </SectionBody>
     </Section>
   );
