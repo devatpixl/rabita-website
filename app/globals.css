@@ -252,8 +252,28 @@ dialog {
   max-width: 100vw;
   max-height: 100vh;
 }
+
+/* The seal on the visit photograph. One slow turn, and none at all for anyone
+   who has asked for less movement. */
+@keyframes seal-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.seal-ring {
+  animation: seal-turn 44s linear infinite;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .seal-ring {
+    animation: none;
+  }
+}
+
 dialog::backdrop {
-  background: rgba(26, 26, 24, 0.5);
+  background: rgba(26, 26, 24, 0.55);
+  backdrop-filter: blur(3px);
 }
 
 /* When the giving sheet is open, lock body scroll. Set from the sheet

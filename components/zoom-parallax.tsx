@@ -36,8 +36,8 @@ const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
 // Feathered edges, so a tile dissolves into the dusk instead of stopping on a
 // hard rectangle. One gradient per axis, intersected.
 const EDGE =
-  'linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%),' +
-  ' linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%)';
+  'linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%),' +
+  ' linear-gradient(to bottom, transparent 0, #000 3%, #000 97%, transparent 100%)';
 const FEATHER = {
   maskImage: EDGE,
   WebkitMaskImage: EDGE,

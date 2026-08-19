@@ -572,6 +572,7 @@
     }
   },
   "prayerVisit": {
+    "seal": "مفتوح يوميّا",
     "now": "الآن",
     "untilHm": "بعد {h}س {m}د",
     "untilM": "بعد {m}د",

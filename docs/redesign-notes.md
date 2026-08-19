@@ -398,6 +398,36 @@ what the section is for instead of leaving the reader to work it out.
 One regression caught on the way: the stamps went in at 0.7rem, which renders
 at 11.2px and is under the floor the rest of the site keeps. They are 0.75rem.
 
+### Four finishing passes
+
+**The giving sheet was a square panel.** Rounded to 16px and clipped, with a
+soft shadow so it lifts off the page, and the backdrop went from a flat 50
+percent scrim to 55 with a 3px blur, which reads as the page receding rather
+than a rectangle cut out of it.
+
+**The gallery feather was too heavy.** 7 percent of each edge is most of a
+small tile. It is 3, enough to lose the corner without eating the picture.
+
+**The visit photograph was a small box floating above the copy**, which made
+the strongest thing in the section the weakest part of the layout. It is 4:3
+and carries its column now, with a seal on the corner: the label running round
+the ring and the star mark at the centre, turning once every 44 seconds and not
+at all under reduced motion. Used once on the page, and it does a real job,
+since the thing a reader most needs to know about dropping in is that the door
+is open every day.
+
+Two bugs found while placing that seal, both worth writing down:
+
+`cn` is plain clsx with no tailwind-merge, so a base `relative` on a component
+and an `absolute` passed in from the caller both land and CSS source order
+decides, not the caller. Components here cannot expect to have their position
+overridden from outside; the caller wraps them instead.
+
+`bg-paper/95` works and `bg-paper/92` silently produces nothing, because 92 is
+not on Tailwind's opacity scale. The seal's disc rendered fully transparent and
+looked like a stacking bug for two attempts. Arbitrary opacities need the
+bracket form.
+
 ## How this branch is deployed
 
 `main` deploys to the original Vercel project. This branch has its own project

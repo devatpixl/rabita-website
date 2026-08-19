@@ -97,7 +97,7 @@ export function GivingSheet() {
       ref={dialogRef}
       onClick={onDialogClick}
       aria-labelledby="giving-sheet-title"
-      className="w-full max-w-lg bg-paper"
+      className="w-full max-w-lg overflow-hidden rounded-2xl border border-rule/60 bg-paper shadow-[0_2px_6px_rgba(0,0,0,0.06),0_24px_60px_-24px_rgba(0,0,0,0.45)]"
     >
       <div className="border-b border-rule bg-paper px-6 py-4 flex items-center justify-between">
         <h2 id="giving-sheet-title" className="text-card font-serif">

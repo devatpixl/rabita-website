@@ -572,6 +572,7 @@
     }
   },
   "prayerVisit": {
+    "seal": "Åpent hver dag",
     "now": "Nå",
     "untilHm": "om {h}t {m}m",
     "untilM": "om {m}m",

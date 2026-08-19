@@ -572,6 +572,7 @@
     }
   },
   "prayerVisit": {
+    "seal": "Open daily",
     "now": "Now",
     "untilHm": "in {h}h {m}m",
     "untilM": "in {m}m",

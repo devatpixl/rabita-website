@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
 import { PrayerToday } from './prayer-today';
+import { RotatingSeal } from './rotating-seal';
 import { Eyebrow, Section, SectionBody, SectionHeading } from './primitives';
 
 // §4.08. Full week, Friday time, opening hours, address, booking form for
@@ -36,14 +37,19 @@ export async function PrayerVisit() {
             {/* Full-bleed photo above the visit copy — Rabita volunteers
                praying together in a Grønland underpass. The photograph
                that argues for the campaign more than any statistic. */}
-            <div className="relative w-full aspect-[16/9] overflow-hidden bg-paper-2 mb-6">
-              <Image
-                src="/photos/prayer-underpass.webp"
-                alt="Rabita volunteers praying together in the Grønland underpass"
-                fill
-                sizes="(min-width: 768px) 55vw, 90vw"
-                className="object-cover editorial-photo"
-              />
+            <div className="relative mb-16">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-paper-2">
+                <Image
+                  src="/photos/prayer-underpass.webp"
+                  alt="Rabita volunteers praying together in the Grønland underpass"
+                  fill
+                  sizes="(min-width: 768px) 58vw, 90vw"
+                  className="object-cover editorial-photo"
+                />
+              </div>
+              <div className="absolute -bottom-8 end-6 z-10 md:end-10">
+                <RotatingSeal label={t('seal')} />
+              </div>
             </div>
             <h3 className="mb-4 font-serif text-card text-ink">{t('visitHeading')}</h3>
             <p className="mb-4 text-body text-ink">{CAMPAIGN.address}</p>
