@@ -191,6 +191,41 @@ row now has the same gap. The plot dimension sat a third of the way into the
 -01 level, on top of the parking bays; it moved onto the ground line, where it
 belongs, with a knockout so it stays readable over the excavation hatching.
 
+### Follow up on that pass
+
+Three things the pass above either caused or did not go far enough on.
+
+**The carousel caption was being painted over.** The pane holding the whole
+section was capped at one viewport height with its content centred inside,
+so anything over budget spilled past the section and the next section covered
+it. Moving the figure onto its own line added about 24px, which put the
+longest slide over on a 740px viewport: the last line of the sentence was
+hidden behind the section below. The cap is gone, so the pane grows on a short
+screen instead of clipping, and the rail gives back the height the caption
+took.
+
+**The chapter caption fell off the fold.** The sticky photo is capped so its
+own bottom lands one viewport down, which left nothing for the caption under
+it. On a 740px viewport it was 4px past the edge. The cap now accounts for the
+caption too.
+
+**The drawing labels were 7 to 8px on screen.** They are 8.5 to 10 units in a
+700 unit canvas that scales to the height available, so they arrived well under
+the 12px floor the rest of the site keeps. They are 15 and 17 units now, which
+is 12.5 to 14px on a 1920 by 820 window. The canvas is 840 wide rather than 700
+to give the bigger type room; that costs nothing, because the drawing is
+constrained by height, not width.
+
+Three things had to move with the larger type: the street label was tracked in
+so it stays inside the building wall, the plot dimension moved to the right end
+of the ground line so the two annotations are not stacked, and the leading
+between a floor name and its detail line went from 13 units to 19, which at the
+old sizes was fine and at the new ones was set solid.
+
+Checked at 900, 820, 740 and 680px viewport heights: no clipping at any of
+them. The labels do keep shrinking with the drawing on very short windows,
+which is inherent to a pinned section that fits one screen.
+
 ## How this branch is deployed
 
 `main` deploys to the original Vercel project. This branch has its own project

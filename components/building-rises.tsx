@@ -50,7 +50,7 @@ const GOLD_DEEP = '#9B7F4A';
 const LEFT_NB_X = 0;
 const LEFT_NB_W = 32;
 const LEFT_NB_TOP = 256;
-const RIGHT_NB_X = 664;
+const RIGHT_NB_X = 790;
 const RIGHT_NB_W = 36;
 const RIGHT_NB_TOP = 200;
 
@@ -316,11 +316,11 @@ function BuildingSVG({
       />
       <text
         x={BUILDING_X + 4}
-        y={GROUND_Y - 6}
+        y={GROUND_Y - 10}
         fill={INK}
         fontFamily="var(--font-mono)"
-        fontSize={9}
-        letterSpacing="0.14em"
+        fontSize={15}
+        letterSpacing="0.07em"
       >
         {labelT('svg.groundLevel')}
       </text>
@@ -349,19 +349,19 @@ function BuildingSVG({
       {/* TOMT label — on the ground line, knocked out of what is behind it */}
       <g>
         <rect
-          x={BUILDING_X + BUILDING_W / 2 - 78}
-          y={GROUND_Y + 6}
-          width={156}
-          height={16}
+          x={BUILDING_RIGHT - 202}
+          y={GROUND_Y + 5}
+          width={198}
+          height={22}
           fill="#F2EEE7"
         />
         <text
-          x={BUILDING_X + BUILDING_W / 2}
-          y={GROUND_Y + 18}
-          textAnchor="middle"
+          x={BUILDING_RIGHT - 8}
+          y={GROUND_Y + 21}
+          textAnchor="end"
           fill={INK_60}
           fontFamily="var(--font-mono)"
-          fontSize={10}
+          fontSize={17}
           letterSpacing="0.14em"
         >
           {labelT('svg.plot')}
@@ -458,32 +458,32 @@ function BuildingSVG({
           strokeWidth={1}
         />
         <text
-          x={LABEL_X + 24}
-          y={BUILDING_TOP - 23}
+          x={LABEL_X + 34}
+          y={BUILDING_TOP - 25}
           textAnchor="end"
           fill={GOLD_DEEP}
           fontFamily="var(--font-mono)"
-          fontSize={9}
+          fontSize={15}
           letterSpacing="0.14em"
         >
           07
         </text>
         <text
-          x={LABEL_X + 32}
-          y={BUILDING_TOP - 23}
+          x={LABEL_X + 44}
+          y={BUILDING_TOP - 25}
           fill={INK}
           fontFamily="var(--font-mono)"
-          fontSize={10}
+          fontSize={17}
           letterSpacing="0.14em"
         >
           {labelT('svg.floorsUp')}
         </text>
         <text
-          x={LABEL_X + 32}
-          y={BUILDING_TOP - 10}
+          x={LABEL_X + 44}
+          y={BUILDING_TOP - 6}
           fill={INK_60}
           fontFamily="var(--font-mono)"
-          fontSize={8.5}
+          fontSize={15}
           letterSpacing="0.06em"
         >
           {labelT('svg.belowGround')}
@@ -494,7 +494,7 @@ function BuildingSVG({
           y={GROUND_Y - 60}
           fill={RULE}
           fontFamily="var(--font-mono)"
-          fontSize={10}
+          fontSize={17}
           letterSpacing="0.16em"
         >
           ↓ SCROLL
@@ -666,34 +666,34 @@ function BuildingSVG({
               }}
             />
             <text
-              x={LABEL_X + 24}
-              y={y - 3}
+              x={LABEL_X + 34}
+              y={y - 5}
               textAnchor="end"
               fill={numberFill}
               fontFamily="var(--font-mono)"
-              fontSize={9}
+              fontSize={15}
               letterSpacing="0.12em"
               style={{ transition: 'fill 300ms ease-out' }}
             >
               {f.levelLabel}
             </text>
             <text
-              x={LABEL_X + 32}
-              y={y - 3}
+              x={LABEL_X + 44}
+              y={y - 5}
               fill={nameFill}
               fontFamily="var(--font-mono)"
-              fontSize={10}
+              fontSize={17}
               letterSpacing="0.14em"
               style={{ transition: 'fill 300ms ease-out' }}
             >
               {labelT(`floors.${f.key}.name`)}
             </text>
             <text
-              x={LABEL_X + 32}
-              y={y + 10}
+              x={LABEL_X + 44}
+              y={y + 14}
               fill={factFill}
               fontFamily="var(--font-mono)"
-              fontSize={8.5}
+              fontSize={15}
               letterSpacing="0.06em"
               style={{ transition: 'fill 300ms ease-out' }}
             >
