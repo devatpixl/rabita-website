@@ -387,8 +387,8 @@
         "body": "First basement: visitor parking, ventilation, electrical supply for the building above."
       },
       "p2": {
-        "name": "PARKING",
-        "fact": "storage · services",
+        "name": "STORAGE",
+        "fact": "technical services",
         "headline": "The foundation we pour this year.",
         "body": "Second basement: storage for the school and library, and the technical installations that keep the building warm."
       }

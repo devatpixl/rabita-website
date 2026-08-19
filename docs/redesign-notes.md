@@ -252,6 +252,48 @@ foot matches its head. The section is 2 396px rather than 2 780px and all four
 chapters still take their turn as you scroll, which was worth checking, since
 the tracking depends on a panel dominating the middle of the viewport.
 
+### Floor plates, centred and checked
+
+**A floor was named wrong.** Level −02 was labelled PARKING in all three
+languages while its own body copy says "storage for the school and library,
+and the technical installations that keep the building warm". Only −01 is
+parking. It reads STORAGE, technical services now.
+
+The rest of the sequence checks out. Walking the eight scroll steps: 01 / 07
+is floor −02, then −01, 00, 01, 02, 03 and 04 at 07 / 07, and each one matches
+its label in the column and its panel on the left. Seven floors, two below the
+street, which is what the intro says.
+
+One thing left alone: −02 still draws the three rounded bays the parking floor
+draws, because they share a renderer. They read as racks as easily as cars, so
+it is not wrong, but it is worth knowing if that floor ever gets its own
+drawing.
+
+**The ground floor furniture was off centre.** It sat 48 units from the left
+wall and 20 from the right, and low in its band. The street label was inside
+that band too, taking the bottom of it, which is what made the floor look
+bottom heavy. The label annotates the ground line from outside the walls now,
+where the line runs the full canvas anyway, and the furniture is centred.
+
+Measured margins per floor after the change, in SVG units, left / right and
+top / bottom:
+
+| floor | left | right | top | bottom |
+| --- | --- | --- | --- | --- |
+| −02 storage | 20 | 20 | 33 | 33 |
+| −01 parking | 20 | 20 | 33 | 33 |
+| 00 entrance | 34 | 34 | 26 | 27 |
+| 01 youth | 12 | 12 | 27 | 26 |
+| 02 library | 28 | 28 | 20 | 20 |
+| 03 school | 16 | 16 | 20 | 16 |
+| 04 prayer | 24 | 24 | 11 | 11 |
+
+Three of those needed moving. The library had four shelves one side and three
+the other, so the group sat 20 from the left wall and 36 from the right. The
+school's two figures pressed harder against the right wall than the classrooms
+did against the left. The youth floor sat 41 from the top of its band and 12
+from the bottom.
+
 ## How this branch is deployed
 
 `main` deploys to the original Vercel project. This branch has its own project

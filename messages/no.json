@@ -387,8 +387,8 @@
         "body": "Første kjeller: parkering for besøkende, ventilasjon, og el-forsyning for bygget over."
       },
       "p2": {
-        "name": "PARKERING",
-        "fact": "lager · teknisk",
+        "name": "LAGER",
+        "fact": "tekniske rom",
         "headline": "Fundamentet vi støper i år.",
         "body": "Andre kjeller: lager for skolen og biblioteket, og de tekniske installasjonene som holder bygget varmt."
       }

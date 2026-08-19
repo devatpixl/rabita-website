@@ -315,8 +315,8 @@ function BuildingSVG({
         strokeWidth={1.2}
       />
       <text
-        x={BUILDING_X + 4}
-        y={GROUND_Y - 8}
+        x={BUILDING_RIGHT + 12}
+        y={GROUND_Y - 4}
         fill={INK}
         fontFamily="var(--font-mono)"
         fontSize={13}
@@ -742,13 +742,13 @@ function FloorContent({
 
 function PrayerFloor({ top, stroke, fig }: { top: number; stroke: string; fig: string }) {
   const cx = BUILDING_X + BUILDING_W / 2;
-  const rowY1 = top + 62;
-  const rowY2 = top + 74;
-  const figHeadY = top + 45;
+  const rowY1 = top + 65;
+  const rowY2 = top + 77;
+  const figHeadY = top + 48;
   const figXs = [cx - 60, cx - 30, cx, cx + 30, cx + 60];
   return (
     <g fill="none" stroke={stroke} strokeWidth={1} strokeLinecap="round">
-      <path d={`M ${cx - 12} ${top + 40} L ${cx - 12} ${top + 22} Q ${cx - 12} ${top + 8} ${cx} ${top + 8} Q ${cx + 12} ${top + 8} ${cx + 12} ${top + 22} L ${cx + 12} ${top + 40}`} />
+      <path d={`M ${cx - 12} ${top + 43} L ${cx - 12} ${top + 25} Q ${cx - 12} ${top + 11} ${cx} ${top + 11} Q ${cx + 12} ${top + 11} ${cx + 12} ${top + 25} L ${cx + 12} ${top + 43}`} />
       <line x1={BUILDING_X + 24} x2={BUILDING_RIGHT - 24} y1={rowY1} y2={rowY1} />
       <line x1={BUILDING_X + 24} x2={BUILDING_RIGHT - 24} y1={rowY2} y2={rowY2} />
       {figXs.map((x) => <Figure key={x} x={x} y={figHeadY} fill={fig} />)}
@@ -764,8 +764,8 @@ function SchoolFloor({ top, stroke, fig }: { top: number; stroke: string; fig: s
     <g fill="none" stroke={stroke} strokeWidth={1}>
       {boxes.map((x) => <rect key={x} x={x} y={boxY} width={boxSize} height={boxSize} />)}
       <line x1={BUILDING_X + 16} x2={BUILDING_RIGHT - 16} y1={top + 72} y2={top + 72} />
-      <Figure x={BUILDING_RIGHT - 42} y={top + 52} fill={fig} />
-      <Figure x={BUILDING_RIGHT - 24} y={top + 52} fill={fig} />
+      <Figure x={BUILDING_RIGHT - 50} y={top + 52} fill={fig} />
+      <Figure x={BUILDING_RIGHT - 32} y={top + 52} fill={fig} />
     </g>
   );
 }
@@ -773,8 +773,8 @@ function SchoolFloor({ top, stroke, fig }: { top: number; stroke: string; fig: s
 function LibraryFloor({ top, stroke, fig }: { top: number; stroke: string; fig: string }) {
   const shelfTop = top + 20;
   const shelfBot = top + 68;
-  const leftShelfXs = [BUILDING_X + 20, BUILDING_X + 36, BUILDING_X + 52, BUILDING_X + 68];
-  const rightShelfXs = [BUILDING_RIGHT - 68, BUILDING_RIGHT - 52, BUILDING_RIGHT - 36];
+  const leftShelfXs = [BUILDING_X + 28, BUILDING_X + 44, BUILDING_X + 60, BUILDING_X + 76];
+  const rightShelfXs = [BUILDING_RIGHT - 60, BUILDING_RIGHT - 44, BUILDING_RIGHT - 28];
   const tableL = BUILDING_X + BUILDING_W / 2 - 34;
   const tableR = BUILDING_X + BUILDING_W / 2 + 34;
   return (
@@ -789,28 +789,28 @@ function LibraryFloor({ top, stroke, fig }: { top: number; stroke: string; fig: 
 }
 
 function YouthFloor({ top, stroke, fig }: { top: number; stroke: string; fig: string }) {
-  const floorLineY = top + 76;
-  const deskY = top + 62;
+  const floorLineY = top + 62;
+  const deskY = top + 48;
   const deskW = 40;
   const deskXs = [BUILDING_X + 24, BUILDING_X + 78, BUILDING_X + 132, BUILDING_X + 186];
   return (
     <g fill="none" stroke={stroke} strokeWidth={1}>
       <line x1={BUILDING_X + 12} x2={BUILDING_RIGHT - 12} y1={floorLineY} y2={floorLineY} />
       {deskXs.map((x) => <rect key={`d-${x}`} x={x} y={deskY} width={deskW} height={6} rx={1.5} />)}
-      {deskXs.map((x) => <Figure key={`fig-${x}`} x={x + deskW / 2} y={top + 44} fill={fig} seated />)}
-      <Figure x={BUILDING_RIGHT - 30} y={top + 48} fill={fig} />
+      {deskXs.map((x) => <Figure key={`fig-${x}`} x={x + deskW / 2} y={top + 30} fill={fig} seated />)}
+      <Figure x={BUILDING_RIGHT - 30} y={top + 34} fill={fig} />
     </g>
   );
 }
 
 function EntranceFloor({ top, stroke, fig }: { top: number; stroke: string; fig: string }) {
-  const midY = top + 52;
+  const midY = top + 49;
   return (
     <g fill="none" stroke={stroke} strokeWidth={1}>
-      <circle cx={BUILDING_X + 60} cy={midY} r={12} />
-      <circle cx={BUILDING_X + 108} cy={midY} r={12} />
-      <rect x={BUILDING_X + 170} y={midY - 12} width={130} height={22} rx={2} />
-      <Figure x={BUILDING_X + 148} y={midY - 20} fill={fig} />
+      <circle cx={BUILDING_X + 46} cy={midY} r={12} />
+      <circle cx={BUILDING_X + 94} cy={midY} r={12} />
+      <rect x={BUILDING_X + 156} y={midY - 12} width={130} height={22} rx={2} />
+      <Figure x={BUILDING_X + 134} y={midY - 20} fill={fig} />
     </g>
   );
 }
