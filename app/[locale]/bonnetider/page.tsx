@@ -17,12 +17,23 @@ export default async function BonnetiderPage({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'bonnetiderPage' });
 
+  const PRAYERS = [
+    { label: 'Fajr', time: PRAYER_TIMES_TODAY.fajr },
+    { label: t('sunrise'), time: PRAYER_TIMES_TODAY.sunrise },
+    { label: 'Dhuhr', time: PRAYER_TIMES_TODAY.dhuhr },
+    { label: 'Asr', time: PRAYER_TIMES_TODAY.asr },
+    { label: 'Maghrib', time: PRAYER_TIMES_TODAY.maghrib },
+    { label: 'Isha', time: PRAYER_TIMES_TODAY.isha },
+  ];
+
   return (
     <main>
       <PageHeader eyebrow={t('eyebrow')} title={t('title')} lede={t('lede')} />
       <Section tone="paper">
         <SectionBody>
-          <div className="overflow-x-auto">
+          {/* Seven columns do not fit a phone, so the table is desktop only
+             and small screens get the same week as one card per day. */}
+          <div className="hidden overflow-x-auto md:block">
             <table className="w-full border-collapse text-body">
               <thead>
                 <tr className="text-[13px] text-ink-60">
@@ -60,6 +71,38 @@ export default async function BonnetiderPage({
               </tbody>
             </table>
           </div>
+
+          <ul className="md:hidden">
+            {DAYS.map((d) => {
+              const isFri = d === 'fri';
+              return (
+                <li
+                  key={d}
+                  className={`border-b border-rule py-4 ${isFri ? 'bg-paper-2' : ''}`}
+                >
+                  <p className="flex flex-wrap items-baseline gap-x-3 font-semibold text-ink">
+                    {t(`days.${d}` as `days.${DayKey}`)}
+                    {isFri && (
+                      <span className="font-normal text-[13px] text-ink-60">
+                        {t('jumua')} {PRAYER_TIMES_TODAY.jumua}
+                      </span>
+                    )}
+                  </p>
+                  <dl className="mt-3 grid grid-cols-3 gap-x-4 gap-y-3">
+                    {PRAYERS.map((row) => (
+                      <div key={row.label}>
+                        <dt className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">
+                          {row.label}
+                        </dt>
+                        <dd className="mt-1 tabular-nums text-ink">{row.time}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </li>
+              );
+            })}
+          </ul>
+
           <p className="mt-6 text-[13px] text-ink-60">{t('note')}</p>
         </SectionBody>
       </Section>
