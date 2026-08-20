@@ -89,43 +89,44 @@ function DepthPlate({
   const z = useTransform(progress, stops, [0, BACK, FRONT, 0]);
   const opacity = useTransform(progress, stops, [1, 0.45, 1, 1]);
 
-  // The whole field also sweeps up and to the left across the section, each
-  // plate at its own rate. Deeper travel on the plates that go furthest back,
-  // so the diagonal reads as parallax rather than as a slide.
+  // On the same beat the plate sweeps up and to the left, then back down and
+  // to the right, each one at its own rate. It starts and ends on its slot, so
+  // the field is square at both ends of the section and only the middle moves.
   const dx = plate.travel;
   const dy = plate.travel * 0.62;
-  const driftX = useTransform(progress, (p: number) =>
-    `calc(-50% + ${((0.5 - p) * dx).toFixed(3)}vw)`,
-  );
-  const driftY = useTransform(progress, (p: number) =>
-    `calc(-50% + ${((p - 0.5) * dy).toFixed(3)}vh)`,
-  );
+  const driftX = useTransform(progress, stops, ['0vw', `${-dx}vw`, `${dx * 0.3}vw`, '0vw']);
+  const driftY = useTransform(progress, stops, ['0vh', `${dy}vh`, `${-dy * 0.3}vh`, '0vh']);
 
   return (
-    <motion.div
-      className="absolute will-change-transform"
+    // Outer holds the slot and the centring. Inner does the moving, and needs
+    // preserve-3d on its parent for translateZ to land in the container's
+    // perspective rather than flattening.
+    <div
+      className="absolute -translate-x-1/2 -translate-y-1/2"
       style={{
         left: `${plate.x}%`,
         top: `${plate.y}%`,
         height: `${plate.vh}vh`,
         aspectRatio: `${plate.w} / ${plate.h}`,
-        x: driftX,
-        y: driftY,
-        z,
-        opacity,
+        transformStyle: 'preserve-3d',
       }}
     >
-      <div className="relative h-full w-full overflow-hidden rounded-xl" style={FEATHER}>
-        <Image
-          src={plate.src}
-          alt={alt}
-          fill
-          sizes="30vw"
-          className="object-cover"
-          style={{ filter: GRADE }}
-        />
-      </div>
-    </motion.div>
+      <motion.div
+        className="h-full w-full will-change-transform"
+        style={{ x: driftX, y: driftY, z, opacity }}
+      >
+        <div className="relative h-full w-full overflow-hidden rounded-xl" style={FEATHER}>
+          <Image
+            src={plate.src}
+            alt={alt}
+            fill
+            sizes="30vw"
+            className="object-cover"
+            style={{ filter: GRADE }}
+          />
+        </div>
+      </motion.div>
+    </div>
   );
 }
 
