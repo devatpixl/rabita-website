@@ -24,13 +24,15 @@ export function ParallaxMedia({
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start end', 'start start'],
+    offset: ['start end', 'start 25%'],
   });
 
+  // Snappy enough that a fast flick lands the figure straight away, soft
+  // enough that a slow scroll drags it down at the same pace as the thumb.
   const eased = useSpring(scrollYProgress, {
-    stiffness: 220,
-    damping: 40,
-    mass: 0.3,
+    stiffness: 420,
+    damping: 42,
+    mass: 0.22,
     restDelta: 0.001,
   });
 

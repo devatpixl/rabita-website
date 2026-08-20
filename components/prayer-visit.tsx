@@ -92,7 +92,7 @@ export async function PrayerVisit() {
 
           {/* One tall photograph, sticky, so it stays beside whichever part of
              the column the reader is on. */}
-          <ParallaxMedia className="md:col-span-5" lift={170}>
+          <ParallaxMedia className="md:col-span-5 md:self-end" lift={300}>
             <figure className="m-0">
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-paper">
                 <Image

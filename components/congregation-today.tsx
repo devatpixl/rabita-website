@@ -138,14 +138,17 @@ export function CongregationToday() {
     const el = regionRef.current;
     if (!el) return;
     const onWheel = (e: WheelEvent) => {
-      if (Math.abs(e.deltaX) < 24 || Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+      // Claim the horizontal swipe so the browser does not treat it as back or forward.
+      e.preventDefault();
+      if (Math.abs(e.deltaX) < 24) return;
       if (wheelLock.current) return;
       wheelLock.current = true;
       window.setTimeout(() => { wheelLock.current = false; }, 420);
       const forward = isRtl ? e.deltaX < 0 : e.deltaX > 0;
       if (forward) next(); else prev();
     };
-    el.addEventListener('wheel', onWheel, { passive: true });
+    el.addEventListener('wheel', onWheel, { passive: false });
     return () => el.removeEventListener('wheel', onWheel);
   }, [isRtl, next, prev]);
 
@@ -320,6 +323,7 @@ export function CongregationToday() {
               height: CARD_H,
               overflow: 'visible',
               touchAction: 'pan-y',
+              overscrollBehaviorX: 'contain',
             }}
           >
             {SLIDE_KEYS.map((key, i) => {
