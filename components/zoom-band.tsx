@@ -47,15 +47,15 @@ export function ZoomBand() {
   const roomsOut = useTransform(scrollYProgress, [0.2, 0.48], [1, 0]);
   const roomsAway = useTransform(scrollYProgress, [0.2, 0.48], [1, 1.85]);
 
-  const scrim = useTransform(scrollYProgress, [0.34, 0.5], [0, 0.82]);
-  const lift = useTransform(scrollYProgress, [0.42, 0.58], [22, 0]);
-  const show = useTransform(scrollYProgress, [0.42, 0.58], [0, 1]);
+  const scrim = useTransform(scrollYProgress, [0.42, 0.56], [0, 0.82]);
+  const lift = useTransform(scrollYProgress, [0.5, 0.64], [22, 0]);
+  const show = useTransform(scrollYProgress, [0.5, 0.64], [0, 1]);
 
   return (
     <section
       ref={band}
       aria-labelledby="zoom-band-heading"
-      className="relative h-[100svh] overflow-hidden bg-dusk"
+      className="relative h-[170svh] overflow-hidden bg-dusk"
     >
       {/* The rooms, falling back */}
       {ROOMS.map((r) => (

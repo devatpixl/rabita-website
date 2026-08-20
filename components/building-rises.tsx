@@ -106,7 +106,7 @@ export function BuildingRises() {
             <Eyebrow>{t('eyebrow')}</Eyebrow>
             <h2
               id="building-rises-heading"
-              className="mt-2 font-serif text-[clamp(1.3rem,2.4vw,1.85rem)] leading-[1.1] text-ink max-w-2xl"
+              className="mt-2 font-serif text-section leading-[1.1] text-ink max-w-2xl"
             >
               {t.rich('heading', {
                 em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
