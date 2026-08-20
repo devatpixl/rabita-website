@@ -3,7 +3,6 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
 import { PageHeader } from '@/components/page-header';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
-import { CampaignMeter } from '@/components/campaign-meter';
 
 import { Accent } from '@/components/accent';
 import {
@@ -44,7 +43,6 @@ export default async function WhereMoneyGoesPage({
         heading={tp('pages.money.colHeading')}
         items={tp.raw('pages.money.items') as { title: string; body: string }[]}
       />
-      <CampaignMeter />
 
       <Section id="skattefradrag" tone="paper">
         <SectionBody>

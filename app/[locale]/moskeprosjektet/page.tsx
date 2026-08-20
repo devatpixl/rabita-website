@@ -1,14 +1,9 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
-import { BuildingRises } from '@/components/building-rises';
-import { FloorStory } from '@/components/floor-story';
-import { FoundationWall } from '@/components/foundation-wall';
 import { PageHeader } from '@/components/page-header';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
-import { RenderingPlaceholder } from '@/components/rendering-placeholder';
-import { CampaignMeter } from '@/components/campaign-meter';
-import { WhereMoneyGoes } from '@/components/where-money-goes';
 
 import { Accent } from '@/components/accent';
 import {
@@ -48,9 +43,23 @@ export default async function ProjectPage({
         heading={tp('pages.building.colHeading')}
         items={tp.raw('pages.building.items') as { title: string; body: string }[]}
       />
+      <section className="bg-paper-2 pb-section-md">
+        <SectionBody>
+          <div className="relative aspect-[16/10] overflow-hidden rounded-3xl bg-paper">
+            <Image
+              src="/photos/project-aerial.webp"
+              alt={tp('aerial')}
+              fill
+              sizes="(min-width: 1024px) 78vw, 92vw"
+              className="object-cover"
+              style={{ filter: 'saturate(0.72) contrast(1.12) brightness(0.9)' }}
+            />
+          </div>
+          <p className="mt-4 font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">{tp('aerial')}</p>
+        </SectionBody>
+      </section>
       <Section tone="paper">
         <SectionBody>
-          <RenderingPlaceholder ratio="hero" caption="Site plan · Norconsult · pending 2560×1440" />
           <div className="mt-10 grid gap-10 md:grid-cols-2">
             <div>
               <h2 className="mb-4 font-serif text-card text-ink">{t('facts.heading')}</h2>
@@ -92,12 +101,6 @@ export default async function ProjectPage({
           </div>
         </SectionBody>
       </Section>
-
-      <BuildingRises />
-      <FloorStory />
-      <CampaignMeter />
-      <FoundationWall />
-      <WhereMoneyGoes />
 
       <Section tone="paper">
         <SectionBody>

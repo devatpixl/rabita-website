@@ -1,10 +1,12 @@
-import Link from 'next/link';
 import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
-import { PageHeader } from '@/components/page-header';
-import { Section, SectionBody } from '@/components/primitives';
+import {
+  ServiceCards,
+  ServiceHero,
+  ServiceRegister,
+  ServiceVisit,
+} from '@/components/service-page';
 
-// §6: /tjenester (nikah, janaza, shahada, counselling, hajj/umrah — each
-// its own page and request form, named in the words a member would type).
+// The five subjects each keep their own page and request form, named in the words a member would type.
 const SUBJECTS = ['nikah', 'janaza', 'shahada', 'counselling', 'hajj-umrah'] as const;
 
 export default async function ServicesIndex({
@@ -15,26 +17,48 @@ export default async function ServicesIndex({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'servicesIndex' });
+  const tp = await getTranslations({ locale, namespace: 'servicePages' });
   const l = await getLocale();
+
+  const rows = SUBJECTS.map((s) => ({
+    term: t(`items.${s}.title`),
+    detail: t(`items.${s}.body`),
+    href: `/${l}/tjenester/${s}`,
+  }));
 
   return (
     <main>
-      <PageHeader eyebrow={t('eyebrow')} title={t('title')} lede={t('lede')} />
-      <Section tone="paper">
-        <SectionBody>
-          <ul className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {SUBJECTS.map((s) => (
-              <li key={s} className="border-t border-rule pt-6">
-                <h2 className="mb-2 font-serif text-card text-ink">{t(`items.${s}.title`)}</h2>
-                <p className="mb-4 text-body text-ink-60">{t(`items.${s}.body`)}</p>
-                <Link href={`/${l}/tjenester/${s}`} className="inline-flex min-h-11 items-center text-body font-semibold text-ink underline underline-offset-4">
-                  {t('more')}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </SectionBody>
-      </Section>
+      <ServiceHero
+        crumb={tp('crumb')}
+        eyebrow={tp('pages.services.eyebrow')}
+        title={tp('pages.services.title')}
+        lede={tp('pages.services.lede')}
+        note={tp('pages.services.note')}
+        image="/photos/svc-services.webp"
+        alt={tp('pages.services.eyebrow')}
+      />
+      <ServiceRegister
+        eyebrow={tp('pages.services.regEyebrow')}
+        heading={tp('pages.services.regHeading')}
+        rows={rows}
+      />
+      <ServiceCards
+        eyebrow={tp('pages.services.cardEyebrow')}
+        heading={tp('pages.services.cardHeading')}
+        cards={[
+          { ...(tp.raw('pages.services.cards') as { title: string; body: string }[])[0], image: '/photos/svc-gathering.webp' },
+          { ...(tp.raw('pages.services.cards') as { title: string; body: string }[])[1], image: '/photos/svc-counsel.webp' },
+        ]}
+      />
+      <ServiceVisit
+        heading={tp('visit.heading')}
+        body={tp('visit.body')}
+        address="Calmeyers gate 8"
+        postal="0183 Oslo"
+        hours={tp('visit.hours')}
+        primary={{ label: tp('visit.primary'), href: `/${l}/besok-oss` }}
+        secondary={{ label: tp('visit.secondary'), href: `/${l}/kontakt` }}
+      />
     </main>
   );
 }

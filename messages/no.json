@@ -708,6 +708,118 @@
           }
         ]
       }
+    },
+    "aerial": "Kvartalet sett ovenfra, Norconsult"
+  },
+  "servicePages": {
+    "crumb": "Bønn og tjenester",
+    "visit": {
+      "heading": "Å komme innom.",
+      "body": "Døren er åpen hver dag. Du trenger ikke være medlem, og du trenger ikke bestille med mindre du kommer med en gruppe.",
+      "primary": "Bestill gruppebesøk",
+      "secondary": "Kontakt oss",
+      "hours": "Åpent hver dag 06:00 til 22:00"
+    },
+    "pages": {
+      "times": {
+        "eyebrow": "Bønnetider",
+        "title": "Fem bønner, hver dag i uka.",
+        "lede": "Tidene er beregnet for Oslo og endrer seg med årstiden. Fredagsbønnen er det faste punktet i uka, og salen fylles lenge før khutbaen.",
+        "note": "Åpent hver dag 06:00 til 22:00",
+        "regEyebrow": "Uka",
+        "regHeading": "Hva som skjer og når.",
+        "rows": [
+          {
+            "term": "Fajr",
+            "detail": "Første bønn, før soloppgang.",
+            "note": "Daglig"
+          },
+          {
+            "term": "Dhuhr",
+            "detail": "Middagsbønn.",
+            "note": "Daglig"
+          },
+          {
+            "term": "Asr",
+            "detail": "Ettermiddagsbønn.",
+            "note": "Daglig"
+          },
+          {
+            "term": "Maghrib",
+            "detail": "Rett etter solnedgang, og øyeblikket fasten brytes i ramadan.",
+            "note": "Daglig"
+          },
+          {
+            "term": "Isha",
+            "detail": "Kveldsbønn, den siste av de fem.",
+            "note": "Daglig"
+          },
+          {
+            "term": "Jumu'ah",
+            "detail": "Fredagsbønn, med khutbaen før.",
+            "note": "Fredager"
+          }
+        ],
+        "cardEyebrow": "Før du ber",
+        "cardHeading": "To praktiske ting.",
+        "cards": [
+          {
+            "title": "Fredag fylles tidlig",
+            "body": "Den gamle salen tar 100 kvinner og 500 menn. Kom før khutbaen hvis du vil ha en plass og ikke en korridor."
+          },
+          {
+            "title": "Wudu i underetasjen",
+            "body": "Vaskerom ligger i underetasjen, atskilt for menn og kvinner, åpne hele tiden bygget er åpent."
+          }
+        ]
+      },
+      "services": {
+        "eyebrow": "Tjenester",
+        "title": "Nikah, janaza, shahada og samtaler.",
+        "lede": "Det en menighet faktisk trenger, håndtert av imamene og de ansatte. Noe kan avtales samme uke, noe krever varsel.",
+        "note": "Spør i resepsjonen eller send en e-post",
+        "regEyebrow": "Hva vi tilbyr",
+        "regHeading": "Spør om hva som helst av dette.",
+        "rows": [
+          {
+            "term": "Nikah",
+            "detail": "Ekteskapsseremonien, i salen eller i et mindre rom.",
+            "note": "Etter avtale"
+          },
+          {
+            "term": "Janaza",
+            "detail": "Begravelsesbønn og hjelp med de praktiske stegene etterpå.",
+            "note": "Samme dag"
+          },
+          {
+            "term": "Shahada",
+            "detail": "Trosbekjennelsen, tatt med en imam og bevitnet.",
+            "note": "Etter avtale"
+          },
+          {
+            "term": "Samtaler",
+            "detail": "En samtale med en imam, i fortrolighet, om hva det enn gjelder.",
+            "note": "Etter avtale"
+          },
+          {
+            "term": "Skolebesøk",
+            "detail": "Klasser og universitetsgrupper er velkomne til å sette seg ned og spørre.",
+            "note": "Bestill på forhånd"
+          }
+        ],
+        "cardEyebrow": "Slik gjør du det",
+        "cardHeading": "To måter å begynne på.",
+        "cards": [
+          {
+            "title": "Kom og spør",
+            "body": "Resepsjonen er åpen de samme timene som bygget. For det meste holder det med en samtale."
+          },
+          {
+            "title": "Skriv til oss",
+            "body": "Ved begravelse eller noe som haster, skriv eller ring. Noen svarer samme dag."
+          }
+        ]
+      }
     }
   },
   "whereMoneyGoes": {

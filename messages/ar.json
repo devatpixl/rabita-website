@@ -708,6 +708,118 @@
           }
         ]
       }
+    },
+    "aerial": "المبنى من الأعلى، Norconsult"
+  },
+  "servicePages": {
+    "crumb": "الصلاة والخدمات",
+    "visit": {
+      "heading": "الحضور شخصياً.",
+      "body": "الباب مفتوح كل يوم. لست مضطراً لأن تكون عضواً، ولا تحتاج حجزاً إلا إذا جئت مع مجموعة.",
+      "primary": "احجز زيارة جماعية",
+      "secondary": "تواصل معنا",
+      "hours": "مفتوح يومياً من 06:00 إلى 22:00"
+    },
+    "pages": {
+      "times": {
+        "eyebrow": "مواقيت الصلاة",
+        "title": "خمس صلوات، كل يوم من الأسبوع.",
+        "lede": "المواقيت محسوبة لأوسلو وتتغير مع الفصول. صلاة الجمعة هي الموعد الثابت، والقاعة تمتلئ قبل الخطبة بكثير.",
+        "note": "مفتوح يومياً من 06:00 إلى 22:00",
+        "regEyebrow": "الأسبوع",
+        "regHeading": "ما يجري ومتى.",
+        "rows": [
+          {
+            "term": "Fajr",
+            "detail": "First prayer, before sunrise.",
+            "note": "Daily"
+          },
+          {
+            "term": "Dhuhr",
+            "detail": "Midday prayer.",
+            "note": "Daily"
+          },
+          {
+            "term": "Asr",
+            "detail": "Afternoon prayer.",
+            "note": "Daily"
+          },
+          {
+            "term": "Maghrib",
+            "detail": "Just after sunset, and the moment the fast breaks in Ramadan.",
+            "note": "Daily"
+          },
+          {
+            "term": "Isha",
+            "detail": "Night prayer, the last of the five.",
+            "note": "Daily"
+          },
+          {
+            "term": "Jumu'ah",
+            "detail": "Friday prayer, with the khutba before it.",
+            "note": "Fridays"
+          }
+        ],
+        "cardEyebrow": "قبل الصلاة",
+        "cardHeading": "أمران عمليّان.",
+        "cards": [
+          {
+            "title": "Friday fills early",
+            "body": "The old hall takes 100 women and 500 men. Come before the khutba if you want a place rather than a corridor."
+          },
+          {
+            "title": "Ablution downstairs",
+            "body": "Wudu facilities are on the lower floor, separate for men and women, open the whole time the building is."
+          }
+        ]
+      },
+      "services": {
+        "eyebrow": "الخدمات",
+        "title": "النكاح والجنازة والشهادة والاستشارة.",
+        "lede": "ما تحتاجه الجماعة فعلاً، يتولّاه الأئمة والعاملون. بعضه يُرتّب في الأسبوع نفسه، وبعضه يحتاج إشعاراً.",
+        "note": "اسأل في الاستقبال أو أرسل بريداً",
+        "regEyebrow": "ما نقدمه",
+        "regHeading": "اسأل عن أي منها.",
+        "rows": [
+          {
+            "term": "Nikah",
+            "detail": "The marriage ceremony, held in the hall or in a smaller room.",
+            "note": "By arrangement"
+          },
+          {
+            "term": "Janaza",
+            "detail": "Funeral prayer and help with the practical steps that follow.",
+            "note": "Same day"
+          },
+          {
+            "term": "Shahada",
+            "detail": "The declaration of faith, taken with an imam and witnessed.",
+            "note": "By arrangement"
+          },
+          {
+            "term": "Counselling",
+            "detail": "A conversation with an imam, in confidence, about whatever it is.",
+            "note": "By arrangement"
+          },
+          {
+            "term": "School visits",
+            "detail": "Classes and university groups are welcome to sit down and ask.",
+            "note": "Book ahead"
+          }
+        ],
+        "cardEyebrow": "كيف تبدأ",
+        "cardHeading": "طريقتان للبدء.",
+        "cards": [
+          {
+            "title": "Come and ask",
+            "body": "Reception is open the same hours as the building. For most things a conversation is enough to get started."
+          },
+          {
+            "title": "Send it in writing",
+            "body": "For a funeral or anything time sensitive, write or ring. Somebody answers the same day."
+          }
+        ]
+      }
     }
   },
   "whereMoneyGoes": {

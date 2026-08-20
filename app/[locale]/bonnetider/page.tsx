@@ -1,7 +1,11 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { PRAYER_TIMES_TODAY } from '@/lib/campaign';
-import { PageHeader } from '@/components/page-header';
 import { Section, SectionBody } from '@/components/primitives';
+import {
+  ServiceCards,
+  ServiceHero,
+  ServiceVisit,
+} from '@/components/service-page';
 
 // §6. Full week + Friday. Times come from PRAYER_TIMES_TODAY for now — real
 // weekly feed is a §13.4 blocker; layout is ready when data lands.
@@ -16,6 +20,7 @@ export default async function BonnetiderPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'bonnetiderPage' });
+  const tp = await getTranslations({ locale, namespace: 'servicePages' });
 
   const PRAYERS = [
     { label: 'Fajr', time: PRAYER_TIMES_TODAY.fajr },
@@ -28,7 +33,15 @@ export default async function BonnetiderPage({
 
   return (
     <main>
-      <PageHeader eyebrow={t('eyebrow')} title={t('title')} lede={t('lede')} />
+      <ServiceHero
+        crumb={tp('crumb')}
+        eyebrow={tp('pages.times.eyebrow')}
+        title={tp('pages.times.title')}
+        lede={tp('pages.times.lede')}
+        note={tp('pages.times.note')}
+        image="/photos/svc-prayer.webp"
+        alt={tp('pages.times.eyebrow')}
+      />
       <Section tone="paper">
         <SectionBody>
           {/* Seven columns do not fit a phone, so the table is desktop only
@@ -106,6 +119,23 @@ export default async function BonnetiderPage({
           <p className="mt-6 text-[13px] text-ink-60">{t('note')}</p>
         </SectionBody>
       </Section>
+      <ServiceCards
+        eyebrow={tp('pages.times.cardEyebrow')}
+        heading={tp('pages.times.cardHeading')}
+        cards={[
+          { ...(tp.raw('pages.times.cards') as { title: string; body: string }[])[0], image: '/photos/svc-friday.webp' },
+          { ...(tp.raw('pages.times.cards') as { title: string; body: string }[])[1], image: '/photos/svc-wudu.webp' },
+        ]}
+      />
+      <ServiceVisit
+        heading={tp('visit.heading')}
+        body={tp('visit.body')}
+        address="Calmeyers gate 8"
+        postal="0183 Oslo"
+        hours={tp('visit.hours')}
+        primary={{ label: tp('visit.primary'), href: `/${locale}/besok-oss` }}
+        secondary={{ label: tp('visit.secondary'), href: `/${locale}/kontakt` }}
+      />
     </main>
   );
 }

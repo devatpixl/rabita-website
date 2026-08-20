@@ -708,6 +708,118 @@
           }
         ]
       }
+    },
+    "aerial": "The block seen from above, Norconsult"
+  },
+  "servicePages": {
+    "crumb": "Prayer and services",
+    "visit": {
+      "heading": "Coming in person.",
+      "body": "The door is open every day. You do not need to be a member, and you do not need to book unless you are bringing a group.",
+      "primary": "Book a group visit",
+      "secondary": "Contact us",
+      "hours": "Open daily 06:00 to 22:00"
+    },
+    "pages": {
+      "times": {
+        "eyebrow": "Prayer times",
+        "title": "Five prayers, every day of the week.",
+        "lede": "Times are calculated for Oslo and change with the season. Friday prayer is the fixed point in the week, and the hall fills long before the khutba.",
+        "note": "Open daily 06:00 to 22:00",
+        "regEyebrow": "The week",
+        "regHeading": "What is on and when.",
+        "rows": [
+          {
+            "term": "Fajr",
+            "detail": "First prayer, before sunrise.",
+            "note": "Daily"
+          },
+          {
+            "term": "Dhuhr",
+            "detail": "Midday prayer.",
+            "note": "Daily"
+          },
+          {
+            "term": "Asr",
+            "detail": "Afternoon prayer.",
+            "note": "Daily"
+          },
+          {
+            "term": "Maghrib",
+            "detail": "Just after sunset, and the moment the fast breaks in Ramadan.",
+            "note": "Daily"
+          },
+          {
+            "term": "Isha",
+            "detail": "Night prayer, the last of the five.",
+            "note": "Daily"
+          },
+          {
+            "term": "Jumu'ah",
+            "detail": "Friday prayer, with the khutba before it.",
+            "note": "Fridays"
+          }
+        ],
+        "cardEyebrow": "Before you pray",
+        "cardHeading": "Two practical things.",
+        "cards": [
+          {
+            "title": "Friday fills early",
+            "body": "The old hall takes 100 women and 500 men. Come before the khutba if you want a place rather than a corridor."
+          },
+          {
+            "title": "Ablution downstairs",
+            "body": "Wudu facilities are on the lower floor, separate for men and women, open the whole time the building is."
+          }
+        ]
+      },
+      "services": {
+        "eyebrow": "Services",
+        "title": "Nikah, janaza, shahada and counselling.",
+        "lede": "The things a congregation actually needs, handled by the imams and the staff. Some can be arranged the same week, some need notice.",
+        "note": "Ask at reception or send an email",
+        "regEyebrow": "What we offer",
+        "regHeading": "Ask about any of these.",
+        "rows": [
+          {
+            "term": "Nikah",
+            "detail": "The marriage ceremony, held in the hall or in a smaller room.",
+            "note": "By arrangement"
+          },
+          {
+            "term": "Janaza",
+            "detail": "Funeral prayer and help with the practical steps that follow.",
+            "note": "Same day"
+          },
+          {
+            "term": "Shahada",
+            "detail": "The declaration of faith, taken with an imam and witnessed.",
+            "note": "By arrangement"
+          },
+          {
+            "term": "Counselling",
+            "detail": "A conversation with an imam, in confidence, about whatever it is.",
+            "note": "By arrangement"
+          },
+          {
+            "term": "School visits",
+            "detail": "Classes and university groups are welcome to sit down and ask.",
+            "note": "Book ahead"
+          }
+        ],
+        "cardEyebrow": "How it works",
+        "cardHeading": "Two ways to start.",
+        "cards": [
+          {
+            "title": "Come and ask",
+            "body": "Reception is open the same hours as the building. For most things a conversation is enough to get started."
+          },
+          {
+            "title": "Send it in writing",
+            "body": "For a funeral or anything time sensitive, write or ring. Somebody answers the same day."
+          }
+        ]
+      }
     }
   },
   "whereMoneyGoes": {
