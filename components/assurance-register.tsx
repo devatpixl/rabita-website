@@ -58,14 +58,14 @@ export function AssuranceRegister({
               })}
             </p>
 
-            <div className="flex items-baseline justify-between gap-6 md:col-span-3 md:justify-end">
+            <div className="flex items-baseline gap-6 md:col-span-3 md:justify-end">
               {/* The stamp: what this row is evidence of */}
-              <span className="whitespace-nowrap rounded-chip border border-rule px-2 py-1 font-mono text-[0.75rem] uppercase tracking-[0.12em] text-ink-60">
+              <span className="w-32 shrink-0 whitespace-nowrap rounded-chip border border-rule px-2 py-1 text-center font-mono text-[0.75rem] uppercase tracking-[0.12em] text-ink-60">
                 {t(`cards.${c.key}.stamp`)}
               </span>
               <Link
                 href={c.href}
-                className="inline-flex min-h-11 items-center gap-2 whitespace-nowrap text-[14px] font-semibold text-gold-deep"
+                className="inline-flex min-h-11 w-52 shrink-0 items-center gap-2 whitespace-nowrap text-[14px] font-semibold text-gold-deep"
               >
                 <span className="border-b border-rule pb-px transition-colors group-hover:border-gold-deep">
                   {t(`cards.${c.key}.cta`)}
