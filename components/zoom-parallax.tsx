@@ -100,6 +100,12 @@ const IMAGES: Img[] = [
     height: 898,
   },
   {
+    src: '/photos/zoom-gateiftar.webp',
+    alt: 'Street iftar in Grønland, long tables under tents on the road',
+    width: 1600,
+    height: 1200,
+  },
+  {
     src: '/photos/zoom-wudu.webp',
     alt: 'Ablution room, geometric wall panels in white and gold, marble floor',
     width: 1400,
@@ -148,7 +154,7 @@ export function ZoomParallax() {
   const scale6 = useTransform(progress, [0, 1], [1, 6]);
   const scale8 = useTransform(progress, [0, 1], [1, 8]);
   const scale9 = useTransform(progress, [0, 1], [1, 9]);
-  const scales = [scale4, scale5, scale6, scale5, scale6, scale8, scale9];
+  const scales = [scale4, scale5, scale6, scale5, scale6, scale8, scale9, scale6];
 
   // Payoff: dusk overlay finishes fading in BEFORE the statement
   // starts. Overlay ramps 0 → 0.90 across [0.44, 0.72] so by the time
@@ -264,6 +270,7 @@ export function ZoomParallax() {
                 i === 4 && '[&>div]:!top-[30vh] [&>div]:!left-[3vw] [&>div]:!h-[26vh] [&>div]:!w-[28vw]',
                 i === 5 && '[&>div]:!top-[28vh] [&>div]:!-left-[28vw] [&>div]:!h-[22vh] [&>div]:!w-[24vw]',
                 i === 6 && '[&>div]:!top-[31vh] [&>div]:!left-[31vw] [&>div]:!h-[24vh] [&>div]:!w-[20vw]',
+                i === 7 && '[&>div]:!-top-[2vh] [&>div]:!left-[30vw] [&>div]:!h-[24vh] [&>div]:!w-[22vw]',
               )}
             >
               <div

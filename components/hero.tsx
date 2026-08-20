@@ -173,7 +173,7 @@ export async function Hero() {
               className="mt-5 font-serif text-paper text-balance"
               style={{
                 fontSize: 'clamp(2.75rem, min(6vw, 8.8vh), 6rem)',
-                lineHeight: 0.94,
+                lineHeight: 1.06,
                 letterSpacing: '-0.015em',
                 maxWidth: '22ch',
               }}
