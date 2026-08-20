@@ -50,7 +50,7 @@ export async function CampaignMeter() {
 
         {/* HEAD: the total, and the figures that qualify it, on one baseline. */}
         <div className="flex flex-col gap-8 border-b border-rule pb-10 md:flex-row md:items-end md:justify-between md:gap-12">
-          <div>
+          <div className="shrink-0">
             <div className="mb-5 flex items-center gap-3">
               <span aria-hidden className="h-px w-10 bg-gold" />
               <span className="font-mono text-[12px] uppercase tracking-[0.16em] text-gold-deep">
@@ -60,7 +60,7 @@ export async function CampaignMeter() {
 
             <h2
               id="meter-heading"
-              className="flex items-baseline gap-3 font-serif leading-none tabular-nums text-ink tracking-[-0.025em]"
+              className="flex items-baseline gap-3 whitespace-nowrap font-serif leading-none tabular-nums text-ink tracking-[-0.025em]"
             >
               <span className="text-[clamp(3rem,7.5vw,5rem)]">
                 <Counter to={raised} locale={locale} />
@@ -75,7 +75,7 @@ export async function CampaignMeter() {
               <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-60">
                 {t('of')} {formatAmount(locale, goal)} kr
               </dt>
-              <dd className="mt-1 font-serif text-[1.75rem] leading-none tabular-nums text-ink">
+              <dd className="mt-1 whitespace-nowrap font-serif text-[1.5rem] leading-none tabular-nums text-ink">
                 {pctInt} %{' '}
                 <span className="font-sans text-[13px] font-normal text-ink-60">
                   {t('financed')}
@@ -86,7 +86,7 @@ export async function CampaignMeter() {
               <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-60">
                 {tPhase(active)} · {PHASES.find((p) => p.key === active)?.year}
               </dt>
-              <dd className="mt-1 font-serif text-[1.75rem] leading-none tabular-nums text-gold-deep">
+              <dd className="mt-1 whitespace-nowrap font-serif text-[1.5rem] leading-none tabular-nums text-gold-deep">
                 {t('lastMonth', { amount: formatAmount(locale, CAMPAIGN.lastMonthNok) })}
               </dd>
             </div>

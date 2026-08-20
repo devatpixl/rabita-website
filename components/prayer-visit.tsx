@@ -19,15 +19,17 @@ export async function PrayerVisit() {
   return (
     <Section id="bonn-og-besok" tone="paper-2">
       <SectionBody>
-        <div className="mb-12 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-2xl">
+        <div className="mb-12 md:mb-16">
+          {/* Eyebrow and the open sign share one dateline, so the sign reads as
+             part of the section head instead of floating beside the headline. */}
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
             <Eyebrow>{t('eyebrow')}</Eyebrow>
-            <SectionHeading className="mt-3">{t('heading')}</SectionHeading>
+            <p className="flex items-center gap-2 font-mono text-[0.75rem] uppercase tracking-[0.16em] text-gold-deep">
+              <span className="pulse-dot" aria-hidden />
+              {t('seal')}
+            </p>
           </div>
-          <p className="flex shrink-0 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-gold-deep">
-            <span className="pulse-dot" aria-hidden />
-            {t('seal')}
-          </p>
+          <SectionHeading className="mt-4 max-w-2xl">{t('heading')}</SectionHeading>
         </div>
 
         <div className="grid gap-12 md:grid-cols-12 md:gap-x-16">
@@ -43,7 +45,7 @@ export async function PrayerVisit() {
               </Link>
             </div>
 
-            <div className="mt-12 border-t border-rule pt-12">
+            <div className="mt-8 border-t border-rule pt-10">
               <h3 className="font-serif text-card text-ink">{t('visitHeading')}</h3>
 
               {/* Address and hours as a two-line ledger, so the street and the
@@ -101,7 +103,7 @@ export async function PrayerVisit() {
                   className="editorial-photo object-cover"
                 />
               </div>
-              <figcaption className="mt-4 font-mono text-[11px] uppercase leading-relaxed tracking-[0.14em] text-ink-60">
+              <figcaption className="mt-4 max-w-[42ch] text-[13px] leading-relaxed text-ink-60">
                 {t('photoCaption')}
               </figcaption>
             </figure>

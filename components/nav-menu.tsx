@@ -95,7 +95,7 @@ export function DesktopNav() {
                 aria-current={isCurrent(key) ? 'page' : undefined}
                 onFocus={() => open(key)}
                 className={cn(
-                  'relative block whitespace-nowrap py-2 font-sans text-[0.95rem] transition-colors duration-200',
+                  'relative block whitespace-nowrap py-2 font-sans text-[13px] font-medium transition-colors duration-200',
                   active || isCurrent(key) ? 'text-gold-deep' : 'text-ink hover:text-gold-deep',
                 )}
               >
@@ -137,9 +137,9 @@ export function DesktopNav() {
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
             onMouseEnter={clear}
             onMouseLeave={close}
-            className="absolute inset-x-0 top-full hidden border-b border-rule bg-paper shadow-[0_24px_48px_-32px_rgba(0,0,0,0.35)] md:block"
+            className="absolute inset-x-0 top-full hidden md:block"
           >
-            <div className="mx-auto w-full max-w-[112rem] px-6 md:px-10 lg:px-24 py-8">
+            <div className="mx-auto w-full max-w-[84rem] rounded-b-3xl border border-t-0 border-rule bg-paper px-10 py-7 shadow-[0_24px_48px_-28px_rgba(0,0,0,0.4)]">
               <MegaPanel navKey={openKey} onNavigate={() => setOpenKey(null)} />
             </div>
           </motion.div>
@@ -165,13 +165,13 @@ function MegaPanel({ navKey, onNavigate }: { navKey: NavKey; onNavigate: () => v
       <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60">
         {t('overview')} {t(`items.${navKey}`)}
       </p>
-      <ul className="mt-5 grid gap-x-10 gap-y-1 md:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-4 grid gap-x-10 gap-y-0 md:grid-cols-2 lg:grid-cols-3">
         {items.map((item) => (
           <li key={item.href}>
             <LinkVT
               href={`/${locale}${item.href}`}
               onClick={onNavigate}
-              className="group block border-t border-rule py-4 transition-colors hover:border-gold-deep"
+              className="group block border-t border-rule py-3 transition-colors hover:border-gold-deep"
             >
               <span className="flex items-baseline justify-between gap-4">
                 <span className="font-serif text-[1.05rem] text-ink transition-colors group-hover:text-gold-deep">

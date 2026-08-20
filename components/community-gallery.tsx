@@ -48,22 +48,22 @@ type Plate = {
   h: number;
   x: number; // centre, % of viewport width
   y: number; // centre, % of viewport height
-  vw: number; // plate width, in vw
+  vh: number; // plate height, in vh; width follows from the aspect ratio
 };
 
 const PLATES: Plate[] = [
-  { key: 'serving', src: '/photos/community/iftar-serving.webp', w: 844, h: 1500, x: 13, y: 16, vw: 12 },
-  { key: 'tables', src: '/photos/community/iftar-tables.webp', w: 1500, h: 1002, x: 38, y: 20, vw: 18 },
-  { key: 'child', src: '/photos/community/bazaar-child.webp', w: 1125, h: 1500, x: 63, y: 15, vw: 13 },
-  { key: 'volunteers', src: '/photos/community/volunteers-two.webp', w: 1500, h: 1002, x: 87, y: 21, vw: 17 },
-  { key: 'circle', src: '/photos/community/womens-circle.webp', w: 1125, h: 1500, x: 11, y: 50, vw: 13 },
-  { key: 'quran', src: '/photos/community/quran-carpet.webp', w: 1500, h: 1125, x: 36, y: 48, vw: 17 },
-  { key: 'street', src: '/photos/community/volunteers-street.webp', w: 1125, h: 1500, x: 64, y: 52, vw: 13 },
-  { key: 'cakes', src: '/photos/community/bazaar-cakes.webp', w: 1125, h: 1500, x: 89, y: 47, vw: 12 },
-  { key: 'sweets', src: '/photos/community/iftar-sweets.webp', w: 1500, h: 1002, x: 14, y: 84, vw: 17 },
-  { key: 'site', src: '/photos/community/site-cleared.webp', w: 1125, h: 1500, x: 38, y: 80, vw: 12 },
-  { key: 'embrace', src: '/photos/community/welcome-embrace.webp', w: 888, h: 1500, x: 62, y: 85, vw: 12 },
-  { key: 'dress', src: '/photos/community/bazaar-dress.webp', w: 1125, h: 1500, x: 88, y: 79, vw: 13 },
+  { key: 'serving', src: '/photos/community/iftar-serving.webp', w: 844, h: 1500, x: 13, y: 22, vh: 21 },
+  { key: 'tables', src: '/photos/community/iftar-tables.webp', w: 1500, h: 1002, x: 38, y: 22, vh: 20 },
+  { key: 'child', src: '/photos/community/bazaar-child.webp', w: 1125, h: 1500, x: 63, y: 21, vh: 22 },
+  { key: 'volunteers', src: '/photos/community/volunteers-two.webp', w: 1500, h: 1002, x: 87, y: 23, vh: 20 },
+  { key: 'circle', src: '/photos/community/womens-circle.webp', w: 1125, h: 1500, x: 11, y: 50, vh: 23 },
+  { key: 'quran', src: '/photos/community/quran-carpet.webp', w: 1500, h: 1125, x: 36, y: 49, vh: 21 },
+  { key: 'street', src: '/photos/community/volunteers-street.webp', w: 1125, h: 1500, x: 64, y: 51, vh: 23 },
+  { key: 'cakes', src: '/photos/community/bazaar-cakes.webp', w: 1125, h: 1500, x: 89, y: 50, vh: 20 },
+  { key: 'sweets', src: '/photos/community/iftar-sweets.webp', w: 1500, h: 1002, x: 14, y: 78, vh: 20 },
+  { key: 'site', src: '/photos/community/site-cleared.webp', w: 1125, h: 1500, x: 38, y: 78, vh: 22 },
+  { key: 'embrace', src: '/photos/community/welcome-embrace.webp', w: 888, h: 1500, x: 62, y: 79, vh: 20 },
+  { key: 'dress', src: '/photos/community/bazaar-dress.webp', w: 1125, h: 1500, x: 88, y: 77, vh: 21 },
 ];
 
 function DepthPlate({
@@ -98,17 +98,15 @@ function DepthPlate({
       style={{
         left: `${plate.x}%`,
         top: `${plate.y}%`,
-        width: `${plate.vw}vw`,
+        height: `${plate.vh}vh`,
+        aspectRatio: `${plate.w} / ${plate.h}`,
         x: '-50%',
         y: '-50%',
         z,
         opacity,
       }}
     >
-      <div
-        className="relative w-full overflow-hidden rounded-xl"
-        style={{ aspectRatio: `${plate.w} / ${plate.h}`, ...FEATHER }}
-      >
+      <div className="relative h-full w-full overflow-hidden rounded-xl" style={FEATHER}>
         <Image
           src={plate.src}
           alt={alt}
@@ -155,8 +153,12 @@ export function CommunityGallery() {
 
   // The line surfaces in the well the plates leave behind, and is gone by the
   // time they come back through it.
-  const lineOpacity = useTransform(progress, [0.3, 0.46, 0.64], [0, 1, 0]);
-  const lineY = useTransform(progress, [0.3, 0.46], [16, 0]);
+  const lineOpacity = useTransform(progress, [0.32, 0.44, 0.62], [0, 1, 0]);
+  const lineY = useTransform(progress, [0.32, 0.44], [16, 0]);
+
+  // A dusk scrim comes up under the line, so the type never has to compete with
+  // a photograph passing behind it. It is gone before the plates return.
+  const scrimOpacity = useTransform(progress, [0.26, 0.42, 0.52, 0.66], [0, 0.9, 0.9, 0]);
 
   const heading = (
     <h2
@@ -224,6 +226,13 @@ export function CommunityGallery() {
             alt={t(`alts.${p.key}`)}
           />
         ))}
+
+        {/* Ground for the line */}
+        <motion.div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-dusk"
+          style={{ opacity: scrimOpacity }}
+        />
 
         {/* The line, in the well the plates leave behind */}
         <motion.div

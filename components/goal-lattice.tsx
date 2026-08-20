@@ -80,7 +80,14 @@ export function GoalLattice({
         })}
       </div>
       <p className="mt-6 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[0.75rem] uppercase tracking-[0.14em]">
-        {countLabel && <span className="text-gold-deep tabular-nums">{countLabel}</span>}
+        {countLabel && (
+          <>
+            <span className="text-gold-deep tabular-nums">{countLabel}</span>
+            <span aria-hidden className="text-ink-40">
+              &middot;
+            </span>
+          </>
+        )}
         <span className="text-ink-60">{caption}</span>
       </p>
     </div>
