@@ -1,9 +1,8 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
 import { GivingCard } from '@/components/giving-card';
-import { Section, SectionBody, SectionHeading, Eyebrow } from '@/components/primitives';
-import { CAMPAIGN } from '@/lib/campaign';
-import { Copyable } from '@/components/copyable';
+import { Section, SectionBody, SectionHeading } from '@/components/primitives';
 
 import { Accent } from '@/components/accent';
 import {
@@ -55,21 +54,23 @@ export default async function GiveIndexPage({
         heading={tp('pages.give.colHeading')}
         items={tp.raw('pages.give.items') as { title: string; body: string }[]}
       />
-      <div className="relative bg-ink text-paper">
-        <div className="mx-auto flex min-h-[60vh] max-w-6xl items-end px-6 py-section-lg">
-          <div className="max-w-3xl">
-            <Eyebrow className="text-gold">{CAMPAIGN.address}</Eyebrow>
-            <h1 className="mt-4 font-serif text-display leading-none">{t('title')}</h1>
-          </div>
-        </div>
-      </div>
-
       <Section tone="paper" id="gikort">
         <SectionBody>
           <div className="grid gap-10 md:grid-cols-12">
             <div className="md:col-span-6">
               <SectionHeading>{t('cardHeading')}</SectionHeading>
               <p className="mt-4 text-body text-ink">{t('cardLede')}</p>
+              <div className="relative mt-10 aspect-[4/3] overflow-hidden rounded-3xl bg-paper-2">
+                <Image
+                  src="/photos/give-bazar.webp"
+                  alt={t('cardHeading')}
+                  fill
+                  loading="eager"
+                  sizes="(min-width: 768px) 46vw, 90vw"
+                  className="object-cover"
+                  style={{ filter: 'saturate(0.72) contrast(1.12) brightness(0.9)' }}
+                />
+              </div>
             </div>
             <div className="md:col-span-6">
               <GivingCard />
@@ -98,18 +99,6 @@ export default async function GiveIndexPage({
         </SectionBody>
       </Section>
 
-      <Section tone="paper" id="direkte">
-        <SectionBody>
-          <SectionHeading>{t('direct.heading')}</SectionHeading>
-          <p className="mt-4 max-w-prose text-body text-ink">{t('direct.body')}</p>
-          <div className="mt-8 space-y-6 max-w-lg">
-            <Copyable value={CAMPAIGN.vippsNumber} label="Vipps" size="display" />
-            <Copyable value={CAMPAIGN.bankAccount} label={t('direct.account')} />
-            <Copyable value={CAMPAIGN.iban} label="IBAN" />
-            <Copyable value={CAMPAIGN.swift} label="SWIFT" />
-          </div>
-        </SectionBody>
-      </Section>
           <ProjectAssurance
         heading={tp('assurance.heading')}
         lede={tp('assurance.lede')}

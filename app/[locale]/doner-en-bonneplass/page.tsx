@@ -1,9 +1,9 @@
 'use client';
 
 import { useTranslations, useLocale} from 'next-intl';
+import Image from 'next/image';
 import { useState } from 'react';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
-import { RenderingPlaceholder } from '@/components/rendering-placeholder';
 import { openGiveSheet } from '@/components/giving-sheet';
 
 import { Accent } from '@/components/accent';
@@ -68,7 +68,17 @@ export default function SadaqaPage() {
         <SectionBody>
           <div className="grid gap-10 md:grid-cols-12 md:items-center">
             <div className="md:col-span-5">
-              <RenderingPlaceholder ratio="portrait" caption="Photograph · prayer space, pending" />
+              <div className="relative aspect-[3/4] overflow-hidden rounded-3xl bg-paper-2">
+                <Image
+                  src="/photos/give-dedication.webp"
+                  alt={t('formHeading')}
+                  fill
+                  loading="eager"
+                  sizes="(min-width: 768px) 40vw, 90vw"
+                  className="object-cover"
+                  style={{ filter: 'saturate(0.72) contrast(1.12) brightness(0.9)' }}
+                />
+              </div>
             </div>
             <form onSubmit={onSubmit} className="md:col-span-7 space-y-5">
               <SectionHeading>{t('formHeading')}</SectionHeading>
