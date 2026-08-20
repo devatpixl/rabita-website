@@ -71,12 +71,12 @@ export function Footer() {
             <p className="mb-1">{CAMPAIGN.address}</p>
             <p className="mb-4 text-ink-60">{CAMPAIGN.postalCity}</p>
             <p className="mb-1">
-              <a href={`tel:${CAMPAIGN.contactPhone.replace(/\s/g, '')}`} className="inline-flex min-h-11 items-center hover:underline">
+              <a href={`tel:${CAMPAIGN.contactPhone.replace(/\s/g, '')}`} className="inline-flex min-h-11 items-center transition-colors hover:text-gold-deep">
                 {CAMPAIGN.contactPhone}
               </a>
             </p>
             <p>
-              <a href={`mailto:${CAMPAIGN.contactEmail}`} className="inline-flex min-h-11 items-center hover:underline">
+              <a href={`mailto:${CAMPAIGN.contactEmail}`} className="inline-flex min-h-11 items-center transition-colors hover:text-gold-deep">
                 {CAMPAIGN.contactEmail}
               </a>
             </p>
@@ -116,9 +116,9 @@ export function Footer() {
           </p>
           {/* inline-flex, because min-height does nothing to an inline box */}
           <ul className="space-y-2 text-body">
-            <li><Link href={`/${locale}/personvern-og-tilgjengelighet`} className="inline-flex min-h-11 items-center hover:underline">{t('legal.privacy')}</Link></li>
-            <li><Link href={`/${locale}/givere`} className="inline-flex min-h-11 items-center hover:underline">{t('legal.donors')}</Link></li>
-            <li><Link href={`/${locale}/om-oss`} className="inline-flex min-h-11 items-center hover:underline">{t('legal.about')}</Link></li>
+            <li><Link href={`/${locale}/personvern-og-tilgjengelighet`} className="inline-flex min-h-11 items-center transition-colors hover:text-gold-deep">{t('legal.privacy')}</Link></li>
+            <li><Link href={`/${locale}/givere`} className="inline-flex min-h-11 items-center transition-colors hover:text-gold-deep">{t('legal.donors')}</Link></li>
+            <li><Link href={`/${locale}/om-oss`} className="inline-flex min-h-11 items-center transition-colors hover:text-gold-deep">{t('legal.about')}</Link></li>
           </ul>
           <div className="mt-6">
             <LanguageSwitcher />

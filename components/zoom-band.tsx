@@ -47,9 +47,9 @@ export function ZoomBand() {
   const roomsOut = useTransform(scrollYProgress, [0.2, 0.48], [1, 0]);
   const roomsAway = useTransform(scrollYProgress, [0.2, 0.48], [1, 1.85]);
 
-  const scrim = useTransform(scrollYProgress, [0.52, 0.68], [0, 0.82]);
-  const lift = useTransform(scrollYProgress, [0.6, 0.78], [22, 0]);
-  const show = useTransform(scrollYProgress, [0.6, 0.78], [0, 1]);
+  const scrim = useTransform(scrollYProgress, [0.34, 0.5], [0, 0.82]);
+  const lift = useTransform(scrollYProgress, [0.42, 0.58], [22, 0]);
+  const show = useTransform(scrollYProgress, [0.42, 0.58], [0, 1]);
 
   return (
     <section

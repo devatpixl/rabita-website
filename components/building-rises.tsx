@@ -101,12 +101,12 @@ export function BuildingRises() {
           reduced ? 'min-h-screen py-16' : 'sticky top-20 h-[calc(100svh-5rem)]',
         )}
       >
-        <header className="shrink-0 px-6 pt-6 md:pt-8">
+        <header className="shrink-0 px-6 pt-3 md:pt-4">
           <div className="mx-auto max-w-6xl">
             <Eyebrow>{t('eyebrow')}</Eyebrow>
             <h2
               id="building-rises-heading"
-              className="mt-3 font-serif text-[clamp(1.5rem,3vw,2.25rem)] leading-[1.1] text-ink max-w-2xl"
+              className="mt-2 font-serif text-[clamp(1.3rem,2.4vw,1.85rem)] leading-[1.1] text-ink max-w-2xl"
             >
               {t.rich('heading', {
                 em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
@@ -115,7 +115,7 @@ export function BuildingRises() {
           </div>
         </header>
 
-        <div className="flex-1 min-h-0 px-6 pb-6 md:pb-8 mt-4 md:mt-6">
+        <div className="flex-1 min-h-0 px-6 pb-3 md:pb-4 mt-2 md:mt-3">
           <div className="mx-auto max-w-6xl h-full">
             <div className="grid gap-6 md:grid-cols-12 md:items-stretch h-full">
               <div className="md:col-span-4 lg:col-span-3 flex md:items-center">
