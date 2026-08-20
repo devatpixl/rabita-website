@@ -116,7 +116,7 @@ export function PrayerTimesWidget() {
             <span className="ms-2 text-ink-60">({countdown})</span>
           </span>
         ) : (
-          <span aria-hidden>—</span>
+          <span aria-hidden>···</span>
         )}
         <ChevronIcon
           className={cn(

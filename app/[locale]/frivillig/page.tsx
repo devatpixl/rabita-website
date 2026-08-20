@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { PageHeader } from '@/components/page-header';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
+import { StoryColophon, StoryHero, StoryPlate } from '@/components/story-page';
 
 // Volunteer signup. Simple checkbox list of interest areas + contact.
 const AREAS = ['events', 'teaching', 'library', 'youth', 'construction', 'admin'] as const;
@@ -11,6 +11,7 @@ type Area = (typeof AREAS)[number];
 
 export default function VolunteerPage() {
   const t = useTranslations('volunteerPage');
+  const ts = useTranslations('storyPages');
   const [name, setName] = useState('');
   const [contact, setContact] = useState('');
   const [interests, setInterests] = useState<Set<Area>>(new Set());
@@ -45,7 +46,14 @@ export default function VolunteerPage() {
 
   return (
     <main>
-      <PageHeader eyebrow={t('eyebrow')} title={t('title')} lede={t('lede')} />
+      <StoryHero
+        crumb={ts('crumb')}
+        index={ts('pages.volunteer.index')}
+        eyebrow={ts('pages.volunteer.eyebrow')}
+        title={ts('pages.volunteer.title')}
+        lede={ts('pages.volunteer.lede')}
+      />
+      <StoryPlate image="/photos/story-volunteers.webp" caption={ts('pages.volunteer.caption')} />
       <Section tone="paper">
         <SectionBody>
           {done ? (
@@ -96,6 +104,19 @@ export default function VolunteerPage() {
           )}
         </SectionBody>
       </Section>
+      <StoryColophon
+        heading={ts('colophon.heading')}
+        body={ts('colophon.body')}
+        hours={ts('colophon.hours')}
+        labels={ts.raw('colophon.labels') as {
+          founded: string;
+          orgNr: string;
+          members: string;
+          address: string;
+          hours: string;
+          bank: string;
+        }}
+      />
     </main>
   );
 }

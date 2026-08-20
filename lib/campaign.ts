@@ -57,7 +57,7 @@ export const CAMPAIGN = Object.freeze({
   // Location — §10
   address: 'Calmeyers gate 8, Oslo',
   postalCity: '0183 Oslo',
-  openingHours: 'Man–søn 06:00–22:00', // TODO confirm; placeholder
+  openingHours: 'Man til søn, 06:00 til 22:00', // TODO confirm; placeholder
   newsletterEmail: 'nyhetsbrev@rabita.no', // TODO confirm; placeholder
   contactEmail: 'post@rabita.no', // TODO confirm; placeholder
   contactPhone: '+47 22 20 80 88', // TODO confirm; placeholder

@@ -149,7 +149,8 @@
     },
     "overview": "Se alt i",
     "closeMenu": "Lukk menyen",
-    "openMenu": "Åpne menyen"
+    "openMenu": "Åpne menyen",
+    "openHours": "06:00 til 22:00"
   },
   "giving": {
     "freqMonthly": "Månedlig",
@@ -1495,5 +1496,141 @@
     "shareWhatsapp": "Del på WhatsApp",
     "shareEmail": "Del på e-post",
     "back": "Tilbake til forsiden"
+  },
+  "learnPages": {
+    "crumb": "Undervisning",
+    "pages": {
+      "teaching": {
+        "eyebrow": "Undervisning",
+        "title": "Arabisk, Koran og en skoleuke som passer rundt den norske.",
+        "lede": "Fire hundre elever og nitten lærere, hver uke i semesteret. Det nye bygget gir skolen sin egen etasje i stedet for rommene den låner i dag.",
+        "caption": "Skoleetasjen i det nye bygget, Norconsult"
+      }
+    },
+    "close": {
+      "heading": "Å melde på et barn.",
+      "body": "Plassene deles etter nivå og ikke etter alder, slik at et barn som aldri har lest arabisk sitter med andre som begynner på samme sted.",
+      "items": [
+        {
+          "term": "Semester",
+          "detail": "Høst og vår, etter Oslo sin skolerute."
+        },
+        {
+          "term": "Alder",
+          "detail": "Fra seks år, i grupper etter lesenivå."
+        },
+        {
+          "term": "Pris",
+          "detail": "Fastsatt per semester, og ingen avvises på grunn av den."
+        }
+      ],
+      "cta": "Spør om en plass"
+    }
+  },
+  "visitPages": {
+    "crumb": "Besøk oss",
+    "pages": {
+      "visit": {
+        "eyebrow": "Besøk oss",
+        "title": "Kom og se stedet.",
+        "lede": "Skoleklasser, universitetsgrupper, naboer og alle som er nysgjerrige. Du trenger ingen grunn, og du trenger ikke være muslim.",
+        "caption": "Hovedinngangen i det nye bygget, Norconsult",
+        "facts": [
+          {
+            "term": "Adresse",
+            "detail": "Calmeyers gate 8, Oslo"
+          },
+          {
+            "term": "Åpent",
+            "detail": "Hver dag, 06:00 til 22:00"
+          },
+          {
+            "term": "Slik finner du fram",
+            "detail": "Grønland, noen minutter fra stasjonen"
+          }
+        ],
+        "closeHeading": "Døren er åpen.",
+        "closeBody": "Kommer du med en gruppe, si omtrent hvor mange og når. Resten ordner seg samme dag.",
+        "closePrimary": "Kontakt oss",
+        "closeSecondary": "Se hva som skjer"
+      },
+      "events": {
+        "eyebrow": "Arrangementer",
+        "title": "Eid, iftar, foredrag og familiedager.",
+        "lede": "Året har en rytme. Ramadan fyller gata utenfor, eid fyller salen, og resten av året går på foredrag, kurs og dagene familier møter opp på.",
+        "caption": "Gateiftar utenfor moskeen, ramadan 2025",
+        "facts": [
+          {
+            "term": "Hva som skjer",
+            "detail": "Iftar, eid, foredrag og familiedager"
+          },
+          {
+            "term": "Hvem kan komme",
+            "detail": "Alle, medlem eller ikke"
+          },
+          {
+            "term": "Pris",
+            "detail": "Gratis hvis ikke annet står"
+          }
+        ],
+        "closeHeading": "Spis sammen med oss.",
+        "closeBody": "Gateiftar er den enkleste veien inn. Bordene settes opp ute, maten er gratis, og ingen spor hvem du er.",
+        "closePrimary": "Planlegg et besøk",
+        "closeSecondary": "Kontakt oss"
+      }
+    }
+  },
+  "storyPages": {
+    "crumb": "Om oss",
+    "pages": {
+      "about": {
+        "index": "01",
+        "eyebrow": "Organisasjonen",
+        "title": "Stiftet i 1987, og fortsatt i samme gate.",
+        "lede": "Det Islamske Forbundet har holdt til på Grønland siden åttitallet. Menigheten vokste fra bygget for lenge siden, og det er hele grunnen til byggeprosjektet.",
+        "caption": "Den nye fasaden om kvelden, Norconsult"
+      },
+      "news": {
+        "index": "02",
+        "eyebrow": "Aktuelt",
+        "title": "Hva som skjer, sagt rett fram.",
+        "lede": "Meldinger fra menigheten og framdrift på bygget. Ingen pressemeldinger, bare hva som endret seg og når.",
+        "caption": "Ramadan i gata utenfor, 2025"
+      },
+      "membership": {
+        "index": "03",
+        "eyebrow": "Medlemskap",
+        "title": "Å bli medlem.",
+        "lede": "Medlemskap er måten menigheten teller seg selv på, og grunnlaget for statsstøtten. Det avgjør også hvem som stemmer på årsmøtet.",
+        "caption": "En samling på Rabita"
+      },
+      "volunteer": {
+        "index": "04",
+        "eyebrow": "Frivillig",
+        "title": "Der det trengs hender.",
+        "lede": "Iftar lager ikke seg selv, og skolen går ikke på lærere alene. Si hva du kan bidra med og omtrent når.",
+        "caption": "Frivillige under ramadan"
+      },
+      "contact": {
+        "index": "05",
+        "eyebrow": "Kontakt",
+        "title": "Ring, skriv eller stikk innom.",
+        "lede": "Resepsjonen er åpen de samme timene som bygget. Haster det, ring heller enn å skrive.",
+        "caption": "Kafeen i det nye bygget, Norconsult"
+      }
+    },
+    "colophon": {
+      "heading": "Til protokollen.",
+      "body": "Opplysningene et medlem, en journalist eller en revisor kan trenge å sjekke, samlet på ett sted.",
+      "labels": {
+        "founded": "Stiftet",
+        "orgNr": "Organisasjonsnummer",
+        "members": "Medlemmer",
+        "address": "Adresse",
+        "hours": "Åpent",
+        "bank": "Bankkonto"
+      },
+      "hours": "Hver dag, 06:00 til 22:00"
+    }
   }
 }

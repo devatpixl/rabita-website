@@ -190,7 +190,7 @@ function LadderRow({
           !isAnchor && 'hover:bg-paper-2',
         )}
         style={{ paddingTop: row.padY, paddingBottom: row.padY }}
-        aria-label={`${title} — ${numeral} kr`}
+        aria-label={`${title}, ${numeral} kr`}
       >
         {/* Column 1 — optional anchor label + numeral + kr suffix */}
         <div className="max-md:col-span-1 flex flex-col items-start">

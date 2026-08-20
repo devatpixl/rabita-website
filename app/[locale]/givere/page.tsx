@@ -12,7 +12,6 @@
 
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { FoundationWall } from '@/components/foundation-wall';
-import { PageHeader } from '@/components/page-header';
 
 import { Accent } from '@/components/accent';
 import {
@@ -28,7 +27,6 @@ export default async function DonorsPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: 'donorsPage' });
 
   const tp = await getTranslations({ locale, namespace: 'projectPages' });
   return (

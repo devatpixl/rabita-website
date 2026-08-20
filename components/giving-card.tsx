@@ -832,7 +832,7 @@ function StepDetails({
             type="text"
             disabled
             aria-describedby="fnr-note"
-            placeholder="—"
+            placeholder="000000 00000"
             className="w-full min-h-11 rounded-btn border border-rule bg-paper-2/60 px-3 py-2 text-[14px] text-ink-60/70 cursor-not-allowed"
           />
         </label>

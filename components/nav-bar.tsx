@@ -26,7 +26,7 @@ const WORDMARK_EASE = [0.22, 1, 0.36, 1] as const;
 //             — "Prayer times" ghost button (hidden below lg; also
 //               hidden when the compact trigger is showing — same job)
 //             — "Give" primary                (ALWAYS visible ≥ md)
-//             — mono "OPEN DAILY / 06:00–22:00" (hidden below xl)
+//             — mono "OPEN DAILY / 06:00 til 22:00" (hidden below xl)
 //
 // When the panel is open AND the strip is out of view, the panel body
 // renders BELOW the nav row inside the same sticky <header>, so the

@@ -54,7 +54,7 @@ export function UtilityStrip() {
           {/* the hours sit with the other practical details rather than
               beside the one button worth pressing */}
           <span className="hidden font-mono text-[12px] uppercase tracking-[0.1em] text-ink-60 lg:inline">
-            {tNav('openDaily')} 06:00–22:00
+            {tNav('openDaily')} {tNav('openHours')}
           </span>
           <LanguageSwitcher />
         </div>

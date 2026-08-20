@@ -1,7 +1,7 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
-import { PageHeader } from '@/components/page-header';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
+import { StoryColophon, StoryHero, StoryPlate } from '@/components/story-page';
 import { RequestForm } from '@/components/request-form';
 
 export default async function ContactPage({
@@ -12,10 +12,18 @@ export default async function ContactPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'contactPage' });
+  const ts = await getTranslations({ locale, namespace: 'storyPages' });
 
   return (
     <main>
-      <PageHeader eyebrow={t('eyebrow')} title={t('title')} lede={t('lede')} />
+      <StoryHero
+        crumb={ts('crumb')}
+        index={ts('pages.contact.index')}
+        eyebrow={ts('pages.contact.eyebrow')}
+        title={ts('pages.contact.title')}
+        lede={ts('pages.contact.lede')}
+      />
+      <StoryPlate image="/photos/story-cafe.webp" caption={ts('pages.contact.caption')} />
       <Section tone="paper">
         <SectionBody>
           <div className="grid gap-10 md:grid-cols-12">
@@ -47,6 +55,19 @@ export default async function ContactPage({
           </div>
         </SectionBody>
       </Section>
+      <StoryColophon
+        heading={ts('colophon.heading')}
+        body={ts('colophon.body')}
+        hours={ts('colophon.hours')}
+        labels={ts.raw('colophon.labels') as {
+          founded: string;
+          orgNr: string;
+          members: string;
+          address: string;
+          hours: string;
+          bank: string;
+        }}
+      />
     </main>
   );
 }

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
-import { PageHeader } from '@/components/page-header';
 import { Section, SectionBody } from '@/components/primitives';
+import { VisitClose, VisitHero } from '@/components/visit-page';
 
 // §4.09. Every event captures a signup and "the list must be exportable"
 // — that's admin work, deferred. Public index lives here.
@@ -19,6 +19,7 @@ export default async function EventsPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'eventsPage' });
+  const tv = await getTranslations({ locale, namespace: 'visitPages' });
   const l = await getLocale();
   const fmt = new Intl.DateTimeFormat(l === 'en' ? 'en-GB' : l === 'ar' ? 'ar-EG' : 'nb-NO', {
     day: 'numeric', month: 'long', year: 'numeric',
@@ -26,7 +27,15 @@ export default async function EventsPage({
 
   return (
     <main>
-      <PageHeader eyebrow={t('eyebrow')} title={t('title')} lede={t('lede')} />
+      <VisitHero
+        crumb={tv('crumb')}
+        eyebrow={tv('pages.events.eyebrow')}
+        title={tv('pages.events.title')}
+        lede={tv('pages.events.lede')}
+        image="/photos/visit-iftar-street.webp"
+        alt={tv('pages.events.caption')}
+        facts={tv.raw('pages.events.facts') as { term: string; detail: string }[]}
+      />
       <Section tone="paper">
         <SectionBody>
           <ul className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -45,6 +54,14 @@ export default async function EventsPage({
           </ul>
         </SectionBody>
       </Section>
+      <VisitClose
+        heading={tv('pages.events.closeHeading')}
+        body={tv('pages.events.closeBody')}
+        image="/photos/visit-eid.webp"
+        alt={tv('pages.events.caption')}
+        primary={{ label: tv('pages.events.closePrimary'), href: `/${locale}/besok-oss` }}
+        secondary={{ label: tv('pages.events.closeSecondary'), href: `/${locale}/kontakt` }}
+      />
     </main>
   );
 }

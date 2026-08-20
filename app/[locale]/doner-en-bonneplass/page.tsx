@@ -2,7 +2,6 @@
 
 import { useTranslations, useLocale} from 'next-intl';
 import { useState } from 'react';
-import { PageHeader } from '@/components/page-header';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
 import { RenderingPlaceholder } from '@/components/rendering-placeholder';
 import { openGiveSheet } from '@/components/giving-sheet';

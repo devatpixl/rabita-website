@@ -1,7 +1,7 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
-import { PageHeader } from '@/components/page-header';
 import { Section, SectionBody, SectionHeading, Stat } from '@/components/primitives';
+import { StoryColophon, StoryHero, StoryPlate } from '@/components/story-page';
 
 export default async function AboutPage({
   params,
@@ -11,10 +11,18 @@ export default async function AboutPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'aboutPage' });
+  const ts = await getTranslations({ locale, namespace: 'storyPages' });
 
   return (
     <main>
-      <PageHeader eyebrow={t('eyebrow')} title={t('title')} lede={t('lede')} />
+      <StoryHero
+        crumb={ts('crumb')}
+        index={ts('pages.about.index')}
+        eyebrow={ts('pages.about.eyebrow')}
+        title={ts('pages.about.title')}
+        lede={ts('pages.about.lede')}
+      />
+      <StoryPlate image="/photos/story-facade-night.webp" caption={ts('pages.about.caption')} />
 
       <Section tone="paper">
         <SectionBody>
@@ -58,6 +66,19 @@ export default async function AboutPage({
           </ul>
         </SectionBody>
       </Section>
+      <StoryColophon
+        heading={ts('colophon.heading')}
+        body={ts('colophon.body')}
+        hours={ts('colophon.hours')}
+        labels={ts.raw('colophon.labels') as {
+          founded: string;
+          orgNr: string;
+          members: string;
+          address: string;
+          hours: string;
+          bank: string;
+        }}
+      />
     </main>
   );
 }

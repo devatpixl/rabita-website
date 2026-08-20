@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { PageHeader } from '@/components/page-header';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
+import { StoryColophon, StoryHero, StoryPlate } from '@/components/story-page';
 
 type Tier = 'ordinary' | 'voting' | 'youth';
 
@@ -11,6 +11,7 @@ type Tier = 'ordinary' | 'voting' | 'youth';
 // Payment is stubbed in phase 2; the flow is complete end-to-end otherwise.
 export default function MembershipPage() {
   const t = useTranslations('medlemskapPage');
+  const ts = useTranslations('storyPages');
   const [tier, setTier] = useState<Tier>('voting');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -37,7 +38,14 @@ export default function MembershipPage() {
 
   return (
     <main>
-      <PageHeader eyebrow={t('eyebrow')} title={t('title')} lede={t('lede')} />
+      <StoryHero
+        crumb={ts('crumb')}
+        index={ts('pages.membership.index')}
+        eyebrow={ts('pages.membership.eyebrow')}
+        title={ts('pages.membership.title')}
+        lede={ts('pages.membership.lede')}
+      />
+      <StoryPlate image="/photos/story-members.webp" caption={ts('pages.membership.caption')} />
       <Section tone="paper">
         <SectionBody>
           <SectionHeading>{t('choose')}</SectionHeading>
@@ -102,6 +110,19 @@ export default function MembershipPage() {
           )}
         </SectionBody>
       </Section>
+      <StoryColophon
+        heading={ts('colophon.heading')}
+        body={ts('colophon.body')}
+        hours={ts('colophon.hours')}
+        labels={ts.raw('colophon.labels') as {
+          founded: string;
+          orgNr: string;
+          members: string;
+          address: string;
+          hours: string;
+          bank: string;
+        }}
+      />
     </main>
   );
 }

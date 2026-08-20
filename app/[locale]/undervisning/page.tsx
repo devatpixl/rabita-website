@@ -1,7 +1,7 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
-import { PageHeader } from '@/components/page-header';
 import { Section, SectionBody, SectionHeading, Stat } from '@/components/primitives';
+import { LearnClose, LearnHero } from '@/components/learn-page';
 
 export default async function EducationPage({
   params,
@@ -11,10 +11,18 @@ export default async function EducationPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'educationPage' });
+  const tl = await getTranslations({ locale, namespace: 'learnPages' });
 
   return (
     <main>
-      <PageHeader eyebrow={t('eyebrow')} title={t('title')} lede={t('lede')} />
+      <LearnHero
+        crumb={tl('crumb')}
+        eyebrow={tl('pages.teaching.eyebrow')}
+        title={tl('pages.teaching.title')}
+        lede={tl('pages.teaching.lede')}
+        image="/photos/learn-school.webp"
+        caption={tl('pages.teaching.caption')}
+      />
       <Section tone="paper">
         <SectionBody>
           <ul className="grid grid-cols-2 gap-8 md:grid-cols-4">
@@ -39,6 +47,14 @@ export default async function EducationPage({
           </ul>
         </SectionBody>
       </Section>
+      <LearnClose
+        heading={tl('close.heading')}
+        body={tl('close.body')}
+        image="/photos/learn-classroom.webp"
+        alt={tl('pages.teaching.eyebrow')}
+        items={tl.raw('close.items') as { term: string; detail: string }[]}
+        cta={{ label: tl('close.cta'), href: `/${locale}/kontakt` }}
+      />
     </main>
   );
 }

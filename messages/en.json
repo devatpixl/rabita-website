@@ -149,7 +149,8 @@
     },
     "overview": "See everything in",
     "closeMenu": "Close the menu",
-    "openMenu": "Open the menu"
+    "openMenu": "Open the menu",
+    "openHours": "06:00 to 22:00"
   },
   "giving": {
     "freqMonthly": "Monthly",
@@ -1495,5 +1496,141 @@
     "shareWhatsapp": "Share on WhatsApp",
     "shareEmail": "Share by email",
     "back": "Back to the front page"
+  },
+  "learnPages": {
+    "crumb": "Education",
+    "pages": {
+      "teaching": {
+        "eyebrow": "Teaching",
+        "title": "Arabic, Qur'an, and a school week that fits around the Norwegian one.",
+        "lede": "Four hundred pupils and nineteen teachers, running every week of term. The new building gives the school its own floor instead of the rooms it borrows now.",
+        "caption": "The school floor in the new building, Norconsult"
+      }
+    },
+    "close": {
+      "heading": "Enrolling a child.",
+      "body": "Places are grouped by level rather than by age, so a child who has never read Arabic sits with others starting in the same place.",
+      "items": [
+        {
+          "term": "Term",
+          "detail": "Autumn and spring, following the Oslo school calendar."
+        },
+        {
+          "term": "Age",
+          "detail": "From six years old, in groups by reading level."
+        },
+        {
+          "term": "Fee",
+          "detail": "Set per term, and no child is turned away over it."
+        }
+      ],
+      "cta": "Ask about a place"
+    }
+  },
+  "visitPages": {
+    "crumb": "Visit us",
+    "pages": {
+      "visit": {
+        "eyebrow": "Visit us",
+        "title": "Come and see the place.",
+        "lede": "School classes, university groups, neighbours and anybody curious. You do not need a reason and you do not need to be Muslim.",
+        "caption": "The main entrance in the new building, Norconsult",
+        "facts": [
+          {
+            "term": "Address",
+            "detail": "Calmeyers gate 8, Oslo"
+          },
+          {
+            "term": "Open",
+            "detail": "Every day, 06:00 to 22:00"
+          },
+          {
+            "term": "Getting here",
+            "detail": "Gronland, a few minutes from the station"
+          }
+        ],
+        "closeHeading": "The door is open.",
+        "closeBody": "If you are bringing a group, tell us roughly how many and when. Everything else can be sorted on the day.",
+        "closePrimary": "Contact us",
+        "closeSecondary": "See what is on"
+      },
+      "events": {
+        "eyebrow": "Events",
+        "title": "Eid, iftar, lectures and family days.",
+        "lede": "The year has a rhythm. Ramadan fills the street outside, Eid fills the hall, and the rest of the year runs on lectures, courses and the days families turn up for.",
+        "caption": "Street iftar outside the mosque, Ramadan 2025",
+        "facts": [
+          {
+            "term": "What is on",
+            "detail": "Iftar, Eid, lectures and family days"
+          },
+          {
+            "term": "Who can come",
+            "detail": "Anybody, member or not"
+          },
+          {
+            "term": "Cost",
+            "detail": "Free unless the listing says otherwise"
+          }
+        ],
+        "closeHeading": "Eat with us.",
+        "closeBody": "The street iftar is the easiest way in. Tables go up outside, food is free, and nobody asks who you are.",
+        "closePrimary": "Plan a visit",
+        "closeSecondary": "Contact us"
+      }
+    }
+  },
+  "storyPages": {
+    "crumb": "About us",
+    "pages": {
+      "about": {
+        "index": "01",
+        "eyebrow": "The organisation",
+        "title": "Founded in 1987, and still on the same street.",
+        "lede": "Det Islamske Forbundet has been in Gronland since the eighties. The congregation outgrew the building a long time ago, which is the whole reason for the build.",
+        "caption": "The new facade at night, Norconsult"
+      },
+      "news": {
+        "index": "02",
+        "eyebrow": "News",
+        "title": "What is happening, told plainly.",
+        "lede": "Notices from the congregation and progress on the build. No press releases, just what changed and when.",
+        "caption": "Ramadan on the street outside, 2025"
+      },
+      "membership": {
+        "index": "03",
+        "eyebrow": "Membership",
+        "title": "Becoming a member.",
+        "lede": "Membership is how the congregation counts itself and how the state grant is calculated. It also decides who votes at the annual meeting.",
+        "caption": "A gathering at Rabita"
+      },
+      "volunteer": {
+        "index": "04",
+        "eyebrow": "Volunteering",
+        "title": "Where hands are needed.",
+        "lede": "Iftar does not cook itself and the school does not run on teachers alone. Tell us what you can do and roughly when.",
+        "caption": "Volunteers during Ramadan"
+      },
+      "contact": {
+        "index": "05",
+        "eyebrow": "Contact",
+        "title": "Call, write, or come by.",
+        "lede": "Reception is open the same hours as the building. For anything time sensitive, ring rather than write.",
+        "caption": "The cafe in the new building, Norconsult"
+      }
+    },
+    "colophon": {
+      "heading": "For the record.",
+      "body": "The details a member, a journalist or an auditor might want to check, kept in one place.",
+      "labels": {
+        "founded": "Founded",
+        "orgNr": "Organisation number",
+        "members": "Members",
+        "address": "Address",
+        "hours": "Open",
+        "bank": "Bank account"
+      },
+      "hours": "Every day, 06:00 to 22:00"
+    }
   }
 }

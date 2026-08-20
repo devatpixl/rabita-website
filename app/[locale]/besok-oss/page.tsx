@@ -1,7 +1,7 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
-import { PageHeader } from '@/components/page-header';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
+import { VisitClose, VisitHero } from '@/components/visit-page';
 import { RequestForm } from '@/components/request-form';
 
 export default async function VisitPage({
@@ -12,10 +12,19 @@ export default async function VisitPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'visitPage' });
+  const tv = await getTranslations({ locale, namespace: 'visitPages' });
 
   return (
     <main>
-      <PageHeader eyebrow={t('eyebrow')} title={t('title')} lede={t('lede')} />
+      <VisitHero
+        crumb={tv('crumb')}
+        eyebrow={tv('pages.visit.eyebrow')}
+        title={tv('pages.visit.title')}
+        lede={tv('pages.visit.lede')}
+        image="/photos/visit-entrance.webp"
+        alt={tv('pages.visit.caption')}
+        facts={tv.raw('pages.visit.facts') as { term: string; detail: string }[]}
+      />
       <Section tone="paper">
         <SectionBody>
           <div className="grid gap-10 md:grid-cols-12">
@@ -38,6 +47,14 @@ export default async function VisitPage({
           </div>
         </SectionBody>
       </Section>
+      <VisitClose
+        heading={tv('pages.visit.closeHeading')}
+        body={tv('pages.visit.closeBody')}
+        image="/photos/visit-foyer.webp"
+        alt={tv('pages.visit.caption')}
+        primary={{ label: tv('pages.visit.closePrimary'), href: `/${locale}/kontakt` }}
+        secondary={{ label: tv('pages.visit.closeSecondary'), href: `/${locale}/arrangementer` }}
+      />
     </main>
   );
 }
