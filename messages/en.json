@@ -507,19 +507,31 @@
     "eyebrow": "The congregation",
     "heading": "We are already a congregation. <em>What we are missing is the room.</em>",
     "body": "Photographs from the street iftar on Grønland, the spring bazaar on Youngstorget, the women’s circles, and the site on Calmeyers gate the week it was cleared.",
-    "alts": {
-      "serving": "Volunteers handing out warm food at the street iftar on Grønland",
-      "tables": "Long tables under the tents at the street iftar, filled with guests",
-      "child": "A girl at the spring bazaar holding a painted star, her face painted too",
-      "volunteers": "Two Rabita volunteers in work vests at the street iftar",
-      "circle": "Women greeting each other after a circle at the mosque",
-      "quran": "An open Quran resting on the prayer carpet at Rabita",
-      "street": "Two volunteers in Det Islamske Forbundet vests walking down the street",
-      "cakes": "The cake table at the spring bazaar on Youngstorget",
-      "sweets": "A tray of dates rolled in coconut, ready for breaking the fast",
-      "site": "The old building on Calmeyers gate coming down to clear the site",
-      "embrace": "Two men embracing after a talk in the hall",
-      "dress": "Women in traditional dress at the spring bazaar"
+    "chapters": {
+      "iftar": {
+        "alt": "Long tables under the tents at the street iftar on Grønland, filled with guests",
+        "body": "When the hall is full, the tables go outside. Volunteers serve whoever walks past on Grønland, neighbours included.",
+        "eyebrow": "Every Ramadan",
+        "title": "The iftar moves out onto the street"
+      },
+      "school": {
+        "alt": "An open Quran resting on the prayer carpet at Rabita",
+        "body": "The Rabita school is the largest in Norway teaching Arabic to children who do not speak it at home. Nineteen teachers, a queue out of the door every weekend.",
+        "eyebrow": "Every Saturday",
+        "title": "400 children learn to read"
+      },
+      "bazaar": {
+        "alt": "Women in traditional dress at the spring bazaar on Youngstorget",
+        "body": "Youngstorget fills with food stalls, face paint and traditional dress from every corner of the congregation.",
+        "eyebrow": "Every spring",
+        "title": "Forty nationalities at one bazaar"
+      },
+      "site": {
+        "alt": "The old building on Calmeyers gate coming down to clear the site",
+        "body": "The old building on Calmeyers gate came down. The foundation going in behind it is what the campaign is paying for now.",
+        "eyebrow": "Spring 2025",
+        "title": "The site was cleared"
+      }
     }
   },
   "zoomBand": {

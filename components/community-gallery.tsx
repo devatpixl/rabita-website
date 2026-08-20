@@ -1,261 +1,106 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import Image from 'next/image';
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import { Accent } from './accent';
 import { Eyebrow } from './primitives';
 
-// Photographs of the congregation from the last four years: the street iftar on
-// Groenland, the spring bazaar on Youngstorget, the women's circles, and the
-// site on Calmeyers gate the week it was cleared.
+// Four things the congregation already does, one photograph each: the street
+// iftar on Groenland, the Saturday school, the spring bazaar on Youngstorget,
+// and the site on Calmeyers gate the week it was cleared.
 //
-// The move, scrubbed by scroll across a 300vh container:
-//   1. the twelve plates sit forward, close to the reader
-//   2. they fall back into depth, and the line surfaces in the well they leave
-//   3. they come back to the front, overshoot a little, and settle
+// Each chapter is a full-bleed photograph against a half of running copy. The
+// photograph sits zoomed out when the chapter arrives and pushes in as the
+// chapter passes, so the scroll does the work and nothing slides around the
+// screen. Sides alternate down the section.
 //
-// Real perspective rather than faked scale, because a plate near the edge of
-// the frame should skew as it travels and a scaled one never does. Only `z` and
-// `opacity` animate, so every frame is composited.
-//
-// Under 1024px, and for anyone who asked for less motion, this collapses to a
-// plain grid: no pin, no depth, the same twelve photographs.
+// Only `scale` animates, so every frame is composited. The global
+// prefers-reduced-motion rule flattens it, and under 768px the chapter stacks
+// to photograph over copy.
 
 const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
 
-// Corners feathered into the dusk, matching the zoom band, so a plate has no
-// cut edge against the ground.
-const EDGE =
-  'linear-gradient(to right, transparent 0, #000 4%, #000 96%, transparent 100%),' +
-  ' linear-gradient(to bottom, transparent 0, #000 4%, #000 96%, transparent 100%)';
-const FEATHER = {
-  maskImage: EDGE,
-  WebkitMaskImage: EDGE,
-  maskComposite: 'intersect',
-  WebkitMaskComposite: 'source-in',
-} as const;
+type Chapter = { key: string; src: string; flip: boolean };
 
-const PERSPECTIVE = 1400;
-const BACK = -1750; // deepest point, in px of translateZ
-const FRONT = 150; // the overshoot on the way back
-
-type Plate = {
-  key: string;
-  src: string;
-  w: number;
-  h: number;
-  x: number; // centre, % of viewport width
-  y: number; // centre, % of viewport height
-  vh: number; // plate height, in vh; width follows from the aspect ratio
-  travel: number; // how far it sweeps along the diagonal, in vw
-};
-
-// Four across, three down, sized large enough to read a face. Neighbours are
-// allowed to overlap: they sit at different depths, so the overlap reads as
-// layering rather than as a collision.
-const PLATES: Plate[] = [
-  { key: 'serving', src: '/photos/community/iftar-serving.webp', w: 844, h: 1500, x: 12, y: 26, vh: 30, travel: 20 },
-  { key: 'tables', src: '/photos/community/iftar-tables.webp', w: 1500, h: 1002, x: 37, y: 24, vh: 26, travel: 13 },
-  { key: 'child', src: '/photos/community/bazaar-child.webp', w: 1125, h: 1500, x: 63, y: 27, vh: 29, travel: 22 },
-  { key: 'volunteers', src: '/photos/community/volunteers-two.webp', w: 1500, h: 1002, x: 85, y: 24, vh: 26, travel: 15 },
-  { key: 'circle', src: '/photos/community/womens-circle.webp', w: 1125, h: 1500, x: 10, y: 52, vh: 29, travel: 11 },
-  { key: 'quran', src: '/photos/community/quran-carpet.webp', w: 1500, h: 1125, x: 36, y: 51, vh: 28, travel: 24 },
-  { key: 'street', src: '/photos/community/volunteers-street.webp', w: 1125, h: 1500, x: 62, y: 52, vh: 29, travel: 14 },
-  { key: 'cakes', src: '/photos/community/bazaar-cakes.webp', w: 1125, h: 1500, x: 87, y: 51, vh: 27, travel: 21 },
-  { key: 'sweets', src: '/photos/community/iftar-sweets.webp', w: 1500, h: 1002, x: 15, y: 77, vh: 26, travel: 23 },
-  { key: 'site', src: '/photos/community/site-cleared.webp', w: 1125, h: 1500, x: 40, y: 76, vh: 29, travel: 12 },
-  { key: 'embrace', src: '/photos/community/welcome-embrace.webp', w: 888, h: 1500, x: 63, y: 78, vh: 28, travel: 19 },
-  { key: 'dress', src: '/photos/community/bazaar-dress.webp', w: 1125, h: 1500, x: 87, y: 76, vh: 29, travel: 16 },
+const CHAPTERS: Chapter[] = [
+  { key: 'iftar', src: '/photos/community/iftar-tables.webp', flip: false },
+  { key: 'school', src: '/photos/community/quran-carpet.webp', flip: true },
+  { key: 'bazaar', src: '/photos/community/bazaar-dress.webp', flip: false },
+  { key: 'site', src: '/photos/community/site-cleared.webp', flip: true },
 ];
-function DepthPlate({
-  plate,
-  index,
-  progress,
-  alt,
-}: {
-  plate: Plate;
-  index: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  progress: any;
-  alt: string;
-}) {
-  // Each plate leaves and returns a beat after the one before it, so the field
-  // breathes instead of moving as one slab.
-  const lag = index * 0.012;
-  const stops = [0 + lag, 0.46 + lag, 0.84 + lag, 1];
 
-  const z = useTransform(progress, stops, [0, BACK, FRONT, 0]);
-  const opacity = useTransform(progress, stops, [1, 0.45, 1, 1]);
+function ChapterRow({ chapter, index }: { chapter: Chapter; index: number }) {
+  const t = useTranslations('communityGallery');
+  const row = useRef<HTMLDivElement>(null);
 
-  // On the same beat the plate sweeps up and to the left, then back down and
-  // to the right, each one at its own rate. It starts and ends on its slot, so
-  // the field is square at both ends of the section and only the middle moves.
-  const dx = plate.travel;
-  const dy = plate.travel * 0.62;
-  const driftX = useTransform(progress, stops, ['0vw', `${-dx}vw`, `${dx * 0.3}vw`, '0vw']);
-  const driftY = useTransform(progress, stops, ['0vh', `${dy}vh`, `${-dy * 0.3}vh`, '0vh']);
+  const { scrollYProgress } = useScroll({
+    target: row,
+    offset: ['start end', 'end start'],
+  });
+
+  // Zoomed out on arrival, pushed in by the time the chapter leaves.
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.24]);
 
   return (
-    // Outer holds the slot and the centring. Inner does the moving, and needs
-    // preserve-3d on its parent for translateZ to land in the container's
-    // perspective rather than flattening.
     <div
-      className="absolute -translate-x-1/2 -translate-y-1/2"
-      style={{
-        left: `${plate.x}%`,
-        top: `${plate.y}%`,
-        height: `${plate.vh}vh`,
-        aspectRatio: `${plate.w} / ${plate.h}`,
-        transformStyle: 'preserve-3d',
-      }}
+      ref={row}
+      className={`grid items-stretch md:grid-cols-2 ${
+        chapter.flip ? 'md:[&>figure]:order-2' : ''
+      }`}
     >
-      <motion.div
-        className="h-full w-full will-change-transform"
-        style={{ x: driftX, y: driftY, z, opacity }}
-      >
-        <div className="relative h-full w-full overflow-hidden rounded-xl" style={FEATHER}>
+      <figure className="relative m-0 h-[52vh] overflow-hidden md:h-[74vh]">
+        <motion.div className="absolute inset-0 will-change-transform" style={{ scale }}>
           <Image
-            src={plate.src}
-            alt={alt}
+            src={chapter.src}
+            alt={t(`chapters.${chapter.key}.alt`)}
             fill
-            sizes="30vw"
+            loading={index === 0 ? undefined : 'lazy'}
+            priority={index === 0}
+            sizes="(min-width: 768px) 50vw, 100vw"
             className="object-cover"
             style={{ filter: GRADE }}
           />
+        </motion.div>
+      </figure>
+
+      <div className="flex items-center px-6 py-12 md:px-12 md:py-14 lg:px-20">
+        <div className="max-w-[46ch]">
+          <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-gold">
+            {t(`chapters.${chapter.key}.eyebrow`)}
+          </p>
+          <h3 className="mt-4 font-serif text-[clamp(1.75rem,3.2vw,2.5rem)] leading-[1.12] text-paper">
+            {t(`chapters.${chapter.key}.title`)}
+          </h3>
+          <p className="mt-5 text-body leading-relaxed text-dusk-60">
+            {t(`chapters.${chapter.key}.body`)}
+          </p>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
 
 export function CommunityGallery() {
   const t = useTranslations('communityGallery');
-  const reduced = useReducedMotion();
-  const container = useRef<HTMLElement | null>(null);
-
-  // Narrow viewports get the static grid. Decided on the client only, so the
-  // server and the first paint always agree.
-  const [isNarrow, setIsNarrow] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia('(max-width: 1023px)');
-    setIsNarrow(mq.matches);
-    const onChange = (e: MediaQueryListEvent) => setIsNarrow(e.matches);
-    mq.addEventListener('change', onChange);
-    return () => mq.removeEventListener('change', onChange);
-  }, []);
-
-  const skipAnim = reduced === true || isNarrow;
-
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ['start start', 'end end'],
-  });
-
-  // Wheel deltas arrive in lumps; a stiff spring evens them out without trailing.
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 260,
-    damping: 44,
-    mass: 0.3,
-    restDelta: 0.0005,
-  });
-
-  // The line surfaces in the well the plates leave behind, and is gone by the
-  // time they come back through it.
-  const lineOpacity = useTransform(progress, [0.32, 0.44, 0.62], [0, 1, 0]);
-  const lineY = useTransform(progress, [0.32, 0.44], [16, 0]);
-
-  // A dusk scrim comes up under the line, so the type never has to compete with
-  // a photograph passing behind it. It is gone before the plates return.
-  const scrimOpacity = useTransform(progress, [0.26, 0.42, 0.52, 0.66], [0, 0.9, 0.9, 0]);
-
-  const heading = (
-    <h2
-      id="community-gallery-heading"
-      className="max-w-[22ch] text-balance font-serif text-section text-paper"
-    >
-      {t.rich('heading', { em: (c) => <Accent surface="dusk">{c}</Accent> })}
-    </h2>
-  );
-
-  if (skipAnim) {
-    return (
-      <section
-        id="fellesskapet"
-        aria-labelledby="community-gallery-heading"
-        className="bg-dusk py-section-sm"
-      >
-        <div className="mx-auto max-w-6xl px-6">
-          <Eyebrow tone="gold">{t('eyebrow')}</Eyebrow>
-          <div className="mt-3">{heading}</div>
-          <p className="mt-5 max-w-prose text-body text-dusk-60">{t('body')}</p>
-
-          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
-            {PLATES.map((p) => (
-              <div
-                key={p.key}
-                className="relative overflow-hidden rounded-lg"
-                style={{ aspectRatio: '3 / 4' }}
-              >
-                <Image
-                  src={p.src}
-                  alt={t(`alts.${p.key}`)}
-                  fill
-                  loading="lazy"
-                  sizes="(min-width: 640px) 30vw, 45vw"
-                  className="object-cover"
-                  style={{ filter: GRADE }}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   return (
-    <section
-      ref={container}
-      id="fellesskapet"
-      aria-labelledby="community-gallery-heading"
-      className="relative bg-dusk"
-      style={{ height: '220vh' }}
-    >
-      <div
-        className="sticky top-0 h-screen overflow-hidden"
-        style={{ perspective: `${PERSPECTIVE}px`, perspectiveOrigin: '50% 50%' }}
-      >
-        {PLATES.map((p, i) => (
-          <DepthPlate
-            key={p.key}
-            plate={p}
-            index={i}
-            progress={progress}
-            alt={t(`alts.${p.key}`)}
-          />
-        ))}
-
-        {/* Ground for the line */}
-        <motion.div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-dusk"
-          style={{ opacity: scrimOpacity }}
-        />
-
-        {/* The line, in the well the plates leave behind */}
-        <motion.div
-          className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center"
-          style={{ opacity: lineOpacity, y: lineY }}
+    <section id="fellesskapet" aria-labelledby="community-gallery-heading" className="bg-dusk">
+      <div className="mx-auto max-w-6xl px-6 pb-10 pt-section-md md:pb-12">
+        <Eyebrow tone="gold">{t('eyebrow')}</Eyebrow>
+        <h2
+          id="community-gallery-heading"
+          className="mt-3 max-w-[22ch] text-balance font-serif text-section text-paper"
         >
-          <Eyebrow tone="gold" className="mb-5">
-            {t('eyebrow')}
-          </Eyebrow>
-          {heading}
-          <p className="mt-5 max-w-[46ch] text-body text-dusk-60">{t('body')}</p>
-        </motion.div>
+          {t.rich('heading', { em: (c) => <Accent surface="dusk">{c}</Accent> })}
+        </h2>
+        <p className="mt-4 max-w-prose text-body text-dusk-60">{t('body')}</p>
       </div>
+
+      {CHAPTERS.map((chapter, i) => (
+        <ChapterRow key={chapter.key} chapter={chapter} index={i} />
+      ))}
     </section>
   );
 }

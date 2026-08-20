@@ -507,19 +507,31 @@
     "eyebrow": "Fellesskapet",
     "heading": "Vi er allerede et fellesskap. <em>Det vi mangler er rommet.</em>",
     "body": "Bilder fra gateiftaren på Grønland, vårbasaren på Youngstorget, kvinnegruppene, og tomta i Calmeyers gate uka den ble ryddet.",
-    "alts": {
-      "serving": "Frivillige deler ut varm mat på gateiftaren på Grønland",
-      "tables": "Lange bord under teltene på gateiftaren, fulle av gjester",
-      "child": "En jente på vårbasaren med en malt stjerne i hånda og ansiktsmaling",
-      "volunteers": "To frivillige fra Rabita i arbeidsvest på gateiftaren",
-      "circle": "Kvinner som hilser på hverandre etter en samling i moskeen",
-      "quran": "En åpen koran som ligger på bønneteppet i Rabita",
-      "street": "To frivillige i vester fra Det Islamske Forbundet på gata",
-      "cakes": "Kakebordet på vårbasaren på Youngstorget",
-      "sweets": "Et brett med dadler rullet i kokos, klare til å bryte fasten",
-      "site": "Det gamle bygget i Calmeyers gate rives for å rydde tomta",
-      "embrace": "To menn som omfavner hverandre etter et foredrag i salen",
-      "dress": "Kvinner i tradisjonelle drakter på vårbasaren"
+    "chapters": {
+      "iftar": {
+        "alt": "Lange bord under teltene på gateiftaren på Grønland, fulle av gjester",
+        "body": "Når salen er full, settes bordene utendørs. Frivillige serverer alle som går forbi på Grønland, naboene inkludert.",
+        "eyebrow": "Hver ramadan",
+        "title": "Iftaren flytter ut i gata"
+      },
+      "school": {
+        "alt": "En åpen koran som ligger på bønneteppet i Rabita",
+        "body": "Rabitaskolen er den største i Norge som lærer bort arabisk til barn som ikke snakker det hjemme. Nitten lærere, og kø ut døra hver helg.",
+        "eyebrow": "Hver lørdag",
+        "title": "400 barn lærer å lese"
+      },
+      "bazaar": {
+        "alt": "Kvinner i tradisjonelle drakter på vårbasaren på Youngstorget",
+        "body": "Youngstorget fylles med matboder, ansiktsmaling og tradisjonelle drakter fra hele menigheten.",
+        "eyebrow": "Hver vår",
+        "title": "Førti nasjonaliteter på én basar"
+      },
+      "site": {
+        "alt": "Det gamle bygget i Calmeyers gate rives for å rydde tomta",
+        "body": "Det gamle bygget i Calmeyers gate ble revet. Fundamentet som støpes bak det er det kampanjen betaler for nå.",
+        "eyebrow": "Våren 2025",
+        "title": "Tomta ble ryddet"
+      }
     }
   },
   "zoomBand": {

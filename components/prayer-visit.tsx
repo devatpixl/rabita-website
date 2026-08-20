@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
+import { ParallaxMedia } from './parallax-media';
 import { PrayerToday } from './prayer-today';
 import { Eyebrow, Section, SectionBody, SectionHeading } from './primitives';
 
@@ -91,8 +92,8 @@ export async function PrayerVisit() {
 
           {/* One tall photograph, sticky, so it stays beside whichever part of
              the column the reader is on. */}
-          <div className="md:col-span-5">
-            <figure className="md:sticky md:top-28">
+          <ParallaxMedia className="md:col-span-5" lift={170}>
+            <figure className="m-0">
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-paper">
                 <Image
                   src="/photos/community/visit-door.webp"
@@ -107,7 +108,7 @@ export async function PrayerVisit() {
                 {t('photoCaption')}
               </figcaption>
             </figure>
-          </div>
+          </ParallaxMedia>
         </div>
       </SectionBody>
     </Section>
