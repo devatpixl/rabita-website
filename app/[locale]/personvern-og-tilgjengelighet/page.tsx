@@ -1,7 +1,7 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
-import { PageHeader } from '@/components/page-header';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
+import { StoryColophon, StoryHero } from '@/components/story-page';
 
 // Combined privacy + accessibility statement — universell utforming is a
 // legal requirement in Norway (§8). Content is plain and short so a donor
@@ -14,10 +14,17 @@ export default async function PrivacyPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'privacyPage' });
+  const ts = await getTranslations({ locale, namespace: 'storyPages' });
 
   return (
     <main>
-      <PageHeader eyebrow={t('eyebrow')} title={t('title')} lede={t('lede')} />
+      <StoryHero
+        crumb={ts('crumb')}
+        index="06"
+        eyebrow={t('eyebrow')}
+        title={t('title')}
+        lede={t('lede')}
+      />
 
       <Section tone="paper" id="personvern">
         <SectionBody>
@@ -54,6 +61,19 @@ export default async function PrivacyPage({
           </div>
         </SectionBody>
       </Section>
+      <StoryColophon
+        heading={ts('colophon.heading')}
+        body={ts('colophon.body')}
+        hours={ts('colophon.hours')}
+        labels={ts.raw('colophon.labels') as {
+          founded: string;
+          orgNr: string;
+          members: string;
+          address: string;
+          hours: string;
+          bank: string;
+        }}
+      />
     </main>
   );
 }

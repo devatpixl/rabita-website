@@ -1,10 +1,20 @@
 import { notFound } from 'next/navigation';
+import { CAMPAIGN } from '@/lib/campaign';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { PageHeader } from '@/components/page-header';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
 import { RequestForm, type RequestSubject } from '@/components/request-form';
+import { ServiceHero, ServiceVisit } from '@/components/service-page';
 
 const VALID = ['nikah', 'janaza', 'shahada', 'counselling', 'hajj-umrah'] as const;
+
+// One render per subject, so the five pages are not the same picture five times
+const SUBJECT_IMAGE: Record<(typeof VALID)[number], string> = {
+  nikah: '/photos/subj-nikah.webp',
+  janaza: '/photos/subj-janaza.webp',
+  shahada: '/photos/subj-shahada.webp',
+  counselling: '/photos/subj-counselling.webp',
+  'hajj-umrah': '/photos/subj-hajj.webp',
+};
 type Subject = (typeof VALID)[number];
 
 export function generateStaticParams() {
@@ -23,10 +33,19 @@ export default async function ServiceDetail({
   setRequestLocale(locale);
   const s = subject as Subject;
   const t = await getTranslations({ locale, namespace: 'servicesIndex' });
+  const tp = await getTranslations({ locale, namespace: 'servicePages' });
 
   return (
     <main>
-      <PageHeader eyebrow={t('eyebrow')} title={t(`items.${s}.title`)} lede={t(`items.${s}.body`)} />
+      <ServiceHero
+        crumb={tp('crumb')}
+        eyebrow={t('eyebrow')}
+        title={t(`items.${s}.title`)}
+        lede={t(`items.${s}.body`)}
+        note={tp('pages.services.note')}
+        image={SUBJECT_IMAGE[s]}
+        alt={t(`items.${s}.title`)}
+      />
       <Section tone="paper">
         <SectionBody>
           <div className="grid gap-10 md:grid-cols-12">
@@ -43,6 +62,15 @@ export default async function ServiceDetail({
           </div>
         </SectionBody>
       </Section>
+      <ServiceVisit
+        heading={tp('visit.heading')}
+        body={tp('visit.body')}
+        address={CAMPAIGN.address}
+        postal={CAMPAIGN.postalCity}
+        hours={tp('visit.hours')}
+        primary={{ label: tp('visit.primary'), href: `/${locale}/besok-oss` }}
+        secondary={{ label: tp('visit.secondary'), href: `/${locale}/kontakt` }}
+      />
     </main>
   );
 }

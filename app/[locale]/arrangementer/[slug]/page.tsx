@@ -2,12 +2,19 @@
 
 import { use, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { PageHeader } from '@/components/page-header';
 import { Section, SectionBody } from '@/components/primitives';
+import { VisitClose, VisitHero } from '@/components/visit-page';
 
 // RSVP with capture. In phase 2 the list is written to the stub route; the
 // admin export UI ships with the CMS decision.
 type Params = { locale: string; slug: string };
+
+// One photograph per event, all from the mosque's own archive
+const EVENT_IMAGE: Record<'ramadan' | 'lecture' | 'school', string> = {
+  ramadan: '/photos/event-iftar-tables.webp',
+  lecture: '/photos/event-lecture-hall.webp',
+  school: '/photos/event-school-visit.webp',
+};
 
 const KNOWN: Record<string, 'ramadan' | 'lecture' | 'school'> = {
   'ramadan-iftar-2026': 'ramadan',
@@ -19,12 +26,13 @@ export default function EventDetail({ params }: { params: Promise<Params> }) {
   const { slug } = use(params);
   const key = KNOWN[slug] ?? 'lecture';
   const t = useTranslations('eventsPage');
+  const tv = useTranslations('visitPages');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [count, setCount] = useState(1);
   const [done, setDone] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  useLocale(); // ensure client provider hooked
+  const locale = useLocale();
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,7 +52,15 @@ export default function EventDetail({ params }: { params: Promise<Params> }) {
 
   return (
     <main>
-      <PageHeader eyebrow={t('eyebrow')} title={t(`items.${key}.title`)} lede={t(`items.${key}.body`)} />
+      <VisitHero
+        crumb={tv('crumb')}
+        eyebrow={tv('pages.events.eyebrow')}
+        title={t(`items.${key}.title`)}
+        lede={t(`items.${key}.body`)}
+        image={EVENT_IMAGE[key]}
+        alt={t(`items.${key}.title`)}
+        facts={tv.raw('pages.events.facts') as { term: string; detail: string }[]}
+      />
       <Section tone="paper">
         <SectionBody>
           {done ? (
@@ -77,6 +93,14 @@ export default function EventDetail({ params }: { params: Promise<Params> }) {
           )}
         </SectionBody>
       </Section>
+      <VisitClose
+        heading={tv('pages.events.closeHeading')}
+        body={tv('pages.events.closeBody')}
+        image="/photos/event-close.webp"
+        alt={tv('pages.events.caption')}
+        primary={{ label: tv('pages.events.closePrimary'), href: `/${locale}/besok-oss` }}
+        secondary={{ label: tv('pages.events.closeSecondary'), href: `/${locale}/kontakt` }}
+      />
     </main>
   );
 }
