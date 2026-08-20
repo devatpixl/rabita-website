@@ -22,7 +22,7 @@ export function LearnHero({
   caption: string;
 }) {
   return (
-    <section className="bg-paper-deep pt-section-sm">
+    <section className="bg-paper-deep pt-section-sm pb-section-sm">
       <SectionBody className="text-center">
         <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60">{crumb}</p>
         <div className="mt-10 flex flex-col items-center">
@@ -32,17 +32,25 @@ export function LearnHero({
         </div>
       </SectionBody>
 
-      {/* Edge to edge, because the rest of this section is narrow and centred */}
-      <figure className="mt-14">
-        <div className="relative aspect-[21/9] w-full overflow-hidden bg-paper-2">
-          <Image src={image} alt={caption} fill priority sizes="100vw" className="object-cover" style={{ filter: GRADE }} />
-        </div>
-        <SectionBody>
-          <figcaption className="mt-4 font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
+      {/* Held inside the measure and rounded like every other picture on the site, rather than bled to the window edge */}
+      <SectionBody>
+        <figure className="mt-14">
+          <div className="relative aspect-[21/9] w-full overflow-hidden rounded-3xl bg-paper-2">
+            <Image
+              src={image}
+              alt={caption}
+              fill
+              priority
+              sizes="(min-width: 1024px) 84vw, 92vw"
+              className="object-cover"
+              style={{ filter: GRADE }}
+            />
+          </div>
+          <figcaption className="mt-4 border-t border-rule pt-3 font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
             {caption}
           </figcaption>
-        </SectionBody>
-      </figure>
+        </figure>
+      </SectionBody>
     </section>
   );
 }
@@ -74,7 +82,7 @@ export function LearnClose({
           </div>
           <div className="md:col-span-7">
             <h2 className="font-serif text-section text-balance text-ink">{heading}</h2>
-            <p className="mt-5 max-w-prose text-body text-ink-60">{body}</p>
+            <p className="mt-5 max-w-prose hyphens-auto text-justify text-body text-ink-60">{body}</p>
             <dl className="mt-8 border-t border-rule">
               {items.map((it) => (
                 <div key={it.term} className="grid gap-x-6 border-b border-rule py-4 md:grid-cols-12 md:items-baseline">

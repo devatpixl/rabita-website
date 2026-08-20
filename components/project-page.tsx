@@ -28,7 +28,7 @@ export function ProjectHero({
   secondary?: { label: string; href: string };
 }) {
   return (
-    <section className="relative isolate overflow-hidden bg-dusk text-paper">
+    <section className="relative isolate -mt-[77px] overflow-hidden bg-dusk pt-[77px] text-paper">
       <div className="absolute inset-0">
         <Image src={image} alt={alt} fill priority sizes="100vw" className="object-cover" style={{ filter: GRADE }} />
         <div aria-hidden className="absolute inset-0 bg-dusk/80" />
@@ -40,7 +40,7 @@ export function ProjectHero({
         <div className="mt-8 max-w-3xl">
           <Eyebrow tone="gold">{eyebrow}</Eyebrow>
           <h1 className="mt-4 font-serif text-display text-balance text-paper">{title}</h1>
-          <p className="mt-6 max-w-prose text-body text-paper/80">{lede}</p>
+          <p className="mt-6 max-w-prose hyphens-auto text-justify text-body text-paper/80">{lede}</p>
           {(primary || secondary) && (
             <div className="mt-9 flex flex-wrap items-center gap-4">
               {primary?.give && <GiveCTA label={primary.label} />}
@@ -70,16 +70,34 @@ export function ProjectHero({
 
 // The brief: what this page is, set as one paragraph against a label, so a reader gets the whole answer before any detail.
 export function ProjectBrief({ label, body }: { label: string; body: string }) {
+  // Arabic has no capital forms, so the tile is only worth setting on the latin scripts
+  const initial = body.slice(0, 1);
+  const rest = body.slice(1);
+  const stamped = /^[A-Za-zÀ-ɏ]$/.test(initial);
+
   return (
     <section className="bg-paper py-section-md">
       <SectionBody>
         <div className="grid gap-8 md:grid-cols-12">
+          {/* Rule down the side of the label rather than under it, the way innocents sets its datelines */}
           <div className="md:col-span-3">
-            <span aria-hidden className="mb-3 block h-px w-10 bg-gold-deep" />
-            <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60">{label}</p>
+            <div className="border-s border-gold-deep ps-4">
+              <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-gold-deep">{label}</p>
+            </div>
           </div>
-          <p className="md:col-span-9 max-w-[52ch] font-serif text-[clamp(1.15rem,1.9vw,1.5rem)] leading-[1.5] text-ink">
-            {body}
+          <p className="md:col-span-9 max-w-[52ch] hyphens-auto text-justify font-serif text-[clamp(1.15rem,1.9vw,1.5rem)] leading-[1.5] text-ink">
+            {stamped ? (
+              <>
+                <span
+                  className="float-start me-4 mt-[0.1em] flex h-[1.3em] w-[1.3em] items-center justify-center rounded-2xl border border-gold/40 bg-paper-2 text-[2.7em] leading-none text-gold-deep"
+                >
+                  {initial}
+                </span>
+                {rest}
+              </>
+            ) : (
+              body
+            )}
           </p>
         </div>
       </SectionBody>
@@ -136,7 +154,7 @@ export function ProjectAssurance({
         <div className="grid gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-4">
             <h2 className="font-serif text-section text-balance text-paper">{heading}</h2>
-            <p className="mt-5 max-w-prose text-body text-dusk-60">{lede}</p>
+            <p className="mt-5 max-w-prose hyphens-auto text-justify text-body text-dusk-60">{lede}</p>
           </div>
           <ul className="md:col-span-8">
             {items.map((it, i) => (

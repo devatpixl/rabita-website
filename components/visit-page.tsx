@@ -37,7 +37,7 @@ export function VisitHero({
             <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-gold-deep">{eyebrow}</p>
             <h1 className="mt-4 font-serif text-display text-balance text-ink">{title}</h1>
           </div>
-          <p className="md:col-span-6 max-w-prose self-end text-body text-ink-60">{lede}</p>
+          <p className="md:col-span-6 max-w-prose hyphens-auto text-justify self-end text-body text-ink-60">{lede}</p>
         </div>
 
         <ul className="mt-12 grid gap-x-10 gap-y-6 border-t border-rule pt-8 md:grid-cols-3">

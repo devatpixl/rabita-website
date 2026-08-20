@@ -84,7 +84,7 @@ export function NavBar() {
     <header
       data-prayer-panel-scope
       className={cn(
-        'sticky top-0 z-40 min-h-[77px] border-b transition-colors duration-500 ease-out',
+        'sticky top-0 z-40 min-h-[77px] border-b transition-colors duration-300 ease-out',
         compactVisible
           ? 'border-transparent bg-transparent'
           : 'border-rule bg-paper/95 backdrop-blur',
@@ -99,8 +99,8 @@ export function NavBar() {
 
       <div
         className={cn(
-          'mx-auto flex w-full items-center',
-          'transition-[max-width,padding,border-radius,box-shadow,background-color] duration-500 ease-out',
+          'mx-auto flex w-full items-center will-change-[max-width,padding]',
+          'transition-[max-width,padding,border-radius] duration-[320ms] [transition-timing-function:cubic-bezier(0.32,0.72,0,1)]',
           compactVisible
             ? 'my-2 max-w-[84rem] rounded-full bg-paper/95 px-8 py-2 shadow-[0_10px_30px_-12px_rgba(26,26,24,0.45)] backdrop-blur'
             : 'max-w-[112rem] px-6 py-4 md:px-10 lg:px-24',

@@ -36,7 +36,8 @@ export function UtilityStrip() {
       ([entry]) => {
         setStripInView(entry.isIntersecting);
       },
-      { threshold: 0 },
+      // a little early, so the capsule is already forming by the time the strip clears
+      { threshold: 0, rootMargin: '-12px 0px 0px 0px' },
     );
     io.observe(el);
     return () => io.disconnect();

@@ -31,7 +31,7 @@ export function ServiceHero({
           <div className="md:col-span-6">
             <Eyebrow tone="gold-deep">{eyebrow}</Eyebrow>
             <h1 className="mt-4 font-serif text-display text-balance text-ink">{title}</h1>
-            <p className="mt-6 max-w-prose text-body text-ink-60">{lede}</p>
+            <p className="mt-6 max-w-prose hyphens-auto text-justify text-body text-ink-60">{lede}</p>
             {note && (
               <p className="mt-8 border-t border-rule pt-5 font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
                 {note}
@@ -114,7 +114,7 @@ export function ServiceCards({
                 <Image src={c.image} alt={c.title} fill loading="eager" sizes="(min-width: 768px) 46vw, 90vw" className="object-cover" style={{ filter: GRADE }} />
               </div>
               <h3 className="mt-6 font-serif text-card text-ink">{c.title}</h3>
-              <p className="mt-2 max-w-prose text-body text-ink-60">{c.body}</p>
+              <p className="mt-2 max-w-prose hyphens-auto text-justify text-body text-ink-60">{c.body}</p>
             </li>
           ))}
         </ul>
@@ -147,7 +147,7 @@ export function ServiceVisit({
         <div className="grid gap-10 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-5">
             <h2 className="font-serif text-section text-balance text-ink">{heading}</h2>
-            <p className="mt-5 max-w-prose text-body text-ink-60">{body}</p>
+            <p className="mt-5 max-w-prose hyphens-auto text-justify text-body text-ink-60">{body}</p>
           </div>
           <div className="md:col-span-4">
             <p className="font-serif text-card text-ink">{address}</p>
