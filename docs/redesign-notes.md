@@ -548,6 +548,32 @@ point of it. Sizes vary again, from 391 by 220 to 550 by 258, and the gaps do
 not: every one measures 55 to 58px, horizontally and vertically. Random in the
 sizes, regular in the spacing.
 
+### Typeface
+
+The site now uses the three faces innocents.no uses.
+
+| role | was | now |
+| --- | --- | --- |
+| display | IBM Plex Serif | Fraunces |
+| text | IBM Plex Sans | Inter |
+| labels | JetBrains Mono | JetBrains Mono |
+
+The mono was already the same face, so only the serif and the sans changed.
+All three are Google Fonts under the Open Font Licence, so they were requested
+through `next/font/google` rather than copied off the reference site, and there
+is no licence question hanging over them.
+
+Fraunces and Inter are both variable, so each arrives as one file covering the
+whole weight range rather than one file per weight. The English page pulls three
+woff2 files in total.
+
+Arabic keeps IBM Plex Sans Arabic, because neither Fraunces nor Inter carries
+an Arabic script and the Arabic locale would otherwise fall back to a system
+face.
+
+Fallback stacks match the reference as well: Times New Roman behind the serif,
+system-ui behind the sans.
+
 ## How this branch is deployed
 
 `main` deploys to the original Vercel project. This branch has its own project

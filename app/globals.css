@@ -29,8 +29,7 @@ body {
 body {
   background-color: #faf8f4;
   color: #1a1a18;
-  font-family: var(--font-sans), var(--font-sans-arabic), ui-sans-serif, system-ui,
-    sans-serif;
+  font-family: var(--font-sans), var(--font-sans-arabic), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }

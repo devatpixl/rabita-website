@@ -31,11 +31,10 @@ const config: Config = {
         rule: '#E4DED3',
       },
       fontFamily: {
-        serif: ['var(--font-serif)', 'ui-serif', 'Georgia', 'serif'],
+        serif: ['var(--font-serif)', 'Times New Roman', 'serif'],
         sans: [
           'var(--font-sans)',
           'var(--font-sans-arabic)',
-          'ui-sans-serif',
           'system-ui',
           'sans-serif',
         ],

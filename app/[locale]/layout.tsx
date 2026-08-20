@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
-import { jetbrainsMono, plexSans, plexSansArabic, plexSerif } from '../fonts';
+import { fraunces, inter, jetbrainsMono, plexSansArabic } from '../fonts';
 import { ConsentBanner } from '@/components/consent-banner';
 import { Footer } from '@/components/footer';
 import { GivingSheet } from '@/components/giving-sheet';
@@ -53,7 +53,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={dir}
-      className={`${plexSerif.variable} ${plexSans.variable} ${plexSansArabic.variable} ${jetbrainsMono.variable}`}
+      className={`${fraunces.variable} ${inter.variable} ${plexSansArabic.variable} ${jetbrainsMono.variable}`}
     >
       <body className="bg-paper text-ink antialiased">
         <NextIntlClientProvider messages={messages} locale={locale}>

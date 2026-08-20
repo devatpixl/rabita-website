@@ -1,22 +1,21 @@
-import { IBM_Plex_Sans, IBM_Plex_Sans_Arabic, IBM_Plex_Serif, JetBrains_Mono } from 'next/font/google';
+import { Fraunces, IBM_Plex_Sans_Arabic, Inter, JetBrains_Mono } from 'next/font/google';
 
-// One superfamily so Arabic pages keep the same rhythm as Latin ones.
-// Weights kept minimal so the font payload stays small on 4G — §8.
+// The three faces innocents.no uses: Fraunces to display, Inter to read, JetBrains Mono to label.
 
-export const plexSerif = IBM_Plex_Serif({
-  subsets: ['latin', 'latin-ext'],
-  weight: ['600'],
+// Variable, so the whole weight range arrives in one file rather than one per weight.
+export const fraunces = Fraunces({
+  subsets: ['latin'],
   variable: '--font-serif',
   display: 'swap',
 });
 
-export const plexSans = IBM_Plex_Sans({
+export const inter = Inter({
   subsets: ['latin', 'latin-ext'],
-  weight: ['400', '600'],
   variable: '--font-sans',
   display: 'swap',
 });
 
+// Neither Latin face carries Arabic, so the Arabic locale keeps its own sans.
 export const plexSansArabic = IBM_Plex_Sans_Arabic({
   subsets: ['arabic'],
   weight: ['400', '600'],
@@ -24,9 +23,7 @@ export const plexSansArabic = IBM_Plex_Sans_Arabic({
   display: 'swap',
 });
 
-// Third face — editorial mono for eyebrows, datelines, phase labels and
-// tabular figures on the campaign meter. The single biggest lever for
-// "newsroom" register (§2A of the redesign plan).
+// Editorial mono for eyebrows, datelines, phase labels and tabular figures.
 export const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
