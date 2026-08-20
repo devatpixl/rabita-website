@@ -139,7 +139,7 @@ export function DesktopNav() {
             onMouseLeave={close}
             className="absolute inset-x-0 top-full hidden md:block"
           >
-            <div className="mx-auto mt-2 w-full max-w-[84rem] rounded-3xl border border-rule bg-paper px-10 py-6 shadow-[0_24px_48px_-28px_rgba(0,0,0,0.4)]">
+            <div className="mx-auto mt-1 w-full max-w-[84rem] rounded-3xl border border-rule bg-paper px-9 py-4 shadow-[0_24px_48px_-28px_rgba(0,0,0,0.4)]">
               <MegaPanel navKey={openKey} onNavigate={() => setOpenKey(null)} />
             </div>
           </motion.div>
@@ -165,13 +165,13 @@ function MegaPanel({ navKey, onNavigate }: { navKey: NavKey; onNavigate: () => v
       <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60">
         {t('overview')} {t(`items.${navKey}`)}
       </p>
-      <ul className="mt-4 grid gap-x-10 gap-y-0 md:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-3 grid gap-x-10 gap-y-0 md:grid-cols-2 lg:grid-cols-3">
         {items.map((item) => (
           <li key={item.href}>
             <LinkVT
               href={`/${locale}${item.href}`}
               onClick={onNavigate}
-              className="group block border-t border-rule py-3 transition-colors hover:border-gold-deep"
+              className="group block border-t border-rule py-2 transition-colors hover:border-gold-deep"
             >
               <span className="flex items-baseline justify-between gap-4">
                 <span className="font-serif text-[1.05rem] text-ink transition-colors group-hover:text-gold-deep">
@@ -184,7 +184,7 @@ function MegaPanel({ navKey, onNavigate }: { navKey: NavKey; onNavigate: () => v
                   &rarr;
                 </span>
               </span>
-              <span className="mt-1 block text-[0.85rem] leading-relaxed text-ink-60">
+              <span className="mt-0.5 block text-[0.85rem] leading-snug text-ink-60">
                 {item.blurb}
               </span>
             </LinkVT>
