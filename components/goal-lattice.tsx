@@ -36,12 +36,7 @@ export function GoalLattice({
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setPlay(true);
-          io.disconnect();
-        }
-      },
+      ([e]) => setPlay(e.isIntersecting),
       { threshold: 0.25 },
     );
     io.observe(el);
@@ -51,7 +46,7 @@ export function GoalLattice({
   return (
     <div ref={ref} className={cn('', className)}>
       <div
-        className="grid gap-[10px]"
+        className="grid gap-[9px]"
         style={{ gridTemplateColumns: `repeat(${COLS}, minmax(0, 1fr))` }}
         role="img"
         aria-label={caption}
@@ -79,7 +74,7 @@ export function GoalLattice({
           );
         })}
       </div>
-      <p className="mt-6 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[0.75rem] uppercase tracking-[0.14em]">
+      <p className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[0.75rem] uppercase tracking-[0.14em]">
         {countLabel && (
           <>
             <span className="text-gold-deep tabular-nums">{countLabel}</span>

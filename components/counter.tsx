@@ -25,8 +25,7 @@ export function Counter({ to, locale, mode = 'onView', duration = 1.4, className
   const ref = useRef<HTMLSpanElement | null>(null);
   const value = useMotionValue(mode === 'onView' ? 0 : to);
   const [display, setDisplay] = useState<string>(formatAmount(locale, to));
-  const started = useRef(false);
-  const inView = useInView(ref, { once: true, amount: 0.4 });
+  const inView = useInView(ref, { amount: 0.4 });
 
   // Sync displayed text as the motion value ticks.
   useEffect(() => {
@@ -34,11 +33,14 @@ export function Counter({ to, locale, mode = 'onView', duration = 1.4, className
     return () => unsub();
   }, [value, locale]);
 
-  // onView: fire once on first entry.
+  // onView: counts up on every entry, and resets to zero on the way out so
+  // the roll-up plays again rather than sitting on its final value.
   useEffect(() => {
     if (mode !== 'onView') return;
-    if (!inView || started.current) return;
-    started.current = true;
+    if (!inView) {
+      value.set(0);
+      return;
+    }
     const prefersReduced =
       typeof window !== 'undefined' &&
       window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;

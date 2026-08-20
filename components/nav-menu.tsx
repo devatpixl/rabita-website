@@ -139,7 +139,7 @@ export function DesktopNav() {
             onMouseLeave={close}
             className="absolute inset-x-0 top-full hidden md:block"
           >
-            <div className="mx-auto mt-1 w-full max-w-[84rem] rounded-3xl border border-rule bg-paper px-9 py-4 shadow-[0_24px_48px_-28px_rgba(0,0,0,0.4)]">
+            <div className="mx-auto -mt-[7px] w-full max-w-[84rem] rounded-3xl border border-rule bg-paper px-9 py-4 shadow-[0_24px_48px_-28px_rgba(0,0,0,0.4)]">
               <MegaPanel navKey={openKey} onNavigate={() => setOpenKey(null)} />
             </div>
           </motion.div>

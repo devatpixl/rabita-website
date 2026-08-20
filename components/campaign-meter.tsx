@@ -38,10 +38,10 @@ export async function CampaignMeter() {
   const active: PhaseKey = currentPhaseKey();
 
   return (
-    <section id="byggeregnskap" aria-labelledby="meter-heading" className="bg-paper py-section-lg">
+    <section id="byggeregnskap" aria-labelledby="meter-heading" className="bg-paper py-section-md">
       <div className="mx-auto max-w-6xl px-6">
         {/* Eyebrow row: gold-deep pulse dot + mono editorial dateline. */}
-        <div className="mb-12 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[12px] uppercase tracking-[0.14em] text-ink-60">
+        <div className="mb-8 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[12px] uppercase tracking-[0.14em] text-ink-60">
           <span className="pulse-dot text-gold-deep" aria-hidden />
           <span className="text-gold-deep">{t('eyebrow')}</span>
           <span aria-hidden className="text-ink-40">·</span>
@@ -49,9 +49,9 @@ export async function CampaignMeter() {
         </div>
 
         {/* HEAD: the total, and the figures that qualify it, on one baseline. */}
-        <div className="flex flex-col gap-8 border-b border-rule pb-10 md:flex-row md:items-end md:justify-between md:gap-12">
+        <div className="flex flex-col gap-6 border-b border-rule pb-7 md:flex-row md:items-end md:justify-between md:gap-12">
           <div className="shrink-0">
-            <div className="mb-5 flex items-center gap-3">
+            <div className="mb-4 flex items-center gap-3">
               <span aria-hidden className="h-px w-10 bg-gold" />
               <span className="font-mono text-[12px] uppercase tracking-[0.16em] text-gold-deep">
                 {t('label')}
@@ -95,7 +95,7 @@ export async function CampaignMeter() {
 
         {/* SCALE: the build years as equal bands across the full measure. */}
         <FundingScale
-          className="mt-14"
+          className="mt-10"
           percent={pct}
           pctLabel={`${pctInt} %`}
           stations={PHASES.map((p, i) => ({
@@ -107,7 +107,7 @@ export async function CampaignMeter() {
         />
 
         {/* FOOT: lattice beside the sub-campaign card, both closing level. */}
-        <div className="mt-20 grid gap-12 md:grid-cols-12 md:items-stretch md:gap-16">
+        <div className="mt-12 grid gap-8 md:grid-cols-12 md:items-stretch md:gap-12">
           <div className="md:col-span-7 md:self-center">
             <GoalLattice
               percent={pct}
@@ -116,7 +116,7 @@ export async function CampaignMeter() {
             />
           </div>
 
-          <aside className="flex flex-col rounded-2xl bg-paper-2 p-8 md:col-span-5 md:p-10">
+          <aside className="flex flex-col rounded-2xl bg-paper-2 p-7 md:col-span-5 md:p-8">
             <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-gold-deep">
               {t('sub.label')} · {SUB_CAMPAIGN.name}
             </p>
@@ -138,11 +138,11 @@ export async function CampaignMeter() {
               {subPctInt} % {t('financed')}
             </p>
 
-            <p className="mt-6 max-w-prose text-[15px] leading-relaxed text-ink-60">
+            <p className="mt-5 max-w-prose text-[15px] leading-relaxed text-ink-60">
               {t('sub.body')}
             </p>
 
-            <div className="mt-auto pt-8">
+            <div className="mt-auto pt-6">
               <GiveCTA label={t('give')} fullWidth />
             </div>
           </aside>

@@ -48,7 +48,7 @@ export function PrayerToday() {
   const [mounted, setMounted] = useState(false);
   const [state, setState] = useState<ReturnType<typeof windowNow> | null>(null);
   const root = useRef<HTMLDivElement>(null);
-  const live = useInView(root, { once: true, margin: '-10% 0px' });
+  const live = useInView(root, { margin: '-10% 0px' });
 
   useEffect(() => setMounted(true), []);
   const still = mounted && reduced === true;

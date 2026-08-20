@@ -31,12 +31,7 @@ export function FundingScale({
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setRun(target);
-          io.disconnect();
-        }
-      },
+      ([e]) => setRun(e.isIntersecting ? target : 0),
       { threshold: 0.3 },
     );
     io.observe(el);
@@ -105,7 +100,7 @@ export function FundingScale({
          rule, so the last label sits inside its own band instead of hanging
          two thirds along an otherwise empty line. */}
       <ol
-        className="mt-4 grid"
+        className="mt-3 grid"
         style={{ gridTemplateColumns: `repeat(${stations.length}, minmax(0, 1fr))` }}
       >
         {stations.map((s) => (

@@ -19,7 +19,7 @@ export async function PrayerVisit() {
   return (
     <Section id="bonn-og-besok" tone="paper-2">
       <SectionBody>
-        <div className="mb-12 md:mb-16">
+        <div className="mb-8 md:mb-10">
           {/* Eyebrow and the open sign share one dateline, so the sign reads as
              part of the section head instead of floating beside the headline. */}
           <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
@@ -29,10 +29,10 @@ export async function PrayerVisit() {
               {t('seal')}
             </p>
           </div>
-          <SectionHeading className="mt-4 max-w-2xl">{t('heading')}</SectionHeading>
+          <SectionHeading className="mt-3 max-w-2xl">{t('heading')}</SectionHeading>
         </div>
 
-        <div className="grid gap-12 md:grid-cols-12 md:gap-x-16">
+        <div className="grid gap-10 md:grid-cols-12 md:gap-x-12">
           <div className="md:col-span-7">
             <div id="bonnetider">
               <h3 className="mb-4 font-serif text-card text-ink">{t('todayHeading')}</h3>
@@ -45,12 +45,12 @@ export async function PrayerVisit() {
               </Link>
             </div>
 
-            <div className="mt-8 border-t border-rule pt-10">
+            <div className="mt-6 border-t border-rule pt-8">
               <h3 className="font-serif text-card text-ink">{t('visitHeading')}</h3>
 
               {/* Address and hours as a two-line ledger, so the street and the
                  opening times read as data rather than as more paragraphs. */}
-              <dl className="mt-6 grid gap-x-8 gap-y-4 sm:grid-cols-2">
+              <dl className="mt-5 grid gap-x-8 gap-y-4 sm:grid-cols-2">
                 <div>
                   <dt className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
                     {t('addressLabel')}
@@ -68,9 +68,9 @@ export async function PrayerVisit() {
                 </div>
               </dl>
 
-              <p className="mt-8 max-w-prose text-body text-ink">{t('groupsBody')}</p>
+              <p className="mt-6 max-w-prose text-body text-ink">{t('groupsBody')}</p>
 
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-6 flex flex-wrap gap-3">
                 <Link
                   href={`/${locale}/besok-oss`}
                   className="inline-flex min-h-11 items-center rounded-btn bg-gold-deep px-4 py-2 text-[15px] font-semibold text-paper transition-colors hover:bg-ink"
@@ -93,7 +93,7 @@ export async function PrayerVisit() {
              the column the reader is on. */}
           <div className="md:col-span-5">
             <figure className="md:sticky md:top-28">
-              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg bg-paper">
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-paper">
                 <Image
                   src="/photos/community/visit-door.webp"
                   alt={t('photoAlt')}
@@ -103,7 +103,7 @@ export async function PrayerVisit() {
                   className="editorial-photo object-cover"
                 />
               </div>
-              <figcaption className="mt-4 max-w-[42ch] text-[13px] leading-relaxed text-ink-60">
+              <figcaption className="mt-3 max-w-[42ch] text-[13px] leading-relaxed text-ink-60">
                 {t('photoCaption')}
               </figcaption>
             </figure>

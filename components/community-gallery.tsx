@@ -49,23 +49,26 @@ type Plate = {
   x: number; // centre, % of viewport width
   y: number; // centre, % of viewport height
   vh: number; // plate height, in vh; width follows from the aspect ratio
+  travel: number; // how far it sweeps along the diagonal, in vw
 };
 
+// Four across, three down, sized large enough to read a face. Neighbours are
+// allowed to overlap: they sit at different depths, so the overlap reads as
+// layering rather than as a collision.
 const PLATES: Plate[] = [
-  { key: 'serving', src: '/photos/community/iftar-serving.webp', w: 844, h: 1500, x: 13, y: 22, vh: 21 },
-  { key: 'tables', src: '/photos/community/iftar-tables.webp', w: 1500, h: 1002, x: 38, y: 22, vh: 20 },
-  { key: 'child', src: '/photos/community/bazaar-child.webp', w: 1125, h: 1500, x: 63, y: 21, vh: 22 },
-  { key: 'volunteers', src: '/photos/community/volunteers-two.webp', w: 1500, h: 1002, x: 87, y: 23, vh: 20 },
-  { key: 'circle', src: '/photos/community/womens-circle.webp', w: 1125, h: 1500, x: 11, y: 50, vh: 23 },
-  { key: 'quran', src: '/photos/community/quran-carpet.webp', w: 1500, h: 1125, x: 36, y: 49, vh: 21 },
-  { key: 'street', src: '/photos/community/volunteers-street.webp', w: 1125, h: 1500, x: 64, y: 51, vh: 23 },
-  { key: 'cakes', src: '/photos/community/bazaar-cakes.webp', w: 1125, h: 1500, x: 89, y: 50, vh: 20 },
-  { key: 'sweets', src: '/photos/community/iftar-sweets.webp', w: 1500, h: 1002, x: 14, y: 78, vh: 20 },
-  { key: 'site', src: '/photos/community/site-cleared.webp', w: 1125, h: 1500, x: 38, y: 78, vh: 22 },
-  { key: 'embrace', src: '/photos/community/welcome-embrace.webp', w: 888, h: 1500, x: 62, y: 79, vh: 20 },
-  { key: 'dress', src: '/photos/community/bazaar-dress.webp', w: 1125, h: 1500, x: 88, y: 77, vh: 21 },
+  { key: 'serving', src: '/photos/community/iftar-serving.webp', w: 844, h: 1500, x: 12, y: 26, vh: 30, travel: 20 },
+  { key: 'tables', src: '/photos/community/iftar-tables.webp', w: 1500, h: 1002, x: 37, y: 24, vh: 26, travel: 13 },
+  { key: 'child', src: '/photos/community/bazaar-child.webp', w: 1125, h: 1500, x: 63, y: 27, vh: 29, travel: 22 },
+  { key: 'volunteers', src: '/photos/community/volunteers-two.webp', w: 1500, h: 1002, x: 85, y: 24, vh: 26, travel: 15 },
+  { key: 'circle', src: '/photos/community/womens-circle.webp', w: 1125, h: 1500, x: 10, y: 52, vh: 29, travel: 11 },
+  { key: 'quran', src: '/photos/community/quran-carpet.webp', w: 1500, h: 1125, x: 36, y: 51, vh: 28, travel: 24 },
+  { key: 'street', src: '/photos/community/volunteers-street.webp', w: 1125, h: 1500, x: 62, y: 52, vh: 29, travel: 14 },
+  { key: 'cakes', src: '/photos/community/bazaar-cakes.webp', w: 1125, h: 1500, x: 87, y: 51, vh: 27, travel: 21 },
+  { key: 'sweets', src: '/photos/community/iftar-sweets.webp', w: 1500, h: 1002, x: 15, y: 77, vh: 26, travel: 23 },
+  { key: 'site', src: '/photos/community/site-cleared.webp', w: 1125, h: 1500, x: 40, y: 76, vh: 29, travel: 12 },
+  { key: 'embrace', src: '/photos/community/welcome-embrace.webp', w: 888, h: 1500, x: 63, y: 78, vh: 28, travel: 19 },
+  { key: 'dress', src: '/photos/community/bazaar-dress.webp', w: 1125, h: 1500, x: 87, y: 76, vh: 29, travel: 16 },
 ];
-
 function DepthPlate({
   plate,
   index,
@@ -81,15 +84,21 @@ function DepthPlate({
   // Each plate leaves and returns a beat after the one before it, so the field
   // breathes instead of moving as one slab.
   const lag = index * 0.012;
-  const z = useTransform(
-    progress,
-    [0 + lag, 0.46 + lag, 0.84 + lag, 1],
-    [0, BACK, FRONT, 0],
+  const stops = [0 + lag, 0.46 + lag, 0.84 + lag, 1];
+
+  const z = useTransform(progress, stops, [0, BACK, FRONT, 0]);
+  const opacity = useTransform(progress, stops, [1, 0.45, 1, 1]);
+
+  // The whole field also sweeps up and to the left across the section, each
+  // plate at its own rate. Deeper travel on the plates that go furthest back,
+  // so the diagonal reads as parallax rather than as a slide.
+  const dx = plate.travel;
+  const dy = plate.travel * 0.62;
+  const driftX = useTransform(progress, (p: number) =>
+    `calc(-50% + ${((0.5 - p) * dx).toFixed(3)}vw)`,
   );
-  const opacity = useTransform(
-    progress,
-    [0 + lag, 0.46 + lag, 0.84 + lag, 1],
-    [1, 0.45, 1, 1],
+  const driftY = useTransform(progress, (p: number) =>
+    `calc(-50% + ${((p - 0.5) * dy).toFixed(3)}vh)`,
   );
 
   return (
@@ -100,8 +109,8 @@ function DepthPlate({
         top: `${plate.y}%`,
         height: `${plate.vh}vh`,
         aspectRatio: `${plate.w} / ${plate.h}`,
-        x: '-50%',
-        y: '-50%',
+        x: driftX,
+        y: driftY,
         z,
         opacity,
       }}
@@ -111,7 +120,7 @@ function DepthPlate({
           src={plate.src}
           alt={alt}
           fill
-          sizes="20vw"
+          sizes="30vw"
           className="object-cover"
           style={{ filter: GRADE }}
         />
@@ -174,14 +183,14 @@ export function CommunityGallery() {
       <section
         id="fellesskapet"
         aria-labelledby="community-gallery-heading"
-        className="bg-dusk py-section-md"
+        className="bg-dusk py-section-sm"
       >
         <div className="mx-auto max-w-6xl px-6">
           <Eyebrow tone="gold">{t('eyebrow')}</Eyebrow>
           <div className="mt-3">{heading}</div>
           <p className="mt-5 max-w-prose text-body text-dusk-60">{t('body')}</p>
 
-          <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
             {PLATES.map((p) => (
               <div
                 key={p.key}
@@ -211,7 +220,7 @@ export function CommunityGallery() {
       id="fellesskapet"
       aria-labelledby="community-gallery-heading"
       className="relative bg-dusk"
-      style={{ height: '300vh' }}
+      style={{ height: '220vh' }}
     >
       <div
         className="sticky top-0 h-screen overflow-hidden"

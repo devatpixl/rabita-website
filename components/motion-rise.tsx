@@ -28,11 +28,14 @@ export function MotionRise({
     }
     const el = ref.current;
     if (!el) return;
+    // Replays on every pass, up or down, rather than firing once for the
+    // lifetime of the page.
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           window.setTimeout(() => setVisible(true), delay);
-          io.disconnect();
+        } else {
+          setVisible(false);
         }
       },
       { rootMargin: '0px 0px -10% 0px', threshold: 0.12 },

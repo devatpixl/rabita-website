@@ -32,12 +32,7 @@ export function SplitReveal({
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          io.disconnect();
-        }
-      },
+      ([entry]) => setVisible(entry.isIntersecting),
       { rootMargin: '0px 0px -10% 0px', threshold: 0.2 },
     );
     io.observe(el);

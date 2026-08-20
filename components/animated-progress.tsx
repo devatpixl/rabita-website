@@ -30,12 +30,7 @@ export function AnimatedProgress({
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setWidth(target);
-          io.disconnect();
-        }
-      },
+      ([entry]) => setWidth(entry.isIntersecting ? target : 0),
       { threshold: 0.2 },
     );
     io.observe(el);

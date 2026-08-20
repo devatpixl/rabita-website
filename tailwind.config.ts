@@ -59,9 +59,9 @@ const config: Config = {
       },
       // Section rhythm. Two sections meeting stack their padding, so a 10rem opener meant 320px of empty page.
       spacing: {
-        'section-sm': '4.5rem',
-        'section-md': '6rem',
-        'section-lg': '7rem',
+        'section-sm': '3rem',
+        'section-md': '3.75rem',
+        'section-lg': '4.5rem',
       },
       borderRadius: {
         chip: '4px',
