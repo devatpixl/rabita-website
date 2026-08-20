@@ -37,10 +37,13 @@ export function ZoomBand() {
   const band = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: band, offset: ['start end', 'end start'] });
 
-  // The plate opens from a small frame to full bleed, and its picture pushes in as it goes.
-  const plateW = useTransform(scrollYProgress, [0.1, 0.34], ['34vw', '104vw']);
-  const plateH = useTransform(scrollYProgress, [0.1, 0.34], ['32vh', '104vh']);
-  const radius = useTransform(scrollYProgress, [0.1, 0.34], [22, 0]);
+  // The plate opens from a small frame to full bleed, and its picture pushes in
+  // as it goes. The opening is a `scale` on a plate that is already full size,
+  // not an animated width and height. Width and height are layout properties:
+  // driving them from scroll made the browser re-lay-out and repaint a
+  // full-screen masked element on every frame, which is what made this band
+  // stutter. Scale is composited, so the same move now costs nothing.
+  const open = useTransform(scrollYProgress, [0.1, 0.34], [0.32, 1]);
   const push = useTransform(scrollYProgress, [0.18, 0.82], [1.24, 1]);
 
   // The rooms go back as it comes forward.
@@ -62,7 +65,7 @@ export function ZoomBand() {
         <motion.div
           key={r.src}
           aria-hidden
-          className="absolute inset-0 hidden items-center justify-center lg:flex"
+          className="absolute inset-0 hidden items-center justify-center will-change-transform lg:flex"
           style={still ? { opacity: 0 } : { opacity: roomsOut, scale: roomsAway }}
         >
           <div className={`relative overflow-hidden rounded-xl ${r.size} ${r.at}`} style={FEATHER}>
@@ -75,13 +78,17 @@ export function ZoomBand() {
       <div className="absolute inset-0 flex items-center justify-center">
         <motion.div
           className="relative overflow-hidden will-change-transform"
-          style={
-            still
-              ? { width: '104vw', height: '104vh', borderRadius: 0, ...FEATHER }
-              : { width: plateW, height: plateH, borderRadius: radius, ...FEATHER }
-          }
+          style={{
+            width: '104vw',
+            height: '104vh',
+            ...FEATHER,
+            ...(still ? null : { scale: open }),
+          }}
         >
-          <motion.div className="absolute inset-0" style={still ? undefined : { scale: push }}>
+          <motion.div
+            className="absolute inset-0 will-change-transform"
+            style={still ? undefined : { scale: push }}
+          >
             <Image
               src="/photos/band-facade.webp"
               alt={t('alt')}
