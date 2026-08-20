@@ -60,7 +60,7 @@ export async function CampaignMeter() {
 
             <h2
               id="meter-heading"
-              className="flex items-baseline gap-3 whitespace-nowrap font-serif leading-none tabular-nums text-ink tracking-[-0.025em]"
+              className="flex items-baseline gap-3 font-serif leading-none tabular-nums text-ink tracking-[-0.025em] md:whitespace-nowrap"
             >
               <span className="text-[clamp(3rem,7.5vw,5rem)]">
                 <Counter to={raised} locale={locale} />
@@ -70,12 +70,12 @@ export async function CampaignMeter() {
           </div>
 
           {/* Qualifiers sit as a small table so the numbers line up under each other. */}
-          <dl className="grid grid-cols-2 gap-x-10 gap-y-4 md:text-end">
+          <dl className="grid gap-x-10 gap-y-6 sm:grid-cols-2 sm:gap-y-4 md:text-end">
             <div>
               <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-60">
                 {t('of')} {formatAmount(locale, goal)} kr
               </dt>
-              <dd className="mt-1 whitespace-nowrap font-serif text-[1.5rem] leading-none tabular-nums text-ink">
+              <dd className="mt-1 font-serif text-[1.5rem] leading-none tabular-nums text-ink md:whitespace-nowrap">
                 {pctInt} %{' '}
                 <span className="font-sans text-[13px] font-normal text-ink-60">
                   {t('financed')}
@@ -86,7 +86,7 @@ export async function CampaignMeter() {
               <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-60">
                 {tPhase(active)} · {PHASES.find((p) => p.key === active)?.year}
               </dt>
-              <dd className="mt-1 whitespace-nowrap font-serif text-[1.5rem] leading-none tabular-nums text-gold-deep">
+              <dd className="mt-1 font-serif text-[1.5rem] leading-none tabular-nums text-gold-deep md:whitespace-nowrap">
                 {t('lastMonth', { amount: formatAmount(locale, CAMPAIGN.lastMonthNok) })}
               </dd>
             </div>
