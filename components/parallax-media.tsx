@@ -3,20 +3,22 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 import { motion, useMotionValue, useReducedMotion } from 'motion/react';
 
-// Holds a figure level with the section's opening text while the section is
-// arriving, and brings it down to sit level with the top of the column beside
-// it exactly as the section reaches the top of the screen.
+// Walks a figure down the whole length of the column beside it as the section
+// scrolls through. It starts level with the section's opening text and finishes
+// with its bottom level with the bottom of that column, and it is moving the
+// entire way rather than parking part way down.
 //
 // Three things make it land right:
 //
-//   The distance is measured, not guessed. The figure's grid row starts below
-//   the heading block, so the rise it needs is the gap between its own top and
-//   the top of that heading. Re-measured on resize, so it holds at any
-//   viewport and for any length of copy.
+//   Both ends are measured, not guessed. The top of the travel is the gap up to
+//   the heading block; the bottom is whatever is left of the row underneath the
+//   figure. Re-measured on resize, so it holds at any viewport and for any
+//   length of copy.
 //
-//   The progress is measured against the section, not against the figure. Off
-//   the figure, the travel finished a few hundred pixels late, which is what
-//   left the photograph sitting short of the column.
+//   The progress is measured against the section, not against the figure, and
+//   it runs from the section arriving at the bottom of the screen to the whole
+//   of it being on screen. That is the window in which the reader can actually
+//   see the column, so it is the window the photograph travels in.
 //
 //   The travel is read straight off scroll position, with no spring in the
 //   way. A spring always trails the wheel by its own settling time, which is
@@ -47,20 +49,24 @@ export function ParallaxMedia({
 
     // Only the inner child is transformed, so these boxes are the untransformed
     // layout positions and the measurement stays stable while scrolling.
-    let rise = 0;
+    let from = 0;
+    let to = 0;
     const measure = () => {
-      rise = Math.max(0, el.getBoundingClientRect().top - header.getBoundingClientRect().top);
+      const fig = el.getBoundingClientRect();
+      from = Math.min(0, header.getBoundingClientRect().top - fig.top);
+      to = Math.max(0, row.getBoundingClientRect().bottom - fig.bottom);
     };
 
     let frame = 0;
     const update = () => {
       frame = 0;
       const vh = window.innerHeight || 1;
-      const top = section.getBoundingClientRect().top;
-      // 0 when the section's top meets the bottom of the screen, 1 when it
-      // reaches the top. Past either end it holds.
-      const p = Math.min(1, Math.max(0, (vh - top) / vh));
-      y.set(-rise * (1 - p));
+      const rect = section.getBoundingClientRect();
+      const span = rect.height || 1;
+      // 0 when the section's top meets the bottom of the screen, 1 once its
+      // bottom has come up to meet the bottom of the screen too.
+      const p = Math.min(1, Math.max(0, (vh - rect.top) / span));
+      y.set(from + (to - from) * p);
     };
 
     const onScroll = () => {
