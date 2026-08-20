@@ -92,7 +92,7 @@ export function BuildingRises() {
       className={cn(
         'relative bg-paper-2',
         // Outer track: 8 steps → 800vh desktop, 600vh mobile.
-        reduced ? '' : 'h-[600vh] md:h-[800vh]',
+        reduced ? '' : 'h-[380vh] md:h-[800vh]',
       )}
     >
       <div
@@ -106,7 +106,7 @@ export function BuildingRises() {
             <Eyebrow>{t('eyebrow')}</Eyebrow>
             <h2
               id="building-rises-heading"
-              className="mt-2 font-serif text-section leading-[1.1] text-ink max-w-2xl"
+              className="mt-2 max-w-2xl font-serif text-[clamp(1.5rem,6vw,2rem)] leading-[1.1] text-ink md:text-section"
             >
               {t.rich('heading', {
                 em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
@@ -115,13 +115,15 @@ export function BuildingRises() {
           </div>
         </header>
 
-        <div className="flex-1 min-h-0 px-6 pb-3 md:pb-4 mt-2 md:mt-3">
+        <div className="mt-2 min-h-0 flex-1 px-6 pb-14 md:mt-3 md:pb-4">
           <div className="mx-auto max-w-6xl h-full">
-            <div className="grid gap-6 md:grid-cols-12 md:items-stretch h-full">
+            <div className="grid h-full gap-3 md:grid-cols-12 md:items-stretch md:gap-6">
               <div className="md:col-span-4 lg:col-span-3 flex md:items-center">
                 <LeftPanel step={effectiveStep} activeFloor={activeFloor} />
               </div>
-              <div className="md:col-span-8 lg:col-span-9 h-full flex items-center justify-center min-h-0">
+              <div
+                className="flex h-full min-h-0 items-center justify-center [mask-image:linear-gradient(to_right,black_84%,transparent_100%)] md:col-span-8 md:[mask-image:none] lg:col-span-9"
+              >
                 <BuildingSVG
                   step={effectiveStep}
                   activeFloor={activeFloor}
@@ -240,13 +242,24 @@ function BuildingSVG({
   labelT: ReturnType<typeof useTranslations>;
 }) {
   const { w, h } = BUILDING_VIEWBOX;
+  // Starts true to match what the server rendered. If it started at the real value,
+  // hydration would find the state already correct, never re-render, and leave the
+  // server's viewBox attribute in the DOM.
+  const [wide, setWide] = useState(true);
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)');
+    const on = () => setWide(mq.matches);
+    on();
+    mq.addEventListener('change', on);
+    return () => mq.removeEventListener('change', on);
+  }, []);
   const isIntro = activeFloor < 0;
   const anyFloorLanded = activeFloor >= 0;
   const introVisibleOpacity = isIntro ? 1 : 0;
 
   return (
     <svg
-      viewBox={`0 0 ${w} ${h}`}
+      viewBox={wide ? `0 0 ${w} ${h}` : `0 0 400 ${h}`}
       preserveAspectRatio="xMidYMid meet"
       className="w-full h-full max-h-full"
       role="img"

@@ -67,15 +67,16 @@ export function ConsentBanner() {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.32, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed bottom-0 z-50 w-full border-t border-rule bg-paper shadow-[0_24px_48px_-24px_rgba(0,0,0,0.35)] sm:bottom-4 sm:start-4 sm:w-[min(23rem,calc(100vw-2rem))] sm:rounded-lg sm:border"
+      // On a phone it clears the give bar and stays short; from sm up it is the corner card again
+      className="fixed bottom-[calc(3.5rem+env(safe-area-inset-bottom))] z-50 w-full border-t border-rule bg-paper shadow-[0_24px_48px_-24px_rgba(0,0,0,0.35)] sm:bottom-4 sm:start-4 sm:w-[min(23rem,calc(100vw-2rem))] sm:rounded-lg sm:border"
     >
-      <div className="px-4 py-3.5">
-        <div className="flex flex-col gap-3">
+      <div className="px-4 py-3 sm:py-3.5">
+        <div className="flex flex-col gap-2.5 sm:gap-3">
           <div>
-            <p id="consent-title" className="font-serif text-card text-ink">
+            <p id="consent-title" className="font-serif text-[1rem] leading-tight text-ink sm:text-card">
               {t('title')}
             </p>
-            <p className="mt-1 text-[0.85rem] leading-snug text-ink-60">{t('body')}</p>
+            <p className="mt-1 line-clamp-2 text-[0.8125rem] leading-snug text-ink-60 sm:line-clamp-none sm:text-[0.85rem]">{t('body')}</p>
             {detailOpen && (
               <div className="mt-4 space-y-3 border-t border-rule pt-4 text-body text-ink">
                 <label className="flex min-h-11 items-start gap-3">
@@ -100,7 +101,7 @@ export function ConsentBanner() {
               </div>
             )}
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex gap-2 sm:flex-wrap">
             {detailOpen ? (
               <button type="button" onClick={savePref}
                 className="min-h-11 rounded-btn bg-ink px-4 py-2 text-body font-semibold text-paper">
@@ -109,17 +110,17 @@ export function ConsentBanner() {
             ) : (
               <>
                 <button type="button" onClick={rejectAll}
-                  className="min-h-11 rounded-btn border border-ink px-4 py-2 text-body font-semibold text-ink">
+                  className="min-h-11 flex-1 rounded-btn border border-ink px-3 py-2 text-[14px] font-semibold text-ink sm:flex-none sm:px-4 sm:text-body">
                   {t('rejectAll')}
                 </button>
                 <button type="button" onClick={acceptAll}
-                  className="min-h-11 rounded-btn bg-ink px-4 py-2 text-body font-semibold text-paper">
+                  className="min-h-11 flex-1 rounded-btn bg-ink px-3 py-2 text-[14px] font-semibold text-paper sm:flex-none sm:px-4 sm:text-body">
                   {t('acceptAll')}
                 </button>
               </>
             )}
             <button type="button" onClick={() => setDetailOpen((v) => !v)}
-              className="min-h-11 rounded-btn px-4 py-2 text-body font-semibold text-ink underline underline-offset-4">
+              className="min-h-11 flex-1 rounded-btn px-3 py-2 text-[14px] font-semibold text-ink underline underline-offset-4 sm:flex-none sm:px-4 sm:text-body">
               {detailOpen ? t('less') : t('customise')}
             </button>
           </div>

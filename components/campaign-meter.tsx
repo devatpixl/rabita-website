@@ -72,7 +72,7 @@ export async function CampaignMeter() {
           {/* Qualifiers sit as a small table so the numbers line up under each other. */}
           <dl className="grid gap-x-10 gap-y-6 sm:grid-cols-2 sm:gap-y-4 md:text-end">
             <div>
-              <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-60">
+              <dt className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
                 {t('of')} {formatAmount(locale, goal)} kr
               </dt>
               <dd className="mt-1 font-serif text-[1.5rem] leading-none tabular-nums text-ink md:whitespace-nowrap">
@@ -83,7 +83,7 @@ export async function CampaignMeter() {
               </dd>
             </div>
             <div>
-              <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-60">
+              <dt className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
                 {tPhase(active)} · {PHASES.find((p) => p.key === active)?.year}
               </dt>
               <dd className="mt-1 font-serif text-[1.5rem] leading-none tabular-nums text-gold-deep md:whitespace-nowrap">
@@ -134,7 +134,7 @@ export async function CampaignMeter() {
               className="mt-6 h-2 rounded bg-paper"
               fillClassName="bg-gradient-to-r from-gold to-gold-deep rounded"
             />
-            <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.14em] tabular-nums text-ink-60">
+            <p className="mt-3 font-mono text-[0.75rem] uppercase tracking-[0.14em] tabular-nums text-ink-60">
               {subPctInt} % {t('financed')}
             </p>
 

@@ -171,9 +171,10 @@ export function SadaqaBand() {
             </div>
 
             {/* One track per room, marking where the scroll has got to */}
+            {/* Four names across a phone left each one 68px wide, so they break in half */}
             <ul
-              className="mt-5 grid gap-x-6 gap-y-2"
-              style={{ gridTemplateColumns: `repeat(${count}, minmax(0, 1fr))` }}
+              className="mt-5 grid grid-cols-2 gap-x-6 gap-y-5 md:gap-y-2 md:[grid-template-columns:repeat(var(--rooms),minmax(0,1fr))]"
+              style={{ '--rooms': count } as React.CSSProperties}
             >
               {ROOMS.map((r, i) => (
                 <li key={r.key}>
