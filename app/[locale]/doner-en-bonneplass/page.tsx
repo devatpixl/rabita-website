@@ -1,17 +1,26 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale} from 'next-intl';
 import { useState } from 'react';
 import { PageHeader } from '@/components/page-header';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
 import { RenderingPlaceholder } from '@/components/rendering-placeholder';
 import { openGiveSheet } from '@/components/giving-sheet';
 
+import { Accent } from '@/components/accent';
+import {
+  ProjectAssurance,
+  ProjectBrief,
+  ProjectColumns,
+  ProjectHero,
+} from '@/components/project-page';
 // §4.05 + §5. Sadaqa jariya flow. Name entered and acknowledged, something
 // to send to the family afterwards. Kept on one page for phase-2 shipping;
 // phase-3 adds the certificate email delivery.
 export default function SadaqaPage() {
   const t = useTranslations('sadaqaPage');
+  const tp = useTranslations('projectPages');
+  const locale = useLocale();
   const [name, setName] = useState('');
   const [relation, setRelation] = useState('');
   const [message, setMessage] = useState('');
@@ -38,12 +47,24 @@ export default function SadaqaPage() {
 
   return (
     <main>
-      <PageHeader
-        eyebrow={t('eyebrow')}
-        title={t('title')}
-        lede={t('lede')}
+      <ProjectHero
+        crumb={tp('crumb')}
+        eyebrow={tp('pages.space.eyebrow')}
+        title={tp.rich('pages.space.title', {
+          em: (chunks) => <Accent surface="dusk">{chunks}</Accent>,
+        })}
+        lede={tp('pages.space.lede')}
+        image="/photos/hero-space.webp"
+        alt={tp('pages.space.eyebrow')}
+        primary={{ label: tp('pages.space.primary'), give: true }}
+        secondary={{ label: tp('pages.space.secondary'), href: `/${locale}/moskeprosjektet` }}
       />
-
+      <ProjectBrief label={tp('pages.space.briefLabel')} body={tp('pages.space.brief')} />
+      <ProjectColumns
+        eyebrow={tp('pages.space.colEyebrow')}
+        heading={tp('pages.space.colHeading')}
+        items={tp.raw('pages.space.items') as { title: string; body: string }[]}
+      />
       <Section tone="paper">
         <SectionBody>
           <div className="grid gap-10 md:grid-cols-12 md:items-center">
@@ -95,6 +116,11 @@ export default function SadaqaPage() {
           </div>
         </SectionBody>
       </Section>
+          <ProjectAssurance
+        heading={tp('assurance.heading')}
+        lede={tp('assurance.lede')}
+        items={tp.raw('assurance.items') as { title: string; body: string }[]}
+      />
     </main>
   );
 }

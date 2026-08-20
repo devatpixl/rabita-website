@@ -506,7 +506,7 @@
   "communityGallery": {
     "eyebrow": "الجماعة",
     "heading": "نحن جماعة بالفعل. <em>ما ينقصنا هو المكان.</em>",
-    "body": "صور من إفطار الشارع في غرونلان، وبازار الربيع في يونغستورغيت، وحلقات النساء، ومن أرض المشروع في شارع كالمايرس في الأسبوع الذي جرى فيه إخلاؤها.",
+    "body": "صور من إفطار الشارع في غرونلان، ومدرسة السبت، وبازار الربيع في يونغستورغيت، ومن أرض المشروع في شارع كالمايرس في الأسبوع الذي جرى فيه إخلاؤها.",
     "chapters": {
       "iftar": {
         "alt": "طاولات طويلة تحت الخيام في إفطار الشارع في غرونلان",
@@ -537,6 +537,178 @@
   "zoomBand": {
     "heading": "سبع طوابق، عنوان واحد، مفتوح للمدينة <em>كلّها</em>.",
     "alt": "واجهة رابطة عند الغسق، وشبكتها الماسية مُضاءة من الداخل"
+  },
+  "projectPages": {
+    "crumb": "مشروع المسجد",
+    "assurance": {
+      "heading": "ما يمكنك محاسبتنا عليه.",
+      "lede": "الالتزامات الأربعة نفسها في كل صفحة من هذا القسم.",
+      "items": [
+        {
+          "title": "معتمد للخصم الضريبي",
+          "body": "حتى 25 000 كرونة سنوياً، ونبلّغ المبلغ إلى مصلحة الضرائب."
+        },
+        {
+          "title": "حسابات مُدقّقة",
+          "body": "يدقّقها محاسب معتمد وتُنشر للجميع."
+        },
+        {
+          "title": "رخصة بناء علنية",
+          "body": "معتمدة من بلدية أوسلو، والرخصة في السجل العام."
+        },
+        {
+          "title": "منظمة واحدة منذ 1987",
+          "body": "رابطة، سجل 983 228 364، أول مسجد في أوسلو لا يخصّ جنسية واحدة."
+        }
+      ]
+    },
+    "pages": {
+      "building": {
+        "eyebrow": "المبنى",
+        "title": "سبع طوابق في <em>عنوان واحد</em>.",
+        "lede": "مسجد ومدرسة ومكتبة ومطبخ وقاعة، فوق أرض كالمايرز 8. طابقان تحت الشارع وخمسة فوقه.",
+        "primary": "تبرّع للمبنى",
+        "secondary": "أين تذهب الأموال",
+        "briefLabel": "باختصار",
+        "brief": "The old mosque was demolished in 2025. What replaces it is one building doing the work of five, on a 6 762 square metre plot, designed so the ground floor stays open to the street rather than turning its back on it.",
+        "colEyebrow": "طابقاً بطابق",
+        "colHeading": "ما الغرض من كل طابق.",
+        "items": [
+          {
+            "title": "Prayer halls",
+            "body": "Room for 500 women and 2 000 men across three floors, against 100 places for women today."
+          },
+          {
+            "title": "The school",
+            "body": "The largest Arabic school in Norway, 400 pupils and 19 teachers, in daylight classrooms."
+          },
+          {
+            "title": "Library and youth",
+            "body": "A reading hall and seminar rooms open to the district, with a youth club and a studio."
+          },
+          {
+            "title": "Entrance and cafe",
+            "body": "A ground floor open to the whole city, with no threshold between the street and the building."
+          }
+        ]
+      },
+      "money": {
+        "eyebrow": "أين تذهب الأموال",
+        "title": "محسوبة <em>غرفة بغرفة</em>.",
+        "lede": "Every krone is tied to something physical in the building, and the accounts that prove it are public.",
+        "primary": "تبرّع الآن",
+        "secondary": "انظر المبنى",
+        "briefLabel": "باختصار",
+        "brief": "The campaign is 100 million kroner across three phases. 26 995 179 kroner is in, which is 26 per cent, and the phase it belongs to is stated rather than implied. Rental apartments are part of the building specifically so maintenance never consumes the organisation again.",
+        "colEyebrow": "The record",
+        "colHeading": "What is on paper.",
+        "items": [
+          {
+            "title": "Annual accounts",
+            "body": "Audited by a state authorised auditor and published in full each year."
+          },
+          {
+            "title": "The building permit",
+            "body": "Granted by the Oslo Planning and Building Authority and available to anyone."
+          },
+          {
+            "title": "Tax deduction",
+            "body": "Approved up to 25 000 kr per year, reported to the authorities on your behalf."
+          },
+          {
+            "title": "The organisation",
+            "body": "Det Islamske Forbundet, org.nr. 983 228 364, founded in 1987."
+          }
+        ]
+      },
+      "donors": {
+        "eyebrow": "المتبرعون",
+        "title": "أسماء على <em>الأساس</em>.",
+        "lede": "Gifts over 10 000 kroner are recorded permanently in the building, with the option of a memorial line or an anonymous entry.",
+        "primary": "أضف اسمك",
+        "secondary": "اهدِ مكان صلاة",
+        "briefLabel": "باختصار",
+        "brief": "The foundation wall is not a plaque in a corridor. It is part of the structure, and it records who paid for the building the congregation will use for the next hundred years.",
+        "colEyebrow": "How it works",
+        "colHeading": "From gift to wall.",
+        "items": [
+          {
+            "title": "Give any amount",
+            "body": "Anything from 200 kroner. The wall records gifts from 10 000 upward."
+          },
+          {
+            "title": "Write the entry",
+            "body": "Your name, a memorial line for someone you have lost, or nothing at all."
+          },
+          {
+            "title": "We confirm it",
+            "body": "You receive a receipt for tax, and confirmation of the entry as it will be set."
+          },
+          {
+            "title": "It is built in",
+            "body": "The wall goes up with the building rather than being added to it afterwards."
+          }
+        ]
+      },
+      "space": {
+        "eyebrow": "اهدِ مكان صلاة",
+        "title": "صدقة جارية، هدية <em>باقية</em>.",
+        "lede": "Give a place to pray in the name of someone you have lost. For as long as somebody prays in that room, it counts.",
+        "primary": "اهدِ مكان صلاة",
+        "secondary": "انظر الغرف",
+        "briefLabel": "باختصار",
+        "brief": "One square metre of prayer hall floor is 500 kroner a month for three years. You write the name yourself, and we send you something to pass on to the family.",
+        "colEyebrow": "What you receive",
+        "colHeading": "What happens after you give.",
+        "items": [
+          {
+            "title": "An acknowledgement",
+            "body": "Sent to the family with your message and the name you chose."
+          },
+          {
+            "title": "A certificate",
+            "body": "A digital certificate you can print or forward."
+          },
+          {
+            "title": "An open record",
+            "body": "Where the prayer space sits in the building, stated plainly."
+          },
+          {
+            "title": "A tax receipt",
+            "body": "Deductible up to 25 000 kroner per year, reported for you."
+          }
+        ]
+      },
+      "give": {
+        "eyebrow": "تبرّع",
+        "title": "فيبس أو بطاقة أو <em>بنك</em>.",
+        "lede": "Monthly or one off, in whatever way is easiest. Every route reaches the same account and the same accounts.",
+        "primary": "تبرّع الآن",
+        "secondary": "أين تذهب الأموال",
+        "briefLabel": "باختصار",
+        "brief": "A monthly gift is what lets the building be planned rather than hoped for. Five hundred kroner a month for three years funds one prayer place, and the ladder above that is costed room by room.",
+        "colEyebrow": "The routes",
+        "colHeading": "Four ways to give.",
+        "items": [
+          {
+            "title": "Vipps",
+            "body": "Number 29656. The fastest route, and the one most of the congregation uses."
+          },
+          {
+            "title": "Card",
+            "body": "Monthly or one off, handled through the giving form on this site."
+          },
+          {
+            "title": "Bank transfer",
+            "body": "Account 1503.35.60386. Use your name as the message so we can receipt it."
+          },
+          {
+            "title": "From abroad",
+            "body": "IBAN NO4215033560386, BIC DNBANOKK, for gifts sent from outside Norway."
+          }
+        ]
+      }
+    }
   },
   "whereMoneyGoes": {
     "eyebrow": "إلى أين تذهب الأموال",

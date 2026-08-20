@@ -10,6 +10,13 @@ import { RenderingPlaceholder } from '@/components/rendering-placeholder';
 import { CampaignMeter } from '@/components/campaign-meter';
 import { WhereMoneyGoes } from '@/components/where-money-goes';
 
+import { Accent } from '@/components/accent';
+import {
+  ProjectAssurance,
+  ProjectBrief,
+  ProjectColumns,
+  ProjectHero,
+} from '@/components/project-page';
 export default async function ProjectPage({
   params,
 }: {
@@ -18,12 +25,29 @@ export default async function ProjectPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'projectPage' });
+  const tp = await getTranslations({ locale, namespace: 'projectPages' });
   const l = await getLocale();
 
   return (
     <main>
-      <PageHeader eyebrow={t('eyebrow')} title={t('title')} lede={t('lede')} />
-
+      <ProjectHero
+        crumb={tp('crumb')}
+        eyebrow={tp('pages.building.eyebrow')}
+        title={tp.rich('pages.building.title', {
+          em: (chunks) => <Accent surface="dusk">{chunks}</Accent>,
+        })}
+        lede={tp('pages.building.lede')}
+        image="/photos/hero-project.webp"
+        alt={tp('pages.building.eyebrow')}
+        primary={{ label: tp('pages.building.primary'), give: true }}
+        secondary={{ label: tp('pages.building.secondary'), href: `/${locale}/hvor-pengene-gar` }}
+      />
+      <ProjectBrief label={tp('pages.building.briefLabel')} body={tp('pages.building.brief')} />
+      <ProjectColumns
+        eyebrow={tp('pages.building.colEyebrow')}
+        heading={tp('pages.building.colHeading')}
+        items={tp.raw('pages.building.items') as { title: string; body: string }[]}
+      />
       <Section tone="paper">
         <SectionBody>
           <RenderingPlaceholder ratio="hero" caption="Site plan · Norconsult · pending 2560×1440" />
@@ -92,6 +116,11 @@ export default async function ProjectPage({
           </div>
         </SectionBody>
       </Section>
+          <ProjectAssurance
+        heading={tp('assurance.heading')}
+        lede={tp('assurance.lede')}
+        items={tp.raw('assurance.items') as { title: string; body: string }[]}
+      />
     </main>
   );
 }

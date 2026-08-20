@@ -5,6 +5,13 @@ import { PageHeader } from '@/components/page-header';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
 import { CampaignMeter } from '@/components/campaign-meter';
 
+import { Accent } from '@/components/accent';
+import {
+  ProjectAssurance,
+  ProjectBrief,
+  ProjectColumns,
+  ProjectHero,
+} from '@/components/project-page';
 // §6. /hvor-pengene-gar. Anchored subsections for tax deduction, accounts,
 // permit — those anchors are referenced from the home cards and footer.
 export default async function WhereMoneyGoesPage({
@@ -16,14 +23,27 @@ export default async function WhereMoneyGoesPage({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'wmgPage' });
 
+  const tp = await getTranslations({ locale, namespace: 'projectPages' });
   return (
     <main>
-      <PageHeader
-        eyebrow={t('eyebrow')}
-        title={t('title')}
-        lede={t('lede')}
+      <ProjectHero
+        crumb={tp('crumb')}
+        eyebrow={tp('pages.money.eyebrow')}
+        title={tp.rich('pages.money.title', {
+          em: (chunks) => <Accent surface="dusk">{chunks}</Accent>,
+        })}
+        lede={tp('pages.money.lede')}
+        image="/photos/hero-money.webp"
+        alt={tp('pages.money.eyebrow')}
+        primary={{ label: tp('pages.money.primary'), give: true }}
+        secondary={{ label: tp('pages.money.secondary'), href: `/${locale}/moskeprosjektet` }}
       />
-
+      <ProjectBrief label={tp('pages.money.briefLabel')} body={tp('pages.money.brief')} />
+      <ProjectColumns
+        eyebrow={tp('pages.money.colEyebrow')}
+        heading={tp('pages.money.colHeading')}
+        items={tp.raw('pages.money.items') as { title: string; body: string }[]}
+      />
       <CampaignMeter />
 
       <Section id="skattefradrag" tone="paper">
@@ -85,6 +105,11 @@ export default async function WhereMoneyGoesPage({
           </p>
         </SectionBody>
       </Section>
+          <ProjectAssurance
+        heading={tp('assurance.heading')}
+        lede={tp('assurance.lede')}
+        items={tp.raw('assurance.items') as { title: string; body: string }[]}
+      />
     </main>
   );
 }

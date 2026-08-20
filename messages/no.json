@@ -506,7 +506,7 @@
   "communityGallery": {
     "eyebrow": "Fellesskapet",
     "heading": "Vi er allerede et fellesskap. <em>Det vi mangler er rommet.</em>",
-    "body": "Bilder fra gateiftaren på Grønland, vårbasaren på Youngstorget, kvinnegruppene, og tomta i Calmeyers gate uka den ble ryddet.",
+    "body": "Bilder fra gateiftaren på Grønland, lørdagsskolen, vårbasaren på Youngstorget, og tomta i Calmeyers gate uka den ble ryddet.",
     "chapters": {
       "iftar": {
         "alt": "Lange bord under teltene på gateiftaren på Grønland, fulle av gjester",
@@ -537,6 +537,178 @@
   "zoomBand": {
     "heading": "Sju etasjer, én adresse, åpen for hele <em>byen</em>.",
     "alt": "Rabita-fasaden i skumringen, med diamantgitteret opplyst innenfra"
+  },
+  "projectPages": {
+    "crumb": "Moskeprosjektet",
+    "assurance": {
+      "heading": "Hva du kan holde oss til.",
+      "lede": "De samme fire løftene på hver side i denne delen.",
+      "items": [
+        {
+          "title": "Godkjent for skattefradrag",
+          "body": "Opp til 25 000 kr per år. Vi rapporterer beløpet til Skatteetaten."
+        },
+        {
+          "title": "Revidert regnskap",
+          "body": "Årsregnskapet revideres av statsautorisert revisor og er offentlig tilgjengelig."
+        },
+        {
+          "title": "Offentlig byggetillatelse",
+          "body": "Godkjent av Plan- og bygningsetaten i Oslo. Tillatelsen er offentlig."
+        },
+        {
+          "title": "Én organisasjon siden 1987",
+          "body": "Det Islamske Forbundet, org.nr. 983 228 364, den første moskeen i Oslo uten én nasjonalitet."
+        }
+      ]
+    },
+    "pages": {
+      "building": {
+        "eyebrow": "Bygget",
+        "title": "Sju etasjer på <em>én</em> adresse.",
+        "lede": "En moské, en skole, et bibliotek, et kjøkken og en sal, stablet på tomta i Calmeyers gate 8. To etasjer under gata, fem over.",
+        "primary": "Gi til bygget",
+        "secondary": "Hvor pengene går",
+        "briefLabel": "Kort sagt",
+        "brief": "Den gamle moskeen ble revet i 2025. Det som kommer i stedet er ett bygg som gjør jobben til fem, på en tomt på 6 762 kvadratmeter, tegnet slik at første etasje står åpen mot gata.",
+        "colEyebrow": "Etasje for etasje",
+        "colHeading": "Hva hver etasje er til for.",
+        "items": [
+          {
+            "title": "Bønnesaler",
+            "body": "Plass til 500 kvinner og 2 000 menn over tre etasjer, mot 100 plasser for kvinner i dag."
+          },
+          {
+            "title": "Skolen",
+            "body": "Norges største arabiskskole, 400 elever og 19 lærere, i klasserom med dagslys."
+          },
+          {
+            "title": "Bibliotek og ungdom",
+            "body": "Lesesal og seminarrom åpne for bydelen, med ungdomsklubb og studio."
+          },
+          {
+            "title": "Inngang og kafé",
+            "body": "En første etasje åpen for hele byen, uten terskel mellom gata og bygget."
+          }
+        ]
+      },
+      "money": {
+        "eyebrow": "Hvor pengene går",
+        "title": "Kostnadsberegnet rom for <em>rom</em>.",
+        "lede": "Hver krone er knyttet til noe fysisk i bygget, og regnskapet som viser det er offentlig.",
+        "primary": "Gi nå",
+        "secondary": "Se bygget",
+        "briefLabel": "Kort sagt",
+        "brief": "Kampanjen er 100 millioner kroner over tre faser. 26 995 179 kroner er inne, som er 26 prosent, og fasen det hører til står skrevet. Utleieleiligheter er en del av bygget nettopp for at vedlikehold aldri skal spise opp organisasjonen igjen.",
+        "colEyebrow": "Dokumentasjonen",
+        "colHeading": "Hva som står på papiret.",
+        "items": [
+          {
+            "title": "Årsregnskap",
+            "body": "Revidert av statsautorisert revisor og publisert i sin helhet hvert år."
+          },
+          {
+            "title": "Byggetillatelsen",
+            "body": "Gitt av Plan- og bygningsetaten i Oslo og tilgjengelig for alle."
+          },
+          {
+            "title": "Skattefradrag",
+            "body": "Godkjent opp til 25 000 kr per år, rapportert på dine vegne."
+          },
+          {
+            "title": "Organisasjonen",
+            "body": "Det Islamske Forbundet, org.nr. 983 228 364, stiftet i 1987."
+          }
+        ]
+      },
+      "donors": {
+        "eyebrow": "Giverne",
+        "title": "Navn på <em>grunnmuren</em>.",
+        "lede": "Gaver over 10 000 kroner registreres varig i bygget, med mulighet for et minneord eller å bidra anonymt.",
+        "primary": "Sett navnet ditt",
+        "secondary": "Gi en bønneplass",
+        "briefLabel": "Kort sagt",
+        "brief": "Grunnmuren er ikke en plakett i en korridor. Den er en del av konstruksjonen, og den viser hvem som betalte for bygget menigheten skal bruke de neste hundre årene.",
+        "colEyebrow": "Slik fungerer det",
+        "colHeading": "Fra gave til mur.",
+        "items": [
+          {
+            "title": "Gi et hvilket som helst beløp",
+            "body": "Fra 200 kroner. Muren registrerer gaver fra 10 000 og oppover."
+          },
+          {
+            "title": "Skriv teksten",
+            "body": "Ditt navn, et minneord for noen du har mistet, eller ingenting."
+          },
+          {
+            "title": "Vi bekrefter",
+            "body": "Du får kvittering for skatt, og bekreftelse på teksten slik den blir satt."
+          },
+          {
+            "title": "Den bygges inn",
+            "body": "Muren reises sammen med bygget, ikke som et tillegg etterpå."
+          }
+        ]
+      },
+      "space": {
+        "eyebrow": "Gi en bønneplass",
+        "title": "Sadaqa jariya, en gave som <em>varer</em>.",
+        "lede": "Gi en bønneplass i navnet til noen du har mistet. Så lenge noen ber i det rommet, teller den.",
+        "primary": "Gi en bønneplass",
+        "secondary": "Se rommene",
+        "briefLabel": "Kort sagt",
+        "brief": "Én kvadratmeter bønnesalsgulv er 500 kroner i måneden i tre år. Du skriver navnet selv, og vi sender deg noe du kan gi videre til familien.",
+        "colEyebrow": "Hva du får",
+        "colHeading": "Hva som skjer etter at du gir.",
+        "items": [
+          {
+            "title": "En bekreftelse",
+            "body": "Sendt til familien med din hilsen og navnet du valgte."
+          },
+          {
+            "title": "Et bevis",
+            "body": "Et digitalt bevis du kan skrive ut eller sende videre."
+          },
+          {
+            "title": "Åpen oversikt",
+            "body": "Hvor bønneplassen ligger i bygget, sagt rett ut."
+          },
+          {
+            "title": "Skattekvittering",
+            "body": "Fradragsberettiget opp til 25 000 kroner per år, rapportert for deg."
+          }
+        ]
+      },
+      "give": {
+        "eyebrow": "Gi",
+        "title": "Vipps, kort eller <em>bank</em>.",
+        "lede": "Månedlig eller én gang, på den måten som passer best. Alle veier ender i samme konto og samme regnskap.",
+        "primary": "Gi nå",
+        "secondary": "Hvor pengene går",
+        "briefLabel": "Kort sagt",
+        "brief": "En månedlig gave er det som gjør at bygget kan planlegges i stedet for håpes på. Fem hundre kroner i måneden i tre år finansierer én bønneplass, og stigen over det er kostnadsberegnet rom for rom.",
+        "colEyebrow": "Veiene",
+        "colHeading": "Fire måter å gi på.",
+        "items": [
+          {
+            "title": "Vipps",
+            "body": "Nummer 29656. Den raskeste veien, og den menigheten bruker mest."
+          },
+          {
+            "title": "Kort",
+            "body": "Månedlig eller én gang, gjennom giverskjemaet på denne siden."
+          },
+          {
+            "title": "Bankøverføring",
+            "body": "Konto 1503.35.60386. Bruk navnet ditt som melding så vi kan kvittere."
+          },
+          {
+            "title": "Fra utlandet",
+            "body": "IBAN NO4215033560386, BIC DNBANOKK, for gaver sendt fra utenfor Norge."
+          }
+        ]
+      }
+    }
   },
   "whereMoneyGoes": {
     "eyebrow": "Hvor pengene går",

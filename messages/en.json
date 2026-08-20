@@ -506,7 +506,7 @@
   "communityGallery": {
     "eyebrow": "The congregation",
     "heading": "We are already a congregation. <em>What we are missing is the room.</em>",
-    "body": "Photographs from the street iftar on Grønland, the spring bazaar on Youngstorget, the women’s circles, and the site on Calmeyers gate the week it was cleared.",
+    "body": "Photographs from the street iftar on Grønland, the Saturday school, the spring bazaar on Youngstorget, and the site on Calmeyers gate the week it was cleared.",
     "chapters": {
       "iftar": {
         "alt": "Long tables under the tents at the street iftar on Grønland, filled with guests",
@@ -537,6 +537,178 @@
   "zoomBand": {
     "heading": "Seven floors, one address, open to the whole <em>city</em>.",
     "alt": "The Rabita facade at dusk, its diamond lattice lit from within"
+  },
+  "projectPages": {
+    "crumb": "The mosque project",
+    "assurance": {
+      "heading": "What you can hold us to.",
+      "lede": "The same four commitments on every page in this section.",
+      "items": [
+        {
+          "title": "Approved for tax deduction",
+          "body": "Up to 25 000 kr per year. We report the amount to the Norwegian Tax Administration."
+        },
+        {
+          "title": "Audited accounts",
+          "body": "Annual accounts are audited by a state authorised auditor and are publicly available."
+        },
+        {
+          "title": "A public building permit",
+          "body": "Approved by the Oslo Planning and Building Authority. The permit is on the public record."
+        },
+        {
+          "title": "One organisation since 1987",
+          "body": "Det Islamske Forbundet, org.nr. 983 228 364, the first mosque in Oslo not tied to a single nationality."
+        }
+      ]
+    },
+    "pages": {
+      "building": {
+        "eyebrow": "The building",
+        "title": "Seven floors on <em>one</em> address.",
+        "lede": "A mosque, a school, a library, a kitchen and a hall, stacked on the plot at Calmeyers gate 8. Two floors below the street, five above it.",
+        "primary": "Give to the building",
+        "secondary": "Where the money goes",
+        "briefLabel": "In short",
+        "brief": "The old mosque was demolished in 2025. What replaces it is one building doing the work of five, on a 6 762 square metre plot, designed so the ground floor stays open to the street rather than turning its back on it.",
+        "colEyebrow": "Floor by floor",
+        "colHeading": "What each level is for.",
+        "items": [
+          {
+            "title": "Prayer halls",
+            "body": "Room for 500 women and 2 000 men across three floors, against 100 places for women today."
+          },
+          {
+            "title": "The school",
+            "body": "The largest Arabic school in Norway, 400 pupils and 19 teachers, in daylight classrooms."
+          },
+          {
+            "title": "Library and youth",
+            "body": "A reading hall and seminar rooms open to the district, with a youth club and a studio."
+          },
+          {
+            "title": "Entrance and cafe",
+            "body": "A ground floor open to the whole city, with no threshold between the street and the building."
+          }
+        ]
+      },
+      "money": {
+        "eyebrow": "Where the money goes",
+        "title": "Costed room by <em>room</em>.",
+        "lede": "Every krone is tied to something physical in the building, and the accounts that prove it are public.",
+        "primary": "Give now",
+        "secondary": "See the building",
+        "briefLabel": "In short",
+        "brief": "The campaign is 100 million kroner across three phases. 26 995 179 kroner is in, which is 26 per cent, and the phase it belongs to is stated rather than implied. Rental apartments are part of the building specifically so maintenance never consumes the organisation again.",
+        "colEyebrow": "The record",
+        "colHeading": "What is on paper.",
+        "items": [
+          {
+            "title": "Annual accounts",
+            "body": "Audited by a state authorised auditor and published in full each year."
+          },
+          {
+            "title": "The building permit",
+            "body": "Granted by the Oslo Planning and Building Authority and available to anyone."
+          },
+          {
+            "title": "Tax deduction",
+            "body": "Approved up to 25 000 kr per year, reported to the authorities on your behalf."
+          },
+          {
+            "title": "The organisation",
+            "body": "Det Islamske Forbundet, org.nr. 983 228 364, founded in 1987."
+          }
+        ]
+      },
+      "donors": {
+        "eyebrow": "The donors",
+        "title": "Names on the <em>foundation</em> wall.",
+        "lede": "Gifts over 10 000 kroner are recorded permanently in the building, with the option of a memorial line or an anonymous entry.",
+        "primary": "Add your name",
+        "secondary": "Donate a prayer space",
+        "briefLabel": "In short",
+        "brief": "The foundation wall is not a plaque in a corridor. It is part of the structure, and it records who paid for the building the congregation will use for the next hundred years.",
+        "colEyebrow": "How it works",
+        "colHeading": "From gift to wall.",
+        "items": [
+          {
+            "title": "Give any amount",
+            "body": "Anything from 200 kroner. The wall records gifts from 10 000 upward."
+          },
+          {
+            "title": "Write the entry",
+            "body": "Your name, a memorial line for someone you have lost, or nothing at all."
+          },
+          {
+            "title": "We confirm it",
+            "body": "You receive a receipt for tax, and confirmation of the entry as it will be set."
+          },
+          {
+            "title": "It is built in",
+            "body": "The wall goes up with the building rather than being added to it afterwards."
+          }
+        ]
+      },
+      "space": {
+        "eyebrow": "Donate a prayer space",
+        "title": "Sadaqa jariya, a gift that <em>lasts</em>.",
+        "lede": "Give a place to pray in the name of someone you have lost. For as long as somebody prays in that room, it counts.",
+        "primary": "Give a place to pray",
+        "secondary": "See the rooms",
+        "briefLabel": "In short",
+        "brief": "One square metre of prayer hall floor is 500 kroner a month for three years. You write the name yourself, and we send you something to pass on to the family.",
+        "colEyebrow": "What you receive",
+        "colHeading": "What happens after you give.",
+        "items": [
+          {
+            "title": "An acknowledgement",
+            "body": "Sent to the family with your message and the name you chose."
+          },
+          {
+            "title": "A certificate",
+            "body": "A digital certificate you can print or forward."
+          },
+          {
+            "title": "An open record",
+            "body": "Where the prayer space sits in the building, stated plainly."
+          },
+          {
+            "title": "A tax receipt",
+            "body": "Deductible up to 25 000 kroner per year, reported for you."
+          }
+        ]
+      },
+      "give": {
+        "eyebrow": "Give",
+        "title": "Vipps, card or <em>bank</em>.",
+        "lede": "Monthly or one off, in whatever way is easiest. Every route reaches the same account and the same accounts.",
+        "primary": "Give now",
+        "secondary": "Where the money goes",
+        "briefLabel": "In short",
+        "brief": "A monthly gift is what lets the building be planned rather than hoped for. Five hundred kroner a month for three years funds one prayer place, and the ladder above that is costed room by room.",
+        "colEyebrow": "The routes",
+        "colHeading": "Four ways to give.",
+        "items": [
+          {
+            "title": "Vipps",
+            "body": "Number 29656. The fastest route, and the one most of the congregation uses."
+          },
+          {
+            "title": "Card",
+            "body": "Monthly or one off, handled through the giving form on this site."
+          },
+          {
+            "title": "Bank transfer",
+            "body": "Account 1503.35.60386. Use your name as the message so we can receipt it."
+          },
+          {
+            "title": "From abroad",
+            "body": "IBAN NO4215033560386, BIC DNBANOKK, for gifts sent from outside Norway."
+          }
+        ]
+      }
+    }
   },
   "whereMoneyGoes": {
     "eyebrow": "Where the money goes",

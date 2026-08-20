@@ -5,6 +5,13 @@ import { Section, SectionBody, SectionHeading, Eyebrow } from '@/components/prim
 import { CAMPAIGN } from '@/lib/campaign';
 import { Copyable } from '@/components/copyable';
 
+import { Accent } from '@/components/accent';
+import {
+  ProjectAssurance,
+  ProjectBrief,
+  ProjectColumns,
+  ProjectHero,
+} from '@/components/project-page';
 // §6: `/gi-en-gave` treatment — evening facade full-bleed feel, two words
 // over it, giving card below the fold. Split into named routes: one-off,
 // monthly, dedication, company, legacy. Somebody giving 200 000 needs a
@@ -16,6 +23,7 @@ export default async function GiveIndexPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const tp = await getTranslations({ locale, namespace: 'projectPages' });
   const t = await getTranslations({ locale, namespace: 'givePage' });
   const l = await getLocale();
 
@@ -29,6 +37,24 @@ export default async function GiveIndexPage({
 
   return (
     <main>
+      <ProjectHero
+        crumb={tp('crumb')}
+        eyebrow={tp('pages.give.eyebrow')}
+        title={tp.rich('pages.give.title', {
+          em: (chunks) => <Accent surface="dusk">{chunks}</Accent>,
+        })}
+        lede={tp('pages.give.lede')}
+        image="/photos/hero-give.webp"
+        alt={tp('pages.give.eyebrow')}
+        primary={{ label: tp('pages.give.primary'), give: true }}
+        secondary={{ label: tp('pages.give.secondary'), href: `/${locale}/hvor-pengene-gar` }}
+      />
+      <ProjectBrief label={tp('pages.give.briefLabel')} body={tp('pages.give.brief')} />
+      <ProjectColumns
+        eyebrow={tp('pages.give.colEyebrow')}
+        heading={tp('pages.give.colHeading')}
+        items={tp.raw('pages.give.items') as { title: string; body: string }[]}
+      />
       <div className="relative bg-ink text-paper">
         <div className="mx-auto flex min-h-[60vh] max-w-6xl items-end px-6 py-section-lg">
           <div className="max-w-3xl">
@@ -84,6 +110,11 @@ export default async function GiveIndexPage({
           </div>
         </SectionBody>
       </Section>
+          <ProjectAssurance
+        heading={tp('assurance.heading')}
+        lede={tp('assurance.lede')}
+        items={tp.raw('assurance.items') as { title: string; body: string }[]}
+      />
     </main>
   );
 }
