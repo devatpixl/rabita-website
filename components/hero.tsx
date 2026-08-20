@@ -95,7 +95,7 @@ export async function Hero() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="hero-lift relative overflow-hidden bg-dusk text-paper"
+      className="relative overflow-hidden bg-dusk text-paper"
       style={{
         minHeight: `min(calc(100svh - ${HEADER_H}px), ${980 - HEADER_H}px)`,
         maxHeight: `calc(100svh - ${HEADER_H}px)`,

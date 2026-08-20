@@ -33,7 +33,7 @@ export function Accent({
   const colour = ACCENT_HEX[surface] ?? ACCENT_HEX.paper;
   return (
     <em
-      className={cn('italic font-normal', className)}
+      className={cn('accent-em italic font-normal', className)}
       style={{ color: colour }}
     >
       {children}

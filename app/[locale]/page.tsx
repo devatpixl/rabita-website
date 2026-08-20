@@ -1,6 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
 import { BuildingRises } from '@/components/building-rises';
 import { CampaignMeter } from '@/components/campaign-meter';
+import { CommunityGallery } from '@/components/community-gallery';
 import { CongregationToday } from '@/components/congregation-today';
 import { ImpactStory } from '@/components/impact-story';
 import { GiftBuilds } from '@/components/gift-builds';
@@ -25,6 +26,7 @@ import { ZoomParallax } from '@/components/zoom-parallax';
 //   06 What your gift builds (dusk)
 //   07 Where the money goes
 //   08 Sadaqa jariya
+//   08b Community gallery (dusk, scroll depth)
 //   09 Prayer times + visit
 //   09b Zoom band (dusk, full bleed)
 //   10 Events
@@ -50,6 +52,7 @@ export default async function HomePage({
       <MotionRise><GiftBuilds /></MotionRise>
       <MotionRise><WhereMoneyGoes /></MotionRise>
       <MotionRise><SadaqaBand /></MotionRise>
+      <CommunityGallery />
       <MotionRise><PrayerVisit /></MotionRise>
       <ZoomBand />
       <MotionRise><EventsSchedule /></MotionRise>

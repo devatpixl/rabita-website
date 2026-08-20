@@ -258,12 +258,12 @@ export function ZoomParallax() {
               style={{ scale, willChange: 'transform' }}
               className={cn(
                 'absolute top-0 flex h-full w-full items-center justify-center',
-                i === 1 && '[&>div]:!-top-[32.7vh] [&>div]:!h-[28vh] [&>div]:!w-[28vw]',
-                i === 2 && '[&>div]:!-top-[30.7vh] [&>div]:!-left-[26.8vw] [&>div]:!h-[24vh] [&>div]:!w-[20vw]',
-                i === 3 && '[&>div]:!-top-[30.7vh] [&>div]:!left-[26.8vw] [&>div]:!h-[24vh] [&>div]:!w-[20vw]',
-                i === 4 && '[&>div]:!top-[32.7vh] [&>div]:!left-[2vw] [&>div]:!h-[28vh] [&>div]:!w-[28vw]',
-                i === 5 && '[&>div]:!top-[29.7vh] [&>div]:!-left-[25.8vw] [&>div]:!h-[22vh] [&>div]:!w-[22vw]',
-                i === 6 && '[&>div]:!top-[30.7vh] [&>div]:!left-[28.8vw] [&>div]:!h-[24vh] [&>div]:!w-[20vw]',
+                i === 1 && '[&>div]:!-top-[30vh] [&>div]:!h-[26vh] [&>div]:!w-[26vw]',
+                i === 2 && '[&>div]:!-top-[30vh] [&>div]:!-left-[27.5vw] [&>div]:!h-[26vh] [&>div]:!w-[25vw]',
+                i === 3 && '[&>div]:!-top-[30vh] [&>div]:!left-[27.5vw] [&>div]:!h-[26vh] [&>div]:!w-[25vw]',
+                i === 4 && '[&>div]:!top-[30vh] [&>div]:!h-[26vh] [&>div]:!w-[26vw]',
+                i === 5 && '[&>div]:!top-[30vh] [&>div]:!-left-[27.5vw] [&>div]:!h-[26vh] [&>div]:!w-[25vw]',
+                i === 6 && '[&>div]:!top-[30vh] [&>div]:!left-[27.5vw] [&>div]:!h-[26vh] [&>div]:!w-[25vw]',
               )}
             >
               <div

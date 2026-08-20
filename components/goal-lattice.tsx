@@ -4,16 +4,21 @@ import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/cn';
 
 // The goal as 100 marks, one per million kroner, in the diamond lattice of the facade.
+// Paid marks are solid; the rest are drawn as outlines, so the field reads as a
+// ledger you can count rather than a block of grey texture.
 
 const TOTAL = 100;
+const COLS = 20;
 
 export function GoalLattice({
   percent,
   caption,
+  countLabel,
   className,
 }: {
   percent: number;
   caption: string;
+  countLabel?: string;
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -46,8 +51,8 @@ export function GoalLattice({
   return (
     <div ref={ref} className={cn('', className)}>
       <div
-        className="grid gap-[7px]"
-        style={{ gridTemplateColumns: 'repeat(25, minmax(0, 1fr))' }}
+        className="grid gap-[10px]"
+        style={{ gridTemplateColumns: `repeat(${COLS}, minmax(0, 1fr))` }}
         role="img"
         aria-label={caption}
       >
@@ -59,12 +64,12 @@ export function GoalLattice({
               aria-hidden
               className={cn(
                 'block aspect-square rotate-45',
-                on ? 'bg-gold-deep' : 'bg-rule',
+                on ? 'bg-gold-deep' : 'border border-gold-deep/25 bg-transparent',
               )}
               style={{
-                // Lit marks arrive in order, so the field fills rather than appearing.
+                // Paid marks arrive in order, so the field fills rather than appearing.
                 opacity: play ? 1 : 0,
-                transform: `rotate(45deg) scale(${play || still ? 0.72 : 0.3})`,
+                transform: `rotate(45deg) scale(${play || still ? 0.7 : 0.3})`,
                 transition: still
                   ? 'none'
                   : `opacity 320ms ease-out ${on ? i * 22 : 400 + i * 4}ms,` +
@@ -74,8 +79,9 @@ export function GoalLattice({
           );
         })}
       </div>
-      <p className="mt-5 font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
-        {caption}
+      <p className="mt-6 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[0.75rem] uppercase tracking-[0.14em]">
+        {countLabel && <span className="text-gold-deep tabular-nums">{countLabel}</span>}
+        <span className="text-ink-60">{caption}</span>
       </p>
     </div>
   );

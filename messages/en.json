@@ -39,7 +39,11 @@
     },
     "textsize": {
       "label": "Text size",
-      "sizes": { "sm": "Small", "md": "Regular", "lg": "Large" }
+      "sizes": {
+        "sm": "Small",
+        "md": "Regular",
+        "lg": "Large"
+      }
     }
   },
   "nav": {
@@ -56,97 +60,96 @@
       "visit": "Visit us",
       "about": "About us"
     },
-
-      "menu": {
-        "project": [
-          {
-            "label": "The building",
-            "blurb": "Seven floors, drawings and timeline",
-            "href": "/moskeprosjektet"
-          },
-          {
-            "label": "Where the money goes",
-            "blurb": "Accounts, audit and tax relief",
-            "href": "/hvor-pengene-gar"
-          },
-          {
-            "label": "The donors",
-            "blurb": "Names on the foundation wall",
-            "href": "/givere"
-          },
-          {
-            "label": "Donate a prayer space",
-            "blurb": "Sadaqa jariya in a name",
-            "href": "/doner-en-bonneplass"
-          },
-          {
-            "label": "Give",
-            "blurb": "Vipps, card or bank",
-            "href": "/gi-en-gave"
-          }
-        ],
-        "worship": [
-          {
-            "label": "Prayer times",
-            "blurb": "The whole week and Friday prayer",
-            "href": "/bonnetider"
-          },
-          {
-            "label": "Services",
-            "blurb": "Nikah, janaza, shahada and counselling",
-            "href": "/tjenester"
-          }
-        ],
-        "education": [
-          {
-            "label": "Teaching",
-            "blurb": "Arabic, Qur'an and adult courses",
-            "href": "/undervisning"
-          }
-        ],
-        "visit": [
-          {
-            "label": "Visit us",
-            "blurb": "Hours, address and guided visits",
-            "href": "/besok-oss"
-          },
-          {
-            "label": "Events",
-            "blurb": "Eid, iftar, lectures and family days",
-            "href": "/arrangementer"
-          }
-        ],
-        "about": [
-          {
-            "label": "About us",
-            "blurb": "The story from 1987 and the board",
-            "href": "/om-oss"
-          },
-          {
-            "label": "News",
-            "blurb": "From the congregation and the build",
-            "href": "/aktuelt"
-          },
-          {
-            "label": "Become a member",
-            "blurb": "Membership and the fee",
-            "href": "/medlemskap"
-          },
-          {
-            "label": "Volunteer",
-            "blurb": "Where people are needed",
-            "href": "/frivillig"
-          },
-          {
-            "label": "Contact",
-            "blurb": "Call, write or come by",
-            "href": "/kontakt"
-          }
-        ]
-      },
-      "overview": "See everything in",
-      "closeMenu": "Close the menu",
-      "openMenu": "Open the menu"
+    "menu": {
+      "project": [
+        {
+          "label": "The building",
+          "blurb": "Seven floors, drawings and timeline",
+          "href": "/moskeprosjektet"
+        },
+        {
+          "label": "Where the money goes",
+          "blurb": "Accounts, audit and tax relief",
+          "href": "/hvor-pengene-gar"
+        },
+        {
+          "label": "The donors",
+          "blurb": "Names on the foundation wall",
+          "href": "/givere"
+        },
+        {
+          "label": "Donate a prayer space",
+          "blurb": "Sadaqa jariya in a name",
+          "href": "/doner-en-bonneplass"
+        },
+        {
+          "label": "Give",
+          "blurb": "Vipps, card or bank",
+          "href": "/gi-en-gave"
+        }
+      ],
+      "worship": [
+        {
+          "label": "Prayer times",
+          "blurb": "The whole week and Friday prayer",
+          "href": "/bonnetider"
+        },
+        {
+          "label": "Services",
+          "blurb": "Nikah, janaza, shahada and counselling",
+          "href": "/tjenester"
+        }
+      ],
+      "education": [
+        {
+          "label": "Teaching",
+          "blurb": "Arabic, Qur'an and adult courses",
+          "href": "/undervisning"
+        }
+      ],
+      "visit": [
+        {
+          "label": "Visit us",
+          "blurb": "Hours, address and guided visits",
+          "href": "/besok-oss"
+        },
+        {
+          "label": "Events",
+          "blurb": "Eid, iftar, lectures and family days",
+          "href": "/arrangementer"
+        }
+      ],
+      "about": [
+        {
+          "label": "About us",
+          "blurb": "The story from 1987 and the board",
+          "href": "/om-oss"
+        },
+        {
+          "label": "News",
+          "blurb": "From the congregation and the build",
+          "href": "/aktuelt"
+        },
+        {
+          "label": "Become a member",
+          "blurb": "Membership and the fee",
+          "href": "/medlemskap"
+        },
+        {
+          "label": "Volunteer",
+          "blurb": "Where people are needed",
+          "href": "/frivillig"
+        },
+        {
+          "label": "Contact",
+          "blurb": "Call, write or come by",
+          "href": "/kontakt"
+        }
+      ]
+    },
+    "overview": "See everything in",
+    "closeMenu": "Close the menu",
+    "openMenu": "Open the menu"
   },
   "giving": {
     "freqMonthly": "Monthly",
@@ -245,7 +248,8 @@
     "sub": {
       "label": "Sub-campaign",
       "body": "The foundation is being poured this year. This is the sub-goal we are working toward now."
-    }
+    },
+    "latticeCount": "{lit} of 100"
   },
   "trust": {
     "taxDeductible": "Tax deduction up to 25 000 kr/year",
@@ -499,6 +503,25 @@
       }
     }
   },
+  "communityGallery": {
+    "eyebrow": "The congregation",
+    "heading": "We are already a congregation. <em>What we are missing is the room.</em>",
+    "body": "Photographs from the street iftar on Grønland, the spring bazaar on Youngstorget, the women’s circles, and the site on Calmeyers gate the week it was cleared.",
+    "alts": {
+      "serving": "Volunteers handing out warm food at the street iftar on Grønland",
+      "tables": "Long tables under the tents at the street iftar, filled with guests",
+      "child": "A girl at the spring bazaar holding a painted star, her face painted too",
+      "volunteers": "Two Rabita volunteers in work vests at the street iftar",
+      "circle": "Women greeting each other after a circle at the mosque",
+      "quran": "An open Quran resting on the prayer carpet at Rabita",
+      "street": "Two volunteers in Det Islamske Forbundet vests walking down the street",
+      "cakes": "The cake table at the spring bazaar on Youngstorget",
+      "sweets": "A tray of dates rolled in coconut, ready for breaking the fast",
+      "site": "The old building on Calmeyers gate coming down to clear the site",
+      "embrace": "Two men embracing after a talk in the hall",
+      "dress": "Women in traditional dress at the spring bazaar"
+    }
+  },
   "zoomBand": {
     "heading": "Seven floors, one address, open to the whole <em>city</em>.",
     "alt": "The Rabita facade at dusk, its diamond lattice lit from within"
@@ -577,6 +600,8 @@
     }
   },
   "prayerVisit": {
+    "addressLabel": "Address",
+    "hoursLabel": "Open",
     "seal": "Open daily",
     "now": "Now",
     "untilHm": "in {h}h {m}m",
@@ -597,7 +622,9 @@
       "maghrib": "Maghrib",
       "isha": "Isha",
       "jumua": "Jumu'ah (Friday)"
-    }
+    },
+    "photoAlt": "A visitor standing at the entrance to Rabita on Calmeyers gate",
+    "photoCaption": "The door on Calmeyers gate. Come as you are, and someone will show you round."
   },
   "events": {
     "eyebrow": "NEXT EVENT",
@@ -713,7 +740,9 @@
     "bankAccount": "Account",
     "iban": "IBAN",
     "orgNr": "Org.nr.",
-    "contact": { "heading": "Contact" },
+    "contact": {
+      "heading": "Contact"
+    },
     "newsletter": {
       "heading": "Newsletter",
       "body": "One email a month, a photo from the site and what's happening next.",
@@ -757,10 +786,22 @@
     },
     "ways": {
       "heading": "Ways to give",
-      "once": { "title": "One time", "body": "A single gift, ideal for larger amounts or memorial gifts." },
-      "monthly": { "title": "Monthly", "body": "The building stands for many years. Monthly gives the most to the budget." },
-      "sadaqa": { "title": "Sadaqa jariya", "body": "Sponsor a prayer space in the name of someone you have lost." },
-      "company": { "title": "Company", "body": "A company gift is a conversation, not a checkout. Write to us." }
+      "once": {
+        "title": "One time",
+        "body": "A single gift, ideal for larger amounts or memorial gifts."
+      },
+      "monthly": {
+        "title": "Monthly",
+        "body": "The building stands for many years. Monthly gives the most to the budget."
+      },
+      "sadaqa": {
+        "title": "Sadaqa jariya",
+        "body": "Sponsor a prayer space in the name of someone you have lost."
+      },
+      "company": {
+        "title": "Company",
+        "body": "A company gift is a conversation, not a checkout. Write to us."
+      }
     }
   },
   "givePage": {
@@ -770,11 +811,26 @@
     "routes": {
       "heading": "Five routes to give",
       "cta": "Open",
-      "once": { "title": "One time", "body": "A single gift, any amount." },
-      "monthly": { "title": "Monthly", "body": "A standing order gives the build predictability." },
-      "sadaqa": { "title": "Sadaqa jariya", "body": "A prayer space in someone's name." },
-      "company": { "title": "Company", "body": "For businesses that want to support the project." },
-      "legacy": { "title": "Legacy", "body": "Include us in your will. We help with the formalities." }
+      "once": {
+        "title": "One time",
+        "body": "A single gift, any amount."
+      },
+      "monthly": {
+        "title": "Monthly",
+        "body": "A standing order gives the build predictability."
+      },
+      "sadaqa": {
+        "title": "Sadaqa jariya",
+        "body": "A prayer space in someone's name."
+      },
+      "company": {
+        "title": "Company",
+        "body": "For businesses that want to support the project."
+      },
+      "legacy": {
+        "title": "Legacy",
+        "body": "Include us in your will. We help with the formalities."
+      }
     },
     "direct": {
       "heading": "Direct to account",
@@ -875,7 +931,15 @@
     "sunrise": "Sunrise",
     "jumua": "Jumu'ah",
     "note": "Times are static for now. An automated feed is wired when the source is chosen.",
-    "days": { "mon": "Monday", "tue": "Tuesday", "wed": "Wednesday", "thu": "Thursday", "fri": "Friday", "sat": "Saturday", "sun": "Sunday" }
+    "days": {
+      "mon": "Monday",
+      "tue": "Tuesday",
+      "wed": "Wednesday",
+      "thu": "Thursday",
+      "fri": "Friday",
+      "sat": "Saturday",
+      "sun": "Sunday"
+    }
   },
   "medlemskapPage": {
     "eyebrow": "Membership",
@@ -883,9 +947,21 @@
     "lede": "Children and youth membership is free. Voting membership is 1 000 kr per year and renews annually.",
     "choose": "Choose membership",
     "tiers": {
-      "ordinary": { "name": "Ordinary", "price": "0 kr", "body": "Newsletter and invitations. No voting rights." },
-      "voting": { "name": "Voting", "price": "1 000 kr", "body": "Voting rights at the AGM and eligibility to stand for the board." },
-      "youth": { "name": "Under 15", "price": "0 kr", "body": "Approved by a guardian. Age-appropriate activities." }
+      "ordinary": {
+        "name": "Ordinary",
+        "price": "0 kr",
+        "body": "Newsletter and invitations. No voting rights."
+      },
+      "voting": {
+        "name": "Voting",
+        "price": "1 000 kr",
+        "body": "Voting rights at the AGM and eligibility to stand for the board."
+      },
+      "youth": {
+        "name": "Under 15",
+        "price": "0 kr",
+        "body": "Approved by a guardian. Age-appropriate activities."
+      }
     },
     "form": {
       "heading": "Your details",
@@ -897,7 +973,10 @@
       "submitPay": "Join and pay 1 000 kr",
       "note": "National identity number is not required for membership. Privacy applies."
     },
-    "done": { "title": "You are registered.", "body": "Check your email. We send confirmation shortly." }
+    "done": {
+      "title": "You are registered.",
+      "body": "Check your email. We send confirmation shortly."
+    }
   },
   "newsPage": {
     "eyebrow": "News",
@@ -905,9 +984,15 @@
     "lede": "The build, events, and matters that concern the congregation.",
     "read": "Read",
     "items": {
-      "foundation": { "title": "The foundation stone is laid" },
-      "library": { "title": "New library collection for the district" },
-      "agm": { "title": "AGM 2026: calendar and agenda" }
+      "foundation": {
+        "title": "The foundation stone is laid"
+      },
+      "library": {
+        "title": "New library collection for the district"
+      },
+      "agm": {
+        "title": "AGM 2026: calendar and agenda"
+      }
     }
   },
   "eventsPage": {
@@ -921,9 +1006,18 @@
     "doneTitle": "RSVP registered.",
     "doneBody": "We send confirmation by email. See you there.",
     "items": {
-      "ramadan": { "title": "Iftar for the district", "body": "Open meal, everyone welcome." },
-      "lecture": { "title": "Open house: the building and the plan", "body": "Tour and Q&A with the project lead." },
-      "school": { "title": "School visit: religion and ethics", "body": "Weekly programme for upper secondary schools." }
+      "ramadan": {
+        "title": "Iftar for the district",
+        "body": "Open meal, everyone welcome."
+      },
+      "lecture": {
+        "title": "Open house: the building and the plan",
+        "body": "Tour and Q&A with the project lead."
+      },
+      "school": {
+        "title": "School visit: religion and ethics",
+        "body": "Weekly programme for upper secondary schools."
+      }
     }
   },
   "visitPage": {
@@ -947,10 +1041,22 @@
     "programs": {
       "heading": "Programmes",
       "items": {
-        "arabic": { "title": "Arabic for non-Arabic speakers", "body": "Beginner to advanced. Weekly classes throughout the school year." },
-        "quran": { "title": "Quran and tajweed", "body": "Pronunciation, recognition and memorisation. Children and adults in separate groups." },
-        "youth": { "title": "Youth programme", "body": "Social gatherings and projects for teenagers. Friday evenings." },
-        "calligraphy": { "title": "Calligraphy", "body": "Introduction and practice in classical Arabic calligraphy." }
+        "arabic": {
+          "title": "Arabic for non-Arabic speakers",
+          "body": "Beginner to advanced. Weekly classes throughout the school year."
+        },
+        "quran": {
+          "title": "Quran and tajweed",
+          "body": "Pronunciation, recognition and memorisation. Children and adults in separate groups."
+        },
+        "youth": {
+          "title": "Youth programme",
+          "body": "Social gatherings and projects for teenagers. Friday evenings."
+        },
+        "calligraphy": {
+          "title": "Calligraphy",
+          "body": "Introduction and practice in classical Arabic calligraphy."
+        }
       }
     }
   },
@@ -1051,7 +1157,10 @@
       "construction": "Build and site liaison",
       "admin": "Administration"
     },
-    "done": { "title": "Thank you. You're registered.", "body": "We'll be in touch for a short conversation when we have something concrete to offer." }
+    "done": {
+      "title": "Thank you. You're registered.",
+      "body": "We'll be in touch for a short conversation when we have something concrete to offer."
+    }
   },
   "consent": {
     "title": "We use cookies.",

@@ -30,11 +30,21 @@ const config: Config = {
         // Hairlines, borders.
         rule: '#E4DED3',
       },
+      // The innocents.no stacks, face for face. Latin comes first in each
+      // stack and the Arabic face sits behind it, so Latin glyphs resolve
+      // from Fraunces/Inter and Arabic glyphs fall through to Cairo/Noto
+      // without needing a per-locale class swap.
       fontFamily: {
-        serif: ['var(--font-serif)', 'Times New Roman', 'serif'],
+        serif: [
+          'var(--font-serif)',
+          'var(--font-serif-arabic)',
+          'Times New Roman',
+          'serif',
+        ],
         sans: [
           'var(--font-sans)',
           'var(--font-sans-arabic)',
+          'Segoe UI',
           'system-ui',
           'sans-serif',
         ],

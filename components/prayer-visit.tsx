@@ -5,9 +5,13 @@ import { CAMPAIGN } from '@/lib/campaign';
 import { PrayerToday } from './prayer-today';
 import { Eyebrow, Section, SectionBody, SectionHeading } from './primitives';
 
-// §4.08. Full week, Friday time, opening hours, address, booking form for
-// school and university groups. Kept as a summary on the homepage; the full
-// booking form lives at /besok-oss.
+// Prayer times, address, opening hours and group booking, as one column of
+// running copy with a single tall photograph beside it.
+//
+// The previous layout put the times on the left and everything else on the
+// right, which left the left column dead from the Friday row down and the
+// right column short of the section floor. Both readings are now one column,
+// and the photograph is sticky, so the two sides finish level at every height.
 export async function PrayerVisit() {
   const t = await getTranslations('prayerVisit');
   const locale = await getLocale();
@@ -15,58 +19,92 @@ export async function PrayerVisit() {
   return (
     <Section id="bonn-og-besok" tone="paper-2">
       <SectionBody>
-        <div className="mb-8 max-w-3xl">
-          <Eyebrow>{t('eyebrow')}</Eyebrow>
-          <SectionHeading className="mt-3">{t('heading')}</SectionHeading>
+        <div className="mb-12 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-2xl">
+            <Eyebrow>{t('eyebrow')}</Eyebrow>
+            <SectionHeading className="mt-3">{t('heading')}</SectionHeading>
+          </div>
+          <p className="flex shrink-0 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-gold-deep">
+            <span className="pulse-dot" aria-hidden />
+            {t('seal')}
+          </p>
         </div>
 
-        <div className="grid gap-10 md:grid-cols-12">
-          <div id="bonnetider" className="md:col-span-5">
-            <h3 className="mb-4 font-serif text-card text-ink">{t('todayHeading')}</h3>
-            <PrayerToday />
-            <Link
-              href={`/${locale}/bonnetider`}
-              className="mt-4 inline-flex min-h-11 items-center text-body font-semibold text-ink underline underline-offset-4 hover:decoration-2"
-            >
-              {t('fullWeek')}
-            </Link>
-          </div>
-
+        <div className="grid gap-12 md:grid-cols-12 md:gap-x-16">
           <div className="md:col-span-7">
-            {/* Full-bleed photo above the visit copy — Rabita volunteers
-               praying together in a Grønland underpass. The photograph
-               that argues for the campaign more than any statistic. */}
-            <div className="relative mb-8">
-              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-paper-2">
-                <Image
-                  src="/photos/prayer-underpass.webp"
-                  alt="Rabita volunteers praying together in the Grønland underpass"
-                  fill
-                  sizes="(min-width: 768px) 58vw, 90vw"
-                  className="object-cover editorial-photo"
-                />
+            <div id="bonnetider">
+              <h3 className="mb-4 font-serif text-card text-ink">{t('todayHeading')}</h3>
+              <PrayerToday />
+              <Link
+                href={`/${locale}/bonnetider`}
+                className="mt-4 inline-flex min-h-11 items-center text-body font-semibold text-ink underline underline-offset-4 hover:decoration-2"
+              >
+                {t('fullWeek')}
+              </Link>
+            </div>
+
+            <div className="mt-12 border-t border-rule pt-12">
+              <h3 className="font-serif text-card text-ink">{t('visitHeading')}</h3>
+
+              {/* Address and hours as a two-line ledger, so the street and the
+                 opening times read as data rather than as more paragraphs. */}
+              <dl className="mt-6 grid gap-x-8 gap-y-4 sm:grid-cols-2">
+                <div>
+                  <dt className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
+                    {t('addressLabel')}
+                  </dt>
+                  <dd className="mt-2 font-serif text-card text-ink">{CAMPAIGN.address}</dd>
+                  <dd className="text-body text-ink-60">{CAMPAIGN.postalCity}</dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
+                    {t('hoursLabel')}
+                  </dt>
+                  <dd className="mt-2 font-serif text-card tabular-nums text-ink">
+                    {CAMPAIGN.openingHours}
+                  </dd>
+                </div>
+              </dl>
+
+              <p className="mt-8 max-w-prose text-body text-ink">{t('groupsBody')}</p>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  href={`/${locale}/besok-oss`}
+                  className="inline-flex min-h-11 items-center rounded-btn bg-gold-deep px-4 py-2 text-[15px] font-semibold text-paper transition-colors hover:bg-ink"
+                >
+                  {t('bookGroup')}
+                </Link>
+                <a
+                  href={`https://maps.google.com/?q=${encodeURIComponent(CAMPAIGN.address)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex min-h-11 items-center rounded-btn border border-ink px-4 py-2 text-body font-semibold text-ink transition-colors hover:bg-ink hover:text-paper"
+                >
+                  {t('directions')}
+                </a>
               </div>
             </div>
-            <h3 className="mb-4 font-serif text-card text-ink">{t('visitHeading')}</h3>
-            <p className="mb-4 text-body text-ink">{CAMPAIGN.address}</p>
-            <p className="mb-6 text-body text-ink-60">{CAMPAIGN.openingHours}</p>
-            <p className="mb-6 text-body text-ink">{t('groupsBody')}</p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href={`/${locale}/besok-oss`}
-                className="min-h-11 rounded-btn bg-gold-deep px-4 py-2 text-[15px] font-semibold text-paper hover:bg-ink transition-colors"
-              >
-                {t('bookGroup')}
-              </Link>
-              <a
-                href={`https://maps.google.com/?q=${encodeURIComponent(CAMPAIGN.address)}`}
-                target="_blank"
-                rel="noreferrer"
-                className="min-h-11 rounded-btn border border-ink px-4 py-2 text-body font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
-              >
-                {t('directions')}
-              </a>
-            </div>
+          </div>
+
+          {/* One tall photograph, sticky, so it stays beside whichever part of
+             the column the reader is on. */}
+          <div className="md:col-span-5">
+            <figure className="md:sticky md:top-28">
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg bg-paper">
+                <Image
+                  src="/photos/community/visit-door.webp"
+                  alt={t('photoAlt')}
+                  fill
+                  loading="lazy"
+                  sizes="(min-width: 768px) 40vw, 90vw"
+                  className="editorial-photo object-cover"
+                />
+              </div>
+              <figcaption className="mt-4 font-mono text-[11px] uppercase leading-relaxed tracking-[0.14em] text-ink-60">
+                {t('photoCaption')}
+              </figcaption>
+            </figure>
           </div>
         </div>
       </SectionBody>

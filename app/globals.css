@@ -29,7 +29,7 @@ body {
 body {
   background-color: #faf8f4;
   color: #1a1a18;
-  font-family: var(--font-sans), var(--font-sans-arabic), system-ui, sans-serif;
+  font-family: var(--font-sans), var(--font-sans-arabic), 'Segoe UI', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -272,59 +272,6 @@ dialog {
 
 
 /* On load the bar pulls in to a pill, then opens. backwards, not both, or the held clip hides the mega panel. */
-/* On load the bar is a floating capsule over the hero, then it spreads. */
-
-/* The hero lifts behind the bar so the picture under the capsule is the hero itself, not a copy of it. */
-@keyframes hero-lift {
-  0%,
-  40% {
-    transform: translateY(-122px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-.hero-lift {
-  animation: hero-lift 1500ms cubic-bezier(0.5, 0, 0.18, 1) 150ms backwards;
-}
-
-/* A radius clamps to half its own element's height, so 45px of strip can never round like 77px of bar. The strip stands down while the capsule is up. */
-@keyframes header-strip {
-  0% {
-    clip-path: inset(0 0 0 0);
-  }
-  40% {
-    clip-path: inset(100% 0 0 0);
-  }
-  100% {
-    clip-path: inset(0 0 0 0);
-  }
-}
-.header-open-top {
-  animation: header-strip 1500ms cubic-bezier(0.5, 0, 0.18, 1) 150ms backwards;
-}
-
-/* 77px tall at a 999px radius is a true stadium. */
-@keyframes header-open {
-  0% {
-    clip-path: inset(0 0 0 0 round 0);
-    filter: drop-shadow(0 0 0 rgba(26, 26, 24, 0));
-    animation-timing-function: cubic-bezier(0.5, 0, 0.75, 0);
-  }
-  40% {
-    clip-path: inset(0 31% 0 31% round 999px);
-    filter: drop-shadow(0 12px 30px rgba(26, 26, 24, 0.42));
-    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  100% {
-    clip-path: inset(0 0 0 0 round 0);
-    filter: drop-shadow(0 0 0 rgba(26, 26, 24, 0));
-  }
-}
-.header-open {
-  animation: header-open 1500ms linear 150ms backwards;
-}
-
 /* A scrollbar inside a rounded box squares its corners. */
 .no-scrollbar {
   scrollbar-width: none;
@@ -339,16 +286,6 @@ dialog {
   display: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .header-open,
-  .header-open-top {
-    animation: none;
-  }
-  .hero-lift {
-    animation: none;
-  }
-}
-
 dialog::backdrop {
   background: rgba(26, 26, 24, 0.55);
   backdrop-filter: blur(3px);
@@ -359,4 +296,16 @@ dialog::backdrop {
 html.sheet-open,
 body.sheet-open {
   overflow: hidden;
+}
+
+/* Fraunces on the axes innocents.no drives. Display and section headings sit
+   at optical size 144 so large type keeps its high-contrast cut; the italic
+   accent adds SOFT 80 and WONK 1. Card and body serif are left on the font's
+   own optical sizing, where 144 would read too thin. */
+.text-display,
+.text-section {
+  font-variation-settings: 'opsz' 144;
+}
+.accent-em {
+  font-variation-settings: 'opsz' 144, 'SOFT' 80, 'WONK' 1;
 }

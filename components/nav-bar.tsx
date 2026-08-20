@@ -83,7 +83,12 @@ export function NavBar() {
   return (
     <header
       data-prayer-panel-scope
-      className="header-open sticky top-0 z-40 border-b border-rule bg-paper/95 backdrop-blur"
+      className={cn(
+        'sticky top-0 z-40 min-h-[77px] border-b transition-colors duration-500 ease-out',
+        compactVisible
+          ? 'border-transparent bg-transparent'
+          : 'border-rule bg-paper/95 backdrop-blur',
+      )}
     >
       <a
         href="#main"
@@ -92,7 +97,15 @@ export function NavBar() {
         {t('skipToContent')}
       </a>
 
-      <div className="mx-auto w-full max-w-[112rem] px-6 md:px-10 lg:px-24 flex items-center py-4">
+      <div
+        className={cn(
+          'mx-auto flex w-full items-center',
+          'transition-[max-width,padding,border-radius,box-shadow,background-color] duration-500 ease-out',
+          compactVisible
+            ? 'my-1 max-w-[84rem] rounded-full bg-paper/95 px-8 py-3 shadow-[0_10px_30px_-12px_rgba(26,26,24,0.45)] backdrop-blur'
+            : 'max-w-[112rem] px-6 py-4 md:px-10 lg:px-24',
+        )}
+      >
         {/* Wordmark — mark + two-line stacked org name (matches the
            official brand lockup: "Det Islamske Forbundet" set bold in
            sans, with "Rabita" underneath at regular weight). No
@@ -120,12 +133,12 @@ export function NavBar() {
               className="h-10 w-10 md:h-11 md:w-11"
             />
           </motion.span>
-          <span className="flex flex-col font-sans text-ink leading-tight">
+          <span className="flex flex-col font-serif text-ink leading-tight">
             <motion.span
               initial={reduced ? false : { opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.14, ease: WORDMARK_EASE }}
-              className="text-[13px] md:text-[14px] lg:text-[15px] font-bold tracking-[-0.01em]"
+              className="text-[15px] md:text-[16px] lg:text-[17px] font-normal"
             >
               {t('orgName')}
             </motion.span>
@@ -133,7 +146,7 @@ export function NavBar() {
               initial={reduced ? false : { opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2, ease: WORDMARK_EASE }}
-              className="text-[12px] font-normal text-ink-60 tracking-normal"
+              className="text-[14px] italic text-ink-60"
             >
               {t('wordmark')}
             </motion.span>

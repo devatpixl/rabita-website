@@ -95,7 +95,7 @@ export function DesktopNav() {
                 aria-current={isCurrent(key) ? 'page' : undefined}
                 onFocus={() => open(key)}
                 className={cn(
-                  'relative block whitespace-nowrap py-2 font-mono text-[0.75rem] uppercase tracking-[0.14em] transition-colors duration-200',
+                  'relative block whitespace-nowrap py-2 font-sans text-[0.95rem] transition-colors duration-200',
                   active || isCurrent(key) ? 'text-gold-deep' : 'text-ink hover:text-gold-deep',
                 )}
               >
@@ -103,7 +103,7 @@ export function DesktopNav() {
                   <span
                     aria-hidden
                     className={cn(
-                      'text-[0.6rem] tabular-nums transition-colors duration-200',
+                      'text-[0.72rem] tabular-nums transition-colors duration-200',
                       active || isCurrent(key) ? 'text-gold-deep' : 'text-gold-deep/60',
                     )}
                   >

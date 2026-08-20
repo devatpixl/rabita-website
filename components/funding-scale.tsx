@@ -101,23 +101,24 @@ export function FundingScale({
         />
       </div>
 
-      {/* Station labels hang below their ticks */}
-      <ol className="relative mt-4 h-10">
+      {/* Stations as bands, not points. Each year owns an equal share of the
+         rule, so the last label sits inside its own band instead of hanging
+         two thirds along an otherwise empty line. */}
+      <ol
+        className="mt-4 grid"
+        style={{ gridTemplateColumns: `repeat(${stations.length}, minmax(0, 1fr))` }}
+      >
         {stations.map((s) => (
-          <li
-            key={s.year}
-            className="absolute top-0"
-            style={{ insetInlineStart: `${s.at}%` }}
-          >
+          <li key={s.year} className="border-s border-rule ps-3 first:border-s-0 first:ps-0">
             <div
               className={cn(
                 'text-[15px] tabular-nums',
-                s.current ? 'font-semibold text-ink' : 'text-ink-60/50',
+                s.current ? 'font-semibold text-ink' : 'text-ink-60',
               )}
             >
               {s.year}
             </div>
-            <div className={cn('mt-1 text-[15px]', s.current ? 'text-ink' : 'text-ink-60/50')}>
+            <div className={cn('mt-1 text-[15px]', s.current ? 'text-ink' : 'text-ink-60')}>
               {s.label}
             </div>
           </li>

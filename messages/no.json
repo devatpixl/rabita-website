@@ -39,7 +39,11 @@
     },
     "textsize": {
       "label": "Tekststørrelse",
-      "sizes": { "sm": "Liten", "md": "Vanlig", "lg": "Stor" }
+      "sizes": {
+        "sm": "Liten",
+        "md": "Vanlig",
+        "lg": "Stor"
+      }
     }
   },
   "nav": {
@@ -56,97 +60,96 @@
       "visit": "Besøk oss",
       "about": "Om oss"
     },
-
-      "menu": {
-        "project": [
-          {
-            "label": "Bygget",
-            "blurb": "Sju etasjer, tegninger og tidslinje",
-            "href": "/moskeprosjektet"
-          },
-          {
-            "label": "Hvor pengene går",
-            "blurb": "Regnskap, revisjon og skattefradrag",
-            "href": "/hvor-pengene-gar"
-          },
-          {
-            "label": "Giverne",
-            "blurb": "Navnene på grunnmuren",
-            "href": "/givere"
-          },
-          {
-            "label": "Doner en bønneplass",
-            "blurb": "Sadaqa jariya i et navn",
-            "href": "/doner-en-bonneplass"
-          },
-          {
-            "label": "Gi en gave",
-            "blurb": "Vipps, kort eller bank",
-            "href": "/gi-en-gave"
-          }
-        ],
-        "worship": [
-          {
-            "label": "Bønnetider",
-            "blurb": "Hele uken og fredagsbønnen",
-            "href": "/bonnetider"
-          },
-          {
-            "label": "Tjenester",
-            "blurb": "Nikah, janaza, shahada og rådgivning",
-            "href": "/tjenester"
-          }
-        ],
-        "education": [
-          {
-            "label": "Undervisning",
-            "blurb": "Arabisk, Koran og kurs for voksne",
-            "href": "/undervisning"
-          }
-        ],
-        "visit": [
-          {
-            "label": "Besøk oss",
-            "blurb": "Åpningstider, adresse og omvisning",
-            "href": "/besok-oss"
-          },
-          {
-            "label": "Arrangementer",
-            "blurb": "Id, iftar, foredrag og familiedager",
-            "href": "/arrangementer"
-          }
-        ],
-        "about": [
-          {
-            "label": "Om oss",
-            "blurb": "Historien fra 1987 og styret",
-            "href": "/om-oss"
-          },
-          {
-            "label": "Aktuelt",
-            "blurb": "Nytt fra menigheten og bygget",
-            "href": "/aktuelt"
-          },
-          {
-            "label": "Bli medlem",
-            "blurb": "Medlemskap og kontingent",
-            "href": "/medlemskap"
-          },
-          {
-            "label": "Bli frivillig",
-            "blurb": "Der det trengs folk",
-            "href": "/frivillig"
-          },
-          {
-            "label": "Kontakt",
-            "blurb": "Ring, skriv eller kom innom",
-            "href": "/kontakt"
-          }
-        ]
-      },
-      "overview": "Se alt i",
-      "closeMenu": "Lukk menyen",
-      "openMenu": "Åpne menyen"
+    "menu": {
+      "project": [
+        {
+          "label": "Bygget",
+          "blurb": "Sju etasjer, tegninger og tidslinje",
+          "href": "/moskeprosjektet"
+        },
+        {
+          "label": "Hvor pengene går",
+          "blurb": "Regnskap, revisjon og skattefradrag",
+          "href": "/hvor-pengene-gar"
+        },
+        {
+          "label": "Giverne",
+          "blurb": "Navnene på grunnmuren",
+          "href": "/givere"
+        },
+        {
+          "label": "Doner en bønneplass",
+          "blurb": "Sadaqa jariya i et navn",
+          "href": "/doner-en-bonneplass"
+        },
+        {
+          "label": "Gi en gave",
+          "blurb": "Vipps, kort eller bank",
+          "href": "/gi-en-gave"
+        }
+      ],
+      "worship": [
+        {
+          "label": "Bønnetider",
+          "blurb": "Hele uken og fredagsbønnen",
+          "href": "/bonnetider"
+        },
+        {
+          "label": "Tjenester",
+          "blurb": "Nikah, janaza, shahada og rådgivning",
+          "href": "/tjenester"
+        }
+      ],
+      "education": [
+        {
+          "label": "Undervisning",
+          "blurb": "Arabisk, Koran og kurs for voksne",
+          "href": "/undervisning"
+        }
+      ],
+      "visit": [
+        {
+          "label": "Besøk oss",
+          "blurb": "Åpningstider, adresse og omvisning",
+          "href": "/besok-oss"
+        },
+        {
+          "label": "Arrangementer",
+          "blurb": "Id, iftar, foredrag og familiedager",
+          "href": "/arrangementer"
+        }
+      ],
+      "about": [
+        {
+          "label": "Om oss",
+          "blurb": "Historien fra 1987 og styret",
+          "href": "/om-oss"
+        },
+        {
+          "label": "Aktuelt",
+          "blurb": "Nytt fra menigheten og bygget",
+          "href": "/aktuelt"
+        },
+        {
+          "label": "Bli medlem",
+          "blurb": "Medlemskap og kontingent",
+          "href": "/medlemskap"
+        },
+        {
+          "label": "Bli frivillig",
+          "blurb": "Der det trengs folk",
+          "href": "/frivillig"
+        },
+        {
+          "label": "Kontakt",
+          "blurb": "Ring, skriv eller kom innom",
+          "href": "/kontakt"
+        }
+      ]
+    },
+    "overview": "Se alt i",
+    "closeMenu": "Lukk menyen",
+    "openMenu": "Åpne menyen"
   },
   "giving": {
     "freqMonthly": "Månedlig",
@@ -245,7 +248,8 @@
     "sub": {
       "label": "Delkampanje",
       "body": "Fundamentet støpes i år. Dette er delmålet vi jobber mot nå."
-    }
+    },
+    "latticeCount": "{lit} av 100"
   },
   "trust": {
     "taxDeductible": "Skattefradrag opp til 25 000 kr/år",
@@ -499,6 +503,25 @@
       }
     }
   },
+  "communityGallery": {
+    "eyebrow": "Fellesskapet",
+    "heading": "Vi er allerede et fellesskap. <em>Det vi mangler er rommet.</em>",
+    "body": "Bilder fra gateiftaren på Grønland, vårbasaren på Youngstorget, kvinnegruppene, og tomta i Calmeyers gate uka den ble ryddet.",
+    "alts": {
+      "serving": "Frivillige deler ut varm mat på gateiftaren på Grønland",
+      "tables": "Lange bord under teltene på gateiftaren, fulle av gjester",
+      "child": "En jente på vårbasaren med en malt stjerne i hånda og ansiktsmaling",
+      "volunteers": "To frivillige fra Rabita i arbeidsvest på gateiftaren",
+      "circle": "Kvinner som hilser på hverandre etter en samling i moskeen",
+      "quran": "En åpen koran som ligger på bønneteppet i Rabita",
+      "street": "To frivillige i vester fra Det Islamske Forbundet på gata",
+      "cakes": "Kakebordet på vårbasaren på Youngstorget",
+      "sweets": "Et brett med dadler rullet i kokos, klare til å bryte fasten",
+      "site": "Det gamle bygget i Calmeyers gate rives for å rydde tomta",
+      "embrace": "To menn som omfavner hverandre etter et foredrag i salen",
+      "dress": "Kvinner i tradisjonelle drakter på vårbasaren"
+    }
+  },
   "zoomBand": {
     "heading": "Sju etasjer, én adresse, åpen for hele <em>byen</em>.",
     "alt": "Rabita-fasaden i skumringen, med diamantgitteret opplyst innenfra"
@@ -577,6 +600,8 @@
     }
   },
   "prayerVisit": {
+    "addressLabel": "Adresse",
+    "hoursLabel": "Åpent",
     "seal": "Åpent hver dag",
     "now": "Nå",
     "untilHm": "om {h}t {m}m",
@@ -597,7 +622,9 @@
       "maghrib": "Maghrib",
       "isha": "Isha",
       "jumua": "Jumu'ah (fredag)"
-    }
+    },
+    "photoAlt": "En besøkende ved inngangen til Rabita i Calmeyers gate",
+    "photoCaption": "Døra i Calmeyers gate. Kom som du er, så viser noen deg rundt."
   },
   "events": {
     "eyebrow": "NESTE ARRANGEMENT",
@@ -713,7 +740,9 @@
     "bankAccount": "Konto",
     "iban": "IBAN",
     "orgNr": "Org.nr.",
-    "contact": { "heading": "Kontakt" },
+    "contact": {
+      "heading": "Kontakt"
+    },
     "newsletter": {
       "heading": "Nyhetsbrev",
       "body": "Ett brev i måneden, et bilde fra tomten og hva som skjer neste steg.",
@@ -757,10 +786,22 @@
     },
     "ways": {
       "heading": "Ways du kan bidra",
-      "once": { "title": "Én gang", "body": "Gi et engangsbidrag, ideelt for større summer eller minneord." },
-      "monthly": { "title": "Månedlig", "body": "Bygget står i mange år. Månedlig gir mest til budsjettet." },
-      "sadaqa": { "title": "Sadaqa jariya", "body": "Doner en bønneplass i navnet til noen du har mistet." },
-      "company": { "title": "Bedrift", "body": "Bedriftsbidrag er en samtale, ikke en checkout. Skriv til oss." }
+      "once": {
+        "title": "Én gang",
+        "body": "Gi et engangsbidrag, ideelt for større summer eller minneord."
+      },
+      "monthly": {
+        "title": "Månedlig",
+        "body": "Bygget står i mange år. Månedlig gir mest til budsjettet."
+      },
+      "sadaqa": {
+        "title": "Sadaqa jariya",
+        "body": "Doner en bønneplass i navnet til noen du har mistet."
+      },
+      "company": {
+        "title": "Bedrift",
+        "body": "Bedriftsbidrag er en samtale, ikke en checkout. Skriv til oss."
+      }
     }
   },
   "givePage": {
@@ -770,11 +811,26 @@
     "routes": {
       "heading": "Fem veier å gi på",
       "cta": "Åpne",
-      "once": { "title": "Én gang", "body": "Engangsbidrag, hvilket som helst beløp." },
-      "monthly": { "title": "Månedlig", "body": "Fast trekk gir bygget forutsigbarhet." },
-      "sadaqa": { "title": "Sadaqa jariya", "body": "En bønneplass i minne om noen." },
-      "company": { "title": "Bedrift", "body": "For bedrifter som vil støtte prosjektet." },
-      "legacy": { "title": "Testament", "body": "Ta oss inn i testamentet. Vi hjelper med formalia." }
+      "once": {
+        "title": "Én gang",
+        "body": "Engangsbidrag, hvilket som helst beløp."
+      },
+      "monthly": {
+        "title": "Månedlig",
+        "body": "Fast trekk gir bygget forutsigbarhet."
+      },
+      "sadaqa": {
+        "title": "Sadaqa jariya",
+        "body": "En bønneplass i minne om noen."
+      },
+      "company": {
+        "title": "Bedrift",
+        "body": "For bedrifter som vil støtte prosjektet."
+      },
+      "legacy": {
+        "title": "Testament",
+        "body": "Ta oss inn i testamentet. Vi hjelper med formalia."
+      }
     },
     "direct": {
       "heading": "Direkte til konto",
@@ -875,7 +931,15 @@
     "sunrise": "Soloppgang",
     "jumua": "Fredagsbønn",
     "note": "Tidene er foreløpig statiske. Automatisk feed kobles til når kilde er valgt.",
-    "days": { "mon": "Mandag", "tue": "Tirsdag", "wed": "Onsdag", "thu": "Torsdag", "fri": "Fredag", "sat": "Lørdag", "sun": "Søndag" }
+    "days": {
+      "mon": "Mandag",
+      "tue": "Tirsdag",
+      "wed": "Onsdag",
+      "thu": "Torsdag",
+      "fri": "Fredag",
+      "sat": "Lørdag",
+      "sun": "Søndag"
+    }
   },
   "medlemskapPage": {
     "eyebrow": "Medlemskap",
@@ -883,9 +947,21 @@
     "lede": "Barne- og ungdomsmedlemskap er gratis. Medlemskap med stemmerett koster 1 000 kr per år og fornyes hvert år.",
     "choose": "Velg medlemskap",
     "tiers": {
-      "ordinary": { "name": "Ordinært", "price": "0 kr", "body": "Nyhetsbrev og invitasjoner. Uten stemmerett." },
-      "voting": { "name": "Med stemmerett", "price": "1 000 kr", "body": "Stemmerett på årsmøtet og valgbar til styret." },
-      "youth": { "name": "Under 15", "price": "0 kr", "body": "Godkjennes av foresatt. Alderstilpassede aktiviteter." }
+      "ordinary": {
+        "name": "Ordinært",
+        "price": "0 kr",
+        "body": "Nyhetsbrev og invitasjoner. Uten stemmerett."
+      },
+      "voting": {
+        "name": "Med stemmerett",
+        "price": "1 000 kr",
+        "body": "Stemmerett på årsmøtet og valgbar til styret."
+      },
+      "youth": {
+        "name": "Under 15",
+        "price": "0 kr",
+        "body": "Godkjennes av foresatt. Alderstilpassede aktiviteter."
+      }
     },
     "form": {
       "heading": "Dine opplysninger",
@@ -897,7 +973,10 @@
       "submitPay": "Meld inn og betal 1 000 kr",
       "note": "Fødselsnummer trengs ikke for å bli medlem. Personvern gjelder."
     },
-    "done": { "title": "Vi har registrert deg.", "body": "Sjekk e-posten. Vi sender bekreftelse straks." }
+    "done": {
+      "title": "Vi har registrert deg.",
+      "body": "Sjekk e-posten. Vi sender bekreftelse straks."
+    }
   },
   "newsPage": {
     "eyebrow": "Aktuelt",
@@ -905,9 +984,15 @@
     "lede": "Byggingen, arrangementene og saker som gjelder menigheten.",
     "read": "Les",
     "items": {
-      "foundation": { "title": "Grunnsteinen er lagt" },
-      "library": { "title": "Ny biblioteksamling for bydelen" },
-      "agm": { "title": "Årsmøte 2026: kalender og saksliste" }
+      "foundation": {
+        "title": "Grunnsteinen er lagt"
+      },
+      "library": {
+        "title": "Ny biblioteksamling for bydelen"
+      },
+      "agm": {
+        "title": "Årsmøte 2026: kalender og saksliste"
+      }
     }
   },
   "eventsPage": {
@@ -921,9 +1006,18 @@
     "doneTitle": "Påmelding registrert.",
     "doneBody": "Vi sender bekreftelse på e-post. Vel møtt.",
     "items": {
-      "ramadan": { "title": "Iftar for hele bydelen", "body": "Åpent måltid, alle velkomne." },
-      "lecture": { "title": "Åpent hus: bygget og planen", "body": "Omvisning og spørsmål med prosjektleder." },
-      "school": { "title": "Skolebesøk: religion og etikk", "body": "Ukentlig program for videregående skoler." }
+      "ramadan": {
+        "title": "Iftar for hele bydelen",
+        "body": "Åpent måltid, alle velkomne."
+      },
+      "lecture": {
+        "title": "Åpent hus: bygget og planen",
+        "body": "Omvisning og spørsmål med prosjektleder."
+      },
+      "school": {
+        "title": "Skolebesøk: religion og etikk",
+        "body": "Ukentlig program for videregående skoler."
+      }
     }
   },
   "visitPage": {
@@ -947,10 +1041,22 @@
     "programs": {
       "heading": "Programmer",
       "items": {
-        "arabic": { "title": "Arabisk for ikke-arabisktalende", "body": "Fra nybegynner til avansert nivå. Undervises ukentlig gjennom hele skoleåret." },
-        "quran": { "title": "Quran og tajweed", "body": "Uttale, gjenkjenning og memorering. Barn og voksne, separate grupper." },
-        "youth": { "title": "Ungdomsprogram", "body": "Sosiale samlinger og prosjekter for tenåringer. Fredagskvelder." },
-        "calligraphy": { "title": "Kalligrafi", "body": "Innføring og øving i klassisk arabisk kalligrafi." }
+        "arabic": {
+          "title": "Arabisk for ikke-arabisktalende",
+          "body": "Fra nybegynner til avansert nivå. Undervises ukentlig gjennom hele skoleåret."
+        },
+        "quran": {
+          "title": "Quran og tajweed",
+          "body": "Uttale, gjenkjenning og memorering. Barn og voksne, separate grupper."
+        },
+        "youth": {
+          "title": "Ungdomsprogram",
+          "body": "Sosiale samlinger og prosjekter for tenåringer. Fredagskvelder."
+        },
+        "calligraphy": {
+          "title": "Kalligrafi",
+          "body": "Innføring og øving i klassisk arabisk kalligrafi."
+        }
       }
     }
   },
@@ -1051,7 +1157,10 @@
       "construction": "Bygg og oppfølging",
       "admin": "Administrasjon"
     },
-    "done": { "title": "Takk. Du er registrert.", "body": "Vi tar kontakt for en kort samtale når vi har noe konkret å tilby." }
+    "done": {
+      "title": "Takk. Du er registrert.",
+      "body": "Vi tar kontakt for en kort samtale når vi har noe konkret å tilby."
+    }
   },
   "consent": {
     "title": "Vi bruker informasjonskapsler.",
