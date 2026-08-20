@@ -82,21 +82,26 @@ function ChapterPanel({
 
   const photo = (
     <figure className="m-0 flex h-full items-center px-6 py-8 md:px-10 md:py-12">
-      <motion.div
-        className="relative h-[42vh] w-full overflow-hidden rounded-xl will-change-transform md:h-[62vh]"
-        style={pinned ? { scale } : undefined}
-      >
-        <Image
-          src={chapter.src}
-          alt={t(`chapters.${chapter.key}.alt`)}
-          fill
-          loading={index === 0 ? undefined : 'lazy'}
-          priority={index === 0}
-          sizes="(min-width: 768px) 50vw, 100vw"
-          className="object-cover"
-          style={{ filter: GRADE }}
-        />
-      </motion.div>
+      {/* The frame is fixed, so every plate is the same size. The zoom happens
+         to the picture inside it, not to the plate, which is what used to make
+         the last chapter sit larger than the rest at the end of the run. */}
+      <div className="relative h-[42vh] w-full overflow-hidden rounded-xl md:h-[62vh]">
+        <motion.div
+          className="absolute inset-0 will-change-transform"
+          style={pinned ? { scale } : undefined}
+        >
+          <Image
+            src={chapter.src}
+            alt={t(`chapters.${chapter.key}.alt`)}
+            fill
+            loading={index === 0 ? undefined : 'lazy'}
+            priority={index === 0}
+            sizes="(min-width: 768px) 50vw, 100vw"
+            className="object-cover"
+            style={{ filter: GRADE }}
+          />
+        </motion.div>
+      </div>
     </figure>
   );
 

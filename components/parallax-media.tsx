@@ -3,8 +3,10 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 
-// Lifts a figure above its grid slot when the section first comes into view and
-// lets it settle level with the column beside it as you scroll down.
+// Travels a figure down its own grid row as the section passes, so it starts
+// level with the top of the column beside it and finishes level with the
+// bottom of it. At every point in between it is level with some part of that
+// column rather than parked in a fixed row.
 //
 // Two things make it feel right:
 //
@@ -49,10 +51,10 @@ export function ParallaxMedia({
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start end', 'start 30%'],
+    offset: ['start end', 'end start'],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [-lift, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, lift]);
 
   return (
     <div ref={ref} className={className}>
