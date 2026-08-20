@@ -81,9 +81,9 @@ function ChapterPanel({
   );
 
   const photo = (
-    <figure className="relative m-0 h-[46vh] overflow-hidden md:h-full">
+    <figure className="m-0 flex h-full items-center px-6 py-8 md:px-10 md:py-12">
       <motion.div
-        className="absolute inset-0 will-change-transform"
+        className="relative h-[42vh] w-full overflow-hidden rounded-xl will-change-transform md:h-[62vh]"
         style={pinned ? { scale } : undefined}
       >
         <Image
@@ -101,7 +101,11 @@ function ChapterPanel({
   );
 
   const grid = (
-    <div className="grid h-full bg-dusk md:grid-cols-2">
+    <div
+      className={`grid h-full bg-dusk ${
+        chapter.flip ? 'md:grid-cols-[54%_46%]' : 'md:grid-cols-[46%_54%]'
+      }`}
+    >
       {chapter.flip ? (
         <>
           {copy}
