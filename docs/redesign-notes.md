@@ -590,6 +590,32 @@ point.
 Settled state checked: the header's clip-path is `none` and the backdrop is at
 zero opacity, so neither leaves anything behind once the animation is done.
 
+### The capsule, properly
+
+Two things were wrong and both had a measurable cause.
+
+**The shape was never going to be an oval.** A border radius clamps to half the
+element's own height. The strip is 45px tall so its radius clamps at 22.5px;
+the bar is 77px so its clamps at 38.5px. Asking both to round at 999px gave a
+shape with a 22.5px top, a 38.5px bottom and straight sides in between, which is
+why it read as a rounded box rather than a capsule. A true capsule across the
+pair would need 61px, which neither element can produce.
+
+So the strip stands down while the capsule is up. The bar alone is 77px, and
+77px at a 999px radius is a true stadium. The strip returns as the bar spreads.
+
+**The picture behind it was a different picture.** The stand-in backdrop cropped
+the same photograph into a 136px box, which scales it completely differently
+from the hero below, so the two never matched and a blur only hid it. There is
+no backdrop now. The hero itself lifts 122px so it sits behind the bar while
+the capsule is up, and settles back as the bar spreads. The picture behind the
+capsule is the hero, so it matches by construction.
+
+The lift uses `backwards` fill, not `both`, because a transform left on the hero
+would make it a containing block and break the sticky give card inside it.
+Checked after settle: bar clip none, bar filter none, strip clip none, hero
+transform none, hero back at 122px.
+
 ## How this branch is deployed
 
 `main` deploys to the original Vercel project. This branch has its own project

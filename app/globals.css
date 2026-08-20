@@ -272,59 +272,57 @@ dialog {
 
 
 /* On load the bar pulls in to a pill, then opens. backwards, not both, or the held clip hides the mega panel. */
-@keyframes header-backdrop {
+/* On load the bar is a floating capsule over the hero, then it spreads. */
+
+/* The hero lifts behind the bar so the picture under the capsule is the hero itself, not a copy of it. */
+@keyframes hero-lift {
   0%,
   40% {
-    opacity: 1;
+    transform: translateY(-122px);
   }
   100% {
-    opacity: 0;
+    transform: translateY(0);
   }
 }
-.header-backdrop {
-  animation: header-backdrop 1500ms linear 150ms both;
+.hero-lift {
+  animation: hero-lift 1500ms cubic-bezier(0.5, 0, 0.18, 1) 150ms backwards;
 }
 
-@keyframes header-open-top {
+/* A radius clamps to half its own element's height, so 45px of strip can never round like 77px of bar. The strip stands down while the capsule is up. */
+@keyframes header-strip {
   0% {
-    clip-path: inset(0 0 0 0 round 0);
-    filter: drop-shadow(0 0 0 rgba(26, 26, 24, 0));
-    animation-timing-function: cubic-bezier(0.5, 0, 0.75, 0);
+    clip-path: inset(0 0 0 0);
   }
   40% {
-    clip-path: inset(9px 30% 0 30% round 999px 999px 0 0);
-    filter: drop-shadow(0 10px 26px rgba(26, 26, 24, 0.3));
-    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    clip-path: inset(100% 0 0 0);
   }
   100% {
-    clip-path: inset(0 0 0 0 round 0);
-    filter: drop-shadow(0 0 0 rgba(26, 26, 24, 0));
+    clip-path: inset(0 0 0 0);
   }
 }
-
-@keyframes header-open-bottom {
-  0% {
-    clip-path: inset(0 0 0 0 round 0);
-    filter: drop-shadow(0 0 0 rgba(26, 26, 24, 0));
-    animation-timing-function: cubic-bezier(0.5, 0, 0.75, 0);
-  }
-  40% {
-    clip-path: inset(0 30% 9px 30% round 0 0 999px 999px);
-    filter: drop-shadow(0 10px 26px rgba(26, 26, 24, 0.3));
-    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  100% {
-    clip-path: inset(0 0 0 0 round 0);
-    filter: drop-shadow(0 0 0 rgba(26, 26, 24, 0));
-  }
-}
-
-/* Two elements, one silhouette: the strip takes the rounded top, the bar the rounded bottom. */
 .header-open-top {
-  animation: header-open-top 1500ms linear 150ms backwards;
+  animation: header-strip 1500ms cubic-bezier(0.5, 0, 0.18, 1) 150ms backwards;
+}
+
+/* 77px tall at a 999px radius is a true stadium. */
+@keyframes header-open {
+  0% {
+    clip-path: inset(0 0 0 0 round 0);
+    filter: drop-shadow(0 0 0 rgba(26, 26, 24, 0));
+    animation-timing-function: cubic-bezier(0.5, 0, 0.75, 0);
+  }
+  40% {
+    clip-path: inset(0 31% 0 31% round 999px);
+    filter: drop-shadow(0 12px 30px rgba(26, 26, 24, 0.42));
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  100% {
+    clip-path: inset(0 0 0 0 round 0);
+    filter: drop-shadow(0 0 0 rgba(26, 26, 24, 0));
+  }
 }
 .header-open {
-  animation: header-open-bottom 1500ms linear 150ms backwards;
+  animation: header-open 1500ms linear 150ms backwards;
 }
 
 /* A scrollbar inside a rounded box squares its corners. */
@@ -346,8 +344,8 @@ dialog {
   .header-open-top {
     animation: none;
   }
-  .header-backdrop {
-    display: none;
+  .hero-lift {
+    animation: none;
   }
 }
 
