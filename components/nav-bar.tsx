@@ -102,7 +102,7 @@ export function NavBar() {
           'mx-auto flex w-full items-center',
           'transition-[max-width,padding,border-radius,box-shadow,background-color] duration-500 ease-out',
           compactVisible
-            ? 'my-1 max-w-[84rem] rounded-full bg-paper/95 px-8 py-3 shadow-[0_10px_30px_-12px_rgba(26,26,24,0.45)] backdrop-blur'
+            ? 'my-2 max-w-[84rem] rounded-full bg-paper/95 px-8 py-2 shadow-[0_10px_30px_-12px_rgba(26,26,24,0.45)] backdrop-blur'
             : 'max-w-[112rem] px-6 py-4 md:px-10 lg:px-24',
         )}
       >
