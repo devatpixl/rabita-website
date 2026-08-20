@@ -8,6 +8,7 @@ import { ConsentBanner } from '@/components/consent-banner';
 import { Footer } from '@/components/footer';
 import { GivingSheet } from '@/components/giving-sheet';
 import { MobileGiveBar } from '@/components/mobile-give-bar';
+import { HeaderBackdrop } from '@/components/header-backdrop';
 import { NavBar } from '@/components/nav-bar';
 import { PrayerPanelProvider } from '@/components/prayer-panel-provider';
 import { RsvpSheet } from '@/components/rsvp-sheet';
@@ -58,6 +59,7 @@ export default async function LocaleLayout({
       <body className="bg-paper text-ink antialiased">
         <NextIntlClientProvider messages={messages} locale={locale}>
           <PrayerPanelProvider>
+            <HeaderBackdrop />
             <UtilityStrip />
             <NavBar />
           </PrayerPanelProvider>

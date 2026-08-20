@@ -574,6 +574,22 @@ face.
 Fallback stacks match the reference as well: Times New Roman behind the serif,
 system-ui behind the sans.
 
+### The pill needs something behind it
+
+The bar was already clipping to a pill and opening. What was missing is what
+the pill sits on. The page behind the header is paper, the header is paper, so
+the shape had nothing to be seen against and read as no animation at all.
+
+A backdrop layer now holds the hero photograph across the top of the page while
+the pill is up, and goes as the bar opens. Blurred and darkened rather than a
+straight copy of the hero, because the header band and the hero below crop the
+same photograph at different scales and a sharp copy showed a seam between the
+two. Softened, it reads as the picture continuing behind the bar, which is the
+point.
+
+Settled state checked: the header's clip-path is `none` and the backdrop is at
+zero opacity, so neither leaves anything behind once the animation is done.
+
 ## How this branch is deployed
 
 `main` deploys to the original Vercel project. This branch has its own project

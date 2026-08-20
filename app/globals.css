@@ -272,6 +272,19 @@ dialog {
 
 
 /* On load the bar pulls in to a pill, then opens. backwards, not both, or the held clip hides the mega panel. */
+@keyframes header-backdrop {
+  0%,
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.header-backdrop {
+  animation: header-backdrop 1500ms linear 150ms both;
+}
+
 @keyframes header-open-top {
   0% {
     clip-path: inset(0 0 0 0 round 0);
@@ -332,6 +345,9 @@ dialog {
   .header-open,
   .header-open-top {
     animation: none;
+  }
+  .header-backdrop {
+    display: none;
   }
 }
 
