@@ -23,15 +23,13 @@ export function StoryHero({
     <section className="bg-paper pt-section-sm pb-section-md">
       <SectionBody>
         <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60">{crumb}</p>
-        <div className="mt-10 grid gap-8 border-t-2 border-ink pt-10 md:grid-cols-12 md:gap-16">
-          <div className="md:col-span-3">
-            <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] tabular-nums text-gold-deep">{index}</p>
-            <p className="mt-3 font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60">{eyebrow}</p>
-          </div>
-          <div className="md:col-span-9">
-            <h1 className="font-serif text-display text-balance text-ink">{title}</h1>
-            <p className="mt-6 max-w-prose text-body text-ink-60">{lede}</p>
-          </div>
+        <div className="mt-10 border-t-2 border-ink pt-8">
+          <p className="flex items-baseline gap-4 font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60">
+            <span className="tabular-nums text-gold-deep">{index}</span>
+            <span>{eyebrow}</span>
+          </p>
+          <h1 className="mt-6 max-w-4xl font-serif text-display text-balance text-ink">{title}</h1>
+          <p className="mt-6 max-w-prose text-body text-ink-60">{lede}</p>
         </div>
       </SectionBody>
     </section>

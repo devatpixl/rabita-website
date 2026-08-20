@@ -56,11 +56,11 @@ export default async function GiveIndexPage({
       />
       <Section tone="paper" id="gikort">
         <SectionBody>
-          <div className="grid gap-10 md:grid-cols-12">
-            <div className="md:col-span-6">
+          <div className="grid gap-10 md:grid-cols-12 md:items-stretch">
+            <div className="flex flex-col md:col-span-6">
               <SectionHeading>{t('cardHeading')}</SectionHeading>
               <p className="mt-4 text-body text-ink">{t('cardLede')}</p>
-              <div className="relative mt-10 aspect-[4/3] overflow-hidden rounded-3xl bg-paper-2">
+              <div className="relative mt-10 min-h-[280px] flex-1 overflow-hidden rounded-3xl bg-paper-2">
                 <Image
                   src="/photos/give-bazar.webp"
                   alt={t('cardHeading')}

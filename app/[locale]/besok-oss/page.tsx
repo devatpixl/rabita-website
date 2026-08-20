@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
@@ -37,6 +38,17 @@ export default async function VisitPage({
               </address>
               <p className="text-body text-ink-60">{CAMPAIGN.openingHours}</p>
               <p className="text-body text-ink">{t('groups')}</p>
+              <div className="relative mt-8 aspect-[4/3] overflow-hidden rounded-3xl bg-paper-2">
+                <Image
+                  src="/photos/visit-foyer.webp"
+                  alt={tv('pages.visit.caption')}
+                  fill
+                  loading="eager"
+                  sizes="(min-width: 768px) 38vw, 90vw"
+                  className="object-cover"
+                  style={{ filter: 'saturate(0.72) contrast(1.12) brightness(0.9)' }}
+                />
+              </div>
             </div>
             <div className="md:col-span-7">
               <SectionHeading>{t('formHeading')}</SectionHeading>

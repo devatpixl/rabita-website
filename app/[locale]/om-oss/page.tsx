@@ -59,10 +59,34 @@ export default async function AboutPage({
       <Section tone="paper">
         <SectionBody>
           <SectionHeading>{t('legal.heading')}</SectionHeading>
-          <ul className="mt-6 space-y-4 text-body text-ink">
-            <li><a href="#statuter" className="inline-flex min-h-11 items-center underline underline-offset-4">{t('legal.statutes')}</a></li>
-            <li><a href="#arsrapport" className="inline-flex min-h-11 items-center underline underline-offset-4">{t('legal.annual')}</a></li>
-            <li><a href="#press" className="inline-flex min-h-11 items-center underline underline-offset-4">{t('legal.press')}</a></li>
+          <ul className="mt-8 border-t border-rule">
+            <li className="border-b border-rule">
+              <a
+                href="#statuter"
+                className="group flex min-h-14 items-center justify-between gap-4 font-sans text-[15px] font-medium text-ink transition-colors hover:text-gold-deep"
+              >
+                {t('legal.statutes')}
+                <span aria-hidden className="font-mono text-[0.75rem] text-ink-60 transition-transform group-hover:translate-x-1">&#8594;</span>
+              </a>
+            </li>
+            <li className="border-b border-rule">
+              <a
+                href="#arsrapport"
+                className="group flex min-h-14 items-center justify-between gap-4 font-sans text-[15px] font-medium text-ink transition-colors hover:text-gold-deep"
+              >
+                {t('legal.annual')}
+                <span aria-hidden className="font-mono text-[0.75rem] text-ink-60 transition-transform group-hover:translate-x-1">&#8594;</span>
+              </a>
+            </li>
+            <li className="border-b border-rule">
+              <a
+                href="#press"
+                className="group flex min-h-14 items-center justify-between gap-4 font-sans text-[15px] font-medium text-ink transition-colors hover:text-gold-deep"
+              >
+                {t('legal.press')}
+                <span aria-hidden className="font-mono text-[0.75rem] text-ink-60 transition-transform group-hover:translate-x-1">&#8594;</span>
+              </a>
+            </li>
           </ul>
         </SectionBody>
       </Section>
