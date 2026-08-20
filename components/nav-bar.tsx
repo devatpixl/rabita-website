@@ -138,7 +138,7 @@ export function NavBar() {
               initial={reduced ? false : { opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.14, ease: WORDMARK_EASE }}
-              className="text-[15px] md:text-[16px] lg:text-[17px] font-normal"
+              className="font-serif text-[16px] font-medium md:text-[17px] lg:text-[19px]"
             >
               {t('orgName')}
             </motion.span>
@@ -146,7 +146,7 @@ export function NavBar() {
               initial={reduced ? false : { opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2, ease: WORDMARK_EASE }}
-              className="text-[14px] italic text-ink-60"
+              className="font-serif text-[14px] italic text-ink-60"
             >
               {t('wordmark')}
             </motion.span>

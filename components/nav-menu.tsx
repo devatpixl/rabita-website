@@ -103,7 +103,7 @@ export function DesktopNav() {
                   <span
                     aria-hidden
                     className={cn(
-                      'text-[0.72rem] tabular-nums transition-colors duration-200',
+                      'font-mono text-[0.72rem] tabular-nums transition-colors duration-200',
                       active || isCurrent(key) ? 'text-gold-deep' : 'text-gold-deep/60',
                     )}
                   >
