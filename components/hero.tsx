@@ -232,7 +232,7 @@ export async function Hero() {
             className="md:sticky md:top-24 self-center w-full md:ml-auto"
             style={{
               maxWidth: '640px',
-              maxHeight: `calc(100svh - ${HEADER_H}px - 96px)`,
+              maxHeight: `calc(100svh - ${HEADER_H}px - 48px)`,
             }}
           >
             <div className="relative isolate h-full">
@@ -243,7 +243,7 @@ export async function Hero() {
               <div
                 className="no-scrollbar relative rounded-2xl overflow-y-auto bg-paper text-ink border border-gold/30 shadow-[0_1px_2px_rgba(0,0,0,0.06),0_8px_24px_-10px_rgba(0,0,0,0.35),0_28px_60px_-24px_rgba(0,0,0,0.4)]"
                 style={{
-                  maxHeight: `calc(100svh - ${HEADER_H}px - 96px)`,
+                  maxHeight: `calc(100svh - ${HEADER_H}px - 48px)`,
                 }}
               >
                 <GivingCard />

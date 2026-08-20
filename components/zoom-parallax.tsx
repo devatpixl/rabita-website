@@ -100,10 +100,10 @@ const IMAGES: Img[] = [
     height: 898,
   },
   {
-    src: '/photos/zoom-gateiftar.webp',
-    alt: 'Street iftar in Grønland, long tables under tents on the road',
+    src: '/photos/zoom-minaret-low.webp',
+    alt: 'The minaret from below, brass fretwork against the sky',
     width: 1600,
-    height: 1200,
+    height: 900,
   },
   {
     src: '/photos/zoom-wudu.webp',
