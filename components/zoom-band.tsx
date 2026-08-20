@@ -38,24 +38,24 @@ export function ZoomBand() {
   const { scrollYProgress } = useScroll({ target: band, offset: ['start end', 'end start'] });
 
   // The plate opens from a small frame to full bleed, and its picture pushes in as it goes.
-  const plateW = useTransform(scrollYProgress, [0.18, 0.68], ['34vw', '104vw']);
-  const plateH = useTransform(scrollYProgress, [0.18, 0.68], ['32vh', '104vh']);
-  const radius = useTransform(scrollYProgress, [0.18, 0.68], [22, 0]);
+  const plateW = useTransform(scrollYProgress, [0.1, 0.34], ['34vw', '104vw']);
+  const plateH = useTransform(scrollYProgress, [0.1, 0.34], ['32vh', '104vh']);
+  const radius = useTransform(scrollYProgress, [0.1, 0.34], [22, 0]);
   const push = useTransform(scrollYProgress, [0.18, 0.82], [1.24, 1]);
 
   // The rooms go back as it comes forward.
-  const roomsOut = useTransform(scrollYProgress, [0.2, 0.48], [1, 0]);
-  const roomsAway = useTransform(scrollYProgress, [0.2, 0.48], [1, 1.85]);
+  const roomsOut = useTransform(scrollYProgress, [0.1, 0.28], [1, 0]);
+  const roomsAway = useTransform(scrollYProgress, [0.1, 0.28], [1, 1.85]);
 
-  const scrim = useTransform(scrollYProgress, [0.42, 0.56], [0, 0.82]);
-  const lift = useTransform(scrollYProgress, [0.5, 0.64], [22, 0]);
-  const show = useTransform(scrollYProgress, [0.5, 0.64], [0, 1]);
+  const scrim = useTransform(scrollYProgress, [0.24, 0.36], [0, 0.82]);
+  const lift = useTransform(scrollYProgress, [0.3, 0.42], [22, 0]);
+  const show = useTransform(scrollYProgress, [0.3, 0.42], [0, 1]);
 
   return (
     <section
       ref={band}
       aria-labelledby="zoom-band-heading"
-      className="relative h-[170svh] overflow-hidden bg-dusk"
+      className="relative h-[130svh] overflow-hidden bg-dusk"
     >
       {/* The rooms, falling back */}
       {ROOMS.map((r) => (

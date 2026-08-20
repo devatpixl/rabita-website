@@ -81,7 +81,7 @@ export function SadaqaBand() {
       className="bg-paper py-section-lg"
     >
       <SectionBody>
-        <div className="grid items-center gap-12 md:grid-cols-12 md:gap-16">
+        <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
           {/* The ask */}
           <div className="md:col-span-5">
             <Eyebrow tone="gold-deep">{t('eyebrow')}</Eyebrow>
@@ -113,7 +113,7 @@ export function SadaqaBand() {
               if (e.key === 'ArrowLeft') (rtl ? next : prev)();
             }}
           >
-            <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-paper-2">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-3xl bg-paper-2">
               <AnimatePresence initial={false} custom={dir * away}>
                 <motion.div
                   key={room.key}
