@@ -229,6 +229,39 @@ export function CongregationToday() {
     ? 'none'
     : `transform 380ms ${CURVE}, opacity 380ms ${CURVE}`;
 
+  // The indicator lives in two places and is displayed in exactly one: beside
+  // the statement on desktop, under the carousel on a phone. Rendering it
+  // twice with one of them `display:none` keeps a single tablist in the
+  // accessibility tree, which two visible tablists would not.
+  const dashes = SLIDE_KEYS.map((key, i) => {
+    const isActive = i === active;
+    return (
+      <button
+        key={key}
+        type="button"
+        role="tab"
+        aria-selected={isActive}
+        aria-label={t('goto', { n: i + 1 })}
+        onClick={() => goTo(i)}
+        className={cn(isActive ? 'bg-gold-deep' : 'bg-rule')}
+        // Padding grows the touch area to 44px; the negative margin gives the space back.
+        style={{
+          boxSizing: 'content-box',
+          height: '2px',
+          width: isActive ? '44px' : '26px',
+          paddingBlock: '21px',
+          marginBlock: '-21px',
+          paddingInline: '3px',
+          marginInline: '-3px',
+          backgroundClip: 'content-box',
+          transitionProperty: reduced ? 'none' : 'width, background-color',
+          transitionDuration: '320ms',
+          transitionTimingFunction: CURVE,
+        }}
+      />
+    );
+  });
+
   return (
     <Section id="menigheten-i-dag" tone="paper" className="scroll-mt-20 !py-0">
       <div
@@ -265,8 +298,9 @@ export function CongregationToday() {
               <Accent surface="paper">{t('statement.accent')}</Accent>
               {t('statement.after')}
             </h2>
+            {/* Desktop keeps it on the statement's baseline. */}
             <div
-              className="shrink-0 inline-flex items-center"
+              className="hidden shrink-0 items-center md:inline-flex"
               style={{
                 columnGap: '6px',
                 // With items-baseline on the parent row, a text-less
@@ -279,34 +313,7 @@ export function CongregationToday() {
               role="tablist"
               aria-label={t('carouselLabel')}
             >
-              {SLIDE_KEYS.map((key, i) => {
-                const isActive = i === active;
-                return (
-                  <button
-                    key={key}
-                    type="button"
-                    role="tab"
-                    aria-selected={isActive}
-                    aria-label={t('goto', { n: i + 1 })}
-                    onClick={() => goTo(i)}
-                    className={cn(isActive ? 'bg-gold-deep' : 'bg-rule')}
-                    // Padding grows the touch area to 44px; the negative margin gives the space back.
-                    style={{
-                      boxSizing: 'content-box',
-                      height: '2px',
-                      width: isActive ? '44px' : '26px',
-                      paddingBlock: '21px',
-                      marginBlock: '-21px',
-                      paddingInline: '3px',
-                      marginInline: '-3px',
-                      backgroundClip: 'content-box',
-                      transitionProperty: reduced ? 'none' : 'width, background-color',
-                      transitionDuration: '320ms',
-                      transitionTimingFunction: CURVE,
-                    }}
-                  />
-                );
-              })}
+              {dashes}
             </div>
           </div>
         </div>
@@ -430,6 +437,39 @@ export function CongregationToday() {
             })}
           </div>
 
+          {/* Nothing on a phone said this rail moves. Innocents-style side
+             chevrons, small and translucent so they read as affordances
+             rather than chrome, sitting on the rail itself. Desktop already
+             has the drag cursor, the wheel handler and the indicator on the
+             statement line, so they are mobile only. */}
+          <button
+            type="button"
+            onClick={prev}
+            aria-label={t('goto', { n: (active === 0 ? SLIDE_KEYS.length : active) })}
+            className="absolute start-2 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-paper/85 text-ink shadow-[0_2px_10px_-2px_rgba(26,26,24,0.35)] backdrop-blur-sm active:scale-95 md:hidden"
+          >
+            <ChevronLeft className="h-4 w-4 rtl:rotate-180" />
+          </button>
+          <button
+            type="button"
+            onClick={next}
+            aria-label={t('goto', { n: ((active + 2) > SLIDE_KEYS.length ? 1 : active + 2) })}
+            className="absolute end-2 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-paper/85 text-ink shadow-[0_2px_10px_-2px_rgba(26,26,24,0.35)] backdrop-blur-sm active:scale-95 md:hidden"
+          >
+            <ChevronLeft className="h-4 w-4 rotate-180 rtl:rotate-0" />
+          </button>
+        </div>
+
+        {/* Phone position for the indicator. Beside the statement it sat above
+           the picture it describes; under the rail it reads as a caption for
+           what you are looking at, and it is where the thumb already is. */}
+        <div
+          className="mt-5 flex items-center justify-center md:hidden"
+          style={{ columnGap: '6px' }}
+          role="tablist"
+          aria-label={t('carouselLabel')}
+        >
+          {dashes}
         </div>
 
         {/* Text block — title + figure on one baseline-aligned line,
@@ -557,5 +597,13 @@ function FigureInline({ figure }: { figure: Extract<Figure, { kind: 'single' | '
         {figure.label}
       </span>
     </span>
+  );
+}
+
+function ChevronLeft({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
+      <path d="M15 18l-6-6 6-6" />
+    </svg>
   );
 }

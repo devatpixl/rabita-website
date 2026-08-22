@@ -1497,10 +1497,6 @@
       }
     }
   },
-  "mobile": {
-    "ofGoal": "of {goal} kr",
-    "pick": "Give"
-  },
   "notFound": {
     "title": "This page does not exist.",
     "body": "The address may be old, or it may be mistyped.",

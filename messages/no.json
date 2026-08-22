@@ -1497,10 +1497,6 @@
       }
     }
   },
-  "mobile": {
-    "ofGoal": "av {goal} kr",
-    "pick": "Gi en gave"
-  },
   "notFound": {
     "title": "Siden finnes ikke.",
     "body": "Kanskje adressen er gammel, eller den er skrevet feil.",

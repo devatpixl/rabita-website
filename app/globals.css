@@ -298,15 +298,6 @@ body.sheet-open {
   overflow: hidden;
 }
 
-/* The floating give bar yields to the giving sheet. The sheet is a native
-   <dialog> in the top layer so it already paints over everything, but on a
-   short phone the bar sits exactly where the sheet's own action lands, and
-   two gold buttons stacked a few pixels apart is a misfire waiting to
-   happen. */
-html.sheet-open [data-give-bar] {
-  transform: translateY(220%) !important;
-}
-
 /* Fraunces on the axes innocents.no drives. Display and section headings sit
    at optical size 144 so large type keeps its high-contrast cut; the italic
    accent adds SOFT 80 and WONK 1. Card and body serif are left on the font's

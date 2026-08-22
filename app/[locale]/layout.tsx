@@ -7,7 +7,6 @@ import { cairo, fraunces, inter, jetbrainsMono, notoSansArabic } from '../fonts'
 import { ConsentBanner } from '@/components/consent-banner';
 import { Footer } from '@/components/footer';
 import { GivingSheet } from '@/components/giving-sheet';
-import { MobileGiveBar } from '@/components/mobile-give-bar';
 import { NavBar } from '@/components/nav-bar';
 import { PrayerPanelProvider } from '@/components/prayer-panel-provider';
 import { RsvpSheet } from '@/components/rsvp-sheet';
@@ -63,7 +62,6 @@ export default async function LocaleLayout({
           </PrayerPanelProvider>
           <div id="main" className="pb-16 md:pb-0">{children}</div>
           <Footer />
-          <MobileGiveBar />
           <GivingSheet />
           <RsvpSheet />
           <ConsentBanner />
