@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
@@ -42,6 +43,9 @@ const HERO_IMAGE = {
 // once and update this.
 const HEADER_H = 130;
 
+// The utility strip is hidden below md, so a phone only carries the 77px bar.
+const HEADER_MOBILE_H = 77;
+
 // Two stacked gradients. The horizontal one does the work — heavy on
 // the headline side and near-clear on the card side (the card is
 // opaque anyway). The vertical one is only a header-legibility band
@@ -68,6 +72,19 @@ const SCRIM_FOOT =
   ' rgba(22,36,46,0.45) 42%,' +
   ' rgba(22,36,46,0) 78%)';
 
+// Portrait screens need their own scrim. The horizontal one is built for a
+// two column hero: heavy on the headline side, clear on the card side. On a
+// phone there is no second column, the text sits over the lower half of the
+// picture, and a side weighted gradient leaves it illegible. This one keeps
+// the faces readable near the top and darkens down into the text.
+const SCRIM_MOBILE =
+  'linear-gradient(180deg,' +
+  ' rgba(22,36,46,0.44) 0%,' +
+  ' rgba(22,36,46,0.20) 18%,' +
+  ' rgba(22,36,46,0.52) 42%,' +
+  ' rgba(22,36,46,0.88) 68%,' +
+  ' rgba(22,36,46,0.96) 100%)';
+
 const IMAGE_FILTER = `saturate(${HERO_ART.saturate}) contrast(${HERO_ART.contrast}) brightness(${HERO_ART.brightness})`;
 
 // The hero keeps a narrower gutter than the sections below, since a full bleed photo carries more width.
@@ -88,49 +105,45 @@ export async function Hero() {
   // removed deliberately; `hero.credLine` and `hero.phaseLine` are still in
   // messages/*.json for whatever surfaces them next.
 
+  // The height cap and the vertical centring below are DESKTOP ONLY, and
+  // that is not a refinement: applied at every width they broke the phone
+  // layout outright. The content block is ~1194px tall on a 390px screen
+  // inside a 714px cap, and `justify-center` splits an overflow across both
+  // ends, so the headline sat at top:-240 and `overflow-hidden` threw it
+  // away. The first thing a phone visitor saw was the middle of the second
+  // sentence. On mobile the hero now flows at its natural height and starts
+  // at the top, where a headline belongs.
+  const heroVars = {
+    '--hero-min-sm': `calc(100svh - ${HEADER_MOBILE_H}px)`,
+    '--hero-min': `min(calc(100svh - ${HEADER_H}px), ${980 - HEADER_H}px)`,
+    '--hero-cap': `calc(100svh - ${HEADER_H}px)`,
+    '--hero-card-cap': `calc(100svh - ${HEADER_H}px - 48px)`,
+  } as CSSProperties;
+
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative overflow-hidden bg-dusk text-paper"
-      style={{
-        minHeight: `min(calc(100svh - ${HEADER_H}px), ${980 - HEADER_H}px)`,
-        maxHeight: `calc(100svh - ${HEADER_H}px)`,
-      }}
+      className="relative overflow-hidden bg-dusk text-paper min-h-[var(--hero-min-sm)] md:min-h-[var(--hero-min)] md:max-h-[var(--hero-cap)]"
+      style={heroVars}
     >
-      {/* Mobile image — sits above the content block. 4:5 crop, same
-         grading + scale so the face is dominant, no scrim (image is
-         above the content, not underneath it). */}
-      <div className="relative block md:hidden overflow-hidden">
-        <div className="relative aspect-[4/5] w-full">
-          <Image
-            src={HERO_IMAGE.mobile}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            style={{
-              objectFit: 'cover',
-              objectPosition,
-              transform: `scale(${HERO_ART.scale})`,
-              transformOrigin: objectPosition,
-              filter: IMAGE_FILTER,
-            }}
-          />
-        </div>
-      </div>
+      {/* One background layer at every width, with the crop swapped at md.
 
-      {/* Desktop background image + stacked scrims. Absolute so the
-         content grid below sits over it. Hidden on mobile. */}
+         The photograph used to be a block ABOVE the text on phones: a 4:5
+         crop that filled the entire first screen on its own and pushed the
+         headline, the lede and both buttons below the fold. A visitor met a
+         picture and nothing else. It is a background now, the way the desktop
+         hero and innocents.no both do it, with the content over the top. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 hidden md:block overflow-hidden"
+        className="pointer-events-none absolute inset-0 overflow-hidden"
       >
         <Image
-          src={HERO_IMAGE.desktop}
+          src={HERO_IMAGE.mobile}
           alt=""
           fill
           priority
           sizes="100vw"
+          className="md:hidden"
           style={{
             objectFit: 'cover',
             objectPosition,
@@ -139,27 +152,38 @@ export async function Hero() {
             filter: IMAGE_FILTER,
           }}
         />
-        <div className="absolute inset-0" style={{ background: scrimHorizontal(isRtl) }} />
-        <div className="absolute inset-0" style={{ background: SCRIM_VERTICAL }} />
+        <div className="absolute inset-0 md:hidden" style={{ background: SCRIM_MOBILE }} />
+        <Image
+          src={HERO_IMAGE.desktop}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="hidden md:block"
+          style={{
+            objectFit: 'cover',
+            objectPosition,
+            transform: `scale(${HERO_ART.scale})`,
+            transformOrigin: objectPosition,
+            filter: IMAGE_FILTER,
+          }}
+        />
+        <div className="absolute inset-0 hidden md:block" style={{ background: scrimHorizontal(isRtl) }} />
+        <div className="absolute inset-0 hidden md:block" style={{ background: SCRIM_VERTICAL }} />
         <div
           className="absolute inset-x-0 bottom-0 h-[38%]"
           style={{ background: SCRIM_FOOT }}
         />
       </div>
 
-      <div
-        className="relative z-10 mx-auto flex w-full max-w-[84rem] flex-col justify-center px-6 pt-8 pb-10 md:px-10 md:pt-10 md:pb-12 lg:px-12"
-        style={{
-          minHeight: `min(calc(100svh - ${HEADER_H}px), ${980 - HEADER_H}px)`,
-        }}
-      >
+      <div className="relative z-10 mx-auto flex min-h-[var(--hero-min-sm)] w-full max-w-[84rem] flex-col justify-end px-6 pt-8 pb-10 md:min-h-[var(--hero-min)] md:justify-center md:px-10 md:pt-10 md:pb-12 lg:px-12">
         <div className="grid w-full items-center gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:gap-20">
           <div>
             <h1
               id="hero-heading"
               className="font-serif text-paper text-balance"
               style={{
-                fontSize: 'clamp(2.75rem, min(6vw, 8.8vh), 6rem)',
+                fontSize: 'clamp(2.125rem, min(6vw, 8.8vh), 6rem)',
                 lineHeight: 1.06,
                 letterSpacing: '-0.015em',
                 maxWidth: '22ch',
@@ -188,17 +212,17 @@ export async function Hero() {
                the same fact in a sentence at reading size gets read. */}
             <p className="mt-5 max-w-[52ch] text-body text-paper/80">{t('subhead')}</p>
 
-            <div className="mt-6 flex flex-wrap items-center gap-3">
+            <div className="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
                 href={`/${locale}/moskeprosjektet`}
-                className="inline-flex items-center gap-2 rounded-full bg-gold-deep text-paper px-6 py-3 text-[15px] font-semibold transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99]"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gold-deep px-6 py-3 text-[15px] font-semibold text-paper transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99] sm:justify-start"
               >
                 {t('cta.primary')}
                 <ArrowIcon className="h-3.5 w-3.5" />
               </Link>
               <a
                 href="#menigheten-forteller"
-                className="inline-flex items-center gap-2 rounded-full border border-paper/60 px-6 py-3 text-[15px] font-semibold text-paper hover:bg-paper/10 transition-colors"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-paper/60 px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:bg-paper/10 sm:justify-start"
               >
                 {t('cta.secondary')}
                 <ArrowIcon className="h-3.5 w-3.5" />
@@ -217,23 +241,15 @@ export async function Hero() {
              card is taller than the cap. */}
           <aside
             aria-label="Give"
-            className="md:sticky md:top-24 self-center w-full md:ml-auto"
-            style={{
-              maxWidth: '640px',
-              maxHeight: `calc(100svh - ${HEADER_H}px - 48px)`,
-            }}
+            className="hidden md:block md:sticky md:top-24 self-center w-full md:ml-auto md:max-h-[var(--hero-card-cap)]"
+            style={{ maxWidth: '640px' }}
           >
             <div className="relative isolate h-full">
               <div
                 aria-hidden
                 className="absolute inset-0 translate-y-2 translate-x-2 rounded-2xl bg-paper-deep border-t border-gold/40"
               />
-              <div
-                className="no-scrollbar relative rounded-2xl overflow-y-auto bg-paper text-ink border border-gold/30 shadow-[0_1px_2px_rgba(0,0,0,0.06),0_8px_24px_-10px_rgba(0,0,0,0.35),0_28px_60px_-24px_rgba(0,0,0,0.4)]"
-                style={{
-                  maxHeight: `calc(100svh - ${HEADER_H}px - 48px)`,
-                }}
-              >
+              <div className="no-scrollbar relative overflow-y-auto rounded-2xl border border-gold/30 bg-paper text-ink shadow-[0_1px_2px_rgba(0,0,0,0.06),0_8px_24px_-10px_rgba(0,0,0,0.35),0_28px_60px_-24px_rgba(0,0,0,0.4)] md:max-h-[var(--hero-card-cap)]">
                 <GivingCard />
               </div>
             </div>

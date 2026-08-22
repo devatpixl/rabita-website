@@ -73,13 +73,22 @@ export async function ProjectOverview() {
             {/* Figures at display size with mono labels under them — the
                pairing the campaign meter uses, so the two dark and light
                halves of the page read as one system. */}
-            <dl className="mt-10 grid grid-cols-3 gap-x-6 border-t border-paper/15 pt-7">
+            {/* Three columns is a desktop shape. At 390px each column is about
+               100px wide and every label broke onto three lines: "ETASJER,
+               OVER OG UNDER BAKKEN" stacked under a number it no longer sat
+               beside. On a phone the figures become rows, value and label on
+               one baseline with a hairline between them, which is how the
+               rest of the site sets a short register. */}
+            <dl className="mt-8 border-t border-paper/15 md:mt-10 md:grid md:grid-cols-3 md:gap-x-6 md:pt-7">
               {figures.map((f) => (
-                <div key={f.label}>
+                <div
+                  key={f.label}
+                  className="flex items-baseline justify-between gap-6 border-b border-paper/10 py-3.5 md:block md:border-0 md:py-0"
+                >
                   <dd className="font-serif text-[clamp(1.5rem,3vw,2.25rem)] leading-none tabular-nums text-paper">
                     {f.value}
                   </dd>
-                  <dt className="mt-2 font-mono text-[0.625rem] uppercase leading-snug tracking-[0.14em] text-paper/50">
+                  <dt className="text-end font-mono text-[0.625rem] uppercase leading-snug tracking-[0.14em] text-paper/50 md:mt-2 md:text-start">
                     {f.label}
                   </dt>
                 </div>

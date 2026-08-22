@@ -1498,8 +1498,8 @@
     }
   },
   "mobile": {
-    "vipps": "Gi med Vipps ({number})",
-    "pick": "Velg beløp"
+    "ofGoal": "av {goal} kr",
+    "pick": "Gi en gave"
   },
   "notFound": {
     "title": "Siden finnes ikke.",

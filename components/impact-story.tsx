@@ -64,6 +64,16 @@ export function ImpactStory() {
     setReduced(prefers);
     if (prefers) return;
 
+    // The trigger band has to sit BELOW the pinned photograph, not behind it.
+    // On desktop the photo is in the other column so the middle 20% of the
+    // viewport is free; on a phone the photo is pinned at the top and covers
+    // roughly 84-394px of a 760px screen, so a centred band would switch the
+    // picture for a chapter the reader cannot see yet. Below md the band moves
+    // into the lower third, which is the only part of the screen where a
+    // chapter is actually legible.
+    const narrow = window.matchMedia('(max-width: 767px)').matches;
+    const rootMargin = narrow ? '-62% 0px -20% 0px' : '-40% 0px -40% 0px';
+
     const io = new IntersectionObserver(
       (entries) => {
         const visible = entries
@@ -74,7 +84,7 @@ export function ImpactStory() {
           if (key) setActive(key);
         }
       },
-      { rootMargin: '-40% 0px -40% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] },
+      { rootMargin, threshold: [0, 0.25, 0.5, 0.75, 1] },
     );
     panelsRef.current.forEach((el) => io.observe(el));
     return () => io.disconnect();
@@ -94,15 +104,24 @@ export function ImpactStory() {
           <p className="mt-6 text-body text-ink-60 max-w-prose">{t('lede')}</p>
         </div>
 
-        <div className="grid gap-10 md:grid-cols-12">
+        <div className="md:grid md:gap-10 md:grid-cols-12">
           {/* Sticky photo column */}
-          <div className="md:col-span-6">
+          {/* Pinned on the phone too, not only from md. innocents.no keeps its
+             story photo sticky at every width, shortens the crop and widens
+             the gaps between chapters; without the pin the sequence is just
+             four paragraphs under one picture. top-[84px] clears the header,
+             z-[1] keeps the chapters travelling behind the photograph rather
+             than over it. */}
+          <div className="sticky top-[84px] z-[1] bg-paper-2 pb-4 md:static md:col-span-6 md:bg-transparent md:pb-0">
             <div className="md:sticky md:top-20 md:h-[calc(100svh-5rem)] md:flex md:flex-col md:justify-center">
               {/* Capped so the whole photo is on screen at 100% zoom. The column is
                      wide enough for a 665px tall 4:5 crop, which is taller than a
                      laptop viewport once the sticky offset is taken off. The width
                      is capped instead of the height so the crop stays 4:5. */}
-              <div className="relative mx-auto aspect-[4/5] w-full overflow-hidden rounded-2xl bg-paper shadow-[0_20px_60px_-20px_rgba(0,0,0,0.35)] md:max-w-[calc((100svh-10rem)*0.8)]">
+              {/* 16/11 on a phone, 4/5 from md. A 4:5 crop pinned under the
+                 header leaves almost nothing of the viewport for the text it
+                 is illustrating. Same ratio innocents.no switches to. */}
+              <div className="relative mx-auto aspect-[16/11] w-full overflow-hidden rounded-2xl bg-paper shadow-[0_20px_60px_-20px_rgba(0,0,0,0.35)] md:aspect-[4/5] md:max-w-[calc((100svh-10rem)*0.8)]">
                 {CHAPTERS.map((c) => (
                   <div
                     key={c.key}
@@ -145,7 +164,11 @@ export function ImpactStory() {
           </div>
 
           {/* Scrolling chapter panels */}
-          <ol className="md:col-span-6 space-y-24 md:space-y-32 md:py-16">
+          {/* Each chapter needs scroll distance of its own, otherwise two of
+             them cross the observer's trigger band in the same flick and the
+             pinned photo skips a frame. 38vh between panels on mobile is the
+             innocents.no measure, give or take. */}
+          <ol className="mt-8 space-y-[38vh] pb-[16vh] md:col-span-6 md:mt-0 md:space-y-32 md:pb-0 md:py-16">
             {CHAPTERS.map((c, i) => (
               <li
                 key={c.key}

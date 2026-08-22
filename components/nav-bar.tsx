@@ -147,7 +147,7 @@ export function NavBar() {
            underline. Whole block links to home. */}
         <LinkVT
           href={`/${locale}`}
-          className="vt-wordmark flex min-h-11 shrink-0 items-center gap-3 whitespace-nowrap"
+          className="vt-wordmark flex min-h-11 shrink-0 items-center gap-2.5 whitespace-nowrap md:gap-3"
           aria-label={`${t('orgName')}, ${t('wordmark')}`}
         >
           {/* Mark, then each line of the name, on the curve and duration the
@@ -165,7 +165,7 @@ export function NavBar() {
               width={40}
               height={40}
               priority
-              className="h-10 w-10 md:h-11 md:w-11"
+              className="h-9 w-9 md:h-11 md:w-11"
             />
           </motion.span>
           <span className="flex flex-col font-serif text-ink leading-tight">
@@ -173,7 +173,7 @@ export function NavBar() {
               initial={reduced ? false : { opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.14, ease: WORDMARK_EASE }}
-              className="font-serif text-[16px] font-medium md:text-[17px] lg:text-[19px]"
+              className="font-serif text-[14px] font-medium md:text-[17px] lg:text-[19px]"
             >
               {t('orgName')}
             </motion.span>
@@ -181,7 +181,7 @@ export function NavBar() {
               initial={reduced ? false : { opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2, ease: WORDMARK_EASE }}
-              className="font-serif text-[14px] italic text-ink-60"
+              className="font-serif text-[12px] italic text-ink-60 md:text-[14px]"
             >
               {t('wordmark')}
             </motion.span>
@@ -193,7 +193,7 @@ export function NavBar() {
         {/* Right cluster. One wrapper around the buttons AND the hamburger so
            justify-between sees a single item here; two siblings would each
            take a share of the free space and open a gap between them. */}
-        <div className="flex shrink-0 items-center gap-4">
+        <div className="flex shrink-0 items-center gap-2 md:gap-4">
         <div className="hidden md:flex shrink-0 items-center gap-4">
           {/* Compact prayer trigger — the strip's own trigger is out of
              viewport by now, so the panel needs a handle up here.
@@ -277,6 +277,20 @@ export function NavBar() {
           </button>
 
         </div>
+        {/* Phone give button. The utility strip is hidden below md and the
+           floating bar only arrives after 40vh, so until now a phone had no
+           way to give from the chrome at all on first paint. Icon only, with
+           the label carried by aria-label, which is what innocents.no does
+           with its donate glyph at this width. */}
+        <button
+          type="button"
+          onClick={() => openGiveSheet()}
+          aria-label={t('give')}
+          className="grid h-11 w-11 place-items-center rounded-full bg-gold-deep text-paper transition-colors active:scale-[0.98] md:hidden"
+        >
+          <HeartIcon className="h-[18px] w-[18px]" />
+        </button>
+
         {/* Up to xl, not md. The desktop nav now starts at 1280 — below that
            the hamburger is the only way to reach the five sections, so it has
            to stay mounted through the whole tablet-to-small-laptop range
@@ -300,6 +314,14 @@ export function NavBar() {
         </div>
       )}
     </header>
+  );
+}
+
+function HeartIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+      <path d="M12 21s-7.5-4.7-9.6-9A5.3 5.3 0 0 1 12 6.6 5.3 5.3 0 0 1 21.6 12c-2.1 4.3-9.6 9-9.6 9Z" />
+    </svg>
   );
 }
 

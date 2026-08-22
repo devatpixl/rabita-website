@@ -140,7 +140,9 @@ export function Footer() {
         </div>
 
         <div className="border-t border-paper/12">
-          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-6 px-6 py-6">
+          {/* Extra foot room on mobile so the floating give bar never covers
+             the org number or the qibla reading. */}
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-6 px-6 pb-24 pt-6 md:pb-6">
             <p className="font-mono text-label uppercase tracking-widest text-paper/45">
               &copy; {new Date().getFullYear()} Rabita
             </p>

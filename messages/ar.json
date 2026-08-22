@@ -1498,8 +1498,8 @@
     }
   },
   "mobile": {
-    "vipps": "تبرّع عبر Vipps ({number})",
-    "pick": "اختر المبلغ"
+    "ofGoal": "من {goal} كرونة",
+    "pick": "تبرّع"
   },
   "notFound": {
     "title": "الصفحة غير موجودة.",

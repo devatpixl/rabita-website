@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { useLocale, useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
+import { LanguageSwitcher } from './language-switcher';
 import { LinkVT } from './link-vt';
 import { cn } from '@/lib/cn';
 
@@ -220,7 +221,6 @@ export function MobileNav() {
   const locale = useLocale();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [section, setSection] = useState<NavKey | null>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);
@@ -245,15 +245,34 @@ export function MobileNav() {
 
   return (
     <>
+      {/* Trigger: 44x44, three 2px bars, morphing to an X while the drawer is
+         open. It was 11x11 with two hairlines, which is under the 44px touch
+         minimum and gave no feedback that it had opened anything.
+
+         xl:hidden, not md:hidden. The desktop nav now starts at 1280, and
+         this button was still retiring at 768, so between those two widths
+         the site had no navigation at all. */}
       <button
         type="button"
-        onClick={() => setOpen(true)}
-        aria-label={t('openMenu')}
+        onClick={() => setOpen((v) => !v)}
+        aria-label={open ? t('closeMenu') : t('openMenu')}
         aria-expanded={open}
-        className="-me-2 grid h-11 w-11 place-items-center md:hidden"
+        className="-me-2 grid h-11 w-11 place-items-center xl:hidden"
       >
-        <span aria-hidden className="block h-px w-6 bg-ink" />
-        <span aria-hidden className="mt-[6px] block h-px w-6 bg-ink" />
+        <span aria-hidden className="relative block h-[14px] w-[22px]">
+          <span
+            className={cn(
+              'absolute inset-x-0 top-0 block h-[2px] rounded bg-ink transition-transform duration-300 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)]',
+              open && 'translate-y-[6px] rotate-45',
+            )}
+          />
+          <span
+            className={cn(
+              'absolute inset-x-0 bottom-0 block h-[2px] rounded bg-ink transition-transform duration-300 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)]',
+              open && '-translate-y-[6px] -rotate-45',
+            )}
+          />
+        </span>
       </button>
 
       {mounted &&
@@ -262,107 +281,115 @@ export function MobileNav() {
             {open && (
               <motion.div
                 key="mobile-nav"
-                className="fixed inset-0 z-[60] md:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <button
-              type="button"
-              aria-label={t('closeMenu')}
-              onClick={() => setOpen(false)}
-              className="absolute inset-0 bg-ink/50"
-            />
-            <motion.div
-              className="absolute inset-y-0 end-0 flex w-[min(22rem,88vw)] flex-col overflow-y-auto bg-paper"
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', stiffness: 260, damping: 30 }}
-            >
-              <div className="flex items-center justify-between border-b border-rule px-5 py-3">
-                <span className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60">
-                  {t('wordmark')}
-                </span>
+                className="fixed inset-0 z-[60] xl:hidden"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
                 <button
                   type="button"
-                  onClick={() => setOpen(false)}
                   aria-label={t('closeMenu')}
-                  className="grid h-11 min-w-11 place-items-center text-[0.9rem] text-ink-60 hover:text-ink"
+                  onClick={() => setOpen(false)}
+                  className="absolute inset-0 bg-ink/60"
+                />
+                {/* Full bleed on a phone, a panel on a tablet. Dusk ground,
+                   not paper: the drawer is a place you go, and the site
+                   already uses dusk for every full stop. 100dvh so an iOS
+                   URL bar collapse cannot crop the actions at the foot. */}
+                <motion.div
+                  className="absolute inset-y-0 end-0 flex h-full w-full flex-col bg-dusk text-paper sm:w-[26rem]"
+                  style={{ height: '100dvh' }}
+                  initial={{ x: '100%' }}
+                  animate={{ x: 0 }}
+                  exit={{ x: '100%' }}
+                  transition={{ type: 'spring', stiffness: 260, damping: 30 }}
                 >
-                  &times;
-                </button>
-              </div>
+                  <div className="flex shrink-0 items-center justify-between px-5 py-4">
+                    <span className="flex flex-col font-serif leading-tight">
+                      <span className="text-[15px] font-medium text-paper">{t('orgName')}</span>
+                      <span className="text-[13px] italic text-paper/55">{t('wordmark')}</span>
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setOpen(false)}
+                      aria-label={t('closeMenu')}
+                      className="-me-2 grid h-11 w-11 place-items-center rounded-full text-[26px] leading-none text-paper/70 transition-colors hover:bg-paper/10 hover:text-paper"
+                    >
+                      &times;
+                    </button>
+                  </div>
 
-              <ul className="px-5 pb-10">
-                {NAV_KEYS.map((key) => {
-                  const items = t.raw(`menu.${key}`) as Item[];
-                  const expanded = section === key;
-                  const label = (
-                    <span className="font-serif text-[1.1rem]">{t(`items.${key}`)}</span>
-                  );
-                  return (
-                    <li key={key} className="border-b border-rule">
-                      {/* Prayer has no children, so it is a link rather than a
-                         drawer that opens on nothing. */}
-                      {items.length === 0 ? (
-                        <LinkVT
-                          href={`/${locale}${NAV_ROOT[key]}`}
-                          onClick={() => setOpen(false)}
-                          className="flex min-h-14 w-full items-center justify-between gap-4 text-start text-ink"
-                        >
-                          {label}
-                          <span aria-hidden className="text-ink-60 rtl:rotate-180">
-                            &rsaquo;
-                          </span>
-                        </LinkVT>
-                      ) : (
-                      <button
-                        type="button"
-                        onClick={() => setSection(expanded ? null : key)}
-                        aria-expanded={expanded}
-                        className="flex min-h-14 w-full items-center justify-between gap-4 text-start text-ink"
-                      >
-                        {label}
-                        <span
-                          aria-hidden
-                          className={cn(
-                            'text-ink-60 transition-transform duration-200',
-                            expanded && 'rotate-90',
-                          )}
-                        >
-                          &rsaquo;
-                        </span>
-                      </button>
-                      )}
-                      <AnimatePresence initial={false}>
-                        {expanded && (
-                          <motion.ul
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-                            className="overflow-hidden"
+                  {/* Everything is open. The accordion meant two taps to reach
+                     any of the eighteen pages behind these five headings, and
+                     hid from the reader that the pages existed at all. */}
+                  <div className="no-scrollbar min-h-0 flex-1 overflow-y-auto px-5 pb-8">
+                    <div className="border-t border-paper/15 pt-4">
+                      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
+                        {t('openDaily')}
+                      </p>
+                      <p className="mt-1 font-mono text-[14px] tracking-[0.06em] text-paper/80">
+                        {t('openHours')}
+                      </p>
+                    </div>
+
+                    {NAV_KEYS.map((key) => {
+                      const items = (t.raw(`menu.${key}`) as Item[]) ?? [];
+                      return (
+                        <div key={key} className="mt-7 border-t border-paper/15 pt-4">
+                          <LinkVT
+                            href={`/${locale}${NAV_ROOT[key]}`}
+                            onClick={() => setOpen(false)}
+                            className="block font-serif text-[26px] leading-tight text-paper transition-colors hover:text-gold"
                           >
-                            {items.map((item) => (
-                              <li key={item.href}>
-                                <LinkVT
-                                  href={`/${locale}${item.href}`}
-                                  onClick={() => setOpen(false)}
-                                  className="flex min-h-12 items-center ps-4 text-[0.95rem] text-ink-60 hover:text-gold-deep"
-                                >
-                                  {item.label}
-                                </LinkVT>
-                              </li>
-                            ))}
-                          </motion.ul>
-                        )}
-                      </AnimatePresence>
-                    </li>
-                  );
-                })}
-              </ul>
+                            {t(`items.${key}`)}
+                          </LinkVT>
+                          {items.length > 0 && (
+                            <ul className="mt-2">
+                              {items.map((item) => (
+                                <li key={item.href} className="border-b border-paper/10 last:border-b-0">
+                                  <LinkVT
+                                    href={`/${locale}${item.href}`}
+                                    onClick={() => setOpen(false)}
+                                    className="flex min-h-12 items-center py-1 font-serif text-[18px] text-paper/70 transition-colors hover:text-gold"
+                                  >
+                                    {item.label}
+                                  </LinkVT>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Actions pinned to the foot, in thumb reach, with the iOS
+                     home indicator accounted for. */}
+                  <div
+                    className="shrink-0 border-t border-paper/15 px-5 pt-4"
+                    style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom, 0px))' }}
+                  >
+                    <div className="flex items-center gap-3">
+                      <LinkVT
+                        href={`/${locale}/bli-medlem`}
+                        onClick={() => setOpen(false)}
+                        className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full border border-paper/35 px-4 text-[14px] font-semibold text-paper"
+                      >
+                        {t('join')}
+                      </LinkVT>
+                      <LinkVT
+                        href={`/${locale}/gi-en-gave`}
+                        onClick={() => setOpen(false)}
+                        className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-gold px-4 text-[14px] font-semibold text-dusk"
+                      >
+                        {t('give')}
+                      </LinkVT>
+                    </div>
+                    <div className="mt-3 flex justify-center">
+                      <LanguageSwitcher tone="paper" drop="up" />
+                    </div>
+                  </div>
                 </motion.div>
               </motion.div>
             )}

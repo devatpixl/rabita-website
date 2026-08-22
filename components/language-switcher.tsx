@@ -25,7 +25,10 @@ const LOCALE_SHORT: Record<AppLocale, string> = {
   ar: 'AR',
 };
 
-export function LanguageSwitcher({ tone = 'ink' }: { tone?: 'ink' | 'paper' } = {}) {
+export function LanguageSwitcher({
+  tone = 'ink',
+  drop = 'down',
+}: { tone?: 'ink' | 'paper'; drop?: 'down' | 'up' } = {}) {
   const trigger =
     tone === 'paper'
       ? 'text-paper/70 hover:text-paper'
@@ -75,7 +78,9 @@ export function LanguageSwitcher({ tone = 'ink' }: { tone?: 'ink' | 'paper' } = 
       {open && (
         <ul
           role="listbox"
-          className="absolute end-0 top-full z-50 mt-2 min-w-40 rounded-lg border border-rule bg-paper text-ink shadow-[0_12px_32px_-12px_rgba(26,26,24,0.35)]"
+          className={`absolute end-0 z-50 min-w-40 rounded-lg border border-rule bg-paper text-ink shadow-[0_12px_32px_-12px_rgba(26,26,24,0.35)] ${
+            drop === 'up' ? 'bottom-full mb-2' : 'top-full mt-2'
+          }`}
         >
           {routing.locales.map((l) => (
             <li key={l}>

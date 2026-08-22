@@ -1498,8 +1498,8 @@
     }
   },
   "mobile": {
-    "vipps": "Give with Vipps ({number})",
-    "pick": "Pick amount"
+    "ofGoal": "of {goal} kr",
+    "pick": "Give"
   },
   "notFound": {
     "title": "This page does not exist.",
