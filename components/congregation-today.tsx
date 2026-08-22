@@ -100,6 +100,7 @@ export function CongregationToday() {
   const dragStartX = useRef<number | null>(null);
   const wheelLock = useRef(false);
   const cameFromDrag = useRef(false);
+  const capturing = useRef(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -153,15 +154,33 @@ export function CongregationToday() {
   }, [isRtl, next, prev]);
 
   // One gesture, one slide. Pointer events cover mouse, pen and touch alike.
+  //
+  // Capture is NOT taken on pointerdown. Once a pointer is captured, the
+  // browser dispatches the following `click` to the CAPTURING element rather
+  // than to whatever is under the cursor — so every click on a side card was
+  // being delivered to this container and the card's own onClick never ran.
+  // The handler was there and correct; the event never reached it.
+  //
+  // Capture is taken on the first move past a small threshold instead. By
+  // then it is a drag, which is the only case capture is for: keeping the
+  // gesture alive if the pointer leaves the rail. A click never crosses the
+  // threshold, so it is delivered normally.
   const onPointerDown = (e: React.PointerEvent) => {
     if (e.pointerType === 'mouse' && e.button !== 0) return;
     dragStartX.current = e.clientX;
+    capturing.current = false;
+  };
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (dragStartX.current == null || capturing.current) return;
+    if (Math.abs(e.clientX - dragStartX.current) < 8) return;
+    capturing.current = true;
     e.currentTarget.setPointerCapture?.(e.pointerId);
   };
   const endDrag = (e: React.PointerEvent) => {
     if (dragStartX.current == null) return;
     const dx = e.clientX - dragStartX.current;
     dragStartX.current = null;
+    capturing.current = false;
     if (Math.abs(dx) < 45) return;
     // Swallow the click that follows, or it jumps to whichever card the pointer landed on.
     cameFromDrag.current = true;
@@ -315,8 +334,9 @@ export function CongregationToday() {
             aria-label={t('carouselLabel')}
             tabIndex={0}
             onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
             onPointerUp={endDrag}
-            onPointerCancel={() => { dragStartX.current = null; }}
+            onPointerCancel={() => { dragStartX.current = null; capturing.current = false; }}
             onDragStart={(e) => e.preventDefault()}
             className="relative select-none outline-none focus-visible:ring-1 focus-visible:ring-gold-deep/40 cursor-grab active:cursor-grabbing"
             style={{
@@ -340,12 +360,19 @@ export function CongregationToday() {
               // that step, which is deliberately past the viewport at
               // desktop widths so overflow-x: clip cuts them off.
               const dxCalc = `calc(${off * dirSign} * (${CARD_W} * 0.85 + ${GAP_PX}px))`;
-              // Inner side cards are click-to-navigate: clicking the
-              // card on either side jumps to it, matching mouse users'
-              // intuition. Centre is inert; outer are pointer-none
-              // (decorative peek). Screen readers still navigate via
-              // the indicator tabs above — these cards stay aria-hidden.
-              const clickable = abs === 1;
+              // Every VISIBLE side card is click-to-navigate, not just the
+              // immediate neighbours. The outer pair was pointer-none as a
+              // "decorative peek" on the assumption that overflow clipped
+              // it — but on a wide screen it is plainly on screen at 30%
+              // opacity, so a reader saw five cards that looked alike and
+              // found that only two of them responded. Clicking any of them
+              // now jumps to that card, left or right.
+              //
+              // Centre stays inert (you are already there); anything past
+              // the visible pair is opacity 0 and stays pointer-none.
+              // Screen readers navigate via the indicator tabs above, so
+              // these cards remain aria-hidden.
+              const clickable = abs === 1 || abs === 2;
               return (
                 <div
                   key={key}
@@ -361,7 +388,7 @@ export function CongregationToday() {
                     transition: cardTransition,
                     overflow: 'visible',
                     zIndex: isCenter ? 3 : abs === 1 ? 2 : 1,
-                    pointerEvents: abs > 1 ? 'none' : 'auto',
+                    pointerEvents: abs > 2 ? 'none' : 'auto',
                     cursor: clickable ? 'pointer' : undefined,
                   }}
                 >

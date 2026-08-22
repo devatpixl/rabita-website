@@ -5,7 +5,7 @@ import { openGiveSheet } from './giving-sheet';
 import { formatAmount } from '@/lib/format';
 import { GIFTS, type Gift } from '@/lib/gifts';
 import type { AppLocale } from '@/i18n/routing';
-import { Eyebrow, Section, SectionBody, SectionHeading } from './primitives';
+import { Section, SectionBody, SectionHeading } from './primitives';
 import { Accent } from './accent';
 import { InventoryBar } from './inventory-bar';
 import { MotionRise } from './motion-rise';
@@ -61,8 +61,7 @@ export function GiftLadder() {
     <Section id="hva-din-gave-bygger" tone="paper">
       <SectionBody>
         <div className="mb-12 max-w-3xl">
-          <Eyebrow>{t('eyebrow')}</Eyebrow>
-          <SectionHeading reveal className="mt-3 text-balance">
+          <SectionHeading reveal className="text-balance">
             {t.rich('heading', {
               em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
             })}
@@ -104,7 +103,7 @@ export function GiftLadder() {
           <button
             type="button"
             onClick={() => openGiveSheet()}
-            className="min-h-12 rounded-btn bg-gold-deep text-paper px-6 py-3 text-[15px] font-semibold transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99]"
+            className="min-h-12 rounded-full bg-gold-deep text-paper px-6 py-3 text-[15px] font-semibold transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99]"
           >
             {t('cta')}
           </button>

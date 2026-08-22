@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { PRAYER_TIMES_TODAY } from '@/lib/campaign';
+import { hijriDate } from '@/lib/hijri';
 import type { AppLocale } from '@/i18n/routing';
 import { cn } from '@/lib/cn';
 import {
@@ -42,24 +43,6 @@ function nextPrayer(now: Date): { key: PrayerKey; at: Date } {
   return { key: 'fajr', at };
 }
 
-function hijriDate(locale: AppLocale): string {
-  try {
-    const tag =
-      locale === 'ar'
-        ? 'ar-SA-u-ca-islamic-umalqura'
-        : locale === 'en'
-        ? 'en-GB-u-ca-islamic-umalqura'
-        : 'nb-NO-u-ca-islamic-umalqura';
-    return new Intl.DateTimeFormat(tag, {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    }).format(new Date());
-  } catch {
-    return `${PRAYER_TIMES_TODAY.hijriDayApprox} ${PRAYER_TIMES_TODAY.hijriMonth}`;
-  }
-}
-
 function localeTag(locale: AppLocale): string {
   return locale === 'ar' ? 'ar-EG' : locale === 'en' ? 'en-GB' : 'nb-NO';
 }
@@ -95,7 +78,7 @@ export function PrayerTimesWidget() {
     return `${hStr}${t('hourUnit')} ${mStr}${t('minuteUnit')}`;
   }, [now, next, locale, t]);
 
-  const hijri = useMemo(() => hijriDate(locale), [locale]);
+  const hijri = useMemo(() => (now ? hijriDate(locale, now) : ''), [locale, now]);
 
   return (
     <div className="flex items-center gap-3 text-label uppercase tracking-widest text-ink-60">

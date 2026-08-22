@@ -10,7 +10,7 @@ export function MobileGiveBar() {
   const t = useTranslations('mobile');
 
   return (
-    <div className="md:hidden fixed inset-x-0 bottom-0 z-40 border-t border-rule bg-paper">
+    <div data-print-hide className="md:hidden fixed inset-x-0 bottom-0 z-40 border-t border-rule bg-paper">
       <div className="grid grid-cols-2 divide-x divide-rule">
         <a
           href={`https://qr.vipps.no/28/2/01/031/${CAMPAIGN.vippsNumber}`}

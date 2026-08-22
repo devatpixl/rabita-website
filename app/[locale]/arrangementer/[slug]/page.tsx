@@ -86,7 +86,7 @@ export default function EventDetail({ params }: { params: Promise<Params> }) {
                   className="min-h-11 w-full border border-rule bg-paper px-3 py-2 text-body tabular-nums outline-none focus:border-ink" />
               </label>
               <button type="submit" disabled={submitting}
-                className="min-h-12 rounded-btn bg-gold-deep px-5 py-3 text-[15px] font-semibold text-paper hover:bg-ink transition-colors disabled:opacity-50">
+                className="min-h-12 rounded-full bg-gold-deep px-5 py-3 text-[15px] font-semibold text-paper hover:bg-ink transition-colors disabled:opacity-50">
                 {t('rsvp')}
               </button>
             </form>

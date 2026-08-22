@@ -83,7 +83,12 @@ export function NavBar() {
   return (
     <header
       data-prayer-panel-scope
+      data-print-hide
       className={cn(
+        // `sticky` is a positioned value, so it already establishes the
+        // containing block the capsule layer below absolutely positions
+        // against — do not add `relative`, it would fight it. Only colours
+        // cross-fade here, which is paint work rather than layout.
         'sticky top-0 z-40 min-h-[77px] border-b transition-colors duration-300 ease-out',
         compactVisible
           ? 'border-transparent bg-transparent'
@@ -97,22 +102,52 @@ export function NavBar() {
         {t('skipToContent')}
       </a>
 
+      {/* The capsule, as a background layer.
+
+         This used to be the content container itself, animating max-width,
+         padding and border-radius. Those are layout properties: the
+         compositor cannot touch them, so every frame relaid out the
+         wordmark, five nav items and both buttons, and the row visibly
+         swam into place. The capsule is now a separate element behind the
+         content that animates ONLY opacity and transform — both
+         compositable — while the content does not move at all. */}
+      {/* The capsule and the nav row share a wrapper so the capsule sizes
+         to the ROW. It used to be absolute against the <header>, which was
+         fine until the prayer panel opened: the header grows to contain the
+         panel, so the pill grew with it into a full-height rounded blob
+         that painted over the panel's contents. */}
+      <div className="relative">
       <div
-        className={cn(
-          'mx-auto flex w-full items-center will-change-[max-width,padding]',
-          'transition-[max-width,padding,border-radius] duration-[320ms] [transition-timing-function:cubic-bezier(0.32,0.72,0,1)]',
-          compactVisible
-            ? 'my-2 max-w-[84rem] rounded-full bg-paper/95 px-8 py-2 shadow-[0_10px_30px_-12px_rgba(26,26,24,0.45)] backdrop-blur'
-            : 'max-w-[112rem] px-6 py-4 md:px-10 lg:px-24',
-        )}
+        aria-hidden
+        // inset-x-0 rather than the logical start/end pair: this inset is
+        // symmetric, so the two are equivalent here and the physical form
+        // reads plainer. Logical properties still matter for anything
+        // asymmetric — the padding inside the bar, for instance.
+        className="pointer-events-none absolute inset-y-1.5 inset-x-0 flex justify-center px-3 md:px-6"
       >
+        <div
+          className={cn(
+            'h-full w-full max-w-[83rem] rounded-full bg-paper/95 backdrop-blur',
+            'shadow-[0_10px_30px_-12px_rgba(26,26,24,0.45)]',
+            'transition-[opacity,transform] duration-[320ms] [transition-timing-function:cubic-bezier(0.32,0.72,0,1)]',
+            'will-change-[opacity,transform] motion-reduce:transition-none',
+            compactVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1',
+          )}
+        />
+      </div>
+
+      {/* justify-between, three children: lockup, nav, actions. Whatever the
+         row does not use is split equally between the two gaps rather than
+         dumped on one side. At 1920 that is ~123px either side of the nav
+         instead of 246px in a single hole after "About us". */}
+      <div className="relative mx-auto flex w-full max-w-[84rem] items-center justify-between px-6 py-4 md:px-10 lg:px-12">
         {/* Wordmark — mark + two-line stacked org name (matches the
            official brand lockup: "Det Islamske Forbundet" set bold in
            sans, with "Rabita" underneath at regular weight). No
            underline. Whole block links to home. */}
         <LinkVT
           href={`/${locale}`}
-          className="vt-wordmark flex min-h-11 items-center gap-3 whitespace-nowrap"
+          className="vt-wordmark flex min-h-11 shrink-0 items-center gap-3 whitespace-nowrap"
           aria-label={`${t('orgName')}, ${t('wordmark')}`}
         >
           {/* Mark, then each line of the name, on the curve and duration the
@@ -155,23 +190,49 @@ export function NavBar() {
 
         <DesktopNav />
 
-        {/* Right cluster */}
-        <div
-          className="ms-auto hidden md:flex items-center"
-          style={{ gap: '24px' }}
-        >
-          {/* Compact prayer trigger — visible when strip has scrolled
-             away. Same underlying panel; the strip trigger is unusable
-             at this point because it's out of viewport. */}
-          {compactVisible && (
+        {/* Right cluster. One wrapper around the buttons AND the hamburger so
+           justify-between sees a single item here; two siblings would each
+           take a share of the free space and open a gap between them. */}
+        <div className="flex shrink-0 items-center gap-4">
+        <div className="hidden md:flex shrink-0 items-center gap-4">
+          {/* Compact prayer trigger — the strip's own trigger is out of
+             viewport by now, so the panel needs a handle up here.
+
+             This used to be `{compactVisible && <button …>}`. Mounting it
+             on the same frame the container starts animating its width
+             meant a new flex item appeared mid-transition and shoved the
+             row sideways — the jump you see before things settle. It now
+             stays mounted and animates its own width and opacity on the
+             same curve and duration as the container, so the row resolves
+             as one move instead of two.
+
+             The 24px gap that used to be on the flex parent lives inside
+             this wrapper as pe-6, so collapsing to zero width takes the
+             spacing with it. */}
+          <div
+            aria-hidden={!compactVisible}
+            className={cn(
+              // Only from 1440. With the nav pinned left the bar is fuller
+              // than it was, and at 1280-1440 the five labels, both pills and
+              // a live prayer readout do not all fit — this is the piece that
+              // yields, because it is the only duplicate in the row: the
+              // utility strip carries the same figure, and Prayer is one
+              // click away in the nav itself.
+              'hidden min-[1440px]:block',
+              'overflow-hidden transition-[max-width,opacity] duration-[320ms]',
+              '[transition-timing-function:cubic-bezier(0.32,0.72,0,1)]',
+              compactVisible ? 'max-w-[220px] opacity-100' : 'max-w-0 opacity-0',
+            )}
+          >
             <button
               ref={compactTriggerRef}
               type="button"
               onClick={toggle}
+              tabIndex={compactVisible ? undefined : -1}
               aria-expanded={open}
               aria-controls={PRAYER_PANEL_ID}
               aria-label={tPrayer('expandLabel')}
-              className="inline-flex items-center gap-2 text-[14px] tabular-nums text-ink hover:text-gold-deep transition-colors"
+              className="inline-flex items-center gap-2 whitespace-nowrap pe-6 text-[14px] tabular-nums text-ink hover:text-gold-deep transition-colors"
             >
               {nextInfo && (
                 <span>
@@ -187,14 +248,27 @@ export function NavBar() {
                 aria-hidden
               />
             </button>
-          )}
+          </div>
+
+          {/* Become a member — an OUTLINE button, never a second filled
+             gold one. Give owns the single filled action in this header;
+             two would be the competing-CTA problem the brief warns about,
+             and the outline says "secondary" without needing a label to.
+             Hidden below lg: the bar already runs out of room at 13-14"
+             and this is the least urgent thing in it. */}
+          <LinkVT
+            href={`/${locale}/bli-medlem`}
+            className="hidden lg:inline-flex items-center min-h-11 rounded-full border border-ink/25 px-4 py-2 text-[14px] font-semibold text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper whitespace-nowrap"
+          >
+            {t('join')}
+          </LinkVT>
 
           {/* Primary "Give" — ALWAYS visible ≥ md. */}
           <button
             type="button"
             onClick={() => openGiveSheet()}
             style={{ opacity: 1 }}
-            className="inline-flex items-center gap-2 min-h-11 rounded-btn bg-gold-deep text-paper px-5 py-2 text-[15px] font-semibold transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99] whitespace-nowrap"
+            className="inline-flex items-center gap-2 min-h-11 rounded-full bg-gold-deep text-paper px-5 py-2 text-[14px] font-semibold transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99] whitespace-nowrap"
           >
             {t('give')}
             <span aria-hidden className="rtl:rotate-180">
@@ -203,9 +277,16 @@ export function NavBar() {
           </button>
 
         </div>
-        <div className="ms-auto md:hidden">
+        {/* Up to xl, not md. The desktop nav now starts at 1280 — below that
+           the hamburger is the only way to reach the five sections, so it has
+           to stay mounted through the whole tablet-to-small-laptop range
+           instead of handing off at 768 to a nav that isn't there yet. */}
+        <div className="xl:hidden">
           <MobileNav />
         </div>
+        </div>
+      </div>
+
       </div>
 
       {/* Panel — mounted inside the sticky header when the strip is

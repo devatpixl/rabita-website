@@ -5,13 +5,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { openGiveSheet } from './giving-sheet';
-import { Eyebrow, SectionBody, SectionHeading } from './primitives';
+import { SectionBody, SectionHeading } from './primitives';
 import { Accent } from './accent';
 
 // Impact story — adapts the Innocents "Amir chapters" scroll device to
 // Rabita. Left column is a sticky photo that cross-fades between four
-// chapters; right column scrolls the chapter panels with mono eyebrow +
-// serif title + body + gold-hairline tag pill. Chapter is activated
+// chapters; right column scrolls the chapter panels, each opening on a
+// serif title, then body + gold-hairline tag pill. Chapter is activated
 // when it dominates the middle band of the viewport (IntersectionObserver
 // with -40% top/bottom margins).
 //
@@ -86,8 +86,7 @@ export function ImpactStory() {
     <section id="menigheten-forteller" className="bg-paper-2 pt-section-sm pb-section-sm">
       <SectionBody>
         <div className="mb-16 max-w-3xl">
-          <Eyebrow>{t('eyebrow')}</Eyebrow>
-          <SectionHeading reveal className="mt-4 text-balance">
+          <SectionHeading reveal className="text-balance">
             {t.rich('heading', {
               em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
             })}
@@ -158,10 +157,12 @@ export function ImpactStory() {
                   reduced || active === c.key ? 'opacity-100' : 'opacity-40'
                 }`}
               >
-                <p className="font-mono text-label uppercase tracking-widest text-gold-deep">
-                  {t('chapterLabel', { n: (i + 1).toString().padStart(2, '0') })} · {t(`items.${c.key}.time`)}
-                </p>
-                <h3 className="mt-4 font-serif text-section text-ink leading-[1.1] text-balance">
+                {/* The "CHAPTER 01 · ALWAYS" line that used to open each
+                   panel is gone. It was the site's habit of announcing a
+                   section before letting it speak — and the number was
+                   already on screen, in the 01 / 04 counter under the
+                   photograph. The title now opens the panel. */}
+                <h3 className="font-serif text-section text-ink leading-[1.1] text-balance">
                   {t.rich(`items.${c.key}.title`, {
                     em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
                   })}
@@ -175,12 +176,6 @@ export function ImpactStory() {
                    because it carries the ask. */}
                 {c.key === 'sadaqa' && (
                   <>
-                    <div className="mt-6 flex items-center gap-3">
-                      <span aria-hidden className="block h-px w-16 bg-gold" />
-                      <span className="font-mono text-label uppercase tracking-widest text-gold-deep">
-                        {ts('mark')}
-                      </span>
-                    </div>
                     <ul className="mt-6 space-y-3 text-body text-ink-60 max-w-prose">
                       <li className="flex items-baseline gap-3">
                         <span aria-hidden className="h-px w-4 bg-gold mt-2 shrink-0" />
@@ -198,7 +193,7 @@ export function ImpactStory() {
                     <div className="mt-8 flex flex-col items-start gap-3">
                       <Link
                         href={`/${locale}/doner-en-bonneplass`}
-                        className="inline-flex items-center gap-2 min-h-12 rounded-btn bg-gold-deep text-paper px-6 py-3 text-[15px] font-semibold transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99]"
+                        className="inline-flex items-center gap-2 min-h-12 rounded-full bg-gold-deep text-paper px-6 py-3 text-[15px] font-semibold transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99]"
                       >
                         {ts('primary')}
                         <ArrowIcon className="h-3.5 w-3.5" />
@@ -206,7 +201,7 @@ export function ImpactStory() {
                       <button
                         type="button"
                         onClick={() => openGiveSheet()}
-                        className="inline-flex items-center min-h-12 rounded-btn border border-ink px-6 py-3 text-[15px] font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
+                        className="inline-flex items-center min-h-12 rounded-full border border-ink px-6 py-3 text-[15px] font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
                       >
                         {ts('secondary')}
                       </button>

@@ -13,12 +13,10 @@ const COLS = 20;
 export function GoalLattice({
   percent,
   caption,
-  countLabel,
   className,
 }: {
   percent: number;
   caption: string;
-  countLabel?: string;
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -46,7 +44,7 @@ export function GoalLattice({
   return (
     <div ref={ref} className={cn('', className)}>
       <div
-        className="grid gap-[9px]"
+        className="grid gap-[7px]"
         style={{ gridTemplateColumns: `repeat(${COLS}, minmax(0, 1fr))` }}
         role="img"
         aria-label={caption}
@@ -74,16 +72,13 @@ export function GoalLattice({
           );
         })}
       </div>
-      <p className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[0.75rem] uppercase tracking-[0.14em]">
-        {countLabel && (
-          <>
-            <span className="text-gold-deep tabular-nums">{countLabel}</span>
-            <span aria-hidden className="text-ink-40">
-              &middot;
-            </span>
-          </>
-        )}
-        <span className="text-ink-60">{caption}</span>
+      {/* The caption is back, without the "26 of 100" count that used to
+         precede it. That count restated the percentage a third time; this
+         only explains what a diamond is worth, which is the one thing the
+         grid cannot say for itself. Also serves as the grid's aria-label
+         above, so a screen reader is not handed a hundred unlabelled marks. */}
+      <p className="mt-4 font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
+        {caption}
       </p>
     </div>
   );

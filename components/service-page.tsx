@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Eyebrow, SectionBody } from './primitives';
+import { SectionBody } from './primitives';
+import { cn } from '@/lib/cn';
 
 // The shape every page under "Prayer and services" uses. Deliberately not the mosque project shape: that section opens on a full bleed dusk hero, this one opens light and split, so a reader can feel which part of the site they are in without reading the breadcrumb.
 const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
@@ -29,8 +30,7 @@ export function ServiceHero({
         <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60">{crumb}</p>
         <div className="mt-10 grid items-start gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-6">
-            <Eyebrow tone="gold-deep">{eyebrow}</Eyebrow>
-            <h1 className="mt-4 font-serif text-display text-balance text-ink">{title}</h1>
+            <h1 className="font-serif text-display text-balance text-ink">{title}</h1>
             <p className="mt-6 max-w-prose hyphens-auto text-justify text-body text-ink-60">{lede}</p>
             {note && (
               <p className="mt-8 border-t border-rule pt-5 font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
@@ -63,8 +63,7 @@ export function ServiceRegister({
     <section className="bg-paper-2 py-section-md">
       <SectionBody>
         <div className="max-w-3xl">
-          <Eyebrow tone="gold-deep">{eyebrow}</Eyebrow>
-          <h2 className="mt-4 font-serif text-section text-balance text-ink">{heading}</h2>
+          <h2 className="font-serif text-section text-balance text-ink">{heading}</h2>
         </div>
         <dl className="mt-12 border-t border-rule">
           {rows.map((r) => (
@@ -104,8 +103,7 @@ export function ServiceCards({
     <section className="bg-paper py-section-md">
       <SectionBody>
         <div className="max-w-3xl">
-          <Eyebrow tone="gold-deep">{eyebrow}</Eyebrow>
-          <h2 className="mt-4 font-serif text-section text-balance text-ink">{heading}</h2>
+          <h2 className="font-serif text-section text-balance text-ink">{heading}</h2>
         </div>
         <ul className="mt-12 grid gap-10 md:grid-cols-2">
           {cards.map((c) => (
@@ -157,7 +155,7 @@ export function ServiceVisit({
           <div className="flex flex-col items-start gap-3 md:col-span-3">
             <Link
               href={primary.href}
-              className="inline-flex min-h-12 items-center rounded-btn bg-gold-deep px-5 py-3 text-[15px] font-semibold text-paper transition-colors hover:bg-ink"
+              className="inline-flex min-h-12 items-center rounded-full bg-gold-deep px-5 py-3 text-[15px] font-semibold text-paper transition-colors hover:bg-ink"
             >
               {primary.label}
             </Link>

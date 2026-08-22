@@ -63,17 +63,22 @@ export const CAMPAIGN = Object.freeze({
   contactPhone: '+47 22 20 80 88', // TODO confirm; placeholder
 });
 
-// TODO §13.4 — prayer times source undecided (API feed vs staff entry).
-// Values below are placeholders based on late-summer Oslo. Swap for a real
-// feed (e.g. islamicfinder or Diyanet) once the customer picks a source.
+// §13.4 ANSWERED (strategy meeting): prayer times come from the screen in
+// the mosque, not an external API and not staff entry. Until that sync
+// exists, the real published table lives in lib/prayer-times.ts and should
+// be preferred over this object — it covers 2026-08-01 to 2026-12-31.
+//
+// What remains here is a single-day fallback for surfaces that have no date
+// to look up (and for dates outside the published range). Values match
+// rabita.no for 2026-08-21. `jumua` is site-wide, not a fallback.
 export const PRAYER_TIMES_TODAY = Object.freeze({
-  fajr: '03:45',
-  sunrise: '05:20',
-  dhuhr: '13:20',
-  asr: '17:30',
-  maghrib: '20:55',
-  isha: '22:35',
-  jumua: '13:30',
+  fajr: '03:17',
+  sunrise: '05:46',
+  dhuhr: '13:30',
+  asr: '17:18',
+  maghrib: '20:59',
+  isha: '22:23',
+  jumua: '15:00', // Rabita publishes 15:00; 13:30 here was Friday's dhuhr
   hijriMonth: 'Safar',
   hijriDayApprox: 15,
 });

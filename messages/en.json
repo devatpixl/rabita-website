@@ -10,12 +10,13 @@
     "headlineBefore": "A mosque, a school, a library, a kitchen. ",
     "headlineAccent": "One address.",
     "headlineAfter": "",
-    "subhead": "Seven floors at Calmeyers gate 8, open to the congregation and to the city around it. Your gift builds them: prayer space by prayer space, desk by desk, shelf by shelf.",
+    "subhead": "Oslo’s mosque across nationalities since 1987. Your gift raises seven floors at Calmeyers gate 8: prayer space by prayer space, desk by desk, shelf by shelf.",
     "phaseLine": "Phase 1 · Foundations underway",
     "cta": {
       "primary": "See the project",
       "secondary": "Meet the congregation"
-    }
+    },
+    "campaignToggle": "Show fundraising details"
   },
   "utility": {
     "prayer": {
@@ -55,8 +56,8 @@
     "openDaily": "OPEN DAILY",
     "items": {
       "project": "The mosque project",
-      "worship": "Prayer and services",
-      "education": "Education",
+      "prayer": "Prayer",
+      "services": "Services",
       "visit": "Visit us",
       "about": "About us"
     },
@@ -88,19 +89,33 @@
           "href": "/gi-en-gave"
         }
       ],
-      "worship": [
+      "prayer": [],
+      "services": [
         {
-          "label": "Prayer times",
-          "blurb": "The whole week and Friday prayer",
-          "href": "/bonnetider"
+          "label": "Nikah: wedding ceremony",
+          "blurb": "Islamic marriage, with or without legal registration.",
+          "href": "/tjenester/nikah"
         },
         {
-          "label": "Services",
-          "blurb": "Nikah, janaza, shahada and counselling",
-          "href": "/tjenester"
-        }
-      ],
-      "education": [
+          "label": "Janaza: funeral",
+          "blurb": "Washing, prayer and coordination with the cemetery.",
+          "href": "/tjenester/janaza"
+        },
+        {
+          "label": "Shahada: declaration of faith",
+          "blurb": "For those who wish to take shahada, with witnesses.",
+          "href": "/tjenester/shahada"
+        },
+        {
+          "label": "Counselling and conversations",
+          "blurb": "Confidential conversations with an imam or female counsellor.",
+          "href": "/tjenester/counselling"
+        },
+        {
+          "label": "Hajj and umrah",
+          "blurb": "Information, preparation and referrals.",
+          "href": "/tjenester/hajj-umrah"
+        },
         {
           "label": "Teaching",
           "blurb": "Arabic, Qur'an and adult courses",
@@ -133,7 +148,7 @@
         {
           "label": "Become a member",
           "blurb": "Membership and the fee",
-          "href": "/medlemskap"
+          "href": "/bli-medlem"
         },
         {
           "label": "Volunteer",
@@ -150,7 +165,8 @@
     "overview": "See everything in",
     "closeMenu": "Close the menu",
     "openMenu": "Open the menu",
-    "openHours": "06:00 to 22:00"
+    "openHours": "06:00 to 22:00",
+    "join": "Become a member"
   },
   "giving": {
     "freqMonthly": "Monthly",
@@ -165,12 +181,12 @@
     "corporate": "Give as a company",
     "chipAria": "Select {amount} kroner",
     "impact": {
-      "monthlyLow": "{amount} kr a month keeps the prayer hall lit for a week.",
-      "monthlyMid": "500 kr a month for three years funds a prayer space.",
-      "monthlyHigh": "{amount} kr a month for three years funds several prayer spaces and a desk in the school.",
-      "onceLow": "{amount} kr contributes to materials for the new prayer hall.",
-      "onceMid": "{amount} kr funds a prayer space as sadaqa jariya.",
-      "onceHigh": "25 000 kr funds a desk in the school where 400 children are taught every year."
+      "monthlyLow": "{amount} kr a month: a week of light in the prayer hall.",
+      "monthlyMid": "{amount} kr a month for three years: a prayer space.",
+      "monthlyHigh": "{amount} kr a month for three years: prayer spaces and a school desk.",
+      "onceLow": "{amount} kr towards materials for the new prayer hall.",
+      "onceMid": "{amount} kr: a prayer space as sadaqa jariya.",
+      "onceHigh": "{amount} kr: a desk in the school where 400 children learn."
     },
     "openSheet": "Open giving",
     "closeSheet": "Close",
@@ -232,8 +248,8 @@
   "meter": {
     "lattice": "Each mark is 1 000 000 kr",
     "label": "Raised so far",
-    "eyebrow": "Build fund",
-    "updated": "Updated {date}",
+    "eyebrow": "Raised for the <em>new mosque</em>",
+    "updated": "as of {date}",
     "of": "of",
     "financed": "financed",
     "give": "Give a gift",
@@ -250,7 +266,8 @@
       "label": "Sub-campaign",
       "body": "The foundation is being poured this year. This is the sub-goal we are working toward now."
     },
-    "latticeCount": "{lit} of 100"
+    "latticeCount": "{lit} of 100",
+    "goalLabel": "Goal"
   },
   "trust": {
     "taxDeductible": "Tax deduction up to 25 000 kr/year",
@@ -296,30 +313,25 @@
   },
   "impactStory": {
     "eyebrow": "Four chapters",
-    "heading": "A place where <em>life</em> happens.",
-    "lede": "Four stories from a congregation that already is a family, and shows up for the city around it. The building we are raising makes room for all of it.",
-    "chapterLabel": "Chapter {n}",
+    "heading": "Rabita has been here <em>since 1987</em>.",
+    "lede": "Four thousand members from forty nationalities. A school with 400 pupils and 19 teachers. A library, a youth club, and the people you call when there is a wedding or a funeral. The building we are raising makes room for all of it.",
     "items": {
       "family": {
-        "time": "Always",
         "title": "One family. Together for what is <em>right</em>.",
         "body": "Four thousand members, forty nationalities, one community. We stand together, in prayer and in learning, in joy and in grief, with each other and with our neighbours. To belong here is to belong to something larger than yourself.",
         "tag": "Community"
       },
       "learning": {
-        "time": "Weekdays",
-        "title": "Lectures, conversations, and teaching.",
+        "title": "Lectures, conversations, and <em>teaching</em>.",
         "body": "Evening talks on mental health, Quran classes for children, Arabic for beginners, calligraphy, philosophy. Nineteen teachers, four hundred pupils, waiting lists in every class. What is said here stays with you.",
         "tag": "Learning"
       },
       "volunteer": {
-        "time": "When it's needed",
-        "title": "We show up, for each other and for the city.",
+        "title": "We <em>show up</em>, for each other and for the city.",
         "body": "Volunteers in yellow vests hand out meals, coordinate with the district, and stand with neighbours in good times and hard ones. Rabita isn't only a place you come to. It's a place you come from, to help.",
         "tag": "Volunteer"
       },
       "sadaqa": {
-        "time": "Always",
         "title": "Sadaqa jariya, a gift that <em>lasts</em>.",
         "body": "The prayer rug is perhaps the most-used object in the mosque. Each place in the new hall can be given in the name of someone we've lost. The names stand as long as the building stands.",
         "tag": "Jariya"
@@ -341,7 +353,7 @@
   },
   "building": {
     "eyebrow": "The building rises",
-    "heading": "From foundation to <em>prayer hall</em>.",
+    "heading": "What each floor is for.",
     "etasje": "Floor {n}",
     "svg": {
       "groundLevel": "STREET LEVEL · CALMEYERS GATE",
@@ -858,7 +870,7 @@
   "congregationToday": {
     "statement": {
       "before": "What ",
-      "accent": "Calmeyers gate 8",
+      "accent": "Rabita",
       "after": " is for."
     },
     "carouselLabel": "The congregation today, photographs",
@@ -1236,7 +1248,12 @@
       "fri": "Friday",
       "sat": "Saturday",
       "sun": "Sunday"
-    }
+    },
+    "todayHeading": "Today",
+    "jumuaNote": "The hall fills before the khutbah.",
+    "outOfRange": "We do not have published times for this date yet. Contact the office, or check the screen in the mosque.",
+    "sourceNote": "Times are Rabita’s own, for Oslo. Jama‘ah times and a downloadable calendar arrive once the times sync with the screen in the mosque.",
+    "scheduleHeading": "The months ahead"
   },
   "medlemskapPage": {
     "eyebrow": "Membership",
@@ -1247,17 +1264,17 @@
       "ordinary": {
         "name": "Ordinary",
         "price": "0 kr",
-        "body": "Newsletter and invitations. No voting rights."
+        "body": "Newsletter and invitations."
       },
       "voting": {
         "name": "Voting",
         "price": "1 000 kr",
-        "body": "Voting rights at the AGM and eligibility to stand for the board."
+        "body": "A vote at the annual meeting."
       },
       "youth": {
         "name": "Under 15",
         "price": "0 kr",
-        "body": "Approved by a guardian. Age-appropriate activities."
+        "body": "Needs a guardian's approval."
       }
     },
     "form": {
@@ -1265,7 +1282,8 @@
       "name": "Full name",
       "email": "Email",
       "phone": "Phone (optional)",
-      "guardian": "Guardian (name and phone)",
+      "guardianName": "Guardian's name",
+      "guardianPhone": "Guardian's phone",
       "submitFree": "Join",
       "submitPay": "Join and pay 1 000 kr",
       "note": "National identity number is not required for membership. Privacy applies."
@@ -1425,7 +1443,8 @@
       "heading": "Documents",
       "statutes": "Statutes",
       "annual": "Annual report",
-      "press": "Press enquiries"
+      "press": "Press enquiries",
+      "onRequest": "Statutes, annual report and press material are available on request from the office."
     }
   },
   "contactPage": {
@@ -1631,6 +1650,88 @@
         "bank": "Bank account"
       },
       "hours": "Every day, 06:00 to 22:00"
+    }
+  },
+  "calendar": {
+    "title": "Prayer times",
+    "orgName": "Det Islamske Forbundet",
+    "hijri": "Hijri",
+    "download": "Download PDF",
+    "back": "Back to prayer times",
+    "source": "Times are Rabita’s own, calculated for Oslo.",
+    "panelHeading": "Download the calendar",
+    "panelBody": "One month per sheet, with the Hijri date and Friday prayer. Open the month you want and save it as a PDF, or print it."
+  },
+  "cta": {
+    "prayer": {
+      "eyebrow": "From the sunnah",
+      "give": "Give {amount} kr",
+      "dismiss": "Not now",
+      "quotes": [
+        {
+          "text": "Protect yourselves from the Fire, even with half a date.",
+          "source": "Sahih al-Bukhari 1417 · Sahih Muslim 1016"
+        },
+        {
+          "text": "Whoever builds a mosque for Allah, Allah will build for him a house like it in Paradise.",
+          "source": "Sahih al-Bukhari 450 · Sahih Muslim 533"
+        },
+        {
+          "text": "Charity has never decreased wealth.",
+          "source": "Sahih Muslim 2588"
+        }
+      ],
+      "thanksEyebrow": "Thank you",
+      "thanksTitle": "May Allah accept your gift.",
+      "thanksBody": "Your contribution goes straight into building the mosque at Calmeyers gate 8.",
+      "thanksClose": "Close"
+    }
+  },
+  "projectOverview": {
+    "cta": "See the mosque project",
+    "figures": {
+      "area": "Floor area",
+      "floors": "Floors, above and below ground",
+      "places": "Prayer places when it stands"
+    }
+  },
+  "joinPage": {
+    "lede": "Membership is how you are counted here. It brings the newsletter and invitations to what happens in the building. A voting membership adds a vote at the annual meeting that elects the board.",
+    "points": {
+      "updates": {
+        "title": "News and invitations",
+        "body": "The newsletter, and word of what is happening in the building."
+      },
+      "vote": {
+        "title": "A vote, if you want one",
+        "body": "Voting members elect the board at the annual meeting, and can stand for it themselves."
+      },
+      "renewal": {
+        "title": "Renews yearly",
+        "body": "Membership runs year by year, and you can end it whenever you want."
+      }
+    },
+    "members": "Four thousand members are already on the roll.",
+    "explain": {
+      "heading": "The three memberships.",
+      "note": "A national identity number is not required for membership. The privacy statement applies."
+    },
+    "tiers": {
+      "ordinary": {
+        "name": "Ordinary",
+        "price": "0 kr",
+        "body": "Newsletter and invitations. No voting rights."
+      },
+      "voting": {
+        "name": "Voting",
+        "price": "1 000 kr / year",
+        "body": "Voting rights at the AGM and eligibility to stand for the board."
+      },
+      "youth": {
+        "name": "Under 15",
+        "price": "0 kr",
+        "body": "Approved by a guardian. Age-appropriate activities."
+      }
     }
   }
 }

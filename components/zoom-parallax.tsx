@@ -16,8 +16,15 @@ import { cn } from '@/lib/cn';
 // tuned to native behaviour. If the effect feels stiff, report it,
 // don't add Lenis.
 //
-// Container height is 200vh (spec: not 300vh — three full screens
-// before the second section is too much delay ahead of the ask).
+// Container height is 200vh. All three settings have now been looked at:
+//   100vh — the tiles scale across the container's scroll distance, so
+//           halving it doubles the speed and the zoom reads rushed.
+//   300vh — the 21st.dev original. Genuinely slow: it is 50% more wheel
+//           for the same zoom, and because the payoff starts at 44% of
+//           progress the wait before anything happens grows with it.
+//   200vh — kept. The zoom stays legible and the wash arrives at ~88vh.
+// This is a pacing choice, not a performance one. The spring below is
+// stiff and does not trail the scroll.
 //
 // Payoff: as scroll approaches the end, a dusk overlay fades in over
 // the zoomed centre image and a serif statement + attribution appear.
@@ -33,16 +40,21 @@ import { cn } from '@/lib/cn';
 
 const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
 
-// Feathered edges, so a tile dissolves into the dusk instead of stopping on a hard rectangle.
-const EDGE =
-  'linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%),' +
-  ' linear-gradient(to bottom, transparent 0, #000 3%, #000 97%, transparent 100%)';
-const FEATHER = {
-  maskImage: EDGE,
-  WebkitMaskImage: EDGE,
-  maskComposite: 'intersect',
-  WebkitMaskComposite: 'source-in',
-} as const;
+// Tiles are rounded, not feathered.
+//
+// There used to be a mask fading the outer 3% of each tile to transparent
+// so it dissolved into the dusk. It was applied to the UNSCALED box and the
+// element is then transform-scaled 4-9x, which magnifies the mask with
+// everything else: a 14px fade at rest became ~130px at 9x and read as the
+// photograph being out of focus.
+//
+// A corner radius has the same trap, so it is set small deliberately. The
+// transform multiplies it:
+//     6px at rest  ->  24px at the centre's 4x  ->  54px at the outer 9x
+// 24px is `rounded-3xl`, the radius this site uses on every other image
+// block — so the centre tile matches the rest of the site at exactly the
+// moment it fills the frame. Anything larger balloons into a pill.
+const TILE_RADIUS = 6;
 
 type Img = { src: string; alt: string; width: number; height: number };
 
@@ -100,12 +112,6 @@ const IMAGES: Img[] = [
     height: 898,
   },
   {
-    src: '/photos/zoom-minaret-low.webp',
-    alt: 'The minaret from below, brass fretwork against the sky',
-    width: 1600,
-    height: 900,
-  },
-  {
     src: '/photos/zoom-wudu.webp',
     alt: 'Ablution room, geometric wall panels in white and gold, marble floor',
     width: 1400,
@@ -154,7 +160,7 @@ export function ZoomParallax() {
   const scale6 = useTransform(progress, [0, 1], [1, 6]);
   const scale8 = useTransform(progress, [0, 1], [1, 8]);
   const scale9 = useTransform(progress, [0, 1], [1, 9]);
-  const scales = [scale4, scale5, scale6, scale5, scale6, scale8, scale9, scale6];
+  const scales = [scale4, scale5, scale6, scale5, scale6, scale8, scale9];
 
   // Payoff: dusk overlay finishes fading in BEFORE the statement
   // starts. Overlay ramps 0 → 0.90 across [0.44, 0.72] so by the time
@@ -163,6 +169,13 @@ export function ZoomParallax() {
   // fought white serif at 0.86). Motion under the text continues,
   // which is intended, but no bright pixel ever reaches the type.
   const overlayOpacity = useTransform(progress, [0.44, 0.72], [0, 0.9]);
+
+  // The tiles now recede as the wash arrives instead of just being covered
+  // by it. The side tiles go all the way out; the centre one — the frame the
+  // statement sits on — only drops back, so the ending still has a picture
+  // behind it rather than a flat colour field.
+  const sideOpacity = useTransform(progress, [0.44, 0.70], [1, 0]);
+  const centreOpacity = useTransform(progress, [0.44, 0.72], [1, 0.55]);
   const statementOpacity = useTransform(progress, [0.72, 0.95], [0, 1]);
   const statementY = useTransform(progress, [0.72, 0.95], [12, 0]);
 
@@ -261,21 +274,20 @@ export function ZoomParallax() {
           return (
             <motion.div
               key={i}
-              style={{ scale, willChange: 'transform' }}
+              style={{ scale, opacity: i === 0 ? centreOpacity : sideOpacity, willChange: 'transform, opacity' }}
               className={cn(
                 'absolute top-0 flex h-full w-full items-center justify-center',
-                i === 1 && '[&>div]:!-top-[31vh] [&>div]:!left-[4vw] [&>div]:!h-[26vh] [&>div]:!w-[28vw]',
-                i === 2 && '[&>div]:!-top-[4vh] [&>div]:!-left-[29vw] [&>div]:!h-[38vh] [&>div]:!w-[20vw]',
-                i === 3 && '[&>div]:!-top-[31vh] [&>div]:!left-[31vw] [&>div]:!h-[26vh] [&>div]:!w-[20vw]',
-                i === 4 && '[&>div]:!top-[30vh] [&>div]:!left-[3vw] [&>div]:!h-[26vh] [&>div]:!w-[28vw]',
-                i === 5 && '[&>div]:!top-[28vh] [&>div]:!-left-[28vw] [&>div]:!h-[22vh] [&>div]:!w-[24vw]',
-                i === 6 && '[&>div]:!top-[31vh] [&>div]:!left-[31vw] [&>div]:!h-[24vh] [&>div]:!w-[20vw]',
-                i === 7 && '[&>div]:!-top-[2vh] [&>div]:!left-[30vw] [&>div]:!h-[24vh] [&>div]:!w-[22vw]',
+                i === 1 && '[&>div]:!-top-[30vh] [&>div]:!left-[5vw] [&>div]:!h-[30vh] [&>div]:!w-[35vw]',
+                i === 2 && '[&>div]:!-top-[10vh] [&>div]:!-left-[25vw] [&>div]:!h-[45vh] [&>div]:!w-[20vw]',
+                i === 3 && '[&>div]:!left-[27.5vw] [&>div]:!h-[25vh] [&>div]:!w-[25vw]',
+                i === 4 && '[&>div]:!top-[27.5vh] [&>div]:!left-[5vw] [&>div]:!h-[25vh] [&>div]:!w-[20vw]',
+                i === 5 && '[&>div]:!top-[27.5vh] [&>div]:!-left-[22.5vw] [&>div]:!h-[25vh] [&>div]:!w-[30vw]',
+                i === 6 && '[&>div]:!top-[22.5vh] [&>div]:!left-[25vw] [&>div]:!h-[15vh] [&>div]:!w-[15vw]',
               )}
             >
               <div
                 className="relative h-[25vh] w-[25vw] overflow-hidden"
-                style={FEATHER}
+                style={{ borderRadius: TILE_RADIUS }}
               >
                 <Image
                   src={img.src}
@@ -283,7 +295,15 @@ export function ZoomParallax() {
                   width={img.width}
                   height={img.height}
                   priority={i === 0}
-                  sizes={i === 0 ? '100vw' : '(min-width: 768px) 60vw, 90vw'}
+                  // Every tile asks for the largest variant, not just the
+                  // centre one. `sizes` has to describe the size a tile ends
+                  // up at, and these are transform-scaled 4–9× after layout:
+                  // a 25vw box at 9× occupies 225vw of screen. The old
+                  // "60vw" made next/image serve a ~1150px file that the
+                  // browser then stretched past 2400px — the source was
+                  // already too small, and this halved it again first.
+                  sizes="100vw"
+                  quality={90}
                   className="h-full w-full object-cover"
                   style={{ filter: GRADE }}
                 />

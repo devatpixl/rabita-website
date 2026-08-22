@@ -45,11 +45,14 @@ export default async function AboutPage({
         <SectionBody>
           <SectionHeading>{t('board.heading')}</SectionHeading>
           <p className="mt-6 max-w-prose text-body text-ink">{t('board.body')}</p>
+          {/* Each role used to render the name as "TBD" — six placeholders
+             in a row, which reads as an unfinished page rather than a real
+             board. The roles are real information and stay; the names
+             appear here once Rabita supplies them. */}
           <ul className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {(['chair', 'vice', 'treasurer', 'secretary', 'member', 'member2'] as const).map((k) => (
               <li key={k} className="border-t border-rule pt-6">
-                <p className="text-[13px] text-ink-60">{t(`board.roles.${k}`)}</p>
-                <p className="mt-2 font-serif text-card text-ink">{t('board.tbd')}</p>
+                <p className="font-serif text-card text-ink">{t(`board.roles.${k}`)}</p>
               </li>
             ))}
           </ul>
@@ -59,35 +62,20 @@ export default async function AboutPage({
       <Section tone="paper">
         <SectionBody>
           <SectionHeading>{t('legal.heading')}</SectionHeading>
+          {/* These were links to #statuter / #arsrapport / #press. None of
+             those targets exist and no document is published yet, so they
+             were three arrows that did nothing. Listed as rows until the
+             files exist, with one line saying how to get a copy. */}
           <ul className="mt-8 border-t border-rule">
-            <li className="border-b border-rule">
-              <a
-                href="#statuter"
-                className="group flex min-h-14 items-center justify-between gap-4 font-sans text-[15px] font-medium text-ink transition-colors hover:text-gold-deep"
-              >
-                {t('legal.statutes')}
-                <span aria-hidden className="font-mono text-[0.75rem] text-ink-60 transition-transform group-hover:translate-x-1">&#8594;</span>
-              </a>
-            </li>
-            <li className="border-b border-rule">
-              <a
-                href="#arsrapport"
-                className="group flex min-h-14 items-center justify-between gap-4 font-sans text-[15px] font-medium text-ink transition-colors hover:text-gold-deep"
-              >
-                {t('legal.annual')}
-                <span aria-hidden className="font-mono text-[0.75rem] text-ink-60 transition-transform group-hover:translate-x-1">&#8594;</span>
-              </a>
-            </li>
-            <li className="border-b border-rule">
-              <a
-                href="#press"
-                className="group flex min-h-14 items-center justify-between gap-4 font-sans text-[15px] font-medium text-ink transition-colors hover:text-gold-deep"
-              >
-                {t('legal.press')}
-                <span aria-hidden className="font-mono text-[0.75rem] text-ink-60 transition-transform group-hover:translate-x-1">&#8594;</span>
-              </a>
-            </li>
+            {(['statutes', 'annual', 'press'] as const).map((k) => (
+              <li key={k} className="border-b border-rule">
+                <p className="flex min-h-14 items-center gap-4 font-sans text-[15px] font-medium text-ink">
+                  {t(`legal.${k}`)}
+                </p>
+              </li>
+            ))}
           </ul>
+          <p className="mt-6 max-w-prose text-[13px] text-ink-60">{t('legal.onRequest')}</p>
         </SectionBody>
       </Section>
       <StoryColophon

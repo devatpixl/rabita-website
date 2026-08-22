@@ -127,7 +127,7 @@ export function RsvpSheet() {
           type="button"
           onClick={close}
           aria-label={t('close')}
-          className="min-h-11 min-w-11 rounded-btn p-2 text-ink hover:bg-paper-2"
+          className="min-h-11 min-w-11 rounded-full p-2 text-ink hover:bg-paper-2"
         >
           <CloseIcon />
         </button>
@@ -145,7 +145,7 @@ export function RsvpSheet() {
             <button
               type="button"
               onClick={close}
-              className="mt-6 min-h-11 rounded-btn border border-ink px-5 py-2 text-body font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
+              className="mt-6 min-h-11 rounded-full border border-ink px-5 py-2 text-body font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
             >
               {t('confirmationClose')}
             </button>
@@ -213,7 +213,7 @@ export function RsvpSheet() {
             <button
               type="submit"
               disabled={state === 'submitting'}
-              className="min-h-12 w-full rounded-btn bg-gold-deep px-5 py-3 text-body font-semibold text-paper transition-colors hover:bg-ink disabled:opacity-60"
+              className="min-h-12 w-full rounded-full bg-gold-deep px-5 py-3 text-body font-semibold text-paper transition-colors hover:bg-ink disabled:opacity-60"
             >
               {state === 'submitting' ? t('submitting') : t('submit')}
             </button>

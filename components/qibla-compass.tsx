@@ -11,7 +11,9 @@ import { OSLO_QIBLA_BEARING, qiblaBearing } from '@/lib/qibla';
 
 type Source = 'oslo' | 'user';
 
-export function QiblaCompass() {
+export function QiblaCompass({ tone = 'ink' }: { tone?: 'ink' | 'paper' } = {}) {
+  const dim = tone === 'paper' ? 'text-paper/55' : 'text-ink-60';
+  const strong = tone === 'paper' ? 'text-paper' : 'text-ink';
   const t = useTranslations('qibla');
   const [bearing, setBearing] = useState<number>(OSLO_QIBLA_BEARING);
   const [source, setSource] = useState<Source>('oslo');
@@ -42,7 +44,7 @@ export function QiblaCompass() {
 
   return (
     <div className="flex items-center gap-4">
-      <svg viewBox="0 0 40 40" className="h-10 w-10 text-ink" aria-hidden>
+      <svg viewBox="0 0 40 40" className={`h-10 w-10 ${strong}`} aria-hidden>
         {/* Dial */}
         <circle
           cx={20}
@@ -89,12 +91,12 @@ export function QiblaCompass() {
       </svg>
       <div className="flex flex-col leading-tight">
         <span
-          className="text-[13px] font-semibold text-ink"
+          className={`text-[13px] font-semibold ${strong}`}
           aria-live="polite"
         >
           {t('qibla')} · <span className="tabular-nums">{rounded}°</span>
         </span>
-        <span className="text-[12px] text-ink-60">
+        <span className={`text-[12px] ${dim}`}>
           {source === 'user' ? t('fromHere') : t('fromOslo')}
         </span>
       </div>

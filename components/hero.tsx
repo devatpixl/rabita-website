@@ -2,9 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { GivingCard } from './giving-card';
+import { HeroCampaign } from './hero-campaign';
 import { HeroSentinel } from './campaign-strip';
 import { Accent } from './accent';
-import { Eyebrow } from './primitives';
 
 // §4.01. Full-bleed dark plane. The photograph is a Rabita-owned image
 // of four FRIVILLIG volunteers at a street iftar under the bridge in
@@ -83,14 +83,10 @@ export async function Hero() {
   // card, not the headline.
   const objectPosition = HERO_ART.objectPosition;
 
-  // Split the cred line at the middle-dot separator so the second
-  // clause can drop below the eyebrow's breakpoint (< lg) without
-  // wrapping and breaking rhythm. Copy still lives as one string per
-  // locale in messages/*.json so translators own the whole line.
-  const credLineFull = t('credLine');
-  const credParts = credLineFull.split(' · ');
-  const credHead = credParts[0];
-  const credTail = credParts.slice(1).join(' · ');
+  // The hero carries the headline, the subhead, two links and the giving
+  // card — nothing else. The founding-date line and the phase line were
+  // removed deliberately; `hero.credLine` and `hero.phaseLine` are still in
+  // messages/*.json for whatever surfaces them next.
 
   return (
     <section
@@ -152,25 +148,16 @@ export async function Hero() {
       </div>
 
       <div
-        className="relative z-10 mx-auto flex w-full max-w-[112rem] flex-col justify-center px-6 pt-8 pb-10 md:px-10 md:pt-10 md:pb-12 lg:px-24"
+        className="relative z-10 mx-auto flex w-full max-w-[84rem] flex-col justify-center px-6 pt-8 pb-10 md:px-10 md:pt-10 md:pb-12 lg:px-12"
         style={{
           minHeight: `min(calc(100svh - ${HEADER_H}px), ${980 - HEADER_H}px)`,
         }}
       >
         <div className="grid w-full items-center gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:gap-20">
           <div>
-            <p
-              className="eyebrow-bar font-mono text-[0.75rem] uppercase tracking-[0.16em] text-gold"
-              style={{ whiteSpace: 'nowrap' }}
-            >
-              <span>{credHead}</span>
-              {credTail && (
-                <span className="hidden lg:inline"> · {credTail}</span>
-              )}
-            </p>
             <h1
               id="hero-heading"
-              className="mt-5 font-serif text-paper text-balance"
+              className="font-serif text-paper text-balance"
               style={{
                 fontSize: 'clamp(2.75rem, min(6vw, 8.8vh), 6rem)',
                 lineHeight: 1.06,
@@ -195,29 +182,30 @@ export async function Hero() {
               )}
               {t('headlineAfter')}
             </h1>
+            {/* Carries who Rabita is as well as what is being built. The
+               founding line that used to sit above the headline was a gold
+               small-caps caption, which read as decoration and got skipped;
+               the same fact in a sentence at reading size gets read. */}
             <p className="mt-5 max-w-[52ch] text-body text-paper/80">{t('subhead')}</p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <Link
                 href={`/${locale}/moskeprosjektet`}
-                className="inline-flex items-center gap-2 rounded-btn bg-gold-deep text-paper px-6 py-3 text-[15px] font-semibold transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99]"
+                className="inline-flex items-center gap-2 rounded-full bg-gold-deep text-paper px-6 py-3 text-[15px] font-semibold transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99]"
               >
                 {t('cta.primary')}
                 <ArrowIcon className="h-3.5 w-3.5" />
               </Link>
               <a
                 href="#menigheten-forteller"
-                className="inline-flex items-center gap-2 rounded-btn border border-paper/60 px-6 py-3 text-[15px] font-semibold text-paper hover:bg-paper/10 transition-colors"
+                className="inline-flex items-center gap-2 rounded-full border border-paper/60 px-6 py-3 text-[15px] font-semibold text-paper hover:bg-paper/10 transition-colors"
               >
                 {t('cta.secondary')}
                 <ArrowIcon className="h-3.5 w-3.5" />
               </a>
             </div>
 
-            <div className="mt-6 flex items-center gap-4">
-              <span aria-hidden className="h-px w-12 bg-gold/60" />
-              <p className="text-[13px] text-paper/60">{t('phaseLine')}</p>
-            </div>
+            <HeroCampaign />
           </div>
 
           {/* Right column — giving card. Capped at 640px wide and

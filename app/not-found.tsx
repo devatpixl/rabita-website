@@ -13,7 +13,7 @@ export default function GlobalNotFound() {
             Kanskje adressen er gammel, eller den er skrevet feil.
           </p>
           <div className="mt-8">
-            <Link href="/no" className="min-h-11 inline-block rounded-btn bg-ink px-4 py-2 text-body font-semibold text-paper">
+            <Link href="/no" className="min-h-11 inline-block rounded-full bg-ink px-4 py-2 text-body font-semibold text-paper">
               Til forsiden
             </Link>
           </div>

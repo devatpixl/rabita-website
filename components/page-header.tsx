@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { Eyebrow } from './primitives';
 
 // Shared page header for inner pages. Eyebrow + display headline + optional
 // standfirst. Kept tight — no ornaments, no illustration, just typography.
@@ -17,8 +16,7 @@ export function PageHeader({
   return (
     <header className="bg-paper">
       <div className="mx-auto max-w-6xl px-6 py-section-md">
-        {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-        <h1 className="mt-3 font-serif text-display text-ink">{title}</h1>
+        <h1 className="font-serif text-display text-ink">{title}</h1>
         {lede && (
           <p className="mt-6 max-w-prose text-body text-ink-60">{lede}</p>
         )}

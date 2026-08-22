@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Eyebrow, SectionBody } from './primitives';
+import { SectionBody } from './primitives';
 
 // The shape the Education section uses. Not the mosque project hero and not the split hero from prayer and services: this one is centred type with nothing beside it, then one photograph running the full width of the screen. A prospectus, in other words.
 const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
@@ -26,8 +26,7 @@ export function LearnHero({
       <SectionBody className="text-center">
         <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60">{crumb}</p>
         <div className="mt-10 flex flex-col items-center">
-          <Eyebrow tone="gold-deep">{eyebrow}</Eyebrow>
-          <h1 className="mt-4 max-w-4xl font-serif text-display text-balance text-ink">{title}</h1>
+          <h1 className="max-w-4xl font-serif text-display text-balance text-ink">{title}</h1>
           <p className="mt-6 max-w-2xl text-body text-ink-60">{lede}</p>
         </div>
       </SectionBody>
@@ -93,7 +92,7 @@ export function LearnClose({
             </dl>
             <Link
               href={cta.href}
-              className="mt-8 inline-flex min-h-12 items-center rounded-btn bg-gold-deep px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:bg-ink"
+              className="mt-8 inline-flex min-h-12 items-center rounded-full bg-gold-deep px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:bg-ink"
             >
               {cta.label}
             </Link>

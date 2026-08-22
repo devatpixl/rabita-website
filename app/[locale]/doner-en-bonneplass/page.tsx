@@ -116,7 +116,7 @@ export default function SadaqaPage() {
               <button
                 type="submit"
                 disabled={!name.trim() || submitting}
-                className="min-h-12 rounded-btn bg-gold-deep px-5 py-3 text-[15px] font-semibold text-paper hover:bg-ink transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                className="min-h-12 rounded-full bg-gold-deep px-5 py-3 text-[15px] font-semibold text-paper hover:bg-ink transition-colors disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {t('primary')}
               </button>

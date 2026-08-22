@@ -21,7 +21,7 @@ export function GiveCTA({
       type="button"
       onClick={() => openGiveSheet()}
       className={cn(
-        'inline-flex items-center justify-center gap-2 min-h-12 rounded-btn px-5 py-3',
+        'inline-flex items-center justify-center gap-2 min-h-12 rounded-full px-5 py-3',
         'bg-gold-deep text-paper text-[15px] font-semibold',
         'transition-colors duration-200 ease-out hover:bg-ink',
         'active:scale-[0.99]',

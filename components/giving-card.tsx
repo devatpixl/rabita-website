@@ -406,7 +406,7 @@ export function GivingCard({ onSubmit, initialAmount }: Props) {
           <button
             type="button"
             onClick={goBack}
-            className="min-h-12 rounded-btn border border-ink px-4 py-2 text-[14px] font-medium text-ink hover:bg-ink hover:text-paper transition-colors"
+            className="min-h-12 rounded-full border border-ink px-4 py-2 text-[14px] font-medium text-ink hover:bg-ink hover:text-paper transition-colors"
           >
             ← {t('wizard.back')}
           </button>
@@ -417,7 +417,7 @@ export function GivingCard({ onSubmit, initialAmount }: Props) {
           disabled={!currentValid || submitting}
           style={{ opacity: currentValid ? 1 : 0.45 }}
           className={cn(
-            'flex-1 min-h-12 rounded-btn bg-gold-deep text-paper px-5 py-3 text-[15px] font-semibold transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99] disabled:cursor-not-allowed flex items-center justify-center gap-2',
+            'flex-1 min-h-12 rounded-full bg-gold-deep text-paper px-5 py-3 text-[15px] font-semibold transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99] disabled:cursor-not-allowed flex items-center justify-center gap-2',
           )}
         >
           <span>{primaryContent}</span>

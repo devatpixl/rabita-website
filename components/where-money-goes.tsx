@@ -4,7 +4,7 @@ import { AssuranceRegister } from './assurance-register';
 import { CAMPAIGN } from '@/lib/campaign';
 import { formatAmount } from '@/lib/format';
 import type { AppLocale } from '@/i18n/routing';
-import { Eyebrow, Section, SectionBody, SectionHeading } from './primitives';
+import { Section, SectionBody, SectionHeading } from './primitives';
 import { Accent } from './accent';
 
 // §4.06 — matched to reference mockup. Surface is --paper-2 #F2EEE7.
@@ -110,8 +110,7 @@ export async function WhereMoneyGoes() {
       <SectionBody className="relative">
         {/* Heading block — eyebrow → headline gap = 20px (mt-5). */}
         <div className="max-w-3xl">
-          <Eyebrow>{t('eyebrow')}</Eyebrow>
-          <SectionHeading reveal className="mt-5 text-balance">
+          <SectionHeading reveal className="text-balance">
             {t.rich('heading', {
               em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
             })}

@@ -97,7 +97,7 @@ export default function VolunteerPage() {
               </label>
 
               <button type="submit" disabled={submitting}
-                className="min-h-12 rounded-btn bg-gold-deep px-5 py-3 text-[15px] font-semibold text-paper hover:bg-ink transition-colors disabled:opacity-50">
+                className="min-h-12 rounded-full bg-gold-deep px-5 py-3 text-[15px] font-semibold text-paper hover:bg-ink transition-colors disabled:opacity-50">
                 {t('submit')}
               </button>
             </form>

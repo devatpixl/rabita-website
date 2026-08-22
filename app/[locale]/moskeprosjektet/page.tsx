@@ -3,12 +3,13 @@ import Link from 'next/link';
 import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
+import { BuildingRises } from '@/components/building-rises';
+import { GiftBuilds } from '@/components/gift-builds';
 
 import { Accent } from '@/components/accent';
 import {
   ProjectAssurance,
   ProjectBrief,
-  ProjectColumns,
   ProjectHero,
 } from '@/components/project-page';
 export default async function ProjectPage({
@@ -37,11 +38,18 @@ export default async function ProjectPage({
         secondary={{ label: tp('pages.building.secondary'), href: `/${locale}/hvor-pengene-gar` }}
       />
       <ProjectBrief label={tp('pages.building.briefLabel')} body={tp('pages.building.brief')} />
-      <ProjectColumns
-        eyebrow={tp('pages.building.colEyebrow')}
-        heading={tp('pages.building.colHeading')}
-        items={tp.raw('pages.building.items') as { title: string; body: string }[]}
-      />
+
+      {/* The four-card "What each level is for" grid used to sit here. It
+         summarised prayer halls, the school, library and youth, and the
+         entrance — the same four things the build sequence below walks
+         through in detail, and it covers seven levels rather than four.
+         Two answers to one question, the shorter one first. The component
+         is untouched; four other pages still use it. */}
+      {/* The build, program by program. Moved here from the homepage, where
+         it was 800vh of a 25-viewport page — the deepest content on the site
+         sitting on the page that is meant to introduce things. */}
+      <BuildingRises />
+
       <section className="bg-paper-2 pb-section-md">
         <SectionBody>
           <div className="relative aspect-[16/10] overflow-hidden rounded-3xl bg-paper">
@@ -101,14 +109,27 @@ export default async function ProjectPage({
         </SectionBody>
       </Section>
 
+      {/* The same four gifts as a dark card grid. Swapped in for the row
+         version, which moved to the homepage — both read the same
+         `giftLadder` copy, so this is purely a change of treatment. */}
+      <GiftBuilds />
+
       <Section tone="paper">
         <SectionBody>
           <SectionHeading>{t('ways.heading')}</SectionHeading>
           <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {/* These pointed at /gi-en-gave#once, #monthly, #company — none
+               of which are ids on that page, so all three landed at the top
+               of it regardless. #gikort is the giving card itself, which is
+               where each of these is asking the visitor to go. */}
             {(['once', 'monthly', 'sadaqa', 'company'] as const).map((k) => (
               <Link
                 key={k}
-                href={`/${l}/gi-en-gave#${k}`}
+                href={
+                  k === 'sadaqa'
+                    ? `/${l}/doner-en-bonneplass`
+                    : `/${l}/gi-en-gave#gikort`
+                }
                 className="block border border-rule bg-paper-2 p-6 hover:border-ink"
               >
                 <h3 className="mb-2 font-serif text-card text-ink">{t(`ways.${k}.title`)}</h3>

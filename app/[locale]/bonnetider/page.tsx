@@ -1,16 +1,21 @@
+import Image from 'next/image';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { PRAYER_TIMES_TODAY } from '@/lib/campaign';
 import { Section, SectionBody } from '@/components/primitives';
-import {
-  ServiceCards,
-  ServiceHero,
-  ServiceVisit,
-} from '@/components/service-page';
+import { PrayerNow } from '@/components/prayer-now';
+import { CalendarDownload } from '@/components/calendar-download';
+import { ServiceCards, ServiceVisit } from '@/components/service-page';
+import { TimedCta } from '@/components/timed-cta';
 
-// §6. Full week + Friday. Times come from PRAYER_TIMES_TODAY for now — real
-// weekly feed is a §13.4 blocker; layout is ready when data lands.
-const DAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'] as const;
-type DayKey = (typeof DAYS)[number];
+// The times come first. Everything else on this page is preamble.
+//
+// This page used to open with the standard ServiceHero — headline, prose and
+// a large image — with the times below it, which meant the one thing 30 000
+// people a month arrive for sat under the fold. Shrinking the hero to make
+// room was the wrong lever: it made the type small on a wide screen and the
+// times still did not fit. So the order changed instead. The establishing
+// image and prose still exist, one section down, where preamble belongs.
+
+const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
 
 export default async function BonnetiderPage({
   params,
@@ -19,106 +24,48 @@ export default async function BonnetiderPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: 'bonnetiderPage' });
   const tp = await getTranslations({ locale, namespace: 'servicePages' });
-
-  const PRAYERS = [
-    { label: 'Fajr', time: PRAYER_TIMES_TODAY.fajr },
-    { label: t('sunrise'), time: PRAYER_TIMES_TODAY.sunrise },
-    { label: 'Dhuhr', time: PRAYER_TIMES_TODAY.dhuhr },
-    { label: 'Asr', time: PRAYER_TIMES_TODAY.asr },
-    { label: 'Maghrib', time: PRAYER_TIMES_TODAY.maghrib },
-    { label: 'Isha', time: PRAYER_TIMES_TODAY.isha },
-  ];
 
   return (
     <main>
-      <ServiceHero
-        crumb={tp('crumb')}
-        eyebrow={tp('pages.times.eyebrow')}
-        title={tp('pages.times.title')}
-        lede={tp('pages.times.lede')}
-        note={tp('pages.times.note')}
-        image="/photos/svc-prayer.webp"
-        alt={tp('pages.times.eyebrow')}
-      />
-      <Section tone="paper">
+      <Section tone="paper" className="pt-section-sm">
         <SectionBody>
-          {/* Seven columns do not fit a phone, so the table is desktop only
-             and small screens get the same week as one card per day. */}
-          <div className="hidden overflow-x-auto md:block">
-            <table className="w-full border-collapse text-body">
-              <thead>
-                <tr className="text-[13px] text-ink-60">
-                  <th className="border-b border-rule py-3 text-start">{t('day')}</th>
-                  <th className="border-b border-rule py-3 text-end tabular-nums">Fajr</th>
-                  <th className="border-b border-rule py-3 text-end tabular-nums">{t('sunrise')}</th>
-                  <th className="border-b border-rule py-3 text-end tabular-nums">Dhuhr</th>
-                  <th className="border-b border-rule py-3 text-end tabular-nums">Asr</th>
-                  <th className="border-b border-rule py-3 text-end tabular-nums">Maghrib</th>
-                  <th className="border-b border-rule py-3 text-end tabular-nums">Isha</th>
-                </tr>
-              </thead>
-              <tbody>
-                {DAYS.map((d) => {
-                  const isFri = d === 'fri';
-                  return (
-                    <tr key={d} className={isFri ? 'bg-paper-2' : ''}>
-                      <td className="border-b border-rule py-3 font-semibold text-ink">
-                        {t(`days.${d}` as `days.${DayKey}`)}
-                        {isFri && (
-                          <span className="ms-3 text-[13px] text-ink-60">
-                            {t('jumua')} {PRAYER_TIMES_TODAY.jumua}
-                          </span>
-                        )}
-                      </td>
-                      <td className="border-b border-rule py-3 text-end tabular-nums text-ink-60">{PRAYER_TIMES_TODAY.fajr}</td>
-                      <td className="border-b border-rule py-3 text-end tabular-nums text-ink-60">{PRAYER_TIMES_TODAY.sunrise}</td>
-                      <td className="border-b border-rule py-3 text-end tabular-nums text-ink-60">{PRAYER_TIMES_TODAY.dhuhr}</td>
-                      <td className="border-b border-rule py-3 text-end tabular-nums text-ink-60">{PRAYER_TIMES_TODAY.asr}</td>
-                      <td className="border-b border-rule py-3 text-end tabular-nums text-ink-60">{PRAYER_TIMES_TODAY.maghrib}</td>
-                      <td className="border-b border-rule py-3 text-end tabular-nums text-ink-60">{PRAYER_TIMES_TODAY.isha}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+          <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60">
+            {tp('crumb')}
+          </p>
+          <div className="mt-8">
+            <PrayerNow />
           </div>
-
-          <ul className="md:hidden">
-            {DAYS.map((d) => {
-              const isFri = d === 'fri';
-              return (
-                <li
-                  key={d}
-                  className={`border-b border-rule py-4 ${isFri ? 'bg-paper-2' : ''}`}
-                >
-                  <p className="flex flex-wrap items-baseline gap-x-3 font-semibold text-ink">
-                    {t(`days.${d}` as `days.${DayKey}`)}
-                    {isFri && (
-                      <span className="font-normal text-[13px] text-ink-60">
-                        {t('jumua')} {PRAYER_TIMES_TODAY.jumua}
-                      </span>
-                    )}
-                  </p>
-                  <dl className="mt-3 grid grid-cols-3 gap-x-4 gap-y-3">
-                    {PRAYERS.map((row) => (
-                      <div key={row.label}>
-                        <dt className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">
-                          {row.label}
-                        </dt>
-                        <dd className="mt-1 tabular-nums text-ink">{row.time}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                </li>
-              );
-            })}
-          </ul>
-
-          <p className="mt-6 text-[13px] text-ink-60">{t('note')}</p>
+          <CalendarDownload />
         </SectionBody>
       </Section>
+
+      {/* The editorial block, demoted below the answer. */}
+      <Section tone="paper-2">
+        <SectionBody>
+          <div className="grid items-center gap-12 md:grid-cols-12 md:gap-16">
+            <div className="md:col-span-6">
+              <h2 className="font-serif text-section text-balance text-ink">
+                {tp('pages.times.title')}
+              </h2>
+              <p className="mt-6 max-w-prose text-body text-ink-60">{tp('pages.times.lede')}</p>
+            </div>
+            <div className="md:col-span-6">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-paper">
+                <Image
+                  src="/photos/svc-prayer.webp"
+                  alt={tp('pages.times.eyebrow')}
+                  fill
+                  sizes="(min-width: 768px) 48vw, 90vw"
+                  className="object-cover"
+                  style={{ filter: GRADE }}
+                />
+              </div>
+            </div>
+          </div>
+        </SectionBody>
+      </Section>
+
       <ServiceCards
         eyebrow={tp('pages.times.cardEyebrow')}
         heading={tp('pages.times.cardHeading')}
@@ -136,6 +83,9 @@ export default async function BonnetiderPage({
         primary={{ label: tp('visit.primary'), href: `/${locale}/besok-oss` }}
         secondary={{ label: tp('visit.secondary'), href: `/${locale}/kontakt` }}
       />
+
+      {/* The page's ask. Six seconds, once, then quiet for a month. */}
+      <TimedCta ns="cta.prayer" storageKey="rabita:cta:prayer:v1" delayMs={6000} amountNok={10} />
     </main>
   );
 }

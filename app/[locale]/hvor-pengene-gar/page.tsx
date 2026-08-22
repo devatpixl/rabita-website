@@ -65,16 +65,15 @@ export default async function WhereMoneyGoesPage({
         <SectionBody>
           <SectionHeading>{t('accounts.heading')}</SectionHeading>
           <p className="mt-6 max-w-prose text-body text-ink">{t('accounts.body')}</p>
+          {/* Four year cards that linked to #regnskap-2022 … #regnskap-2025.
+             No such anchors exist and no accounts are published, so all
+             four were dead. Shown as the years on record until the PDFs
+             land, at which point these become real download links. */}
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[2022, 2023, 2024, 2025].map((y) => (
-              <li key={y}>
-                <a
-                  href={`#regnskap-${y}`}
-                  className="block border border-rule bg-paper p-4 hover:border-ink"
-                >
-                  <span className="text-[13px] text-ink-60">{t('accounts.year')}</span>
-                  <span className="mt-2 block font-serif text-card text-ink tabular-nums">{y}</span>
-                </a>
+              <li key={y} className="border border-rule bg-paper p-4">
+                <span className="text-[13px] text-ink-60">{t('accounts.year')}</span>
+                <span className="mt-2 block font-serif text-card text-ink tabular-nums">{y}</span>
               </li>
             ))}
           </ul>
@@ -85,8 +84,11 @@ export default async function WhereMoneyGoesPage({
         <SectionBody>
           <SectionHeading>{t('permit.heading')}</SectionHeading>
           <p className="mt-6 max-w-prose text-body text-ink">{t('permit.body')}</p>
+          {/* Was a link to #permit-pdf, which does not exist. The permit is
+             public but not hosted here yet; pointing at the office is a
+             real answer, a dead anchor is not. */}
           <Link
-            href="#permit-pdf"
+            href={`/${locale}/kontakt`}
             className="mt-6 inline-flex min-h-11 items-center text-body font-semibold text-ink underline underline-offset-4"
           >
             {t('permit.cta')}

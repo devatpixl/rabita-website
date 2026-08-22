@@ -81,14 +81,14 @@ export function VisitClose({
         <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
           <Link
             href={primary.href}
-            className="inline-flex min-h-12 items-center rounded-btn bg-gold-deep px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:bg-gold"
+            className="inline-flex min-h-12 items-center rounded-full bg-gold-deep px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:bg-gold"
           >
             {primary.label}
           </Link>
           {secondary && (
             <Link
               href={secondary.href}
-              className="inline-flex min-h-12 items-center rounded-btn border border-paper/40 px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:border-paper"
+              className="inline-flex min-h-12 items-center rounded-full border border-paper/40 px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:border-paper"
             >
               {secondary.label}
             </Link>

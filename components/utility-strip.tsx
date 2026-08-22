@@ -26,18 +26,33 @@ export function UtilityStrip() {
   const tNav = useTranslations('nav');
   const { open, stripInView, setStripInView } = usePrayerPanel();
   const rootRef = useRef<HTMLDivElement | null>(null);
+  // Mirrors stripInView so the observer can apply hysteresis without
+  // re-subscribing every time the value changes.
+  const lastRef = useRef(true);
 
   useEffect(() => {
     const el = rootRef.current;
     if (!el) return;
     // Fire once at mount so the initial state is correct even before a
     // scroll happens.
+    //
+    // Hysteresis, deliberately. A single boundary (the old `threshold: 0`
+    // with a -12px margin) flips the moment the strip's edge crosses one
+    // line, so scrolling slowly across that line toggles the whole header
+    // between full-width and capsule repeatedly. Leaving and returning now
+    // use different lines — out at 12px, back only at 36px — so the seam
+    // cannot oscillate. Multiple thresholds are needed because an observer
+    // only reports at crossings, and we need position samples between them.
     const io = new IntersectionObserver(
       ([entry]) => {
-        setStripInView(entry.isIntersecting);
+        const bottom = entry.boundingClientRect.bottom;
+        const next = lastRef.current ? bottom > 12 : bottom > 36;
+        if (next !== lastRef.current) {
+          lastRef.current = next;
+          setStripInView(next);
+        }
       },
-      // a little early, so the capsule is already forming by the time the strip clears
-      { threshold: 0, rootMargin: '-12px 0px 0px 0px' },
+      { threshold: [0, 0.25, 0.5, 0.75, 1], rootMargin: '0px' },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -47,9 +62,10 @@ export function UtilityStrip() {
     <div
       ref={rootRef}
       data-prayer-panel-scope
+      data-print-hide
       className="relative hidden md:block border-b border-gold bg-paper-deep"
     >
-      <div className="mx-auto w-full max-w-[112rem] px-6 md:px-10 lg:px-24 flex min-h-11 items-center justify-between gap-6">
+      <div className="mx-auto w-full max-w-[84rem] px-6 md:px-10 lg:px-12 flex min-h-11 items-center justify-between gap-6">
         <PrayerTimesWidget />
         <div className="flex items-center gap-6">
           {/* the hours sit with the other practical details rather than

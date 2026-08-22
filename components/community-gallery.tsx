@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import { Accent } from './accent';
-import { Eyebrow } from './primitives';
 
 // Four things the congregation already does, one photograph each: the street
 // iftar on Groenland, the Saturday school, the spring bazaar on Youngstorget,
@@ -171,10 +170,9 @@ export function CommunityGallery() {
 
   const intro = (
     <div className="mx-auto max-w-6xl px-6 pb-10 pt-section-md">
-      <Eyebrow tone="gold">{t('eyebrow')}</Eyebrow>
       <h2
         id="community-gallery-heading"
-        className="mt-3 max-w-[22ch] text-balance font-serif text-section text-paper"
+        className="max-w-[22ch] text-balance font-serif text-section text-paper"
       >
         {t.rich('heading', { em: (c) => <Accent surface="dusk">{c}</Accent> })}
       </h2>

@@ -40,7 +40,7 @@ export default async function ThankYouPage({
           <p className="mb-4 text-body text-ink">{t('sharePrompt')}</p>
           <div className="flex flex-wrap gap-3">
             <a
-              className="min-h-11 rounded-btn border border-ink px-4 py-2 text-body font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
+              className="min-h-11 rounded-full border border-ink px-4 py-2 text-body font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
               href="https://api.whatsapp.com/send?text=https%3A%2F%2Frabita.no"
               target="_blank"
               rel="noreferrer"
@@ -48,7 +48,7 @@ export default async function ThankYouPage({
               {t('shareWhatsapp')}
             </a>
             <a
-              className="min-h-11 rounded-btn border border-ink px-4 py-2 text-body font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
+              className="min-h-11 rounded-full border border-ink px-4 py-2 text-body font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
               href="mailto:?subject=Rabita&body=https%3A%2F%2Frabita.no"
             >
               {t('shareEmail')}

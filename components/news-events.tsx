@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
-import { Eyebrow, Section, SectionBody, SectionHeading } from './primitives';
+import { Section, SectionBody, SectionHeading } from './primitives';
 
 // §4.09. Three cards. Every event captures a signup and the list must be
 // exportable — that goes on the /arrangementer admin side. Homepage shows
@@ -32,8 +32,7 @@ export async function NewsEvents() {
       <SectionBody>
         <div className="mb-10 flex items-end justify-between gap-6 flex-wrap">
           <div>
-            <Eyebrow>{t('eyebrow')}</Eyebrow>
-            <SectionHeading className="mt-3">{t('heading')}</SectionHeading>
+            <SectionHeading>{t('heading')}</SectionHeading>
           </div>
           <Link
             href={`/${locale}/arrangementer`}

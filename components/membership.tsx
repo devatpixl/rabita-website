@@ -3,7 +3,6 @@ import { getLocale, getTranslations } from 'next-intl/server';
 import { membership } from '@/lib/membership';
 import type { AppLocale } from '@/i18n/routing';
 import { Accent } from './accent';
-import { Eyebrow } from './primitives';
 import { DaysUntil } from './days-until';
 import { SeatGrid } from './seat-grid';
 
@@ -62,9 +61,8 @@ export async function Membership() {
       className="bg-dusk text-paper py-16 md:py-20"
     >
       <div className="mx-auto max-w-6xl px-6">
-        <Eyebrow tone="gold">{t('eyebrow')}</Eyebrow>
 
-        <div className="mt-8 grid grid-cols-1 items-stretch gap-10 md:grid-cols-[1fr_0.82fr]">
+        <div className="grid grid-cols-1 items-stretch gap-10 md:grid-cols-[1fr_0.82fr]">
           {/* Left column — the argument */}
           <div>
             <h2 className="font-serif text-[clamp(1.65rem,3.2vw,1.95rem)] leading-[1.18] text-paper text-balance">
@@ -98,7 +96,7 @@ export async function Membership() {
             <div className="mt-8 flex flex-wrap items-center gap-6">
               <Link
                 href={`/${locale}/medlemskap?tier=voting`}
-                className="inline-flex min-h-11 items-center rounded-btn bg-gold px-5 text-[14px] font-semibold text-dusk hover:bg-gold-deep hover:text-paper transition-colors"
+                className="inline-flex min-h-11 items-center rounded-full bg-gold px-5 text-[14px] font-semibold text-dusk hover:bg-gold-deep hover:text-paper transition-colors"
               >
                 {t('ctaPrimary')}
               </Link>

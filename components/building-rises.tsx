@@ -23,7 +23,7 @@ import {
   floorTop,
   type FloorKey,
 } from '@/lib/building';
-import { Eyebrow, SectionBody } from './primitives';
+import { SectionBody } from './primitives';
 import { Accent } from './accent';
 import { cn } from '@/lib/cn';
 
@@ -103,10 +103,9 @@ export function BuildingRises() {
       >
         <header className="shrink-0 px-6 pt-3 md:pt-4">
           <div className="mx-auto max-w-6xl">
-            <Eyebrow>{t('eyebrow')}</Eyebrow>
             <h2
               id="building-rises-heading"
-              className="mt-2 max-w-2xl font-serif text-[clamp(1.5rem,6vw,2rem)] leading-[1.1] text-ink md:text-section"
+              className="max-w-2xl font-serif text-[clamp(1.5rem,6vw,2rem)] leading-[1.1] text-ink md:text-section"
             >
               {t.rich('heading', {
                 em: (chunks) => <Accent surface="paper">{chunks}</Accent>,

@@ -104,17 +104,17 @@ export function ConsentBanner() {
           <div className="flex gap-2 sm:flex-wrap">
             {detailOpen ? (
               <button type="button" onClick={savePref}
-                className="min-h-11 rounded-btn bg-ink px-4 py-2 text-body font-semibold text-paper">
+                className="min-h-11 rounded-full bg-ink px-4 py-2 text-body font-semibold text-paper">
                 {t('save')}
               </button>
             ) : (
               <>
                 <button type="button" onClick={rejectAll}
-                  className="min-h-11 flex-1 rounded-btn border border-ink px-3 py-2 text-[14px] font-semibold text-ink sm:flex-none sm:px-4 sm:text-body">
+                  className="min-h-11 flex-1 rounded-full border border-ink px-3 py-2 text-[14px] font-semibold text-ink sm:flex-none sm:px-4 sm:text-body">
                   {t('rejectAll')}
                 </button>
                 <button type="button" onClick={acceptAll}
-                  className="min-h-11 flex-1 rounded-btn bg-ink px-3 py-2 text-[14px] font-semibold text-paper sm:flex-none sm:px-4 sm:text-body">
+                  className="min-h-11 flex-1 rounded-full bg-ink px-3 py-2 text-[14px] font-semibold text-paper sm:flex-none sm:px-4 sm:text-body">
                   {t('acceptAll')}
                 </button>
               </>

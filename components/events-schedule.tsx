@@ -3,7 +3,7 @@ import { getLocale, getTranslations } from 'next-intl/server';
 import { formatAmount } from '@/lib/format';
 import { isFull, upcomingEvents, type EventRecord } from '@/lib/events';
 import type { AppLocale } from '@/i18n/routing';
-import { Eyebrow, Section, SectionBody, SectionHeading } from './primitives';
+import { Section, SectionBody, SectionHeading } from './primitives';
 import { RsvpButton } from './rsvp-button';
 
 // Events are a schedule with open seats, not a blog feed. The next
@@ -21,8 +21,7 @@ export async function EventsSchedule() {
     return (
       <Section id="arrangementer" tone="paper">
         <SectionBody>
-          <Eyebrow>{t('eyebrow')}</Eyebrow>
-          <SectionHeading className="mt-3">{t('heading')}</SectionHeading>
+          <SectionHeading>{t('heading')}</SectionHeading>
           <p className="mt-6 max-w-prose text-body text-ink-60">
             {t('emptyState')}
           </p>
@@ -38,8 +37,7 @@ export async function EventsSchedule() {
       <SectionBody>
         <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
           <div>
-            <Eyebrow>{t('eyebrow')}</Eyebrow>
-            <SectionHeading className="mt-3">{t('heading')}</SectionHeading>
+            <SectionHeading>{t('heading')}</SectionHeading>
           </div>
         </div>
 
@@ -58,7 +56,7 @@ export async function EventsSchedule() {
         <div className="mt-8">
           <Link
             href={`/${locale}/arrangementer`}
-            className="inline-flex min-h-12 items-center rounded-btn border border-ink px-5 py-3 text-body font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
+            className="inline-flex min-h-12 items-center rounded-full border border-ink px-5 py-3 text-body font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
           >
             {t('all')}
           </Link>

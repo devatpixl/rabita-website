@@ -8,7 +8,7 @@ import { GIFTS } from '@/lib/gifts';
 import { formatAmount } from '@/lib/format';
 import type { AppLocale } from '@/i18n/routing';
 import { Accent } from './accent';
-import { Eyebrow, SectionBody } from './primitives';
+import { SectionBody } from './primitives';
 import { openGiveSheet } from './giving-sheet';
 
 // What your gift builds. Same costed items as the ladder, shown as photographs, on dusk to break the run of paper sections.
@@ -82,10 +82,9 @@ export function GiftBuilds() {
     >
       <SectionBody>
         <div className="max-w-3xl">
-          <Eyebrow tone="gold">{t('eyebrow')}</Eyebrow>
           <h2
             id="gift-builds-heading"
-            className="mt-4 font-serif text-section text-balance text-paper"
+            className="font-serif text-section text-balance text-paper"
           >
             {t.rich('heading', {
               em: (chunks) => <Accent surface="dusk">{chunks}</Accent>,

@@ -11,7 +11,7 @@ import {
 } from 'motion/react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Accent } from './accent';
-import { Eyebrow, SectionBody } from './primitives';
+import { SectionBody } from './primitives';
 import { GiveCTA } from './give-cta';
 import { cn } from '@/lib/cn';
 
@@ -84,10 +84,9 @@ export function SadaqaBand() {
         <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
           {/* The ask */}
           <div className="md:col-span-5">
-            <Eyebrow tone="gold-deep">{t('eyebrow')}</Eyebrow>
             <h2
               id="sadaqa-band-heading"
-              className="mt-4 font-serif text-section text-balance text-ink"
+              className="font-serif text-section text-balance text-ink"
             >
               {t.rich('heading', {
                 em: (chunks) => <Accent surface="paper">{chunks}</Accent>,

@@ -3,19 +3,24 @@
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/cn';
 
-// The campaign as a surveyor's scale: the goal is the rule, the phases are stations on it.
-
+// The campaign as a surveyor's scale: the goal is the rule, the phases are
+// stations on it, and the gold run shows how much of the goal is raised.
+//
+// Known tension, kept deliberately: the run measures MONEY while the
+// stations underneath are YEARS, so one line carries two quantities. The
+// floating "26 %" label that used to sit on the marker is gone, which makes
+// it terser but also removes the thing that told you the run meant kroner.
+// If a reader ever reads the marker as "we are 26% through the schedule",
+// that label coming back is the fix.
 type Station = { at: number; year: string; label: string; current: boolean };
 
 export function FundingScale({
   percent,
   stations,
-  pctLabel,
   className,
 }: {
   percent: number;
   stations: Station[];
-  pctLabel: string;
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -38,25 +43,12 @@ export function FundingScale({
     return () => io.disconnect();
   }, [target]);
 
-  // The run draws, then the marker catches up a beat later, which reads as the marker being carried by the line rather than racing it.
+  // The run draws, then the marker catches up a beat later, which reads as
+  // the marker being carried by the line rather than racing it.
   const draw = 'cubic-bezier(0.22, 1, 0.36, 1)';
 
   return (
     <div ref={ref} className={cn('relative', className)}>
-      {/* Percentage rides above the marker */}
-      <div
-        className="pointer-events-none absolute bottom-full mb-3 whitespace-nowrap font-mono text-[12px] uppercase tracking-[0.14em] text-gold-deep"
-        style={{
-          insetInlineStart: `${run}%`,
-          transform: 'translateX(-50%)',
-          opacity: run > 0 ? 1 : 0,
-          transition: `inset-inline-start 1100ms ${draw}, opacity 600ms ease-out 500ms`,
-        }}
-      >
-        {pctLabel}
-      </div>
-
-      {/* The rule, its gold run, and the station ticks */}
       <div
         className="relative h-px w-full bg-rule"
         role="progressbar"

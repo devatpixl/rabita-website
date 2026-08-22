@@ -8,13 +8,19 @@ import { usePathname } from 'next/navigation';
 import { LinkVT } from './link-vt';
 import { cn } from '@/lib/cn';
 
-export const NAV_KEYS = ['project', 'worship', 'education', 'visit', 'about'] as const;
+// Five items, unchanged in count. What changed is the split: prayer used to
+// share a heading with services ("Bønn og tjenester") and education held a
+// top-level slot of its own for a single page. Prayer now stands alone and
+// points straight at the times, which is what most visitors arrive for;
+// services takes the freed slot and education sits under it, where a
+// visitor looking for the school would actually think to look.
+export const NAV_KEYS = ['project', 'prayer', 'services', 'visit', 'about'] as const;
 export type NavKey = (typeof NAV_KEYS)[number];
 
 export const NAV_ROOT: Record<NavKey, string> = {
   project: '/moskeprosjektet',
-  worship: '/tjenester',
-  education: '/undervisning',
+  prayer: '/bonnetider',
+  services: '/tjenester',
   visit: '/besok-oss',
   about: '/om-oss',
 };
@@ -36,9 +42,14 @@ export function DesktopNav() {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     closeTimer.current = null;
   };
+  // Prayer has no children — it is a direct link to the times. Opening an
+  // empty panel under it would flash a blank card on hover.
+  const hasMenu = (key: NavKey) =>
+    ((t.raw(`menu.${key}`) as Item[] | undefined) ?? []).length > 0;
+
   const open = (key: NavKey) => {
     clear();
-    setOpenKey(key);
+    setOpenKey(hasMenu(key) ? key : null);
   };
   const close = () => {
     clear();
@@ -70,16 +81,25 @@ export function DesktopNav() {
   const isCurrent = (key: NavKey) => pathname.startsWith(`/${locale}${NAV_ROOT[key]}`);
 
   return (
-    <div ref={wrap} className="hidden md:contents">
+    <div ref={wrap} className="hidden xl:contents">
+      {/* flex-none, with no margin of its own. The header row is
+         justify-between, so the two gaps around this nav are equal and are
+         set by the row, not by a margin here. An ms-8 would make the left
+         gap smaller than the right one and reintroduce exactly the lopsided
+         bar this replaced.
+
+         Gap between items is 20px. innocents.no runs a 6px gap plus 6px of
+         padding either side of each trigger, which is 18px of optical space;
+         Rabita has no horizontal padding on its items, so 20px is the same
+         measure. */}
       <nav
         aria-label="Primary"
-        className="hidden md:flex items-center"
-        style={{ marginInlineStart: '48px', gap: '28px' }}
+        className="hidden xl:flex flex-none items-center"
+        style={{ gap: '20px' }}
         onMouseLeave={close}
       >
         {NAV_KEYS.map((key, i) => {
           const active = openKey === key;
-          const index = String(i + 1).padStart(2, '0');
           return (
             <motion.div
               key={key}
@@ -91,27 +111,26 @@ export function DesktopNav() {
             >
               <LinkVT
                 href={`/${locale}${NAV_ROOT[key]}`}
-                aria-expanded={active}
+                aria-expanded={hasMenu(key) ? active : undefined}
                 aria-current={isCurrent(key) ? 'page' : undefined}
                 onFocus={() => open(key)}
                 className={cn(
-                  'relative block whitespace-nowrap py-2 font-sans text-[13px] font-medium transition-colors duration-200',
-                  active || isCurrent(key) ? 'text-gold-deep' : 'text-ink hover:text-gold-deep',
+                  // 14px and text-ink-60, the innocents.no recipe (13px /
+                  // weight 500 / opacity .82) in Rabita's palette. At full
+                  // text-ink the five links carried the same weight as the
+                  // wordmark and the header had no hierarchy — recessing
+                  // them puts the order back: lockup, then action, then
+                  // navigation.
+                  'relative block whitespace-nowrap py-2 font-sans text-[14px] font-medium tracking-[-0.005em] transition-colors duration-200',
+                  active || isCurrent(key) ? 'text-gold-deep' : 'text-ink-60 hover:text-gold-deep',
                 )}
               >
-                <span className="flex items-baseline gap-1.5">
-                  <span
-                    aria-hidden
-                    className={cn(
-                      'font-mono text-[0.72rem] tabular-nums transition-colors duration-200',
-                      active || isCurrent(key) ? 'text-gold-deep' : 'text-gold-deep/60',
-                    )}
-                  >
-                    {index}
-                  </span>
-                  <span className="transition-transform duration-200 group-hover:-translate-y-px">
-                    {t(`items.${key}`)}
-                  </span>
+                {/* No 01/02/03. A number implies a sequence and these are
+                   not one — nobody reads a nav in order. It also cost the
+                   labels 20px each of horizontal room the bar did not have
+                   at 13-14 inches. */}
+                <span className="block transition-transform duration-200 group-hover:-translate-y-px">
+                  {t(`items.${key}`)}
                 </span>
                 {(active || isCurrent(key)) && (
                   <motion.span
@@ -277,24 +296,35 @@ export function MobileNav() {
               </div>
 
               <ul className="px-5 pb-10">
-                {NAV_KEYS.map((key, i) => {
+                {NAV_KEYS.map((key) => {
                   const items = t.raw(`menu.${key}`) as Item[];
                   const expanded = section === key;
-                  const index = String(i + 1).padStart(2, '0');
+                  const label = (
+                    <span className="font-serif text-[1.1rem]">{t(`items.${key}`)}</span>
+                  );
                   return (
                     <li key={key} className="border-b border-rule">
+                      {/* Prayer has no children, so it is a link rather than a
+                         drawer that opens on nothing. */}
+                      {items.length === 0 ? (
+                        <LinkVT
+                          href={`/${locale}${NAV_ROOT[key]}`}
+                          onClick={() => setOpen(false)}
+                          className="flex min-h-14 w-full items-center justify-between gap-4 text-start text-ink"
+                        >
+                          {label}
+                          <span aria-hidden className="text-ink-60 rtl:rotate-180">
+                            &rsaquo;
+                          </span>
+                        </LinkVT>
+                      ) : (
                       <button
                         type="button"
                         onClick={() => setSection(expanded ? null : key)}
                         aria-expanded={expanded}
                         className="flex min-h-14 w-full items-center justify-between gap-4 text-start text-ink"
                       >
-                        <span className="flex items-baseline gap-2.5">
-                          <span aria-hidden className="font-mono text-[0.6rem] tabular-nums text-gold-deep/70">
-                            {index}
-                          </span>
-                          <span className="font-serif text-[1.1rem]">{t(`items.${key}`)}</span>
-                        </span>
+                        {label}
                         <span
                           aria-hidden
                           className={cn(
@@ -305,6 +335,7 @@ export function MobileNav() {
                           &rsaquo;
                         </span>
                       </button>
+                      )}
                       <AnimatePresence initial={false}>
                         {expanded && (
                           <motion.ul

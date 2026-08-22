@@ -4,7 +4,7 @@ import { getLocale, getTranslations } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
 import { ParallaxMedia } from './parallax-media';
 import { PrayerToday } from './prayer-today';
-import { Eyebrow, Section, SectionBody, SectionHeading } from './primitives';
+import { Section, SectionBody, SectionHeading } from './primitives';
 
 // Prayer times, address, opening hours and group booking, as one column of
 // running copy with a single tall photograph beside it.
@@ -24,7 +24,6 @@ export async function PrayerVisit() {
           {/* Eyebrow and the open sign share one dateline, so the sign reads as
              part of the section head instead of floating beside the headline. */}
           <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
-            <Eyebrow>{t('eyebrow')}</Eyebrow>
             <p className="flex items-center gap-2 font-mono text-[0.75rem] uppercase tracking-[0.16em] text-gold-deep">
               <span className="pulse-dot" aria-hidden />
               {t('seal')}
@@ -74,7 +73,7 @@ export async function PrayerVisit() {
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
                   href={`/${locale}/besok-oss`}
-                  className="inline-flex min-h-11 items-center rounded-btn bg-gold-deep px-4 py-2 text-[15px] font-semibold text-paper transition-colors hover:bg-ink"
+                  className="inline-flex min-h-11 items-center rounded-full bg-gold-deep px-4 py-2 text-[15px] font-semibold text-paper transition-colors hover:bg-ink"
                 >
                   {t('bookGroup')}
                 </Link>
@@ -82,7 +81,7 @@ export async function PrayerVisit() {
                   href={`https://maps.google.com/?q=${encodeURIComponent(CAMPAIGN.address)}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex min-h-11 items-center rounded-btn border border-ink px-4 py-2 text-body font-semibold text-ink transition-colors hover:bg-ink hover:text-paper"
+                  className="inline-flex min-h-11 items-center rounded-full border border-ink px-4 py-2 text-body font-semibold text-ink transition-colors hover:bg-ink hover:text-paper"
                 >
                   {t('directions')}
                 </a>

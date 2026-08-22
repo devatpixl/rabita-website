@@ -309,3 +309,46 @@ body.sheet-open {
 .accent-em {
   font-variation-settings: 'opsz' 144, 'SOFT' 80, 'WONK' 1;
 }
+
+/* ─── Print ────────────────────────────────────────────────────────────
+   The prayer calendar at /bonnetider/kalender is meant to be saved as a
+   PDF or pinned to a noticeboard, so printing has to produce a document
+   rather than a screenshot of a website. A PDF library was considered and
+   rejected: none of the usual ones do Arabic shaping, so the /ar calendar
+   would come out as disconnected letters. The browser already does that
+   correctly, and it uses the site's own fonts and tokens for free. */
+@page {
+  size: A4 portrait;
+  margin: 14mm;
+}
+
+@media print {
+  html,
+  body {
+    background: #fff !important;
+  }
+
+  /* Site chrome never belongs on paper. */
+  [data-print-hide] {
+    display: none !important;
+  }
+
+  /* Ink, not screen colour: paper tints cost toner and read muddy. */
+  .print-doc {
+    color: #000;
+  }
+
+  /* A row split across a page break is unreadable in a time table. */
+  tr,
+  thead {
+    break-inside: avoid;
+  }
+  thead {
+    display: table-header-group; /* repeat headers on every page */
+  }
+
+  /* Long URLs appended to links is a browser default that ruins a table. */
+  a[href]::after {
+    content: none !important;
+  }
+}

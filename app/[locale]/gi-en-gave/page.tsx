@@ -26,12 +26,16 @@ export default async function GiveIndexPage({
   const t = await getTranslations({ locale, namespace: 'givePage' });
   const l = await getLocale();
 
+  // Four of these five used to link to `/gi-en-gave` — this page — so
+  // choosing "Månedlig" or "Bedrift" returned the visitor to where they
+  // already were. Until the named give routes in §6 exist, every route
+  // that is served by the card points at the card.
   const routes = [
-    { hash: 'once', href: `/${l}/gi-en-gave` },
-    { hash: 'monthly', href: `/${l}/gi-en-gave` },
+    { hash: 'once', href: `/${l}/gi-en-gave#gikort` },
+    { hash: 'monthly', href: `/${l}/gi-en-gave#gikort` },
     { hash: 'sadaqa', href: `/${l}/doner-en-bonneplass` },
-    { hash: 'company', href: `/${l}/gi-en-gave` },
-    { hash: 'legacy', href: `/${l}/gi-en-gave` },
+    { hash: 'company', href: `/${l}/gi-en-gave#gikort` },
+    { hash: 'legacy', href: `/${l}/gi-en-gave#gikort` },
   ] as const;
 
   return (

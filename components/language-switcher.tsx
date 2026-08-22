@@ -25,7 +25,11 @@ const LOCALE_SHORT: Record<AppLocale, string> = {
   ar: 'AR',
 };
 
-export function LanguageSwitcher() {
+export function LanguageSwitcher({ tone = 'ink' }: { tone?: 'ink' | 'paper' } = {}) {
+  const trigger =
+    tone === 'paper'
+      ? 'text-paper/70 hover:text-paper'
+      : 'text-ink-60 hover:text-ink';
   const router = useRouter();
   const pathname = usePathname() ?? '/';
   const current = useLocale() as AppLocale;
@@ -62,7 +66,7 @@ export function LanguageSwitcher() {
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={LOCALE_LABELS[current]}
-        className="flex min-h-11 items-center gap-2 rounded-btn px-2 py-1 text-label uppercase tracking-widest text-ink-60 hover:text-ink transition-colors"
+        className={`flex min-h-11 items-center gap-2 rounded-full px-2 py-1 text-label uppercase tracking-widest transition-colors ${trigger}`}
       >
         <GlobeIcon className="h-4 w-4" aria-hidden />
         <span className="tabular-nums">{LOCALE_SHORT[current]}</span>
@@ -71,7 +75,7 @@ export function LanguageSwitcher() {
       {open && (
         <ul
           role="listbox"
-          className="absolute end-0 top-full mt-2 min-w-40 border border-rule bg-paper text-ink shadow-sm"
+          className="absolute end-0 top-full z-50 mt-2 min-w-40 rounded-lg border border-rule bg-paper text-ink shadow-[0_12px_32px_-12px_rgba(26,26,24,0.35)]"
         >
           {routing.locales.map((l) => (
             <li key={l}>

@@ -9,7 +9,7 @@ export default async function LocaleNotFound() {
       <h1 className="mt-3 font-serif text-display text-ink">{t('title')}</h1>
       <p className="mt-4 text-body text-ink-60">{t('body')}</p>
       <div className="mt-8">
-        <Link href="/no" className="min-h-11 inline-block rounded-btn bg-ink px-4 py-2 text-body font-semibold text-paper">
+        <Link href="/no" className="min-h-11 inline-block rounded-full bg-ink px-4 py-2 text-body font-semibold text-paper">
           {t('back')}
         </Link>
       </div>

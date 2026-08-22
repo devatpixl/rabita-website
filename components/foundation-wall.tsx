@@ -13,7 +13,7 @@ import type { AppLocale } from '@/i18n/routing';
 import { Accent } from './accent';
 import { DonorWallBlocks } from './donor-wall-blocks';
 import { GiveCTA } from './give-cta';
-import { Eyebrow, Section, SectionBody, SectionHeading } from './primitives';
+import { Section, SectionBody, SectionHeading } from './primitives';
 
 // The wall is a masonry of stones, not a list of names. It's here to do
 // three jobs: (1) be shareable — each block has a stable anchor; (2)
@@ -36,8 +36,7 @@ export async function FoundationWall() {
       <Section id="fundamentsteiner" tone="paper-deep">
         <SectionBody>
           <div className="max-w-3xl">
-            <Eyebrow tone="gold-deep">{t('eyebrowEmpty')}</Eyebrow>
-            <SectionHeading reveal={false} className="mt-4">
+            <SectionHeading reveal={false}>
               {t.rich('headline', {
                 em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
               })}
@@ -74,8 +73,7 @@ export async function FoundationWall() {
     <Section id="fundamentsteiner" tone="paper-deep">
       <SectionBody>
         <div className="mb-10 max-w-3xl">
-          <Eyebrow tone="gold-deep">{t('eyebrow', { count })}</Eyebrow>
-          <SectionHeading reveal={false} className="mt-4">
+          <SectionHeading reveal={false}>
             {t.rich('headline', {
               em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
             })}

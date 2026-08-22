@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Accent } from './accent';
-import { Eyebrow, SectionBody } from './primitives';
+import { SectionBody } from './primitives';
 import { GiveCTA } from './give-cta';
 
 // The shared shape every page under "The mosque project" uses: a full bleed hero, a brief, a set of numbered columns, then the assurances. One structure, different content, so the section reads as one place.
@@ -38,8 +38,7 @@ export function ProjectHero({
       <SectionBody className="relative py-section-md">
         <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-dusk-60">{crumb}</p>
         <div className="mt-8 max-w-3xl">
-          <Eyebrow tone="gold">{eyebrow}</Eyebrow>
-          <h1 className="mt-4 font-serif text-display text-balance text-paper">{title}</h1>
+          <h1 className="font-serif text-display text-balance text-paper">{title}</h1>
           <p className="mt-6 max-w-prose hyphens-auto text-justify text-body text-paper/80">{lede}</p>
           {(primary || secondary) && (
             <div className="mt-9 flex flex-wrap items-center gap-4">
@@ -47,7 +46,7 @@ export function ProjectHero({
               {primary && !primary.give && primary.href && (
                 <Link
                   href={primary.href}
-                  className="inline-flex min-h-12 items-center rounded-btn bg-gold-deep px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:bg-gold"
+                  className="inline-flex min-h-12 items-center rounded-full bg-gold-deep px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:bg-gold"
                 >
                   {primary.label}
                 </Link>
@@ -55,7 +54,7 @@ export function ProjectHero({
               {secondary && (
                 <Link
                   href={secondary.href}
-                  className="inline-flex min-h-12 items-center rounded-btn border border-paper/40 px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:border-paper"
+                  className="inline-flex min-h-12 items-center rounded-full border border-paper/40 px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:border-paper"
                 >
                   {secondary.label}
                 </Link>
@@ -68,38 +67,45 @@ export function ProjectHero({
   );
 }
 
-// The brief: what this page is, set as one paragraph against a label, so a reader gets the whole answer before any detail.
+// The brief: what this page is, set as one paragraph under a dateline rule.
+//
+// This was a boxed initial floated into a justified paragraph, and every part
+// of that was working against the others:
+//
+//   - the "drop cap" was a rounded, bordered, filled tile, which reads as a UI
+//     chip rather than typography;
+//   - its h-[1.3em] resolved against its OWN text-[2.7em], so the box computed
+//     to ~84px and swallowed three lines as a float;
+//   - text-justify at a 52ch measure with a float that size has nowhere to put
+//     the slack, so it opened rivers between words;
+//   - and when the float ended, line 4 snapped back to the true left margin,
+//     giving the paragraph a stepped left edge — the part that actually looked
+//     broken.
+//
+// A standfirst does not need a drop cap. Drop caps open long-form text; this is
+// four lines. What it needs is one clean left edge, a measure it can hold, and
+// a label that sits ON the page rather than marooned in its own column.
 export function ProjectBrief({ label, body }: { label: string; body: string }) {
-  // Arabic has no capital forms, so the tile is only worth setting on the latin scripts
-  const initial = body.slice(0, 1);
-  const rest = body.slice(1);
-  const stamped = /^[A-Za-zÀ-ɏ]$/.test(initial);
-
   return (
     <section className="bg-paper py-section-md">
       <SectionBody>
-        <div className="grid gap-8 md:grid-cols-12">
-          {/* Rule down the side of the label rather than under it, the way innocents sets its datelines */}
-          <div className="md:col-span-3">
-            <div className="border-s border-gold-deep ps-4">
-              <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-gold-deep">{label}</p>
-            </div>
-          </div>
-          <p className="md:col-span-9 max-w-[52ch] hyphens-auto text-justify font-serif text-[clamp(1.15rem,1.9vw,1.5rem)] leading-[1.5] text-ink">
-            {stamped ? (
-              <>
-                <span
-                  className="float-start me-4 mt-[0.1em] flex h-[1.3em] w-[1.3em] items-center justify-center rounded-2xl border border-gold/40 bg-paper-2 text-[2.7em] leading-none text-gold-deep"
-                >
-                  {initial}
-                </span>
-                {rest}
-              </>
-            ) : (
-              body
-            )}
+        {/* Label on the rule, running the full measure — a dateline, not a
+           column. It used to take md:col-span-3 to carry eight characters,
+           which left ~250px of white between it and the sentence it labels. */}
+        <div className="flex items-center gap-5">
+          <p className="whitespace-nowrap font-mono text-[0.75rem] uppercase tracking-[0.16em] text-gold-deep">
+            {label}
           </p>
+          <span aria-hidden className="h-px flex-1 bg-rule" />
         </div>
+
+        {/* Ragged right, not justified. Browser justification has no proper
+           hyphenation dictionary for Norwegian or Arabic, so at this measure
+           it can only stretch word spaces. 44ch is a measure this size of
+           serif can actually hold. */}
+        <p className="mt-8 max-w-[44ch] font-serif text-[clamp(1.2rem,2vw,1.65rem)] leading-[1.45] text-ink">
+          {body}
+        </p>
       </SectionBody>
     </section>
   );
@@ -119,8 +125,7 @@ export function ProjectColumns({
     <section className="bg-paper-2 py-section-md">
       <SectionBody>
         <div className="max-w-3xl">
-          <Eyebrow tone="gold-deep">{eyebrow}</Eyebrow>
-          <h2 className="mt-4 font-serif text-section text-balance text-ink">{heading}</h2>
+          <h2 className="font-serif text-section text-balance text-ink">{heading}</h2>
         </div>
         <ul className="mt-14 grid gap-x-10 gap-y-10 md:grid-cols-2 lg:grid-cols-4">
           {items.map((it, i) => (

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { CAMPAIGN } from '@/lib/campaign';
 import { RenderingPlaceholder } from './rendering-placeholder';
-import { Eyebrow, SectionBody, SectionHeading } from './primitives';
+import { SectionBody, SectionHeading } from './primitives';
 
 // §4.04 rewritten as a story stage — sticky rendering on the left, floor
 // panels on the right. Active panel triggers via IntersectionObserver;
@@ -56,8 +56,7 @@ export function FloorStory() {
     <section id="etasje-for-etasje" className="bg-paper-2 py-section-lg">
       <SectionBody>
         <div className="mb-16 max-w-3xl">
-          <Eyebrow>{t('eyebrow')}</Eyebrow>
-          <SectionHeading className="mt-4">{t('heading')}</SectionHeading>
+          <SectionHeading>{t('heading')}</SectionHeading>
           <p className="mt-6 text-body text-ink-60">
             {t('attribution', { architect: CAMPAIGN.architect })}
           </p>

@@ -10,12 +10,13 @@
     "headlineBefore": "En moské. En skole. Et bibliotek. Et kjøkken. ",
     "headlineAccent": "Én adresse.",
     "headlineAfter": "",
-    "subhead": "Sju etasjer i Calmeyers gate 8, åpne for menigheten og for byen rundt. Gaven din bygger dem: bønnerom for bønnerom, pult for pult, hylle for hylle.",
+    "subhead": "Oslos moské på tvers av nasjonaliteter siden 1987. Gaven din reiser sju etasjer i Calmeyers gate 8: bønnerom for bønnerom, pult for pult, hylle for hylle.",
     "phaseLine": "Fase 1 · Fundamentering pågår",
     "cta": {
       "primary": "Se prosjektet",
       "secondary": "Møt menigheten"
-    }
+    },
+    "campaignToggle": "Vis detaljer om innsamlingen"
   },
   "utility": {
     "prayer": {
@@ -55,8 +56,8 @@
     "openDaily": "ÅPENT DAGLIG",
     "items": {
       "project": "Moskeprosjektet",
-      "worship": "Bønn og tjenester",
-      "education": "Undervisning",
+      "prayer": "Bønn",
+      "services": "Tjenester",
       "visit": "Besøk oss",
       "about": "Om oss"
     },
@@ -88,19 +89,33 @@
           "href": "/gi-en-gave"
         }
       ],
-      "worship": [
+      "prayer": [],
+      "services": [
         {
-          "label": "Bønnetider",
-          "blurb": "Hele uken og fredagsbønnen",
-          "href": "/bonnetider"
+          "label": "Nikah: ekteskapsseremoni",
+          "blurb": "Islamsk vielse, med eller uten juridisk registrering.",
+          "href": "/tjenester/nikah"
         },
         {
-          "label": "Tjenester",
-          "blurb": "Nikah, janaza, shahada og rådgivning",
-          "href": "/tjenester"
-        }
-      ],
-      "education": [
+          "label": "Janaza: begravelse",
+          "blurb": "Vasking, bønn og koordinering med gravlund.",
+          "href": "/tjenester/janaza"
+        },
+        {
+          "label": "Shahada: bekjennelse",
+          "blurb": "For deg som ønsker å ta shahada, med vitner.",
+          "href": "/tjenester/shahada"
+        },
+        {
+          "label": "Sjelesorg og samtaler",
+          "blurb": "Konfidensielle samtaler med imam eller kvinnelig veileder.",
+          "href": "/tjenester/counselling"
+        },
+        {
+          "label": "Hajj og umrah",
+          "blurb": "Informasjon, forberedelse og henvisninger.",
+          "href": "/tjenester/hajj-umrah"
+        },
         {
           "label": "Undervisning",
           "blurb": "Arabisk, Koran og kurs for voksne",
@@ -133,7 +148,7 @@
         {
           "label": "Bli medlem",
           "blurb": "Medlemskap og kontingent",
-          "href": "/medlemskap"
+          "href": "/bli-medlem"
         },
         {
           "label": "Bli frivillig",
@@ -150,7 +165,8 @@
     "overview": "Se alt i",
     "closeMenu": "Lukk menyen",
     "openMenu": "Åpne menyen",
-    "openHours": "06:00 til 22:00"
+    "openHours": "06:00 til 22:00",
+    "join": "Bli medlem"
   },
   "giving": {
     "freqMonthly": "Månedlig",
@@ -165,12 +181,12 @@
     "corporate": "Støtt som bedrift",
     "chipAria": "Velg {amount} kroner",
     "impact": {
-      "monthlyLow": "{amount} kr i måneden holder lyset på i bønnesalen i én uke.",
-      "monthlyMid": "500 kr i måneden i tre år finansierer en bønneplass.",
-      "monthlyHigh": "{amount} kr i måneden i tre år finansierer flere bønneplasser og en pult i skolen.",
-      "onceLow": "{amount} kr bidrar til materialene i den nye bønnesalen.",
-      "onceMid": "{amount} kr gir en bønneplass i sadaqa jariya.",
-      "onceHigh": "25 000 kr gir en pult i skolen der 400 barn får undervisning hvert år."
+      "monthlyLow": "{amount} kr i måneden: en uke med lys i bønnesalen.",
+      "monthlyMid": "{amount} kr i måneden i tre år: en bønneplass.",
+      "monthlyHigh": "{amount} kr i måneden i tre år: flere bønneplasser og en skolepult.",
+      "onceLow": "{amount} kr til materialer i den nye bønnesalen.",
+      "onceMid": "{amount} kr: en bønneplass i sadaqa jariya.",
+      "onceHigh": "{amount} kr: en pult i skolen der 400 barn undervises."
     },
     "openSheet": "Åpne givergiver",
     "closeSheet": "Lukk",
@@ -232,8 +248,8 @@
   "meter": {
     "lattice": "Hvert merke er 1 000 000 kr",
     "label": "Samlet inn",
-    "eyebrow": "Byggeregnskap",
-    "updated": "Oppdatert {date}",
+    "eyebrow": "Samlet inn til <em>den nye moskeen</em>",
+    "updated": "per {date}",
     "of": "av",
     "financed": "finansiert",
     "give": "Gi en gave",
@@ -250,7 +266,8 @@
       "label": "Delkampanje",
       "body": "Fundamentet støpes i år. Dette er delmålet vi jobber mot nå."
     },
-    "latticeCount": "{lit} av 100"
+    "latticeCount": "{lit} av 100",
+    "goalLabel": "Mål"
   },
   "trust": {
     "taxDeductible": "Skattefradrag opp til 25 000 kr/år",
@@ -296,30 +313,25 @@
   },
   "impactStory": {
     "eyebrow": "Fire kapitler",
-    "heading": "Et sted der <em>livet</em> skjer.",
-    "lede": "Fire fortellinger fra en menighet som allerede er en familie, og som stiller opp for byen rundt seg. Bygget vi reiser, gir plass til alt dette.",
-    "chapterLabel": "Kapittel {n}",
+    "heading": "Rabita har vært her <em>siden 1987</em>.",
+    "lede": "Fire tusen medlemmer fra førti nasjonaliteter. En skole med 400 elever og 19 lærere. Et bibliotek, en ungdomsklubb, og de du ringer når noen skal gifte seg eller gravlegges. Bygget vi reiser gir plass til alt dette.",
     "items": {
       "family": {
-        "time": "Alltid",
         "title": "Én familie. Sammen for det som er <em>rett</em>.",
         "body": "Fire tusen medlemmer, førti nasjonaliteter, ett fellesskap. Vi står sammen, i bønn og i lære, i glede og i sorg, med hverandre og med naboene våre. Å høre til her, betyr å høre til noe større enn seg selv.",
         "tag": "Fellesskap"
       },
       "learning": {
-        "time": "Hverdager",
-        "title": "Foredrag, samtaler og undervisning.",
+        "title": "Foredrag, samtaler og <em>undervisning</em>.",
         "body": "Kveldsforedrag om psykisk helse, Quran-klasser for barn, arabisk for begynnere, kalligrafi, filosofi. Nitten lærere, fire hundre elever, ventelister i alle klasser. Det som blir sagt her, blir husket.",
         "tag": "Undervisning"
       },
       "volunteer": {
-        "time": "Når det trengs",
-        "title": "Vi stiller opp, for hverandre og for byen.",
+        "title": "Vi <em>stiller opp</em>, for hverandre og for byen.",
         "body": "Frivillige i gule vester deler ut mat, koordinerer med bydelen, og står med naboer i medgang og motgang. Rabita er ikke bare et sted man kommer til. Det er et sted man kommer fra, for å hjelpe.",
         "tag": "Frivillig"
       },
       "sadaqa": {
-        "time": "Alltid",
         "title": "Sadaqa jariya, en gave som <em>varer</em>.",
         "body": "Bønneteppet er kanskje det mest brukte objektet i moskeen. Hver plass i den nye salen kan gis i navnet til noen som ikke lenger er blant oss. Navnene blir stående så lenge bygget står.",
         "tag": "Jariya"
@@ -341,7 +353,7 @@
   },
   "building": {
     "eyebrow": "Bygget reiser seg",
-    "heading": "Fra fundament til <em>bønnesal</em>.",
+    "heading": "Hva hver etasje er til for.",
     "etasje": "Etasje {n}",
     "svg": {
       "groundLevel": "GATENIVÅ · CALMEYERS GATE",
@@ -858,8 +870,8 @@
   "congregationToday": {
     "statement": {
       "before": "Hva ",
-      "accent": "Calmeyers gate 8",
-      "after": " brukes til."
+      "accent": "Rabita",
+      "after": " er til for."
     },
     "carouselLabel": "Menigheten i dag, bilder",
     "prev": "Forrige bilde",
@@ -1236,7 +1248,12 @@
       "fri": "Fredag",
       "sat": "Lørdag",
       "sun": "Søndag"
-    }
+    },
+    "todayHeading": "I dag",
+    "jumuaNote": "Salen fylles før khutbaen.",
+    "outOfRange": "Vi har ikke publiserte tider for denne datoen ennå. Ta kontakt med kontoret, eller se skjermen i moskeen.",
+    "sourceNote": "Tidene er Rabitas egne, for Oslo. Jama‘at-tider og nedlastbar kalender kommer når tidene synkroniseres med skjermen i moskeen.",
+    "scheduleHeading": "Bønnetider fremover"
   },
   "medlemskapPage": {
     "eyebrow": "Medlemskap",
@@ -1247,17 +1264,17 @@
       "ordinary": {
         "name": "Ordinært",
         "price": "0 kr",
-        "body": "Nyhetsbrev og invitasjoner. Uten stemmerett."
+        "body": "Nyhetsbrev og invitasjoner."
       },
       "voting": {
         "name": "Med stemmerett",
         "price": "1 000 kr",
-        "body": "Stemmerett på årsmøtet og valgbar til styret."
+        "body": "Én stemme på årsmøtet."
       },
       "youth": {
         "name": "Under 15",
         "price": "0 kr",
-        "body": "Godkjennes av foresatt. Alderstilpassede aktiviteter."
+        "body": "Krever samtykke fra foresatt."
       }
     },
     "form": {
@@ -1265,7 +1282,8 @@
       "name": "Fullt navn",
       "email": "E-post",
       "phone": "Telefon (valgfritt)",
-      "guardian": "Foresatt (navn og telefon)",
+      "guardianName": "Navn på foresatt",
+      "guardianPhone": "Telefon til foresatt",
       "submitFree": "Meld inn",
       "submitPay": "Meld inn og betal 1 000 kr",
       "note": "Fødselsnummer trengs ikke for å bli medlem. Personvern gjelder."
@@ -1425,7 +1443,8 @@
       "heading": "Dokumenter",
       "statutes": "Vedtekter",
       "annual": "Årsrapport",
-      "press": "Pressehenvendelser"
+      "press": "Pressehenvendelser",
+      "onRequest": "Statutter, årsrapport og pressemateriell fås ved henvendelse til kontoret."
     }
   },
   "contactPage": {
@@ -1631,6 +1650,88 @@
         "bank": "Bankkonto"
       },
       "hours": "Hver dag, 06:00 til 22:00"
+    }
+  },
+  "calendar": {
+    "title": "Bønnetider",
+    "orgName": "Det Islamske Forbundet",
+    "hijri": "Hijri",
+    "download": "Last ned PDF",
+    "back": "Tilbake til bønnetider",
+    "source": "Tidene er Rabitas egne, beregnet for Oslo.",
+    "panelHeading": "Last ned kalender",
+    "panelBody": "Én måned per ark, med hijri-dato og fredagsbønn. Åpne måneden du vil ha og lagre den som PDF, eller skriv den ut."
+  },
+  "cta": {
+    "prayer": {
+      "eyebrow": "Fra sunnaen",
+      "give": "Gi {amount} kr",
+      "dismiss": "Ikke nå",
+      "quotes": [
+        {
+          "text": "Beskytt dere mot Ilden, om så bare med en halv daddel.",
+          "source": "Sahih al-Bukhari 1417 · Sahih Muslim 1016"
+        },
+        {
+          "text": "Den som bygger en moské for Allah, bygger Allah et hus som den til ham i paradis.",
+          "source": "Sahih al-Bukhari 450 · Sahih Muslim 533"
+        },
+        {
+          "text": "Ingen gave har noen gang minsket en formue.",
+          "source": "Sahih Muslim 2588"
+        }
+      ],
+      "thanksEyebrow": "Takk",
+      "thanksTitle": "Måtte Allah ta imot gaven din.",
+      "thanksBody": "Bidraget ditt går rett inn i byggingen av moskeen i Calmeyers gate 8.",
+      "thanksClose": "Lukk"
+    }
+  },
+  "projectOverview": {
+    "cta": "Se mosképrosjektet",
+    "figures": {
+      "area": "Bruksareal",
+      "floors": "Etasjer, over og under bakken",
+      "places": "Bønneplasser når bygget står"
+    }
+  },
+  "joinPage": {
+    "lede": "Medlemskap er slik du blir talt med hos Rabita. Det gir deg nyhetsbrevet og invitasjoner til det som skjer i bygget. Med stemmerett følger også en stemme på årsmøtet som velger styret.",
+    "points": {
+      "updates": {
+        "title": "Nyheter og invitasjoner",
+        "body": "Nyhetsbrevet, og beskjed om det som skjer i bygget."
+      },
+      "vote": {
+        "title": "En stemme, om du vil ha en",
+        "body": "Medlemmer med stemmerett velger styret på årsmøtet, og kan selv stille til valg."
+      },
+      "renewal": {
+        "title": "Fornyes årlig",
+        "body": "Medlemskapet løper år for år, og du kan si det opp når som helst."
+      }
+    },
+    "members": "Fire tusen medlemmer står allerede oppført.",
+    "explain": {
+      "heading": "De tre medlemskapene.",
+      "note": "Fødselsnummer kreves ikke for medlemskap. Personvernerklæringen gjelder."
+    },
+    "tiers": {
+      "ordinary": {
+        "name": "Ordinært",
+        "price": "0 kr",
+        "body": "Nyhetsbrev og invitasjoner. Uten stemmerett."
+      },
+      "voting": {
+        "name": "Med stemmerett",
+        "price": "1 000 kr / år",
+        "body": "Stemmerett på årsmøtet og mulighet til å stille til styret."
+      },
+      "youth": {
+        "name": "Under 15",
+        "price": "0 kr",
+        "body": "Godkjennes av foresatt. Aktiviteter tilpasset alderen."
+      }
     }
   }
 }
