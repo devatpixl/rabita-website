@@ -28,6 +28,24 @@ export default async function BonnetiderPage({
 
   return (
     <main>
+      {/* A band, not a hero. This page exists to answer one question and the
+         answer has to stay on the first screen, so the picture is given width
+         instead of height: full bleed, and capped at 14vh so it can never
+         push the six times below the fold. The crop sits on the rosette in
+         the ceiling of the new main hall, which reads at a glance even in a
+         120px slice. */}
+      <div className="relative h-[clamp(96px,14vh,170px)] w-full overflow-hidden bg-dusk">
+        <Image
+          src="/photos/room-main-hall.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: '55% 32%', filter: GRADE }}
+        />
+      </div>
+
       <Section tone="paper" className="pt-section-sm">
         <SectionBody>
           <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60">
