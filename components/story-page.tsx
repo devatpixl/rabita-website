@@ -29,7 +29,7 @@ export function StoryHero({
             <span>{eyebrow}</span>
           </p>
           <h1 className="mt-6 max-w-4xl font-serif text-display text-balance text-ink">{title}</h1>
-          <p className="mt-6 max-w-prose hyphens-auto text-justify text-body text-ink-60">{lede}</p>
+          <p className="mt-6 max-w-prose text-body text-ink-60">{lede}</p>
         </div>
       </SectionBody>
     </section>
@@ -82,7 +82,7 @@ export function StoryColophon({
         <div className="grid gap-10 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-4">
             <h2 className="font-serif text-section text-balance text-ink">{heading}</h2>
-            <p className="mt-5 max-w-prose hyphens-auto text-justify text-body text-ink-60">{body}</p>
+            <p className="mt-5 max-w-prose text-body text-ink-60">{body}</p>
           </div>
           <dl className="md:col-span-8">
             {facts.map((f) => (

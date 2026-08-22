@@ -39,7 +39,7 @@ export function ProjectHero({
         <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-dusk-60">{crumb}</p>
         <div className="mt-8 max-w-3xl">
           <h1 className="font-serif text-display text-balance text-paper">{title}</h1>
-          <p className="mt-6 max-w-prose hyphens-auto text-justify text-body text-paper/80">{lede}</p>
+          <p className="mt-6 max-w-prose text-body text-paper/80">{lede}</p>
           {(primary || secondary) && (
             <div className="mt-9 flex flex-wrap items-center gap-4">
               {primary?.give && <GiveCTA label={primary.label} />}
@@ -76,7 +76,7 @@ export function ProjectHero({
 //     chip rather than typography;
 //   - its h-[1.3em] resolved against its OWN text-[2.7em], so the box computed
 //     to ~84px and swallowed three lines as a float;
-//   - text-justify at a 52ch measure with a float that size has nowhere to put
+//   - at a 52ch measure with a float that size has nowhere to put
 //     the slack, so it opened rivers between words;
 //   - and when the float ended, line 4 snapped back to the true left margin,
 //     giving the paragraph a stepped left edge — the part that actually looked
@@ -159,7 +159,7 @@ export function ProjectAssurance({
         <div className="grid gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-4">
             <h2 className="font-serif text-section text-balance text-paper">{heading}</h2>
-            <p className="mt-5 max-w-prose hyphens-auto text-justify text-body text-dusk-60">{lede}</p>
+            <p className="mt-5 max-w-prose text-body text-dusk-60">{lede}</p>
           </div>
           <ul className="md:col-span-8">
             {items.map((it, i) => (

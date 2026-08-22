@@ -81,7 +81,7 @@ export function LearnClose({
           </div>
           <div className="md:col-span-7">
             <h2 className="font-serif text-section text-balance text-ink">{heading}</h2>
-            <p className="mt-5 max-w-prose hyphens-auto text-justify text-body text-ink-60">{body}</p>
+            <p className="mt-5 max-w-prose text-body text-ink-60">{body}</p>
             <dl className="mt-8 border-t border-rule">
               {items.map((it) => (
                 <div key={it.term} className="grid gap-x-6 border-b border-rule py-4 md:grid-cols-12 md:items-baseline">

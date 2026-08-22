@@ -31,7 +31,7 @@ export function ServiceHero({
         <div className="mt-10 grid items-start gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-6">
             <h1 className="font-serif text-display text-balance text-ink">{title}</h1>
-            <p className="mt-6 max-w-prose hyphens-auto text-justify text-body text-ink-60">{lede}</p>
+            <p className="mt-6 max-w-prose text-body text-ink-60">{lede}</p>
             {note && (
               <p className="mt-8 border-t border-rule pt-5 font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
                 {note}
@@ -68,9 +68,16 @@ export function ServiceRegister({
         <dl className="mt-12 border-t border-rule">
           {rows.map((r) => (
             <div key={r.term} className="grid gap-x-8 gap-y-1 border-b border-rule py-5 md:grid-cols-12 md:items-baseline">
+              {/* inline-flex with min-h-11 on the link rather than a bare
+                 inline one: at 23px tall these were the smallest tap targets
+                 on the site, and on this page they are the only way into the
+                 six service pages. */}
               <dt className="font-serif text-[1.15rem] text-ink md:col-span-3">
                 {r.href ? (
-                  <Link href={r.href} className="underline decoration-gold underline-offset-4 transition-colors hover:text-gold-deep">
+                  <Link
+                    href={r.href}
+                    className="inline-flex min-h-11 items-center underline decoration-gold underline-offset-4 transition-colors hover:text-gold-deep"
+                  >
                     {r.term}
                   </Link>
                 ) : (
@@ -112,7 +119,7 @@ export function ServiceCards({
                 <Image src={c.image} alt={c.title} fill loading="eager" sizes="(min-width: 768px) 46vw, 90vw" className="object-cover" style={{ filter: GRADE }} />
               </div>
               <h3 className="mt-6 font-serif text-card text-ink">{c.title}</h3>
-              <p className="mt-2 max-w-prose hyphens-auto text-justify text-body text-ink-60">{c.body}</p>
+              <p className="mt-2 max-w-prose text-body text-ink-60">{c.body}</p>
             </li>
           ))}
         </ul>
@@ -145,7 +152,7 @@ export function ServiceVisit({
         <div className="grid gap-10 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-5">
             <h2 className="font-serif text-section text-balance text-ink">{heading}</h2>
-            <p className="mt-5 max-w-prose hyphens-auto text-justify text-body text-ink-60">{body}</p>
+            <p className="mt-5 max-w-prose text-body text-ink-60">{body}</p>
           </div>
           <div className="md:col-span-4">
             <p className="font-serif text-card text-ink">{address}</p>

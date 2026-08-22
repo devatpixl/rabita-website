@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
-import { Section, SectionBody, SectionHeading, Stat } from '@/components/primitives';
+import { Section, SectionBody, SectionHeading } from '@/components/primitives';
 import { LearnClose, LearnHero } from '@/components/learn-page';
 
 export default async function EducationPage({
@@ -25,11 +25,29 @@ export default async function EducationPage({
       />
       <Section tone="paper">
         <SectionBody>
-          <ul className="grid grid-cols-2 gap-8 md:grid-cols-4">
-            <li><Stat value={`${CAMPAIGN.pupils}`} label={t('stats.pupils')} /></li>
-            <li><Stat value={`${CAMPAIGN.teachers}`} label={t('stats.teachers')} /></li>
-            <li><Stat value="1" label={t('stats.school')} /></li>
-            <li><Stat value="Ukentlig" label={t('stats.classes')} /></li>
+          {/* Rows on a phone, four columns from md. Two columns of 163px put
+             "school (largest of its kind)" under a single digit and broke it
+             across four lines. Same register treatment the mosque project
+             figures use. */}
+          <ul className="divide-y divide-rule border-y border-rule md:grid md:grid-cols-4 md:gap-8 md:divide-y-0 md:border-0">
+            {([
+              [`${CAMPAIGN.pupils}`, t('stats.pupils')],
+              [`${CAMPAIGN.teachers}`, t('stats.teachers')],
+              ['1', t('stats.school')],
+              ['Ukentlig', t('stats.classes')],
+            ] as const).map(([value, label]) => (
+              <li
+                key={label}
+                className="flex items-baseline justify-between gap-6 py-3.5 md:block md:py-0"
+              >
+                <span className="font-serif text-[2rem] leading-none tabular-nums text-ink md:text-display">
+                  {value}
+                </span>
+                <span className="text-end text-[13px] text-ink-60 md:mt-2 md:block md:text-start">
+                  {label}
+                </span>
+              </li>
+            ))}
           </ul>
         </SectionBody>
       </Section>

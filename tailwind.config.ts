@@ -51,8 +51,15 @@ const config: Config = {
         mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       fontSize: {
-        display: ['clamp(2.75rem, 6vw, 4.5rem)', { lineHeight: '1.02', letterSpacing: '-0.02em' }],
-        section: ['clamp(2rem, 4vw, 2.75rem)', { lineHeight: '1.1' }],
+        // The floors are what a phone gets, and they were set from the
+        // desktop end: 44px for display and 32px for section meant every sub
+        // page opened with a 44px headline over 32px section heads, three
+        // lines deep, with almost no step between the two. Lowering the floor
+        // touches NOTHING above about 730px, where the preferred vw value
+        // already exceeds it, so desktop is unchanged and only small screens
+        // move.
+        display: ['clamp(2rem, 6vw, 4.5rem)', { lineHeight: '1.04', letterSpacing: '-0.02em' }],
+        section: ['clamp(1.65rem, 4vw, 2.75rem)', { lineHeight: '1.12' }],
         card: ['1.25rem', { lineHeight: '1.35' }],
         body: ['1rem', { lineHeight: '1.6' }],
         label: ['0.8125rem', { lineHeight: '1.2', letterSpacing: '0.08em' }],
