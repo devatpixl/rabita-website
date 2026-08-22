@@ -123,7 +123,14 @@ export async function Hero() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative overflow-hidden bg-dusk text-paper min-h-[var(--hero-min-sm)] md:min-h-[var(--hero-min)] md:max-h-[var(--hero-cap)]"
+      // The max-height is gone; min-height stays. With a four line headline
+      // the content block runs about 570px, and on a short laptop (1280x700,
+      // say) the cap left barely 480px, so the section would have clipped the
+      // very type this change enlarged. Without a cap the section grows by a
+      // few pixels on short screens instead, which is a cosmetic cost against
+      // a headline that vanishes. overflow-hidden stays: its real job is
+      // holding the scaled background image, not trimming content.
+      className="relative overflow-hidden bg-dusk text-paper min-h-[var(--hero-min-sm)] md:min-h-[var(--hero-min)]"
       style={heroVars}
     >
       {/* One background layer at every width, with the crop swapped at md.
@@ -189,12 +196,38 @@ export async function Hero() {
               // The gold accent inside the same sentence is .accent-em and was
               // already pinned to 144, so one line was set at two optical
               // sizes.
-              className="display-opsz font-serif text-paper text-balance"
+              // text-pretty, not text-balance. Balance evens every line out
+              // rather than filling the measure, which turned four lines into
+              // five short ones and overran the section's height cap. Pretty
+              // only guards the last line, so the measure still fills but
+              // "adresse." is not left orphaned on its own.
+              className="display-opsz font-serif text-paper text-pretty"
               style={{
-                fontSize: 'clamp(2.125rem, min(6vw, 8.8vh), 6rem)',
-                lineHeight: 1.06,
-                letterSpacing: '-0.015em',
-                maxWidth: '22ch',
+                // 128px at 1920, up from 96. innocents.no runs
+                // clamp(52px, 9.4vw, 140px) and lands at 140, which is most
+                // of what reads as "bigger and more modern" between the two.
+                //
+                // This cannot push the text right into the photograph: the
+                // 22ch max width computes to about 1012px at this size, but
+                // the grid column is roughly 700px, so the column is what
+                // binds. Growing the type adds lines inside the same measure
+                // rather than widening it, which is also what fills the
+                // column vertically.
+                //
+                // The vh term stays so a short laptop does not get a headline
+                // sized for a 27 inch monitor: at 1280x800 this resolves to
+                // 88px, not 128.
+                fontSize: 'clamp(2.125rem, min(7.6vw, 11vh), 8rem)',
+                lineHeight: 0.99,
+                letterSpacing: '-0.03em',
+                // A fixed measure, not 22ch. ch scales WITH font-size, so
+                // enlarging the type widened the line and pushed "Én adresse."
+                // across the man's face. Capping the measure in px means the
+                // extra size becomes extra LINES down the column instead of
+                // extra width across the photograph, which is also what makes
+                // the block fill the height. Below md the column is narrower
+                // than this anyway, so the column still binds on a phone.
+                maxWidth: '36rem',
               }}
             >
               {t('headlineBefore')}
