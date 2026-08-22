@@ -28,22 +28,32 @@ export default async function BonnetiderPage({
 
   return (
     <main>
-      {/* A band, not a hero. This page exists to answer one question and the
-         answer has to stay on the first screen, so the picture is given width
-         instead of height: full bleed, and capped at 14vh so it can never
-         push the six times below the fold. The crop sits on the rosette in
-         the ceiling of the new main hall, which reads at a glance even in a
-         120px slice. */}
-      <div className="relative h-[clamp(96px,14vh,170px)] w-full overflow-hidden bg-dusk">
-        <Image
-          src="/photos/room-main-hall.webp"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-          style={{ objectPosition: '55% 32%', filter: GRADE }}
-        />
+      {/* A band inside the measure, not a full bleed one, and desktop only.
+
+         Framed like the image on /besok-oss: contained to the content column
+         with rounded-3xl, so it reads as part of the page rather than as a
+         header pasted across the top. Very wide and short, because this page
+         exists to answer one question and the six times have to stay on the
+         first screen.
+
+         The picture is a row of people praying under the bridge in Oslo,
+         which is the honest argument for the building: it shows what the
+         congregation does now and what the seven floors are for. An empty
+         architectural render showed neither. */}
+      <div className="hidden md:block">
+        <SectionBody>
+          <div className="relative mt-6 aspect-[6/1] w-full overflow-hidden rounded-3xl bg-paper-2">
+            <Image
+              src="/photos/prayer-underpass.webp"
+              alt={tp('pages.times.eyebrow')}
+              fill
+              priority
+              sizes="(min-width: 1024px) 84vw, 92vw"
+              className="object-cover"
+              style={{ objectPosition: '50% 62%', filter: GRADE }}
+            />
+          </div>
+        </SectionBody>
       </div>
 
       <Section tone="paper" className="pt-section-sm">
