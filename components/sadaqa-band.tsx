@@ -42,25 +42,45 @@ export function SadaqaBand() {
   const [manual, setManual] = useState(false);
   const count = ROOMS.length;
 
-  const go = useCallback(
-    (n: number, d: number) => {
-      setManual(true);
-      setDir(d);
-      setIndex((n + count) % count);
-    },
-    [count],
-  );
-  const next = useCallback(() => go(index + 1, 1), [index, go]);
-  const prev = useCallback(() => go(index - 1, -1), [index, go]);
-
   // The section's own trip past the window, divided between the rooms.
   const { scrollYProgress } = useScroll({
     target: box,
     offset: ['start 88%', 'end 12%'],
   });
 
+  // Where the section had got to when the reader last picked a room by hand.
+  const pickedAt = useRef<number | null>(null);
+
+  const go = useCallback(
+    (n: number, d: number) => {
+      pickedAt.current = scrollYProgress.get();
+      setManual(true);
+      setDir(d);
+      setIndex((n + count) % count);
+    },
+    [count, scrollYProgress],
+  );
+  const next = useCallback(() => go(index + 1, 1), [index, go]);
+  const prev = useCallback(() => go(index - 1, -1), [index, go]);
+
   useMotionValueEvent(scrollYProgress, 'change', (v) => {
-    if (manual || still) return;
+    if (still) return;
+
+    // A click used to set `manual` and nothing ever cleared it, so the first
+    // time anyone touched a room name the scroll link died for the rest of
+    // the page's life. The pick is a pause now, not a switch.
+    //
+    // It is released by distance rather than by a timer: a timer would swap
+    // the picture out from under someone still reading the caption. Once the
+    // section has travelled a full room's worth past the point where they
+    // chose, they have moved on, and scroll takes it back.
+    if (manual) {
+      if (pickedAt.current == null) return;
+      if (Math.abs(v - pickedAt.current) < 1 / count) return;
+      setManual(false);
+      pickedAt.current = null;
+    }
+
     const n = Math.min(count - 1, Math.max(0, Math.floor(v * count)));
     setIndex((was) => {
       if (n === was) return was;
