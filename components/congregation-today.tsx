@@ -285,7 +285,7 @@ export function CongregationToday() {
         <div className="mx-auto max-w-6xl w-full px-6">
           <div className="flex items-baseline justify-between" style={{ gap: '32px' }}>
             <h2
-              className="font-serif text-ink text-balance"
+              className="display-opsz font-serif text-ink text-balance"
               style={{
                 fontSize: 'clamp(28px, 3vw, 44px)',
                 lineHeight: 1.12,

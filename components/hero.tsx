@@ -181,7 +181,15 @@ export async function Hero() {
           <div>
             <h1
               id="hero-heading"
-              className="font-serif text-paper text-balance"
+              // display-opsz, not text-display: this headline sets its own
+              // fontSize inline, and the opsz 144 rule was attached to the
+              // .text-display CLASS. So the one piece of type that most needs
+              // the display cut was the only heading on the site falling back
+              // to font-optical-sizing: auto, which resolved it to about 75.
+              // The gold accent inside the same sentence is .accent-em and was
+              // already pinned to 144, so one line was set at two optical
+              // sizes.
+              className="display-opsz font-serif text-paper text-balance"
               style={{
                 fontSize: 'clamp(2.125rem, min(6vw, 8.8vh), 6rem)',
                 lineHeight: 1.06,

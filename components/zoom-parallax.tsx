@@ -263,7 +263,7 @@ export function ZoomParallax() {
             style={{ rowGap: '0.75em' }}
           >
             <p
-              className="font-serif text-paper text-balance"
+              className="display-opsz font-serif text-paper text-balance"
               style={{
                 fontSize: 'clamp(28px, 3.4vw, 52px)',
                 lineHeight: 1.15,
@@ -274,7 +274,7 @@ export function ZoomParallax() {
               {stmtBefore.trim()}
             </p>
             <p
-              className="font-serif text-balance"
+              className="display-opsz font-serif text-balance"
               style={{
                 fontSize: 'clamp(28px, 3.4vw, 52px)',
                 lineHeight: 1.15,
@@ -361,7 +361,7 @@ export function ZoomParallax() {
             style={{ rowGap: '0.75em' }}
           >
             <p
-              className="font-serif text-paper text-balance"
+              className="display-opsz font-serif text-paper text-balance"
               style={{
                 fontSize: 'clamp(28px, 3.4vw, 52px)',
                 lineHeight: 1.15,
@@ -372,7 +372,7 @@ export function ZoomParallax() {
               {stmtBefore.trim()}
             </p>
             <p
-              className="font-serif text-balance"
+              className="display-opsz font-serif text-balance"
               style={{
                 fontSize: 'clamp(28px, 3.4vw, 52px)',
                 lineHeight: 1.15,

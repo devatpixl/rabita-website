@@ -303,7 +303,8 @@ body.sheet-open {
    accent adds SOFT 80 and WONK 1. Card and body serif are left on the font's
    own optical sizing, where 144 would read too thin. */
 .text-display,
-.text-section {
+.text-section,
+.display-opsz {
   font-variation-settings: 'opsz' 144;
 }
 .accent-em {
