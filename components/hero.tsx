@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import type { CSSProperties } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -84,6 +85,24 @@ const SCRIM_MOBILE =
   ' rgba(22,36,46,0.52) 42%,' +
   ' rgba(22,36,46,0.88) 68%,' +
   ' rgba(22,36,46,0.96) 100%)';
+
+// The headline is a list, and automatic wrapping was breaking it between
+// every article and its noun: "En moské. En / skole. Et / bibliotek. Et /
+// kjøkken. Én / adresse." Five lines, four of them ending on an article, each
+// sentence severed from the word it introduces.
+//
+// Splitting on sentence and clause boundaries and making each phrase
+// unbreakable means the browser can only break where a reader would. It picks
+// how many phrases fit per line; every line still ends on a full stop or a
+// comma.
+//
+// Phrases longer than this are left breakable on purpose. Arabic renders the
+// whole list as a single clause, and a nowrap span wider than its column
+// overflows the column rather than wrapping inside it.
+const NOWRAP_MAX = 16;
+
+const phrases = (text: string) =>
+  text.split(/(?<=[.,\u060C])\s+/).filter((p) => p.trim().length > 0);
 
 const IMAGE_FILTER = `saturate(${HERO_ART.saturate}) contrast(${HERO_ART.contrast}) brightness(${HERO_ART.brightness})`;
 
@@ -217,20 +236,22 @@ export async function Hero() {
                 // The vh term stays so a short laptop does not get a headline
                 // sized for a 27 inch monitor: at 1280x800 this resolves to
                 // 88px, not 128.
-                fontSize: 'clamp(2.125rem, min(7.6vw, 11vh), 8rem)',
+                fontSize: 'clamp(2.125rem, min(6.2vw, 9.2vh), 6.5rem)',
                 lineHeight: 0.99,
                 letterSpacing: '-0.03em',
-                // A fixed measure, not 22ch. ch scales WITH font-size, so
-                // enlarging the type widened the line and pushed "Én adresse."
-                // across the man's face. Capping the measure in px means the
-                // extra size becomes extra LINES down the column instead of
-                // extra width across the photograph, which is also what makes
-                // the block fill the height. Below md the column is narrower
-                // than this anyway, so the column still binds on a phone.
-                maxWidth: '36rem',
+                // No max width: the grid column is the measure. A tighter
+                // cap would stop two short phrases ever sharing a line, which
+                // is what keeps this to four lines instead of five.
+                maxWidth: '100%',
               }}
             >
-              {t('headlineBefore')}
+              {phrases(t('headlineBefore')).map((phrase, i) => (
+                <Fragment key={i}>
+                  <span className={phrase.length <= NOWRAP_MAX ? 'whitespace-nowrap' : undefined}>
+                    {phrase}
+                  </span>{' '}
+                </Fragment>
+              ))}
               {isRtl ? (
                 // Arabic accent — IBM Plex Sans Arabic 700, no italic
                 // (italic Latin-form isn't a native Arabic emphasis; the
@@ -243,7 +264,9 @@ export async function Hero() {
                   {t('headlineAccent')}
                 </em>
               ) : (
-                <Accent surface="dusk">{t('headlineAccent')}</Accent>
+                <span className="whitespace-nowrap">
+                  <Accent surface="dusk">{t('headlineAccent')}</Accent>
+                </span>
               )}
               {t('headlineAfter')}
             </h1>
