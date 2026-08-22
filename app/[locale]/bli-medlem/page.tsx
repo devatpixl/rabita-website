@@ -38,24 +38,48 @@ export default async function JoinPage({
          the screen before the reader ever saw the Join button. */}
       <section className="bg-dusk py-section-md text-paper">
         <SectionBody>
-          <div className="grid items-center gap-12 md:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] md:gap-16">
-            <div>
-              {/* Capped below the display token on this page only. text-display
-                 tops out at 4.5rem, which set this four-line headline at 72px
-                 and pushed the form card off a laptop screen. 3.5rem keeps it
-                 the largest thing on the page without owning the whole fold. */}
-              <h1 className="font-serif text-display text-balance text-paper md:text-[clamp(2.5rem,4.4vw,3.5rem)] md:leading-[1.05]">
+          {/* Three blocks in DOM order: the pitch, the form, then the
+             reasons. On a phone that is exactly the order a visitor wants,
+             and it is what this page was getting wrong: the form sat under a
+             four line headline, a four line paragraph, three explanatory
+             points and a membership count, so joining meant scrolling past
+             roughly a thousand pixels of argument first.
+
+             On desktop the grid puts the pitch and the reasons back in one
+             column with the card beside them, spanning both rows, which is
+             the layout that was there before. Explicit row and column
+             placement is what lets one DOM order serve both. */}
+          <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] md:items-start md:gap-x-16 md:gap-y-10">
+            <div className="md:col-start-1 md:row-start-1">
+              {/* Down a step again on phones. At 40px the headline ran to four
+                 lines and owned the screen on its own. */}
+              <h1 className="font-serif text-[clamp(1.9rem,7.4vw,2.4rem)] leading-[1.08] text-balance text-paper md:text-[clamp(2.5rem,4.4vw,3.5rem)] md:leading-[1.05]">
                 {tm.rich('headline', {
                   em: (chunks) => <Accent surface="dusk">{chunks}</Accent>,
                 })}
               </h1>
-              <p className="mt-5 max-w-prose text-body text-paper/75">{t('lede')}</p>
+              {/* One line on a phone, the full argument on desktop. The three
+                 points below the form say the rest either way. */}
+              <p className="mt-4 max-w-prose text-body text-paper/75 md:hidden">
+                {t('ledeShort')}
+              </p>
+              <p className="mt-5 hidden max-w-prose text-body text-paper/75 md:block">
+                {t('lede')}
+              </p>
+            </div>
 
-              <ul className="mt-8 grid gap-6 border-t border-paper/15 pt-6 sm:grid-cols-3">
+            <div className="md:col-start-2 md:row-start-1 md:row-span-2 md:justify-self-end md:w-full">
+              <MembershipSignup />
+            </div>
+
+            <div className="md:col-start-1 md:row-start-2">
+              <ul className="grid gap-5 border-t border-paper/15 pt-6 sm:grid-cols-3 sm:gap-6">
                 {points.map((k) => (
                   <li key={k}>
-                    <p className="font-serif text-[1.05rem] text-paper">{t(`points.${k}.title`)}</p>
-                    <p className="mt-1.5 text-[0.9rem] leading-snug text-paper/60">
+                    <p className="font-serif text-[1rem] text-paper md:text-[1.05rem]">
+                      {t(`points.${k}.title`)}
+                    </p>
+                    <p className="mt-1 text-[0.875rem] leading-snug text-paper/60 md:mt-1.5 md:text-[0.9rem]">
                       {t(`points.${k}.body`)}
                     </p>
                   </li>
@@ -65,10 +89,6 @@ export default async function JoinPage({
               <p className="mt-6 text-[13px] text-paper/45">
                 {t('members', { count: CAMPAIGN.members.toLocaleString('nb-NO') })}
               </p>
-            </div>
-
-            <div className="md:justify-self-end md:w-full">
-              <MembershipSignup />
             </div>
           </div>
         </SectionBody>
@@ -82,14 +102,23 @@ export default async function JoinPage({
             </h2>
             <div className="md:col-span-7">
               <dl className="border-t border-rule">
+                {/* Name and price share a line on a phone, with the sentence
+                   under them. Stacked in three separate rows it took three
+                   times the height and stopped reading as a comparison, which
+                   is the only reason this table exists. */}
                 {(['ordinary', 'voting', 'youth'] as const).map((k) => (
-                  <div key={k} className="grid gap-2 border-b border-rule py-5 md:grid-cols-12 md:items-baseline">
-                    <dt className="font-serif text-[1.15rem] text-ink md:col-span-3">
+                  <div
+                    key={k}
+                    className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 border-b border-rule py-4 md:grid-cols-12 md:items-baseline md:gap-2 md:py-5"
+                  >
+                    <dt className="col-start-1 row-start-1 font-serif text-[1.05rem] text-ink md:col-span-3 md:text-[1.15rem]">
                       {t(`tiers.${k}.name`)}
                     </dt>
-                    <dd className="text-body text-ink-60 md:col-span-6">{t(`tiers.${k}.body`)}</dd>
-                    <dd className="font-serif text-[1.05rem] tabular-nums text-gold-deep md:col-span-3 md:text-end">
+                    <dd className="col-start-2 row-start-1 text-end font-serif text-[1rem] tabular-nums text-gold-deep md:col-span-3 md:col-start-10 md:text-[1.05rem]">
                       {t(`tiers.${k}.price`)}
+                    </dd>
+                    <dd className="col-span-2 row-start-2 text-[0.9rem] leading-snug text-ink-60 md:col-span-6 md:col-start-4 md:row-start-1 md:text-body md:leading-normal">
+                      {t(`tiers.${k}.body`)}
                     </dd>
                   </div>
                 ))}

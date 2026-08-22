@@ -1696,6 +1696,7 @@
   },
   "joinPage": {
     "lede": "Medlemskap er slik du blir talt med hos Rabita. Det gir deg nyhetsbrevet og invitasjoner til det som skjer i bygget. Med stemmerett følger også en stemme på årsmøtet som velger styret.",
+    "ledeShort": "Bli talt med hos Rabita. Nyhetsbrev, invitasjoner, og stemmerett om du vil ha det.",
     "points": {
       "updates": {
         "title": "Nyheter og invitasjoner",

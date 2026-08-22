@@ -1696,6 +1696,7 @@
   },
   "joinPage": {
     "lede": "Membership is how you are counted here. It brings the newsletter and invitations to what happens in the building. A voting membership adds a vote at the annual meeting that elects the board.",
+    "ledeShort": "Be counted at Rabita. The newsletter, invitations, and a vote if you want one.",
     "points": {
       "updates": {
         "title": "News and invitations",
