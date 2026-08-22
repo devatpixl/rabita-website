@@ -169,10 +169,57 @@ export function SadaqaBand() {
               />
             </div>
 
-            {/* One track per room, marking where the scroll has got to */}
-            {/* Four names across a phone left each one 68px wide, so they break in half */}
+            {/* Phone: one room at a time, with arrows.
+
+               Four names in a 2x2 grid meant the reader was looking at ONE
+               photograph while reading FOUR labels, three of which described
+               something not on screen, and the 68px columns broke every name
+               in half. Now the label names the picture above it and the
+               arrows say the rest exist. */}
+            <div className="mt-5 md:hidden">
+              <div className="flex items-center justify-between gap-3">
+                <button
+                  type="button"
+                  onClick={() => go(index - 1, -1)}
+                  aria-label={t('rooms.prev')}
+                  className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-rule text-ink transition-colors active:scale-95"
+                >
+                  <RoomChevron className="h-4 w-4 rtl:rotate-180" />
+                </button>
+                <p aria-live="polite" className="min-w-0 flex-1 text-center">
+                  <span className="block font-serif text-[1.1rem] leading-tight text-ink">
+                    {t(`rooms.${room.key}.label`)}
+                  </span>
+                  <span className="mt-0.5 block font-mono text-[11px] uppercase tracking-[0.16em] tabular-nums text-ink-60">
+                    {index + 1} / {count}
+                  </span>
+                </p>
+                <button
+                  type="button"
+                  onClick={() => go(index + 1, 1)}
+                  aria-label={t('rooms.next')}
+                  className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-rule text-ink transition-colors active:scale-95"
+                >
+                  <RoomChevron className="h-4 w-4 rotate-180 rtl:rotate-0" />
+                </button>
+              </div>
+              <span aria-hidden className="mt-4 flex gap-1.5">
+                {ROOMS.map((r, i) => (
+                  <span
+                    key={r.key}
+                    className={cn(
+                      'h-[2px] flex-1 transition-colors duration-300',
+                      i === index ? 'bg-gold-deep' : 'bg-rule',
+                    )}
+                  />
+                ))}
+              </span>
+            </div>
+
+            {/* Desktop keeps the four tracks side by side, where there is room
+               for four names and the reader can see the whole set at once */}
             <ul
-              className="mt-5 grid grid-cols-2 gap-x-6 gap-y-5 md:gap-y-2 md:[grid-template-columns:repeat(var(--rooms),minmax(0,1fr))]"
+              className="mt-5 hidden gap-x-6 gap-y-2 md:grid md:[grid-template-columns:repeat(var(--rooms),minmax(0,1fr))]"
               style={{ '--rooms': count } as React.CSSProperties}
             >
               {ROOMS.map((r, i) => (
@@ -214,5 +261,13 @@ export function SadaqaBand() {
         </div>
       </SectionBody>
     </section>
+  );
+}
+
+function RoomChevron({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
+      <path d="M15 18l-6-6 6-6" />
+    </svg>
   );
 }

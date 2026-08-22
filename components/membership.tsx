@@ -65,7 +65,7 @@ export async function Membership() {
         <div className="grid grid-cols-1 items-stretch gap-10 md:grid-cols-[1fr_0.82fr]">
           {/* Left column — the argument */}
           <div>
-            <h2 className="font-serif text-[clamp(1.65rem,3.2vw,1.95rem)] leading-[1.18] text-paper text-balance">
+            <h2 className="font-serif text-[clamp(1.75rem,3.2vw,1.95rem)] leading-[1.18] text-paper text-balance">
               {t.rich('headline', {
                 em: (chunks) =>
                   locale === 'ar' ? (
@@ -85,7 +85,7 @@ export async function Membership() {
             <div className="mt-8 h-px w-full bg-[#2A3A44]" />
 
             <div className="mt-6 flex items-baseline gap-3">
-              <span className="font-serif text-[40px] leading-none text-paper tabular-nums">
+              <span className="font-serif text-[34px] leading-none text-paper tabular-nums md:text-[40px]">
                 {fee}
               </span>
               <span className="text-[13.5px] text-dusk-60">
@@ -93,7 +93,7 @@ export async function Membership() {
               </span>
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-6">
+            <div className="mt-7 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6 md:mt-8">
               <Link
                 href={`/${locale}/medlemskap?tier=voting`}
                 className="inline-flex min-h-11 items-center rounded-full bg-gold px-5 text-[14px] font-semibold text-dusk hover:bg-gold-deep hover:text-paper transition-colors"
@@ -110,11 +110,11 @@ export async function Membership() {
           </div>
 
           {/* Right column — the notice card */}
-          <aside className="rounded-lg bg-[#1C2E3A] p-[1.3rem]">
+          <aside className="rounded-lg bg-[#1C2E3A] p-5 md:p-[1.3rem]">
             <p className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-gold-deep">
               {t('venueLabel')}
             </p>
-            <p className="mt-2 font-serif text-[34px] leading-[1.05] text-paper tabular-nums">
+            <p className="mt-2 font-serif text-[24px] leading-[1.05] text-paper tabular-nums md:text-[34px]">
               {dayMonth}
               <br />
               {year}
@@ -139,7 +139,7 @@ export async function Membership() {
                     ariaLabel={ariaLabel}
                   />
                 </div>
-                <p className="mt-[30px] text-[12px] leading-[1.5] text-dusk-60">
+                <p className="mt-5 text-[12px] leading-[1.5] text-dusk-60 md:mt-[30px]">
                   <span className="text-paper tabular-nums">{nStr}</span>{' '}
                   {t('captionAfterN', { total: totalStr })}
                 </p>

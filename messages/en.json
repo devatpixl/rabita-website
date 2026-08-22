@@ -513,7 +513,9 @@
         "label": "The lower hall",
         "caption": "Opens when the main room fills, which on a Friday is most weeks.",
         "alt": "The lower prayer hall, seen from its entrance"
-      }
+      },
+      "prev": "Previous room",
+      "next": "Next room"
     }
   },
   "communityGallery": {
@@ -1684,6 +1686,7 @@
     }
   },
   "projectOverview": {
+    "briefShort": "One building doing the work of five, with its ground floor open to the street.",
     "cta": "See the mosque project",
     "figures": {
       "area": "Floor area",

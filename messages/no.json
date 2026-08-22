@@ -513,7 +513,9 @@
         "label": "Underetasjen",
         "caption": "Åpner når hovedrommet fylles, som på en fredag er de fleste uker.",
         "alt": "Bønnesalen i underetasjen, sett fra inngangen"
-      }
+      },
+      "prev": "Forrige rom",
+      "next": "Neste rom"
     }
   },
   "communityGallery": {
@@ -1684,6 +1686,7 @@
     }
   },
   "projectOverview": {
+    "briefShort": "Ett bygg som gjør jobben til fem, med første etasje åpen mot gata.",
     "cta": "Se mosképrosjektet",
     "figures": {
       "area": "Bruksareal",

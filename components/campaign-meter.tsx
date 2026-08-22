@@ -84,12 +84,12 @@ export async function CampaignMeter() {
           </div>
 
           {/* Qualifiers sit as a small table so the numbers line up under each other. */}
-          <dl className="grid gap-x-10 gap-y-6 sm:grid-cols-2 sm:gap-y-4 md:text-end">
+          <dl className="grid gap-x-10 gap-y-4 sm:grid-cols-2 sm:gap-y-4 md:text-end">
             <div>
               <dt className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
                 {t('goalLabel')}
               </dt>
-              <dd className="mt-1 font-serif text-[1.5rem] leading-none tabular-nums text-ink md:whitespace-nowrap">
+              <dd className="mt-1 font-serif text-[1.15rem] leading-none tabular-nums text-ink md:whitespace-nowrap md:text-[1.5rem]">
                 {formatAmount(locale, goal)} kr
               </dd>
             </div>
@@ -97,7 +97,7 @@ export async function CampaignMeter() {
               <dt className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
                 {tPhase(active)} · {PHASES.find((p) => p.key === active)?.year}
               </dt>
-              <dd className="mt-1 font-serif text-[1.5rem] leading-none tabular-nums text-gold-deep md:whitespace-nowrap">
+              <dd className="mt-1 font-serif text-[1.15rem] leading-none tabular-nums text-gold-deep md:whitespace-nowrap md:text-[1.5rem]">
                 {t('lastMonth', { amount: formatAmount(locale, CAMPAIGN.lastMonthNok) })}
               </dd>
             </div>
@@ -126,7 +126,11 @@ export async function CampaignMeter() {
             />
           </div>
 
-          <aside className="flex flex-col rounded-2xl bg-paper p-7 md:col-span-5 md:p-8">
+          {/* Desktop only. On a phone this card followed the main total with
+             a second total, a second bar, a second percentage and a second
+             ask, and the reader had already been given all of that above. The
+             page keeps one number on a phone. */}
+          <aside className="hidden flex-col rounded-2xl bg-paper p-7 md:col-span-5 md:flex md:p-8">
             <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-gold-deep">
               {t('sub.label')} · {SUB_CAMPAIGN.name}
             </p>

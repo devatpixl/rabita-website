@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Accent } from './accent';
-import { cn } from '@/lib/cn';
 
 // §4.02 — zoom parallax after the hero, before Four chapters.
 //
@@ -138,7 +137,9 @@ export function ZoomParallax() {
     return () => mq.removeEventListener('change', onChange);
   }, []);
 
-  const skipAnim = reducedMotion === true || isNarrow;
+  // Reduced motion still gets the still frame. A narrow viewport no longer
+  // does: it gets the narrow composition above instead.
+  const skipAnim = reducedMotion === true;
 
   const { scrollYProgress } = useScroll({
     target: container,
@@ -155,12 +156,42 @@ export function ZoomParallax() {
 
   // Scale ramps per the reference (scale4 for centre, higher for the
   // outer tiles so they punch through faster).
+  // Tile geometry, per orientation. It used to live in a stack of
+  // `[&>div]:!-top-[30vh]` overrides, which cannot express two compositions.
+  //
+  // The wide set is built for 16:9. On a 390x760 phone it bunches: tiles laid
+  // out along the horizontal axis have no room, and seven of them scaling to
+  // 9x is a lot of compositing for a phone. The narrow set is a cross —
+  // centre, above, below, one either side — and stops at five tiles.
+  //
+  // The centre tile needs no special case: 25vw x 25vh is 97 x 190 on that
+  // screen, and at scale 4 that is 390 x 760. It fills the phone exactly.
   const scale4 = useTransform(progress, [0, 1], [1, 4]);
   const scale5 = useTransform(progress, [0, 1], [1, 5]);
   const scale6 = useTransform(progress, [0, 1], [1, 6]);
   const scale8 = useTransform(progress, [0, 1], [1, 8]);
   const scale9 = useTransform(progress, [0, 1], [1, 9]);
-  const scales = [scale4, scale5, scale6, scale5, scale6, scale8, scale9];
+  const scalesWide = [scale4, scale5, scale6, scale5, scale6, scale8, scale9];
+  const scalesNarrow = [scale4, scale5, scale6, scale6, scale5];
+  const scales = isNarrow ? scalesNarrow : scalesWide;
+
+  const TILES_WIDE = [
+    { top: '0', left: '0', h: '25vh', w: '25vw' },
+    { top: '-30vh', left: '5vw', h: '30vh', w: '35vw' },
+    { top: '-10vh', left: '-25vw', h: '45vh', w: '20vw' },
+    { top: '0', left: '27.5vw', h: '25vh', w: '25vw' },
+    { top: '27.5vh', left: '5vw', h: '25vh', w: '20vw' },
+    { top: '27.5vh', left: '-22.5vw', h: '25vh', w: '30vw' },
+    { top: '22.5vh', left: '25vw', h: '15vh', w: '15vw' },
+  ];
+  const TILES_NARROW = [
+    { top: '0', left: '0', h: '25vh', w: '25vw' },
+    { top: '-30vh', left: '0', h: '20vh', w: '44vw' },
+    { top: '-6vh', left: '-33vw', h: '24vh', w: '26vw' },
+    { top: '-6vh', left: '33vw', h: '24vh', w: '26vw' },
+    { top: '30vh', left: '0', h: '20vh', w: '40vw' },
+  ];
+  const tiles = isNarrow ? TILES_NARROW : TILES_WIDE;
 
   // Payoff: dusk overlay finishes fading in BEFORE the statement
   // starts. Overlay ramps 0 → 0.90 across [0.44, 0.72] so by the time
@@ -266,28 +297,27 @@ export function ZoomParallax() {
       ref={container}
       aria-label={sectionLabel}
       className="relative bg-dusk"
-      style={{ height: '200vh' }}
+      style={{ height: '200svh' }}
     >
-      <div className="sticky top-0 h-screen overflow-hidden">
-        {IMAGES.map((img, i) => {
+      <div className="sticky top-0 h-[100svh] overflow-hidden">
+        {IMAGES.slice(0, tiles.length).map((img, i) => {
           const scale = scales[i];
+          const tile = tiles[i];
           return (
             <motion.div
               key={i}
               style={{ scale, opacity: i === 0 ? centreOpacity : sideOpacity, willChange: 'transform, opacity' }}
-              className={cn(
-                'absolute top-0 flex h-full w-full items-center justify-center',
-                i === 1 && '[&>div]:!-top-[30vh] [&>div]:!left-[5vw] [&>div]:!h-[30vh] [&>div]:!w-[35vw]',
-                i === 2 && '[&>div]:!-top-[10vh] [&>div]:!-left-[25vw] [&>div]:!h-[45vh] [&>div]:!w-[20vw]',
-                i === 3 && '[&>div]:!left-[27.5vw] [&>div]:!h-[25vh] [&>div]:!w-[25vw]',
-                i === 4 && '[&>div]:!top-[27.5vh] [&>div]:!left-[5vw] [&>div]:!h-[25vh] [&>div]:!w-[20vw]',
-                i === 5 && '[&>div]:!top-[27.5vh] [&>div]:!-left-[22.5vw] [&>div]:!h-[25vh] [&>div]:!w-[30vw]',
-                i === 6 && '[&>div]:!top-[22.5vh] [&>div]:!left-[25vw] [&>div]:!h-[15vh] [&>div]:!w-[15vw]',
-              )}
+              className="absolute top-0 flex h-full w-full items-center justify-center"
             >
               <div
-                className="relative h-[25vh] w-[25vw] overflow-hidden"
-                style={{ borderRadius: TILE_RADIUS }}
+                className="relative overflow-hidden"
+                style={{
+                  top: tile.top,
+                  left: tile.left,
+                  height: tile.h,
+                  width: tile.w,
+                  borderRadius: TILE_RADIUS,
+                }}
               >
                 <Image
                   src={img.src}

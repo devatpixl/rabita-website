@@ -66,7 +66,16 @@ export async function ProjectOverview() {
               })}
             </h2>
 
-            <p className="mt-6 max-w-prose text-body text-paper/75">
+            {/* Two lengths. The full brief is a four line paragraph on a
+               phone and the three figures under it already carry the plot
+               size, so the short one says the part the figures cannot: what
+               the building replaces and what it does at street level. The
+               long version is unchanged on desktop, and on the mosque project
+               page, which shares the same string. */}
+            <p className="mt-5 max-w-prose text-body text-paper/75 md:hidden">
+              {t('briefShort')}
+            </p>
+            <p className="mt-6 hidden max-w-prose text-body text-paper/75 md:block">
               {tp('pages.building.brief')}
             </p>
 
