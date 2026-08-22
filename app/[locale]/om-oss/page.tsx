@@ -27,11 +27,20 @@ export default async function AboutPage({
       <Section tone="paper">
         <SectionBody>
           <div className="grid gap-10 md:grid-cols-12">
-            <div className="md:col-span-4 space-y-3">
-              <Stat value={String(CAMPAIGN.foundedYear)} label={t('facts.founded')} />
-              <Stat value={CAMPAIGN.members.toLocaleString('nb-NO')} label={t('facts.members')} />
-              <Stat value={`${CAMPAIGN.nationalities}+`} label={t('facts.nationalities')} />
-            </div>
+            {/* A ruled register, not three numbers 12px apart. Each entry is
+               divided off, which gives the column structure and gives the
+               numerals the room they need. */}
+            <dl className="md:col-span-4">
+              {([
+                [String(CAMPAIGN.foundedYear), t('facts.founded')],
+                [CAMPAIGN.members.toLocaleString('nb-NO'), t('facts.members')],
+                [`${CAMPAIGN.nationalities}+`, t('facts.nationalities')],
+              ] as const).map(([value, label]) => (
+                <div key={label} className="border-t border-rule py-5 first:pt-0 last:border-b last:border-rule">
+                  <Stat value={value} label={label} />
+                </div>
+              ))}
+            </dl>
             <div className="md:col-span-8 space-y-6 max-w-prose text-body text-ink">
               <p>{t('history.p1')}</p>
               <p>{t('history.p2')}</p>

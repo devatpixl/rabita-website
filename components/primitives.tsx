@@ -101,10 +101,13 @@ export function Stat({
 }) {
   return (
     <div className={cn('flex flex-col gap-2', align === 'center' && 'items-center text-center')}>
-      <span className="font-serif text-display leading-none text-ink tabular-nums">
+      {/* leading-[1.2], not leading-none. At opsz 144 the ink of a 72px
+         numeral is 89px tall, so a 72px line box left the ascenders hanging
+         9px above it and into whatever sat above. */}
+      <span className="font-serif text-display leading-[1.2] text-ink tabular-nums">
         {value}
       </span>
-      <span className="text-[13px] text-ink-60">
+      <span className="text-[13px] uppercase tracking-[0.1em] text-ink-60">
         {label}
       </span>
     </div>
