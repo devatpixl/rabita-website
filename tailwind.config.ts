@@ -61,7 +61,12 @@ const config: Config = {
         display: ['clamp(2rem, 6vw, 4.5rem)', { lineHeight: '1.04', letterSpacing: '-0.02em' }],
         section: ['clamp(1.65rem, 4vw, 2.75rem)', { lineHeight: '1.12' }],
         card: ['1.25rem', { lineHeight: '1.35' }],
-        body: ['1rem', { lineHeight: '1.6' }],
+        // Fluid, not a flat 16px. innocents.no runs a 17px base with ledes
+        // reaching 19px; this sat at 16px on a 27 inch monitor and a phone
+        // alike, which is why the prose read small next to the display type.
+        // 16px on a phone (unchanged, so nothing verified there moves),
+        // about 17px on a tablet, 18px from roughly 1280 up.
+        body: ['clamp(1rem, 0.95rem + 0.22vw, 1.125rem)', { lineHeight: '1.6' }],
         label: ['0.8125rem', { lineHeight: '1.2', letterSpacing: '0.08em' }],
       },
       // Section rhythm. Two sections meeting stack their padding, so a 10rem opener meant 320px of empty page.

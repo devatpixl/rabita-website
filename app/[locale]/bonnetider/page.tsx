@@ -41,7 +41,7 @@ export default async function BonnetiderPage({
          only show arches at this height. */}
       <div className="hidden md:block">
         <SectionBody>
-          <div className="relative mt-6 aspect-[6/1] w-full overflow-hidden rounded-3xl bg-paper-2">
+          <div className="relative mt-6 aspect-[6/1] max-h-[18vh] w-full overflow-hidden rounded-3xl bg-paper-2">
             <Image
               src="/photos/prayer-congregation.webp"
               alt={tp('pages.times.eyebrow')}
