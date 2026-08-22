@@ -202,7 +202,15 @@ export async function Hero() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-[var(--hero-min-sm)] w-full max-w-[84rem] flex-col justify-end px-6 pt-8 pb-10 md:min-h-[var(--hero-min)] md:justify-center md:px-10 md:pt-10 md:pb-12 lg:px-12">
+      {/* 92rem here, against 84rem for the header and the sections. The hero
+         is the one full bleed block on the site, so it can sit on a wider
+         measure, and that is what moves the whole text column left: about
+         64px at 1512 and above. It is the right edge that matters, since that
+         is the end that was reaching the man's face. The cost is that the
+         headline no longer starts exactly under the wordmark; a hero running
+         wider than the grid beneath it is a normal editorial device, but it
+         is a deliberate break rather than an accident. */}
+      <div className="relative z-10 mx-auto flex min-h-[var(--hero-min-sm)] w-full max-w-[92rem] flex-col justify-end px-6 pt-8 pb-10 md:min-h-[var(--hero-min)] md:justify-center md:px-10 md:pt-10 md:pb-12 lg:px-12">
         <div className="grid w-full items-center gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:gap-20">
           <div>
             <h1

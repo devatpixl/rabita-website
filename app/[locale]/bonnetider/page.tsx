@@ -36,21 +36,20 @@ export default async function BonnetiderPage({
          exists to answer one question and the six times have to stay on the
          first screen.
 
-         The picture is a row of people praying under the bridge in Oslo,
-         which is the honest argument for the building: it shows what the
-         congregation does now and what the seven floors are for. An empty
-         architectural render showed neither. */}
+         The crop sits on the front rows of the congregation, which is what
+         makes the subject legible in a 184px slice: an interior shot would
+         only show arches at this height. */}
       <div className="hidden md:block">
         <SectionBody>
           <div className="relative mt-6 aspect-[6/1] w-full overflow-hidden rounded-3xl bg-paper-2">
             <Image
-              src="/photos/prayer-underpass.webp"
+              src="/photos/prayer-congregation.webp"
               alt={tp('pages.times.eyebrow')}
               fill
               priority
-              sizes="(min-width: 1024px) 84vw, 92vw"
+              sizes="100vw"
               className="object-cover"
-              style={{ objectPosition: '50% 62%', filter: GRADE }}
+              style={{ objectPosition: '50% 86%', filter: GRADE }}
             />
           </div>
         </SectionBody>
