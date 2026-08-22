@@ -237,11 +237,11 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-1 block text-[13px] font-semibold text-ink">
+      {/* Quiet label, same as every other form on the site. Bold ink at 13px
+         outweighed the field it names. */}
+      <label htmlFor={id} className="mb-1.5 block text-[13px] text-ink-60">
         {label}
-        {hint && (
-          <span className="ms-2 font-normal text-ink-60">({hint})</span>
-        )}
+        {hint && <span className="ms-2">({hint})</span>}
       </label>
       {children}
     </div>
