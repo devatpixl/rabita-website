@@ -5,7 +5,7 @@ import { Section, SectionBody, SectionHeading } from '@/components/primitives';
 import { RequestForm, type RequestSubject } from '@/components/request-form';
 import { ServiceHero, ServiceVisit } from '@/components/service-page';
 
-const VALID = ['nikah', 'janaza', 'shahada', 'counselling', 'hajj-umrah'] as const;
+const VALID = ['nikah', 'janaza', 'shahada', 'counselling', 'hajj-umrah', 'megling', 'barn-og-ungdom', 'skole', 'koran', 'kurs', 'veivisere'] as const;
 
 // One render per subject, so the five pages are not the same picture five times
 const SUBJECT_IMAGE: Record<(typeof VALID)[number], string> = {
@@ -14,6 +14,12 @@ const SUBJECT_IMAGE: Record<(typeof VALID)[number], string> = {
   shahada: '/photos/subj-shahada.webp',
   counselling: '/photos/subj-counselling.webp',
   'hajj-umrah': '/photos/subj-hajj.webp',
+  megling: '/photos/svc-counsel.webp',
+  'barn-og-ungdom': '/photos/community/bazaar-child.webp',
+  skole: '/photos/learn-school.webp',
+  koran: '/photos/community/quran-carpet.webp',
+  kurs: '/photos/event-lecture-hall.webp',
+  veivisere: '/photos/event-school-visit.webp',
 };
 type Subject = (typeof VALID)[number];
 

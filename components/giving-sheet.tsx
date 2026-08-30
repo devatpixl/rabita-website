@@ -35,13 +35,16 @@ export const GIVE_COMPLETE_EVENT = 'rabita:give-complete';
 // This is also the shape the real Vipps flow needs: Vipps leaves the
 // browser for the app and comes back via a redirect, so "return here" has
 // to be a URL rather than in-page state that an app switch would destroy.
-export function openGiveSheet(amount?: number, returnTo?: string) {
+export type GivePurpose = 'general' | 'building';
+
+export function openGiveSheet(amount?: number, returnTo?: string, purpose?: GivePurpose) {
   if (typeof window !== 'undefined') {
     window.dispatchEvent(
       new CustomEvent(OPEN_GIVE_SHEET_EVENT, {
         detail: {
           amount: typeof amount === 'number' ? amount : undefined,
           returnTo,
+          purpose,
         },
       }),
     );
@@ -56,6 +59,8 @@ export function GivingSheet() {
   const [submitting, setSubmitting] = useState(false);
   const [initialAmount, setInitialAmount] = useState<number | undefined>();
   const returnToRef = useRef<string | undefined>(undefined);
+  const purposeRef = useRef<GivePurpose>('general');
+  const [purpose, setPurpose] = useState<GivePurpose>('general');
 
   const open = useCallback(() => {
     const el = dialogRef.current;
@@ -72,9 +77,11 @@ export function GivingSheet() {
   // this and passes the optional pre-fill amount through to the card.
   useEffect(() => {
     const handler = (e: Event) => {
-      const detail = (e as CustomEvent<{ amount?: number; returnTo?: string }>).detail;
+      const detail = (e as CustomEvent<{ amount?: number; returnTo?: string; purpose?: GivePurpose }>).detail;
       setInitialAmount(detail?.amount);
       returnToRef.current = detail?.returnTo;
+      purposeRef.current = detail?.purpose ?? 'general';
+      setPurpose(purposeRef.current);
       open();
     };
     window.addEventListener(OPEN_GIVE_SHEET_EVENT, handler as EventListener);
@@ -101,6 +108,7 @@ export function GivingSheet() {
     amount: number;
     frequency: Frequency;
     isZakat: boolean;
+    isAnonymous: boolean;
   }) => {
     if (submitting) return;
     setSubmitting(true);
@@ -108,7 +116,7 @@ export function GivingSheet() {
       await fetch('/api/donations', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ ...payload, purpose: purposeRef.current }),
       });
       close();
       const back = returnToRef.current;
@@ -136,7 +144,7 @@ export function GivingSheet() {
     >
       <div className="border-b border-rule bg-paper px-6 py-4 flex items-center justify-between">
         <h2 id="giving-sheet-title" className="text-card font-serif">
-          {t('sheetTitle')}
+          {purpose === 'building' ? t('sheetTitleBuilding') : t('sheetTitle')}
         </h2>
         <button
           type="button"

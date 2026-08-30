@@ -7,7 +7,7 @@
     "eyebrow": "Calmeyers gate 8, Oslo",
     "credLine": "STIFTET 1987 · OSLOS FØRSTE MOSKÉ PÅ TVERS AV NASJONALITETER",
     "headline": "Tomten er klar. Nå reiser vi bygget.",
-    "headlineBefore": "En moské. En skole. Et bibliotek. Et kjøkken. ",
+    "headlineBefore": "Moské, skole, bibliotek. ",
     "headlineAccent": "Én adresse.",
     "headlineAfter": "",
     "subhead": "Oslos moské på tvers av nasjonaliteter siden 1987. Gaven din reiser sju etasjer i Calmeyers gate 8: bønnerom for bønnerom, pult for pult, hylle for hylle.",
@@ -69,27 +69,38 @@
           "href": "/moskeprosjektet"
         },
         {
-          "label": "Hvor pengene går",
-          "blurb": "Regnskap, revisjon og skattefradrag",
-          "href": "/hvor-pengene-gar"
-        },
-        {
-          "label": "Giverne",
-          "blurb": "Navnene på grunnmuren",
-          "href": "/givere"
+          "label": "Leiligheter",
+          "blurb": "Femten leiligheter for salg i det nye bygget",
+          "href": "/moskeprosjektet/leiligheter"
         },
         {
           "label": "Doner en bønneplass",
           "blurb": "Sadaqa jariya i et navn",
           "href": "/doner-en-bonneplass"
-        },
-        {
-          "label": "Gi en gave",
-          "blurb": "Vipps, kort eller bank",
-          "href": "/gi-en-gave"
         }
       ],
-      "prayer": [],
+      "prayer": [
+        {
+          "label": "Bønnetider",
+          "blurb": "Dagens tider, oppdatert fra IRN",
+          "href": "/bonnetider"
+        },
+        {
+          "label": "Fredagsbønn",
+          "blurb": "14:00 og 15:00, hver fredag",
+          "href": "/bonnetider#fredagsbonn"
+        },
+        {
+          "label": "Imamene",
+          "blurb": "Teologisk leder og to imamer",
+          "href": "/bonnetider#imamene"
+        },
+        {
+          "label": "Kalender",
+          "blurb": "Hele måneden, klar til utskrift",
+          "href": "/bonnetider/kalender"
+        }
+      ],
       "services": [
         {
           "label": "Nikah: ekteskapsseremoni",
@@ -171,9 +182,11 @@
   "giving": {
     "freqMonthly": "Månedlig",
     "freqOnce": "Én gang",
-    "customLabel": "Annet",
+    "customLabel": "Annet beløp",
     "customPlaceholder": "F.eks. 750",
     "zakatLabel": "Dette er zakat",
+    "anonymousLabel": "Gi anonymt",
+    "paymentLogosAria": "Betalingsmåter",
     "primaryMonthly": "Gi <amount></amount> kr/mnd med Vipps",
     "primaryOnce": "Gi <amount></amount> kr med Vipps",
     "secondary": "Kort, AvtaleGiro eller bank",
@@ -198,7 +211,6 @@
       "stepAmount": "BELØP",
       "stepPayment": "BETALING",
       "stepDetails": "DINE OPPLYSNINGER",
-      "providerFillsDetails": "Vipps fyller inn navn og e-post for deg, så siste steg tas i appen.",
       "stepLabel": "STEG {n} AV {total} · {label}",
       "stepAnnounce": "Steg {n} av {total}: {label}",
       "step2Title": "Hvordan vil du betale?",
@@ -206,20 +218,19 @@
       "recommended": "Anbefalt",
       "methods": {
         "vipps": {
-          "name": "Vipps",
-          "detail": "Raskest. Logger deg inn og henter opplysningene dine fra appen."
+          "name": "Vipps"
+        },
+        "applepay": {
+          "name": "Apple Pay"
+        },
+        "googlepay": {
+          "name": "Google Pay"
         },
         "card": {
-          "name": "Kort",
-          "detail": "Visa eller Mastercard, engangs eller månedlig."
+          "name": "Kort"
         },
         "avtalegiro": {
-          "name": "AvtaleGiro",
-          "detail": "Fast trekk fra norsk bankkonto."
-        },
-        "bank": {
-          "name": "Bankoverføring",
-          "detail": "Tradisjonell overføring med KID-nummer."
+          "name": "AvtaleGiro"
         }
       },
       "fields": {
@@ -228,22 +239,31 @@
         "email": "E-post",
         "mobile": "Mobilnummer",
         "fnr": "Fødselsnummer",
-        "fnrHint": "Kun for skattefradrag, rapporteres til Skatteetaten. Ikke påkrevd for å gi.",
-        "fnrDisabled": "Dette feltet aktiveres når betalingsintegrasjonen er på plass. Skjult inntil da.",
         "consent": "Jeg har lest og godtar personvernerklæringen.",
-        "optional": "valgfritt"
+        "optional": "valgfritt",
+        "taxDeduction": "Skattefradrag",
+        "fnrPlaceholder": "11 siffer eller fødselsnummer",
+        "fnrNote": "Rapporteres til Skatteetaten."
       },
       "errors": {
         "required": "Påkrevd",
         "email": "Skriv en gyldig e-postadresse",
         "mobile": "Skriv et gyldig mobilnummer",
-        "fnr": "Fødselsnummer må være 11 sifre",
+        "fnr": "Må være 11 sifre",
         "consent": "Du må godta for å fortsette"
       },
       "give": "Gi <amount></amount> kr",
       "giveMonthly": "Gi <amount></amount> kr/mnd",
-      "todoSubmit": "Betalingsintegrasjonen er ikke koblet på ennå. Knappen på siste steg er en plassholder."
-    }
+      "todoSubmit": "Betalingsintegrasjonen er ikke koblet på ennå. Knappen på siste steg er en plassholder.",
+      "switchMethod": "Bytt betalingsmåte",
+      "monthlyOnly": "Kun månedlig",
+      "giveWith": "Gi <amount></amount> kr med {method}",
+      "giveWithMonthly": "Gi <amount></amount> kr/mnd med {method}"
+    },
+    "perMonth": "/mnd",
+    "ledeMonthly": "Som fast giver gir du forutsigbar støtte og lavere administrasjonskostnader.",
+    "ledeOnce": "Ett bidrag, hvilket som helst beløp.",
+    "sheetTitleBuilding": "Gi til bygget"
   },
   "meter": {
     "lattice": "Hvert merke er 1 000 000 kr",
@@ -267,7 +287,18 @@
       "body": "Fundamentet støpes i år. Dette er delmålet vi jobber mot nå."
     },
     "latticeCount": "{lit} av 100",
-    "goalLabel": "Mål"
+    "goalLabel": "Mål",
+    "lastMonthLabel": "siste måned",
+    "subLabel": "Delmål {year} · {name}",
+    "subValue": "{raised} av {goal} kr",
+    "remaining": "{amount} kr gjenstår",
+    "roadmap": "Veien til 2028",
+    "now": "Nå",
+    "phaseNotes": {
+      "fundament": "Tomten er ryddet. Fundamentet støpes og råbygget reiser seg.",
+      "interior": "Fasade, bønnesaler, skole og bibliotek innredes.",
+      "ferdigstillelse": "Bygget åpner. Sju etasjer på én adresse."
+    }
   },
   "trust": {
     "taxDeductible": "Skattefradrag opp til 25 000 kr/år",
@@ -312,29 +343,28 @@
     "kickerCta": "Bidra på nivået"
   },
   "impactStory": {
-    "eyebrow": "Fire kapitler",
-    "heading": "Rabita har vært her <em>siden 1987</em>.",
-    "lede": "Fire tusen medlemmer fra førti nasjonaliteter. En skole med 400 elever og 19 lærere. Et bibliotek, en ungdomsklubb, og de du ringer når noen skal gifte seg eller gravlegges. Bygget vi reiser gir plass til alt dette.",
+    "eyebrow": "Om Rabita",
+    "heading": "Dette er <em>Rabita</em>.",
     "items": {
+      "history": {
+        "name": "Historie",
+        "title": "Grunnlagt i <em>{year}</em>.",
+        "body": "Den første moskeen i Oslo som ikke var knyttet til én nasjonalitet: et sted for muslimer i Norge, uavhengig av hvor de kom fra. Bygget vi reiser gir plass til alt dette."
+      },
       "family": {
-        "title": "Én familie. Sammen for det som er <em>rett</em>.",
-        "body": "Fire tusen medlemmer, førti nasjonaliteter, ett fellesskap. Vi står sammen, i bønn og i lære, i glede og i sorg, med hverandre og med naboene våre. Å høre til her, betyr å høre til noe større enn seg selv.",
-        "tag": "Fellesskap"
+        "name": "Fellesskap",
+        "title": "<em>{members}</em> medlemmer. Ett fellesskap.",
+        "body": "Fra mer enn {nationalities} nasjonaliteter. Vi står sammen, i bønn og i lære, i glede og i sorg, med hverandre og med naboene våre."
       },
       "learning": {
-        "title": "Foredrag, samtaler og <em>undervisning</em>.",
-        "body": "Kveldsforedrag om psykisk helse, Quran-klasser for barn, arabisk for begynnere, kalligrafi, filosofi. Nitten lærere, fire hundre elever, ventelister i alle klasser. Det som blir sagt her, blir husket.",
-        "tag": "Undervisning"
+        "name": "Undervisning",
+        "title": "Over <em>{pupils}</em> elever.",
+        "body": "Kveldsforedrag, Quran-klasser for barn, arabisk for begynnere, kalligrafi og filosofi. Ventelister i alle klasser."
       },
       "volunteer": {
-        "title": "Vi <em>stiller opp</em>, for hverandre og for byen.",
-        "body": "Frivillige i gule vester deler ut mat, koordinerer med bydelen, og står med naboer i medgang og motgang. Rabita er ikke bare et sted man kommer til. Det er et sted man kommer fra, for å hjelpe.",
-        "tag": "Frivillig"
-      },
-      "sadaqa": {
-        "title": "Sadaqa jariya, en gave som <em>varer</em>.",
-        "body": "Bønneteppet er kanskje det mest brukte objektet i moskeen. Hver plass i den nye salen kan gis i navnet til noen som ikke lenger er blant oss. Navnene blir stående så lenge bygget står.",
-        "tag": "Jariya"
+        "name": "Frivillighet",
+        "title": "<em>{volunteers}</em> frivillige, hele året.",
+        "body": "Rundt {visitors} besøkende i uken. Frivillige i gule vester deler ut mat, koordinerer med bydelen og står med naboer i medgang og motgang."
       }
     }
   },
@@ -410,7 +440,10 @@
         "headline": "Fundamentet vi støper i år.",
         "body": "Andre kjeller: lager for skolen og biblioteket, og de tekniske installasjonene som holder bygget varmt."
       }
-    }
+    },
+    "skip": "Hopp over",
+    "index": "Etasjer",
+    "jumpTo": "Gå til etasje {n}"
   },
   "giftLadder": {
     "eyebrow": "HVA GAVEN BYGGER",
@@ -557,7 +590,7 @@
     "crumb": "Moskeprosjektet",
     "assurance": {
       "heading": "Hva du kan holde oss til.",
-      "lede": "De samme fire løftene på hver side i denne delen.",
+      "lede": "Løfter er lette å gi. Disse fire kan du sjekke selv – i offentlige registre, ikke bare på denne siden.",
       "items": [
         {
           "title": "Godkjent for skattefradrag",
@@ -565,15 +598,21 @@
         },
         {
           "title": "Revidert regnskap",
-          "body": "Årsregnskapet revideres av statsautorisert revisor og er offentlig tilgjengelig."
+          "body": "Årsregnskapet revideres av statsautorisert revisor og er offentlig tilgjengelig.",
+          "href": "https://data.brreg.no/enhetsregisteret/oppslag/enheter/983228364",
+          "linkLabel": "Se i Brønnøysundregistrene"
         },
         {
           "title": "Offentlig byggetillatelse",
-          "body": "Godkjent av Plan- og bygningsetaten i Oslo. Tillatelsen er offentlig."
+          "body": "Godkjent av Plan- og bygningsetaten i Oslo. Tillatelsen er offentlig.",
+          "href": "https://innsyn.pbe.oslo.kommune.no/",
+          "linkLabel": "Søk i saksinnsyn hos Plan- og bygningsetaten"
         },
         {
           "title": "Én organisasjon siden 1987",
-          "body": "Det Islamske Forbundet, org.nr. 983 228 364, den første moskeen i Oslo uten én nasjonalitet."
+          "body": "Det Islamske Forbundet, org.nr. 983 228 364, den første moskeen i Oslo uten én nasjonalitet.",
+          "href": "https://data.brreg.no/enhetsregisteret/oppslag/enheter/983228364",
+          "linkLabel": "Slå opp org.nr. 983 228 364"
         }
       ]
     },
@@ -581,7 +620,7 @@
       "building": {
         "eyebrow": "Bygget",
         "title": "Sju etasjer på <em>én</em> adresse.",
-        "lede": "En moské, en skole, et bibliotek, et kjøkken og en sal, stablet på tomta i Calmeyers gate 8. To etasjer under gata, fem over.",
+        "lede": "En moské, en skole, et bibliotek, et kjøkken og en sal på én tomt i Calmeyers gate 8 – to etasjer under gata, fem over. Den gamle moskeen ble revet i 2025. Det som reiser seg er ett bygg som gjør jobben til fem, med første etasje åpen mot gata.",
         "primary": "Gi til bygget",
         "secondary": "Hvor pengene går",
         "briefLabel": "Kort sagt",
@@ -605,7 +644,8 @@
             "title": "Inngang og kafé",
             "body": "En første etasje åpen for hele byen, uten terskel mellom gata og bygget."
           }
-        ]
+        ],
+        "ledeShort": "Moské, skole, bibliotek, kjøkken og sal på én tomt i Calmeyers gate 8. Første etasje åpen mot gata."
       },
       "money": {
         "eyebrow": "Hvor pengene går",
@@ -790,8 +830,8 @@
       },
       "services": {
         "eyebrow": "Tjenester",
-        "title": "Nikah, janaza, shahada og samtaler.",
-        "lede": "Det en menighet faktisk trenger, håndtert av imamene og de ansatte. Noe kan avtales samme uke, noe krever varsel.",
+        "title": "Nikah, skole, veiledning og mer.",
+        "lede": "Religiøse tjenester, veiledning, undervisning og arbeid ut mot samfunnet. Alle henvendelser behandles diskret.",
         "note": "Spør i resepsjonen eller send en e-post",
         "regEyebrow": "Hva vi tilbyr",
         "regHeading": "Spør om hva som helst av dette.",
@@ -880,35 +920,41 @@
     "next": "Neste bilde",
     "goto": "Gå til bilde {n}",
     "slides": {
-      "daily": {
-        "title": "Daglig bønn",
-        "figureLabel": "ganger om dagen",
-        "sentence": "Bygget stenger aldri helt, fra første lys til isha."
+      "nikah": {
+        "title": "Nikah",
+        "sentence": "Islamsk vielse i moskeen eller der dere ønsker, med vitner og imam."
       },
-      "school": {
-        "title": "Helgeskolen",
-        "figureLabel": "elever · 19 lærere",
-        "sentence": "Norges største arabiskskole holder til her hver lørdag."
+      "janaza": {
+        "title": "Janaza",
+        "sentence": "Vasking, bønn og gravlegging, døgnet rundt. Ingen kostnad for medlemmer."
       },
-      "friday": {
-        "title": "Fredagsbønn",
-        "figureLabel": "plasser for kvinner",
-        "sentence": "Den gamle salen fylles lenge før khutbaen. Den nye er tegnet for dem som faktisk kommer. Plassene for menn går fra 500 til 2 000."
+      "shahada": {
+        "title": "Shahada",
+        "sentence": "For deg som vil ta shahada. Vi ordner vitner og følger opp etterpå."
       },
-      "iftar": {
-        "title": "Gateiftar",
-        "sentence": "I åtte netter i ramadan spiser hele kvartalet sammen, uansett hvem de er, uansett hva de tror på."
+      "counselling": {
+        "title": "Samtaler",
+        "sentence": "Konfidensielle samtaler med imam eller kvinnelig veileder, alene eller i par."
       },
-      "visits": {
-        "title": "Skole- og universitetsbesøk",
-        "figureLabel": "besøkende i året",
-        "sentence": "Hver skole, hvert universitet, alle er velkomne til å sette seg ned og snakke."
+      "hajj-umrah": {
+        "title": "Hajj og umra",
+        "sentence": "Forberedelse, informasjon og henvisning til erfarne reiseledere."
       },
-      "services": {
-        "title": "Begravelser og vielser",
-        "sentence": "Vi holder nikah, vi begraver de døde, vi sitter med folk i vanskelige uker."
+      "education": {
+        "title": "Undervisning",
+        "figureLabel": "elever hver helg",
+        "sentence": "Quran, arabisk og troslære for barn og voksne. Ventelister i alle klasser."
+      },
+      "mediation": {
+        "title": "Megling",
+        "sentence": "Hjelp til å løse konflikter i familie og nabolag, med tillit og diskresjon."
+      },
+      "youth": {
+        "title": "Barn og ungdom",
+        "sentence": "Ungdomsklubb, leir og faste aktiviteter. Trygge møteplasser for de yngste."
       }
-    }
+    },
+    "readMore": "Les mer"
   },
   "prayerVisit": {
     "addressLabel": "Adresse",
@@ -1067,7 +1113,46 @@
       "permit": "Byggetillatelse",
       "donors": "Givere",
       "about": "Om Rabita"
-    }
+    },
+    "findUs": {
+      "eyebrow": "Finn oss",
+      "heading": "Midt i Oslo, et par minutter fra Oslo S.",
+      "address": "Adresse",
+      "hours": "Åpent",
+      "phone": "Telefon",
+      "email": "E-post",
+      "directions": "Veibeskrivelse",
+      "visit": "Planlegg besøk",
+      "openMaps": "Åpne i Google Maps",
+      "estimate": "Gangvei · OSM",
+      "walk": "{min} min til fots",
+      "landmarks": {
+        "oslo-s": "Oslo S / Jernbanetorget",
+        "gronland": "Grønland T-bane",
+        "brugata": "Brugata trikk og buss"
+      }
+    },
+    "cols": {
+      "rabita": "Rabita",
+      "about": "Om oss",
+      "project": "Moskeprosjektet",
+      "donors": "Givere",
+      "join": "Bli medlem",
+      "volunteer": "Bli frivillig",
+      "contact": "Kontakt",
+      "services": "Tjenester",
+      "prayer": "Bønnetider",
+      "counselling": "Samtaler",
+      "education": "Undervisning",
+      "allServices": "Alle tjenester",
+      "follow": "Følg oss"
+    },
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "tiktok": "TikTok"
+    },
+    "credit": "Utviklet av"
   },
   "donorsPage": {
     "eyebrow": "Givere",
@@ -1085,7 +1170,10 @@
       "architect": "Arkitekt",
       "startConstruction": "Byggestart",
       "completion": "Ferdigstillelse",
-      "completionNote": "Endelig ferdigstillelsesdato oppdateres i takt med byggefasene."
+      "completionNote": "Endelig ferdigstillelsesdato oppdateres i takt med byggefasene.",
+      "completionTbd": "settes av byggefase",
+      "eyebrow": "Det nye bygget",
+      "title": "Større, høyere, og plass til <em>flere</em>."
     },
     "capacity": {
       "heading": "Kapasitet",
@@ -1112,7 +1200,81 @@
       "company": {
         "title": "Bedrift",
         "body": "Bedriftsbidrag er en samtale, ikke en checkout. Skriv til oss."
+      },
+      "eyebrow": "Støtt bygget",
+      "intro": "Fire måter å bidra på. Velg den som passer deg – alt går inn i samme byggeregnskap.",
+      "cta": "Gi",
+      "ctaCompany": "Skriv til oss",
+      "badge": "Mest effekt"
+    },
+    "gallery": {
+      "label": "Bilder av det nye bygget",
+      "prev": "Forrige bilde",
+      "next": "Neste bilde",
+      "goto": "Gå til bilde {n}",
+      "items": {
+        "aerial": {
+          "tag": "Ovenfra",
+          "title": "Takhagen over Calmeyers gate",
+          "caption": "Kvartalet sett ovenfra: takterrasse med beplantning, den lille minareten og det gule takoppbygget over trappen.",
+          "alt": "Bygget sett ovenfra, takhage og minaret"
+        },
+        "facadeDay": {
+          "tag": "Fasaden",
+          "title": "Mursteinsgitteret mot gata",
+          "caption": "Diamantmønsteret i tegl lar lyset inn i bønnesalene og gjør bygget gjenkjennelig fra begge ender av gata.",
+          "alt": "Fasaden i dagslys, gitter i tegl og glass"
+        },
+        "facadeNight": {
+          "tag": "Kveld",
+          "title": "Når lyset kommer innenfra",
+          "caption": "Om kvelden snus bildet: salene lyser ut gjennom gitteret, og gata får en lykt.",
+          "alt": "Fasaden om kvelden, opplyst innenfra"
+        },
+        "mainHall": {
+          "tag": "Hovedsalen",
+          "title": "Bønnerom over tre etasjer",
+          "caption": "Under lyskronen, med mihraben innerst. Plass til 2 000 menn når salen er full.",
+          "alt": "Hovedbønnesalen med lyskrone og mihrab"
+        },
+        "womensHall": {
+          "tag": "Kvinnesalen",
+          "title": "Egen sal, egen inngang",
+          "caption": "Plass til 500 kvinner, opp fra 100 i dag, med utsyn ned i hovedrommet.",
+          "alt": "Kvinnenes bønnesal, grønt teppe under en opplyst vegg"
+        },
+        "qibla": {
+          "tag": "Qibla-veggen",
+          "title": "Tre, gull og marmor",
+          "caption": "Utskjært tre og gull, opplyst gjennom marmoren bak. Veggen alle vender seg mot.",
+          "alt": "Qibla-veggen sett ovenfra"
+        },
+        "minaret": {
+          "tag": "Minareten",
+          "title": "Et tegn over takene",
+          "caption": "Lav og slank, tegnet for et boligkvartal i Oslo – et merke, ikke et tårn.",
+          "alt": "Minareten mot kveldshimmelen"
+        },
+        "garden": {
+          "tag": "Hagen",
+          "title": "Et grønt rom i byen",
+          "caption": "Takhagen gir skolen og ungdomsklubben et uterom midt i sentrum.",
+          "alt": "Takhagen med benker og beplantning"
+        },
+        "wudu": {
+          "tag": "Wudu",
+          "title": "Rommet før bønnen",
+          "caption": "Lyse vaskerom for kvinner og menn, rett ved inngangen til salene.",
+          "alt": "Wudu-rommet i lys stein"
+        }
       }
+    },
+    "giveBox": {
+      "eyebrow": "Til moskeprosjektet · øremerket",
+      "title": "Gi til bygget",
+      "note": "Går uavkortet til bygget i Calmeyers gate 8.",
+      "cta": "Gi {amount} kr",
+      "methods": "Vipps · Kort · AvtaleGiro"
     }
   },
   "givePage": {
@@ -1227,21 +1389,30 @@
       "counselling": "Kort om hva samtalen bør handle om.",
       "hajj-umrah": "Antall reisende, planlagt tid og evt. reisebyrå.",
       "visit": "Type gruppe, antall og alder på deltakerne.",
-      "contact": "Hva gjelder henvendelsen?"
+      "contact": "Hva gjelder henvendelsen?",
+      "megling": "Kort om hvem som er involvert og hva saken gjelder.",
+      "barn-og-ungdom": "Barnets alder og hvilke aktiviteter dere er interessert i.",
+      "apartments": "Når ønsker du å flytte inn, og er det noe mer vi bør vite?",
+      "skole": "Barnets alder og hvilket klassetrinn.",
+      "koran": "Alder, nivå og om det gjelder barn eller voksen.",
+      "kurs": "Hvilket kurs, og om du har erfaring fra før.",
+      "veivisere": "Skole eller organisasjon, klassetrinn og ønsket tid."
     },
     "submit": "Send",
     "privacy": "Vi svarer innen 3 virkedager. Se personvern for hvordan vi lagrer opplysningene.",
     "doneTitle": "Vi har mottatt henvendelsen.",
-    "doneBody": "Du hører fra oss innen 3 virkedager. Sjekk gjerne søppelpost."
+    "doneBody": "Du hører fra oss innen 3 virkedager. Sjekk gjerne søppelpost.",
+    "bedrooms": "Antall soverom",
+    "bedroomsUnit": "soverom"
   },
   "bonnetiderPage": {
     "eyebrow": "Bønnetider",
     "title": "Denne uken",
-    "lede": "Tidene her stemmer for Oslo og oppdateres daglig. Fredagsbønn kl. 13:30.",
+    "lede": "Tidene her stemmer for Oslo og oppdateres daglig. Fredagsbønn kl. 14:00 og 15:00.",
     "day": "Dag",
     "sunrise": "Soloppgang",
     "jumua": "Fredagsbønn",
-    "note": "Tidene er foreløpig statiske. Automatisk feed kobles til når kilde er valgt.",
+    "note": "Tidene hentes automatisk fra Islamsk Råd Norges felles bønnetider (bonnetid.no).",
     "days": {
       "mon": "Mandag",
       "tue": "Tirsdag",
@@ -1254,8 +1425,10 @@
     "todayHeading": "I dag",
     "jumuaNote": "Salen fylles før khutbaen.",
     "outOfRange": "Vi har ikke publiserte tider for denne datoen ennå. Ta kontakt med kontoret, eller se skjermen i moskeen.",
-    "sourceNote": "Tidene er Rabitas egne, for Oslo. Jama‘at-tider og nedlastbar kalender kommer når tidene synkroniseres med skjermen i moskeen.",
-    "scheduleHeading": "Bønnetider fremover"
+    "sourceNote": "Tidene hentes fra Islamsk Råd Norges felles bønnetider for Oslo. Jama‘at-tider og fredagsbønn er slik moskeen har registrert dem hos IRN.",
+    "scheduleHeading": "Bønnetider fremover",
+    "jamaah": "Jama‘ah",
+    "jumuaImams": "Khutba og bønn ledes av imamene"
   },
   "medlemskapPage": {
     "eyebrow": "Medlemskap",
@@ -1380,7 +1553,7 @@
   "servicesIndex": {
     "eyebrow": "Tjenester",
     "title": "Nikah, janaza, shahada og mer.",
-    "lede": "Vi tilbyr religiøse tjenester for medlemmer og andre som ønsker det. Alle henvendelser behandles diskret.",
+    "lede": "Religiøse tjenester, veiledning, undervisning og arbeid ut mot samfunnet. Alle henvendelser behandles diskret.",
     "more": "Les mer og send henvendelse",
     "detail": {
       "what": "Hva vi tilbyr",
@@ -1411,7 +1584,45 @@
         "title": "Hajj og umrah",
         "body": "Informasjon, forberedelse og henvisninger.",
         "longBody": "Rabita organiserer ikke selv reiser, men vi hjelper med forberedelse, informasjon og henvisninger til erfarne reisebyråer og imamer som følger grupper."
+      },
+      "megling": {
+        "title": "Megling",
+        "body": "Hjelp til å løse konflikter i familie, ekteskap og nabolag.",
+        "longBody": "Imamene våre megler i konflikter mellom ektefeller, i familier og mellom naboer. Samtalene er konfidensielle og bygger på tillit fra begge parter. Ta kontakt for å avtale et første møte."
+      },
+      "barn-og-ungdom": {
+        "title": "Barne- og ungdomsaktiviteter",
+        "body": "Ungdomsklubb, leir og aktiviteter for de yngste.",
+        "longBody": "Rabita driver ungdomsklubb, leirer og faste aktiviteter for barn og unge gjennom hele året, i samarbeid med Norges Unge Muslimer. Meld interesse, så tar vi kontakt om neste samling."
+      },
+      "skole": {
+        "title": "Rabita skole",
+        "body": "Lørdagsskole for barn og unge fra 6 til 16 år.",
+        "longBody": "Rabita skole er lørdagsskolen vår for barn og unge i alderen 6–16 år. I 2025 hadde skolen 225 elever fordelt på 13 klasser. Undervisningen omfatter arabisk språk, islamsk lære og Koran, og holdes i leide lokaler ved Hersleb skole. Alle faste lærere har pedagogisk kompetanse og arbeider til daglig i norske utdanningsinstitusjoner. Skolen markerer også religiøse høytider gjennom året."
+      },
+      "koran": {
+        "title": "Koran og arabisk",
+        "body": "Koranundervisning og arabisk for barn, unge og voksne.",
+        "longBody": "Koran og arabisk er kjernen i undervisningen ved Rabita skole, sammen med islamsk lære. For voksne holder imam Usman fredagskurset, et åpent undervisningstilbud i islamsk lære på norsk. Ta kontakt for å høre hvilke klasser som har ledige plasser."
+      },
+      "kurs": {
+        "title": "Kalligrafi og geometri",
+        "body": "Kurs i islamsk kalligrafi og geometrisk kunst.",
+        "longBody": "Rabita arrangerer kurs i islamsk kalligrafi ledet av Ustadh Khalid Casado, og kurs i islamsk geometri med Samira Mian, hvor deltakerne lærer å konstruere klassiske mønstre med passer og linjal. I 2025 kom det deltakere helt fra Tyskland, Spania og England. «Geometri og te» er en månedlig lavterskelsamling mellom kursene, for både tidligere og nye deltakere."
+      },
+      "veivisere": {
+        "title": "Muslimske veivisere",
+        "body": "Unge veivisere som besøker skoler og møter elever.",
+        "longBody": "Muslimske veivisere er et ung-til-ung-tiltak som skal forebygge fordommer og diskriminering mot norske muslimer. I 2025 besøkte veiviserne over 200 skoler og møtte mer enn 10 000 elever. Ordningen er utviklet av Rabita og Minotenk, og ble i 2024 innlemmet i regjeringens handlingsplan mot muslimfiendtlige holdninger. Skoler og organisasjoner kan be om et besøk."
       }
+    },
+    "allEyebrow": "Alle tjenester",
+    "allHeading": "Alt vi gjør, <em>samlet</em>.",
+    "groups": {
+      "religious": "Religiøse tjenester",
+      "guidance": "Veiledning",
+      "teaching": "Undervisning",
+      "community": "Barn, unge og samfunn"
     }
   },
   "aboutPage": {
@@ -1421,7 +1632,10 @@
     "facts": {
       "founded": "Grunnlagt",
       "members": "medlemmer",
-      "nationalities": "nasjonaliteter"
+      "pupils": "elever på skolen",
+      "nationalities": "nasjonaliteter",
+      "visits": "besøkende i uken",
+      "volunteers": "frivillige"
     },
     "history": {
       "p1": "Rabita ble stiftet i 1987 som den første moskeen i Oslo ikke tilknyttet én nasjonalitet. Det ideelle var enkelt: et sted for muslimer i Norge, uavhengig av hvor de kom fra.",
@@ -1658,7 +1872,9 @@
     "back": "Tilbake til bønnetider",
     "source": "Tidene er Rabitas egne, beregnet for Oslo.",
     "panelHeading": "Last ned kalender",
-    "panelBody": "Én måned per ark, med hijri-dato og fredagsbønn. Åpne måneden du vil ha og lagre den som PDF, eller skriv den ut."
+    "panelBody": "Én måned per ark, med hijri-dato og fredagsbønn. Åpne måneden du vil ha og lagre den som PDF, eller skriv den ut.",
+    "panelEyebrow": "Kalender",
+    "panelHeadingRich": "Hele måneden, <em>på ett ark</em>."
   },
   "cta": {
     "prayer": {
@@ -1690,9 +1906,11 @@
     "cta": "Se mosképrosjektet",
     "figures": {
       "area": "Bruksareal",
-      "floors": "Etasjer, over og under bakken",
-      "places": "Bønneplasser når bygget står"
-    }
+      "floors": "Etasjer opp / ned",
+      "places": "Bønneplasser",
+      "cleared": "Tomten ryddet"
+    },
+    "credit": "Arkitekt"
   },
   "joinPage": {
     "lede": "Medlemskap er slik du blir talt med hos Rabita. Det gir deg nyhetsbrevet og invitasjoner til det som skjer i bygget. Med stemmerett følger også en stemme på årsmøtet som velger styret.",
@@ -1711,7 +1929,7 @@
         "body": "Medlemskapet løper år for år, og du kan si det opp når som helst."
       }
     },
-    "members": "Fire tusen medlemmer står allerede oppført.",
+    "members": "Over 4 300 medlemmer står allerede oppført.",
     "explain": {
       "heading": "De tre medlemskapene.",
       "note": "Fødselsnummer kreves ikke for medlemskap. Personvernerklæringen gjelder."
@@ -1731,6 +1949,108 @@
         "name": "Under 15",
         "price": "0 kr",
         "body": "Godkjennes av foresatt. Aktiviteter tilpasset alderen."
+      }
+    }
+  },
+  "apartmentsPage": {
+    "eyebrow": "Leiligheter",
+    "title": "Femten leiligheter på <em>én</em> adresse.",
+    "lede": "Femten leiligheter for salg i de øverste etasjene i Calmeyers gate 8, ved takhagen og med byen rett utenfor døra. Salget er med på å finansiere bygget under.",
+    "ledeShort": "Femten leiligheter for salg i toppetasjene i Calmeyers gate 8, ved takhagen.",
+    "primary": "Meld interesse",
+    "secondary": "Se hele prosjektet",
+    "facts": {
+      "heading": "Nøkkeltall",
+      "count": "Leiligheter",
+      "address": "Adresse",
+      "floors": "Plassering",
+      "floorsValue": "Øverste etasjer",
+      "completion": "Innflytting",
+      "completionValue": "settes av byggefase",
+      "architect": "Arkitekt",
+      "walking": "Gangtid til",
+      "stations": {
+        "brugata": "Brugata trikk og buss",
+        "oslo-s": "Oslo S / Jernbanetorget",
+        "gronland": "Grønland T-bane"
+      }
+    },
+    "why": {
+      "eyebrow": "Hvorfor her",
+      "heading": "Bo over takhagen, midt i <em>Oslo</em>.",
+      "items": {
+        "garden": {
+          "title": "En hage <em>over</em> gatene.",
+          "body": "Leilighetene ligger i etasjene ved den beplantede takterrassen – et grønt uterom over gatene, tegnet inn i bygget fra starten.",
+          "tag": "Uterommet"
+        },
+        "city": {
+          "title": "Midt i <em>sentrum</em>.",
+          "body": "Calmeyers gate 8 ligger mellom Storgata og Akerselva. Trikk, T-bane og Oslo S er få minutter til fots.",
+          "tag": "Beliggenhet"
+        },
+        "building": {
+          "title": "Et bygg med en <em>historie</em>.",
+          "body": "Tegnet av Norconsult, med teglgitteret mot gata. Salget av leilighetene er en del av finansieringen av det nye bygget.",
+          "tag": "Bygget"
+        }
+      }
+    },
+    "interest": {
+      "eyebrow": "Salgsstart",
+      "heading": "Meld interesse, og få beskjed <em>først</em>.",
+      "body": "Vi tar imot interessemeldinger nå. Du forplikter deg ikke til noe – vi kontakter deg når det er nytt å fortelle.",
+      "note": "Priser, planløsninger og dato for salgsstart er ikke fastsatt ennå og publiseres her når de er klare.",
+      "formHeading": "Meld interesse"
+    }
+  },
+  "imams": {
+    "eyebrow": "Imamene",
+    "heading": "De som leder <em>bønnen</em>.",
+    "lede": "Én teologisk leder og to imamer. Du møter dem i fredagsbønnen, i undervisningen og i samtalen etterpå.",
+    "languages": "Språk",
+    "people": {
+      "amara": {
+        "role": "Teologisk leder",
+        "bio": "Utdannet ved sharia-fakultetet ved Universitetet i Beirut og i pedagogikk ved Høgskolen i Oslo. Lærer i Bærum kommune 2001–2008, og en mye brukt foredragsholder i moskeer i Norge og Europa."
+      },
+      "andreas": {
+        "role": "Imam",
+        "bio": "Holder kurset i islamsk lære på norsk og jevnlige foredrag for medlemmer og besøkende. Stemmen du hører i bønneropet på gateiftaren."
+      },
+      "aldiri": {
+        "role": "Imam og teolog",
+        "bio": "Ansatt som imam i 2025. Doktorgrad og høy faglig kompetanse innen islamsk lære, dialogarbeid, ungdomsarbeid og kommunikasjon."
+      }
+    }
+  },
+  "video": {
+    "play": "Spill av",
+    "imamWelcome": "En hilsen fra imamen",
+    "comingSoon": "Video kommer"
+  },
+  "prayerClock": {
+    "eyebrow": "Nå i Oslo",
+    "nowLabel": "Klokken",
+    "nextLabel": "Neste"
+  },
+  "followUs": {
+    "eyebrow": "Følg oss",
+    "title": "Huset er åpent — også <em>på nett</em>.",
+    "lede": "Bilder, kunngjøringer og korte klipp fra Calmeyers gate 8. Følg med der du allerede er.",
+    "action": "Følg",
+    "channels": {
+      "instagram": {
+        "handle": "@detislamskeforbundet",
+        "blurb": "Bilder fra huset, hver uke"
+      },
+      "facebook": {
+        "handle": "Det Islamske Forbundet",
+        "blurb": "Arrangementer og kunngjøringer"
+      },
+      "tiktok": {
+        "handle": "@oslomosque",
+        "blurb": "Korte klipp fra moskeen"
       }
     }
   }

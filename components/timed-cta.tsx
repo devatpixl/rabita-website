@@ -4,6 +4,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { GIVE_COMPLETE_EVENT, openGiveSheet } from './giving-sheet';
+import { VideoCard } from './video-card';
+import { IMAM_WELCOME, WELCOME_PLACEHOLDER } from '@/lib/media';
 import { cn } from '@/lib/cn';
 
 // A timed, page-specific ask, centred.
@@ -36,14 +38,27 @@ export function TimedCta({
   storageKey,
   delayMs = 6000,
   amountNok = 10,
+  showVideoInAsk = false,
 }: {
   /** Message namespace holding `eyebrow`, `quotes[]`, `give`, `dismiss`. */
   ns: string;
   storageKey: string;
   delayMs?: number;
   amountNok?: number;
+  /** Also show the imam's welcome on the ASK card, not only the thank-you.
+     Off by default: this popup interrupts someone checking a prayer time,
+     and a film is a heavier interruption than a hadith. */
+  showVideoInAsk?: boolean;
 }) {
   const t = useTranslations(ns);
+  const tVideo = useTranslations('video');
+  // Nothing has been filmed yet, so the card runs in placeholder mode: the
+  // frame, a still and the play button are all there so the slot can be seen
+  // and judged, but the button is inert and the corner reads "video coming".
+  // The day IMAM_WELCOME stops being null in lib/media.ts, both cards below
+  // become the real film with no edit here.
+  const film = IMAM_WELCOME ?? WELCOME_PLACEHOLDER;
+  const filmIsPlaceholder = IMAM_WELCOME === null;
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   // `t` is not guaranteed to be referentially stable across renders. If the
@@ -225,6 +240,15 @@ export function TimedCta({
               {t('thanksTitle')}
             </p>
             <p className="mx-auto mt-4 max-w-[34ch] text-body text-ink-60">{t('thanksBody')}</p>
+            {/* The imam's thank-you, once it has been filmed. Here rather
+               than on the ask: the visitor has already given, so a film is
+               a reward rather than an interruption. */}
+            <VideoCard
+              video={film}
+              label={tVideo('imamWelcome')}
+              placeholder={filmIsPlaceholder}
+              className="mt-7 text-start"
+            />
             <button
               type="button"
               onClick={() => close()}
@@ -251,6 +275,15 @@ export function TimedCta({
                 <span aria-hidden className="h-px w-8 bg-gold-deep/40" />
               </footer>
             </blockquote>
+
+            {showVideoInAsk && (
+              <VideoCard
+                video={film}
+                label={tVideo('imamWelcome')}
+                placeholder={filmIsPlaceholder}
+                className="mt-7 text-start"
+              />
+            )}
 
             <button
               type="button"

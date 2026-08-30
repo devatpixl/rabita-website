@@ -3,10 +3,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
-import { PRAYER_TIMES_TODAY } from '@/lib/campaign';
+import type { PrayerDay } from '@/lib/prayer-times';
 import type { AppLocale } from '@/i18n/routing';
 import { cn } from '@/lib/cn';
 import { PRAYER_PANEL_ID } from './prayer-panel-provider';
+import { joinJumuah, usePrayerData, usePrayerDay, usePrayerDayAfter } from './prayer-data-provider';
 
 // Shared panel body — mounted inside EITHER the utility strip (when
 // the strip is in the viewport) or the sticky nav header (when the
@@ -24,28 +25,32 @@ import { PRAYER_PANEL_ID } from './prayer-panel-provider';
 type PrayerKey = 'fajr' | 'sunrise' | 'dhuhr' | 'asr' | 'maghrib' | 'isha';
 const ORDER: PrayerKey[] = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'];
 
-function parseTimeToday(hhmm: string): Date {
+function parseTimeOn(base: Date, hhmm: string): Date {
   const [h, m] = hhmm.split(':').map(Number);
-  const d = new Date();
+  const d = new Date(base);
   d.setHours(h, m, 0, 0);
   return d;
 }
 
-function findNextAndPrev(now: Date): {
+function findNextAndPrev(
+  now: Date,
+  today: PrayerDay,
+  tomorrow: PrayerDay | null,
+): {
   nextKey: PrayerKey;
   nextAt: Date;
   prevAt: Date | null;
 } {
   let prevAt: Date | null = null;
   for (const key of ORDER) {
-    const at = parseTimeToday(PRAYER_TIMES_TODAY[key]);
+    const at = parseTimeOn(now, today[key]);
     if (at.getTime() > now.getTime()) {
       return { nextKey: key, nextAt: at, prevAt };
     }
     prevAt = at;
   }
   // Past isha → next is tomorrow's fajr; prev stays isha (today)
-  const tomorrowFajr = parseTimeToday(PRAYER_TIMES_TODAY.fajr);
+  const tomorrowFajr = parseTimeOn(now, tomorrow?.fajr ?? today.fajr);
   tomorrowFajr.setDate(tomorrowFajr.getDate() + 1);
   return { nextKey: 'fajr', nextAt: tomorrowFajr, prevAt };
 }
@@ -53,6 +58,7 @@ function findNextAndPrev(now: Date): {
 export function PrayerPanelBody() {
   const t = useTranslations('utility.prayer');
   const locale = useLocale() as AppLocale;
+  const { jumuah } = usePrayerData();
 
   const [now, setNow] = useState<Date | null>(null);
   const [visible, setVisible] = useState(false);
@@ -80,7 +86,12 @@ export function PrayerPanelBody() {
     regionRef.current?.focus();
   }, []);
 
-  const info = useMemo(() => (now ? findNextAndPrev(now) : null), [now]);
+  const today = usePrayerDay(now);
+  const tomorrow = usePrayerDayAfter(now);
+  const info = useMemo(
+    () => (now && today ? findNextAndPrev(now, today, tomorrow) : null),
+    [now, today, tomorrow],
+  );
 
   const elapsedPct = useMemo(() => {
     if (!now || !info || !info.prevAt) return 0;
@@ -133,7 +144,7 @@ export function PrayerPanelBody() {
                       : 'text-ink',
                   )}
                 >
-                  {PRAYER_TIMES_TODAY[key]}
+                  {today ? today[key] : '—'}
                 </dd>
               </div>
             );
@@ -159,7 +170,7 @@ export function PrayerPanelBody() {
         <div className="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
           <p className="text-[14px] text-ink-60">
             <span className="tabular-nums">
-              {t('names.jumua')} {PRAYER_TIMES_TODAY.jumua}
+              {t('names.jumua')} {joinJumuah(jumuah)}
             </span>
             <span> · Calmeyers gate 8</span>
           </p>

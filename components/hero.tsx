@@ -28,6 +28,12 @@ import { Accent } from './accent';
 export const HERO_ART = {
   objectPosition: '32% 42%',
   scale: 1.45,
+  // Phones get no extra magnification. The mobile source is already a 4:5
+  // crop, and the hero column is roughly 1:1.95, so object-cover alone has
+  // to enlarge it ~1.5x to fill. Stacking the desktop 1.45 on top of that
+  // took it to 2.2x — the "why is the bg image so zoomed in" the client
+  // flagged on 2026-08-30. 1 means: crop as much as cover needs, no more.
+  scaleMobile: 1,
   saturate: 0.72,
   contrast: 1.12,
   brightness: 0.9,
@@ -44,8 +50,9 @@ const HERO_IMAGE = {
 // once and update this.
 const HEADER_H = 130;
 
-// The utility strip is hidden below md, so a phone only carries the 77px bar.
-const HEADER_MOBILE_H = 77;
+// The utility strip is hidden below md, so a phone only carries the bar —
+// trimmed from 77 to 60 on 2026-08-30 when the mobile capsule was tightened.
+const HEADER_MOBILE_H = 60;
 
 // Two stacked gradients. The horizontal one does the work — heavy on
 // the headline side and near-clear on the card side (the card is
@@ -173,7 +180,7 @@ export async function Hero() {
           style={{
             objectFit: 'cover',
             objectPosition,
-            transform: `scale(${HERO_ART.scale})`,
+            transform: `scale(${HERO_ART.scaleMobile})`,
             transformOrigin: objectPosition,
             filter: IMAGE_FILTER,
           }}
@@ -311,16 +318,21 @@ export async function Hero() {
              headline block via the grid's items-center; height capped
              so a short viewport never overflows, inner scroll if the
              card is taller than the cap. */}
+          {/* Desktop only, deliberately. The card WAS shown here on phones for
+             a few hours on 2026-08-30 to answer "where is the donation box" —
+             but the hero grows to fit its content and the background is
+             object-cover, so a taller hero crops the photo harder and it read
+             as badly zoomed in. On a phone the card is its own section under
+             the hero instead (HeroGive, in the homepage), which leaves this
+             image at its intended crop. */}
           <aside
             aria-label="Give"
             className="hidden md:block md:sticky md:top-24 self-center w-full md:ml-auto md:max-h-[var(--hero-card-cap)]"
             style={{ maxWidth: '640px' }}
           >
+            {/* One card. The offset paper-deep layer that used to sit behind
+               it read as a second, stacked card; removed 2026-08-30. */}
             <div className="relative isolate h-full">
-              <div
-                aria-hidden
-                className="absolute inset-0 translate-y-2 translate-x-2 rounded-2xl bg-paper-deep border-t border-gold/40"
-              />
               <div className="no-scrollbar relative overflow-y-auto rounded-2xl border border-gold/30 bg-paper text-ink shadow-[0_1px_2px_rgba(0,0,0,0.06),0_8px_24px_-10px_rgba(0,0,0,0.35),0_28px_60px_-24px_rgba(0,0,0,0.4)] md:max-h-[var(--hero-card-cap)]">
                 <GivingCard />
               </div>

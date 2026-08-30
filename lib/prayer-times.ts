@@ -10,10 +10,9 @@
 // Covers 2026-08-01 to 2026-12-31 (153 days). OUTSIDE THAT RANGE
 // there is no data and the UI must say so rather than guess.
 //
-// TODO(rabita): replace with the sync from the prayer screen in the mosque
-// (agreed in the strategy meeting). That feed is also the only place
-// jama'ah times can come from — they are not published anywhere today,
-// including on the current live site.
+// STATUS 2026-08-30: the live source is now IRN's API (lib/irn.ts), which
+// is the same data this table was captured from. This table remains only
+// as the offline fallback and to cover months IRN has not generated yet.
 
 export type PrayerDay = {
   /** ISO date, YYYY-MM-DD. */
@@ -22,6 +21,8 @@ export type PrayerDay = {
   sunrise: string;
   dhuhr: string;
   asr: string;
+  /** Asr at the 2× shadow (Hanafi), when the source provides it. */
+  asr2x?: string;
   maghrib: string;
   isha: string;
 };
@@ -184,6 +185,10 @@ export const PRAYER_DAYS: readonly PrayerDay[] = [
 
 const BY_DATE = new Map(PRAYER_DAYS.map((d) => [d.date, d]));
 
+function lookup(days: readonly PrayerDay[] | undefined) {
+  return days ? new Map(days.map((d) => [d.date, d])) : BY_DATE;
+}
+
 /** Local-time ISO date. Never use toISOString() — that shifts to UTC and
   * hands back yesterday for anyone in Oslo before 01:00/02:00. */
 export function isoDate(d: Date): string {
@@ -193,24 +198,25 @@ export function isoDate(d: Date): string {
 }
 
 /** That day's times, or null when the date falls outside the published range. */
-export function prayerTimesFor(d: Date): PrayerDay | null {
-  return BY_DATE.get(isoDate(d)) ?? null;
+export function prayerTimesFor(d: Date, days?: readonly PrayerDay[]): PrayerDay | null {
+  return lookup(days).get(isoDate(d)) ?? null;
 }
 
 /** `count` days starting at `start`, stopping early at the end of the data. */
-export function prayerDaysFrom(start: Date, count: number): PrayerDay[] {
+export function prayerDaysFrom(start: Date, count: number, days?: readonly PrayerDay[]): PrayerDay[] {
+  const table = lookup(days);
   const out: PrayerDay[] = [];
   for (let i = 0; i < count; i += 1) {
     const d = new Date(start);
     d.setDate(start.getDate() + i);
-    const row = BY_DATE.get(isoDate(d));
+    const row = table.get(isoDate(d));
     if (row) out.push(row);
   }
   return out;
 }
 
 /** Every published day in the same calendar month as `d`. */
-export function prayerDaysInMonth(d: Date): PrayerDay[] {
+export function prayerDaysInMonth(d: Date, days: readonly PrayerDay[] = PRAYER_DAYS): PrayerDay[] {
   const prefix = `${d.getFullYear()}-${`${d.getMonth() + 1}`.padStart(2, '0')}`;
-  return PRAYER_DAYS.filter((row) => row.date.startsWith(prefix));
+  return days.filter((row) => row.date.startsWith(prefix));
 }

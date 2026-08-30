@@ -9,6 +9,8 @@ const bodySchema = z.object({
   amount: z.number().int().positive(),
   frequency: z.enum(['monthly', 'once']),
   isZakat: z.boolean(),
+  isAnonymous: z.boolean().optional(),
+  purpose: z.enum(['general', 'building']).optional(),
 });
 
 export async function POST(req: Request) {

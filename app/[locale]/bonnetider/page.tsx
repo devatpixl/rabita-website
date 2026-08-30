@@ -3,7 +3,8 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Section, SectionBody } from '@/components/primitives';
 import { PrayerNow } from '@/components/prayer-now';
 import { CalendarDownload } from '@/components/calendar-download';
-import { ServiceCards, ServiceVisit } from '@/components/service-page';
+import { ServiceVisit } from '@/components/service-page';
+import { Imams } from '@/components/imams';
 import { TimedCta } from '@/components/timed-cta';
 
 // The times come first. Everything else on this page is preamble.
@@ -63,44 +64,20 @@ export default async function BonnetiderPage({
           <div className="mt-8">
             <PrayerNow />
           </div>
-          <CalendarDownload />
         </SectionBody>
       </Section>
 
-      {/* The editorial block, demoted below the answer. */}
-      <Section tone="paper-2">
-        <SectionBody>
-          <div className="grid items-center gap-12 md:grid-cols-12 md:gap-16">
-            <div className="md:col-span-6">
-              <h2 className="font-serif text-section text-balance text-ink">
-                {tp('pages.times.title')}
-              </h2>
-              <p className="mt-6 max-w-prose text-body text-ink-60">{tp('pages.times.lede')}</p>
-            </div>
-            <div className="md:col-span-6">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-paper">
-                <Image
-                  src="/photos/svc-prayer.webp"
-                  alt={tp('pages.times.eyebrow')}
-                  fill
-                  sizes="(min-width: 768px) 48vw, 90vw"
-                  className="object-cover"
-                  style={{ filter: GRADE }}
-                />
-              </div>
-            </div>
-          </div>
-        </SectionBody>
-      </Section>
+      {/* The imams, straight after the times — who leads the prayer is the
+         second thing a visitor wants to know. The editorial block and the
+         "two practical things" cards that sat here are gone (client
+         2026-08-30: simpler, like ICC's page). */}
+      <Imams />
 
-      <ServiceCards
-        eyebrow={tp('pages.times.cardEyebrow')}
-        heading={tp('pages.times.cardHeading')}
-        cards={[
-          { ...(tp.raw('pages.times.cards') as { title: string; body: string }[])[0], image: '/photos/svc-friday.webp' },
-          { ...(tp.raw('pages.times.cards') as { title: string; body: string }[])[1], image: '/photos/svc-wudu.webp' },
-        ]}
-      />
+      {/* The calendar sits after the imams (client 2026-08-30) and as its own
+         band: as a hairline row of chips under the times, nobody could see
+         the site had a printable calendar at all. */}
+      <CalendarDownload />
+
       <ServiceVisit
         heading={tp('visit.heading')}
         body={tp('visit.body')}
@@ -111,8 +88,13 @@ export default async function BonnetiderPage({
         secondary={{ label: tp('visit.secondary'), href: `/${locale}/kontakt` }}
       />
 
+      {/* The "digital clock" board that sat here as a test on 2026-08-30 was
+         removed on 2026-08-31 — the client saw it and did not want it. The
+         component (components/prayer-clock.tsx) is left in the tree, unused,
+         so it can be dropped back in with one line if that changes. */}
+
       {/* The page's ask. Six seconds, once, then quiet for a month. */}
-      <TimedCta ns="cta.prayer" storageKey="rabita:cta:prayer:v1" delayMs={6000} amountNok={10} />
+      <TimedCta ns="cta.prayer" storageKey="rabita:cta:prayer:v1" delayMs={6000} amountNok={10} showVideoInAsk />
     </main>
   );
 }

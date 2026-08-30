@@ -1,13 +1,6 @@
 import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
-import {
-  ServiceCards,
-  ServiceHero,
-  ServiceRegister,
-  ServiceVisit,
-} from '@/components/service-page';
-
-// The five subjects each keep their own page and request form, named in the words a member would type.
-const SUBJECTS = ['nikah', 'janaza', 'shahada', 'counselling', 'hajj-umrah'] as const;
+import { ServiceHero, ServiceVisit } from '@/components/service-page';
+import { ServiceIndex } from '@/components/service-index';
 
 export default async function ServicesIndex({
   params,
@@ -16,15 +9,8 @@ export default async function ServicesIndex({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: 'servicesIndex' });
   const tp = await getTranslations({ locale, namespace: 'servicePages' });
   const l = await getLocale();
-
-  const rows = SUBJECTS.map((s) => ({
-    term: t(`items.${s}.title`),
-    detail: t(`items.${s}.body`),
-    href: `/${l}/tjenester/${s}`,
-  }));
 
   return (
     <main>
@@ -37,19 +23,11 @@ export default async function ServicesIndex({
         image="/photos/svc-services.webp"
         alt={tp('pages.services.eyebrow')}
       />
-      <ServiceRegister
-        eyebrow={tp('pages.services.regEyebrow')}
-        heading={tp('pages.services.regHeading')}
-        rows={rows}
-      />
-      <ServiceCards
-        eyebrow={tp('pages.services.cardEyebrow')}
-        heading={tp('pages.services.cardHeading')}
-        cards={[
-          { ...(tp.raw('pages.services.cards') as { title: string; body: string }[])[0], image: '/photos/svc-gathering.webp' },
-          { ...(tp.raw('pages.services.cards') as { title: string; body: string }[])[1], image: '/photos/svc-counsel.webp' },
-        ]}
-      />
+      {/* Every service as grouped boxes (client 2026-08-30: the register of
+         rows read as clutter). The two "how to start" cards went with it —
+         the visit block below already says where to come and how to write. */}
+      <ServiceIndex />
+
       <ServiceVisit
         heading={tp('visit.heading')}
         body={tp('visit.body')}

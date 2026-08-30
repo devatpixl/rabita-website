@@ -2,29 +2,21 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
-import { SectionBody } from './primitives';
 import { Accent } from './accent';
 import type { AppLocale } from '@/i18n/routing';
 
-// The building, introduced on the homepage.
+// The building, introduced on the homepage — as a plate, not a slide.
 //
-// Without this the page asked for money for something it never named: the
-// campaign meter said "raised for the new mosque" and the next section was
-// where the money goes, with nothing in between saying what the mosque IS.
-// The zoom parallax shows it at the top, wordlessly, and that was the only
-// trace of it.
+// The earlier version set prose on the left and the render in a rounded
+// box on the right, with three figures squeezed under the paragraph. That
+// is the shape of a pitch deck. Rebuilt 2026-08-30 the way an architecture
+// monograph sets a project: the render runs edge to edge and carries the
+// section; the words sit over a dusk scrim on the reading side; the figures
+// run as one ruled ledger along the foot, each with its own cell; the
+// architect is credited in the ledger like a plate caption. No motion.
 //
-// Deliberately an introduction, not a second project page. It states what
-// the building is, gives three figures, and hands off to
-// /moskeprosjektet, which holds the pinned build sequence and the costed
-// gifts. Every word here already existed in projectPages.pages.building —
-// nothing new to translate.
-//
-// On dusk on purpose. When the gift cards moved to the project page the
-// homepage lost its only dark band and ran cream from the hero to the
-// footer; this puts the break back where the page needs a change of pace.
-
-const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
+// Hands off to /moskeprosjektet, which holds the pinned build sequence and
+// the costed gifts.
 
 export async function ProjectOverview() {
   const locale = (await getLocale()) as AppLocale;
@@ -32,112 +24,126 @@ export async function ProjectOverview() {
   const t = await getTranslations('projectOverview');
   const nf = new Intl.NumberFormat('nb-NO');
 
-  // Three figures, chosen because each answers a different question: how
-  // big, how tall, and who it is actually for. The capacity is the one that
-  // carries feeling — it is the only figure here about people.
+  // How big, how tall, who it is for, and when. All four in the same
+  // off-white: the one gold accent in this section is "one" in the headline.
   const figures = [
-    { value: `${nf.format(CAMPAIGN.buildingM2)} m²`, label: t('figures.area') },
+    { value: nf.format(CAMPAIGN.buildingM2), unit: 'm²', label: t('figures.area') },
+    { value: `${CAMPAIGN.floorsAbove}+${CAMPAIGN.floorsBelow}`, label: t('figures.floors') },
     {
-      value: `${CAMPAIGN.floorsAbove}+${CAMPAIGN.floorsBelow}`,
-      label: t('figures.floors'),
-    },
-    {
-      value: `${nf.format(CAMPAIGN.mensPrayerCapacityAfter + CAMPAIGN.womensPrayerCapacityAfter)}`,
+      value: nf.format(CAMPAIGN.mensPrayerCapacityAfter + CAMPAIGN.womensPrayerCapacityAfter),
       label: t('figures.places'),
     },
+    { value: String(CAMPAIGN.siteClearedRamadan), label: t('figures.cleared') },
   ];
 
   return (
     <section
       aria-labelledby="project-overview-heading"
-      className="bg-dusk py-section-lg text-paper"
+      className="relative isolate overflow-hidden bg-dusk text-paper"
     >
-      <SectionBody>
-        <div className="grid items-center gap-12 md:grid-cols-12 md:gap-16">
-          {/* Text column. Narrower than the image so the render carries the
-             section and the words stay a column of prose. */}
-          <div className="md:col-span-5">
-            <h2
-              id="project-overview-heading"
-              className="font-serif text-section text-balance text-paper"
+      {/* The plate. On desktop it is the whole band; on a phone it is a
+         4:3 crop above the words, because a scrim over a portrait crop
+         would hide the roof garden that makes the render legible. */}
+      <div className="relative aspect-[4/3] md:absolute md:inset-0 md:aspect-auto">
+        <Image
+          src="/photos/project-aerial.webp"
+          alt={tp('aerial')}
+          fill
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: '62% 40%', filter: 'saturate(0.8) contrast(1.08) brightness(0.92)' }}
+        />
+        {/* Reading-side scrim on desktop; a foot fade on the phone so the
+           crop meets the dusk block underneath without a hard edge. */}
+        <div
+          aria-hidden
+          className="absolute inset-0 hidden md:block"
+          style={{
+            background:
+              'linear-gradient(90deg, rgba(22,36,46,0.96) 0%, rgba(22,36,46,0.88) 30%, rgba(22,36,46,0.45) 55%, rgba(22,36,46,0.12) 100%)',
+          }}
+        />
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 h-1/2 hidden md:block"
+          style={{
+            background: 'linear-gradient(180deg, rgba(22,36,46,0) 0%, rgba(22,36,46,0.92) 100%)',
+          }}
+        />
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 h-24 md:hidden"
+          style={{ background: 'linear-gradient(180deg, rgba(22,36,46,0) 0%, rgba(22,36,46,1) 100%)' }}
+        />
+      </div>
+
+      <div className="relative mx-auto flex min-h-0 max-w-6xl flex-col px-6 pb-10 pt-10 md:min-h-[min(88svh,52rem)] md:justify-between md:pb-12 md:pt-24">
+        {/* Words, on the reading side. */}
+        <div className="max-w-xl">
+          <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
+            {tp('pages.building.eyebrow')} · {CAMPAIGN.address}
+          </p>
+          <h2
+            id="project-overview-heading"
+            className="mt-5 font-serif text-[clamp(2.25rem,5vw,4rem)] leading-[1.02] text-balance text-paper"
+          >
+            {tp.rich('pages.building.title', {
+              em: (chunks) => <Accent surface="dusk">{chunks}</Accent>,
+            })}
+          </h2>
+          <p className="mt-6 max-w-[44ch] text-body text-paper/80">{t('briefShort')}</p>
+          <Link
+            href={`/${locale}/moskeprosjektet`}
+            className="group mt-8 inline-flex min-h-11 items-center gap-3 text-[15px] font-semibold text-paper transition-colors hover:text-gold"
+          >
+            <span className="border-b border-gold pb-0.5">{t('cta')}</span>
+            <span
+              aria-hidden
+              className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
             >
-              {tp.rich('pages.building.title', {
-                em: (chunks) => <Accent surface="dusk">{chunks}</Accent>,
-              })}
-            </h2>
-
-            {/* Two lengths. The full brief is a four line paragraph on a
-               phone and the three figures under it already carry the plot
-               size, so the short one says the part the figures cannot: what
-               the building replaces and what it does at street level. The
-               long version is unchanged on desktop, and on the mosque project
-               page, which shares the same string. */}
-            <p className="mt-5 max-w-prose text-body text-paper/75 md:hidden">
-              {t('briefShort')}
-            </p>
-            <p className="mt-6 hidden max-w-prose text-body text-paper/75 md:block">
-              {tp('pages.building.brief')}
-            </p>
-
-            {/* Figures at display size with mono labels under them — the
-               pairing the campaign meter uses, so the two dark and light
-               halves of the page read as one system. */}
-            {/* Three columns is a desktop shape. At 390px each column is about
-               100px wide and every label broke onto three lines: "ETASJER,
-               OVER OG UNDER BAKKEN" stacked under a number it no longer sat
-               beside. On a phone the figures become rows, value and label on
-               one baseline with a hairline between them, which is how the
-               rest of the site sets a short register. */}
-            <dl className="mt-8 border-t border-paper/15 md:mt-10 md:grid md:grid-cols-3 md:gap-x-6 md:pt-7">
-              {figures.map((f) => (
-                <div
-                  key={f.label}
-                  className="flex items-baseline justify-between gap-6 border-b border-paper/10 py-3.5 md:block md:border-0 md:py-0"
-                >
-                  <dd className="font-serif text-[clamp(1.5rem,3vw,2.25rem)] leading-none tabular-nums text-paper">
-                    {f.value}
-                  </dd>
-                  <dt className="text-end font-mono text-[0.625rem] uppercase leading-snug tracking-[0.14em] text-paper/50 md:mt-2 md:text-start">
-                    {f.label}
-                  </dt>
-                </div>
-              ))}
-            </dl>
-
-            {/* A link, not a filled button. Give already owns the one filled
-               action on this page; a second would be the competing CTA the
-               brief warns about. */}
-            <Link
-              href={`/${locale}/moskeprosjektet`}
-              className="group mt-10 inline-flex min-h-11 items-center gap-3 text-[15px] font-semibold text-paper underline decoration-gold underline-offset-[6px] transition-colors hover:text-gold"
-            >
-              {t('cta')}
-              <span
-                aria-hidden
-                className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
-              >
-                &rarr;
-              </span>
-            </Link>
-          </div>
-
-          <div className="md:col-span-7">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-dusk md:aspect-[3/2]">
-              <Image
-                src="/photos/project-aerial.webp"
-                alt={tp('aerial')}
-                fill
-                sizes="(min-width: 768px) 58vw, 92vw"
-                className="object-cover"
-                style={{ filter: GRADE }}
-              />
-            </div>
-            <p className="mt-4 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-paper/45">
-              {CAMPAIGN.architect}
-            </p>
-          </div>
+              &rarr;
+            </span>
+          </Link>
         </div>
-      </SectionBody>
+
+        {/* The ledger: four equal columns, dividers between them only, held
+           to the same measure as the headline column so it reads as part of
+           the same block. Labels are one line each, so all four baselines
+           align. */}
+        <dl className="mt-14 grid max-w-xl grid-cols-2 border-t border-paper/20 sm:grid-cols-4 md:mt-16">
+          {figures.map((f, i) => (
+            <div
+              key={f.label}
+              className={[
+                'py-5 pe-4 lg:py-6',
+                i % 2 === 1 ? 'border-s border-paper/15 ps-4' : '',
+                i >= 2 ? 'border-t border-paper/15 sm:border-t-0' : '',
+                i === 2 ? 'sm:border-s sm:ps-4' : '',
+              ].join(' ')}
+            >
+              <dd className="flex items-baseline gap-1.5 font-serif text-[clamp(1.75rem,3vw,2.5rem)] leading-none tabular-nums text-paper">
+                <span>{f.value}</span>
+                {f.unit && (
+                  <span className="font-mono text-[11px] tracking-[0.08em] text-paper/55">{f.unit}</span>
+                )}
+              </dd>
+              <dt className="mt-2.5 whitespace-nowrap font-mono text-[0.625rem] uppercase tracking-[0.14em] text-paper/55">
+                {f.label}
+              </dt>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      {/* Architect credit, out of the ledger: bottom-right of the plate, set
+         like a caption. */}
+      <p className="absolute bottom-5 end-6 hidden text-end font-mono text-[10px] uppercase leading-relaxed tracking-[0.14em] text-paper/45 md:block lg:end-12">
+        {t('credit')}
+        <br />
+        {CAMPAIGN.architect.split(',')[0]}
+        <br />
+        {CAMPAIGN.architect.split(',').slice(1).join(',').trim()}
+      </p>
     </section>
   );
 }

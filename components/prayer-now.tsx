@@ -2,12 +2,11 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { PRAYER_TIMES_TODAY } from '@/lib/campaign';
 import { hijriDate } from '@/lib/hijri';
-import { prayerTimesFor } from '@/lib/prayer-times';
 import { PRAYER_ORDER, prayerWindow } from '@/lib/prayer-window';
 import type { AppLocale } from '@/i18n/routing';
 import { cn } from '@/lib/cn';
+import { joinJumuah, usePrayerData, usePrayerDay } from './prayer-data-provider';
 
 // The page's lead block: six times at full width, and what is coming next.
 //
@@ -27,6 +26,7 @@ export function PrayerNow() {
   const tp = useTranslations('utility.prayer');
   const locale = useLocale() as AppLocale;
   const [now, setNow] = useState<Date | null>(null);
+  const { jumuah, jamaah } = usePrayerData();
 
   useEffect(() => {
     const tick = () => setNow(new Date());
@@ -46,7 +46,7 @@ export function PrayerNow() {
     }).format(now);
   }, [now, locale]);
 
-  const today = useMemo(() => (now ? prayerTimesFor(now) : null), [now]);
+  const today = usePrayerDay(now);
   const win = useMemo(
     () => (now && today ? prayerWindow(today, now.getHours() * 60 + now.getMinutes()) : null),
     [now, today],
@@ -61,7 +61,9 @@ export function PrayerNow() {
   return (
     <div>
       <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
-        <h1 className="font-serif text-display text-balance text-ink">{t('todayHeading')}</h1>
+        {/* The heading is a label now, not a rival to the figures: the
+           times are what the page is for. */}
+        <h1 className="font-mono text-[0.75rem] uppercase tracking-[0.18em] text-gold-deep">{t('todayHeading')}</h1>
         {now && (
           // Both calendars. The Gregorian date carries the weight because
           // that is the one a reader in Oslo is checking against; the Hijri
@@ -78,7 +80,7 @@ export function PrayerNow() {
 
       {/* Six columns at full width. Three per row on a phone so the figures
          stay large rather than shrinking to fit six across 390px. */}
-      <dl className="mt-10 grid grid-cols-3 border-t border-rule lg:grid-cols-6">
+      <dl className="mt-6 grid grid-cols-3 border-t border-rule lg:grid-cols-6">
         {PRAYER_ORDER.map((key) => {
           // The NEXT prayer is highlighted, not the current window.
           //
@@ -93,7 +95,7 @@ export function PrayerNow() {
             <div
               key={key}
               className={cn(
-                'relative border-b border-rule px-1 py-6 lg:border-b-0',
+                'relative overflow-hidden border-b border-rule px-2 py-6 lg:border-b-0',
                 isNext && 'bg-paper-2',
               )}
             >
@@ -117,9 +119,14 @@ export function PrayerNow() {
               </dt>
               <dd
                 className={cn(
-                  'mt-3 font-serif leading-none tabular-nums',
-                  'text-[clamp(2rem,4.5vw,3.25rem)]',
-                  isNext ? 'text-ink' : 'text-ink-60',
+                  'mt-3 font-serif leading-none tabular-nums transition-colors',
+                  // The next prayer is the biggest thing on the page and the
+                  // only gold figure; the other five step back.
+                  // Capped so "20:32" in tabular figures still fits one of
+                  // six columns — at 6vw it ran past its cell into Isha.
+                  isNext
+                    ? 'text-[clamp(2.25rem,4.2vw,3.25rem)] text-gold-deep'
+                    : 'text-[clamp(1.75rem,3.4vw,2.35rem)] text-ink-60',
                 )}
               >
                 {today ? today[key] : '—'}
@@ -148,15 +155,40 @@ export function PrayerNow() {
 
       {/* Jumu'ah apart from the six: the time most visitors come for, and a
          fixed hour rather than one that moves with the sun. */}
-      <div className="mt-10 flex flex-wrap items-baseline gap-x-6 gap-y-2 border-s-2 border-gold-deep bg-paper-2 px-6 py-5">
-        <p className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-gold-deep">
-          {t('jumua')}
-        </p>
-        <p className="font-serif text-[clamp(1.75rem,4vw,2.25rem)] leading-none tabular-nums text-ink">
-          {PRAYER_TIMES_TODAY.jumua}
-        </p>
-        <p className="text-[13px] text-ink-60">{t('jumuaNote')}</p>
+      <div id="fredagsbonn" className="mt-10 scroll-mt-24 border-s-2 border-gold-deep bg-paper-2 px-6 py-5">
+        <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
+          <p className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-gold-deep">
+            {t('jumua')}
+          </p>
+          <p className="font-serif text-[clamp(1.75rem,4vw,2.25rem)] leading-none tabular-nums text-ink">
+            {joinJumuah(jumuah)}
+          </p>
+          <p className="text-[13px] text-ink-60">{t('jumuaNote')}</p>
+        </div>
+        {/* Who leads it — the reason to come, not just the hour. */}
+        <a
+          href="#imamene"
+          className="group mt-3 inline-flex min-h-9 items-center gap-2 text-[14px] font-semibold text-ink transition-colors hover:text-gold-deep"
+        >
+          <span className="border-b border-gold pb-px">{t('jumuaImams')}</span>
+          <span aria-hidden className="transition-transform duration-200 group-hover:translate-y-0.5">&darr;</span>
+        </a>
       </div>
+
+      {/* Jama'ah: when the congregation actually stands, as the mosque has
+         registered it with IRN. Only the prayers with a fixed time show. */}
+      {(['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'] as const).some((k) => jamaah[k]) && (
+        <p className="mt-4 text-[0.9rem] tabular-nums text-ink-60">
+          <span className="font-mono text-[0.6875rem] uppercase tracking-[0.14em]">{t('jamaah')}</span>
+          {(['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'] as const)
+            .filter((k) => jamaah[k])
+            .map((k) => (
+              <span key={k} className="ms-4">
+                <span className="text-ink">{tv(`names.${k}`)}</span> {jamaah[k]}
+              </span>
+            ))}
+        </p>
+      )}
 
       {now && !today && (
         <p className="mt-6 max-w-prose text-body text-ink-60">{t('outOfRange')}</p>

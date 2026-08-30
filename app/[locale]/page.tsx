@@ -1,12 +1,12 @@
 import { setRequestLocale } from 'next-intl/server';
 import { CampaignMeter } from '@/components/campaign-meter';
+import { FollowUs } from '@/components/follow-us';
 import { CongregationToday } from '@/components/congregation-today';
 import { ImpactStory } from '@/components/impact-story';
 import { Hero } from '@/components/hero';
-import { Membership } from '@/components/membership';
+import { HeroGive } from '@/components/hero-give';
 import { MotionRise } from '@/components/motion-rise';
 import { ProjectOverview } from '@/components/project-overview';
-import { SadaqaBand } from '@/components/sadaqa-band';
 import { ZoomParallax } from '@/components/zoom-parallax';
 
 // Homepage section order — ordering ONLY. Do not restyle in this file.
@@ -47,6 +47,9 @@ export default async function HomePage({
   return (
     <main>
       <Hero />
+      {/* Phone only — the hero's own card is md-and-up. See hero-give.tsx
+         for why it is not inside the hero on mobile. */}
+      <HeroGive />
       <ZoomParallax />
       <ImpactStory />
       <MotionRise><CongregationToday /></MotionRise>
@@ -59,13 +62,12 @@ export default async function HomePage({
          Each section now supplies what the next one needs. */}
       <ProjectOverview />
       <MotionRise><CampaignMeter /></MotionRise>
-      {/* Membership before sadaqa. Membership is the lighter ask — 1 000 kr
-         a year, or free — and sadaqa jariya is the heaviest thing on the
-         page: giving a prayer space in the name of someone who has died.
-         Closing on that rather than on an AGM notice is the stronger last
-         word, and it puts the two asks in ascending order of weight. */}
-      <MotionRise><Membership /></MotionRise>
-      <MotionRise><SadaqaBand /></MotionRise>
+      {/* Follow us — the social section the client asked for on 2026-08-31.
+         Closes the page on dusk, running into the footer. */}
+      <FollowUs />
+      {/* Sadaqa band moved to /moskeprosjektet and the membership section
+         removed from the home page on 2026-08-30 (client request). The page
+         now closes on the campaign meter. */}
     </main>
   );
 }

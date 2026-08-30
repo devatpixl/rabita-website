@@ -164,8 +164,14 @@ export function ZoomParallax() {
   // 9x is a lot of compositing for a phone. The narrow set is a cross —
   // centre, above, below, one either side — and stops at five tiles.
   //
-  // The centre tile needs no special case: 25vw x 25vh is 97 x 190 on that
-  // screen, and at scale 4 that is 390 x 760. It fills the phone exactly.
+  // The centre tile DID need a special case. 25vw x 25vh is 97 x 190 on that
+  // screen — a 1:2 sliver, and the client's note was exactly that ("bildet i
+  // midten er veldig avlangt"). Filling the phone exactly at the end of the
+  // zoom forces the tile to carry the phone's own 0.51 aspect at rest, which
+  // is the whole problem. So the tile is now WIDER than it needs to be and
+  // object-cover crops the surplus: 36vw x 25vh reads 140 x 190 (0.74) at
+  // rest and still covers 390 x 760 at scale 4 (562 x 760). The two side
+  // tiles were slivers for the same reason and got the same treatment.
   const scale4 = useTransform(progress, [0, 1], [1, 4]);
   const scale5 = useTransform(progress, [0, 1], [1, 5]);
   const scale6 = useTransform(progress, [0, 1], [1, 6]);
@@ -185,10 +191,10 @@ export function ZoomParallax() {
     { top: '22.5vh', left: '25vw', h: '15vh', w: '15vw' },
   ];
   const TILES_NARROW = [
-    { top: '0', left: '0', h: '25vh', w: '25vw' },
+    { top: '0', left: '0', h: '25vh', w: '36vw' },
     { top: '-30vh', left: '0', h: '20vh', w: '44vw' },
-    { top: '-6vh', left: '-33vw', h: '24vh', w: '26vw' },
-    { top: '-6vh', left: '33vw', h: '24vh', w: '26vw' },
+    { top: '-8vh', left: '-33vw', h: '18vh', w: '26vw' },
+    { top: '-8vh', left: '33vw', h: '18vh', w: '26vw' },
     { top: '30vh', left: '0', h: '20vh', w: '40vw' },
   ];
   const tiles = isNarrow ? TILES_NARROW : TILES_WIDE;

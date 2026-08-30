@@ -1,25 +1,24 @@
 import { getLocale, getTranslations } from 'next-intl/server';
-import { CAMPAIGN, PHASES, SUB_CAMPAIGN, currentPhaseKey, type PhaseKey } from '@/lib/campaign';
+import { CAMPAIGN, PHASES, SUB_CAMPAIGN, currentPhaseKey } from '@/lib/campaign';
 import { formatAmount, formatDate } from '@/lib/format';
 import type { AppLocale } from '@/i18n/routing';
 import { AnimatedProgress } from './animated-progress';
-import { FundingScale } from './funding-scale';
-import { GoalLattice } from './goal-lattice';
 import { Counter } from './counter';
 import { GiveCTA } from './give-cta';
 import { Accent } from './accent';
+import { PhasePopover, type PhaseStep } from './phase-popover';
 
-// Byggeregnskap, read as a ledger page rather than two unrelated columns.
-//   HEAD    total on the left, the figures that qualify it on the right,
-//           closed by a hairline. Both sides sit on one baseline.
-//   SCALE   the three build years as equal bands across the full measure.
-//   FOOT    the 100-mark lattice (7 cols) beside the sub-campaign card (5).
-// The old layout ran the left column past the bottom of the right one and
-// left a screen-height hole under the card. Everything here is measured
-// full width, so the section closes level.
-// Every figure comes from lib/campaign.ts. Fill widths are computed, never
-// hardcoded. Bar and counter animate on view, reduced motion respected via
-// AnimatedProgress + Counter.
+// Byggeregnskap, rebuilt 2026-08-30 on the pattern every large fundraising
+// platform has converged on (GoFundMe, Kickstarter, JustGiving, charity:
+// water): ONE raised figure, "of goal", ONE bar with the percentage, a
+// short row of supporting stats, ONE button.
+//
+// What went: the 100-mark lattice, the three-year funding scale and the
+// sub-campaign card — three more ways of saying the same thing, which is
+// what the client found confusing. The sub-campaign survives as a single
+// stat, and "last month" is now the second-largest figure on the page,
+// because "how much, and how is it moving" is the question this section
+// answers. Every figure comes from lib/campaign.ts.
 export async function CampaignMeter() {
   const locale = (await getLocale()) as AppLocale;
   const t = await getTranslations('meter');
@@ -28,139 +27,124 @@ export async function CampaignMeter() {
   const raised = CAMPAIGN.raisedNok;
   const goal = CAMPAIGN.goalNok;
   const pct = goal > 0 ? Math.min(100, (raised / goal) * 100) : 0;
+  const pctInt = Math.round(pct);
+  const subPct = SUB_CAMPAIGN.goalNok > 0 ? Math.round((SUB_CAMPAIGN.raisedNok / SUB_CAMPAIGN.goalNok) * 100) : 0;
+  const phase = PHASES.find((p) => p.key === currentPhaseKey());
 
-  const subPct =
-    SUB_CAMPAIGN.goalNok > 0
-      ? Math.min(100, (SUB_CAMPAIGN.raisedNok / SUB_CAMPAIGN.goalNok) * 100)
-      : 0;
-  const subPctInt = Math.floor(subPct);
-
-  const active: PhaseKey = currentPhaseKey();
+  // The roadmap shown on hover over the goal and the phase: the three build
+  // years, each marked done / now / to come relative to the current phase.
+  const currentIdx = PHASES.findIndex((p) => p.key === currentPhaseKey());
+  const steps: PhaseStep[] = PHASES.map((p, i) => ({
+    year: String(p.year),
+    name: tPhase(p.key),
+    note: t(`phaseNotes.${p.key}`),
+    state: i < currentIdx ? 'done' : i === currentIdx ? 'current' : 'next',
+  }));
 
   return (
-    <section id="byggeregnskap" aria-labelledby="meter-heading" className="bg-paper-2 py-section-md md:py-section-sm">
-      <div className="mx-auto max-w-6xl px-6">
-        {/* A real heading, in the section serif, rather than a mono
-           small-caps dateline. The <h2> used to be the NUMBER, which left
-           the section with no sentence at all — a first-time reader met
-           26 995 179 with nothing saying what it counted. The sentence is
-           the heading now and the figure sits under it. */}
+    <section id="byggeregnskap" aria-labelledby="meter-heading" className="bg-paper-2 py-10 md:py-section-md lg:py-section-lg">
+      <div className="mx-auto max-w-6xl px-5 sm:px-6">
         <h2 id="meter-heading" className="font-serif text-section text-balance text-ink">
-          {/* surface="paper" — this section is on --paper-2, so the accent
-             takes gold-deep for contrast on a warm neutral rather than the
-             brighter gold reserved for dusk. */}
           {t.rich('eyebrow', {
             em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
           })}
         </h2>
 
-        {/* HEAD: the total, and the figures that qualify it, on one baseline. */}
-        {/* No bottom rule here. The schedule below draws its own hairline,
-           so this one put two parallel lines a few pixels apart. The
-           padding went with it — mt-10 on the schedule is now the only
-           thing setting the gap. */}
-        <div className="mt-6 flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-12">
-          <div className="shrink-0">
-            <p className="flex items-baseline gap-3 font-serif leading-none tabular-nums text-ink tracking-[-0.025em] md:whitespace-nowrap">
-              {/* 4.4vw, not 7.5. At 7.5vw the middle term overtook the 5rem
-                 cap at about 1067px, so a 13-inch laptop and a 27-inch
-                 monitor both rendered the same 80px — the figure could only
-                 ever be "too big" or "too small", never proportional. At
-                 4.4vw the cap is reached around 1820px, so the number
-                 actually scales across the laptop range: ~63px at 1440,
-                 ~67px at 1512, and still the full 80px on a large screen. */}
-              <span className="text-[clamp(2.75rem,4.4vw,5rem)]">
-                <Counter to={raised} locale={locale} />
-              </span>
-              <span className="font-serif text-3xl md:text-4xl text-ink-60">kr</span>
-            </p>
-            {/* Provenance for the figure, sitting under it rather than
-               above the section. The live dot keeps its job of saying the
-               total is maintained, not carved. */}
-            <p className="mt-3 flex items-center gap-2 text-[13px] text-ink-60">
-              <span className="pulse-dot text-gold-deep" aria-hidden />
-              {t('updated', { date: formatDate(locale, CAMPAIGN.raisedAsOf) })}
-            </p>
-          </div>
-
-          {/* Qualifiers sit as a small table so the numbers line up under each other. */}
-          <dl className="grid gap-x-10 gap-y-4 sm:grid-cols-2 sm:gap-y-4 md:text-end">
+        {/* Raised and goal as two figures on one baseline — the goal is the
+           other half of the story, so it is set in the same serif rather
+           than as a caption. The button closes the row. */}
+        <div className="mt-6 flex flex-col gap-6 md:mt-8 md:flex-row md:items-end md:justify-between md:gap-12">
+          <dl className="flex flex-col gap-4 sm:flex-row sm:items-end sm:gap-12">
             <div>
-              <dt className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
+              <dd className="flex items-baseline gap-2 font-serif leading-none tabular-nums tracking-[-0.025em] text-ink">
+                <span className="text-[clamp(2.35rem,5.5vw,5.5rem)]">
+                  <Counter to={raised} locale={locale} />
+                </span>
+                <span className="text-2xl text-ink-60 md:text-3xl">kr</span>
+              </dd>
+              <dt className="mt-2 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60 md:mt-3">
+                {t('label')}
+              </dt>
+            </div>
+            <div className="sm:border-s sm:border-rule sm:ps-12">
+              {/* The goal in the site's accent — gold italic — so the two
+                 figures read as "what we have" and "what we are reaching
+                 for" rather than two of the same. */}
+              <dd>
+                <PhasePopover steps={steps} label={t('roadmap')} currentLabel={t('now')}>
+                  <span className="flex items-baseline gap-2 font-serif italic leading-none tabular-nums tracking-[-0.02em] text-gold-deep">
+                    <span className="text-[clamp(1.65rem,3.2vw,3.25rem)]">{formatAmount(locale, goal)}</span>
+                    <span className="text-xl md:text-2xl">kr</span>
+                  </span>
+                </PhasePopover>
+              </dd>
+              <dt className="mt-2 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60 md:mt-3">
                 {t('goalLabel')}
               </dt>
-              <dd className="mt-1 font-serif text-[1.15rem] leading-none tabular-nums text-ink md:whitespace-nowrap md:text-[1.5rem]">
-                {formatAmount(locale, goal)} kr
-              </dd>
-            </div>
-            <div>
-              <dt className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
-                {tPhase(active)} · {PHASES.find((p) => p.key === active)?.year}
-              </dt>
-              <dd className="mt-1 font-serif text-[1.15rem] leading-none tabular-nums text-gold-deep md:whitespace-nowrap md:text-[1.5rem]">
-                {t('lastMonth', { amount: formatAmount(locale, CAMPAIGN.lastMonthNok) })}
-              </dd>
             </div>
           </dl>
-        </div>
 
-        {/* SCALE: the build years as equal bands, with the run showing how
-           much of the goal is raised. */}
-        <FundingScale
-          className="mt-10"
-          percent={pct}
-          stations={PHASES.map((p, i) => ({
-            at: (i * 100) / PHASES.length,
-            year: String(p.year),
-            label: tPhase(p.key),
-            current: p.key === active,
-          }))}
-        />
-
-        {/* FOOT: lattice beside the sub-campaign card, both closing level. */}
-        <div className="mt-8 grid gap-8 md:grid-cols-12 md:items-stretch md:gap-12">
-          <div className="md:col-span-7 md:self-start">
-            <GoalLattice
-              percent={pct}
-              caption={t('lattice')}
-            />
+          <div className="shrink-0">
+            <GiveCTA label={t('give')} />
           </div>
-
-          {/* Desktop only. On a phone this card followed the main total with
-             a second total, a second bar, a second percentage and a second
-             ask, and the reader had already been given all of that above. The
-             page keeps one number on a phone. */}
-          <aside className="hidden flex-col rounded-2xl bg-paper p-7 md:col-span-5 md:flex md:p-8">
-            <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-gold-deep">
-              {t('sub.label')} · {SUB_CAMPAIGN.name}
-            </p>
-            <p className="mt-6 flex items-baseline gap-3 font-serif tabular-nums text-ink">
-              <span className="text-[clamp(2rem,4vw,2.5rem)] leading-none tracking-[-0.02em]">
-                {formatAmount(locale, SUB_CAMPAIGN.raisedNok)}
-              </span>
-              <span className="text-[14px] text-ink-60 tabular-nums">
-                / {formatAmount(locale, SUB_CAMPAIGN.goalNok)} kr
-              </span>
-            </p>
-
-            <AnimatedProgress
-              percent={subPct}
-              className="mt-6 h-2 rounded bg-paper-2"
-              fillClassName="bg-gradient-to-r from-gold to-gold-deep rounded"
-            />
-            <p className="mt-3 font-mono text-[0.75rem] uppercase tracking-[0.14em] tabular-nums text-ink-60">
-              {subPctInt} % {t('financed')}
-            </p>
-
-            <p className="mt-5 max-w-prose text-[15px] leading-relaxed text-ink-60">
-              {t('sub.body')}
-            </p>
-
-            <div className="mt-auto pt-6">
-              <GiveCTA label={t('give')} fullWidth />
-            </div>
-          </aside>
         </div>
+
+        {/* The bar. One fill, the percentage at its head, the goal at the end. */}
+        <div className="mt-7 md:mt-10">
+          <div className="mb-2 flex items-baseline justify-between font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">
+            <span className="tabular-nums text-gold-deep">{pctInt} %</span>
+            <span className="tabular-nums">{t('remaining', { amount: formatAmount(locale, Math.max(0, goal - raised)) })}</span>
+          </div>
+          <AnimatedProgress
+            percent={pct}
+            className="h-2.5 rounded-full bg-paper"
+            fillClassName="rounded-full bg-gradient-to-r from-gold to-gold-deep"
+          />
+        </div>
+
+        {/* Supporting stats. One ruled row from sm; on a phone the first two
+           sit two-up with a hairline between them and the phase runs full
+           width beneath, because three stacked rows of one figure each was
+           most of the second screen of this section (client, 2026-08-30).
+           Movement first: it is the figure the reader compares to the total. */}
+        <dl className="mt-7 grid grid-cols-2 gap-x-5 gap-y-5 border-t border-rule pt-6 sm:mt-10 sm:grid-cols-3 sm:gap-x-8 sm:pt-7">
+          <div>
+            <dd className="font-serif text-[clamp(1.6rem,2.6vw,2.25rem)] leading-none tabular-nums text-gold-deep">
+              +{formatAmount(locale, CAMPAIGN.lastMonthNok)} kr
+            </dd>
+            <dt className="mt-2 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">
+              {t('lastMonthLabel')}
+            </dt>
+          </div>
+          <div className="border-s border-rule ps-5 sm:ps-8">
+            <dd className="font-serif text-[clamp(1.6rem,2.6vw,2.25rem)] leading-none tabular-nums text-ink">
+              {subPct} %
+            </dd>
+            <dt className="mt-2 max-w-[26ch] font-mono text-[0.6875rem] uppercase leading-snug tracking-[0.14em] text-ink-60">
+              {t('subLabel', { name: SUB_CAMPAIGN.name, year: phase?.year ?? '' })}
+              <br />
+              <span className="normal-case tracking-normal">
+                {t('subValue', {
+                  raised: formatAmount(locale, SUB_CAMPAIGN.raisedNok),
+                  goal: formatAmount(locale, SUB_CAMPAIGN.goalNok),
+                })}
+              </span>
+            </dt>
+          </div>
+          <div className="col-span-2 border-t border-rule pt-5 sm:col-span-1 sm:border-t-0 sm:border-s sm:border-rule sm:ps-8 sm:pt-0">
+            <dd>
+              <PhasePopover steps={steps} label={t('roadmap')} currentLabel={t('now')} align="end">
+                <span className="block font-serif text-[clamp(1.6rem,2.6vw,2.25rem)] leading-none text-ink">
+                  {tPhase(phase?.key ?? 'fundament')}
+                </span>
+              </PhasePopover>
+            </dd>
+            <dt className="mt-2 flex items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">
+              <span className="pulse-dot text-gold-deep" aria-hidden />
+              {t('updated', { date: formatDate(locale, CAMPAIGN.raisedAsOf) })}
+            </dt>
+          </div>
+        </dl>
       </div>
     </section>
   );

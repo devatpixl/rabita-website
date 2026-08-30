@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { AnimatePresence, motion } from 'motion/react';
 import { useLocale, useTranslations } from 'next-intl';
 import { CAMPAIGN } from '@/lib/campaign';
@@ -26,7 +27,21 @@ import { cn } from '@/lib/cn';
 // translate + scale in CSS via one shared 380ms cubic-bezier on
 // transform + opacity. No width/height/margin animation.
 
-const SLIDE_KEYS = ['daily', 'school', 'friday', 'iftar', 'visits', 'services'] as const;
+// The eight services the client listed (2026-08-30): this section is
+// "what Rabita is for", so it shows the services, one card each, and each
+// card hands off to the service's own page.
+// Order alternates the interior renders (nikah / janaza / shahada /
+// counselling) with photographs, so no two look-alike cards sit together.
+const SLIDE_KEYS = [
+  'nikah',
+  'education',
+  'janaza',
+  'hajj-umrah',
+  'shahada',
+  'youth',
+  'counselling',
+  'mediation',
+] as const;
 type SlideKey = (typeof SLIDE_KEYS)[number];
 const TOTAL = SLIDE_KEYS.length;
 const HALF = Math.floor(TOTAL / 2);
@@ -39,42 +54,31 @@ const OUTER_SCALE = 0.52;
 const CURVE = 'cubic-bezier(0.22, 0.61, 0.36, 1)';
 
 const PHOTOS: Record<SlideKey, { src: string; alt: string; width: number; height: number }> = {
-  daily: {
-    src: '/photos/daily-prayer-sujud.webp',
-    alt: 'A worshipper in sujud on the red prayer carpet, string-lights and a chandelier above, an old wall clock on the stone wall',
-    width: 800,
-    height: 1200,
-  },
-  school: {
+  nikah: { src: '/photos/svc-nikah-ceremony.webp', alt: 'A nikah ceremony in the hall: the couple and the imam at a table, guests seated on the carpet', width: 1086, height: 1448 },
+  janaza: { src: '/photos/svc-janaza-prayer.webp', alt: 'Janaza prayer: the congregation standing in rows, heads bowed, facing the timber qibla wall', width: 1086, height: 1448 },
+  shahada: { src: '/photos/subj-shahada.webp', alt: 'A shahada taken with witnesses at Rabita', width: 1600, height: 1000 },
+  counselling: { src: '/photos/subj-counselling.webp', alt: 'A quiet conversation with an imam at Rabita', width: 1600, height: 1000 },
+  'hajj-umrah': { src: '/photos/hajj-kaaba.webp', alt: 'Pilgrims in ihram circling the Kaaba in Makkah, the clock tower behind', width: 1200, height: 1600 },
+  education: {
     src: '/photos/learning-lecture.webp',
     alt: 'Weekend-school session at Rabita, teachers at the front, pupils following the lesson',
     width: 1200,
     height: 1600,
   },
-  friday: {
-    src: '/photos/prayer-mat-underpass.webp',
-    alt: 'Rabita Friday prayer at capacity, worshippers bowing on prayer mats, imam leading at the front',
-    width: 799,
-    height: 1066,
-  },
-  iftar: {
-    src: '/photos/hero-iftar.webp',
-    alt: 'Street iftar in Grønland, Oslo, long shared tables, neighbours breaking fast together',
-    width: 2560,
-    height: 1707,
-  },
-  visits: {
-    src: '/photos/cong-hall.webp',
-    alt: 'A visiting group seated in the Rabita hall for a talk and conversation',
-    width: 1600,
-    height: 1069,
-  },
-  services: {
-    src: '/photos/family-together.webp',
-    alt: 'A family gathered at Rabita, three generations in the paper-lit hall after a service',
-    width: 933,
-    height: 1400,
-  },
+  mediation: { src: '/photos/svc-counsel.webp', alt: 'Two people in conversation with an imam mediating', width: 1600, height: 1000 },
+  youth: { src: '/photos/community/bazaar-child.webp', alt: 'A child at a Rabita community bazaar', width: 1125, height: 1500 },
+};
+
+// Where each card leads.
+const HREFS: Record<SlideKey, string> = {
+  nikah: '/tjenester/nikah',
+  janaza: '/tjenester/janaza',
+  shahada: '/tjenester/shahada',
+  counselling: '/tjenester/counselling',
+  'hajj-umrah': '/tjenester/hajj-umrah',
+  education: '/undervisning',
+  mediation: '/tjenester/megling',
+  youth: '/tjenester/barn-og-ungdom',
 };
 
 type Figure =
@@ -191,37 +195,14 @@ export function CongregationToday() {
 
   const activeKey = SLIDE_KEYS[active];
   const figure: Figure = useMemo(() => {
-    switch (activeKey) {
-      case 'daily':
-        return {
-          kind: 'single',
-          value: formatAmount(locale, 5),
-          label: t('slides.daily.figureLabel'),
-        };
-      case 'school':
-        return {
-          kind: 'single',
-          value: formatAmount(locale, CAMPAIGN.pupils),
-          label: t('slides.school.figureLabel'),
-        };
-      case 'friday':
-        return {
-          kind: 'delta',
-          before: formatAmount(locale, CAMPAIGN.womensPrayerCapacityBefore),
-          after: formatAmount(locale, CAMPAIGN.womensPrayerCapacityAfter),
-          label: t('slides.friday.figureLabel'),
-        };
-      case 'visits':
-        return {
-          kind: 'single',
-          value: formatAmount(locale, CAMPAIGN.studentVisitorsPerYear),
-          label: t('slides.visits.figureLabel'),
-        };
-      case 'iftar':
-      case 'services':
-      default:
-        return { kind: 'none' };
+    if (activeKey === 'education') {
+      return {
+        kind: 'single',
+        value: `${formatAmount(locale, CAMPAIGN.pupils)}+`,
+        label: t('slides.education.figureLabel'),
+      };
     }
+    return { kind: 'none' };
   }, [activeKey, locale, t]);
 
   const dirSign = isRtl ? -1 : 1;
@@ -264,16 +245,15 @@ export function CongregationToday() {
 
   return (
     <Section id="menigheten-i-dag" tone="paper" className="scroll-mt-20 !py-0">
+      {/* Sized to its content, not to the viewport. The old
+         min-height: 100svh centred the block in a full screen, and with the
+         caption now a fixed height the leftover became a band of empty
+         paper above the heading on every laptop. */}
       <div
-        className="flex flex-col justify-center"
+        className="flex flex-col"
         style={{
-          minHeight: 'calc(100svh - 80px)',
-          // 32px each (down from 40) — the new statement-above-carousel
-          // stacking adds ~12px vs the prior below-carousel layout, and
-          // 1280×800 doesn't fit at 40/40. Padding is the least
-          // load-bearing spec dimension to trim.
-          paddingTop: '96px',
-          paddingBottom: '24px',
+          paddingTop: '64px',
+          paddingBottom: '40px',
         }}
       >
         {/* Statement + indicator row — one row, container-bound.
@@ -481,12 +461,18 @@ export function CongregationToday() {
           style={{ marginTop: '16px' }}
           aria-live="polite"
         >
-          <div className="mx-auto text-center" style={{ maxWidth: '62ch' }}>
+          {/* Fixed height, so a one-line service and a two-line one with a
+             figure occupy the same space and nothing below the carousel
+             moves as the cards change. Sized for title + figure line + two
+             lines of sentence + the link. */}
+          <div className="mx-auto text-center" style={{ maxWidth: '62ch', minHeight: '11.5rem' }}>
             {reduced ? (
               <TextBlock
                 title={t(`slides.${activeKey}.title` as never)}
                 sentence={t(`slides.${activeKey}.sentence` as never)}
                 figure={figure}
+                href={`/${locale}${HREFS[activeKey]}`}
+                linkLabel={t('readMore')}
               />
             ) : (
               <AnimatePresence mode="wait" initial={false}>
@@ -506,6 +492,8 @@ export function CongregationToday() {
                     title={t(`slides.${activeKey}.title` as never)}
                     sentence={t(`slides.${activeKey}.sentence` as never)}
                     figure={figure}
+                    href={`/${locale}${HREFS[activeKey]}`}
+                    linkLabel={t('readMore')}
                   />
                 </motion.div>
               </AnimatePresence>
@@ -521,10 +509,14 @@ function TextBlock({
   title,
   sentence,
   figure,
+  href,
+  linkLabel,
 }: {
   title: string;
   sentence: string;
   figure: Figure;
+  href: string;
+  linkLabel: string;
 }) {
   return (
     <div className="flex flex-col items-center">
@@ -554,6 +546,15 @@ function TextBlock({
       >
         {sentence}
       </p>
+      <Link
+        href={href}
+        className="group mt-4 inline-flex min-h-11 items-center gap-2 text-[14px] font-semibold text-ink transition-colors hover:text-gold-deep"
+      >
+        <span className="border-b border-gold pb-0.5">{linkLabel}</span>
+        <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">
+          &rarr;
+        </span>
+      </Link>
     </div>
   );
 }

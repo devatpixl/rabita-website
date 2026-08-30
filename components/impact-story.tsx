@@ -2,31 +2,34 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
-import { openGiveSheet } from './giving-sheet';
+import { CAMPAIGN } from '@/lib/campaign';
+import { formatAmount } from '@/lib/format';
+import type { AppLocale } from '@/i18n/routing';
 import { SectionBody, SectionHeading } from './primitives';
 import { Accent } from './accent';
 
-// Impact story — adapts the Innocents "Amir chapters" scroll device to
-// Rabita. Left column is a sticky photo that cross-fades between four
-// chapters; right column scrolls the chapter panels, each opening on a
-// serif title, then body + gold-hairline tag pill. Chapter is activated
-// when it dominates the middle band of the viewport (IntersectionObserver
-// with -40% top/bottom margins).
-//
-// Reframes the previous "floor by floor" architectural device into a
-// human/editorial statement: what Rabita already is. The architectural
-// version still ships on /moskeprosjektet where floor-plan detail
-// belongs.
+// "Om Rabita" — adapts the Innocents "Amir chapters" scroll device.
+// Left column is a sticky photo that cross-fades between four chapters;
+// right column scrolls the chapter panels. Each panel opens on the key
+// figure(s) for that part of Rabita, then the part's name and one short
+// paragraph (client request 2026-08-30: name each part, carry the numbers
+// confirmed in Årsrapport 2025). Chapter is activated when it dominates
+// the middle band of the viewport.
 
-type ChapterKey = 'family' | 'learning' | 'volunteer' | 'sadaqa';
+type ChapterKey = 'family' | 'learning' | 'volunteer' | 'history';
 
 const CHAPTERS: {
   key: ChapterKey;
   photo: string;
   photoAlt: string;
 }[] = [
+  {
+    key: 'history',
+    photo: '/photos/prayer-mat-underpass.webp',
+    photoAlt:
+      'Rabita worshippers bowing in prayer on a mat under the Grønland underpass, imam leading at the front',
+  },
   {
     key: 'family',
     photo: '/photos/family-together.webp',
@@ -42,19 +45,25 @@ const CHAPTERS: {
     photo: '/photos/volunteer-megaphone.webp',
     photoAlt: 'A Rabita volunteer with a megaphone, high-vis vest reading RABITA',
   },
-  {
-    key: 'sadaqa',
-    photo: '/photos/prayer-mat-underpass.webp',
-    photoAlt:
-      'Rabita worshippers bowing in prayer on a mat under the Grønland underpass, imam leading at the front',
-  },
+
 ];
 
 export function ImpactStory() {
   const t = useTranslations('impactStory');
-  const ts = useTranslations('sadaqa');
-  const locale = useLocale();
-  const [active, setActive] = useState<ChapterKey>('family');
+  const locale = useLocale() as AppLocale;
+
+  // The one figure each part leads with, interpolated into its headline
+  // (the site's gold-italic accent), plus the secondary figure the body
+  // sentence mentions. All from lib/campaign.ts.
+  const n = (v: number) => formatAmount(locale, v);
+  const values: Record<ChapterKey, Record<string, string>> = {
+    history: { year: String(CAMPAIGN.foundedYear) },
+    family: { members: n(CAMPAIGN.members), nationalities: String(CAMPAIGN.nationalities) },
+    learning: { pupils: n(CAMPAIGN.pupils) },
+    volunteer: { volunteers: n(CAMPAIGN.volunteers), visitors: n(CAMPAIGN.visitorsPerWeek) },
+  };
+
+  const [active, setActive] = useState<ChapterKey>('history');
   const [reduced, setReduced] = useState(false);
   const panelsRef = useRef<Map<ChapterKey, HTMLElement>>(new Map());
 
@@ -74,17 +83,33 @@ export function ImpactStory() {
     const narrow = window.matchMedia('(max-width: 767px)').matches;
     const rootMargin = narrow ? '-62% 0px -20% 0px' : '-40% 0px -40% 0px';
 
+    // The observer only reports the panels whose intersection CHANGED, so
+    // deciding from `entries` alone handed the picture to the next chapter
+    // the moment its first line touched the band — while the chapter being
+    // read still filled most of it. Keep the latest ratio for every panel
+    // and pick the one that occupies the band most; on a tie, the earlier
+    // one, so a chapter is never taken away before its successor has
+    // clearly arrived.
+    const ratios = new Map<ChapterKey, number>();
+    const order = CHAPTERS.map((c) => c.key);
     const io = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible.length > 0) {
-          const key = visible[0].target.getAttribute('data-chapter') as ChapterKey | null;
-          if (key) setActive(key);
+        for (const e of entries) {
+          const key = e.target.getAttribute('data-chapter') as ChapterKey | null;
+          if (key) ratios.set(key, e.isIntersecting ? e.intersectionRatio : 0);
         }
+        let best: ChapterKey | null = null;
+        let bestRatio = 0;
+        for (const key of order) {
+          const r = ratios.get(key) ?? 0;
+          if (r > bestRatio + 0.05) {
+            best = key;
+            bestRatio = r;
+          }
+        }
+        if (best) setActive(best);
       },
-      { rootMargin, threshold: [0, 0.25, 0.5, 0.75, 1] },
+      { rootMargin, threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1] },
     );
     panelsRef.current.forEach((el) => io.observe(el));
     return () => io.disconnect();
@@ -96,12 +121,14 @@ export function ImpactStory() {
     <section id="menigheten-forteller" className="bg-paper-2 pt-section-sm pb-section-sm">
       <SectionBody>
         <div className="mb-16 max-w-3xl">
+          <p className="mb-4 font-mono text-[0.75rem] uppercase tracking-[0.16em] text-gold-deep">
+            {t('eyebrow')}
+          </p>
           <SectionHeading reveal className="text-balance">
             {t.rich('heading', {
               em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
             })}
           </SectionHeading>
-          <p className="mt-6 text-body text-ink-60 max-w-prose">{t('lede')}</p>
         </div>
 
         <div className="md:grid md:gap-10 md:grid-cols-12">
@@ -109,10 +136,12 @@ export function ImpactStory() {
           {/* Pinned on the phone too, not only from md. innocents.no keeps its
              story photo sticky at every width, shortens the crop and widens
              the gaps between chapters; without the pin the sequence is just
-             four paragraphs under one picture. top-[84px] clears the header,
+             four paragraphs under one picture. top-[68px] clears the header
+             (60px since the mobile capsule was tightened on 2026-08-30, plus
+             8px of air; it was 84 for the old 77px bar),
              z-[1] keeps the chapters travelling behind the photograph rather
              than over it. */}
-          <div className="sticky top-[84px] z-[1] bg-paper-2 pb-4 md:static md:col-span-6 md:bg-transparent md:pb-0">
+          <div className="sticky top-[68px] z-[1] bg-paper-2 pb-4 md:static md:col-span-6 md:bg-transparent md:pb-0">
             <div className="md:sticky md:top-20 md:h-[calc(100svh-5rem)] md:flex md:flex-col md:justify-center">
               {/* Capped so the whole photo is on screen at 100% zoom. The column is
                      wide enough for a 665px tall 4:5 crop, which is taller than a
@@ -158,17 +187,20 @@ export function ImpactStory() {
                   {(activeIndex + 1).toString().padStart(2, '0')} / {CHAPTERS.length.toString().padStart(2, '0')}
                 </span>
                 <span aria-hidden className="h-px flex-1 bg-rule" />
-                <span className="shrink-0 text-ink-60">{t(`items.${active}.tag`)}</span>
+                <span className="shrink-0 text-ink-60">{t(`items.${active}.name`)}</span>
               </div>
             </div>
           </div>
 
-          {/* Scrolling chapter panels */}
+          {/* Scrolling chapter panels. The bottom padding is the last
+             chapter's runway: without it the section ends the moment the
+             fourth chapter is reached, the photo un-pins and the reader
+             gets a fraction of the time the other three had. */}
           {/* Each chapter needs scroll distance of its own, otherwise two of
              them cross the observer's trigger band in the same flick and the
              pinned photo skips a frame. 38vh between panels on mobile is the
              innocents.no measure, give or take. */}
-          <ol className="mt-8 space-y-[38vh] pb-[16vh] md:col-span-6 md:mt-0 md:space-y-32 md:pb-0 md:py-16">
+          <ol className="mt-8 space-y-[38vh] pb-[16vh] md:col-span-6 md:mt-0 md:space-y-44 md:pt-20 md:pb-[34vh]">
             {CHAPTERS.map((c, i) => (
               <li
                 key={c.key}
@@ -180,60 +212,20 @@ export function ImpactStory() {
                   reduced || active === c.key ? 'opacity-100' : 'opacity-40'
                 }`}
               >
-                {/* The "CHAPTER 01 · ALWAYS" line that used to open each
-                   panel is gone. It was the site's habit of announcing a
-                   section before letting it speak — and the number was
-                   already on screen, in the 01 / 04 counter under the
-                   photograph. The title now opens the panel. */}
+                {/* Headline carries the part's figure in the gold italic
+                   accent the rest of the site uses; body carries any
+                   secondary figure in prose; the pill names the part. */}
                 <h3 className="font-serif text-section text-ink leading-[1.1] text-balance">
                   {t.rich(`items.${c.key}.title`, {
+                    ...values[c.key],
                     em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
                   })}
                 </h3>
-                <p className="mt-5 text-body text-ink max-w-prose">{t(`items.${c.key}.body`)}</p>
-
-                {/* Chapter 04 (sadaqa) absorbs the deleted standalone
-                   sadaqa section: gold-hairline mono mark, the three-
-                   item acknowledgement list, and the stacked CTAs. The
-                   chapter is deliberately visually heavier than 01–03
-                   because it carries the ask. */}
-                {c.key === 'sadaqa' && (
-                  <>
-                    <ul className="mt-6 space-y-3 text-body text-ink-60 max-w-prose">
-                      <li className="flex items-baseline gap-3">
-                        <span aria-hidden className="h-px w-4 bg-gold mt-2 shrink-0" />
-                        <span>{ts('bullets.family')}</span>
-                      </li>
-                      <li className="flex items-baseline gap-3">
-                        <span aria-hidden className="h-px w-4 bg-gold mt-2 shrink-0" />
-                        <span>{ts('bullets.certificate')}</span>
-                      </li>
-                      <li className="flex items-baseline gap-3">
-                        <span aria-hidden className="h-px w-4 bg-gold mt-2 shrink-0" />
-                        <span>{ts('bullets.transparent')}</span>
-                      </li>
-                    </ul>
-                    <div className="mt-8 flex flex-col items-start gap-3">
-                      <Link
-                        href={`/${locale}/doner-en-bonneplass`}
-                        className="inline-flex items-center gap-2 min-h-12 rounded-full bg-gold-deep text-paper px-6 py-3 text-[15px] font-semibold transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99]"
-                      >
-                        {ts('primary')}
-                        <ArrowIcon className="h-3.5 w-3.5" />
-                      </Link>
-                      <button
-                        type="button"
-                        onClick={() => openGiveSheet()}
-                        className="inline-flex items-center min-h-12 rounded-full border border-ink px-6 py-3 text-[15px] font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
-                      >
-                        {ts('secondary')}
-                      </button>
-                    </div>
-                  </>
-                )}
-
+                <p className="mt-5 max-w-prose text-body text-ink">
+                  {t(`items.${c.key}.body`, values[c.key])}
+                </p>
                 <span className="mt-6 inline-flex items-center rounded-btn border border-gold/60 bg-paper px-3 py-1 text-[13px] text-gold-deep">
-                  {t(`items.${c.key}.tag`)}
+                  {t(`items.${c.key}.name`)}
                 </span>
               </li>
             ))}
@@ -241,22 +233,5 @@ export function ImpactStory() {
         </div>
       </SectionBody>
     </section>
-  );
-}
-
-function ArrowIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden
-    >
-      <path d="M5 12h14M13 5l7 7-7 7" />
-    </svg>
   );
 }

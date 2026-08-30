@@ -5,7 +5,6 @@
 // date — the Hijri line would freeze on whatever day the site was last
 // deployed and never advance. Passing `now` in forces the caller to have
 // a mounted, client-side date.
-import { PRAYER_TIMES_TODAY } from './campaign';
 import type { AppLocale } from '@/i18n/routing';
 
 const CALENDAR_TAG: Record<AppLocale, string> = {
@@ -22,8 +21,8 @@ export function hijriDate(locale: AppLocale, now: Date): string {
       year: 'numeric',
     }).format(now);
   } catch {
-    // Older engines without the Islamic calendar fall back to the static
-    // approximation rather than showing nothing.
-    return `${PRAYER_TIMES_TODAY.hijriDayApprox} ${PRAYER_TIMES_TODAY.hijriMonth}`;
+    // Older engines without the Islamic calendar show nothing rather than
+    // a wrong date.
+    return '';
   }
 }

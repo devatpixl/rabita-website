@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
-import { CAMPAIGN, PRAYER_TIMES_TODAY } from '@/lib/campaign';
-import { PRAYER_DAYS, type PrayerDay } from '@/lib/prayer-times';
+import { CAMPAIGN } from '@/lib/campaign';
+import { getPrayerData } from '@/lib/irn';
+import type { PrayerDay } from '@/lib/prayer-times';
 import { PrintButton } from '@/components/print-button';
 import type { AppLocale } from '@/i18n/routing';
 
@@ -47,9 +48,10 @@ export default async function CalendarPage({
   const t = await getTranslations('bonnetiderPage');
   const tc = await getTranslations('calendar');
 
-  const months = [...new Set(PRAYER_DAYS.map((d) => d.date.slice(0, 7)))].sort();
+  const { days, jumuah } = await getPrayerData();
+  const months = [...new Set(days.map((d) => d.date.slice(0, 7)))].sort();
   const month = m && months.includes(m) ? m : months[0];
-  const rows: PrayerDay[] = PRAYER_DAYS.filter((d) => d.date.startsWith(month));
+  const rows: PrayerDay[] = days.filter((d) => d.date.startsWith(month));
 
   const tag = localeTag(l);
   const monthFmt = new Intl.DateTimeFormat(tag, { month: 'long', year: 'numeric' });
@@ -131,7 +133,13 @@ export default async function CalendarPage({
             <p className="text-[0.85rem] tabular-nums text-ink-60">{hijriSpan}</p>
           </div>
 
-          <table className="mt-6 w-full border-collapse text-[0.8rem]">
+          {/* Scroll container: the seven prayer columns need ~525px and a
+             phone gives the card 329px, so without this the right-hand
+             columns were clipped and unreachable. -mx-* bleeds the rail to
+             the card edge so the first column still lines up with the
+             heading above it. print:overflow-visible keeps the PDF whole. */}
+          <div className="no-scrollbar -mx-5 mt-6 overflow-x-auto px-5 sm:mx-0 sm:px-0 print:mx-0 print:overflow-visible print:px-0">
+          <table className="w-full min-w-[30rem] border-collapse text-[0.8rem]">
             <thead>
               <tr>
                 <th className="border-b border-ink py-2 pe-3 text-start font-mono text-[0.62rem] uppercase tracking-[0.12em] font-normal text-ink-60">
@@ -176,13 +184,14 @@ export default async function CalendarPage({
               })}
             </tbody>
           </table>
+          </div>
 
           <div className="mt-6 flex flex-wrap items-baseline gap-x-6 gap-y-2 border border-rule bg-paper-2 px-5 py-3">
             <p className="font-mono text-[0.62rem] uppercase tracking-[0.12em] text-gold-deep">
               {t('jumua')}
             </p>
             <p className="font-serif text-[1.35rem] leading-none tabular-nums text-ink">
-              {PRAYER_TIMES_TODAY.jumua}
+              {jumuah.join(' · ')}
             </p>
             <p className="text-[0.8rem] text-ink-60">{t('jumuaNote')}</p>
           </div>

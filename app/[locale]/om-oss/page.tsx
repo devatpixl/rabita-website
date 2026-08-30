@@ -31,10 +31,15 @@ export default async function AboutPage({
                divided off, which gives the column structure and gives the
                numerals the room they need. */}
             <dl className="md:col-span-4">
+              {/* Key figures as confirmed in Årsrapport 2025, in the order the
+                 client listed them (2026-08-30). */}
               {([
                 [String(CAMPAIGN.foundedYear), t('facts.founded')],
                 [CAMPAIGN.members.toLocaleString('nb-NO'), t('facts.members')],
+                [`${CAMPAIGN.volunteers}`, t('facts.volunteers')],
+                [`${CAMPAIGN.pupils}+`, t('facts.pupils')],
                 [`${CAMPAIGN.nationalities}+`, t('facts.nationalities')],
+                [CAMPAIGN.visitorsPerWeek.toLocaleString('nb-NO'), t('facts.visits')],
               ] as const).map(([value, label]) => (
                 <div key={label} className="border-t border-rule py-5 first:pt-0 last:border-b last:border-rule">
                   <Stat value={value} label={label} />

@@ -34,7 +34,10 @@ export function MotionRise({
       ([entry]) => {
         if (entry.isIntersecting) {
           window.setTimeout(() => setVisible(true), delay);
-        } else {
+        } else if (entry.boundingClientRect.top > 0) {
+          // Left downwards (back above the fold): reset so it rises again.
+          // Left upwards (scrolled past): stay put — a section translating
+          // back down as it exits paints over the section after it.
           setVisible(false);
         }
       },

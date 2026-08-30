@@ -103,11 +103,16 @@ export function GiftBuilds() {
             />
           </div>
 
-          <ul className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+          {/* A swipe rail on a phone, the grid from sm up (client, 2026-08-30).
+             Four cards each carrying a 4:3 plate stacked vertically was four
+             screens of scroll for what is one idea. Cards sit at 78% so the
+             next one peeks in and the row reads as swipeable without a hint.
+             snap-mandatory so it always settles on a card. */}
+          <ul className="no-scrollbar -mx-1 flex snap-x snap-mandatory gap-5 overflow-x-auto px-1 pb-1 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-12 sm:overflow-visible sm:px-0 lg:grid-cols-4">
             {GIFTS.map((g, i) => {
               const dimmed = focused !== null && focused !== i;
               return (
-                <li key={g.key}>
+                <li key={g.key} className="w-[78%] shrink-0 snap-start sm:w-auto sm:shrink">
                   <motion.button
                     type="button"
                     onClick={() => openGiveSheet(g.amountNok)}
@@ -146,7 +151,7 @@ export function GiftBuilds() {
                         </span>
                       </span>
 
-                      <span className="relative block aspect-[1/1] overflow-hidden rounded-lg bg-dusk">
+                      <span className="relative block aspect-[4/3] overflow-hidden rounded-lg bg-dusk md:aspect-[1/1]">
                         <motion.span
                           className="absolute inset-0 block"
                           initial={{ clipPath: still ? 'inset(0% 0 0 0)' : 'inset(100% 0 0 0)' }}

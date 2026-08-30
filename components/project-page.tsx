@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Accent } from './accent';
+import { AssuranceList, type AssuranceItem } from './assurance-list';
 import { SectionBody } from './primitives';
 import { GiveCTA } from './give-cta';
 
@@ -13,6 +14,8 @@ export function ProjectHero({
   eyebrow,
   title,
   lede,
+  ledeShort,
+  aside,
   image,
   alt,
   primary,
@@ -22,26 +25,60 @@ export function ProjectHero({
   eyebrow: string;
   title: ReactNode;
   lede: string;
+  /** One or two lines for phones; the full lede shows from md. */
+  ledeShort?: string;
   image: string;
   alt: string;
   primary?: { label: string; href?: string; give?: boolean };
   secondary?: { label: string; href: string };
+  /** Optional right-hand column, e.g. a giving box. */
+  aside?: ReactNode;
 }) {
+  // The negative margin pulls the hero under the sticky header so the picture
+  // starts at the top of the screen. It has to match the header's real height,
+  // which is 60px on a phone since 2026-08-30 and 77 from md up.
   return (
-    <section className="relative isolate -mt-[77px] overflow-hidden bg-dusk pt-[77px] text-paper">
-      <div className="absolute inset-0">
+    <section className="relative isolate -mt-[60px] overflow-hidden bg-dusk pt-[60px] text-paper md:-mt-[77px] md:pt-[77px]">
+      {/* Below md the picture is CAPPED at 52svh rather than covering the
+         section. With a giving card in the hero this section runs ~1080px on
+         a phone, and stretching a 16:9-ish render over that with object-cover
+         showed about a fifth of the frame — the photo read as massively
+         zoomed in. Capped, the render keeps its proportions and plain dusk
+         carries the rest of the section behind the card. 52svh, not more:
+         the source is a wide band, so a taller box magnifies it again. */}
+      <div className="absolute inset-x-0 top-0 h-[52svh] md:inset-0 md:h-auto">
         <Image src={image} alt={alt} fill priority sizes="100vw" className="object-cover" style={{ filter: GRADE }} />
-        <div aria-hidden className="absolute inset-0 bg-dusk/80" />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-dusk via-dusk/70 to-transparent" />
+        {/* A light veil plus a reading-side gradient. The flat 80% dusk
+           that used to sit here turned every render into a dark slab; now
+           the picture shows on the right and the words stay legible on
+           the left. */}
+        <div aria-hidden className="absolute inset-0 bg-dusk/30" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-dusk via-dusk/65 to-transparent" />
+        {/* Foot fade, phones only: the capped crop has a hard bottom edge
+           otherwise, right where the dusk section continues. */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-dusk md:hidden"
+        />
       </div>
 
-      <SectionBody className="relative py-section-md">
+      {/* With a card in the hero the whole thing has to fit a 13-inch laptop
+         screen: 8 units of padding, not the section default. */}
+      <SectionBody className={aside ? 'relative py-8' : 'relative py-section-md'}>
         <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-dusk-60">{crumb}</p>
-        <div className="mt-8 max-w-3xl">
+        <div className={aside ? 'mt-5 grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12' : undefined}>
+        <div className={aside ? 'max-w-3xl lg:col-span-7' : 'mt-8 max-w-3xl'}>
           <h1 className="font-serif text-display text-balance text-paper">{title}</h1>
-          <p className="mt-6 max-w-prose text-body text-paper/80">{lede}</p>
+          {ledeShort ? (
+            <>
+              <p className="mt-5 max-w-prose text-body text-paper/80 md:hidden">{ledeShort}</p>
+              <p className="mt-6 hidden max-w-prose text-body text-paper/80 md:block">{lede}</p>
+            </>
+          ) : (
+            <p className="mt-6 max-w-prose text-body text-paper/80">{lede}</p>
+          )}
           {(primary || secondary) && (
-            <div className="mt-9 flex flex-wrap items-center gap-4">
+            <div className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               {primary?.give && <GiveCTA label={primary.label} />}
               {primary && !primary.give && primary.href && (
                 <Link
@@ -54,13 +91,15 @@ export function ProjectHero({
               {secondary && (
                 <Link
                   href={secondary.href}
-                  className="inline-flex min-h-12 items-center rounded-full border border-paper/40 px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:border-paper"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-paper/40 px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:border-paper"
                 >
                   {secondary.label}
                 </Link>
               )}
             </div>
           )}
+        </div>
+        {aside && <div className="lg:col-span-5 lg:justify-self-end lg:w-full lg:max-w-[24rem]">{aside}</div>}
         </div>
       </SectionBody>
     </section>
@@ -151,27 +190,21 @@ export function ProjectAssurance({
 }: {
   heading: ReactNode;
   lede: string;
-  items: { title: string; body: string }[];
+  items: AssuranceItem[];
 }) {
   return (
     <section className="bg-dusk py-section-md text-paper">
       <SectionBody>
         <div className="grid gap-12 md:grid-cols-12 md:gap-16">
-          <div className="md:col-span-4">
+          {/* Sticky, so the heading keeps company with the list instead of
+             stranding above an empty column. */}
+          <div className="md:col-span-4 md:sticky md:top-28 md:self-start">
             <h2 className="font-serif text-section text-balance text-paper">{heading}</h2>
-            <p className="mt-5 max-w-prose text-body text-dusk-60">{lede}</p>
+            <p className="mt-5 max-w-prose text-body text-paper/70">{lede}</p>
           </div>
-          <ul className="md:col-span-8">
-            {items.map((it, i) => (
-              <li key={it.title} className="grid gap-x-8 gap-y-2 border-t border-paper/15 py-6 md:grid-cols-12">
-                <span className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-gold md:col-span-1">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <h3 className="font-serif text-[1.15rem] text-paper md:col-span-4">{it.title}</h3>
-                <p className="max-w-[46ch] text-[14px] leading-relaxed text-dusk-60 md:col-span-7">{it.body}</p>
-              </li>
-            ))}
-          </ul>
+          <div className="md:col-span-8">
+            <AssuranceList items={items} />
+          </div>
         </div>
       </SectionBody>
     </section>

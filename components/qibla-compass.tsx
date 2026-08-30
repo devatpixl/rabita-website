@@ -43,8 +43,8 @@ export function QiblaCompass({ tone = 'ink' }: { tone?: 'ink' | 'paper' } = {}) 
   const rounded = Math.round(bearing);
 
   return (
-    <div className="flex items-center gap-4">
-      <svg viewBox="0 0 40 40" className={`h-10 w-10 ${strong}`} aria-hidden>
+    <div className="flex items-center gap-2.5 sm:gap-4">
+      <svg viewBox="0 0 40 40" className={`h-8 w-8 sm:h-10 sm:w-10 ${strong}`} aria-hidden>
         {/* Dial */}
         <circle
           cx={20}
@@ -96,7 +96,7 @@ export function QiblaCompass({ tone = 'ink' }: { tone?: 'ink' | 'paper' } = {}) 
         >
           {t('qibla')} · <span className="tabular-nums">{rounded}°</span>
         </span>
-        <span className={`text-[12px] ${dim}`}>
+        <span className={`hidden text-[12px] sm:inline ${dim}`}>
           {source === 'user' ? t('fromHere') : t('fromOslo')}
         </span>
       </div>

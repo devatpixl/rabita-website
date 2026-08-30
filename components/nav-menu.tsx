@@ -43,7 +43,8 @@ export function DesktopNav() {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     closeTimer.current = null;
   };
-  // Prayer has no children — it is a direct link to the times. Opening an
+  // A heading without children (none today; Prayer gained its own list on
+  // 2026-08-30) is a plain link. Opening an
   // empty panel under it would flash a blank card on hover.
   const hasMenu = (key: NavKey) =>
     ((t.raw(`menu.${key}`) as Item[] | undefined) ?? []).length > 0;
@@ -222,12 +223,21 @@ export function MobileNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  // Which section has its sub-items showing. One at a time — a phone drawer
+  // that can have all five open again is the wall of links we just left.
+  const [expanded, setExpanded] = useState<NavKey | null>(null);
 
   useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  // Collapse the sections again once the drawer is shut, so reopening it
+  // always starts at the five headings rather than wherever you last were.
+  useEffect(() => {
+    if (!open) setExpanded(null);
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -320,9 +330,11 @@ export function MobileNav() {
                     </button>
                   </div>
 
-                  {/* Everything is open. The accordion meant two taps to reach
-                     any of the eighteen pages behind these five headings, and
-                     hid from the reader that the pages existed at all. */}
+                  {/* Main categories only, sub-pages folded behind a chevron
+                     (client, 2026-08-30). Eighteen links stacked open turned
+                     the drawer into a scroll of its own on a phone. Nothing is
+                     gone: the heading still navigates in one tap, and the
+                     chevron opens its pages without leaving the drawer. */}
                   <div className="no-scrollbar min-h-0 flex-1 overflow-y-auto px-5 pb-8">
                     <div className="border-t border-paper/15 pt-4">
                       <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
@@ -335,30 +347,59 @@ export function MobileNav() {
 
                     {NAV_KEYS.map((key) => {
                       const items = (t.raw(`menu.${key}`) as Item[]) ?? [];
+                      const isOpen = expanded === key;
                       return (
-                        <div key={key} className="mt-7 border-t border-paper/15 pt-4">
-                          <LinkVT
-                            href={`/${locale}${NAV_ROOT[key]}`}
-                            onClick={() => setOpen(false)}
-                            className="block font-serif text-[26px] leading-tight text-paper transition-colors hover:text-gold"
-                          >
-                            {t(`items.${key}`)}
-                          </LinkVT>
-                          {items.length > 0 && (
-                            <ul className="mt-2">
-                              {items.map((item) => (
-                                <li key={item.href} className="border-b border-paper/10 last:border-b-0">
-                                  <LinkVT
-                                    href={`/${locale}${item.href}`}
-                                    onClick={() => setOpen(false)}
-                                    className="flex min-h-12 items-center py-1 font-serif text-[18px] text-paper/70 transition-colors hover:text-gold"
-                                  >
-                                    {item.label}
-                                  </LinkVT>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
+                        <div key={key} className="border-t border-paper/15 first:mt-5">
+                          <div className="flex items-center">
+                            <LinkVT
+                              href={`/${locale}${NAV_ROOT[key]}`}
+                              onClick={() => setOpen(false)}
+                              className="flex min-h-14 flex-1 items-center font-serif text-[22px] leading-tight text-paper transition-colors hover:text-gold"
+                            >
+                              {t(`items.${key}`)}
+                            </LinkVT>
+                            {items.length > 0 && (
+                              <button
+                                type="button"
+                                onClick={() => setExpanded(isOpen ? null : key)}
+                                aria-expanded={isOpen}
+                                aria-label={`${t(`items.${key}`)} – ${t('overview')}`}
+                                className="-me-2 grid h-11 w-11 shrink-0 place-items-center text-paper/60 transition-colors hover:text-gold"
+                              >
+                                <ChevronIcon
+                                  className={cn(
+                                    'h-4 w-4 transition-transform duration-300 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)]',
+                                    isOpen && 'rotate-180',
+                                  )}
+                                />
+                              </button>
+                            )}
+                          </div>
+                          <AnimatePresence initial={false}>
+                            {isOpen && items.length > 0 && (
+                              <motion.ul
+                                key="sub"
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+                                className="overflow-hidden"
+                              >
+                                {items.map((item) => (
+                                  <li key={item.href} className="border-t border-paper/10">
+                                    <LinkVT
+                                      href={`/${locale}${item.href}`}
+                                      onClick={() => setOpen(false)}
+                                      className="flex min-h-12 items-center ps-4 font-serif text-[16px] text-paper/70 transition-colors hover:text-gold"
+                                    >
+                                      {item.label}
+                                    </LinkVT>
+                                  </li>
+                                ))}
+                                <li className="h-2" />
+                              </motion.ul>
+                            )}
+                          </AnimatePresence>
                         </div>
                       );
                     })}
@@ -397,5 +438,24 @@ export function MobileNav() {
           document.body,
         )}
     </>
+  );
+}
+
+// Chevron for the mobile accordion. Same 1.8 stroke and round caps as the
+// arrows elsewhere in the chrome, so it belongs to the same set.
+function ChevronIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden
+    >
+      <path d="M6 9l6 6 6-6" />
+    </svg>
   );
 }

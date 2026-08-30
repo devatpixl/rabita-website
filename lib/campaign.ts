@@ -22,11 +22,13 @@ export const CAMPAIGN = Object.freeze({
   raisedAsOf: '2026-08-01', // last snapshot date; replace when live feed lands
   phase: 'foundations' as const,
 
-  // Community — §10
-  members: 4_200,
-  nationalities: 40,
-  studentVisitorsPerYear: 5_000,
-  pupils: 400,
+  // Community — figures confirmed in Rabita Årsrapport 2025 (p. 1 & 9)
+  members: 4_344, // ordinære medlemmer
+  volunteers: 300, // "over 300 frivillige per år"
+  visitorsPerWeek: 10_000, // "10.000 besøkende i uken"
+  nationalities: 50, // "mer enn 50 nasjonaliteter"
+  pupils: 400, // "over 400 studenter/elever på Rabita"
+  studentVisitorsPerYear: 5_000, // school/university visits — not in the report; §10 brief
   teachers: 19,
   womensPrayerCapacityBefore: 100,
   womensPrayerCapacityAfter: 500,
@@ -63,25 +65,8 @@ export const CAMPAIGN = Object.freeze({
   contactPhone: '+47 22 20 80 88', // TODO confirm; placeholder
 });
 
-// §13.4 ANSWERED (strategy meeting): prayer times come from the screen in
-// the mosque, not an external API and not staff entry. Until that sync
-// exists, the real published table lives in lib/prayer-times.ts and should
-// be preferred over this object — it covers 2026-08-01 to 2026-12-31.
-//
-// What remains here is a single-day fallback for surfaces that have no date
-// to look up (and for dates outside the published range). Values match
-// rabita.no for 2026-08-21. `jumua` is site-wide, not a fallback.
-export const PRAYER_TIMES_TODAY = Object.freeze({
-  fajr: '03:17',
-  sunrise: '05:46',
-  dhuhr: '13:30',
-  asr: '17:18',
-  maghrib: '20:59',
-  isha: '22:23',
-  jumua: '15:00', // Rabita publishes 15:00; 13:30 here was Friday's dhuhr
-  hijriMonth: 'Safar',
-  hijriDayApprox: 15,
-});
+// Prayer times: live from IRN's API via lib/irn.ts, with lib/prayer-times.ts
+// as the offline fallback. Nothing prayer-related is hard-coded here any more.
 
 // Named phase-1 sub-campaign so 100M doesn't feel unfinishable per §4.
 export const SUB_CAMPAIGN = Object.freeze({
@@ -112,11 +97,11 @@ export function currentPhaseKey(now: Date = new Date()): PhaseKey {
 // when Prisma is wired.
 export const FOUNDATION_WALL_THRESHOLD_NOK = 10_000;
 
-// Preset amount ladder — trimmed to two headline amounts + Other on the
-// hero card, so the card fits above the fold. Larger preset ladders live
-// on the dedicated /gi-en-gave route where the anchoring argument (§3)
-// matters more than compactness.
-export const AMOUNT_PRESETS = [500, 1_000] as const;
+// Preset amount ladder, laid out 2×2 with a recommended box and an
+// always-open "other amount" row — the innocents.no pattern the client
+// asked for (2026-08-30).
+export const AMOUNT_PRESETS = [200, 500, 1_000, 2_500] as const;
+export const RECOMMENDED_AMOUNT: (typeof AMOUNT_PRESETS)[number] = 500;
 export const DEFAULT_AMOUNT: (typeof AMOUNT_PRESETS)[number] = 500;
 export const DEFAULT_FREQUENCY: 'monthly' | 'once' = 'monthly';
 

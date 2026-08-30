@@ -4,49 +4,23 @@ import { useEffect, useState } from 'react';
 import { motion, useInView, useReducedMotion } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
-import { PRAYER_TIMES_TODAY } from '@/lib/campaign';
 import { cn } from '@/lib/cn';
+import { PRAYER_ORDER, prayerWindow, type PrayerWindow } from '@/lib/prayer-window';
+import { joinJumuah, usePrayerData, usePrayerDay } from './prayer-data-provider';
 
 // Prayer times as a thing happening: the window you are in fills, the next one counts down.
 
-const ORDER = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'] as const;
-type Key = (typeof ORDER)[number];
-
-const mins = (hhmm: string) => {
-  const [h, m] = hhmm.split(':').map(Number);
-  return h * 60 + m;
-};
-
-/** Which window we are inside, and which one is next, in minutes from midnight. */
-function windowNow(nowMin: number) {
-  const stops = ORDER.map((k) => ({ key: k, at: mins(PRAYER_TIMES_TODAY[k]) }));
-  let current = stops[stops.length - 1]; // before Fajr we are still inside last night's Isha
-  let next = stops[0];
-  let wrapped = true;
-  for (let i = 0; i < stops.length; i++) {
-    if (nowMin >= stops[i].at) {
-      current = stops[i];
-      next = stops[i + 1] ?? stops[0];
-      wrapped = i === stops.length - 1;
-    }
-  }
-  const from = current.at;
-  const to = wrapped || next.at <= from ? next.at + 1440 : next.at;
-  const n = nowMin < from ? nowMin + 1440 : nowMin;
-  const span = Math.max(1, to - from);
-  return {
-    current: current.key,
-    next: next.key,
-    untilNext: Math.max(0, to - n),
-    through: Math.min(1, Math.max(0, (n - from) / span)),
-  };
-}
+const ORDER = PRAYER_ORDER;
 
 export function PrayerToday() {
   const t = useTranslations('prayerVisit');
   const reduced = useReducedMotion();
   const [mounted, setMounted] = useState(false);
-  const [state, setState] = useState<ReturnType<typeof windowNow> | null>(null);
+  const [now, setNow] = useState<Date | null>(null);
+  const { jumuah } = usePrayerData();
+  const today = usePrayerDay(now);
+  const state: PrayerWindow | null =
+    now && today ? prayerWindow(today, now.getHours() * 60 + now.getMinutes()) : null;
   const root = useRef<HTMLDivElement>(null);
   const live = useInView(root, { margin: '-10% 0px' });
 
@@ -54,10 +28,7 @@ export function PrayerToday() {
   const still = mounted && reduced === true;
 
   useEffect(() => {
-    const tick = () => {
-      const d = new Date();
-      setState(windowNow(d.getHours() * 60 + d.getMinutes()));
-    };
+    const tick = () => setNow(new Date());
     tick();
     const id = window.setInterval(tick, 30_000);
     return () => window.clearInterval(id);
@@ -118,7 +89,7 @@ export function PrayerToday() {
                     </span>
                   )}
                   <span className={cn(isNow ? 'font-semibold text-ink' : 'text-ink-60')}>
-                    {PRAYER_TIMES_TODAY[key]}
+                    {today ? today[key] : '—'}
                   </span>
                 </span>
               </div>
@@ -141,7 +112,7 @@ export function PrayerToday() {
         className="flex items-baseline justify-between gap-4 border-b border-rule bg-paper py-3 text-body tabular-nums"
       >
         <span className="ps-[18px] font-semibold text-ink">{t('names.jumua')}</span>
-        <span className="font-semibold text-ink">{PRAYER_TIMES_TODAY.jumua}</span>
+        <span className="font-semibold text-ink">{joinJumuah(jumuah)}</span>
       </div>
     </div>
   );

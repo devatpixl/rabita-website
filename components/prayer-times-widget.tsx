@@ -2,14 +2,15 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { PRAYER_TIMES_TODAY } from '@/lib/campaign';
 import { hijriDate } from '@/lib/hijri';
+import type { PrayerDay } from '@/lib/prayer-times';
 import type { AppLocale } from '@/i18n/routing';
 import { cn } from '@/lib/cn';
 import {
   PRAYER_PANEL_ID,
   usePrayerPanel,
 } from './prayer-panel-provider';
+import { joinJumuah, usePrayerData, usePrayerDay, usePrayerDayAfter } from './prayer-data-provider';
 
 // Utility-strip widget — the STRIP-side trigger for the shared prayer
 // panel. Renders next-prayer name + time + countdown + gold-deep
@@ -26,21 +27,27 @@ import {
 type PrayerKey = 'fajr' | 'sunrise' | 'dhuhr' | 'asr' | 'maghrib' | 'isha';
 const ORDER: PrayerKey[] = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'];
 
-function parseTimeToday(hhmm: string): Date {
+function parseTimeOn(base: Date, hhmm: string): Date {
   const [h, m] = hhmm.split(':').map(Number);
-  const d = new Date();
+  const d = new Date(base);
   d.setHours(h, m, 0, 0);
   return d;
 }
 
-function nextPrayer(now: Date): { key: PrayerKey; at: Date } {
+function nextPrayer(
+  now: Date,
+  today: PrayerDay,
+  tomorrow: PrayerDay | null,
+): { key: PrayerKey; at: Date; time: string } {
   for (const key of ORDER) {
-    const at = parseTimeToday(PRAYER_TIMES_TODAY[key]);
-    if (at.getTime() > now.getTime()) return { key, at };
+    const at = parseTimeOn(now, today[key]);
+    if (at.getTime() > now.getTime()) return { key, at, time: today[key] };
   }
-  const at = parseTimeToday(PRAYER_TIMES_TODAY.fajr);
+  // Past Isha: tomorrow's Fajr, from tomorrow's row when we have it.
+  const fajr = tomorrow?.fajr ?? today.fajr;
+  const at = parseTimeOn(now, fajr);
   at.setDate(at.getDate() + 1);
-  return { key: 'fajr', at };
+  return { key: 'fajr', at, time: fajr };
 }
 
 function localeTag(locale: AppLocale): string {
@@ -51,6 +58,7 @@ export function PrayerTimesWidget() {
   const t = useTranslations('utility.prayer');
   const locale = useLocale() as AppLocale;
   const { open, toggle, registerStripTrigger } = usePrayerPanel();
+  const { jumuah } = usePrayerData();
 
   const [now, setNow] = useState<Date | null>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
@@ -66,7 +74,12 @@ export function PrayerTimesWidget() {
     return () => registerStripTrigger(null);
   }, [registerStripTrigger]);
 
-  const next = useMemo(() => (now ? nextPrayer(now) : null), [now]);
+  const today = usePrayerDay(now);
+  const tomorrow = usePrayerDayAfter(now);
+  const next = useMemo(
+    () => (now && today ? nextPrayer(now, today, tomorrow) : null),
+    [now, today, tomorrow],
+  );
   const countdown = useMemo(() => {
     if (!now || !next) return null;
     const diff = Math.max(0, next.at.getTime() - now.getTime());
@@ -95,7 +108,7 @@ export function PrayerTimesWidget() {
         {next ? (
           <span>
             <span className="text-ink">{t(`names.${next.key}`)}</span>{' '}
-            <span className="text-ink">{PRAYER_TIMES_TODAY[next.key]}</span>
+            <span className="text-ink">{next.time}</span>
             <span className="ms-2 text-ink-60">({countdown})</span>
           </span>
         ) : (
@@ -111,7 +124,7 @@ export function PrayerTimesWidget() {
       </button>
       <span aria-hidden className="text-rule">·</span>
       <span className="tabular-nums text-ink-60">
-        {t('jumua')} {PRAYER_TIMES_TODAY.jumua}
+        {t('jumua')} {joinJumuah(jumuah)}
       </span>
       <span aria-hidden className="text-rule">·</span>
       <span className="tabular-nums text-ink-60">{hijri}</span>

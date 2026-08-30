@@ -7,7 +7,7 @@
     "eyebrow": "Calmeyers gate 8, Oslo",
     "credLine": "FOUNDED 1987 · OSLO'S FIRST MOSQUE ACROSS NATIONALITIES",
     "headline": "The site is ready. Now we raise the building.",
-    "headlineBefore": "A mosque, a school, a library, a kitchen. ",
+    "headlineBefore": "Mosque, school, library. ",
     "headlineAccent": "One address.",
     "headlineAfter": "",
     "subhead": "Oslo’s mosque across nationalities since 1987. Your gift raises seven floors at Calmeyers gate 8: prayer space by prayer space, desk by desk, shelf by shelf.",
@@ -69,27 +69,38 @@
           "href": "/moskeprosjektet"
         },
         {
-          "label": "Where the money goes",
-          "blurb": "Accounts, audit and tax relief",
-          "href": "/hvor-pengene-gar"
-        },
-        {
-          "label": "The donors",
-          "blurb": "Names on the foundation wall",
-          "href": "/givere"
+          "label": "Apartments",
+          "blurb": "Fifteen apartments for sale in the new building",
+          "href": "/moskeprosjektet/leiligheter"
         },
         {
           "label": "Donate a prayer space",
           "blurb": "Sadaqa jariya in a name",
           "href": "/doner-en-bonneplass"
-        },
-        {
-          "label": "Give",
-          "blurb": "Vipps, card or bank",
-          "href": "/gi-en-gave"
         }
       ],
-      "prayer": [],
+      "prayer": [
+        {
+          "label": "Prayer times",
+          "blurb": "Today, updated from IRN",
+          "href": "/bonnetider"
+        },
+        {
+          "label": "Friday prayer",
+          "blurb": "14:00 and 15:00, every Friday",
+          "href": "/bonnetider#fredagsbonn"
+        },
+        {
+          "label": "The imams",
+          "blurb": "A theological leader and two imams",
+          "href": "/bonnetider#imamene"
+        },
+        {
+          "label": "Calendar",
+          "blurb": "The whole month, ready to print",
+          "href": "/bonnetider/kalender"
+        }
+      ],
       "services": [
         {
           "label": "Nikah: wedding ceremony",
@@ -171,9 +182,11 @@
   "giving": {
     "freqMonthly": "Monthly",
     "freqOnce": "One time",
-    "customLabel": "Other",
+    "customLabel": "Other amount",
     "customPlaceholder": "e.g. 750",
     "zakatLabel": "This is zakat",
+    "anonymousLabel": "Give anonymously",
+    "paymentLogosAria": "Payment methods",
     "primaryMonthly": "Give <amount></amount> kr/mo with Vipps",
     "primaryOnce": "Give <amount></amount> kr with Vipps",
     "secondary": "Card, AvtaleGiro or bank",
@@ -198,28 +211,26 @@
       "stepAmount": "AMOUNT",
       "stepPayment": "PAYMENT",
       "stepDetails": "YOUR DETAILS",
-      "providerFillsDetails": "Vipps fills in your name and email, so the last stage happens in the app.",
       "stepLabel": "STEP {n} OF {total} · {label}",
       "stepAnnounce": "Step {n} of {total}: {label}",
       "step2Title": "How would you like to pay?",
-      "step3Title": "Who shall we thank?",
+      "step3Title": "Who should we thank?",
       "recommended": "Recommended",
       "methods": {
         "vipps": {
-          "name": "Vipps",
-          "detail": "Fastest. Signs you in and returns your details from the app."
+          "name": "Vipps"
+        },
+        "applepay": {
+          "name": "Apple Pay"
+        },
+        "googlepay": {
+          "name": "Google Pay"
         },
         "card": {
-          "name": "Card",
-          "detail": "Visa or Mastercard, single donation or monthly."
+          "name": "Card"
         },
         "avtalegiro": {
-          "name": "AvtaleGiro",
-          "detail": "Recurring donation from your Norwegian bank account."
-        },
-        "bank": {
-          "name": "Bank transfer",
-          "detail": "Traditional bank transfer with a KID number."
+          "name": "AvtaleGiro"
         }
       },
       "fields": {
@@ -227,23 +238,32 @@
         "lastName": "Last name",
         "email": "Email",
         "mobile": "Mobile number",
-        "fnr": "Fødselsnummer",
-        "fnrHint": "Only needed for tax deduction, reported to Skatteetaten. Not required to give.",
-        "fnrDisabled": "This field will collect once the payment integration is live. Hidden until then.",
+        "fnr": "National ID number",
         "consent": "I have read and agree to the privacy policy.",
-        "optional": "optional"
+        "optional": "optional",
+        "taxDeduction": "Tax deduction",
+        "fnrPlaceholder": "11 digits or national ID number",
+        "fnrNote": "Reported to the Norwegian Tax Administration."
       },
       "errors": {
         "required": "Required",
         "email": "Enter a valid email address",
         "mobile": "Enter a valid mobile number",
-        "fnr": "Fødselsnummer must be 11 digits",
+        "fnr": "Must be 11 digits",
         "consent": "You need to agree to continue"
       },
       "give": "Give <amount></amount> kr",
       "giveMonthly": "Give <amount></amount> kr/mo",
-      "todoSubmit": "Payment integration not yet wired. The button on this final step is a placeholder."
-    }
+      "todoSubmit": "Payment integration not yet wired. The button on this final step is a placeholder.",
+      "switchMethod": "Switch payment method",
+      "monthlyOnly": "Monthly only",
+      "giveWith": "Give <amount></amount> kr with {method}",
+      "giveWithMonthly": "Give <amount></amount> kr/mo with {method}"
+    },
+    "perMonth": "/mo",
+    "ledeMonthly": "As a monthly donor you provide predictable support and lower our admin costs.",
+    "ledeOnce": "A single gift, any amount.",
+    "sheetTitleBuilding": "Give to the building"
   },
   "meter": {
     "lattice": "Each mark is 1 000 000 kr",
@@ -267,7 +287,18 @@
       "body": "The foundation is being poured this year. This is the sub-goal we are working toward now."
     },
     "latticeCount": "{lit} of 100",
-    "goalLabel": "Goal"
+    "goalLabel": "Goal",
+    "lastMonthLabel": "last month",
+    "subLabel": "{year} milestone · {name}",
+    "subValue": "{raised} of {goal} kr",
+    "remaining": "{amount} kr to go",
+    "roadmap": "The road to 2028",
+    "now": "Now",
+    "phaseNotes": {
+      "fundament": "The site is cleared. Foundations are poured and the shell goes up.",
+      "interior": "Facade, prayer halls, school and library are fitted out.",
+      "ferdigstillelse": "The building opens. Seven floors on one address."
+    }
   },
   "trust": {
     "taxDeductible": "Tax deduction up to 25 000 kr/year",
@@ -312,29 +343,28 @@
     "kickerCta": "Give at this level"
   },
   "impactStory": {
-    "eyebrow": "Four chapters",
-    "heading": "Rabita has been here <em>since 1987</em>.",
-    "lede": "Four thousand members from forty nationalities. A school with 400 pupils and 19 teachers. A library, a youth club, and the people you call when there is a wedding or a funeral. The building we are raising makes room for all of it.",
+    "eyebrow": "About Rabita",
+    "heading": "This is <em>Rabita</em>.",
     "items": {
+      "history": {
+        "name": "History",
+        "title": "Founded in <em>{year}</em>.",
+        "body": "The first mosque in Oslo not tied to one nationality: a place for Muslims in Norway, wherever they came from. The building we are raising makes room for all of it."
+      },
       "family": {
-        "title": "One family. Together for what is <em>right</em>.",
-        "body": "Four thousand members, forty nationalities, one community. We stand together, in prayer and in learning, in joy and in grief, with each other and with our neighbours. To belong here is to belong to something larger than yourself.",
-        "tag": "Community"
+        "name": "Community",
+        "title": "<em>{members}</em> members. One community.",
+        "body": "From more than {nationalities} nationalities. We stand together, in prayer and in learning, in joy and in grief, with each other and with our neighbours."
       },
       "learning": {
-        "title": "Lectures, conversations, and <em>teaching</em>.",
-        "body": "Evening talks on mental health, Quran classes for children, Arabic for beginners, calligraphy, philosophy. Nineteen teachers, four hundred pupils, waiting lists in every class. What is said here stays with you.",
-        "tag": "Learning"
+        "name": "Learning",
+        "title": "Over <em>{pupils}</em> pupils.",
+        "body": "Evening talks, Quran classes for children, Arabic for beginners, calligraphy and philosophy. Waiting lists in every class."
       },
       "volunteer": {
-        "title": "We <em>show up</em>, for each other and for the city.",
-        "body": "Volunteers in yellow vests hand out meals, coordinate with the district, and stand with neighbours in good times and hard ones. Rabita isn't only a place you come to. It's a place you come from, to help.",
-        "tag": "Volunteer"
-      },
-      "sadaqa": {
-        "title": "Sadaqa jariya, a gift that <em>lasts</em>.",
-        "body": "The prayer rug is perhaps the most-used object in the mosque. Each place in the new hall can be given in the name of someone we've lost. The names stand as long as the building stands.",
-        "tag": "Jariya"
+        "name": "Volunteering",
+        "title": "<em>{volunteers}</em> volunteers, all year.",
+        "body": "Around {visitors} visitors a week. Volunteers in yellow vests hand out food, coordinate with the district and stand with neighbours in good times and bad."
       }
     }
   },
@@ -410,7 +440,10 @@
         "headline": "The foundation we pour this year.",
         "body": "Second basement: storage for the school and library, and the technical installations that keep the building warm."
       }
-    }
+    },
+    "skip": "Skip",
+    "index": "Floors",
+    "jumpTo": "Go to floor {n}"
   },
   "giftLadder": {
     "eyebrow": "WHAT YOUR GIFT BUILDS",
@@ -557,7 +590,7 @@
     "crumb": "The mosque project",
     "assurance": {
       "heading": "What you can hold us to.",
-      "lede": "The same four commitments on every page in this section.",
+      "lede": "Promises are easy to make. These four you can check yourself — in public registers, not just on this page.",
       "items": [
         {
           "title": "Approved for tax deduction",
@@ -565,15 +598,21 @@
         },
         {
           "title": "Audited accounts",
-          "body": "Annual accounts are audited by a state authorised auditor and are publicly available."
+          "body": "Annual accounts are audited by a state authorised auditor and are publicly available.",
+          "href": "https://data.brreg.no/enhetsregisteret/oppslag/enheter/983228364",
+          "linkLabel": "See the Brønnøysund Register"
         },
         {
           "title": "A public building permit",
-          "body": "Approved by the Oslo Planning and Building Authority. The permit is on the public record."
+          "body": "Approved by the Oslo Planning and Building Authority. The permit is on the public record.",
+          "href": "https://innsyn.pbe.oslo.kommune.no/",
+          "linkLabel": "Search the Planning and Building Authority records"
         },
         {
           "title": "One organisation since 1987",
-          "body": "Det Islamske Forbundet, org.nr. 983 228 364, the first mosque in Oslo not tied to a single nationality."
+          "body": "Det Islamske Forbundet, org.nr. 983 228 364, the first mosque in Oslo not tied to a single nationality.",
+          "href": "https://data.brreg.no/enhetsregisteret/oppslag/enheter/983228364",
+          "linkLabel": "Look up org. no. 983 228 364"
         }
       ]
     },
@@ -581,7 +620,7 @@
       "building": {
         "eyebrow": "The building",
         "title": "Seven floors on <em>one</em> address.",
-        "lede": "A mosque, a school, a library, a kitchen and a hall, stacked on the plot at Calmeyers gate 8. Two floors below the street, five above it.",
+        "lede": "A mosque, a school, a library, a kitchen and a hall on one plot at Calmeyers gate 8 — two floors below the street, five above. The old mosque was demolished in 2025. What rises in its place is one building doing the work of five, with its ground floor open to the street.",
         "primary": "Give to the building",
         "secondary": "Where the money goes",
         "briefLabel": "In short",
@@ -605,7 +644,8 @@
             "title": "Entrance and cafe",
             "body": "A ground floor open to the whole city, with no threshold between the street and the building."
           }
-        ]
+        ],
+        "ledeShort": "A mosque, school, library, kitchen and hall on one plot at Calmeyers gate 8. Ground floor open to the street."
       },
       "money": {
         "eyebrow": "Where the money goes",
@@ -790,8 +830,8 @@
       },
       "services": {
         "eyebrow": "Services",
-        "title": "Nikah, janaza, shahada and counselling.",
-        "lede": "The things a congregation actually needs, handled by the imams and the staff. Some can be arranged the same week, some need notice.",
+        "title": "Nikah, school, guidance and more.",
+        "lede": "Religious services, guidance, teaching and work out in the community. Every enquiry is handled discreetly.",
         "note": "Ask at reception or send an email",
         "regEyebrow": "What we offer",
         "regHeading": "Ask about any of these.",
@@ -880,35 +920,41 @@
     "next": "Next photograph",
     "goto": "Go to slide {n}",
     "slides": {
-      "daily": {
-        "title": "Daily prayer",
-        "figureLabel": "times a day",
-        "sentence": "The building never really closes, first light through isha."
+      "nikah": {
+        "title": "Nikah",
+        "sentence": "Islamic marriage at the mosque or wherever you choose, with witnesses and an imam."
       },
-      "school": {
-        "title": "The weekend school",
-        "figureLabel": "pupils · 19 teachers",
-        "sentence": "Norway's largest Arabic school runs from the top floor every Saturday."
+      "janaza": {
+        "title": "Janaza",
+        "sentence": "Washing, prayer and burial, around the clock. No cost for members."
       },
-      "friday": {
-        "title": "Friday prayer",
-        "figureLabel": "places for women",
-        "sentence": "The old hall fills long before the khutba. The new one is designed for who actually shows up. Room for men goes from 500 to 2 000."
+      "shahada": {
+        "title": "Shahada",
+        "sentence": "For anyone wishing to take the shahada. We arrange witnesses and follow up afterwards."
       },
-      "iftar": {
-        "title": "Street iftar",
-        "sentence": "For eight nights of Ramadan the block eats together, whoever they are, whatever they believe."
+      "counselling": {
+        "title": "Conversations",
+        "sentence": "Confidential conversations with an imam or a female counsellor, alone or as a couple."
       },
-      "visits": {
-        "title": "School and university visits",
-        "figureLabel": "visitors a year",
-        "sentence": "Every school, every university, welcome to sit down for a conversation."
+      "hajj-umrah": {
+        "title": "Hajj and umrah",
+        "sentence": "Preparation, information and referrals to experienced group leaders."
       },
-      "services": {
-        "title": "Funerals and marriages",
-        "sentence": "We hold nikah, we bury the dead, we sit with people in hard weeks."
+      "education": {
+        "title": "Learning",
+        "figureLabel": "pupils every weekend",
+        "sentence": "Quran, Arabic and faith studies for children and adults. Waiting lists in every class."
+      },
+      "mediation": {
+        "title": "Mediation",
+        "sentence": "Help resolving conflicts in families and neighbourhoods, with trust and discretion."
+      },
+      "youth": {
+        "title": "Children and youth",
+        "sentence": "Youth club, camps and regular activities. Safe places for the youngest."
       }
-    }
+    },
+    "readMore": "Read more"
   },
   "prayerVisit": {
     "addressLabel": "Address",
@@ -1067,7 +1113,46 @@
       "permit": "Building permit",
       "donors": "Donors",
       "about": "About Rabita"
-    }
+    },
+    "findUs": {
+      "eyebrow": "Find us",
+      "heading": "In the middle of Oslo, minutes from Oslo S.",
+      "address": "Address",
+      "hours": "Open",
+      "phone": "Phone",
+      "email": "E-mail",
+      "directions": "Directions",
+      "visit": "Plan a visit",
+      "openMaps": "Open in Google Maps",
+      "estimate": "Walking route · OSM",
+      "walk": "{min} min walk",
+      "landmarks": {
+        "oslo-s": "Oslo S / Jernbanetorget",
+        "gronland": "Grønland metro",
+        "brugata": "Brugata tram and bus"
+      }
+    },
+    "cols": {
+      "rabita": "Rabita",
+      "about": "About us",
+      "project": "The mosque project",
+      "donors": "Donors",
+      "join": "Become a member",
+      "volunteer": "Volunteer",
+      "contact": "Contact",
+      "services": "Services",
+      "prayer": "Prayer times",
+      "counselling": "Conversations",
+      "education": "Learning",
+      "allServices": "All services",
+      "follow": "Follow us"
+    },
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "tiktok": "TikTok"
+    },
+    "credit": "Developed by"
   },
   "donorsPage": {
     "eyebrow": "Donors",
@@ -1085,7 +1170,10 @@
       "architect": "Architect",
       "startConstruction": "Construction start",
       "completion": "Completion",
-      "completionNote": "The final completion date is updated in step with the build phases."
+      "completionNote": "The final completion date is updated in step with the build phases.",
+      "completionTbd": "set by build phase",
+      "eyebrow": "The new building",
+      "title": "Bigger, taller, and room for <em>more</em>."
     },
     "capacity": {
       "heading": "Capacity",
@@ -1112,7 +1200,81 @@
       "company": {
         "title": "Company",
         "body": "A company gift is a conversation, not a checkout. Write to us."
+      },
+      "eyebrow": "Support the build",
+      "intro": "Four ways to contribute. Pick the one that suits you — everything goes into the same building account.",
+      "cta": "Give",
+      "ctaCompany": "Write to us",
+      "badge": "Most impact"
+    },
+    "gallery": {
+      "label": "Pictures of the new building",
+      "prev": "Previous picture",
+      "next": "Next picture",
+      "goto": "Go to picture {n}",
+      "items": {
+        "aerial": {
+          "tag": "From above",
+          "title": "The roof garden over Calmeyers gate",
+          "caption": "The block seen from above: a planted roof terrace, the small minaret and the yellow stair housing.",
+          "alt": "The building from above, roof garden and minaret"
+        },
+        "facadeDay": {
+          "tag": "The facade",
+          "title": "The brick lattice on the street",
+          "caption": "The diamond pattern in brick lets light into the prayer halls and makes the building recognisable from either end of the street.",
+          "alt": "The facade in daylight, brick and glass lattice"
+        },
+        "facadeNight": {
+          "tag": "Evening",
+          "title": "When the light comes from inside",
+          "caption": "In the evening the picture reverses: the halls glow out through the lattice and the street gets a lantern.",
+          "alt": "The facade at night, lit from within"
+        },
+        "mainHall": {
+          "tag": "Main hall",
+          "title": "Prayer space over three floors",
+          "caption": "Under the chandelier, with the mihrab at the far end. Room for 2,000 men when the hall is full.",
+          "alt": "The main prayer hall with chandelier and mihrab"
+        },
+        "womensHall": {
+          "tag": "Women's hall",
+          "title": "Its own hall, its own entrance",
+          "caption": "Room for 500 women, up from 100 today, looking down into the main hall.",
+          "alt": "The women's prayer hall, green carpet under a lit wall"
+        },
+        "qibla": {
+          "tag": "Qibla wall",
+          "title": "Wood, gold and marble",
+          "caption": "Carved wood and gold, lit through the marble behind. The wall everyone faces.",
+          "alt": "The qibla wall from above"
+        },
+        "minaret": {
+          "tag": "The minaret",
+          "title": "A sign above the roofs",
+          "caption": "Low and slender, drawn for a residential block in Oslo — a mark, not a tower.",
+          "alt": "The minaret against the evening sky"
+        },
+        "garden": {
+          "tag": "The garden",
+          "title": "A green room in the city",
+          "caption": "The roof garden gives the school and youth club an outdoor space in the centre.",
+          "alt": "The roof garden with benches and planting"
+        },
+        "wudu": {
+          "tag": "Wudu",
+          "title": "The room before prayer",
+          "caption": "Bright ablution rooms for women and men, right by the entrance to the halls.",
+          "alt": "The wudu room in pale stone"
+        }
       }
+    },
+    "giveBox": {
+      "eyebrow": "To the mosque project · earmarked",
+      "title": "Give to the building",
+      "note": "Goes in full to the building at Calmeyers gate 8.",
+      "cta": "Give {amount} kr",
+      "methods": "Vipps · Card · AvtaleGiro"
     }
   },
   "givePage": {
@@ -1227,21 +1389,30 @@
       "counselling": "Briefly what the conversation should be about.",
       "hajj-umrah": "Number of travellers, planned dates and any agency involved.",
       "visit": "Type of group, number and age of attendees.",
-      "contact": "What is the enquiry about?"
+      "contact": "What is the enquiry about?",
+      "megling": "Briefly, who is involved and what the matter concerns.",
+      "barn-og-ungdom": "The child’s age and which activities you are interested in.",
+      "apartments": "When would you like to move in, and anything else we should know?",
+      "skole": "The child’s age and school year.",
+      "koran": "Age, level, and whether it is for a child or an adult.",
+      "kurs": "Which course, and any previous experience.",
+      "veivisere": "School or organisation, year group and preferred date."
     },
     "submit": "Send",
     "privacy": "We reply within 3 working days. See privacy for how we store your data.",
     "doneTitle": "We have received your enquiry.",
-    "doneBody": "You will hear from us within 3 working days. Please check your spam folder."
+    "doneBody": "You will hear from us within 3 working days. Please check your spam folder.",
+    "bedrooms": "Bedrooms",
+    "bedroomsUnit": "bedrooms"
   },
   "bonnetiderPage": {
     "eyebrow": "Prayer times",
     "title": "This week",
-    "lede": "Times shown are for Oslo and update daily. Jumu'ah at 13:30.",
+    "lede": "Times shown are for Oslo and update daily. Jumu'ah at 14:00 and 15:00.",
     "day": "Day",
     "sunrise": "Sunrise",
     "jumua": "Jumu'ah",
-    "note": "Times are static for now. An automated feed is wired when the source is chosen.",
+    "note": "Times are fetched automatically from the Islamic Council of Norway’s shared prayer times (bonnetid.no).",
     "days": {
       "mon": "Monday",
       "tue": "Tuesday",
@@ -1254,8 +1425,10 @@
     "todayHeading": "Today",
     "jumuaNote": "The hall fills before the khutbah.",
     "outOfRange": "We do not have published times for this date yet. Contact the office, or check the screen in the mosque.",
-    "sourceNote": "Times are Rabita’s own, for Oslo. Jama‘ah times and a downloadable calendar arrive once the times sync with the screen in the mosque.",
-    "scheduleHeading": "The months ahead"
+    "sourceNote": "Times come from the Islamic Council of Norway’s shared prayer times for Oslo. Jama‘ah and jumu‘ah times are as the mosque has registered them with IRN.",
+    "scheduleHeading": "The months ahead",
+    "jamaah": "Jama‘ah",
+    "jumuaImams": "Khutbah and prayer led by the imams"
   },
   "medlemskapPage": {
     "eyebrow": "Membership",
@@ -1380,7 +1553,7 @@
   "servicesIndex": {
     "eyebrow": "Services",
     "title": "Nikah, janaza, shahada and more.",
-    "lede": "We provide religious services to members and to others who wish. All enquiries are handled discreetly.",
+    "lede": "Religious services, guidance, teaching and work out in the community. Every enquiry is handled discreetly.",
     "more": "More and request",
     "detail": {
       "what": "What we offer",
@@ -1411,7 +1584,45 @@
         "title": "Hajj and umrah",
         "body": "Information, preparation and referrals.",
         "longBody": "Rabita does not organise trips itself, but we help with preparation, information and referrals to experienced agencies and imams accompanying groups."
+      },
+      "megling": {
+        "title": "Mediation",
+        "body": "Help resolving conflicts in families, marriages and neighbourhoods.",
+        "longBody": "Our imams mediate in conflicts between spouses, within families and between neighbours. Conversations are confidential and rest on the trust of both parties. Get in touch to arrange a first meeting."
+      },
+      "barn-og-ungdom": {
+        "title": "Children and youth activities",
+        "body": "Youth club, camps and activities for the youngest.",
+        "longBody": "Rabita runs a youth club, camps and regular activities for children and young people all year, together with Norges Unge Muslimer. Register your interest and we will contact you about the next gathering."
+      },
+      "skole": {
+        "title": "Rabita school",
+        "body": "Saturday school for children and young people aged 6 to 16.",
+        "longBody": "Rabita school is our Saturday school for children and young people aged 6–16. In 2025 it had 225 pupils across 13 classes. Teaching covers Arabic, Islamic studies and the Quran, and takes place in rented rooms at Hersleb school. Every permanent teacher is a trained educator working in Norwegian schools day to day. The school also marks the religious festivals through the year."
+      },
+      "koran": {
+        "title": "Quran and Arabic",
+        "body": "Quran and Arabic teaching for children, young people and adults.",
+        "longBody": "Quran and Arabic are at the centre of the teaching at Rabita school, alongside Islamic studies. For adults, Imam Usman runs the Friday course, an open class in Islamic learning held in Norwegian. Get in touch to hear which classes have places."
+      },
+      "kurs": {
+        "title": "Calligraphy and geometry",
+        "body": "Courses in Islamic calligraphy and geometric art.",
+        "longBody": "Rabita runs courses in Islamic calligraphy led by Ustadh Khalid Casado, and in Islamic geometry with Samira Mian, where participants learn to construct classical patterns with compass and ruler. In 2025 the courses drew participants from Germany, Spain and England. \"Geometry and tea\" is a monthly, low-threshold gathering between courses, for past and new participants alike."
+      },
+      "veivisere": {
+        "title": "Muslim guides",
+        "body": "Young guides who visit schools and meet pupils.",
+        "longBody": "Muslimske veivisere is a youth-to-youth programme working against prejudice and discrimination towards Norwegian Muslims. In 2025 the guides visited more than 200 schools and met over 10,000 pupils. It was developed by Rabita and Minotenk, and in 2024 was written into the government’s action plan against anti-Muslim attitudes. Schools and organisations can request a visit."
       }
+    },
+    "allEyebrow": "All services",
+    "allHeading": "Everything we do, <em>in one place</em>.",
+    "groups": {
+      "religious": "Religious services",
+      "guidance": "Guidance",
+      "teaching": "Teaching",
+      "community": "Children, youth and community"
     }
   },
   "aboutPage": {
@@ -1421,7 +1632,10 @@
     "facts": {
       "founded": "Founded",
       "members": "members",
-      "nationalities": "nationalities"
+      "pupils": "pupils at the school",
+      "nationalities": "nationalities",
+      "visits": "visitors a week",
+      "volunteers": "volunteers"
     },
     "history": {
       "p1": "Rabita was founded in 1987 as the first mosque in Oslo not tied to a single nationality. The idea was simple: a place for Muslims in Norway, regardless of where they came from.",
@@ -1658,7 +1872,9 @@
     "back": "Back to prayer times",
     "source": "Times are Rabita’s own, calculated for Oslo.",
     "panelHeading": "Download the calendar",
-    "panelBody": "One month per sheet, with the Hijri date and Friday prayer. Open the month you want and save it as a PDF, or print it."
+    "panelBody": "One month per sheet, with the Hijri date and Friday prayer. Open the month you want and save it as a PDF, or print it.",
+    "panelEyebrow": "Calendar",
+    "panelHeadingRich": "The whole month, <em>on one sheet</em>."
   },
   "cta": {
     "prayer": {
@@ -1690,9 +1906,11 @@
     "cta": "See the mosque project",
     "figures": {
       "area": "Floor area",
-      "floors": "Floors, above and below ground",
-      "places": "Prayer places when it stands"
-    }
+      "floors": "Floors up / down",
+      "places": "Prayer places",
+      "cleared": "Site cleared"
+    },
+    "credit": "Architect"
   },
   "joinPage": {
     "lede": "Membership is how you are counted here. It brings the newsletter and invitations to what happens in the building. A voting membership adds a vote at the annual meeting that elects the board.",
@@ -1711,7 +1929,7 @@
         "body": "Membership runs year by year, and you can end it whenever you want."
       }
     },
-    "members": "Four thousand members are already on the roll.",
+    "members": "Over 4,300 members are already on the roll.",
     "explain": {
       "heading": "The three memberships.",
       "note": "A national identity number is not required for membership. The privacy statement applies."
@@ -1731,6 +1949,108 @@
         "name": "Under 15",
         "price": "0 kr",
         "body": "Approved by a guardian. Age-appropriate activities."
+      }
+    }
+  },
+  "apartmentsPage": {
+    "eyebrow": "Apartments",
+    "title": "Fifteen apartments on <em>one</em> address.",
+    "lede": "Fifteen apartments for sale on the upper floors of Calmeyers gate 8, beside the roof garden and with the city outside the door. The sale helps finance the building below.",
+    "ledeShort": "Fifteen apartments for sale on the top floors of Calmeyers gate 8, beside the roof garden.",
+    "primary": "Register interest",
+    "secondary": "See the whole project",
+    "facts": {
+      "heading": "Key figures",
+      "count": "Apartments",
+      "address": "Address",
+      "floors": "Position",
+      "floorsValue": "Upper floors",
+      "completion": "Move-in",
+      "completionValue": "set by build phase",
+      "architect": "Architect",
+      "walking": "Walk to",
+      "stations": {
+        "brugata": "Brugata tram and bus",
+        "oslo-s": "Oslo S / Jernbanetorget",
+        "gronland": "Grønland metro"
+      }
+    },
+    "why": {
+      "eyebrow": "Why here",
+      "heading": "Live above the roof garden, in the middle of <em>Oslo</em>.",
+      "items": {
+        "garden": {
+          "title": "A garden <em>above</em> the streets.",
+          "body": "The apartments sit on the floors by the planted roof terrace: a green outdoor room above the streets, drawn into the building from the start.",
+          "tag": "Outdoors"
+        },
+        "city": {
+          "title": "In the <em>city centre</em>.",
+          "body": "Calmeyers gate 8 lies between Storgata and the Akerselva. Tram, metro and Oslo S are a few minutes on foot.",
+          "tag": "Location"
+        },
+        "building": {
+          "title": "A building with a <em>story</em>.",
+          "body": "Designed by Norconsult, with the brick lattice on the street. The sale of the apartments is part of financing the new building.",
+          "tag": "The building"
+        }
+      }
+    },
+    "interest": {
+      "eyebrow": "Sales start",
+      "heading": "Register interest and hear <em>first</em>.",
+      "body": "We are taking expressions of interest now. No commitment; we contact you when there is news.",
+      "note": "Prices, floor plans and the date of the sales start are not yet set and will be published here when they are.",
+      "formHeading": "Register interest"
+    }
+  },
+  "imams": {
+    "eyebrow": "The imams",
+    "heading": "The people who lead the <em>prayer</em>.",
+    "lede": "One theological leader and two imams. You meet them at Friday prayer, in the classes, and in the conversation afterwards.",
+    "languages": "Languages",
+    "people": {
+      "amara": {
+        "role": "Theological leader",
+        "bio": "Trained at the Sharia Faculty of the University of Beirut and in pedagogy at Oslo University College. A teacher in Bærum from 2001 to 2008, and a frequent lecturer in mosques across Norway and Europe."
+      },
+      "andreas": {
+        "role": "Imam",
+        "bio": "Teaches the Islamic-studies course in Norwegian and gives regular lectures for members and visitors. The voice of the adhan at the street iftar."
+      },
+      "aldiri": {
+        "role": "Imam and theologian",
+        "bio": "Joined as imam in 2025. Holds a doctorate, with deep expertise in Islamic scholarship, dialogue, youth work and communication."
+      }
+    }
+  },
+  "video": {
+    "play": "Play",
+    "imamWelcome": "A word from the imam",
+    "comingSoon": "Video coming"
+  },
+  "prayerClock": {
+    "eyebrow": "Now in Oslo",
+    "nowLabel": "Time now",
+    "nextLabel": "Next"
+  },
+  "followUs": {
+    "eyebrow": "Follow us",
+    "title": "The house is open — <em>online too</em>.",
+    "lede": "Photos, announcements and short clips from Calmeyers gate 8. Follow along where you already are.",
+    "action": "Follow",
+    "channels": {
+      "instagram": {
+        "handle": "@detislamskeforbundet",
+        "blurb": "Photos from the house, every week"
+      },
+      "facebook": {
+        "handle": "Det Islamske Forbundet",
+        "blurb": "Events and announcements"
+      },
+      "tiktok": {
+        "handle": "@oslomosque",
+        "blurb": "Short clips from the mosque"
       }
     }
   }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import {
@@ -54,6 +54,25 @@ const RIGHT_NB_X = 790;
 const RIGHT_NB_W = 36;
 const RIGHT_NB_TOP = 200;
 
+// Native smooth scroll, with a guarantee: if the page has not arrived
+// within 700ms (smooth scrolling is throttled in background tabs and off
+// in some settings) it jumps instantly. Reduced-motion jumps straight
+// away. Either way the reader always ends up where they asked to go.
+function scrollTo(target: number) {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const top = Math.max(0, Math.round(target));
+  if (reduced) {
+    window.scrollTo({ top, behavior: 'instant' as ScrollBehavior });
+    return;
+  }
+  window.scrollTo({ top, behavior: 'smooth' });
+  window.setTimeout(() => {
+    if (Math.abs(window.scrollY - top) > 40) {
+      window.scrollTo({ top, behavior: 'instant' as ScrollBehavior });
+    }
+  }, 700);
+}
+
 export function BuildingRises() {
   const t = useTranslations('building');
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -76,6 +95,25 @@ export function BuildingRises() {
     setStep((prev) => (prev === idx ? prev : idx));
   });
 
+  // Jump to a step, or past the whole sequence. The pinned range runs from
+  // the section's top to (bottom − viewport); scrollYProgress maps 0..1
+  // across it, and step s occupies [s/N, (s+1)/N). Landing mid-step keeps
+  // the floor stable rather than sitting on a boundary.
+  const scrollToProgress = useCallback((progress: number) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY;
+    const range = el.offsetHeight - window.innerHeight;
+    scrollTo(top + Math.max(0, Math.min(1, progress)) * range);
+  }, []);
+  const jumpToStep = useCallback((s: number) => scrollToProgress((s + 0.5) / STEP_COUNT), [scrollToProgress]);
+  const skip = useCallback(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    // Straight to where the pin releases, so the next section follows at once.
+    scrollTo(el.getBoundingClientRect().top + window.scrollY + el.offsetHeight - window.innerHeight + 1);
+  }, []);
+
   // In reduced-motion, skip the pin, show the finished drawing.
   const effectiveStep = reduced ? STEP_COUNT - 1 : step;
   const activeFloor = activeFloorFromStep(effectiveStep); // -1 during intro
@@ -91,8 +129,10 @@ export function BuildingRises() {
       aria-labelledby="building-rises-heading"
       className={cn(
         'relative bg-paper-2',
-        // Outer track: 8 steps → 800vh desktop, 600vh mobile.
-        reduced ? '' : 'h-[380vh] md:h-[800vh]',
+        // Outer track: 8 steps → 560vh desktop, 320vh mobile. Was 800/380;
+        // shortened 2026-08-30 so reading it through is ~30% less scrolling,
+        // with a Skip link and a floor index for those who want out.
+        reduced ? '' : 'h-[320vh] md:h-[560vh]',
       )}
     >
       <div
@@ -101,11 +141,11 @@ export function BuildingRises() {
           reduced ? 'min-h-screen py-16' : 'sticky top-20 h-[calc(100svh-5rem)]',
         )}
       >
-        <header className="shrink-0 px-6 pt-3 md:pt-4">
+        <header className="shrink-0 px-6 pt-2 md:pt-4">
           <div className="mx-auto max-w-6xl">
             <h2
               id="building-rises-heading"
-              className="max-w-2xl font-serif text-[clamp(1.5rem,6vw,2rem)] leading-[1.1] text-ink md:text-section"
+              className="max-w-2xl font-serif text-[1.25rem] leading-[1.1] text-ink md:text-section"
             >
               {t.rich('heading', {
                 em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
@@ -114,22 +154,37 @@ export function BuildingRises() {
           </div>
         </header>
 
-        <div className="mt-2 min-h-0 flex-1 px-6 pb-14 md:mt-3 md:pb-4">
+        <div className="mt-2 min-h-0 flex-1 px-6 pb-3 md:mt-3 md:pb-4">
           <div className="mx-auto max-w-6xl h-full">
             <div className="grid h-full gap-3 md:grid-cols-12 md:items-stretch md:gap-6">
-              <div className="md:col-span-4 lg:col-span-3 flex md:items-center">
-                <LeftPanel step={effectiveStep} activeFloor={activeFloor} />
+              {/* On a phone the text block has a FIXED height, so the drawing
+                 under it never moves as chapters of different length come
+                 and go. */}
+              <div className="flex h-[12rem] shrink-0 overflow-hidden md:h-[14.75rem] md:items-center md:col-span-4 lg:col-span-3 md:h-auto">
+                <LeftPanel step={effectiveStep} activeFloor={activeFloor} onJump={jumpToStep} onSkip={skip} pinned={!reduced} />
               </div>
+              {/* Below md the drawing shares the row with an HTML floor
+                 register. The SVG's own label column cannot come to a phone:
+                 it lives past x=400 in the viewBox, and scaling the whole
+                 thing down far enough to include it puts the label type at
+                 ~7px. So the drawing keeps 42% and the register is set in
+                 real HTML at a readable size beside it — the same two-column
+                 idea as the desktop, which is what the client asked for.
+                 The right-edge mask is md+ only now: on a phone it would fade
+                 out the register that has just been put there. */}
               <div
-                className="flex h-full min-h-0 items-center justify-center [mask-image:linear-gradient(to_right,black_84%,transparent_100%)] md:col-span-8 md:[mask-image:none] lg:col-span-9"
+                className="flex h-full min-h-0 items-center justify-center gap-3 md:col-span-8 md:gap-0 md:[mask-image:none] lg:col-span-9"
               >
-                <BuildingSVG
-                  step={effectiveStep}
-                  activeFloor={activeFloor}
-                  wallTopY={wallTopY}
-                  showRoof={showRoof}
-                  labelT={t}
-                />
+                <div className="h-full min-h-0 w-[60%] shrink-0 md:w-full">
+                  <BuildingSVG
+                    step={effectiveStep}
+                    activeFloor={activeFloor}
+                    wallTopY={wallTopY}
+                    showRoof={showRoof}
+                    labelT={t}
+                  />
+                </div>
+                <FloorRegister activeFloor={activeFloor} labelT={t} />
               </div>
             </div>
           </div>
@@ -153,7 +208,19 @@ export function BuildingRises() {
 // LEFT PANEL — intro (step 0) or per-floor content (step 1..7)
 // -----------------------------------------------------------------------------
 
-function LeftPanel({ step, activeFloor }: { step: number; activeFloor: number }) {
+function LeftPanel({
+  step,
+  activeFloor,
+  onJump,
+  onSkip,
+  pinned,
+}: {
+  step: number;
+  activeFloor: number;
+  onJump: (step: number) => void;
+  onSkip: () => void;
+  pinned: boolean;
+}) {
   const t = useTranslations('building');
   const total = FLOORS.length;
   const isIntro = activeFloor < 0;
@@ -163,7 +230,7 @@ function LeftPanel({ step, activeFloor }: { step: number; activeFloor: number })
   const counterTotal = total.toString().padStart(2, '0');
 
   return (
-    <div className="relative min-h-[280px]">
+    <div className="relative w-full md:min-h-[280px]">
       <AnimatePresence mode="wait">
         {isIntro ? (
           <motion.div
@@ -172,23 +239,21 @@ function LeftPanel({ step, activeFloor }: { step: number; activeFloor: number })
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col gap-6"
+            className="flex flex-col gap-3 md:gap-6"
           >
             <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-gold-deep">
               {t('intro.eyebrow')}
             </p>
-            <h3 className="font-serif text-[clamp(1.75rem,3.2vw,2.25rem)] leading-[1.15] text-ink tracking-[-0.01em] max-w-[16ch]">
+            <h3 className="font-serif text-[1.5rem] leading-[1.12] text-ink tracking-[-0.01em] max-w-[16ch] md:text-[clamp(1.75rem,3.2vw,2.25rem)] md:leading-[1.15]">
               {t('intro.headlineLine1')}
               <br />
               <Accent surface="paper">{t('intro.headlineLine2')}</Accent>
             </h3>
-            <span aria-hidden className="block h-px w-8 bg-gold" />
-            <p className="text-[15px] leading-relaxed text-ink-60 max-w-[36ch]">
+            <span aria-hidden className="hidden h-px w-8 bg-gold md:block" />
+            <p className="line-clamp-3 text-[14px] leading-snug text-ink-60 max-w-[36ch] md:line-clamp-none md:text-[15px] md:leading-relaxed">
               {t('intro.body')}
             </p>
-            <p className="font-mono text-label uppercase tracking-widest text-ink-60 tabular-nums">
-              <span className="text-ink">{counterActive}</span> / {counterTotal}
-            </p>
+            <FloorIndex step={step} total={total} active={counterActive} totalLabel={counterTotal} onJump={onJump} onSkip={onSkip} pinned={pinned} />
           </motion.div>
         ) : (
           floor && (
@@ -198,27 +263,95 @@ function LeftPanel({ step, activeFloor }: { step: number; activeFloor: number })
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col gap-6"
+              className="flex flex-col gap-3 md:gap-6"
             >
               <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-gold-deep">
                 {t('etasje', { n: floor.levelLabel })}
               </p>
-              <h3 className="font-serif text-[clamp(1.75rem,3.2vw,2.25rem)] leading-[1.15] text-ink tracking-[-0.01em] max-w-[16ch] text-balance">
+              <h3 className="font-serif text-[1.5rem] leading-[1.12] text-ink tracking-[-0.01em] max-w-[16ch] text-balance md:text-[clamp(1.75rem,3.2vw,2.25rem)] md:leading-[1.15]">
                 {t.rich(`floors.${floor.key}.headline`, {
                   em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
                 })}
               </h3>
-              <span aria-hidden className="block h-px w-8 bg-gold" />
-              <p className="text-[15px] leading-relaxed text-ink-60 max-w-[36ch]">
+              <span aria-hidden className="hidden h-px w-8 bg-gold md:block" />
+              <p className="line-clamp-3 text-[14px] leading-snug text-ink-60 max-w-[36ch] md:line-clamp-none md:text-[15px] md:leading-relaxed">
                 {t(`floors.${floor.key}.body`)}
               </p>
-              <p className="font-mono text-label uppercase tracking-widest text-ink-60 tabular-nums">
-                <span className="text-ink">{counterActive}</span> / {counterTotal}
-              </p>
+              <FloorIndex step={step} total={total} active={counterActive} totalLabel={counterTotal} onJump={onJump} onSkip={onSkip} pinned={pinned} />
             </motion.div>
           )
         )}
       </AnimatePresence>
+    </div>
+  );
+}
+
+// Counter, a clickable index of the seven floors, and the way out. The
+// index is the same mark the counter uses (mono, small), so it reads as
+// part of the counter rather than as a second control; the skip link is a
+// plain text link, visible from the first step, because the person who
+// wants out wants out immediately.
+function FloorIndex({
+  step,
+  total,
+  active,
+  totalLabel,
+  onJump,
+  onSkip,
+  pinned,
+}: {
+  step: number;
+  total: number;
+  active: string;
+  totalLabel: string;
+  onJump: (step: number) => void;
+  onSkip: () => void;
+  pinned: boolean;
+}) {
+  const t = useTranslations('building');
+  return (
+    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 md:flex-col md:items-start md:gap-3">
+      <div className="flex items-center gap-4">
+        <p className="font-mono text-label uppercase tracking-widest text-ink-60 tabular-nums">
+          <span className="text-ink">{active}</span> / {totalLabel}
+        </p>
+        {pinned && (
+          <ol className="flex items-center gap-1.5" aria-label={t('index')}>
+            {Array.from({ length: total }).map((_, i) => {
+              const isOn = step === i + 1;
+              const done = step > i + 1;
+              return (
+                <li key={i}>
+                  <button
+                    type="button"
+                    onClick={() => onJump(i + 1)}
+                    aria-label={t('jumpTo', { n: i + 1 })}
+                    aria-current={isOn ? 'step' : undefined}
+                    className="grid h-6 w-4 place-items-center"
+                  >
+                    <span
+                      className={cn(
+                        'block h-[2px] w-3 transition-colors',
+                        isOn ? 'bg-gold-deep' : done ? 'bg-ink/60' : 'bg-rule',
+                      )}
+                    />
+                  </button>
+                </li>
+              );
+            })}
+          </ol>
+        )}
+      </div>
+      {pinned && (
+        <button
+          type="button"
+          onClick={onSkip}
+          className="group inline-flex min-h-9 items-center gap-2 self-start text-[13px] font-semibold text-ink-60 transition-colors hover:text-gold-deep"
+        >
+          <span className="border-b border-rule pb-px group-hover:border-gold-deep">{t('skip')}</span>
+          <span aria-hidden className="transition-transform duration-200 group-hover:translate-y-0.5">&darr;</span>
+        </button>
+      )}
     </div>
   );
 }
@@ -264,6 +397,20 @@ function BuildingSVG({
       role="img"
       aria-labelledby="building-rises-heading"
     >
+      {/* A narrow viewBox does NOT clip. A viewBox only maps coordinates —
+         the clip is the SVG *viewport*, which stays the full container width.
+         So at `0 0 400 700` everything drawn past x=400 (the whole right-hand
+         label column, which runs out to x=727) kept painting into the viewport
+         and got sliced at the phone's edge: the half-cut "04 PRAYE…" the
+         client reported on 2026-08-30. Clip to the viewBox explicitly. The
+         floor's name and description are carried by the text block above the
+         drawing, which is where a phone reader takes them from anyway. */}
+      <defs>
+        <clipPath id="building-rises-clip">
+          <rect x={0} y={0} width={wide ? w : 400} height={h} />
+        </clipPath>
+      </defs>
+      <g clipPath="url(#building-rises-clip)">
       {/* -------------------------------------------------------------------
          PERSISTENT — neighbours, ground line, plot boundary, hatching.
          These render at every step; they ARE the site, not the intro.
@@ -326,9 +473,13 @@ function BuildingSVG({
         stroke={INK}
         strokeWidth={1.2}
       />
+      {/* On narrow the drawing is clipped at x=400, and this label starts at
+         372 — it ran straight into the clip edge and read as "STRE…". Inside
+         the building, right-aligned, on a phone. */}
       <text
-        x={BUILDING_RIGHT + 12}
+        x={wide ? BUILDING_RIGHT + 12 : BUILDING_RIGHT - 8}
         y={GROUND_Y - 4}
+        textAnchor={wide ? 'start' : 'end'}
         fill={INK}
         fontFamily="var(--font-mono)"
         fontSize={13}
@@ -714,6 +865,7 @@ function BuildingSVG({
           </g>
         );
       })}
+      </g>
     </svg>
   );
 }
@@ -867,4 +1019,59 @@ function zigzagPath(x1: number, x2: number, yTop: number, yBottom: number, step:
     toRight = !toRight;
   }
   return parts.join(' ');
+}
+
+
+// The floor register, phones only.
+//
+// On the desktop the seven floor labels sit in the SVG itself, to the right of
+// the building (x >= 406 in an 840-wide viewBox). A phone gets a 400-wide
+// viewBox, so those labels fall outside it; and widening the viewBox to reach
+// them scales the type down to about 7px. Setting them as HTML instead keeps
+// them at a real size and lets them reflow.
+//
+// Behaviour mirrors the SVG labels exactly: a floor appears once it has landed
+// (i <= activeFloor) and only the active one is at full strength, so scrolling
+// reads the same on both.
+function FloorRegister({
+  activeFloor,
+  labelT,
+}: {
+  activeFloor: number;
+  labelT: ReturnType<typeof useTranslations>;
+}) {
+  return (
+    <ol className="flex min-w-0 flex-1 flex-col justify-center gap-2 md:hidden" aria-hidden>
+      {[...FLOORS].map((f, revIdx) => ({ f, i: revIdx })).reverse().map(({ f, i }) => {
+        // Every row is present from the start here, unlike the SVG labels,
+        // which fade in as their floor lands. On a desktop that reveal is a
+        // pleasure because the drawing is large and legible on its own; on a
+        // phone it meant the reader saw an unlabelled diagram until they had
+        // scrolled most of the section, which is exactly the "I can't see any
+        // info" the client reported. The list is the information here, so it
+        // is always readable; only the emphasis tracks the active floor.
+        const isActive = i === activeFloor;
+        return (
+          <li key={f.key}>
+            <p className="flex items-baseline gap-1.5 font-mono text-[11px] uppercase leading-[1.25] tracking-[0.08em]">
+              <span className={cn('tabular-nums transition-colors duration-300', isActive ? 'text-gold-deep' : 'text-ink-60/55')}>
+                {f.levelLabel}
+              </span>
+              <span className={cn('transition-colors duration-300', isActive ? 'text-ink' : 'text-ink-60/55')}>
+                {labelT(`floors.${f.key}.name`)}
+              </span>
+            </p>
+            <p
+              className={cn(
+                'mt-0.5 font-mono text-[10px] leading-[1.3] transition-colors duration-300',
+                isActive ? 'text-ink-60' : 'text-ink-60/40',
+              )}
+            >
+              {labelT(`floors.${f.key}.fact`)}
+            </p>
+          </li>
+        );
+      })}
+    </ol>
+  );
 }

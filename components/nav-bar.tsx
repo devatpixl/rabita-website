@@ -12,8 +12,9 @@ import {
   PRAYER_PANEL_ID,
   usePrayerPanel,
 } from './prayer-panel-provider';
-import { PRAYER_TIMES_TODAY } from '@/lib/campaign';
 import { cn } from '@/lib/cn';
+import type { PrayerDay } from '@/lib/prayer-times';
+import { usePrayerDay, usePrayerDayAfter } from './prayer-data-provider';
 
 // Same curve the nav headings use, so the header resolves as one move.
 const WORDMARK_EASE = [0.22, 1, 0.36, 1] as const;
@@ -36,19 +37,23 @@ const WORDMARK_EASE = [0.22, 1, 0.36, 1] as const;
 type PrayerKey = 'fajr' | 'sunrise' | 'dhuhr' | 'asr' | 'maghrib' | 'isha';
 const ORDER: PrayerKey[] = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'];
 
-function parseTimeToday(hhmm: string): Date {
+function parseTimeOn(base: Date, hhmm: string): Date {
   const [h, m] = hhmm.split(':').map(Number);
-  const d = new Date();
+  const d = new Date(base);
   d.setHours(h, m, 0, 0);
   return d;
 }
 
-function nextPrayerKey(now: Date): PrayerKey {
+function nextPrayer(
+  now: Date,
+  today: PrayerDay,
+  tomorrow: PrayerDay | null,
+): { key: PrayerKey; time: string } {
   for (const key of ORDER) {
-    const at = parseTimeToday(PRAYER_TIMES_TODAY[key]);
-    if (at.getTime() > now.getTime()) return key;
+    const at = parseTimeOn(now, today[key]);
+    if (at.getTime() > now.getTime()) return { key, time: today[key] };
   }
-  return 'fajr';
+  return { key: 'fajr', time: tomorrow?.fajr ?? today.fajr };
 }
 
 export function NavBar() {
@@ -72,11 +77,12 @@ export function NavBar() {
     return () => registerNavTrigger(null);
   }, [registerNavTrigger]);
 
-  const nextInfo = useMemo(() => {
-    if (!now) return null;
-    const key = nextPrayerKey(now);
-    return { key, time: PRAYER_TIMES_TODAY[key] };
-  }, [now]);
+  const today = usePrayerDay(now);
+  const tomorrow = usePrayerDayAfter(now);
+  const nextInfo = useMemo(
+    () => (now && today ? nextPrayer(now, today, tomorrow) : null),
+    [now, today, tomorrow],
+  );
 
   const compactVisible = !stripInView;
 
@@ -89,7 +95,10 @@ export function NavBar() {
         // containing block the capsule layer below absolutely positions
         // against — do not add `relative`, it would fight it. Only colours
         // cross-fade here, which is paint work rather than layout.
-        'sticky top-0 z-40 min-h-[77px] border-b transition-colors duration-300 ease-out',
+        // Mobile heights: the capsule carried desktop's 77px onto a 390px
+        // screen, where it ate a sixth of the viewport before any content.
+        // 60px on phones, unchanged from md up.
+        'sticky top-0 z-40 min-h-[60px] md:min-h-[77px] border-b transition-colors duration-300 ease-out',
         compactVisible
           ? 'border-transparent bg-transparent'
           : 'border-rule bg-paper/95 backdrop-blur',
@@ -140,14 +149,14 @@ export function NavBar() {
          row does not use is split equally between the two gaps rather than
          dumped on one side. At 1920 that is ~123px either side of the nav
          instead of 246px in a single hole after "About us". */}
-      <div className="relative mx-auto flex w-full max-w-[84rem] items-center justify-between px-6 py-4 md:px-10 lg:px-12">
+      <div className="relative mx-auto flex w-full max-w-[84rem] items-center justify-between px-4 py-2 md:px-10 md:py-4 lg:px-12">
         {/* Wordmark — mark + two-line stacked org name (matches the
            official brand lockup: "Det Islamske Forbundet" set bold in
            sans, with "Rabita" underneath at regular weight). No
            underline. Whole block links to home. */}
         <LinkVT
           href={`/${locale}`}
-          className="vt-wordmark flex min-h-11 shrink-0 items-center gap-2.5 whitespace-nowrap md:gap-3"
+          className="vt-wordmark flex min-h-10 shrink-0 items-center gap-2 whitespace-nowrap md:min-h-11 md:gap-3"
           aria-label={`${t('orgName')}, ${t('wordmark')}`}
         >
           {/* Mark, then each line of the name, on the curve and duration the
@@ -165,7 +174,7 @@ export function NavBar() {
               width={40}
               height={40}
               priority
-              className="h-9 w-9 md:h-11 md:w-11"
+              className="h-8 w-8 md:h-11 md:w-11"
             />
           </motion.span>
           <span className="flex flex-col font-serif text-ink leading-tight">
@@ -173,7 +182,7 @@ export function NavBar() {
               initial={reduced ? false : { opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.14, ease: WORDMARK_EASE }}
-              className="font-serif text-[14px] font-medium md:text-[17px] lg:text-[19px]"
+              className="font-serif text-[13px] font-medium leading-[1.15] md:text-[17px] lg:text-[19px]"
             >
               {t('orgName')}
             </motion.span>
@@ -181,7 +190,7 @@ export function NavBar() {
               initial={reduced ? false : { opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2, ease: WORDMARK_EASE }}
-              className="font-serif text-[12px] italic text-ink-60 md:text-[14px]"
+              className="font-serif text-[11px] italic leading-[1.15] text-ink-60 md:text-[14px]"
             >
               {t('wordmark')}
             </motion.span>
@@ -286,9 +295,9 @@ export function NavBar() {
           type="button"
           onClick={() => openGiveSheet()}
           aria-label={t('give')}
-          className="grid h-11 w-11 place-items-center rounded-full bg-gold-deep text-paper transition-colors active:scale-[0.98] md:hidden"
+          className="grid h-10 w-10 place-items-center rounded-full bg-gold-deep text-paper transition-colors active:scale-[0.98] md:hidden"
         >
-          <HeartIcon className="h-[18px] w-[18px]" />
+          <HeartIcon className="h-4 w-4" />
         </button>
 
         {/* Up to xl, not md. The desktop nav now starts at 1280 — below that
