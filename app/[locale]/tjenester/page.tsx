@@ -1,4 +1,4 @@
-import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { ServicesHero } from '@/components/services-hero';
 import { ServiceIndex } from '@/components/service-index';
 
@@ -9,8 +9,6 @@ export default async function ServicesIndex({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const tp = await getTranslations({ locale, namespace: 'servicePages' });
-  const l = await getLocale();
 
   return (
     <main>
