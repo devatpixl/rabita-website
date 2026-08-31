@@ -4,24 +4,12 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
 import { RequestForm, type RequestSubject } from '@/components/request-form';
 import { ServiceHero, ServiceVisit } from '@/components/service-page';
+import { Accent } from '@/components/accent';
+import { SERVICE_KEYS, SERVICE_IMAGE, type ServiceKey } from '@/lib/services';
 
-const VALID = ['nikah', 'janaza', 'shahada', 'counselling', 'hajj-umrah', 'megling', 'barn-og-ungdom', 'skole', 'koran', 'kurs', 'veivisere'] as const;
+const VALID = SERVICE_KEYS;
 
-// One render per subject, so the five pages are not the same picture five times
-const SUBJECT_IMAGE: Record<(typeof VALID)[number], string> = {
-  nikah: '/photos/subj-nikah.webp',
-  janaza: '/photos/subj-janaza.webp',
-  shahada: '/photos/subj-shahada.webp',
-  counselling: '/photos/subj-counselling.webp',
-  'hajj-umrah': '/photos/subj-hajj.webp',
-  megling: '/photos/svc-counsel.webp',
-  'barn-og-ungdom': '/photos/community/bazaar-child.webp',
-  skole: '/photos/learn-school.webp',
-  koran: '/photos/community/quran-carpet.webp',
-  kurs: '/photos/event-lecture-hall.webp',
-  veivisere: '/photos/event-school-visit.webp',
-};
-type Subject = (typeof VALID)[number];
+type Subject = ServiceKey;
 
 export function generateStaticParams() {
   return VALID.flatMap((subject) =>
@@ -41,16 +29,25 @@ export default async function ServiceDetail({
   const t = await getTranslations({ locale, namespace: 'servicesIndex' });
   const tp = await getTranslations({ locale, namespace: 'servicePages' });
 
+  // The service titles carry <em> for the gold-italic accent. next-intl's
+  // plain t() cannot render markup — it bails and prints the key itself, which
+  // is why every one of these pages showed "servicesIndex.items.<key>.title"
+  // as its headline. The heading goes through t.rich; anything that needs a
+  // real string (alt text, and any future <title>) gets the tags stripped.
+  const plainTitle = (t.raw(`items.${s}.title`) as string).replace(/<\/?em>/g, '');
+
   return (
     <main>
       <ServiceHero
         crumb={tp('crumb')}
         eyebrow={t('eyebrow')}
-        title={t(`items.${s}.title`)}
+        title={t.rich(`items.${s}.title`, {
+          em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
+        })}
         lede={t(`items.${s}.body`)}
         note={tp('pages.services.note')}
-        image={SUBJECT_IMAGE[s]}
-        alt={t(`items.${s}.title`)}
+        image={SERVICE_IMAGE[s]}
+        alt={plainTitle}
       />
       <Section tone="paper">
         <SectionBody>

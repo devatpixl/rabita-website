@@ -118,14 +118,39 @@
           "href": "/tjenester/shahada"
         },
         {
-          "label": "Sjelesorg og samtaler",
-          "blurb": "Konfidensielle samtaler med imam eller kvinnelig veileder.",
-          "href": "/tjenester/counselling"
-        },
-        {
           "label": "Hajj og umrah",
           "blurb": "Informasjon, forberedelse og henvisninger.",
           "href": "/tjenester/hajj-umrah"
+        },
+        {
+          "label": "Samtaler og megling",
+          "blurb": "Fortrolige samtaler med imam eller kvinnelig rådgiver, og hjelp til å løse konflikter.",
+          "href": "/tjenester/counselling"
+        },
+        {
+          "label": "Rabita skole",
+          "blurb": "Lørdagsskole for barn og unge fra 6 til 16 år.",
+          "href": "/tjenester/skole"
+        },
+        {
+          "label": "Koran og arabisk",
+          "blurb": "Koranundervisning og arabisk for barn, unge og voksne.",
+          "href": "/tjenester/koran"
+        },
+        {
+          "label": "Kalligrafi og geometri",
+          "blurb": "Kurs i islamsk kalligrafi og geometrisk kunst.",
+          "href": "/tjenester/kurs"
+        },
+        {
+          "label": "Barne- og ungdomsaktiviteter",
+          "blurb": "Ungdomsklubb, leir og aktiviteter for de yngste.",
+          "href": "/tjenester/barn-og-ungdom"
+        },
+        {
+          "label": "Muslimske veivisere",
+          "blurb": "Unge veivisere som besøker skoler og møter elever.",
+          "href": "/tjenester/veivisere"
         },
         {
           "label": "Undervisning",
@@ -829,9 +854,9 @@
         ]
       },
       "services": {
-        "eyebrow": "Tjenester",
-        "title": "Nikah, skole, veiledning og mer.",
-        "lede": "Religiøse tjenester, veiledning, undervisning og arbeid ut mot samfunnet. Alle henvendelser behandles diskret.",
+        "eyebrow": "Her for deg",
+        "title": "For de største dagene, <em>og de tyngste</em>.",
+        "lede": "Uansett hva som bringer deg hit, finnes det noen her som kan hjelpe. Alle henvendelser behandles diskret.",
         "note": "Spør i resepsjonen eller send en e-post",
         "regEyebrow": "Hva vi tilbyr",
         "regHeading": "Spør om hva som helst av dette.",
@@ -1561,57 +1586,52 @@
     },
     "items": {
       "nikah": {
-        "title": "Nikah: ekteskapsseremoni",
+        "title": "Nikah: <em>ekteskapsseremoni</em>",
         "body": "Islamsk vielse, med eller uten juridisk registrering.",
         "longBody": "Vi arrangerer nikah både på moskeen og på andre steder etter avtale. Vitner og imam koordineres. Juridisk registrering håndteres via norsk folkeregister; vi hjelper med formalia."
       },
       "janaza": {
-        "title": "Janaza: begravelse",
+        "title": "Janaza: <em>begravelse</em>",
         "body": "Vasking, bønn og koordinering med gravlund.",
         "longBody": "Janaza-tjenesten er tilgjengelig døgnet rundt. Vi hjelper med praktiske avtaler mot Alfaset gravlund og andre begravelsesplasser i Oslo. Ingen kostnad for medlemmer."
       },
       "shahada": {
-        "title": "Shahada: bekjennelse",
+        "title": "Shahada: <em>bekjennelse</em>",
         "body": "For deg som ønsker å ta shahada, med vitner.",
         "longBody": "Vi tar imot både private og offentlige shahada-seremonier. Ta kontakt for å avtale tid. Vi ordner vitner ved behov og gir kort veiledning i etterkant."
       },
       "counselling": {
-        "title": "Sjelesorg og samtaler",
-        "body": "Konfidensielle samtaler med imam eller kvinnelig veileder.",
-        "longBody": "Vi tilbyr både korte og lengre samtaler, individuelt eller i par. Alle henvendelser er konfidensielle. Vi kan tilby både mannlig imam og kvinnelig veileder."
+        "title": "Samtaler og <em>megling</em>",
+        "body": "Fortrolige samtaler med imam eller kvinnelig rådgiver, og hjelp til å løse konflikter.",
+        "longBody": "Vi tilbyr både korte og lengre samtaler, individuelt eller i par. Alle henvendelser er konfidensielle. Vi kan tilby både mannlig imam og kvinnelig veileder. Imamene våre megler i konflikter mellom ektefeller, i familier og mellom naboer. Samtalene er konfidensielle og bygger på tillit fra begge parter. Ta kontakt for å avtale et første møte."
       },
       "hajj-umrah": {
-        "title": "Hajj og umrah",
+        "title": "Hajj og <em>umrah</em>",
         "body": "Informasjon, forberedelse og henvisninger.",
         "longBody": "Rabita organiserer ikke selv reiser, men vi hjelper med forberedelse, informasjon og henvisninger til erfarne reisebyråer og imamer som følger grupper."
       },
-      "megling": {
-        "title": "Megling",
-        "body": "Hjelp til å løse konflikter i familie, ekteskap og nabolag.",
-        "longBody": "Imamene våre megler i konflikter mellom ektefeller, i familier og mellom naboer. Samtalene er konfidensielle og bygger på tillit fra begge parter. Ta kontakt for å avtale et første møte."
-      },
       "barn-og-ungdom": {
-        "title": "Barne- og ungdomsaktiviteter",
+        "title": "Barne- og <em>ungdomsaktiviteter</em>",
         "body": "Ungdomsklubb, leir og aktiviteter for de yngste.",
         "longBody": "Rabita driver ungdomsklubb, leirer og faste aktiviteter for barn og unge gjennom hele året, i samarbeid med Norges Unge Muslimer. Meld interesse, så tar vi kontakt om neste samling."
       },
       "skole": {
-        "title": "Rabita skole",
+        "title": "Rabita <em>skole</em>",
         "body": "Lørdagsskole for barn og unge fra 6 til 16 år.",
         "longBody": "Rabita skole er lørdagsskolen vår for barn og unge i alderen 6–16 år. I 2025 hadde skolen 225 elever fordelt på 13 klasser. Undervisningen omfatter arabisk språk, islamsk lære og Koran, og holdes i leide lokaler ved Hersleb skole. Alle faste lærere har pedagogisk kompetanse og arbeider til daglig i norske utdanningsinstitusjoner. Skolen markerer også religiøse høytider gjennom året."
       },
       "koran": {
-        "title": "Koran og arabisk",
+        "title": "Koran og <em>arabisk</em>",
         "body": "Koranundervisning og arabisk for barn, unge og voksne.",
         "longBody": "Koran og arabisk er kjernen i undervisningen ved Rabita skole, sammen med islamsk lære. For voksne holder imam Usman fredagskurset, et åpent undervisningstilbud i islamsk lære på norsk. Ta kontakt for å høre hvilke klasser som har ledige plasser."
       },
       "kurs": {
-        "title": "Kalligrafi og geometri",
+        "title": "Kalligrafi og <em>geometri</em>",
         "body": "Kurs i islamsk kalligrafi og geometrisk kunst.",
         "longBody": "Rabita arrangerer kurs i islamsk kalligrafi ledet av Ustadh Khalid Casado, og kurs i islamsk geometri med Samira Mian, hvor deltakerne lærer å konstruere klassiske mønstre med passer og linjal. I 2025 kom det deltakere helt fra Tyskland, Spania og England. «Geometri og te» er en månedlig lavterskelsamling mellom kursene, for både tidligere og nye deltakere."
       },
       "veivisere": {
-        "title": "Muslimske veivisere",
+        "title": "Muslimske <em>veivisere</em>",
         "body": "Unge veivisere som besøker skoler og møter elever.",
         "longBody": "Muslimske veivisere er et ung-til-ung-tiltak som skal forebygge fordommer og diskriminering mot norske muslimer. I 2025 besøkte veiviserne over 200 skoler og møtte mer enn 10 000 elever. Ordningen er utviklet av Rabita og Minotenk, og ble i 2024 innlemmet i regjeringens handlingsplan mot muslimfiendtlige holdninger. Skoler og organisasjoner kan be om et besøk."
       }

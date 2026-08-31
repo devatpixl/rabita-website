@@ -118,14 +118,39 @@
           "href": "/tjenester/shahada"
         },
         {
-          "label": "Counselling and conversations",
-          "blurb": "Confidential conversations with an imam or female counsellor.",
-          "href": "/tjenester/counselling"
-        },
-        {
           "label": "Hajj and umrah",
           "blurb": "Information, preparation and referrals.",
           "href": "/tjenester/hajj-umrah"
+        },
+        {
+          "label": "Counselling and mediation",
+          "blurb": "Confidential conversations with an imam or female counsellor, and help resolving conflicts.",
+          "href": "/tjenester/counselling"
+        },
+        {
+          "label": "Rabita school",
+          "blurb": "Saturday school for children and young people aged 6 to 16.",
+          "href": "/tjenester/skole"
+        },
+        {
+          "label": "Quran and Arabic",
+          "blurb": "Quran and Arabic teaching for children, young people and adults.",
+          "href": "/tjenester/koran"
+        },
+        {
+          "label": "Calligraphy and geometry",
+          "blurb": "Courses in Islamic calligraphy and geometric art.",
+          "href": "/tjenester/kurs"
+        },
+        {
+          "label": "Children and youth activities",
+          "blurb": "Youth club, camps and activities for the youngest.",
+          "href": "/tjenester/barn-og-ungdom"
+        },
+        {
+          "label": "Muslim guides",
+          "blurb": "Young guides who visit schools and meet pupils.",
+          "href": "/tjenester/veivisere"
         },
         {
           "label": "Teaching",
@@ -829,9 +854,9 @@
         ]
       },
       "services": {
-        "eyebrow": "Services",
-        "title": "Nikah, school, guidance and more.",
-        "lede": "Religious services, guidance, teaching and work out in the community. Every enquiry is handled discreetly.",
+        "eyebrow": "Here for you",
+        "title": "For the biggest days, <em>and the hardest ones</em>.",
+        "lede": "Whatever brings you here, there is someone who can help. Every enquiry is handled discreetly.",
         "note": "Ask at reception or send an email",
         "regEyebrow": "What we offer",
         "regHeading": "Ask about any of these.",
@@ -1561,57 +1586,52 @@
     },
     "items": {
       "nikah": {
-        "title": "Nikah: wedding ceremony",
+        "title": "Nikah: <em>wedding ceremony</em>",
         "body": "Islamic marriage, with or without legal registration.",
         "longBody": "We host nikah both at the mosque and elsewhere by arrangement. Witnesses and imam are coordinated. Legal registration is handled through the Norwegian civil registry; we help with the formalities."
       },
       "janaza": {
-        "title": "Janaza: funeral",
+        "title": "Janaza: <em>funeral</em>",
         "body": "Washing, prayer and coordination with the cemetery.",
         "longBody": "The janaza service is available 24 hours. We help with practical arrangements with Alfaset cemetery and other burial grounds in Oslo. No cost for members."
       },
       "shahada": {
-        "title": "Shahada: declaration of faith",
+        "title": "Shahada: <em>declaration of faith</em>",
         "body": "For those who wish to take shahada, with witnesses.",
         "longBody": "We host both private and public shahada ceremonies. Get in touch to arrange a time. We provide witnesses if needed and offer brief guidance afterwards."
       },
       "counselling": {
-        "title": "Counselling and conversations",
-        "body": "Confidential conversations with an imam or female counsellor.",
-        "longBody": "We offer both short and longer conversations, individually or as a couple. All enquiries are confidential. We can offer both a male imam and a female counsellor."
+        "title": "Counselling and <em>mediation</em>",
+        "body": "Confidential conversations with an imam or female counsellor, and help resolving conflicts.",
+        "longBody": "We offer both short and longer conversations, individually or as a couple. All enquiries are confidential. We can offer both a male imam and a female counsellor. Our imams mediate in conflicts between spouses, within families and between neighbours. Conversations are confidential and rest on the trust of both parties. Get in touch to arrange a first meeting."
       },
       "hajj-umrah": {
-        "title": "Hajj and umrah",
+        "title": "Hajj and <em>umrah</em>",
         "body": "Information, preparation and referrals.",
         "longBody": "Rabita does not organise trips itself, but we help with preparation, information and referrals to experienced agencies and imams accompanying groups."
       },
-      "megling": {
-        "title": "Mediation",
-        "body": "Help resolving conflicts in families, marriages and neighbourhoods.",
-        "longBody": "Our imams mediate in conflicts between spouses, within families and between neighbours. Conversations are confidential and rest on the trust of both parties. Get in touch to arrange a first meeting."
-      },
       "barn-og-ungdom": {
-        "title": "Children and youth activities",
+        "title": "Children and <em>youth activities</em>",
         "body": "Youth club, camps and activities for the youngest.",
         "longBody": "Rabita runs a youth club, camps and regular activities for children and young people all year, together with Norges Unge Muslimer. Register your interest and we will contact you about the next gathering."
       },
       "skole": {
-        "title": "Rabita school",
+        "title": "Rabita <em>school</em>",
         "body": "Saturday school for children and young people aged 6 to 16.",
         "longBody": "Rabita school is our Saturday school for children and young people aged 6–16. In 2025 it had 225 pupils across 13 classes. Teaching covers Arabic, Islamic studies and the Quran, and takes place in rented rooms at Hersleb school. Every permanent teacher is a trained educator working in Norwegian schools day to day. The school also marks the religious festivals through the year."
       },
       "koran": {
-        "title": "Quran and Arabic",
+        "title": "Quran and <em>Arabic</em>",
         "body": "Quran and Arabic teaching for children, young people and adults.",
         "longBody": "Quran and Arabic are at the centre of the teaching at Rabita school, alongside Islamic studies. For adults, Imam Usman runs the Friday course, an open class in Islamic learning held in Norwegian. Get in touch to hear which classes have places."
       },
       "kurs": {
-        "title": "Calligraphy and geometry",
+        "title": "Calligraphy and <em>geometry</em>",
         "body": "Courses in Islamic calligraphy and geometric art.",
         "longBody": "Rabita runs courses in Islamic calligraphy led by Ustadh Khalid Casado, and in Islamic geometry with Samira Mian, where participants learn to construct classical patterns with compass and ruler. In 2025 the courses drew participants from Germany, Spain and England. \"Geometry and tea\" is a monthly, low-threshold gathering between courses, for past and new participants alike."
       },
       "veivisere": {
-        "title": "Muslim guides",
+        "title": "Muslim <em>guides</em>",
         "body": "Young guides who visit schools and meet pupils.",
         "longBody": "Muslimske veivisere is a youth-to-youth programme working against prejudice and discrimination towards Norwegian Muslims. In 2025 the guides visited more than 200 schools and met over 10,000 pupils. It was developed by Rabita and Minotenk, and in 2024 was written into the government’s action plan against anti-Muslim attitudes. Schools and organisations can request a visit."
       }

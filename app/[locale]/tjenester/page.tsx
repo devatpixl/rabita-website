@@ -1,5 +1,6 @@
 import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
-import { ServiceHero, ServiceVisit } from '@/components/service-page';
+import { ServiceVisit } from '@/components/service-page';
+import { ServicesHero } from '@/components/services-hero';
 import { ServiceIndex } from '@/components/service-index';
 
 export default async function ServicesIndex({
@@ -14,15 +15,9 @@ export default async function ServicesIndex({
 
   return (
     <main>
-      <ServiceHero
-        crumb={tp('crumb')}
-        eyebrow={tp('pages.services.eyebrow')}
-        title={tp('pages.services.title')}
-        lede={tp('pages.services.lede')}
-        note={tp('pages.services.note')}
-        image="/photos/svc-services.webp"
-        alt={tp('pages.services.eyebrow')}
-      />
+      {/* Full-bleed picture with the words in front (client, 2026-08-31).
+         The split ServiceHero still runs every /tjenester/[subject] page. */}
+      <ServicesHero />
       {/* Every service as grouped boxes (client 2026-08-30: the register of
          rows read as clutter). The two "how to start" cards went with it —
          the visit block below already says where to come and how to write. */}

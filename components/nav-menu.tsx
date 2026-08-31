@@ -183,9 +183,23 @@ function MegaPanel({ navKey, onNavigate }: { navKey: NavKey; onNavigate: () => v
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
     >
-      <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60">
+      {/* "See everything in Services" is a sentence that promises a
+         destination, so it is a link — it was plain text, which is exactly the
+         kind of thing people click at and nothing happens. Goes to the
+         section's own root. */}
+      <LinkVT
+        href={`/${locale}${NAV_ROOT[navKey]}`}
+        onClick={onNavigate}
+        className="group/all inline-flex items-center gap-2 font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60 transition-colors hover:text-gold-deep"
+      >
         {t('overview')} {t(`items.${navKey}`)}
-      </p>
+        <span
+          aria-hidden
+          className="transition-transform duration-200 group-hover/all:translate-x-1 rtl:rotate-180 rtl:group-hover/all:-translate-x-1"
+        >
+          &rarr;
+        </span>
+      </LinkVT>
       <ul className="mt-3 grid gap-x-10 gap-y-0 md:grid-cols-2 lg:grid-cols-3">
         {items.map((item) => (
           <li key={item.href}>
