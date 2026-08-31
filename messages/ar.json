@@ -2048,7 +2048,9 @@
   "video": {
     "play": "تشغيل",
     "imamWelcome": "كلمة من الإمام",
-    "comingSoon": "الفيديو قريبًا"
+    "comingSoon": "الفيديو قريبًا",
+    "unmute": "تشغيل الصوت",
+    "muted": "يُعرض بدون صوت"
   },
   "prayerClock": {
     "eyebrow": "الآن في أوسلو",

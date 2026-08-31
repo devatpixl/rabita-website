@@ -81,6 +81,13 @@ export function TimedCta({
   const [quote, setQuote] = useState<Quote | null>(null);
   const [thanking, setThanking] = useState(false);
   const [entered, setEntered] = useState(false);
+  // Whether the dialog's CONTENT is mounted, as distinct from whether the
+  // <dialog> is open. dialog.close() only hides the element — React keeps the
+  // children, and a hidden <video> keeps playing: the imam carried on talking
+  // after the card was shut (client, 2026-08-31). Unmounting the body on close
+  // stops it by construction, rather than by remembering to pause it on each
+  // of the four ways out (the X, "Not now", Escape, the backdrop).
+  const [bodyMounted, setBodyMounted] = useState(false);
 
   const releaseScroll = useCallback(() => {
     document.documentElement.classList.remove('sheet-open');
@@ -94,17 +101,30 @@ export function TimedCta({
     }
   }, [storageKey]);
 
+  // Silence first, synchronously, before anything else — not after the exit
+  // animation and not as a consequence of a re-render. Someone who has just
+  // hit the X wants the talking to stop now, and every other mechanism here
+  // (the close event, unmounting the body) happens at least a frame later.
+  const hushVideo = useCallback(() => {
+    dialogRef.current?.querySelectorAll('video').forEach((v) => {
+      v.pause();
+      v.muted = true;
+    });
+  }, []);
+
   const close = useCallback(
     (then?: () => void) => {
+      hushVideo();
       remember();
       setEntered(false);
       window.setTimeout(() => {
         releaseScroll();
+        setBodyMounted(false);
         dialogRef.current?.close();
         then?.();
       }, EXIT_MS);
     },
-    [remember, releaseScroll],
+    [remember, releaseScroll, hushVideo],
   );
 
   // Arm the timer — unless we have just come back from the giving sheet, in
@@ -168,6 +188,7 @@ export function TimedCta({
     const el = dialogRef.current;
     if (!el || el.open) return;
     el.showModal();
+    setBodyMounted(true);
     // The scroll lock goes on a frame later, not now. When we reopen right
     // after the giving sheet closes, that sheet's own `close` event is a
     // QUEUED task — so its cleanup can run after this effect and strip the
@@ -191,13 +212,15 @@ export function TimedCta({
     const el = dialogRef.current;
     if (!el) return;
     const onClose = () => {
+      hushVideo();
       releaseScroll();
       setEntered(false);
+      setBodyMounted(false);
       remember();
     };
     el.addEventListener('close', onClose);
     return () => el.removeEventListener('close', onClose);
-  }, [quote, thanking, remember, releaseScroll]);
+  }, [quote, thanking, remember, releaseScroll, hushVideo]);
 
   // 3. Last line of defence: never leave the document locked because this
   //    component went away while the dialog was open.
@@ -213,6 +236,18 @@ export function TimedCta({
       onClick={(e) => {
         if (e.target === dialogRef.current) close();
       }}
+      // Escape is handled here rather than left to the browser so that all
+      // four ways out — this, the X, "Not now" and the backdrop — run the
+      // same close(), which silences the film synchronously. Left to the
+      // native behaviour, Escape's only hook is the dialog's `close` event,
+      // and a single event listener is a thin thing to hang "the imam stops
+      // talking" on. preventDefault keeps the exit animation too.
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          close();
+        }
+      }}
       className={cn(
         // max-h, not just max-w: on a 13" laptop the viewport is about 790px
         // and this card ran past it, so the "Not now" fell off the bottom.
@@ -222,7 +257,8 @@ export function TimedCta({
         entered ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-3 scale-[0.97] opacity-0',
       )}
     >
-      <div className="no-scrollbar relative max-h-[calc(100svh-2rem)] overflow-y-auto rounded-[1.75rem] border border-rule bg-paper px-8 py-8 text-center md:px-12 md:py-10">
+      {bodyMounted && (
+      <div className="no-scrollbar relative max-h-[calc(100svh-2rem)] overflow-y-auto rounded-[1.75rem] border border-rule bg-paper px-8 py-8 text-center md:px-12 md:py-10 [@media(max-height:730px)]:py-6">
         <button
           type="button"
           onClick={() => close()}
@@ -240,7 +276,13 @@ export function TimedCta({
           alt=""
           width={48}
           height={48}
-          className="mx-auto h-12 w-12"
+          className={cn(
+            'mx-auto h-12 w-12',
+            // 72px of pure decoration. With the film in the card there is not
+            // room for it on a laptop, and a card the reader has to scroll
+            // costs more than a mark.
+            showVideoInAsk && '[@media(max-height:900px)]:hidden',
+          )}
         />
 
         {thanking ? (
@@ -259,7 +301,9 @@ export function TimedCta({
               video={film}
               label={tVideo('imamWelcome')}
               placeholder={filmIsPlaceholder}
-              className="mx-auto mt-6 max-w-[22rem] text-start"
+              autoPlay
+              className="mt-6"
+              frameClassName="mx-auto aspect-[4/5] h-[min(36svh,20rem)] max-w-full [@media(max-height:730px)]:h-[33svh]"
             />
             <button
               type="button"
@@ -271,31 +315,56 @@ export function TimedCta({
           </>
         ) : (
           <>
-            <p className="mt-6 font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-gold-deep">
-              {t('eyebrow')}
-            </p>
-
-            <blockquote className="mt-5">
-              <p className="text-balance font-serif text-[clamp(1.35rem,2.6vw,1.75rem)] leading-[1.38] text-ink">
-                {quote!.text}
-              </p>
-              <footer className="mt-6 flex items-center justify-center gap-4">
-                <span aria-hidden className="h-px w-8 bg-gold-deep/40" />
-                <cite className="not-italic font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-60">
-                  {quote!.source}
-                </cite>
-                <span aria-hidden className="h-px w-8 bg-gold-deep/40" />
-              </footer>
-            </blockquote>
-
+            {/* The film leads (client, 2026-08-31), with the hadith beneath it
+               and set smaller. It is a portrait film, so the frame is driven
+               from HEIGHT rather than width: at 4:5 a width-led box on a 13"
+               laptop pushes the Give button off the bottom of the dialog. The
+               svh cap keeps the whole card on one screen, and the rem cap
+               stops it ballooning on a tall monitor. */}
             {showVideoInAsk && (
               <VideoCard
                 video={film}
                 label={tVideo('imamWelcome')}
                 placeholder={filmIsPlaceholder}
-                className="mx-auto mt-6 max-w-[22rem] text-start"
+              autoPlay
+                className="mt-6"
+                frameClassName="mx-auto aspect-[4/5] h-[min(38svh,22rem)] max-w-full [@media(max-height:730px)]:h-[35svh]"
               />
             )}
+
+            <p
+              className={cn(
+                'font-mono uppercase tracking-[0.16em] text-gold-deep',
+                showVideoInAsk ? 'mt-7 text-[0.625rem]' : 'mt-6 text-[0.6875rem]',
+              )}
+            >
+              {t('eyebrow')}
+            </p>
+
+            <blockquote className={showVideoInAsk ? 'mt-3' : 'mt-5'}>
+              <p
+                className={cn(
+                  'text-balance font-serif text-ink',
+                  showVideoInAsk
+                    ? 'text-[clamp(1.05rem,2vw,1.3rem)] leading-[1.4]'
+                    : 'text-[clamp(1.35rem,2.6vw,1.75rem)] leading-[1.38]',
+                )}
+              >
+                {quote!.text}
+              </p>
+              <footer
+                className={cn(
+                  'flex items-center justify-center',
+                  showVideoInAsk ? 'mt-4 gap-3' : 'mt-6 gap-4',
+                )}
+              >
+                <span aria-hidden className={cn('h-px bg-gold-deep/40', showVideoInAsk ? 'w-6' : 'w-8')} />
+                <cite className="not-italic font-mono text-[0.625rem] uppercase tracking-[0.12em] text-ink-60">
+                  {quote!.source}
+                </cite>
+                <span aria-hidden className={cn('h-px bg-gold-deep/40', showVideoInAsk ? 'w-6' : 'w-8')} />
+              </footer>
+            </blockquote>
 
             <button
               type="button"
@@ -307,7 +376,10 @@ export function TimedCta({
                   ),
                 )
               }
-              className="mt-7 min-h-[3.25rem] w-full rounded-full bg-gold-deep px-6 text-[15px] font-semibold text-paper transition-colors hover:bg-ink active:scale-[0.99]"
+              className={cn(
+                'min-h-[3.25rem] w-full rounded-full bg-gold-deep px-6 text-[15px] font-semibold text-paper transition-colors hover:bg-ink active:scale-[0.99]',
+                showVideoInAsk ? 'mt-6' : 'mt-7',
+              )}
             >
               {t('give', { amount: amountNok })}
             </button>
@@ -322,6 +394,7 @@ export function TimedCta({
           </>
         )}
       </div>
+      )}
     </dialog>
   );
 }

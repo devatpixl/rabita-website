@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import type { SiteVideo } from '@/lib/media';
@@ -18,11 +18,20 @@ export function VideoCard({
   video,
   label,
   className,
+  frameClassName,
   placeholder = false,
+  autoPlay = false,
 }: {
   video: SiteVideo;
   label?: string;
   className?: string;
+  /**
+   * Sizing for the picture itself, when the caller needs to drive it from
+   * height rather than width — a portrait film in a dialog has to fit the
+   * screen vertically, and letting the width lead puts the play button off
+   * the bottom of a laptop. Replaces the default 16:9 full-width box.
+   */
+  frameClassName?: string;
   /**
    * Nothing to play yet. Shows the frame, the poster and the play button so
    * the slot is visibly reserved, but the button is inert and carries a
@@ -30,11 +39,44 @@ export function VideoCard({
    * nothing when tapped is worse than no button at all.
    */
   placeholder?: boolean;
+  /**
+   * Start playing on its own, without the poster step.
+   *
+   * MUTED, necessarily: every browser refuses to autoplay a film with sound,
+   * so an unmuted attempt does not start quietly — it does not start at all.
+   * The card carries an obvious "turn on sound" control instead, and the
+   * native controls stay on so it can be paused.
+   *
+   * Ignored under prefers-reduced-motion, where the poster and the play
+   * button are shown as normal.
+   */
+  autoPlay?: boolean;
 }) {
   const t = useTranslations('video');
   const locale = useLocale() as AppLocale;
   const [playing, setPlaying] = useState(false);
+  const [muted, setMuted] = useState(true);
   const ref = useRef<HTMLVideoElement | null>(null);
+
+  // Belt and braces: stop on the way out. Unmounting a <video> is normally
+  // enough, but this one lives in a dialog and "the sound kept going after I
+  // closed it" is the exact failure worth two lines of insurance against.
+  useEffect(() => () => {
+    const el = ref.current;
+    if (el) {
+      el.pause();
+      el.muted = true;
+    }
+  }, []);
+
+  // Autoplay decides itself on the client, after mount: the server cannot
+  // know whether this visitor asks for reduced motion, and rendering the
+  // <video> on the server and then pulling it would be a hydration mismatch.
+  useEffect(() => {
+    if (!autoPlay || placeholder || !video.src) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    setPlaying(true);
+  }, [autoPlay, placeholder, video.src]);
 
   const mmss = video.seconds
     ? `${Math.floor(video.seconds / 60)}:${String(video.seconds % 60).padStart(2, '0')}`
@@ -47,16 +89,25 @@ export function VideoCard({
           {label}
         </figcaption>
       )}
-      <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-dusk">
+      <div
+        className={cn(
+          'relative overflow-hidden rounded-2xl bg-dusk',
+          frameClassName ?? 'aspect-video w-full',
+        )}
+        style={video.aspect && !frameClassName ? { aspectRatio: video.aspect } : undefined}
+      >
         {playing ? (
+          <>
           <video
             ref={ref}
             src={video.src}
             poster={video.poster}
             controls
             autoPlay
+            muted={muted}
+            onVolumeChange={(e) => setMuted(e.currentTarget.muted)}
             playsInline
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain"
           >
             {Object.entries(video.captions ?? {}).map(([lang, src]) => (
               <track
@@ -69,6 +120,27 @@ export function VideoCard({
               />
             ))}
           </video>
+          {/* Autoplay is muted because browsers allow nothing else, so the
+             card has to say so and offer the way out. It disappears the
+             moment sound is on, however it was turned on — the native
+             volume control fires the same event. */}
+          {muted && (
+            <button
+              type="button"
+              onClick={() => {
+                const el = ref.current;
+                if (!el) return;
+                el.muted = false;
+                setMuted(false);
+                void el.play();
+              }}
+              className="absolute inset-x-0 top-0 z-[1] flex items-center justify-center gap-2 bg-gradient-to-b from-dusk/75 to-transparent px-3 pb-6 pt-3 font-mono text-[0.625rem] uppercase tracking-[0.14em] text-paper transition-opacity hover:opacity-90"
+            >
+              <SoundOffIcon className="h-4 w-4 shrink-0" />
+              {t('unmute')}
+            </button>
+          )}
+          </>
         ) : (
           <PosterFrame
             as={placeholder ? 'div' : 'button'}
@@ -132,5 +204,14 @@ function PosterFrame({
     <div className="group absolute inset-0 h-full w-full" aria-hidden>
       {children}
     </div>
+  );
+}
+
+function SoundOffIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
+      <path d="M11 5 6.5 9H3v6h3.5L11 19Z" />
+      <path d="m16 9 5 6M21 9l-5 6" />
+    </svg>
   );
 }

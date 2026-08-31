@@ -11,30 +11,32 @@ export type SiteVideo = {
   captions?: Partial<Record<AppLocale, string>>;
   /** Runtime, for the hint on the play button. */
   seconds?: number;
+  /**
+   * The film's own shape, as a CSS ratio. Defaults to 16/9. The imam's
+   * welcome was shot on a phone and is 480x600, so the frame has to be told
+   * — a portrait film in a 16:9 box is cropped to a letterbox of the middle
+   * of his face.
+   */
+  aspect?: string;
 };
 
-// NOT FILMED YET (2026-08-30). The imam's welcome — a short thank-you to
-// people who have just given. To turn it on:
+// FILMED. Delivered 2026-08-31 and live: the imam's welcome, 480x600 shot on
+// a phone, 38 seconds.
 //
-//   1. put the file at        public/video/imam-welcome.mp4
-//   2. a still frame at       public/video/imam-welcome-poster.webp
-//   3. subtitles at           public/video/imam-welcome.<locale>.vtt
-//   4. replace `null` below with the object commented out under it.
+// The source was 5.5 MB at ~960 kbps; it ships re-encoded at H.264 crf 24,
+// 2.6 MB, which is visually indistinguishable from the original at 3x zoom.
+// Nothing downloads until someone presses play — the poster is 17 KB.
 //
-// Nothing else changes: the thank-you card renders the film instead of
-// closing on a button, and the prayer popup can opt in with
-// `showVideoInAsk` if the client wants it there too.
-export const IMAM_WELCOME: SiteVideo | null = null;
-// export const IMAM_WELCOME: SiteVideo | null = {
-//   src: '/video/imam-welcome.mp4',
-//   poster: '/video/imam-welcome-poster.webp',
-//   captions: {
-//     no: '/video/imam-welcome.no.vtt',
-//     en: '/video/imam-welcome.en.vtt',
-//     ar: '/video/imam-welcome.ar.vtt',
-//   },
-//   seconds: 32,
-// };
+// STILL MISSING: subtitles. `captions` is empty because there is no
+// transcript, and writing one from the audio is not something to guess at in
+// three languages. Drop VTT files at public/video/imam-welcome.<locale>.vtt
+// and list them here; VideoCard already renders whatever it is given.
+export const IMAM_WELCOME: SiteVideo | null = {
+  src: '/video/imam-welcome.mp4',
+  poster: '/video/imam-welcome-poster.webp',
+  seconds: 38,
+  aspect: '4 / 5',
+};
 
 
 // Stand-in while nothing has been filmed. Only the poster is real — VideoCard

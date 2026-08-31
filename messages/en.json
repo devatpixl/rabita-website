@@ -2048,7 +2048,9 @@
   "video": {
     "play": "Play",
     "imamWelcome": "A word from the imam",
-    "comingSoon": "Video coming"
+    "comingSoon": "Video coming",
+    "unmute": "Turn on sound",
+    "muted": "Playing without sound"
   },
   "prayerClock": {
     "eyebrow": "Now in Oslo",
