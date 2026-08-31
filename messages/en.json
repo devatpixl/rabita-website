@@ -851,7 +851,8 @@
             "title": "Ablution downstairs",
             "body": "Wudu facilities are on the lower floor, separate for men and women, open the whole time the building is."
           }
-        ]
+        ],
+        "ledeShort": "Times calculated for Oslo, updated through the year."
       },
       "services": {
         "eyebrow": "Here for you",
@@ -2073,5 +2074,18 @@
         "blurb": "Short clips from the mosque"
       }
     }
+  },
+  "prayerBoard": {
+    "nextLabel": "Next prayer",
+    "progressLabel": "{name} in {m}m",
+    "jumuahHeading": "Jumu'ah",
+    "jumuahNote": "The khutbah begins before the prayer.",
+    "jumuahImams": "Khutbah and prayer led by the imams",
+    "glanceHeading": "Today at a glance",
+    "doorsOpen": "Doors open",
+    "doorsOpenNote": "The mosque is open for visitors.",
+    "adhanNext": "Adhan · {name}",
+    "adhanNote": "The call to prayer.",
+    "jumuahPrayer": "Jumu'ah prayer"
   }
 }

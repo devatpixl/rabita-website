@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
+import { FigureIcon, type FigureIconName } from '@/components/figure-icons';
 import { cn } from '@/lib/cn';
 import { Section, SectionBody } from '@/components/primitives';
 import { BuildingRises } from '@/components/building-rises';
@@ -85,13 +86,19 @@ export default async function ProjectPage({
               { key: 'women', before: CAMPAIGN.womensPrayerCapacityBefore, after: CAMPAIGN.womensPrayerCapacityAfter },
               { key: 'men', before: CAMPAIGN.mensPrayerCapacityBefore, after: CAMPAIGN.mensPrayerCapacityAfter },
             ] as const;
-            const facts: { key: string; value: string; unit?: string; muted?: boolean }[] = [
-              { key: 'building', value: nf.format(CAMPAIGN.buildingM2), unit: 'm²' },
-              { key: 'floors', value: `${CAMPAIGN.floorsAbove}+${CAMPAIGN.floorsBelow}` },
-              { key: 'startConstruction', value: CAMPAIGN.constructionStart },
+            const facts: {
+              key: string;
+              icon: FigureIconName;
+              value: string;
+              unit?: string;
+              muted?: boolean;
+            }[] = [
+              { key: 'building', icon: 'building', value: nf.format(CAMPAIGN.buildingM2), unit: 'm²' },
+              { key: 'floors', icon: 'floors', value: `${CAMPAIGN.floorsAbove}+${CAMPAIGN.floorsBelow}` },
+              { key: 'startConstruction', icon: 'calendar', value: CAMPAIGN.constructionStart },
               CAMPAIGN.completionDate
-                ? { key: 'completion', value: CAMPAIGN.completionDate }
-                : { key: 'completion', value: t('facts.completionTbd'), muted: true },
+                ? { key: 'completion', icon: 'check', value: CAMPAIGN.completionDate }
+                : { key: 'completion', icon: 'check', value: t('facts.completionTbd'), muted: true },
             ];
             const label = 'font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink-60';
             // One rhythm for both registers: every row is 5rem tall with its
@@ -102,7 +109,21 @@ export default async function ProjectPage({
             // and 3.75rem per row was just padding — it opened the gaps the
             // client flagged under "Completion" and under the architect.
             // Rows size to their content on a phone.
-            const row = 'flex items-baseline justify-between gap-4 py-3.5 md:min-h-[5rem] md:gap-6 md:py-3';
+            const row =
+              'flex items-baseline justify-between gap-4 py-3.5 md:min-h-[4.5rem] md:items-center md:gap-5 md:py-3';
+            // The card treatment the client asked for (2026-08-31), taken from
+            // their mockup: a bordered plate per register, a mark beside every
+            // figure, a gold rule off each register's label, and the capacity
+            // rows set as inset panels.
+            //
+            // Every class here is md:-prefixed. The phone keeps the plain
+            // ruled registers it has now — the client was explicit about that,
+            // and a 40px chip beside a 13px label on a 390px screen would cost
+            // the label its line anyway.
+            const card = 'md:rounded-2xl md:border md:border-rule md:bg-paper-2/50 md:p-7';
+            const chip =
+              'hidden h-10 w-10 shrink-0 place-items-center rounded-lg border border-rule bg-paper text-gold-deep md:grid';
+            const leader = 'hidden h-px flex-1 bg-rule md:block';
             return (
               <div>
                 {/* A heading, so the registers have something to answer to:
@@ -113,12 +134,20 @@ export default async function ProjectPage({
                 </h2>
                 <div className="mt-8 grid gap-9 md:mt-12 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
                   {/* Key figures */}
-                  <div>
-                    <h2 className={label}>{t('facts.heading')}</h2>
-                    <dl className="mt-3 divide-y-[0.5px] divide-rule border-t border-ink">
+                  <div className={card}>
+                    <div className="flex items-center gap-3">
+                      <FigureIcon name="building" className="hidden h-[18px] w-[18px] shrink-0 text-gold-deep md:block" />
+                      <h2 className={label}>{t('facts.heading')}</h2>
+                      <span aria-hidden className="hidden h-px flex-1 bg-gold-deep/30 md:block" />
+                    </div>
+                    <dl className="mt-3 divide-y-[0.5px] divide-rule border-t border-ink md:mt-2 md:border-t-0">
                       {facts.map((f) => (
                         <div key={f.key} className={row}>
+                          <span aria-hidden className={chip}>
+                            <FigureIcon name={f.icon} className="h-[18px] w-[18px]" />
+                          </span>
                           <dt className="text-[13px] text-ink-60">{t(`facts.${f.key}`)}</dt>
+                          <span aria-hidden className={leader} />
                           <dd className="flex items-baseline gap-1.5 text-end">
                             {f.muted ? (
                               <span className="text-[13px] italic text-ink-60">{f.value}</span>
@@ -133,11 +162,30 @@ export default async function ProjectPage({
                   </div>
 
                   {/* Capacity, then the school as its own register */}
-                  <div>
-                    <h2 className={label}>{t('capacity.heading')}</h2>
-                    <dl className="mt-3 divide-y-[0.5px] divide-rule border-t border-ink">
+                  <div className="md:space-y-6">
+                    <div className={card}>
+                    <div className="flex items-center gap-3">
+                      <FigureIcon name="people" className="hidden h-[18px] w-[18px] shrink-0 text-gold-deep md:block" />
+                      <h2 className={label}>{t('capacity.heading')}</h2>
+                      <span aria-hidden className="hidden h-px flex-1 bg-gold-deep/30 md:block" />
+                    </div>
+                    <dl className="mt-3 border-t border-ink md:mt-2 md:space-y-2.5 md:border-t-0">
                       {cap.map((c) => (
-                        <div key={c.key} className={cn(row, 'flex-col items-start gap-2 md:flex-row md:items-baseline')}>
+                        <div
+                          key={c.key}
+                          className={cn(
+                            row,
+                            'flex-col items-start gap-2 md:flex-row md:items-center',
+                            // the phone's hairline, set on the row rather than
+                            // by divide-* — see the note on the <dl>
+                            '[&:not(:first-child)]:border-t-[0.5px] [&:not(:first-child)]:border-t-rule',
+                            // the inset panel from the mockup, gold edge first
+                            'md:rounded-lg md:border-s-2 md:border-gold-deep md:bg-paper md:px-4 md:[&:not(:first-child)]:border-t-0',
+                          )}
+                        >
+                          <span aria-hidden className={chip}>
+                            <FigureIcon name="person" className="h-[18px] w-[18px]" />
+                          </span>
                           <dt className="text-[13px] text-ink-60 md:w-[7.5rem] md:shrink-0">{t(`capacity.${c.key}`)}</dt>
                           <dd className="flex w-full flex-1 items-baseline gap-3 leading-none md:w-auto">
                             <span className="font-serif text-[1.1rem] tabular-nums text-ink-60">{nf.format(c.before)}</span>
@@ -156,15 +204,23 @@ export default async function ProjectPage({
 
                     {/* The architect, as its own register where the school
                        block used to be; the credit line at the foot is gone. */}
-                    <h2 className={`${label} mt-8 md:mt-10`}>{t('facts.architect')}</h2>
-                    <dl className="mt-3 border-t border-ink">
-                      <div className={row}>
+                    </div>
+
+                    <div className={card}>
+                    <div className="flex items-center gap-3 mt-8 md:mt-0">
+                      <FigureIcon name="building" className="hidden h-[18px] w-[18px] shrink-0 text-gold-deep md:block" />
+                      <h2 className={label}>{t('facts.architect')}</h2>
+                      <span aria-hidden className="hidden h-px flex-1 bg-gold-deep/30 md:block" />
+                    </div>
+                    <dl className="mt-3 border-t border-ink md:mt-2 md:border-t-0">
+                      <div className={cn(row, 'md:min-h-0')}>
                         <dd className="flex flex-col gap-1 leading-none">
                           <span className="font-serif text-[1.35rem] text-ink md:text-[1.5rem]">{CAMPAIGN.architect.split(',')[0]}</span>
                           <span className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">{CAMPAIGN.architect.split(',').slice(1).join(',').trim()}</span>
                         </dd>
                       </div>
                     </dl>
+                    </div>
                   </div>
                 </div>
 

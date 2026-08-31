@@ -49,6 +49,10 @@ const HERO_IMAGE = {
 // within one viewport; if the header ever changes height, re-measure
 // once and update this.
 const HEADER_H = 130;
+// The measured height of what sits above the hero at md and up: the prayer
+// strip (45) plus the header (77). Only the giving card uses it — the hero's
+// own min-height stays keyed to HEADER_H, which is tuned, not measured.
+const CARD_CHROME_H = 122;
 
 // The utility strip is hidden below md, so a phone only carries the bar —
 // trimmed from 77 to 60 on 2026-08-30 when the mobile capsule was tightened.
@@ -143,7 +147,15 @@ export async function Hero() {
     '--hero-min-sm': `calc(100svh - ${HEADER_MOBILE_H}px)`,
     '--hero-min': `min(calc(100svh - ${HEADER_H}px), ${980 - HEADER_H}px)`,
     '--hero-cap': `calc(100svh - ${HEADER_H}px)`,
-    '--hero-card-cap': `calc(100svh - ${HEADER_H}px - 48px)`,
+    // The gutter reserved above and below the card. 48px of breathing room is
+    // right on a monitor; on a 13" laptop it is 48px the card does not have,
+    // so it shrinks with the screen. Paired with the short:/shorter: spacing
+    // inside GivingCard, which is what actually makes the card fit.
+    // The card sits below real chrome of CARD_CHROME_H, not HEADER_H: the
+    // 130 is a rounded figure the hero's own min-height is tuned against,
+    // and measuring the strip (45) plus the header (77) gives 122. Those 8px
+    // are the difference between the card fitting and not on a 13" laptop.
+    '--hero-card-cap': `calc(100svh - ${CARD_CHROME_H}px - clamp(12px, 100svh - 700px, 48px))`,
   } as CSSProperties;
 
   return (
@@ -334,7 +346,7 @@ export async function Hero() {
                it read as a second, stacked card; removed 2026-08-30. */}
             <div className="relative isolate h-full">
               <div className="no-scrollbar relative overflow-y-auto rounded-2xl border border-gold/30 bg-paper text-ink shadow-[0_1px_2px_rgba(0,0,0,0.06),0_8px_24px_-10px_rgba(0,0,0,0.35),0_28px_60px_-24px_rgba(0,0,0,0.4)] md:max-h-[var(--hero-card-cap)]">
-                <GivingCard />
+                <GivingCard fit />
               </div>
             </div>
           </aside>

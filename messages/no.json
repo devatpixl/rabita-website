@@ -851,7 +851,8 @@
             "title": "Wudu i underetasjen",
             "body": "Vaskerom ligger i underetasjen, atskilt for menn og kvinner, åpne hele tiden bygget er åpent."
           }
-        ]
+        ],
+        "ledeShort": "Tider beregnet for Oslo, oppdatert gjennom året."
       },
       "services": {
         "eyebrow": "Her for deg",
@@ -2073,5 +2074,18 @@
         "blurb": "Korte klipp fra moskeen"
       }
     }
+  },
+  "prayerBoard": {
+    "nextLabel": "Neste bønn",
+    "progressLabel": "{name} om {m}m",
+    "jumuahHeading": "Jumu'ah",
+    "jumuahNote": "Khutbaen begynner før bønnen.",
+    "jumuahImams": "Khutba og bønn ledet av imamene",
+    "glanceHeading": "I dag",
+    "doorsOpen": "Dørene er åpne",
+    "doorsOpenNote": "Moskeen er åpen for besøk.",
+    "adhanNext": "Adhan · {name}",
+    "adhanNote": "Kallet til bønn.",
+    "jumuahPrayer": "Jumu'ah-bønn"
   }
 }

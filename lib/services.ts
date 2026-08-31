@@ -33,21 +33,26 @@ export const SERVICE_IMAGE: Record<ServiceKey, string> = {
   veivisere: '/photos/event-school-visit.webp',
 };
 
-// What the index shows, in four families.
+// What the index shows.
 //
-// `megling` is deliberately absent: mediation merged into counselling on
-// 2026-08-31 (client) — one card, "Samtaler og megling", carrying both
-// descriptions. The /tjenester/megling route is kept alive in SERVICE_KEYS so
-// any link already in the wild still resolves; it is simply not advertised.
+// Three keys are deliberately absent, and all three stay in SERVICE_KEYS so
+// their routes keep resolving — links to them already exist in the wild, and
+// components/congregation-today.tsx points at barn-og-ungdom directly:
 //
-// The index no longer lays groups out as rows — it is one band per service —
-// so these counts no longer drive any layout. The grouping survives because it
-// still sets the ORDER, which keeps related services adjacent as you scroll.
+//   • `megling` — mediation merged into counselling on 2026-08-31 (client):
+//     one card, "Samtaler og megling", carrying both descriptions.
+//   • `barn-og-ungdom` and `veivisere` — pulled from the index on 2026-08-31
+//     (client), which retires the 'community' family and takes the list from
+//     ten bands to eight. Nothing else changes: the pages are still there, and
+//     the counter renumbers itself off this array.
+//
+// The index is one band per service rather than a grid, so these counts drive
+// no layout. The grouping survives because it still sets the ORDER, which
+// keeps related services adjacent as you scroll.
 export const SERVICE_GROUPS = [
   { key: 'religious', items: ['nikah', 'janaza', 'shahada', 'hajj-umrah'] },
   { key: 'guidance', items: ['counselling'] },
   { key: 'teaching', items: ['skole', 'koran', 'kurs'] },
-  { key: 'community', items: ['barn-og-ungdom', 'veivisere'] },
 ] as const satisfies ReadonlyArray<{ key: string; items: readonly ServiceKey[] }>;
 
 // Where to hold the crop, for sources whose subject is not dead centre.

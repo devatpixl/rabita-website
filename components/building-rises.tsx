@@ -142,7 +142,7 @@ export function BuildingRises() {
         )}
       >
         <header className="shrink-0 px-6 pt-2 md:pt-4">
-          <div className="mx-auto max-w-6xl">
+          <div className="mx-auto flex max-w-6xl items-start justify-between gap-8">
             <h2
               id="building-rises-heading"
               className="max-w-2xl font-serif text-[1.25rem] leading-[1.1] text-ink md:text-section"
@@ -151,6 +151,21 @@ export function BuildingRises() {
                 em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
               })}
             </h2>
+            {/* The way out, at the top right from md up (client 2026-08-31).
+               It used to sit under the floor index at the foot of the left
+               panel, which is the last place you look when you have decided
+               you are done. The phone keeps it there — see FloorIndex — because
+               a phone has no room beside the heading. */}
+            {!reduced && (
+              <button
+                type="button"
+                onClick={skip}
+                className="group hidden shrink-0 items-center gap-2 pt-1 text-[13px] font-semibold text-ink-60 transition-colors hover:text-gold-deep md:inline-flex"
+              >
+                <span className="border-b border-rule pb-px group-hover:border-gold-deep">{t('skip')}</span>
+                <span aria-hidden className="transition-transform duration-200 group-hover:translate-y-0.5">&darr;</span>
+              </button>
+            )}
           </div>
         </header>
 
@@ -346,7 +361,7 @@ function FloorIndex({
         <button
           type="button"
           onClick={onSkip}
-          className="group inline-flex min-h-9 items-center gap-2 self-start text-[13px] font-semibold text-ink-60 transition-colors hover:text-gold-deep"
+          className="group inline-flex min-h-9 items-center gap-2 self-start text-[13px] font-semibold text-ink-60 transition-colors hover:text-gold-deep md:hidden"
         >
           <span className="border-b border-rule pb-px group-hover:border-gold-deep">{t('skip')}</span>
           <span aria-hidden className="transition-transform duration-200 group-hover:translate-y-0.5">&darr;</span>

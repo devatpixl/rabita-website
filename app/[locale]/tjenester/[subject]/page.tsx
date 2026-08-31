@@ -3,7 +3,7 @@ import { CAMPAIGN } from '@/lib/campaign';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
 import { RequestForm, type RequestSubject } from '@/components/request-form';
-import { ServiceHero, ServiceVisit } from '@/components/service-page';
+import { ServiceHero } from '@/components/service-page';
 import { Accent } from '@/components/accent';
 import { SERVICE_KEYS, SERVICE_IMAGE, type ServiceKey } from '@/lib/services';
 
@@ -65,15 +65,12 @@ export default async function ServiceDetail({
           </div>
         </SectionBody>
       </Section>
-      <ServiceVisit
-        heading={tp('visit.heading')}
-        body={tp('visit.body')}
-        address={CAMPAIGN.address}
-        postal={CAMPAIGN.postalCity}
-        hours={tp('visit.hours')}
-        primary={{ label: tp('visit.primary'), href: `/${locale}/besok-oss` }}
-        secondary={{ label: tp('visit.secondary'), href: `/${locale}/kontakt` }}
-      />
+      {/* The "Coming in person" band (ServiceVisit) was removed on 2026-08-31:
+         it repeated verbatim on this page, the services index and all eleven
+         subject pages, so the address stopped registering as information and
+         started reading as furniture. It survives on /besok-oss, which is the
+         page that exists to answer it. The component is left in
+         components/service-page.tsx, unused, so it can go back with one line. */}
     </main>
   );
 }

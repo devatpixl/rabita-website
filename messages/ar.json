@@ -851,7 +851,8 @@
             "title": "Ablution downstairs",
             "body": "Wudu facilities are on the lower floor, separate for men and women, open the whole time the building is."
           }
-        ]
+        ],
+        "ledeShort": "مواقيت محسوبة لأوسلو، محدَّثة على مدار السنة."
       },
       "services": {
         "eyebrow": "نحن هنا من أجلك",
@@ -2073,5 +2074,18 @@
         "blurb": "مقاطع قصيرة من المسجد"
       }
     }
+  },
+  "prayerBoard": {
+    "nextLabel": "الصلاة القادمة",
+    "progressLabel": "{name} بعد {m} دقيقة",
+    "jumuahHeading": "الجمعة",
+    "jumuahNote": "تبدأ الخطبة قبل الصلاة.",
+    "jumuahImams": "الخطبة والصلاة بإمامة الأئمة",
+    "glanceHeading": "اليوم",
+    "doorsOpen": "فتح الأبواب",
+    "doorsOpenNote": "المسجد مفتوح للزوار.",
+    "adhanNext": "الأذان · {name}",
+    "adhanNote": "النداء إلى الصلاة.",
+    "jumuahPrayer": "صلاة الجمعة"
   }
 }

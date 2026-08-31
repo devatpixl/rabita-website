@@ -63,6 +63,13 @@ type Props = {
   purpose?: GivePurpose;
   /** Tighter spacing for a hero column: the whole card fits a laptop screen. */
   compact?: boolean;
+  /**
+   * Tighten with the viewport's HEIGHT as well as its width, so the card fits
+   * whole on a short screen. Set by the homepage hero, where the card has to
+   * sit between the header and the fold; left off everywhere the page can
+   * simply scroll. See FIT.
+   */
+  fit?: boolean;
   onSubmit?: (payload: {
     amount: number;
     frequency: Frequency;
@@ -98,6 +105,34 @@ function isValidFnr(v: string) {
   return /^\d{11}$/.test(v.replace(/\s/g, ''));
 }
 
+// Viewport-HEIGHT tuning, applied only where the card has to fit a screen —
+// the homepage hero. Everything else about this card is width-responsive;
+// this axis is height, because at 685px tall it needed an 863px viewport and
+// a 13" laptop gives 700-800, so it scrolled inside itself.
+//
+// Behind a flag rather than applied unconditionally: on a phone the viewport
+// is ~844px tall, so every one of these would fire there too — and the phone
+// already uses the tight base measures, so one of them (a 3.5rem preset box
+// against the phone's 3.25rem) made the mobile card TALLER. The card in
+// HeroGive does not need to fit anything; the page scrolls.
+//
+// Written as arbitrary variants rather than named ones in tailwind.config
+// because a config-level variant only compiles after a dev-server restart.
+const FIT = {
+  header: '[@media(max-height:880px)]:pt-3 [@media(max-height:880px)]:pb-2 [@media(max-height:760px)]:pt-2.5 [@media(max-height:720px)]:pt-2 [@media(max-height:720px)]:pb-1.5',
+  stepRow: '[@media(max-height:880px)]:mt-3 [@media(max-height:760px)]:mt-2 [@media(max-height:720px)]:mt-1.5',
+  title: '[@media(max-height:880px)]:mt-2 [@media(max-height:880px)]:text-lg',
+  lede: '[@media(max-height:760px)]:mt-1 [@media(max-height:720px)]:hidden',
+  body: '[@media(max-height:880px)]:py-3.5 [@media(max-height:760px)]:py-2.5 [@media(max-height:720px)]:py-2',
+  toggle: '[@media(max-height:880px)]:mb-3 [@media(max-height:760px)]:mb-2 [@media(max-height:720px)]:mb-1.5',
+  presetGrid: '[@media(max-height:880px)]:gap-2 [@media(max-height:760px)]:gap-1.5 [@media(max-height:720px)]:mb-1',
+  presetCell: '[@media(max-height:880px)]:min-h-[3.5rem] [@media(max-height:880px)]:py-2 [@media(max-height:760px)]:min-h-[3.1rem] [@media(max-height:720px)]:min-h-[2.8rem] [@media(max-height:720px)]:py-1.5',
+  other: '[@media(max-height:880px)]:mb-3 [@media(max-height:880px)]:min-h-[3rem] [@media(max-height:760px)]:mb-2 [@media(max-height:760px)]:min-h-[2.75rem] [@media(max-height:720px)]:mb-1.5 [@media(max-height:720px)]:min-h-[2.5rem]',
+  anon: '[@media(max-height:880px)]:py-2 [@media(max-height:760px)]:py-1.5 [@media(max-height:720px)]:py-1',
+  actions: '[@media(max-height:880px)]:pb-3 [@media(max-height:760px)]:pb-2 [@media(max-height:720px)]:pb-1.5',
+  footer: '[@media(max-height:880px)]:py-1.5 [@media(max-height:760px)]:py-1 [@media(max-height:720px)]:py-0.5',
+} as const;
+
 export function GivingCard({
   onSubmit,
   initialAmount,
@@ -106,6 +141,7 @@ export function GivingCard({
   defaultAmount = DEFAULT_AMOUNT,
   purpose = 'general',
   compact = false,
+  fit = false,
 }: Props) {
   const t = useTranslations('giving');
   const locale = useLocale() as AppLocale;
@@ -144,7 +180,9 @@ export function GivingCard({
   const [entered, setEntered] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
-  const TOTAL_STEPS = 3;
+  
+
+const TOTAL_STEPS = 3;
 
   // AvtaleGiro is a standing order: it only makes sense for monthly gifts.
   // If the donor switches to Once after picking it, fall back to Vipps.
@@ -327,10 +365,20 @@ export function GivingCard({
       {/* Every `compact ? … : …` pair below now carries the compact measure
          as the phone default and restores the roomy one at sm. The card is
          640px of desktop form squeezed into 390px otherwise, which is what
-         made it spill on /moskeprosjektet. */}
-      <header className={cn('border-b border-rule', compact ? 'px-5 pt-4 pb-3' : 'px-4 pt-4 pb-3 sm:px-6 sm:pt-5 sm:pb-4')}>
+         made it spill on /moskeprosjektet.
+
+         The [@media(max-height:…)] variants are a second, independent axis:
+         this card's problem on a laptop is height, not width. At 685px tall
+         it needed an 863px viewport, and a 13" MacBook Air gives ~700–800 —
+         so it scrolled inside itself, which is what the client saw. The
+         spacing tightens with the screen and the card fits whole.
+
+         Written as arbitrary variants rather than named ones in
+         tailwind.config: a config-level variant only compiles after the dev
+         server restarts, and these compile on save. */}
+      <header className={cn('border-b border-rule', compact ? 'px-5 pt-4 pb-3' : cn('px-4 pt-4 pb-3 sm:px-6 sm:pt-5 sm:pb-4', fit && FIT.header))}>
         <ProgressBar current={step} total={TOTAL_STEPS} />
-        <div className="mt-4">
+        <div className={cn('mt-4', fit && FIT.stepRow)}>
           <span className="font-mono text-[0.75rem] uppercase tracking-[0.18em] text-gold">
             {t('wizard.stepLabel', {
               n: step,
@@ -343,12 +391,17 @@ export function GivingCard({
           ref={headingRef}
           tabIndex={-1}
           style={{ outline: 'none' }}
-          className={cn('font-serif leading-tight text-ink focus:outline-none focus-visible:outline-none', compact ? 'mt-2 text-lg' : 'mt-2 text-lg sm:mt-3 sm:text-xl')}
+          className={cn('font-serif leading-tight text-ink focus:outline-none focus-visible:outline-none', compact ? 'mt-2 text-lg' : cn('mt-2 text-lg sm:mt-3 sm:text-xl', fit && FIT.title))}
         >
           {stepHeading}
         </h2>
+        {/* Supporting copy, two lines and 40px — the single biggest item left
+           once the padding is spent, so it goes below 720px. The question
+           above it ("How often will you give?") is the part that has to be
+           there; this only elaborates on it, and a form whose end the reader
+           cannot see costs more than a missing sentence. */}
         {step === 1 && !compact && (
-          <p className="mt-1.5 text-[13px] leading-snug text-ink-60">
+          <p className={cn('mt-1.5 text-[13px] leading-snug text-ink-60', fit && FIT.lede)}>
             {frequency === 'monthly' ? t('ledeMonthly') : t('ledeOnce')}
           </p>
         )}
@@ -367,7 +420,7 @@ export function GivingCard({
          step is showing. */}
       <AnimatedHeight reduced={reduced}>
         <div
-          className={compact ? 'px-5 py-4' : 'px-4 py-4 sm:px-6 sm:py-5'}
+          className={compact ? 'px-5 py-4' : cn('px-4 py-4 sm:px-6 sm:py-5', fit && FIT.body)}
           key={step}
           style={{
             opacity: entered ? 1 : 0,
@@ -390,6 +443,7 @@ export function GivingCard({
               presets={presets}
               recommended={recommended}
               compact={compact}
+              fit={fit}
               locale={locale}
               t={t}
             />
@@ -419,7 +473,7 @@ export function GivingCard({
       </AnimatedHeight>
 
       {/* Footer buttons — back (ghost) + primary. */}
-      <div className={cn('flex items-center gap-3', compact ? 'px-5 pb-3' : 'px-4 pb-3 sm:px-6 sm:pb-4')}>
+      <div className={cn('flex items-center gap-3', compact ? 'px-5 pb-3' : cn('px-4 pb-3 sm:px-6 sm:pb-4', fit && FIT.actions))}>
         {step > 1 && (
           <button
             type="button"
@@ -453,7 +507,7 @@ export function GivingCard({
 
       {/* Payment marks in place of the tax-deduction line (client request
          2026-08-30). Monochrome, so five brands read as one quiet row. */}
-      <footer className={cn('border-t border-rule bg-paper-2/40', compact ? 'px-5 py-2' : 'px-4 py-2 sm:px-6 sm:py-3')}>
+      <footer className={cn('border-t border-rule bg-paper-2/40', compact ? 'px-5 py-2' : cn('px-4 py-2 sm:px-6 sm:py-3', fit && FIT.footer))}>
         <PaymentLogos label={t('paymentLogosAria')} />
       </footer>
     </div>
@@ -554,6 +608,7 @@ type StepAmountProps = {
   presets: readonly number[];
   recommended: number;
   compact: boolean;
+  fit: boolean;
   locale: AppLocale;
   t: ReturnType<typeof useTranslations>;
 };
@@ -569,6 +624,7 @@ function StepAmount({
   presets,
   recommended: recommendedAmount,
   compact,
+  fit,
   locale,
   t,
 }: StepAmountProps) {
@@ -578,7 +634,7 @@ function StepAmount({
 
       {/* Frequency toggle — shared selection language. */}
       <div
-        className={cn('relative inline-flex w-full items-center rounded-btn bg-paper-2 p-1', compact ? 'mb-3' : 'mb-3 sm:mb-5')}
+        className={cn('relative inline-flex w-full items-center rounded-btn bg-paper-2 p-1', compact ? 'mb-3' : cn('mb-3 sm:mb-5', fit && FIT.toggle))}
         role="tablist"
         aria-label={t('sheetTitle')}
       >
@@ -608,7 +664,7 @@ function StepAmount({
       {/* Amount boxes — 2×2, the amount set large in serif with the
          period as a small suffix, one box tagged as recommended. */}
       <div
-        className={cn('grid grid-cols-2', compact ? 'mt-1 mb-2 gap-2' : 'mt-1 mb-2 gap-2 sm:mt-0 sm:mb-3 sm:gap-3')}
+        className={cn('grid grid-cols-2', compact ? 'mt-1 mb-2 gap-2' : cn('mt-1 mb-2 gap-2 sm:mt-0 sm:mb-3 sm:gap-3', fit && FIT.presetGrid))}
         role="radiogroup"
         aria-label={t('customLabel')}
       >
@@ -628,7 +684,7 @@ function StepAmount({
               }}
               className={cn(
                 'relative flex items-baseline gap-1.5 rounded-btn text-start transition-colors',
-                compact ? 'min-h-[3rem] px-3 py-2' : 'min-h-[3.25rem] px-3 py-2 sm:min-h-[4.25rem] sm:px-4 sm:py-3',
+                compact ? 'min-h-[3rem] px-3 py-2' : cn('min-h-[3.25rem] px-3 py-2 sm:min-h-[4.25rem] sm:px-4 sm:py-3', fit && FIT.presetCell),
                 selected
                   ? 'border-[1.5px] border-ink bg-ink text-paper'
                   : 'border-[1.5px] border-ink/30 bg-paper text-ink hover:border-ink',
@@ -668,7 +724,7 @@ function StepAmount({
       <label
         className={cn(
           'flex items-center justify-between gap-4 rounded-btn px-4 transition-colors',
-          compact ? 'mb-3 min-h-[2.75rem]' : 'mb-3 min-h-[2.75rem] sm:mb-5 sm:min-h-[3.5rem]',
+          compact ? 'mb-3 min-h-[2.75rem]' : cn('mb-3 min-h-[2.75rem] sm:mb-5 sm:min-h-[3.5rem]', fit && FIT.other),
           presetAmount === 'custom'
             ? 'border-[1.5px] border-ink'
             : 'border-[1.5px] border-ink/30 focus-within:border-ink',
@@ -697,7 +753,7 @@ function StepAmount({
 
       {/* Anonymous toggle — replaces the zakat box here; zakat is asked
          with the payment method instead. */}
-      <label className={cn('group flex cursor-pointer items-center gap-3 border-y border-rule', compact ? 'py-2' : 'py-3')}>
+      <label className={cn('group flex cursor-pointer items-center gap-3 border-y border-rule', compact ? 'py-2' : cn('py-3', fit && FIT.anon))}>
         <span className="relative inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-[1.5px] border-ink transition-colors group-hover:border-gold">
           <input
             type="checkbox"

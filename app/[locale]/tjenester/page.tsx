@@ -1,5 +1,4 @@
 import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
-import { ServiceVisit } from '@/components/service-page';
 import { ServicesHero } from '@/components/services-hero';
 import { ServiceIndex } from '@/components/service-index';
 
@@ -23,15 +22,12 @@ export default async function ServicesIndex({
          the visit block below already says where to come and how to write. */}
       <ServiceIndex />
 
-      <ServiceVisit
-        heading={tp('visit.heading')}
-        body={tp('visit.body')}
-        address="Calmeyers gate 8"
-        postal="0183 Oslo"
-        hours={tp('visit.hours')}
-        primary={{ label: tp('visit.primary'), href: `/${l}/besok-oss` }}
-        secondary={{ label: tp('visit.secondary'), href: `/${l}/kontakt` }}
-      />
+      {/* The "Coming in person" band (ServiceVisit) was removed on 2026-08-31:
+         it repeated verbatim on this page, the services index and all eleven
+         subject pages, so the address stopped registering as information and
+         started reading as furniture. It survives on /besok-oss, which is the
+         page that exists to answer it. The component is left in
+         components/service-page.tsx, unused, so it can go back with one line. */}
     </main>
   );
 }
