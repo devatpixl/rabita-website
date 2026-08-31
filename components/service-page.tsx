@@ -25,15 +25,17 @@ export function ServiceHero({
   note?: string;
 }) {
   return (
-    <section className="bg-paper pt-section-sm pb-section-md">
+    <section className="bg-paper pb-10 pt-8 md:pb-section-md md:pt-section-sm">
       <SectionBody>
         <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60">{crumb}</p>
-        <div className="mt-10 grid items-start gap-12 md:grid-cols-12 md:gap-16">
+        <div className="mt-6 grid items-start gap-7 md:mt-10 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-6">
             <h1 className="font-serif text-display text-balance text-ink">{title}</h1>
-            <p className="mt-6 max-w-prose text-body text-ink-60">{lede}</p>
+            <p className="mt-5 max-w-prose text-body text-ink-60 md:mt-6">{lede}</p>
+            {/* Desktop keeps the note under the words, where it closes the
+               reading column. */}
             {note && (
-              <p className="mt-8 border-t border-rule pt-5 font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
+              <p className="mt-8 hidden border-t border-rule pt-5 font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60 md:block">
                 {note}
               </p>
             )}
@@ -43,6 +45,16 @@ export function ServiceHero({
               <Image src={image} alt={alt} fill priority sizes="(min-width: 768px) 48vw, 90vw" className="object-cover" style={{ filter: GRADE }} />
             </div>
           </div>
+          {/* On a phone the columns stack, so the note printed BETWEEN the
+             words and their own photograph — a ruled line marooned in the
+             middle with 48px of grid gap either side, which is the empty
+             space the client flagged. Below the picture it reads as what it
+             is: the practical footnote that closes the block. */}
+          {note && (
+            <p className="border-t border-rule pt-4 font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60 md:hidden">
+              {note}
+            </p>
+          )}
         </div>
       </SectionBody>
     </section>

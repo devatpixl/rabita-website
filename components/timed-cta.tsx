@@ -26,7 +26,17 @@ import { cn } from '@/lib/cn';
 // Shows once, then stays quiet for a month. A regular asked on every visit
 // stops being a donor and becomes someone with a complaint.
 
-const DISMISS_DAYS = 30;
+// How long a dismissal suppresses the popup.
+//
+// 0 = show on EVERY visit. That is deliberate while Rabita is still being
+// reviewed (client, 2026-08-31): the client needs to see this card without
+// clearing localStorage first, and the old 30-day window meant one dismissal
+// hid it for the rest of the review.
+//
+// BEFORE LAUNCH: put this back to 30 (or whatever the client settles on). A
+// popup that returns on every visit to the page people check daily for prayer
+// times is the most annoying thing on the site.
+const DISMISS_DAYS = 0;
 /** Query flag the giving sheet returns with, so the card can say thank you. */
 const RETURN_FLAG = 'takk';
 const EXIT_MS = 260;

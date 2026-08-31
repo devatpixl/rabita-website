@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
-import { Section, SectionBody, SectionHeading, Stat } from '@/components/primitives';
+import { Section, SectionBody } from '@/components/primitives';
 import { StoryColophon, StoryHero, StoryPlate } from '@/components/story-page';
 
 export default async function AboutPage({
@@ -26,72 +26,51 @@ export default async function AboutPage({
 
       <Section tone="paper">
         <SectionBody>
-          <div className="grid gap-10 md:grid-cols-12">
-            {/* A ruled register, not three numbers 12px apart. Each entry is
-               divided off, which gives the column structure and gives the
-               numerals the room they need. */}
-            <dl className="md:col-span-4">
-              {/* Key figures as confirmed in Årsrapport 2025, in the order the
-                 client listed them (2026-08-30). */}
-              {([
-                [String(CAMPAIGN.foundedYear), t('facts.founded')],
-                [CAMPAIGN.members.toLocaleString('nb-NO'), t('facts.members')],
-                [`${CAMPAIGN.volunteers}`, t('facts.volunteers')],
-                [`${CAMPAIGN.pupils}+`, t('facts.pupils')],
-                [`${CAMPAIGN.nationalities}+`, t('facts.nationalities')],
-                [CAMPAIGN.visitorsPerWeek.toLocaleString('nb-NO'), t('facts.visits')],
-              ] as const).map(([value, label]) => (
-                <div key={label} className="border-t border-rule py-5 first:pt-0 last:border-b last:border-rule">
-                  <Stat value={value} label={label} />
-                </div>
-              ))}
-            </dl>
-            <div className="md:col-span-8 space-y-6 max-w-prose text-body text-ink">
-              <p>{t('history.p1')}</p>
-              <p>{t('history.p2')}</p>
-              <p>{t('history.p3', { year: 2009 })}</p>
-            </div>
+          {/* Prose first, then the figures as a band beneath it.
+             They used to sit in a col-span-4 rail beside the text, set in
+             text-display. Two problems: "10 000" and "4 344" all but filled a
+             360px column at that size, and six stacked entries ran ~930px
+             against ~260px of prose — some 670px of nothing beside them.
+             Across the full width in three columns they fit comfortably, read
+             as key figures rather than as a list, and the section stops
+             having a hole in it. */}
+          <div className="max-w-prose space-y-6 text-body text-ink">
+            <p>{t('history.p1')}</p>
+            <p>{t('history.p2')}</p>
+            <p>{t('history.p3', { year: 2009 })}</p>
           </div>
+
+          <dl className="mt-14 grid grid-cols-2 gap-x-8 sm:grid-cols-3 md:mt-20 md:gap-x-12">
+            {/* Key figures as confirmed in Årsrapport 2025, in the order the
+               client listed them (2026-08-30). */}
+            {([
+              [String(CAMPAIGN.foundedYear), t('facts.founded')],
+              [CAMPAIGN.members.toLocaleString('nb-NO'), t('facts.members')],
+              [`${CAMPAIGN.volunteers}`, t('facts.volunteers')],
+              [`${CAMPAIGN.pupils}+`, t('facts.pupils')],
+              [`${CAMPAIGN.nationalities}+`, t('facts.nationalities')],
+              [CAMPAIGN.visitorsPerWeek.toLocaleString('nb-NO'), t('facts.visits')],
+            ] as const).map(([value, label]) => (
+              <div key={label} className="border-t border-rule pb-8 pt-5 md:pb-10 md:pt-6">
+                <dd className="font-serif text-[clamp(1.9rem,3.2vw,2.75rem)] leading-none tabular-nums text-ink">
+                  {value}
+                </dd>
+                <dt className="mt-3 font-mono text-[0.6875rem] uppercase leading-snug tracking-[0.16em] text-ink-60">
+                  {label}
+                </dt>
+              </div>
+            ))}
+          </dl>
         </SectionBody>
       </Section>
 
-      <Section tone="paper-2">
-        <SectionBody>
-          <SectionHeading>{t('board.heading')}</SectionHeading>
-          <p className="mt-6 max-w-prose text-body text-ink">{t('board.body')}</p>
-          {/* Each role used to render the name as "TBD" — six placeholders
-             in a row, which reads as an unfinished page rather than a real
-             board. The roles are real information and stay; the names
-             appear here once Rabita supplies them. */}
-          <ul className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {(['chair', 'vice', 'treasurer', 'secretary', 'member', 'member2'] as const).map((k) => (
-              <li key={k} className="border-t border-rule pt-6">
-                <p className="font-serif text-card text-ink">{t(`board.roles.${k}`)}</p>
-              </li>
-            ))}
-          </ul>
-        </SectionBody>
-      </Section>
+      {/* The board and Documents sections were removed on 2026-08-31
+         (client). Both were placeholders in practice: the board listed six
+         roles with no names, and Documents listed three files that do not
+         exist yet with no links behind them. Their strings are still in
+         messages/*.json under about.board and about.legal, so either can be
+         restored once there are real names and real files. */}
 
-      <Section tone="paper">
-        <SectionBody>
-          <SectionHeading>{t('legal.heading')}</SectionHeading>
-          {/* These were links to #statuter / #arsrapport / #press. None of
-             those targets exist and no document is published yet, so they
-             were three arrows that did nothing. Listed as rows until the
-             files exist, with one line saying how to get a copy. */}
-          <ul className="mt-8 border-t border-rule">
-            {(['statutes', 'annual', 'press'] as const).map((k) => (
-              <li key={k} className="border-b border-rule">
-                <p className="flex min-h-14 items-center gap-4 font-sans text-[15px] font-medium text-ink">
-                  {t(`legal.${k}`)}
-                </p>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 max-w-prose text-[13px] text-ink-60">{t('legal.onRequest')}</p>
-        </SectionBody>
-      </Section>
       <StoryColophon
         heading={ts('colophon.heading')}
         body={ts('colophon.body')}
