@@ -214,13 +214,15 @@ export function TimedCta({
         if (e.target === dialogRef.current) close();
       }}
       className={cn(
-        'm-auto w-[calc(100vw-2rem)] max-w-[34rem] bg-transparent',
+        // max-h, not just max-w: on a 13" laptop the viewport is about 790px
+        // and this card ran past it, so the "Not now" fell off the bottom.
+        'm-auto max-h-[calc(100svh-2rem)] w-[calc(100vw-2rem)] max-w-[34rem] bg-transparent',
         'transition-[opacity,transform] duration-[420ms] [transition-timing-function:cubic-bezier(0.32,0.72,0,1)]',
         'motion-reduce:transition-none',
         entered ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-3 scale-[0.97] opacity-0',
       )}
     >
-      <div className="relative overflow-hidden rounded-[1.75rem] border border-rule bg-paper px-8 py-10 text-center md:px-12 md:py-12">
+      <div className="no-scrollbar relative max-h-[calc(100svh-2rem)] overflow-y-auto rounded-[1.75rem] border border-rule bg-paper px-8 py-8 text-center md:px-12 md:py-10">
         <button
           type="button"
           onClick={() => close()}
@@ -257,12 +259,12 @@ export function TimedCta({
               video={film}
               label={tVideo('imamWelcome')}
               placeholder={filmIsPlaceholder}
-              className="mt-7 text-start"
+              className="mx-auto mt-6 max-w-[22rem] text-start"
             />
             <button
               type="button"
               onClick={() => close()}
-              className="mt-9 min-h-[3.25rem] w-full rounded-full bg-gold-deep px-6 text-[15px] font-semibold text-paper transition-colors hover:bg-ink active:scale-[0.99]"
+              className="mt-7 min-h-[3.25rem] w-full rounded-full bg-gold-deep px-6 text-[15px] font-semibold text-paper transition-colors hover:bg-ink active:scale-[0.99]"
             >
               {t('thanksClose')}
             </button>
@@ -277,7 +279,7 @@ export function TimedCta({
               <p className="text-balance font-serif text-[clamp(1.35rem,2.6vw,1.75rem)] leading-[1.38] text-ink">
                 {quote!.text}
               </p>
-              <footer className="mt-7 flex items-center justify-center gap-4">
+              <footer className="mt-6 flex items-center justify-center gap-4">
                 <span aria-hidden className="h-px w-8 bg-gold-deep/40" />
                 <cite className="not-italic font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-60">
                   {quote!.source}
@@ -291,7 +293,7 @@ export function TimedCta({
                 video={film}
                 label={tVideo('imamWelcome')}
                 placeholder={filmIsPlaceholder}
-                className="mt-7 text-start"
+                className="mx-auto mt-6 max-w-[22rem] text-start"
               />
             )}
 
@@ -305,7 +307,7 @@ export function TimedCta({
                   ),
                 )
               }
-              className="mt-9 min-h-[3.25rem] w-full rounded-full bg-gold-deep px-6 text-[15px] font-semibold text-paper transition-colors hover:bg-ink active:scale-[0.99]"
+              className="mt-7 min-h-[3.25rem] w-full rounded-full bg-gold-deep px-6 text-[15px] font-semibold text-paper transition-colors hover:bg-ink active:scale-[0.99]"
             >
               {t('give', { amount: amountNok })}
             </button>

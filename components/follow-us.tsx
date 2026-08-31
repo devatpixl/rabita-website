@@ -43,12 +43,13 @@ export async function FollowUs() {
       className="border-b border-paper/15 bg-dusk py-12 text-paper md:py-section-md"
     >
       <SectionBody>
-        <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
-          {t('eyebrow')}
-        </p>
+        {/* The "Follow us" eyebrow came out on 2026-08-31 (client). The
+           headline and the three channel cards already say what this is, so
+           the label was only repeating the section back to itself. The
+           translation stays in messages/*.json under followUs.eyebrow. */}
         <h2
           id="follow-us-heading"
-          className="mt-3 max-w-2xl font-serif text-section text-balance text-paper sm:mt-4"
+          className="max-w-2xl font-serif text-section text-balance text-paper"
         >
           {t.rich('title', { em: (chunks) => <Accent surface="dusk">{chunks}</Accent> })}
         </h2>
