@@ -19,10 +19,14 @@ import { cn } from '@/lib/cn';
 
 const ORDER = PRAYER_ORDER;
 
+// How long each Jumu'ah khutba runs. Stated by the client on 2026-08-31 —
+// Norwegian 14:00 to 14:30, Arabic 15:00 to 15:30 — and kept as a length
+// rather than as four hardcoded times so it stays tied to the Jumu'ah slots.
+const KHUTBA_MINUTES = 30;
+
 export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
   const t = useTranslations('prayerBoard');
   const tv = useTranslations('prayerVisit');
-  const tnav = useTranslations('nav');
   const locale = useLocale();
   const { jumuah } = usePrayerData();
   const [now, setNow] = useState<Date | null>(null);
@@ -86,44 +90,46 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
   // cannot appear here. The reference design showed such times; they are not
   // in our data, and sending someone to a locked door is worse than a shorter
   // list.
+  // Friday, hour by hour. The building's own 06:00 opening and the day's
+  // Dhuhr adhan came out on 2026-08-31 (client): this panel sits beside
+  // Jumu'ah, and a row about Tuesday morning or a prayer that Jumu'ah
+  // replaces was answering a question nobody had asked here.
+  //
+  // What is left is the Friday itself — when you can come in, and the two
+  // khutbas. Every time still comes from the Jumu'ah data; only the khutba
+  // length and the two languages are stated, so a change to the slots
+  // upstream carries through on its own.
   const glance = useMemo(() => {
-    const opensAt = /\d{1,2}:\d{2}/.exec(tnav('openHours'))?.[0];
-    const rows: { key: string; time: string; title: string; note: string; icon: ReactNode }[] = [];
-    if (opensAt) {
+    const rows: { key: string; time: string; title: string; note?: string; icon: ReactNode }[] = [];
+    if (jumuah[0]) {
       rows.push({
         key: 'doors',
-        time: opensAt,
+        time: jumuah[0],
         title: t('doorsOpen'),
-        note: t('doorsOpenNote'),
         icon: <DoorIcon className="h-4 w-4" />,
       });
     }
-    // Jumu'ah replaces Dhuhr, so on a Friday an "Adhan · Dhuhr 13:27" row
-    // sitting directly above "Jumu'ah 14:00" reads as two separate prayers and
-    // would send someone half an hour early. Dropped on Fridays; the day is
-    // taken from the date we are rendering, so this is decided on the server.
-    const [fy, fm, fd] = (today?.date ?? '').split('-').map(Number);
-    const isFriday = today ? new Date(fy, fm - 1, fd).getDay() === 5 : false;
-    if (today?.dhuhr && !isFriday) {
+    const plusHalfHour = (hhmm: string) => {
+      const [h, m] = hhmm.split(':').map(Number);
+      if (Number.isNaN(h) || Number.isNaN(m)) return null;
+      const t = (h * 60 + m + KHUTBA_MINUTES) % 1440;
+      return `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(t % 60).padStart(2, '0')}`;
+    };
+    ([
+      [jumuah[0], t('khutbaNo')],
+      [jumuah[1], t('khutbaAr')],
+    ] as const).forEach(([start, title], i) => {
+      if (!start) return;
+      const end = plusHalfHour(start);
       rows.push({
-        key: 'adhan',
-        time: today.dhuhr,
-        title: t('adhanNext', { name: tv('names.dhuhr') }),
-        note: t('adhanNote'),
-        icon: <MinaretIcon className="h-4 w-4" />,
-      });
-    }
-    if (jumuah[0]) {
-      rows.push({
-        key: 'jumuah',
-        time: jumuah[0],
-        title: t('jumuahPrayer'),
-        note: t('jumuahNote'),
+        key: `khutba-${i}`,
+        time: end ? `${start}\u2013${end}` : start,
+        title,
         icon: <MicIcon className="h-4 w-4" />,
       });
-    }
+    });
     return rows;
-  }, [today, jumuah, t, tv, tnav]);
+  }, [jumuah, t]);
 
   return (
     <div className="space-y-5">
@@ -271,7 +277,9 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
                     </span>
                     <span className="text-[14px] leading-none text-ink">{row.title}</span>
                   </p>
-                  <p className="mt-1.5 text-[13px] leading-snug text-ink-60">{row.note}</p>
+                  {row.note && (
+                    <p className="mt-1.5 text-[13px] leading-snug text-ink-60">{row.note}</p>
+                  )}
                 </div>
               </li>
             ))}

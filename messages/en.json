@@ -2085,9 +2085,7 @@
     "jumuahImams": "Khutbah and prayer led by the imams",
     "glanceHeading": "Today at a glance",
     "doorsOpen": "Doors open",
-    "doorsOpenNote": "The mosque is open for visitors.",
-    "adhanNext": "Adhan · {name}",
-    "adhanNote": "The call to prayer.",
-    "jumuahPrayer": "Jumu'ah prayer"
+    "khutbaNo": "Khutba in Norwegian",
+    "khutbaAr": "Khutba in Arabic"
   }
 }

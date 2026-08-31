@@ -2084,10 +2084,8 @@
     "jumuahNote": "Khutbaen begynner før bønnen.",
     "jumuahImams": "Khutba og bønn ledet av imamene",
     "glanceHeading": "I dag",
-    "doorsOpen": "Dørene er åpne",
-    "doorsOpenNote": "Moskeen er åpen for besøk.",
-    "adhanNext": "Adhan · {name}",
-    "adhanNote": "Kallet til bønn.",
-    "jumuahPrayer": "Jumu'ah-bønn"
+    "doorsOpen": "Dørene åpnes",
+    "khutbaNo": "Norsk khutba",
+    "khutbaAr": "Arabisk khutba"
   }
 }

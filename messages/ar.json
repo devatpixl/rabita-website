@@ -2085,9 +2085,7 @@
     "jumuahImams": "الخطبة والصلاة بإمامة الأئمة",
     "glanceHeading": "اليوم",
     "doorsOpen": "فتح الأبواب",
-    "doorsOpenNote": "المسجد مفتوح للزوار.",
-    "adhanNext": "الأذان · {name}",
-    "adhanNote": "النداء إلى الصلاة.",
-    "jumuahPrayer": "صلاة الجمعة"
+    "khutbaNo": "خطبة بالنرويجية",
+    "khutbaAr": "خطبة بالعربية"
   }
 }
