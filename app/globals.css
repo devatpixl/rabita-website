@@ -149,15 +149,17 @@ html {
 
 /* On-view fade + rise. Once, never on re-scroll. Respected by the
    prefers-reduced-motion rule below. */
+/* The hidden state is keyed on data-visible="false", which JS sets only after
+   it has armed the element. Previously `opacity: 0` was the BASE rule, so the
+   section shipped invisible in the HTML and stayed that way if the observer
+   never fired — the same single-point-of-failure the services reveal had. Now
+   the default is visible and the animation can only ever add. */
 .motion-rise {
+  transition: opacity 500ms ease-out, transform 500ms ease-out;
+}
+.motion-rise[data-visible='false'] {
   opacity: 0;
   transform: translateY(12px);
-  transition: opacity 500ms ease-out, transform 500ms ease-out;
-  will-change: opacity, transform;
-}
-.motion-rise[data-visible='true'] {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* Staggered word-in for the hero headline. */

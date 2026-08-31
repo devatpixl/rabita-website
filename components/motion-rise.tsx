@@ -1,6 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
+
+// useLayoutEffect on the client so the element is hidden before the first
+// paint — with useEffect the section would flash in and then out again.
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 import { cn } from '@/lib/cn';
 
 // On-view fade + rise. Once, never on re-scroll (§1). The reduced-motion
@@ -17,29 +21,37 @@ export function MotionRise({
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = useState(false);
+  // Starts NOT hidden. The server therefore renders the section visible, and
+  // the effect below hides it only once it has confirmed JS is running and
+  // the element is still below the fold. Two bugs came out of the old
+  // `useState(false)` + `opacity: 0` base rule:
+  //
+  //   1. the section shipped invisible in the HTML, so if the observer never
+  //      fired — hydration broken, an extension in the tree, no JS — it was
+  //      gone for good;
+  //   2. it reset itself to hidden every time you scrolled back UP past it,
+  //      so sections blanked out and re-animated mid-scroll. That was the
+  //      empty band the client photographed on the homepage.
+  //
+  // Once shown, it now stays shown.
+  const [hidden, setHidden] = useState(false);
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) {
-      setVisible(true);
-      return;
-    }
+  useIsomorphicLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
-    // Replays on every pass, up or down, rather than firing once for the
-    // lifetime of the page.
+    if (typeof IntersectionObserver === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // Already on screen: leave it alone rather than hide it and flash.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) return;
+
+    setHidden(true);
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          window.setTimeout(() => setVisible(true), delay);
-        } else if (entry.boundingClientRect.top > 0) {
-          // Left downwards (back above the fold): reset so it rises again.
-          // Left upwards (scrolled past): stay put — a section translating
-          // back down as it exits paints over the section after it.
-          setVisible(false);
-        }
+        if (!entry.isIntersecting) return;
+        window.setTimeout(() => setHidden(false), delay);
+        io.disconnect();
       },
       { rootMargin: '0px 0px -10% 0px', threshold: 0.12 },
     );
@@ -52,7 +64,7 @@ export function MotionRise({
   return (
     <Comp
       ref={ref}
-      data-visible={visible ? 'true' : 'false'}
+      data-visible={hidden ? 'false' : 'true'}
       className={cn('motion-rise', className)}
     >
       {children}
