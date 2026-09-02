@@ -47,15 +47,15 @@ export default async function BonnetiderPage({
              masthead belongs and is also how this page finally gets an h1.
              (It had none: the ServiceHero that used to supply one was dropped
              when the times moved above the fold.) */}
-          <div className="relative mt-5 aspect-[6/1] max-h-[9.5rem] w-full overflow-hidden rounded-3xl bg-dusk">
+          <div className="relative mt-5 aspect-[5/2] max-h-[15rem] w-full overflow-hidden rounded-3xl bg-dusk">
             <Image
-              src="/photos/prayer-congregation.webp"
+              src="/photos/prayer-band.webp"
               alt=""
               fill
               priority
               sizes="100vw"
               className="object-cover"
-              style={{ objectPosition: '50% 86%', filter: GRADE }}
+              style={{ objectPosition: '50% 62%', filter: GRADE }}
             />
             {/* Reading-side scrim. Two utilities rather than one, because a
                gradient direction is physical: in Arabic the words sit at the

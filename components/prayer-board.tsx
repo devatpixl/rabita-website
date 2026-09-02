@@ -1,10 +1,13 @@
 'use client';
 
-import { useEffect, useId, useMemo, useState, type ReactNode } from 'react';
+import Image from 'next/image';
+
+import { useEffect, useId, useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { PRAYER_ORDER, prayerWindow, type PrayerKey } from '@/lib/prayer-window';
 import { joinJumuah, usePrayerData, usePrayerDay } from './prayer-data-provider';
 import { isoDate } from '@/lib/prayer-times';
+import { IMAMS } from '@/lib/imams';
 import { cn } from '@/lib/cn';
 
 // The prayer board — the lead block of /bonnetider, rebuilt 2026-08-31 to the
@@ -19,16 +22,21 @@ import { cn } from '@/lib/cn';
 
 const ORDER = PRAYER_ORDER;
 
-// How long each Jumu'ah khutba runs. Stated by the client on 2026-08-31 —
-// Norwegian 14:00 to 14:30, Arabic 15:00 to 15:30 — and kept as a length
-// rather than as four hardcoded times so it stays tied to the Jumu'ah slots.
-const KHUTBA_MINUTES = 30;
-
 export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
   const t = useTranslations('prayerBoard');
   const tv = useTranslations('prayerVisit');
+  // The khateeb's role and the line about him are the imams section's own
+  // copy, read rather than restated: one bio per imam, in one place, already
+  // carried in all three languages.
+  const ti = useTranslations('imams');
   const locale = useLocale();
   const { jumuah } = usePrayerData();
+  // PLACEHOLDER (client, 2026-09-02): "put image of any imam for now". There
+  // is no rota anywhere in the data, so this is simply the first imam, every
+  // week — it is a slot with a face in it, not a fact. Wire it to a real
+  // schedule before launch, or the same name will be announced for a khutba
+  // he is not giving.
+  const khateeb = IMAMS.find((i) => i.key === 'andreas') ?? IMAMS[0];
   const [now, setNow] = useState<Date | null>(null);
 
   useEffect(() => {
@@ -90,46 +98,6 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
   // cannot appear here. The reference design showed such times; they are not
   // in our data, and sending someone to a locked door is worse than a shorter
   // list.
-  // Friday, hour by hour. The building's own 06:00 opening and the day's
-  // Dhuhr adhan came out on 2026-08-31 (client): this panel sits beside
-  // Jumu'ah, and a row about Tuesday morning or a prayer that Jumu'ah
-  // replaces was answering a question nobody had asked here.
-  //
-  // What is left is the Friday itself — when you can come in, and the two
-  // khutbas. Every time still comes from the Jumu'ah data; only the khutba
-  // length and the two languages are stated, so a change to the slots
-  // upstream carries through on its own.
-  const glance = useMemo(() => {
-    const rows: { key: string; time: string; title: string; note?: string; icon: ReactNode }[] = [];
-    if (jumuah[0]) {
-      rows.push({
-        key: 'doors',
-        time: jumuah[0],
-        title: t('doorsOpen'),
-        icon: <DoorIcon className="h-4 w-4" />,
-      });
-    }
-    const plusHalfHour = (hhmm: string) => {
-      const [h, m] = hhmm.split(':').map(Number);
-      if (Number.isNaN(h) || Number.isNaN(m)) return null;
-      const t = (h * 60 + m + KHUTBA_MINUTES) % 1440;
-      return `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(t % 60).padStart(2, '0')}`;
-    };
-    ([
-      [jumuah[0], t('khutbaNo')],
-      [jumuah[1], t('khutbaAr')],
-    ] as const).forEach(([start, title], i) => {
-      if (!start) return;
-      const end = plusHalfHour(start);
-      rows.push({
-        key: `khutba-${i}`,
-        time: end ? `${start}\u2013${end}` : start,
-        title,
-        icon: <MicIcon className="h-4 w-4" />,
-      });
-    });
-    return rows;
-  }, [jumuah, t]);
 
   return (
     <div className="space-y-5">
@@ -230,7 +198,7 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
       {/* ── Jumu'ah, and the shape of the day beside it ─────────────── */}
       {/* Jumu'ah used to run the full width with everything stacked at its
          left end, so two thirds of the card was empty paper. It is a pair now:
-         the times on the left, the day's order on the right. Equal-height
+         the times on the left, this week's khateeb on the right. Equal-height
          cards, because the grid stretches them. */}
       <div className="grid gap-5 md:grid-cols-[1.35fr_1fr]">
         <section className="relative overflow-hidden rounded-[1.5rem] border border-rule bg-paper-2/60 p-6 md:p-8 md:pb-24">
@@ -238,9 +206,28 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
             <MinaretIcon className="h-4 w-4" />
             {t('jumuahHeading')}
           </p>
-          <p className="mt-3 font-serif text-[clamp(1.8rem,3.6vw,2.5rem)] leading-none tabular-nums text-ink">
-            {joinJumuah(jumuah)}
-          </p>
+          {/* One line per khutba, the time leading and the language after
+             it, instead of the two times run together as "14:00 · 15:00"
+             (client, 2026-09-02). Which language is at which hour is the
+             thing people actually come here to find out, and it was the one
+             fact that line did not carry. */}
+          <ul className="mt-3 space-y-1">
+            {([
+              [jumuah[0], t('langNo')],
+              [jumuah[1], t('langAr')],
+            ] as const).map(([time, lang]) =>
+              time ? (
+                <li
+                  key={time}
+                  className="font-serif text-[clamp(1.35rem,2.8vw,1.9rem)] leading-tight text-ink"
+                >
+                  <span className="tabular-nums">{time}</span>{' '}
+                  <span className="text-ink-60">{lang} khutba</span>
+                </li>
+              ) : null,
+            )}
+          </ul>
+
           <p className="mt-3 text-body text-ink-60">{t('jumuahNote')}</p>
           <p className="mt-5 inline-flex items-center gap-3 rounded-full border border-rule bg-paper px-4 py-2.5 text-[14px] text-ink">
             <MicIcon className="h-4 w-4 shrink-0 text-gold-deep" />
@@ -252,38 +239,40 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
           <Skyline className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-16 w-full text-gold-deep/15 md:block" />
         </section>
 
-        {/* ── the day's order ───────────────────────────────────────── */}
-        <section className="rounded-[1.5rem] border border-rule bg-paper p-6 md:p-7">
-          <h3 className="font-serif text-[1.2rem] leading-none text-ink">{t('glanceHeading')}</h3>
-          <ol className="mt-6">
-            {glance.map((row, i) => (
-              <li key={row.key} className="relative flex gap-3.5 pb-6 last:pb-0">
-                {/* The rail joining one stop to the next. Drawn from the chip's
-                   centre (a 2.25rem chip, so 1.125rem in) and stopped before
-                   the last row, which has nothing to join to. */}
-                {i < glance.length - 1 && (
-                  <span
-                    aria-hidden
-                    className="absolute bottom-0 start-[1.125rem] top-9 w-px bg-rule"
-                  />
+        {/* ── who is giving the khutba ──────────────────────────────── */}
+        {/* This card used to be a Friday timetable, which said the same three
+           times the card beside it says — two thirds of it was a restatement.
+           It answers a question the times cannot instead: who is speaking.
+           A photograph, because that is how a congregation recognises a
+           khateeb, and centred in the card so the pair still balances. */}
+        <section className="flex flex-col rounded-[1.5rem] border border-rule bg-paper p-6 md:p-7">
+          <h3 className="font-serif text-[1.2rem] leading-none text-ink">{t('khateebLabel')}</h3>
+          <div className="flex flex-1 items-center">
+            <div className="flex w-full items-center gap-4 py-6 md:gap-5">
+              {/* The portraits are square crops crested on the face, so a
+                 circle sits right on them. A missing photo falls back to the
+                 initial rather than to a broken frame — the rota is not wired
+                 yet and an imam without a portrait is a matter of time. */}
+              <span className="relative flex h-[5.5rem] w-[5.5rem] shrink-0 items-center justify-center overflow-hidden rounded-full bg-paper-2 ring-1 ring-rule md:h-28 md:w-28">
+                {khateeb.photo ? (
+                  <Image src={khateeb.photo} alt="" fill sizes="112px" className="object-cover" />
+                ) : (
+                  <span className="font-serif text-[1.75rem] text-gold-deep">{khateeb.name.charAt(0)}</span>
                 )}
-                <span className="relative z-[1] flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-rule bg-paper-2 text-gold-deep">
-                  {row.icon}
+              </span>
+              <span className="min-w-0">
+                <span className="block font-serif text-[clamp(1.25rem,2.4vw,1.5rem)] leading-tight text-ink">
+                  {khateeb.name}
                 </span>
-                <div className="min-w-0 pt-1">
-                  <p className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
-                    <span className="font-serif text-[1.05rem] leading-none tabular-nums text-ink">
-                      {row.time}
-                    </span>
-                    <span className="text-[14px] leading-none text-ink">{row.title}</span>
-                  </p>
-                  {row.note && (
-                    <p className="mt-1.5 text-[13px] leading-snug text-ink-60">{row.note}</p>
-                  )}
-                </div>
-              </li>
-            ))}
-          </ol>
+                <span className="mt-1.5 block font-mono text-[0.5625rem] uppercase tracking-[0.14em] text-gold-deep">
+                  {ti(`people.${khateeb.key}.role`)}
+                </span>
+              </span>
+            </div>
+          </div>
+          <p className="border-t border-rule pt-5 text-[14px] leading-relaxed text-ink-60">
+            {ti(`people.${khateeb.key}.bio`)}
+          </p>
         </section>
       </div>
     </div>
@@ -316,15 +305,6 @@ function MicIcon({ className }: { className?: string }) {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
       <rect x="9" y="2" width="6" height="11" rx="3" />
       <path d="M5 11a7 7 0 0 0 14 0M12 18v4" />
-    </svg>
-  );
-}
-
-function DoorIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
-      <path d="M5 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16" />
-      <path d="M3 21h16M12 12h.01" />
     </svg>
   );
 }
