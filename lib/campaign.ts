@@ -8,11 +8,19 @@
 // completion date in the UI until the customer picks one. `completionDate`
 // stays null and any component that needs it must render a "TBD" state.
 //
-// TODO (§13.2) — budget figure conflict: 286M NOK (phase totals) vs
-// 30M EUR ≈ 330M NOK (brochure) vs 100M NOK (this campaign — donation-funded
-// share only). `goalNok` below is the campaign goal, not the total project
-// budget. If a page needs the total build cost, wire it in as a separate
-// exported constant here first.
+// §13.2 — budget figures, RESOLVED 2026-09-01. There are two numbers and they
+// were never meant to reconcile:
+//
+//   • TOTAL_BUILD_COST_EUR — what the building costs to put up, in euro,
+//     as broken down per phase in the client's fremdrift brochure.
+//   • goalNok — the donation-funded SHARE of that, in kroner. This is what
+//     the meter tracks. It is not the project budget.
+//
+// They are never mixed on screen and never converted into one another: no
+// rate is stated anywhere, and one that ages silently would be worse than
+// two honest figures side by side. The brochure now totals 24.53M EUR, not
+// the 30M an earlier note here cited — the earlier figure predates the
+// per-phase breakdown below and has been dropped.
 
 export const CAMPAIGN = Object.freeze({
   // Money — §10
@@ -75,15 +83,52 @@ export const SUB_CAMPAIGN = Object.freeze({
   raisedNok: 4_320_000, // TODO wire to real feed
 });
 
-// Segmented phase timeline for the CampaignMeter — three equal segments
-// (three build years). `key` is the i18n slot; the current phase is the
-// one whose year matches "now" (or the last one if we're past 2028).
-export const PHASES = Object.freeze([
-  { year: 2026, key: 'fundament' as const },
-  { year: 2027, key: 'interior' as const },
-  { year: 2028, key: 'ferdigstillelse' as const },
+// The project in five funded phases, from the client's fremdrift brochure
+// (2026-09-01). Two are already paid for and delivered; three are ahead.
+//
+// `eur` is that phase's share of the total build cost — see the §13.2 note at
+// the top of this file for why this is euro while the meter is kroner.
+//
+// The last three keys are deliberately the SAME keys the campaign meter has
+// always used, so this is one vocabulary rather than a second one: PHASES
+// below is derived from this array, and components/campaign-meter.tsx and
+// components/phase-popover.tsx keep working untouched. (There is already a
+// third, unrelated set in lib/donor-wall.ts; a fourth would be the real
+// mistake here.)
+export const PROJECT_PHASES = Object.freeze([
+  { n: 1, from: 2019, to: 2024, key: 'planning' as const, eur: 602_000 },
+  { n: 2, from: 2025, to: 2025, key: 'demolition' as const, eur: 946_000 },
+  { n: 3, from: 2026, to: 2026, key: 'fundament' as const, eur: 9_632_000 },
+  { n: 4, from: 2027, to: 2027, key: 'interior' as const, eur: 6_450_000 },
+  { n: 5, from: 2028, to: 2028, key: 'ferdigstillelse' as const, eur: 6_900_000 },
 ]);
-export type PhaseKey = (typeof PHASES)[number]['key'];
+export type ProjectPhaseKey = (typeof PROJECT_PHASES)[number]['key'];
+
+// Summed, never typed twice: a total that can disagree with its own parts is
+// the classic way a figure like this goes stale.
+export const TOTAL_BUILD_COST_EUR = PROJECT_PHASES.reduce((sum, p) => sum + p.eur, 0);
+
+// Where each phase stands relative to a given date. The brochure's own
+// framing — "the first two phases have been completed" — falls out of the
+// years rather than being asserted separately.
+export function projectPhaseState(
+  phase: (typeof PROJECT_PHASES)[number],
+  now: Date = new Date(),
+): 'done' | 'current' | 'next' {
+  const y = now.getFullYear();
+  if (y > phase.to) return 'done';
+  if (y >= phase.from) return 'current';
+  return 'next';
+}
+
+// Segmented phase timeline for the CampaignMeter — three equal segments
+// (the three build years). Derived from PROJECT_PHASES so the meter and the
+// fremdrift page can never drift apart. `key` is the i18n slot; the current
+// phase is the one whose year matches "now" (or the last one past 2028).
+export const PHASES = Object.freeze(
+  PROJECT_PHASES.filter((p) => p.from >= 2026).map((p) => ({ year: p.from, key: p.key })),
+);
+export type PhaseKey = 'fundament' | 'interior' | 'ferdigstillelse';
 
 export function currentPhaseKey(now: Date = new Date()): PhaseKey {
   const y = now.getFullYear();

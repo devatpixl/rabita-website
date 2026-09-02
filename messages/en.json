@@ -69,6 +69,11 @@
           "href": "/moskeprosjektet"
         },
         {
+          "label": "Progress",
+          "blurb": "Timeline, phases and what each phase costs",
+          "href": "/moskeprosjektet/fremdrift"
+        },
+        {
           "label": "Apartments",
           "blurb": "Fifteen apartments for sale in the new building",
           "href": "/moskeprosjektet/leiligheter"
@@ -1981,48 +1986,92 @@
     "primary": "Register interest",
     "secondary": "See the whole project",
     "facts": {
-      "heading": "Key figures",
-      "count": "Apartments",
-      "address": "Address",
-      "floors": "Position",
-      "floorsValue": "Upper floors",
-      "completion": "Move-in",
-      "completionValue": "set by build phase",
-      "architect": "Architect",
-      "walking": "Walk to",
       "stations": {
         "brugata": "Brugata tram and bus",
         "oslo-s": "Oslo S / Jernbanetorget",
         "gronland": "Grønland metro"
       }
     },
-    "why": {
-      "eyebrow": "Why here",
-      "heading": "Live above the roof garden, in the middle of <em>Oslo</em>.",
-      "items": {
-        "garden": {
-          "title": "A garden <em>above</em> the streets.",
-          "body": "The apartments sit on the floors by the planted roof terrace: a green outdoor room above the streets, drawn into the building from the start.",
-          "tag": "Outdoors"
-        },
-        "city": {
-          "title": "In the <em>city centre</em>.",
-          "body": "Calmeyers gate 8 lies between Storgata and the Akerselva. Tram, metro and Oslo S are a few minutes on foot.",
-          "tag": "Location"
-        },
-        "building": {
-          "title": "A building with a <em>story</em>.",
-          "body": "Designed by Norconsult, with the brick lattice on the street. The sale of the apartments is part of financing the new building.",
-          "tag": "The building"
-        }
-      }
-    },
     "interest": {
       "eyebrow": "Sales start",
       "heading": "Register interest and hear <em>first</em>.",
       "body": "We are taking expressions of interest now. No commitment; we contact you when there is news.",
-      "note": "Prices, floor plans and the date of the sales start are not yet set and will be published here when they are.",
+      "note": "Prices and floor plans are published on the project's sales site cm8.no. Register your interest here and we will be in touch.",
       "formHeading": "Register interest"
+    },
+    "about": {
+      "eyebrow": "About the project",
+      "heading": "Living in the heart of <em>Oslo</em>.",
+      "body1": "A rare chance to live in the heart of Oslo, centrally placed and a short walk from government institutions, tourist attractions, major transport hubs and large shopping centres — and, not least, in the same building as the Oslo Mosque.",
+      "body2": "The project comprises modern apartments and a broad range of facilities, among them a café, restaurants, a multi-purpose hall, a roof terrace and sheltered outdoor areas.",
+      "points": {
+        "modern": {
+          "title": "Modern apartments",
+          "body": "Efficient layouts, good materials and a light design."
+        },
+        "central": {
+          "title": "Central location",
+          "body": "Walking distance to Oslo City, the Storting and the main transport hubs."
+        }
+      },
+      "mapCaption": "Walking times are measured along real pedestrian routes, not in a straight line."
+    },
+    "location": {
+      "eyebrow": "Central location",
+      "heading": "Walking distance to <em>most of it</em>.",
+      "lede": "Calmeyers gate sits in an attractive, well-established part of Oslo, within walking distance of the city's most important functions.",
+      "items": [
+        "5–10 minutes on foot to Oslo City, the Storting and the central parts of town",
+        "A short walk to Grünerløkka, with its wide choice of cafés, restaurants and shops",
+        "Close to the main transport hubs — Jernbanetorget, Stortinget and Tøyen",
+        "Set in quiet side streets, more withdrawn and more comfortable than the main roads around it"
+      ],
+      "close": "It is a rare combination: central access, and a quiet place to live."
+    },
+    "quality": {
+      "eyebrow": "Quality and common ground",
+      "heading": "More than homes. A <em>neighbourhood</em>.",
+      "lede": "The homes are designed around functional layouts, good daylight and a modern standard. Large windows, comfortable living rooms and airy balconies make them easy to settle into.",
+      "listLabel": "The project will also include",
+      "items": {
+        "outdoor": {
+          "title": "Green outdoor space and courtyard",
+          "body": "Planted, with places to sit."
+        },
+        "hall": {
+          "title": "Multi-purpose hall and activity rooms",
+          "body": "For events and for the neighbourhood."
+        },
+        "teaching": {
+          "title": "Teaching facilities",
+          "body": "Flexible rooms for courses, gatherings and lectures on the lower floors."
+        },
+        "library": {
+          "title": "Library and social areas",
+          "body": "Places that bring life and bring people together."
+        },
+        "terrace": {
+          "title": "Roof terraces",
+          "body": "With a view over the city."
+        }
+      },
+      "close": "All of it adds up to a sociable, welcoming place to live."
+    },
+    "priceLabel": "Starting price from",
+    "priceUnit": "million",
+    "sales": {
+      "eyebrow": "Sales site",
+      "line": "Prices, floor plans and the apartments currently available are published by the developer at cm8.no.",
+      "cta": "Visit cm8.no",
+      "newTab": "Opens in a new tab"
+    },
+    "cta": {
+      "eyebrow": "For sale",
+      "heading": "Fifteen apartments in the <em>new</em> building.",
+      "body": "On the fifth and sixth floors, beside the roof garden with the city outside the door. The sale helps finance the building below.",
+      "cta": "See the apartments",
+      "countLabel": "Apartments",
+      "sizeLabel": "Sizes"
     }
   },
   "imams": {
@@ -2086,6 +2135,114 @@
     "glanceHeading": "Today at a glance",
     "doorsOpen": "Doors open",
     "khutbaNo": "Khutba in Norwegian",
-    "khutbaAr": "Khutba in Arabic"
+    "khutbaAr": "Khutba in Arabic",
+    "khutbaLine": "{time} {lang} khutba",
+    "khateebLabel": "This week's khateeb",
+    "khateebPlaceholder": "The rota is not set yet",
+    "langNo": "Norwegian",
+    "langAr": "Arabic"
+  },
+  "fremdrift": {
+    "crumb": "The mosque project",
+    "eyebrow": "Progress",
+    "title": "From vision to <em>finished building</em>.",
+    "lede": "The most pivotal years of the project now lie ahead. The old mosque has been demolished and the ground cleared. We now begin the work of building a mosque that will serve generations to come.",
+    "pastEyebrow": "Progress so far",
+    "pastHeading": "How we got here.",
+    "aheadEyebrow": "What lies ahead",
+    "aheadHeading": "The years in front of us.",
+    "aheadLede": "As we approach the end of 2025, we stand at a defining moment in the project. The old mosque is now part of our history. The building has been dismantled and the site has been cleared. For many years it was our shared home. Now we open the door to something greater, more beautiful and more sustainable. The first two phases have been completed. We now enter the next, and most crucial, phase: the construction of the mosque itself.",
+    "years": {
+      "vision": {
+        "label": "2017",
+        "name": "Vision",
+        "body": "After many years in our former mosque, the need for a larger space became increasingly clear. The old building was worn down, expensive to maintain, and no longer met the needs of our growing community. That is why a bold new vision was launched: to tear down the existing structure and build a new, modern Islamic centre — with a mosque spanning multiple floors, a school, a library, a youth club, a multi-purpose hall and residential units."
+      },
+      "preparation": {
+        "label": "2019–2024",
+        "name": "Preparation",
+        "body": "The first official steps toward a new mosque were taken in 2019, when we entered a long-term collaboration with architect Håvard Lindgard Fagernes, who developed the initial design sketches. In 2022 the project received full approval from the municipality, and by 2024 it was opened to bids from some of the country's leading construction firms. These milestones laid a solid foundation and marked the beginning of a new chapter: the mosque of the future."
+      },
+      "demolition": {
+        "label": "2025",
+        "name": "Demolition",
+        "body": "After several years of ideas, sketches and careful planning, the first major milestone was reached in 2025. During Ramadan that year, demolition began on the 19th-century building that had served as our mosque for generations. We carried with us the memories and stories shaped within its walls, while knowing in our hearts that this was the beginning of something new."
+      },
+      "construction": {
+        "label": "2026",
+        "name": "Construction",
+        "body": "In the first quarter of 2026, the goal is to begin construction of the foundation, main structure and external facade. This is the most critical phase of the project, a defining milestone that brings us closer to the vision of a new, modern mosque in the heart of Oslo."
+      },
+      "interior": {
+        "label": "2027",
+        "name": "Interior",
+        "body": "By the end of 2027, our goal is to complete the interior work in the basement, first floor and second floor. These levels will form the heart of the building, with prayer areas spread across three floors, including wudu facilities and changing rooms."
+      },
+      "completion": {
+        "label": "2028",
+        "name": "Completion",
+        "body": "In the final phase, the aim is to complete the upper floors. The third floor will be dedicated to education, with modern classrooms and flexible spaces for weekend school, courses and lectures. The fourth floor will house offices, meeting rooms, a studio and a large youth club. The fifth and sixth floors will contain residential apartments, providing stable income to help sustain the mosque's upkeep and community activities for years to come."
+      }
+    },
+    "phasesEyebrow": "Five phases",
+    "phasesHeading": "What each phase costs.",
+    "phaseLabel": "Phase {n}",
+    "totalLabel": "Total build cost",
+    "goalLabel": "Fundraising goal",
+    "goalNote": "The build cost is given in euro, as it is budgeted per phase. Our fundraising is in kroner and covers a share of it — the two are not the same figure, and we do not convert one into the other.",
+    "stateDone": "Completed",
+    "stateCurrent": "In progress",
+    "stateNext": "Ahead",
+    "phases": {
+      "planning": {
+        "name": "Preparation",
+        "items": [
+          "Conceptual design",
+          "Preliminary project",
+          "Building approval",
+          "Contractor selection"
+        ]
+      },
+      "demolition": {
+        "name": "Demolition",
+        "items": [
+          "Construction permit",
+          "Demolition"
+        ]
+      },
+      "fundament": {
+        "name": "Construction",
+        "items": [
+          "Technical planning",
+          "Groundwork",
+          "Structural framework",
+          "Weather-sealed exterior"
+        ]
+      },
+      "interior": {
+        "name": "Interior",
+        "items": [
+          "Interior completion of basement, 1st and 2nd floors"
+        ]
+      },
+      "ferdigstillelse": {
+        "name": "Completion",
+        "items": [
+          "Completion of third to sixth floors",
+          "Classrooms, offices, studio, youth club and residential units"
+        ]
+      }
+    },
+    "ctaHeading": "Build it with us.",
+    "ctaBody": "Every phase is funded by people who give. Phase 3 is under way.",
+    "ctaPrimary": "Give to the building",
+    "ctaSecondary": "Where the money goes",
+    "seeAll": "See the full timeline",
+    "timelineEyebrow": "Our journey",
+    "timelineHeading": "From vision to finished building, year by year.",
+    "scrollHint": "Scroll to explore",
+    "heroEyebrow": "Progress",
+    "heroTitle": "How it <em>rises</em>.",
+    "heroLede": "Six years, from the first sketch to a finished building in Calmeyers gate. Where the project stands, and what comes next."
   }
 }

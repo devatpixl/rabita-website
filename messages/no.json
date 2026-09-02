@@ -69,6 +69,11 @@
           "href": "/moskeprosjektet"
         },
         {
+          "label": "Fremdrift",
+          "blurb": "Tidslinje, faser og hva hver fase koster",
+          "href": "/moskeprosjektet/fremdrift"
+        },
+        {
           "label": "Leiligheter",
           "blurb": "Femten leiligheter for salg i det nye bygget",
           "href": "/moskeprosjektet/leiligheter"
@@ -1981,48 +1986,92 @@
     "primary": "Meld interesse",
     "secondary": "Se hele prosjektet",
     "facts": {
-      "heading": "Nøkkeltall",
-      "count": "Leiligheter",
-      "address": "Adresse",
-      "floors": "Plassering",
-      "floorsValue": "Øverste etasjer",
-      "completion": "Innflytting",
-      "completionValue": "settes av byggefase",
-      "architect": "Arkitekt",
-      "walking": "Gangtid til",
       "stations": {
         "brugata": "Brugata trikk og buss",
         "oslo-s": "Oslo S / Jernbanetorget",
         "gronland": "Grønland T-bane"
       }
     },
-    "why": {
-      "eyebrow": "Hvorfor her",
-      "heading": "Bo over takhagen, midt i <em>Oslo</em>.",
-      "items": {
-        "garden": {
-          "title": "En hage <em>over</em> gatene.",
-          "body": "Leilighetene ligger i etasjene ved den beplantede takterrassen – et grønt uterom over gatene, tegnet inn i bygget fra starten.",
-          "tag": "Uterommet"
-        },
-        "city": {
-          "title": "Midt i <em>sentrum</em>.",
-          "body": "Calmeyers gate 8 ligger mellom Storgata og Akerselva. Trikk, T-bane og Oslo S er få minutter til fots.",
-          "tag": "Beliggenhet"
-        },
-        "building": {
-          "title": "Et bygg med en <em>historie</em>.",
-          "body": "Tegnet av Norconsult, med teglgitteret mot gata. Salget av leilighetene er en del av finansieringen av det nye bygget.",
-          "tag": "Bygget"
-        }
-      }
-    },
     "interest": {
       "eyebrow": "Salgsstart",
       "heading": "Meld interesse, og få beskjed <em>først</em>.",
       "body": "Vi tar imot interessemeldinger nå. Du forplikter deg ikke til noe – vi kontakter deg når det er nytt å fortelle.",
-      "note": "Priser, planløsninger og dato for salgsstart er ikke fastsatt ennå og publiseres her når de er klare.",
+      "note": "Prisene og planløsningene ligger ute på prosjektets salgsside cm8.no. Meld interesse her, så tar vi kontakt.",
       "formHeading": "Meld interesse"
+    },
+    "about": {
+      "eyebrow": "Om prosjektet",
+      "heading": "Å bo i hjertet av <em>Oslo</em>.",
+      "body1": "En unik mulighet til å bo i hjertet av Oslo, med sentral beliggenhet og kort gangavstand til sentrale statlige institusjoner, turistattraksjoner, viktige kollektivknutepunkter og store kjøpesentre – og ikke minst i samme bygg som Oslo Moské.",
+      "body2": "Prosjektet omfatter moderne leiligheter og et bredt tilbud av fasiliteter, blant annet kafé, restauranter, flerbrukshall, takterrasse og skjermede uteområder.",
+      "points": {
+        "modern": {
+          "title": "Moderne leiligheter",
+          "body": "Effektive planløsninger, gode materialer og lyst design."
+        },
+        "central": {
+          "title": "Sentralt område",
+          "body": "Gangavstand til Oslo City, Stortinget og andre viktige kollektivknutepunkter."
+        }
+      },
+      "mapCaption": "Gangavstander er målt langs faktiske gangruter, ikke i luftlinje."
+    },
+    "location": {
+      "eyebrow": "Sentral beliggenhet",
+      "heading": "Gangavstand til det <em>meste</em>.",
+      "lede": "Calmeyers gate ligger i et attraktivt og veletablert område i Oslo, med gangavstand til byens viktigste funksjoner.",
+      "items": [
+        "5–10 minutters gange til Oslo City, Stortinget og sentrale deler av sentrum",
+        "Kort vei til Grünerløkka, med et bredt utvalg av kafeer, restauranter og butikker",
+        "Nær viktige kollektivknutepunkter som Jernbanetorget, Stortinget og Tøyen",
+        "Beliggende i rolige sidegater, med en mer tilbaketrukket og behagelig atmosfære enn omkringliggende hovedgater"
+      ],
+      "close": "Dette gir en sjelden kombinasjon av sentral tilgjengelighet og rolig bomiljø."
+    },
+    "quality": {
+      "eyebrow": "Kvalitet og møteplasser",
+      "heading": "Mer enn boliger. Et <em>nabolag</em>.",
+      "lede": "Boligene er utviklet med fokus på funksjonelle planløsninger, gode lysforhold og moderne standard. Store vindusflater, hyggelige oppholdsrom og luftige balkonger skaper boliger som er enkle å trives i.",
+      "listLabel": "Prosjektet vil også inkludere",
+      "items": {
+        "outdoor": {
+          "title": "Grønne uterom og gårdsplass",
+          "body": "Med beplantning og sitteområder."
+        },
+        "hall": {
+          "title": "Flerbrukshall og aktivitetsrom",
+          "body": "For arrangementer og nærmiljøbruk."
+        },
+        "teaching": {
+          "title": "Undervisningsfasiliteter",
+          "body": "Fleksible rom til kurs, samlinger og foredrag i de lavere etasjene."
+        },
+        "library": {
+          "title": "Bibliotek og sosiale soner",
+          "body": "Som skaper liv og møteplasser."
+        },
+        "terrace": {
+          "title": "Takterrasser",
+          "body": "Med utsyn over byen."
+        }
+      },
+      "close": "Alt dette bidrar til et sosialt og inkluderende bomiljø."
+    },
+    "priceLabel": "Startspris fra",
+    "priceUnit": "millioner",
+    "sales": {
+      "eyebrow": "Salgssiden",
+      "line": "Priser, plantegninger og hvilke leiligheter som er ledige, ligger ute hos utbyggeren på cm8.no.",
+      "cta": "Gå til cm8.no",
+      "newTab": "Åpnes i en ny fane"
+    },
+    "cta": {
+      "eyebrow": "Til salgs",
+      "heading": "Femten leiligheter i det <em>nye</em> bygget.",
+      "body": "I femte og sjette etasje, ved takhagen og med byen rett utenfor døra. Salget er med på å finansiere bygget under.",
+      "cta": "Se leilighetene",
+      "countLabel": "Leiligheter",
+      "sizeLabel": "Størrelser"
     }
   },
   "imams": {
@@ -2086,6 +2135,114 @@
     "glanceHeading": "I dag",
     "doorsOpen": "Dørene åpnes",
     "khutbaNo": "Norsk khutba",
-    "khutbaAr": "Arabisk khutba"
+    "khutbaAr": "Arabisk khutba",
+    "khutbaLine": "{time} {lang} khutba",
+    "khateebLabel": "Ukas khatib",
+    "khateebPlaceholder": "Fast rota er ikke satt ennå",
+    "langNo": "norsk",
+    "langAr": "arabisk"
+  },
+  "fremdrift": {
+    "crumb": "Moskeprosjektet",
+    "eyebrow": "Fremdrift",
+    "title": "Fra visjon til <em>ferdig bygg</em>.",
+    "lede": "De mest avgjørende årene i prosjektet ligger foran oss. Den gamle moskeen er revet og tomta ryddet. Nå begynner arbeidet med å bygge en moské som skal tjene generasjoner.",
+    "pastEyebrow": "Så langt",
+    "pastHeading": "Veien hit.",
+    "aheadEyebrow": "Veien videre",
+    "aheadHeading": "Det som ligger foran.",
+    "aheadLede": "Ved utgangen av 2025 står vi ved et vendepunkt. Den gamle moskeen er nå en del av historien vår. Bygget er demontert og tomta ryddet. I mange år var det vårt felles hjem. Nå åpner vi døren til noe større, vakrere og mer bærekraftig. De to første fasene er fullført. Vi går nå inn i den neste, og mest avgjørende, fasen: byggingen av selve moskeen.",
+    "years": {
+      "vision": {
+        "label": "2017",
+        "name": "Visjon",
+        "body": "Etter mange år i den gamle moskeen ble behovet for mer plass stadig tydeligere. Bygget var slitt, dyrt å vedlikeholde og svarte ikke lenger til behovene i et voksende fellesskap. Derfor ble en dristig visjon lansert: å rive det gamle og bygge et nytt, moderne islamsk senter — med moské over flere etasjer, skole, bibliotek, ungdomsklubb, flerbrukssal og leiligheter."
+      },
+      "preparation": {
+        "label": "2019–2024",
+        "name": "Forberedelse",
+        "body": "De første offisielle stegene ble tatt i 2019, da vi innledet et langsiktig samarbeid med arkitekt Håvard Lindgard Fagernes, som utarbeidet de første skissene. I 2022 fikk prosjektet full godkjenning fra kommunen, og i 2024 ble det åpnet for anbud fra noen av landets ledende entreprenører. Milepælene la et solid fundament og markerte begynnelsen på et nytt kapittel: framtidens moské."
+      },
+      "demolition": {
+        "label": "2025",
+        "name": "Riving",
+        "body": "Etter flere år med idéer, skisser og nøye planlegging kom den første store milepælen i 2025. I ramadan det året startet rivingen av 1800-tallsbygget som hadde vært moskeen vår i generasjoner. Vi tok med oss minnene og historiene som ble formet innenfor veggene, og visste samtidig at dette var begynnelsen på noe nytt."
+      },
+      "construction": {
+        "label": "2026",
+        "name": "Bygging",
+        "body": "I første kvartal av 2026 er målet å starte byggingen av fundament, hovedkonstruksjon og fasade. Dette er prosjektets mest kritiske fase — en milepæl som bringer oss nærmere visjonen om en ny, moderne moské midt i Oslo."
+      },
+      "interior": {
+        "label": "2027",
+        "name": "Innredning",
+        "body": "Ved utgangen av 2027 er målet å ferdigstille innredningen av kjeller, første og andre etasje. Disse planene utgjør hjertet i bygget, med bønnesaler over tre etasjer, wudu-fasiliteter og garderober."
+      },
+      "completion": {
+        "label": "2028",
+        "name": "Ferdigstillelse",
+        "body": "I den siste fasen er målet å ferdigstille de øvre etasjene. Tredje etasje vies til undervisning, med moderne klasserom og fleksible rom for helgeskole, kurs og forelesninger. Fjerde etasje rommer kontorer, møterom, studio og en stor ungdomsklubb. Femte og sjette etasje blir leiligheter som gir stabile inntekter til drift og aktiviteter i årene som kommer."
+      }
+    },
+    "phasesEyebrow": "Fem faser",
+    "phasesHeading": "Hva hver fase koster.",
+    "phaseLabel": "Fase {n}",
+    "totalLabel": "Samlet byggekostnad",
+    "goalLabel": "Innsamlingsmål",
+    "goalNote": "Byggekostnaden er oppgitt i euro, slik den er budsjettert per fase. Innsamlingen vår er i kroner og dekker en del av den — de to tallene er ikke det samme, og vi regner dem ikke om mot hverandre.",
+    "stateDone": "Fullført",
+    "stateCurrent": "Pågår",
+    "stateNext": "Kommer",
+    "phases": {
+      "planning": {
+        "name": "Forberedelse",
+        "items": [
+          "Skisseprosjekt",
+          "Forprosjekt",
+          "Rammetillatelse",
+          "Valg av entreprenør"
+        ]
+      },
+      "demolition": {
+        "name": "Riving",
+        "items": [
+          "Igangsettingstillatelse",
+          "Riving"
+        ]
+      },
+      "fundament": {
+        "name": "Bygging",
+        "items": [
+          "Teknisk prosjektering",
+          "Grunnarbeid",
+          "Råbygg",
+          "Tett bygg"
+        ]
+      },
+      "interior": {
+        "name": "Innredning",
+        "items": [
+          "Innredning av kjeller, 1. og 2. etasje"
+        ]
+      },
+      "ferdigstillelse": {
+        "name": "Ferdigstillelse",
+        "items": [
+          "Ferdigstillelse av 3.–6. etasje",
+          "Klasserom, kontorer, studio, ungdomsklubb og leiligheter"
+        ]
+      }
+    },
+    "ctaHeading": "Bygg den med oss.",
+    "ctaBody": "Hver fase er finansiert av mennesker som gir. Fase 3 er i gang.",
+    "ctaPrimary": "Gi til bygget",
+    "ctaSecondary": "Hvor pengene går",
+    "seeAll": "Se hele tidslinjen",
+    "timelineEyebrow": "Vår reise",
+    "timelineHeading": "Fra visjon til ferdig bygg, år for år.",
+    "scrollHint": "Bla for å utforske",
+    "heroEyebrow": "Fremdrift",
+    "heroTitle": "Slik <em>vokser</em> det fram.",
+    "heroLede": "Seks år, fra den første skissa til et ferdig bygg i Calmeyers gate. Her er hvor prosjektet står, og hva som kommer."
   }
 }
