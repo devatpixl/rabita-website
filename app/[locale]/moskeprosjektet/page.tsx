@@ -1,9 +1,13 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import Link from 'next/link';
 import { CAMPAIGN } from '@/lib/campaign';
+import { ProgressPhases } from '@/components/progress-phases';
+import type { AppLocale } from '@/i18n/routing';
 import { FigureIcon, type FigureIconName } from '@/components/figure-icons';
 import { cn } from '@/lib/cn';
 import { Section, SectionBody } from '@/components/primitives';
 import { BuildingRises } from '@/components/building-rises';
+import { ApartmentsCta } from '@/components/apartments-cta';
 import { GiftBuilds } from '@/components/gift-builds';
 import { ProjectGallery } from '@/components/project-gallery';
 import { GivingCard } from '@/components/giving-card';
@@ -23,6 +27,7 @@ export default async function ProjectPage({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'projectPage' });
   const tp = await getTranslations({ locale, namespace: 'projectPages' });
+  const tf = await getTranslations({ locale, namespace: 'fremdrift' });
 
   return (
     <main>
@@ -73,6 +78,47 @@ export default async function ProjectPage({
           <ProjectGallery />
         </SectionBody>
       </section>
+
+      {/* Fremdrift, in digest. Sits here deliberately: the renders above
+         answer "what will it look like", the key figures below open with
+         Byggestart and Ferdigstillelse, and "when" belongs between the two.
+         The totals are dropped (compact) because the campaign meter has
+         already given a figure further up — the full page carries them. */}
+      <Section tone="paper">
+        <SectionBody>
+          <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
+            <div>
+              <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
+                {tf('eyebrow')}
+              </p>
+              <h2 className="mt-4 max-w-2xl font-serif text-section text-balance text-ink">
+                {tf('phasesHeading')}
+              </h2>
+            </div>
+            {/* The site's own outline pill, the one used for every secondary
+               action on paper (events, prayer visit) — not a third button
+               shape invented for this one link. Outline rather than filled:
+               it sits on a page whose filled gold buttons all mean "give",
+               and this one only means "read on". */}
+            <Link
+              href={`/${locale}/moskeprosjektet/fremdrift`}
+              className="group inline-flex min-h-12 shrink-0 items-center gap-2.5 rounded-full border border-ink px-6 py-3 text-[15px] font-semibold text-ink transition-colors hover:bg-ink hover:text-paper"
+            >
+              {tf('seeAll')}
+              <span
+                aria-hidden
+                className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
+              >
+                &rarr;
+              </span>
+            </Link>
+          </div>
+          <div className="mt-12 md:mt-16">
+            <ProgressPhases locale={locale as AppLocale} compact />
+          </div>
+        </SectionBody>
+      </Section>
+
       <Section tone="paper">
         <SectionBody>
           {/* Key figures and capacity as two registers of the same design:
@@ -233,6 +279,8 @@ export default async function ProjectPage({
       {/* The same four gifts as a dark card grid. Swapped in for the row
          version, which moved to the homepage — both read the same
          `giftLadder` copy, so this is purely a change of treatment. */}
+      <ApartmentsCta locale={locale as AppLocale} />
+
       <GiftBuilds />
 
       {/* Sadaqa jariya — a prayer space given in someone's name. Moved here
