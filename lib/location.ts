@@ -15,19 +15,34 @@ export const MOSQUE = {
   lon: 10.7535,
 } as const;
 
-export type LandmarkKind = 'metro' | 'rail' | 'tram' | 'bus';
+export type LandmarkKind = 'metro' | 'rail' | 'tram' | 'bus' | 'place';
 
 export type Landmark = {
-  key: 'oslo-s' | 'gronland' | 'brugata';
+  key:
+    | 'oslo-s'
+    | 'gronland'
+    | 'brugata'
+    | 'stortinget'
+    | 'oslo-city'
+    | 'bussterminalen'
+    | 'operahuset';
   kind: LandmarkKind;
   lat: number;
   lon: number;
+  /** Only on the big map (apartments page) — the footer keeps the three stations. */
+  extended?: boolean;
 };
 
 export const LANDMARKS: readonly Landmark[] = [
   { key: 'gronland', kind: 'metro', lat: 59.9127, lon: 10.762 },
   { key: 'oslo-s', kind: 'rail', lat: 59.9117, lon: 10.7508 },
   { key: 'brugata', kind: 'tram', lat: 59.9136, lon: 10.7578 },
+  // The client's landmark set (2026-09-04). Routed like the stations —
+  // real pedestrian paths, fetched once and stored, never straight lines.
+  { key: 'stortinget', kind: 'place', lat: 59.9132, lon: 10.7403, extended: true },
+  { key: 'oslo-city', kind: 'place', lat: 59.9123, lon: 10.7527, extended: true },
+  { key: 'bussterminalen', kind: 'bus', lat: 59.9113, lon: 10.759, extended: true },
+  { key: 'operahuset', kind: 'place', lat: 59.9075, lon: 10.7528, extended: true },
 ];
 
 const R = 6_371_000;
