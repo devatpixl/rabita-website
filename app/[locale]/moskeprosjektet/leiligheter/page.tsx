@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import Image from 'next/image';
 import { APARTMENTS_SOURCE, apartmentStats } from '@/lib/apartments';
-import { LANDMARKS, routedMinutes } from '@/lib/location';
 import { Accent } from '@/components/accent';
 import { FindUs } from '@/components/find-us';
 import { ProjectGallery } from '@/components/project-gallery';
@@ -39,7 +39,6 @@ export default async function ApartmentsPage({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'apartmentsPage' });
 
-  const walk = LANDMARKS.map((l) => ({ key: l.key, min: routedMinutes(l.key) })).sort((a, b) => a.min - b.min);
   const stats = apartmentStats();
 
   // "6 millioner" rather than "6 000 000 kr" — the project's own way of
@@ -130,7 +129,7 @@ export default async function ApartmentsPage({
 
             <div>
               <div className="overflow-hidden rounded-3xl bg-dusk p-4 sm:p-5">
-                <FindUs />
+                <FindUs extended />
               </div>
               <p className="mt-4 text-[13px] leading-relaxed text-ink-60">{t('about.mapCaption')}</p>
             </div>
@@ -185,99 +184,160 @@ export default async function ApartmentsPage({
          The four claims cm8 makes about the location, each on its own ruled
          line with an oversized numeral — a register rather than a bullet
          list, because bullets read as small print and these are the argument. */}
-      <Section tone="paper-2">
+      <section className="bg-paper-2 py-12 md:py-16">
         <SectionBody>
           <div className="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
-            <div className="md:sticky md:top-28 md:self-start">
+            <div className="md:sticky md:top-24 md:self-start">
               <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
                 {t('location.eyebrow')}
               </p>
-              <SectionHeading className="mt-4">
+              <SectionHeading className="mt-3">
                 {t.rich('location.heading', { em: (chunks) => <Accent surface="paper">{chunks}</Accent> })}
               </SectionHeading>
-              <p className="mt-6 max-w-[44ch] text-body text-ink-60">{t('location.lede')}</p>
-
-              {/* The routed walking times, which cm8 does not publish at all. */}
-              <dl className="mt-9 border-t border-ink">
-                {walk.map((w) => (
-                  <div key={w.key} className="flex items-baseline justify-between gap-4 border-b-[0.5px] border-rule py-3.5">
-                    <dt className="text-[13px] text-ink-60">{t(`facts.stations.${w.key}`)}</dt>
-                    <dd className="flex items-baseline gap-1.5">
-                      <span className="font-serif text-[1.35rem] leading-none tabular-nums text-ink">{w.min}</span>
-                      <span className="font-mono text-[11px] tracking-[0.08em] text-ink-60">min</span>
-                    </dd>
-                  </div>
-                ))}
-              </dl>
+              <span aria-hidden className="mt-4 block h-0.5 w-10 bg-gold-deep" />
+              <p className="mt-4 max-w-[44ch] text-body text-ink-60">{t('location.lede')}</p>
+              {/* The street itself — Calmeyers gate's own neighbourhood. */}
+              <div className="relative mt-6 aspect-[16/10] overflow-hidden rounded-[14px]">
+                <Image
+                  src="/photos/calmeyers-street.webp"
+                  alt=""
+                  fill
+                  sizes="(min-width: 768px) 26rem, 92vw"
+                  className="object-cover"
+                />
+              </div>
             </div>
 
             <ol className="space-y-0">
               {(t.raw('location.items') as string[]).map((item, i) => (
-                <li key={item} className="flex gap-6 border-b-[0.5px] border-rule py-6 first:border-t first:border-t-ink first:pt-6">
+                <li key={item} className="flex items-center gap-5 border-b-[0.5px] border-rule py-4 first:pt-0">
+                  {/* The numeral in a gold-ringed seal, per the mock — a
+                     medallion, not small print. */}
                   <span
                     aria-hidden
-                    className="shrink-0 font-serif text-[1.6rem] leading-none tabular-nums text-ink/30"
+                    className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-gold-deep/40 bg-paper font-serif text-[1rem] tabular-nums text-gold-deep"
                   >
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <p className="max-w-[46ch] text-body text-ink">{item}</p>
+                  <p className="max-w-[46ch] border-s border-rule ps-5 text-body text-ink">{item}</p>
                 </li>
               ))}
-              <li className="pt-7">
-                <p className="max-w-[46ch] border-s-2 border-gold-deep ps-5 font-serif text-[1.2rem] italic leading-snug text-ink">
-                  {t('location.close')}
-                </p>
+              <li className="pt-6">
+                <div className="rounded-[14px] bg-paper-deep/60 p-5 md:p-6">
+                  <span aria-hidden className="block font-serif text-[1.7rem] leading-none text-gold-deep">
+                    &ldquo;
+                  </span>
+                  <p className="mt-0.5 max-w-[46ch] font-serif text-[1.15rem] italic leading-snug text-ink">
+                    {t('location.close')}
+                  </p>
+                </div>
               </li>
             </ol>
           </div>
         </SectionBody>
-      </Section>
+      </section>
 
-      {/* ── kvalitet og møteplasser ─────────────────────────────────────── */}
+      {/* ── kvalitet og møteplasser ─────────────────────────────────────
+         Rebuilt to the client's mock (2026-09-04): heading beside the
+         courtyard render with a community chip floating on it; the five
+         facilities as arch-shaped medallions on one thread; the closing
+         line as a quote bar. */}
       <Section tone="paper">
         <SectionBody>
-          <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
-            {t('quality.eyebrow')}
-          </p>
-          <SectionHeading className="mt-4 max-w-2xl">
-            {t.rich('quality.heading', { em: (chunks) => <Accent surface="paper">{chunks}</Accent> })}
-          </SectionHeading>
-          <p className="mt-6 max-w-[58ch] text-body text-ink-60">{t('quality.lede')}</p>
+          <div className="grid items-center gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-14">
+            <div>
+              <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
+                {t('quality.eyebrow')}
+              </p>
+              <SectionHeading className="mt-4 max-w-[16ch]">
+                {t.rich('quality.heading', { em: (chunks) => <Accent surface="paper">{chunks}</Accent> })}
+              </SectionHeading>
+              <span aria-hidden className="mt-5 block h-0.5 w-10 bg-gold-deep" />
+              <p className="mt-6 max-w-[48ch] text-body text-ink-60">{t('quality.lede')}</p>
+            </div>
 
-          <p className="mt-12 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-ink-60 md:mt-16">
-            {t('quality.listLabel')}
-          </p>
-          {/* Five plates. The first is wide on a large screen so the grid
-             reads as a composition rather than as five equal boxes. */}
-          <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
-            {QUALITY_ITEMS.map((k, i) => (
-              <li
-                key={k}
-                className={[
-                  'group relative overflow-hidden rounded-2xl border border-rule bg-paper-2/50 p-6 transition-colors hover:border-gold-deep/40 hover:bg-paper-2',
-                  // Six columns: the first two take three each, the last
-                  // three take two each. Both rows fill exactly, and the
-                  // grid reads as a composition rather than five equal
-                  // boxes with a gap at the end.
-                  i < 2 ? 'lg:col-span-3' : 'lg:col-span-2',
-                ].join(' ')}
-              >
-                <span
-                  aria-hidden
-                  className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-gold-deep transition-transform duration-500 ease-out group-hover:scale-x-100 motion-reduce:transition-none rtl:origin-right"
+            {/* The courtyard at dusk — the minaret over the shared garden,
+               every window lit. One oversized corner, per the mock. */}
+            <div className="relative overflow-hidden rounded-[1.5rem] rounded-bl-[4.5rem]">
+              <div className="relative aspect-[16/11]">
+                <Image
+                  src="/photos/courtyard-dusk.webp"
+                  alt=""
+                  fill
+                  sizes="(min-width: 768px) 40rem, 92vw"
+                  className="object-cover"
                 />
-                <QualityIcon name={k} className="h-5 w-5 text-gold-deep" />
-                <h3 className="mt-5 font-serif text-[1.2rem] leading-tight text-ink">
-                  {t(`quality.items.${k}.title`)}
-                </h3>
-                <p className="mt-2 text-body text-ink-60">{t(`quality.items.${k}.body`)}</p>
-              </li>
-            ))}
-          </ul>
+              </div>
+              {/* The chip, floating on the picture: what the picture is FOR. */}
+              <div className="absolute bottom-5 start-5 flex items-center gap-3.5 rounded-2xl bg-dusk/85 p-4 pe-6 text-paper backdrop-blur-sm">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-paper text-gold-deep">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden className="h-5 w-5">
+                    <circle cx="9" cy="8" r="3" />
+                    <path d="M3.5 19a5.5 5.5 0 0 1 11 0" />
+                    <circle cx="17" cy="9.5" r="2.3" />
+                    <path d="M14.5 19a4.6 4.6 0 0 1 6-4.3" />
+                  </svg>
+                </span>
+                <span>
+                  <span className="block font-serif text-[1.05rem] leading-tight">{t('quality.chip.title')}</span>
+                  <span className="mt-0.5 block text-[12.5px] leading-snug text-paper/70">{t('quality.chip.body')}</span>
+                </span>
+              </div>
+            </div>
+          </div>
 
-          <p className="mt-10 font-serif text-[clamp(1.25rem,2.4vw,1.6rem)] italic leading-snug text-ink">
-            {t('quality.close')}
-          </p>
+          {/* The list label, running out along a hairline to a gold point. */}
+          <div className="mt-14 flex items-center gap-5 md:mt-16">
+            <p className="shrink-0 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-ink-60">
+              {t('quality.listLabel')}
+            </p>
+            <span aria-hidden className="h-px flex-1 bg-rule" />
+            <span aria-hidden className="h-1.5 w-1.5 shrink-0 rotate-45 bg-gold-deep" />
+          </div>
+
+          {/* Five medallions on one thread. The thread is a gentle wave
+             drawn behind the arches (md+), so the row reads as beads on a
+             string rather than five columns. */}
+          <div className="relative mt-10">
+            <svg
+              aria-hidden
+              viewBox="0 0 1000 60"
+              preserveAspectRatio="none"
+              className="absolute inset-x-0 top-9 hidden h-[60px] w-full text-gold-deep/30 md:block"
+            >
+              <path d="M0 38 C 100 10, 180 52, 300 30 S 520 8, 640 34 S 880 54, 1000 22" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            </svg>
+            <ol className="relative grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 md:grid-cols-5 md:gap-x-6">
+              {QUALITY_ITEMS.map((k, i) => (
+                <li key={k} className="flex flex-col items-center text-center md:border-s md:border-rule/70 md:first:border-s-0">
+                  {/* The arch: the building's own doorway shape as the icon
+                     plate. */}
+                  <span className="grid h-24 w-20 place-items-center rounded-t-full rounded-b-xl bg-paper-deep/60">
+                    <QualityIcon name={k} className="h-7 w-7 text-gold-deep" />
+                  </span>
+                  <span className="mt-4 font-mono text-[0.6875rem] tracking-[0.14em] text-gold-deep">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="mt-1.5 max-w-[16ch] font-serif text-[1.05rem] leading-tight text-ink">
+                    {t(`quality.items.${k}.title`)}
+                  </h3>
+                  <p className="mt-2 max-w-[22ch] text-[13px] leading-snug text-ink-60">
+                    {t(`quality.items.${k}.body`)}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          {/* The closing line as a quote bar: the oversized mark, a rule,
+             the sentence. */}
+          <div className="mt-14 flex items-center gap-6 rounded-2xl bg-paper-deep/60 px-7 py-5 md:mt-16 md:px-9">
+            <span aria-hidden className="font-serif text-[2.6rem] leading-none text-gold-deep">&ldquo;</span>
+            <span aria-hidden className="h-8 w-px shrink-0 bg-gold-deep/30" />
+            <p className="font-serif text-[clamp(1.05rem,2vw,1.3rem)] italic leading-snug text-ink">
+              {t('quality.close')}
+            </p>
+          </div>
         </SectionBody>
       </Section>
 
