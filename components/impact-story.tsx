@@ -6,7 +6,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { CAMPAIGN } from '@/lib/campaign';
 import { formatAmount } from '@/lib/format';
 import type { AppLocale } from '@/i18n/routing';
-import { SectionBody, SectionHeading } from './primitives';
+import { SectionBody } from './primitives';
 import { Accent } from './accent';
 
 // "Om Rabita" — adapts the Innocents "Amir chapters" scroll device.
@@ -118,19 +118,8 @@ export function ImpactStory() {
   const activeIndex = CHAPTERS.findIndex((c) => c.key === active);
 
   return (
-    <section id="menigheten-forteller" className="bg-paper-2 pt-section-sm pb-section-sm">
+    <section id="menigheten-forteller" className="bg-paper-2 pb-section-sm">
       <SectionBody>
-        <div className="mb-16 max-w-3xl">
-          <p className="mb-4 font-mono text-[0.75rem] uppercase tracking-[0.16em] text-gold-deep">
-            {t('eyebrow')}
-          </p>
-          <SectionHeading reveal className="text-balance">
-            {t.rich('heading', {
-              em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
-            })}
-          </SectionHeading>
-        </div>
-
         <div className="md:grid md:gap-10 md:grid-cols-12">
           {/* Sticky photo column */}
           {/* Pinned on the phone too, not only from md. innocents.no keeps its
@@ -200,7 +189,7 @@ export function ImpactStory() {
              them cross the observer's trigger band in the same flick and the
              pinned photo skips a frame. 38vh between panels on mobile is the
              innocents.no measure, give or take. */}
-          <ol className="mt-8 space-y-[38vh] pb-[16vh] md:col-span-6 md:mt-0 md:space-y-44 md:pt-20 md:pb-[34vh]">
+          <ol className="mt-[12vh] space-y-[38vh] pb-[16vh] md:col-span-6 md:mt-0 md:space-y-44 md:pt-[36vh] md:pb-[34vh]">
             {CHAPTERS.map((c, i) => (
               <li
                 key={c.key}
@@ -224,9 +213,6 @@ export function ImpactStory() {
                 <p className="mt-5 max-w-prose text-body text-ink">
                   {t(`items.${c.key}.body`, values[c.key])}
                 </p>
-                <span className="mt-6 inline-flex items-center rounded-btn border border-gold/60 bg-paper px-3 py-1 text-[13px] text-gold-deep">
-                  {t(`items.${c.key}.name`)}
-                </span>
               </li>
             ))}
           </ol>

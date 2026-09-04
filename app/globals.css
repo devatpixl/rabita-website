@@ -447,3 +447,252 @@ body.sheet-open {
     opacity: 0;
   }
 }
+
+/* Two red pulses on a required field the donor missed — the silent stand-in
+   for the removed "Påkrevd" label. Two, not a loop: it points, then stops.
+   Under reduced motion the border simply holds red for the same beat. */
+.field-blink {
+  animation: field-blink 0.9s ease;
+}
+@keyframes field-blink {
+  0%, 42%, 100% { border-color: theme('colors.rule'); box-shadow: none; }
+  16%, 60% { border-color: #dc2626; box-shadow: 0 0 0 1.5px rgb(220 38 38 / 0.55); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .field-blink { animation: none; border-color: #dc2626; }
+}
+
+/* ============================================================
+   Brand Type — "DETTE ER / RABITA" with the congregation clipped
+   through the letterforms. Ported from innocents.no (client,
+   2026-09-04: "copy the scroll part as it is"); mechanism theirs,
+   palette, type and photo ours. --p (0→1) is written by
+   components/brand-type.tsx; everything below derives from it.
+   ============================================================ */
+.brand-type-section {
+  /* A pale sage rather than the site's paper (client, 2026-09-04: "light
+     green"): the light end of the dusk family, so the section reads as its
+     own room without leaving the palette. One variable — tune it here. */
+  --brand-type-ground: #e3eae4;
+  position: relative;
+  height: 320vh;
+  background: var(--brand-type-ground);
+  border-top: 1px solid #e4ded3;
+  border-bottom: 1px solid #e4ded3;
+}
+.brand-type-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.brand-type-stage {
+  --p: 0;
+  --eased: calc(var(--p) * var(--p) * var(--p));
+  --scale: calc(1 + var(--eased) * 60);
+  --photo-scale: calc(1 + var(--p) * 0.18);
+  --label-fade: calc(1 - var(--p) * 7);
+  --final-opacity: clamp(0, calc((var(--p) - 0.55) * 2.85), 1);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+  background: var(--brand-type-ground);
+}
+.brand-type-stage__photo,
+.brand-type-stage__final {
+  position: absolute;
+  inset: 0;
+  /* dusk-tinted, not navy: the same grade the site's other full-bleed
+     photography carries */
+  background-image:
+    linear-gradient(180deg, rgba(22, 36, 46, 0.12), rgba(22, 36, 46, 0.28)),
+    url('/photos/brand-gateiftar.webp');
+  background-size: cover;
+  background-position: center 50%;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+.brand-type-stage__photo {
+  transform: scale(var(--photo-scale));
+  z-index: 1;
+}
+.brand-type-stage__final {
+  transform: scale(calc(var(--photo-scale) * 1.04));
+  opacity: var(--final-opacity);
+  z-index: 4;
+  pointer-events: none;
+}
+.brand-type-stage__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(22, 36, 46, calc(0.2 + var(--p) * 0.35)) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+  opacity: calc(1 - var(--final-opacity) * 0.3);
+}
+.brand-type-stage__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+.brand-type-stage__paper {
+  fill: var(--brand-type-ground);
+}
+.brand-type-stage__textwrap {
+  transform-box: view-box;
+  transform-origin: 800px 540px;
+  transform: scale(var(--scale));
+  will-change: transform;
+}
+.brand-type-stage__text {
+  font-family: var(--font-serif), 'Times New Roman', serif;
+  font-weight: 700;
+  font-size: 220px;
+  letter-spacing: -4px;
+  /* the negative tracking above swallows the word space in "DETTE ER" —
+     this hands the space its width back, and then some, so two words at
+     220px read as two words */
+  word-spacing: 56px;
+}
+.brand-type-stage__text--wide {
+  letter-spacing: 24px;
+}
+.brand-type-stage__eyebrow {
+  position: absolute;
+  top: clamp(56px, 12vh, 140px);
+  left: 50%;
+  transform: translateX(-50%) translateY(calc(var(--p) * -3vh));
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #9b7f4a;
+  opacity: var(--label-fade);
+  pointer-events: none;
+  z-index: 4;
+  white-space: nowrap;
+}
+.brand-type-stage__eyebrow::before,
+.brand-type-stage__eyebrow::after {
+  content: '';
+  width: 44px;
+  height: 1px;
+  background: #9b7f4a;
+}
+.brand-type-stage__sig {
+  position: absolute;
+  bottom: clamp(56px, 12vh, 140px);
+  left: 50%;
+  transform: translateX(-50%) translateY(calc(var(--p) * 3vh));
+  font-family: var(--font-serif), 'Times New Roman', serif;
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 400;
+  color: #9b7f4a;
+  letter-spacing: 0.01em;
+  opacity: var(--label-fade);
+  pointer-events: none;
+  z-index: 4;
+}
+.brand-type-stage__sig em {
+  font-style: italic;
+  font-weight: 300;
+  margin-inline-start: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-type-section { height: auto; padding: clamp(96px, 14vh, 200px) 0; }
+  .brand-type-stage { position: relative; height: auto; aspect-ratio: 16 / 9; }
+}
+@media (max-width: 700px) {
+  /* Phones: the sticky runway goes ENTIRELY — Innocents' users read the
+     near-empty paper viewport as a blank screen, and mobile Safari bails
+     on SVG masks at extreme scales, leaving the paper rect covering the
+     photo. Their replacement, kept: one editorial card, photo + dusk
+     scrim + the two lines legible in paper. */
+  .brand-type-section {
+    height: auto;
+    padding: clamp(56px, 9vh, 96px) 0;
+    background: #16242e;
+    border-top: 0;
+    border-bottom: 0;
+  }
+  .brand-type-stage {
+    position: relative;
+    top: auto;
+    height: 78svh;
+    min-height: 460px;
+    max-height: 720px;
+    width: calc(100% - 3rem);
+    margin: 0 auto;
+    border-radius: 14px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .brand-type-stage__photo {
+    transform: none;
+    inset: 0;
+    z-index: 1;
+    will-change: auto;
+    background-attachment: scroll;
+  }
+  .brand-type-stage__svg,
+  .brand-type-stage__final,
+  .brand-type-stage__vignette { display: none; }
+  .brand-type-stage::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(22, 36, 46, 0.55) 0%,
+      rgba(22, 36, 46, 0.2) 40%,
+      rgba(22, 36, 46, 0.78) 100%
+    );
+    z-index: 2;
+    pointer-events: none;
+  }
+  .brand-type-stage__eyebrow {
+    top: clamp(28px, 6vh, 56px);
+    color: #faf8f4;
+    opacity: 1;
+    transform: translateX(-50%);
+    z-index: 3;
+  }
+  .brand-type-stage__eyebrow::before,
+  .brand-type-stage__eyebrow::after {
+    width: 24px;
+    background: #faf8f4;
+  }
+  .brand-type-stage__sig {
+    bottom: clamp(28px, 6vh, 56px);
+    color: #faf8f4;
+    opacity: 1;
+    transform: translateX(-50%);
+    font-size: clamp(20px, 5.2vw, 28px);
+    text-align: center;
+    width: 90%;
+    z-index: 3;
+  }
+  .brand-type-stage__sig em { color: #faf8f4; }
+}

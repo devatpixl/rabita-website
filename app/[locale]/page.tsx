@@ -5,9 +5,11 @@ import { CongregationToday } from '@/components/congregation-today';
 import { ImpactStory } from '@/components/impact-story';
 import { Hero } from '@/components/hero';
 import { HeroGive } from '@/components/hero-give';
+import { BrandType } from '@/components/brand-type';
 import { MotionRise } from '@/components/motion-rise';
 import { ProjectOverview } from '@/components/project-overview';
-import { ZoomParallax } from '@/components/zoom-parallax';
+// Hidden for now, not deleted — see the note where it rendered.
+// import { ZoomParallax } from '@/components/zoom-parallax';
 
 // Homepage section order — ordering ONLY. Do not restyle in this file.
 //
@@ -50,7 +52,13 @@ export default async function HomePage({
       {/* Phone only — the hero's own card is md-and-up. See hero-give.tsx
          for why it is not inside the hero on mobile. */}
       <HeroGive />
-      <ZoomParallax />
+      {/* Zoom parallax (the render collage) — HIDDEN, not deleted (client,
+         2026-09-04): may return later. Re-enable by restoring the element.
+      <ZoomParallax /> */}
+      {/* The threshold the client asked for (2026-09-04): a named "Dette er
+         Rabita" break between the hero's pitch and the sections that
+         introduce the organisation. */}
+      <BrandType />
       <ImpactStory />
       <MotionRise><CongregationToday /></MotionRise>
       {/* The building before the money. The meter's heading is "Raised for
