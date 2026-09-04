@@ -67,14 +67,6 @@ export function UtilityStrip() {
     >
       <div className="mx-auto w-full max-w-[84rem] px-6 md:px-10 lg:px-12 flex min-h-11 items-center justify-between gap-6">
         <PrayerTimesWidget />
-        <div className="flex items-center gap-6">
-          {/* the hours sit with the other practical details rather than
-              beside the one button worth pressing */}
-          <span className="hidden font-mono text-[12px] uppercase tracking-[0.1em] text-ink-60 lg:inline">
-            {tNav('openDaily')} {tNav('openHours')}
-          </span>
-          <LanguageSwitcher />
-        </div>
       </div>
       {open && stripInView && (
         <div className="border-t border-rule">

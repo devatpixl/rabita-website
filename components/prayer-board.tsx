@@ -8,6 +8,8 @@ import { PRAYER_ORDER, prayerWindow, type PrayerKey } from '@/lib/prayer-window'
 import { joinJumuah, usePrayerData, usePrayerDay } from './prayer-data-provider';
 import { isoDate } from '@/lib/prayer-times';
 import { IMAMS } from '@/lib/imams';
+import { hijriDate } from '@/lib/hijri';
+import type { AppLocale } from '@/i18n/routing';
 import { cn } from '@/lib/cn';
 
 // The prayer board — the lead block of /bonnetider, rebuilt 2026-08-31 to the
@@ -85,6 +87,15 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
     ];
   }, [today, locale]);
 
+  // The hijri date of the SAME day the times are for — derived from
+  // today.date like the gregorian above, not from the client clock, so the
+  // two lines flanking this row can never name different days.
+  const hijri = useMemo(() => {
+    if (!today) return '';
+    const [y, m, d] = today.date.split('-').map(Number);
+    return hijriDate(locale as AppLocale, new Date(y, m - 1, d, 12));
+  }, [today, locale]);
+
   // How far through the current window we are, for the rail along the foot.
   // `through` is already 0-1 from lib/prayer-window.
   const progress = win ? Math.min(100, Math.max(0, win.through * 100)) : 0;
@@ -110,6 +121,14 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
         <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60 md:hidden">
           {eyebrow}
         </p>
+        {/* The hijri date holds the start of the row (client, 2026-09-04),
+           the gregorian the end — the day in both calendars, one baseline.
+           md+ only: on phones the eyebrow label owns this slot. */}
+        {hijri && (
+          <p className="hidden font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-gold-deep md:block">
+            {hijri}
+          </p>
+        )}
         {/* Only one of these is ever displayed, and display:none is not
            announced, so this is one date to a reader — not two. */}
         <p className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60 md:ms-auto">
@@ -160,6 +179,13 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
                       : 'border-rule bg-paper-2/50',
                   )}
                 >
+                  <PrayerGlyph
+                    prayer={key}
+                    className={cn(
+                      'h-5 w-5 transition-colors sm:h-6 sm:w-6',
+                      isNext ? 'text-gold-deep' : 'text-ink-40',
+                    )}
+                  />
                   <span className="font-mono text-[0.625rem] uppercase tracking-[0.12em] text-ink-60">
                     {tv(`names.${key}`)}
                   </span>
@@ -171,10 +197,6 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
                   >
                     {today ? today[key] : '—'}
                   </span>
-                  <PrayerGlyph
-                    prayer={key}
-                    className={cn('mt-0.5 h-4 w-4', isNext ? 'text-gold-deep' : 'text-ink-60/60')}
-                  />
                 </div>
               </li>
             );
@@ -230,7 +252,7 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
 
           <p className="mt-3 text-body text-ink-60">{t('jumuahNote')}</p>
           <p className="mt-5 inline-flex items-center gap-3 rounded-full border border-rule bg-paper px-4 py-2.5 text-[14px] text-ink">
-            <MicIcon className="h-4 w-4 shrink-0 text-gold-deep" />
+            <PeopleIcon className="h-4 w-4 shrink-0 text-gold-deep" />
             {t('jumuahImams')}
           </p>
           {/* A skyline along the foot, at 10% ink. The card is taller than its
@@ -300,14 +322,17 @@ function MinaretIcon({ className }: { className?: string }) {
   );
 }
 
-function MicIcon({ className }: { className?: string }) {
+function PeopleIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
-      <rect x="9" y="2" width="6" height="11" rx="3" />
-      <path d="M5 11a7 7 0 0 0 14 0M12 18v4" />
+      <circle cx="9" cy="8" r="3" />
+      <path d="M3.5 19a5.5 5.5 0 0 1 11 0" />
+      <circle cx="17" cy="9.5" r="2.3" />
+      <path d="M14.5 19a4.6 4.6 0 0 1 6-4.3" />
     </svg>
   );
 }
+
 
 /* The skyline along the foot of the Jumu'ah card.
    A filled silhouette, not an outline. The first attempt stroked the domes and
@@ -498,14 +523,31 @@ function PrayerGlyph({ prayer, className }: { prayer: PrayerKey; className?: str
     className,
     'aria-hidden': true,
   };
-  if (prayer === 'fajr' || prayer === 'isha') {
+  // Six prayers, six marks (client, 2026-09-04: "endre symbolene på de
+  // ulike bønnetidene" — three of these used to be shared). Each draws the
+  // sky at that hour: light before the sun, the sun arriving, high, past
+  // its height, leaving, and the night.
+  if (prayer === 'fajr') {
+    // First light: the horizon glows, the sun itself is not up yet.
     return (
       <svg {...common}>
-        <path d="M20 14.5A8 8 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" />
+        <path d="M4 17.5h16" />
+        <path d="M12 13v-3.5M7.4 14.4 5.9 12.9M16.6 14.4l1.5-1.5" />
+      </svg>
+    );
+  }
+  if (prayer === 'sunrise') {
+    // The sun breaking the horizon, on its way up.
+    return (
+      <svg {...common}>
+        <path d="M4 17.5h16" />
+        <path d="M8 17.5a4 4 0 0 1 8 0" />
+        <path d="M12 10V4.5M9.6 6.9 12 4.5l2.4 2.4" />
       </svg>
     );
   }
   if (prayer === 'dhuhr') {
+    // Midday: the full sun, high.
     return (
       <svg {...common}>
         <circle cx="12" cy="12" r="4" />
@@ -513,11 +555,31 @@ function PrayerGlyph({ prayer, className }: { prayer: PrayerKey; className?: str
       </svg>
     );
   }
-  // sunrise / asr / maghrib — sun on the horizon
+  if (prayer === 'asr') {
+    // Afternoon: the sun whole but low, the horizon already in the frame.
+    return (
+      <svg {...common}>
+        <circle cx="12" cy="10.5" r="3.5" />
+        <path d="M4 17.5h16" />
+        <path d="M12 3.5V2M6.6 5.1 5.5 4M17.4 5.1 18.5 4" />
+      </svg>
+    );
+  }
+  if (prayer === 'maghrib') {
+    // Sunset: the sun half gone, going down.
+    return (
+      <svg {...common}>
+        <path d="M4 17.5h16" />
+        <path d="M8 17.5a4 4 0 0 1 8 0" />
+        <path d="M12 4v5.5M9.6 7.1 12 9.5l2.4-2.4" />
+      </svg>
+    );
+  }
+  // isha — the crescent, with one star beside it.
   return (
     <svg {...common}>
-      <circle cx="12" cy="13" r="3.5" />
-      <path d="M4 19h16M12 5v2M5.6 8.6l1.4 1.4M17 10l1.4-1.4" />
+      <path d="M19 14.5A7.5 7.5 0 0 1 9.5 5a8 8 0 1 0 9.5 9.5Z" />
+      <path d="M18 4v2.4M16.8 5.2h2.4" />
     </svg>
   );
 }

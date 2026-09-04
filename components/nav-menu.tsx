@@ -15,11 +15,12 @@ import { cn } from '@/lib/cn';
 // points straight at the times, which is what most visitors arrive for;
 // services takes the freed slot and education sits under it, where a
 // visitor looking for the school would actually think to look.
-export const NAV_KEYS = ['project', 'prayer', 'services', 'visit', 'about'] as const;
+export const NAV_KEYS = ['project', 'apartments', 'prayer', 'services', 'visit', 'about'] as const;
 export type NavKey = (typeof NAV_KEYS)[number];
 
 export const NAV_ROOT: Record<NavKey, string> = {
   project: '/moskeprosjektet',
+  apartments: '/moskeprosjektet/leiligheter',
   prayer: '/bonnetider',
   services: '/tjenester',
   visit: '/besok-oss',
@@ -80,7 +81,9 @@ export function DesktopNav() {
     };
   }, [openKey]);
 
-  const isCurrent = (key: NavKey) => pathname.startsWith(`/${locale}${NAV_ROOT[key]}`);
+  const isCurrent = (key: NavKey) =>
+    pathname.startsWith(`/${locale}${NAV_ROOT[key]}`) &&
+    !(key === 'project' && pathname.startsWith(`/${locale}${NAV_ROOT.apartments}`));
 
   return (
     <div ref={wrap} className="hidden xl:contents">

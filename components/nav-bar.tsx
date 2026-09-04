@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { openGiveSheet } from './giving-sheet';
 import { LinkVT } from './link-vt';
+import { LanguageSwitcher } from './language-switcher';
 import { DesktopNav, MobileNav } from './nav-menu';
 import { PrayerPanelBody } from './prayer-panel-body';
 import {
@@ -150,10 +151,10 @@ export function NavBar() {
          dumped on one side. At 1920 that is ~123px either side of the nav
          instead of 246px in a single hole after "About us". */}
       <div className="relative mx-auto flex w-full max-w-[84rem] items-center justify-between px-4 py-2 md:px-10 md:py-4 lg:px-12">
-        {/* Wordmark — mark + two-line stacked org name (matches the
-           official brand lockup: "Det Islamske Forbundet" set bold in
-           sans, with "Rabita" underneath at regular weight). No
-           underline. Whole block links to home. */}
+        {/* Wordmark — mark + two-line stacked name ("Oslo Sentralmoské"
+           over "Rabita", client 2026-09-04; together they read the full
+           name, Oslo Sentralmoské Rabita). No underline. Whole block links
+           to home. */}
         <LinkVT
           href={`/${locale}`}
           className="vt-wordmark flex min-h-10 shrink-0 items-center gap-2 whitespace-nowrap md:min-h-11 md:gap-3"
@@ -227,7 +228,7 @@ export function NavBar() {
               // yields, because it is the only duplicate in the row: the
               // utility strip carries the same figure, and Prayer is one
               // click away in the nav itself.
-              'hidden min-[1440px]:block',
+              'hidden min-[1620px]:block',
               'overflow-hidden transition-[max-width,opacity] duration-[320ms]',
               '[transition-timing-function:cubic-bezier(0.32,0.72,0,1)]',
               compactVisible ? 'max-w-[220px] opacity-100' : 'max-w-0 opacity-0',
@@ -241,7 +242,7 @@ export function NavBar() {
               aria-expanded={open}
               aria-controls={PRAYER_PANEL_ID}
               aria-label={tPrayer('expandLabel')}
-              className="inline-flex items-center gap-2 whitespace-nowrap pe-6 text-[14px] tabular-nums text-ink hover:text-gold-deep transition-colors"
+              className="inline-flex items-center gap-2 whitespace-nowrap border-s border-rule ps-5 pe-6 text-[14px] tabular-nums text-ink hover:text-gold-deep transition-colors"
             >
               {nextInfo && (
                 <span>
@@ -285,6 +286,10 @@ export function NavBar() {
             </span>
           </button>
 
+          {/* Language switcher, moved down from the utility strip (client,
+             2026-09-04): the strip is prayer-facts now, and language sits
+             with the other controls instead of alone up there. */}
+          <LanguageSwitcher />
         </div>
         {/* Phone give button. The utility strip is hidden below md and the
            floating bar only arrives after 40vh, so until now a phone had no
