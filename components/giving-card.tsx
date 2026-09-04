@@ -121,7 +121,7 @@ function isValidFnr(v: string) {
 const FIT = {
   header: '[@media(max-height:880px)]:pt-3 [@media(max-height:880px)]:pb-2 [@media(max-height:760px)]:pt-2.5 [@media(max-height:720px)]:pt-2 [@media(max-height:720px)]:pb-1.5',
   stepRow: '[@media(max-height:880px)]:mt-3 [@media(max-height:760px)]:mt-2 [@media(max-height:720px)]:mt-1.5',
-  title: '[@media(max-height:880px)]:mt-2 [@media(max-height:880px)]:text-lg',
+  title: '[@media(max-height:880px)]:mt-2 [@media(max-height:880px)]:text-xl',
   lede: '[@media(max-height:760px)]:mt-1 [@media(max-height:720px)]:hidden',
   body: '[@media(max-height:880px)]:py-3.5 [@media(max-height:760px)]:py-2.5 [@media(max-height:720px)]:py-2',
   toggle: '[@media(max-height:880px)]:mb-3 [@media(max-height:760px)]:mb-2 [@media(max-height:720px)]:mb-1.5',
@@ -213,8 +213,6 @@ const TOTAL_STEPS = 3;
 
   // ── Validation ─────────────────────────────────────────────────
   const errors: Partial<Record<keyof Details, string>> = {};
-  if (touched.firstName && !details.firstName.trim()) errors.firstName = t('wizard.errors.required');
-  if (touched.lastName && !details.lastName.trim()) errors.lastName = t('wizard.errors.required');
   if (touched.email && !isValidEmail(details.email)) errors.email = t('wizard.errors.email');
   if (touched.mobile && !isValidMobile(details.mobile)) errors.mobile = t('wizard.errors.mobile');
   if (touched.fnr && details.taxDeduction && !isValidFnr(details.fnr)) errors.fnr = t('wizard.errors.fnr');
@@ -315,6 +313,14 @@ const TOTAL_STEPS = 3;
     locale,
   ]);
 
+  // Two red blinks on an empty name box — the silent version of the
+  // removed "Påkrevd" label, and ONLY for the person who filled everything
+  // else and missed a name (client, 2026-09-04). Someone who filled nothing
+  // gets the old behaviour: the touched-flood, and the format errors that
+  // still print under email and mobile. A counter, not a boolean, so a
+  // second failed attempt re-fires the animation.
+  const [nameBlink, setNameBlink] = useState(0);
+
   const goNext = () => {
     if (step === 1) {
       if (step1Valid) setStep(2);
@@ -322,7 +328,17 @@ const TOTAL_STEPS = 3;
     }
     if (step === 2) {
       if (!step2Valid) {
-        showTouchedForCurrentStep();
+        const namesMissing = !details.firstName.trim() || !details.lastName.trim();
+        const restValid =
+          isValidEmail(details.email) &&
+          isValidMobile(details.mobile) &&
+          (!details.taxDeduction || isValidFnr(details.fnr)) &&
+          details.consent;
+        if (namesMissing && restValid) {
+          setNameBlink((n) => n + 1);
+        } else {
+          showTouchedForCurrentStep();
+        }
         return;
       }
       setStep(3);
@@ -391,20 +407,10 @@ const TOTAL_STEPS = 3;
           ref={headingRef}
           tabIndex={-1}
           style={{ outline: 'none' }}
-          className={cn('font-serif leading-tight text-ink focus:outline-none focus-visible:outline-none', compact ? 'mt-2 text-lg' : cn('mt-2 text-lg sm:mt-3 sm:text-xl', fit && FIT.title))}
+          className={cn('font-serif leading-tight text-ink focus:outline-none focus-visible:outline-none', compact ? 'mt-2 text-xl' : cn('mt-2 text-xl sm:mt-3 sm:text-2xl', fit && FIT.title))}
         >
           {stepHeading}
         </h2>
-        {/* Supporting copy, two lines and 40px — the single biggest item left
-           once the padding is spent, so it goes below 720px. The question
-           above it ("How often will you give?") is the part that has to be
-           there; this only elaborates on it, and a form whose end the reader
-           cannot see costs more than a missing sentence. */}
-        {step === 1 && !compact && (
-          <p className={cn('mt-1.5 text-[13px] leading-snug text-ink-60', fit && FIT.lede)}>
-            {frequency === 'monthly' ? t('ledeMonthly') : t('ledeOnce')}
-          </p>
-        )}
         <p className="sr-only" aria-live="polite">
           {t('wizard.stepAnnounce', {
             n: step,
@@ -454,6 +460,7 @@ const TOTAL_STEPS = 3;
               setDetails={setDetails}
               setTouched={setTouched}
               errors={errors}
+              nameBlink={nameBlink}
               t={t}
             />
           )}
@@ -486,7 +493,7 @@ const TOTAL_STEPS = 3;
         <button
           type="button"
           onClick={goNext}
-          disabled={!currentValid || submitting}
+          disabled={submitting || (step === 1 && !step1Valid) || (step === 3 && !step3Valid)}
           style={{ opacity: currentValid ? 1 : 0.45 }}
           className={cn(
             'flex-1 min-h-12 rounded-full bg-gold-deep text-paper px-5 py-3 text-[15px] font-semibold transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99] disabled:cursor-not-allowed flex items-center justify-center gap-2',
@@ -839,7 +846,7 @@ function StepPayment({
                 className={cn(
                   'flex min-h-[4.5rem] cursor-pointer flex-col items-center justify-center gap-1.5 rounded-btn px-2 py-3 transition-colors',
                   selected
-                    ? 'border-[1.5px] border-ink bg-ink text-paper'
+                    ? 'border-[1.5px] border-ink bg-paper-2 text-ink'
                     : 'border-[1.5px] border-ink/30 bg-paper text-ink hover:border-ink',
                   disabled && 'cursor-not-allowed opacity-40 hover:border-ink/30',
                 )}
@@ -856,7 +863,7 @@ function StepPayment({
                   }}
                   className="sr-only"
                 />
-                <MethodMark method={m} className="h-6 w-14" inverted={selected} />
+                <MethodMark method={m} className="h-6 w-14" />
                 {/* AvtaleGiro's mark IS its name, so no second line. */}
                 <span className="text-[12px] font-medium leading-tight text-center">
                   {m === 'avtalegiro' ? (
@@ -894,16 +901,16 @@ function StepPayment({
 
 // One method's mark. Card shows Visa + Mastercard side by side; AvtaleGiro
 // has no mark we may use, so it is set in type.
+// One method's mark, in brand colours — which is why the selected tile
+// stays light instead of filling with ink: Visa blue on a near-black tile
+// would be unreadable, and a brand mark cannot be tinted to rescue it.
 function MethodMark({
   method,
   className,
-  inverted,
 }: {
   method: PaymentMethod;
   className?: string;
-  inverted?: boolean;
 }) {
-  const tone = inverted ? 'bg-paper' : 'bg-ink';
   if (method === 'avtalegiro') {
     return (
       <span className={cn('flex items-center justify-center font-serif text-[15px] font-medium', className)} aria-hidden>
@@ -914,45 +921,34 @@ function MethodMark({
   if (method === 'card') {
     return (
       <span className={cn('flex items-center justify-center gap-1.5', className)} aria-hidden>
-        <Mask src="/payments/visa.svg" className={cn('h-full w-1/2', tone)} />
-        <Mask src="/payments/mastercard.svg" className={cn('h-full w-1/3', tone)} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/payments/visa.svg" alt="" className="h-full w-1/2 object-contain" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/payments/mastercard.svg" alt="" className="h-full w-1/3 object-contain" />
       </span>
     );
   }
-  return <Mask src={`/payments/${method}.svg`} className={cn(tone, className)} aria-hidden />;
-}
-
-function Mask({ src, className, ...rest }: { src: string; className?: string; 'aria-hidden'?: boolean }) {
   return (
-    <span
-      {...rest}
-      className={cn('block', className)}
-      style={{
-        maskImage: `url(${src})`,
-        WebkitMaskImage: `url(${src})`,
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskPosition: 'center',
-        WebkitMaskPosition: 'center',
-        maskSize: 'contain',
-        WebkitMaskSize: 'contain',
-      }}
-    />
+    <>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={`/payments/${method}.svg`} alt="" className={cn('object-contain', className)} aria-hidden />
+    </>
   );
 }
 
 // ─────────────────────────────────────────────────────────────────
-// Payment marks. Monochrome via CSS mask so five brands sit as one row
-// in the card's own ink rather than five competing colours. Files in
-// public/payments/ (simple-icons for the card/wallet marks; Vipps is the
-// official wordmark supplied by the client, cropped to its bounds).
+// Payment marks, in each brand's own colours (client, 2026-09-04 — they
+// were monochrome ink via CSS mask before). Files in public/payments/:
+// official multicolour marks for the card/wallet brands; Vipps is the
+// client-supplied wordmark with its stencil matrix recoloured to the
+// brand orange.
 // ─────────────────────────────────────────────────────────────────
 const PAYMENT_MARKS = [
   { key: 'vipps', name: 'Vipps', w: 'w-16' },
   { key: 'visa', name: 'Visa', w: 'w-12' },
   { key: 'mastercard', name: 'Mastercard', w: 'w-9' },
   { key: 'applepay', name: 'Apple Pay', w: 'w-12' },
-  { key: 'googlepay', name: 'Google Pay', w: 'w-12' },
+  { key: 'googlepay', name: 'Google Pay', w: 'w-20' },
 ] as const;
 
 function PaymentLogos({ label }: { label: string }) {
@@ -960,7 +956,8 @@ function PaymentLogos({ label }: { label: string }) {
     <ul aria-label={label} className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
       {PAYMENT_MARKS.map((m) => (
         <li key={m.key} className="flex items-center" role="img" aria-label={m.name}>
-          <Mask src={`/payments/${m.key}.svg`} className={cn('h-8 bg-ink', m.w)} aria-hidden />
+          {/* eslint-disable-next-line @next/next/no-img-element -- static same-origin SVG */}
+          <img src={`/payments/${m.key}.svg`} alt="" className={cn('h-8 object-contain', m.w)} aria-hidden />
         </li>
       ))}
     </ul>
@@ -977,6 +974,7 @@ type StepDetailsProps = {
   setDetails: (d: Details) => void;
   setTouched: Dispatch<SetStateAction<TouchMap>>;
   errors: Partial<Record<keyof Details, string>>;
+  nameBlink?: number;
   t: ReturnType<typeof useTranslations>;
 };
 function StepDetails({
@@ -984,6 +982,7 @@ function StepDetails({
   setDetails,
   setTouched,
   errors,
+  nameBlink,
   t,
 }: StepDetailsProps) {
   const bump = (k: keyof Details) => (v: string | boolean) =>
@@ -1002,6 +1001,7 @@ function StepDetails({
           onChange={(v) => bump('firstName')(v)}
           onBlur={blur('firstName')}
           error={errors.firstName}
+          blink={nameBlink}
           autoComplete="given-name"
         />
         <Field
@@ -1010,6 +1010,7 @@ function StepDetails({
           onChange={(v) => bump('lastName')(v)}
           onBlur={blur('lastName')}
           error={errors.lastName}
+          blink={nameBlink}
           autoComplete="family-name"
         />
       </div>
@@ -1111,6 +1112,7 @@ function Field({
   onChange,
   onBlur,
   error,
+  blink,
   type = 'text',
   autoComplete,
 }: {
@@ -1119,9 +1121,20 @@ function Field({
   onChange: (v: string) => void;
   onBlur: () => void;
   error?: string;
+  /** Bumped by the parent to flash this field red — only fires while empty. */
+  blink?: number;
   type?: string;
   autoComplete?: string;
 }) {
+  const [flash, setFlash] = useState(false);
+  useEffect(() => {
+    if (!blink || value.trim()) return;
+    setFlash(true);
+    const id = setTimeout(() => setFlash(false), 950);
+    return () => clearTimeout(id);
+    // value is deliberately NOT a dep: typing mid-flash should not restart it.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [blink]);
   return (
     <label className="block">
       <span className="block text-[13px] text-ink-60 mb-1">{label}</span>
@@ -1137,6 +1150,7 @@ function Field({
           error
             ? 'border-[1.5px] border-gold-deep'
             : 'border border-rule focus:border-ink',
+          flash && 'field-blink',
         )}
       />
       {error && (

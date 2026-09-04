@@ -1,5 +1,5 @@
 import { getLocale, getTranslations } from 'next-intl/server';
-import { CAMPAIGN, PHASES, SUB_CAMPAIGN, currentPhaseKey } from '@/lib/campaign';
+import { CAMPAIGN, PHASES, currentPhaseKey } from '@/lib/campaign';
 import { formatAmount, formatDate } from '@/lib/format';
 import type { AppLocale } from '@/i18n/routing';
 import { AnimatedProgress } from './animated-progress';
@@ -28,7 +28,6 @@ export async function CampaignMeter() {
   const goal = CAMPAIGN.goalNok;
   const pct = goal > 0 ? Math.min(100, (raised / goal) * 100) : 0;
   const pctInt = Math.round(pct);
-  const subPct = SUB_CAMPAIGN.goalNok > 0 ? Math.round((SUB_CAMPAIGN.raisedNok / SUB_CAMPAIGN.goalNok) * 100) : 0;
   const phase = PHASES.find((p) => p.key === currentPhaseKey());
 
   // The roadmap shown on hover over the goal and the phase: the three build
@@ -89,17 +88,31 @@ export async function CampaignMeter() {
           </div>
         </div>
 
-        {/* The bar. One fill, the percentage at its head, the goal at the end. */}
+        {/* The bar. The percentage at its head, and at the very end a
+           finish-line marker PLANTED on the track — the client's race-flag
+           instinct, in the site's own vocabulary: a pole rising from the
+           100% point with the minaret at its top, because what stands at
+           this finish is the building. The phrase names the moment. */}
         <div className="mt-7 md:mt-10">
-          <div className="mb-2 flex items-baseline justify-between font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">
+          <div className="mb-2 flex items-baseline justify-between pe-8 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">
             <span className="tabular-nums text-gold-deep">{pctInt} %</span>
-            <span className="tabular-nums">{t('remaining', { amount: formatAmount(locale, Math.max(0, goal - raised)) })}</span>
+            <span className="text-gold-deep">{t('goalMark')}</span>
           </div>
-          <AnimatedProgress
-            percent={pct}
-            className="h-2.5 rounded-full bg-paper"
-            fillClassName="rounded-full bg-gradient-to-r from-gold to-gold-deep"
-          />
+          <div className="relative">
+            <span aria-hidden className="absolute -top-6 end-0 flex w-5 flex-col items-center text-gold-deep">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+                <path d="M12 2v3" />
+                <path d="M8 21V11a4 4 0 0 1 8 0v10" />
+                <path d="M5 21h14" />
+              </svg>
+              <span className="h-2.5 w-px bg-gold-deep" />
+            </span>
+            <AnimatedProgress
+              percent={pct}
+              className="h-2.5 rounded-full bg-paper"
+              fillClassName="rounded-full bg-gradient-to-r from-gold to-gold-deep"
+            />
+          </div>
         </div>
 
         {/* Supporting stats. One ruled row from sm; on a phone the first two
@@ -118,17 +131,10 @@ export async function CampaignMeter() {
           </div>
           <div className="border-s border-rule ps-5 sm:ps-8">
             <dd className="font-serif text-[clamp(1.6rem,2.6vw,2.25rem)] leading-none tabular-nums text-ink">
-              {subPct} %
+              {formatAmount(locale, CAMPAIGN.goalNok - CAMPAIGN.raisedNok)} kr
             </dd>
-            <dt className="mt-2 max-w-[26ch] font-mono text-[0.6875rem] uppercase leading-snug tracking-[0.14em] text-ink-60">
-              {t('subLabel', { name: SUB_CAMPAIGN.name, year: phase?.year ?? '' })}
-              <br />
-              <span className="normal-case tracking-normal">
-                {t('subValue', {
-                  raised: formatAmount(locale, SUB_CAMPAIGN.raisedNok),
-                  goal: formatAmount(locale, SUB_CAMPAIGN.goalNok),
-                })}
-              </span>
+            <dt className="mt-2 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">
+              {t('remainingLabel')}
             </dt>
           </div>
           <div className="col-span-2 border-t border-rule pt-5 sm:col-span-1 sm:border-t-0 sm:border-s sm:border-rule sm:ps-8 sm:pt-0">
