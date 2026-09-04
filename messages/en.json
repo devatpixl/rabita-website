@@ -49,13 +49,14 @@
   },
   "nav": {
     "wordmark": "Rabita",
-    "orgName": "Det Islamske Forbundet",
+    "orgName": "Oslo Sentralmoské",
     "skipToContent": "Skip to content",
     "give": "Give",
     "prayerTimes": "Prayer times",
     "openDaily": "OPEN DAILY",
     "items": {
       "project": "The mosque project",
+      "apartments": "Apartments",
       "prayer": "Prayer",
       "services": "Services",
       "visit": "Visit us",
@@ -72,18 +73,9 @@
           "label": "Progress",
           "blurb": "Timeline, phases and what each phase costs",
           "href": "/moskeprosjektet/fremdrift"
-        },
-        {
-          "label": "Apartments",
-          "blurb": "Fifteen apartments for sale in the new building",
-          "href": "/moskeprosjektet/leiligheter"
-        },
-        {
-          "label": "Donate a prayer space",
-          "blurb": "Sadaqa jariya in a name",
-          "href": "/doner-en-bonneplass"
         }
       ],
+      "apartments": [],
       "prayer": [
         {
           "label": "Prayer times",
@@ -234,7 +226,7 @@
     "openSheet": "Open giving",
     "closeSheet": "Close",
     "sheetTitle": "Give to Rabita",
-    "question": "How often will you give?",
+    "question": "Help build Europe's largest mosque",
     "wizard": {
       "back": "Back",
       "continue": "Continue",
@@ -276,7 +268,6 @@
         "fnrNote": "Reported to the Norwegian Tax Administration."
       },
       "errors": {
-        "required": "Required",
         "email": "Enter a valid email address",
         "mobile": "Enter a valid mobile number",
         "fnr": "Must be 11 digits",
@@ -291,8 +282,6 @@
       "giveWithMonthly": "Give <amount></amount> kr/mo with {method}"
     },
     "perMonth": "/mo",
-    "ledeMonthly": "As a monthly donor you provide predictable support and lower our admin costs.",
-    "ledeOnce": "A single gift, any amount.",
     "sheetTitleBuilding": "Give to the building"
   },
   "meter": {
@@ -319,16 +308,15 @@
     "latticeCount": "{lit} of 100",
     "goalLabel": "Goal",
     "lastMonthLabel": "last month",
-    "subLabel": "{year} milestone · {name}",
-    "subValue": "{raised} of {goal} kr",
-    "remaining": "{amount} kr to go",
     "roadmap": "The road to 2028",
     "now": "Now",
     "phaseNotes": {
       "fundament": "The site is cleared. Foundations are poured and the shell goes up.",
       "interior": "Facade, prayer halls, school and library are fitted out.",
       "ferdigstillelse": "The building opens. Seven floors on one address."
-    }
+    },
+    "remainingLabel": "Remaining to the goal",
+    "goalMark": "2028 · The doors open"
   },
   "trust": {
     "taxDeductible": "Tax deduction up to 25 000 kr/year",
@@ -942,9 +930,9 @@
   },
   "congregationToday": {
     "statement": {
-      "before": "What ",
-      "accent": "Rabita",
-      "after": " is for."
+      "before": "Our ",
+      "accent": "services",
+      "after": "."
     },
     "carouselLabel": "The congregation today, photographs",
     "prev": "Previous photograph",
@@ -1160,7 +1148,11 @@
       "landmarks": {
         "oslo-s": "Oslo S / Jernbanetorget",
         "gronland": "Grønland metro",
-        "brugata": "Brugata tram and bus"
+        "brugata": "Brugata tram and bus",
+        "stortinget": "Stortinget",
+        "oslo-city": "Oslo City",
+        "bussterminalen": "Oslo bus terminal",
+        "operahuset": "The Opera House"
       }
     },
     "cols": {
@@ -1181,7 +1173,8 @@
     "social": {
       "facebook": "Facebook",
       "instagram": "Instagram",
-      "tiktok": "TikTok"
+      "tiktok": "TikTok",
+      "whatsapp": "WhatsApp"
     },
     "credit": "Developed by"
   },
@@ -1934,7 +1927,7 @@
       "area": "Floor area",
       "floors": "Floors up / down",
       "places": "Prayer places",
-      "cleared": "Site cleared"
+      "done": "Planned completion"
     },
     "credit": "Architect"
   },
@@ -1989,7 +1982,11 @@
       "stations": {
         "brugata": "Brugata tram and bus",
         "oslo-s": "Oslo S / Jernbanetorget",
-        "gronland": "Grønland metro"
+        "gronland": "Grønland metro",
+        "oslo-city": "Oslo City",
+        "bussterminalen": "Oslo bus terminal",
+        "stortinget": "Stortinget",
+        "operahuset": "The Opera House"
       }
     },
     "interest": {
@@ -2018,7 +2015,7 @@
     },
     "location": {
       "eyebrow": "Central location",
-      "heading": "Walking distance to <em>most of it</em>.",
+      "heading": "Close to everything <em>that matters</em>.",
       "lede": "Calmeyers gate sits in an attractive, well-established part of Oslo, within walking distance of the city's most important functions.",
       "items": [
         "5–10 minutes on foot to Oslo City, the Storting and the central parts of town",
@@ -2055,7 +2052,11 @@
           "body": "With a view over the city."
         }
       },
-      "close": "All of it adds up to a sociable, welcoming place to live."
+      "close": "All of it adds up to a sociable, welcoming place to live.",
+      "chip": {
+        "title": "Built for community",
+        "body": "Spaces that bring people together, every day."
+      }
     },
     "priceLabel": "Starting price from",
     "priceUnit": "million",
@@ -2123,6 +2124,10 @@
       "tiktok": {
         "handle": "@oslomosque",
         "blurb": "Short clips from the mosque"
+      },
+      "whatsapp": {
+        "handle": "+47 22 20 80 88",
+        "blurb": "Message us directly"
       }
     }
   },
@@ -2130,8 +2135,8 @@
     "nextLabel": "Next prayer",
     "progressLabel": "{name} in {m}m",
     "jumuahHeading": "Jumu'ah",
-    "jumuahNote": "The khutbah begins before the prayer.",
-    "jumuahImams": "Khutbah and prayer led by the imams",
+    "jumuahNote": "Duration 30 minutes.",
+    "jumuahImams": "Open to everyone — men, women and children",
     "glanceHeading": "Today at a glance",
     "doorsOpen": "Doors open",
     "khutbaNo": "Khutba in Norwegian",
@@ -2244,5 +2249,28 @@
     "heroEyebrow": "Progress",
     "heroTitle": "How it <em>rises</em>.",
     "heroLede": "Six years, from the first sketch to a finished building in Calmeyers gate. Where the project stands, and what comes next."
+  },
+  "floorByFloor": {
+    "eyebrow": "Floor by floor",
+    "heading": "The building, from the ground up.",
+    "altFinal": "Architect's cutaway of the finished building, with the roof terrace, dome and minaret",
+    "floors": {
+      "lower": "Lower floor · prayer hall and sports hall",
+      "first": "1st floor · the main mosque",
+      "second": "2nd floor · the women's mosque",
+      "third": "3rd floor · school and garden",
+      "fourth": "4th floor · offices and youth club",
+      "fifth": "5th floor · apartments",
+      "sixth": "6th floor · apartments",
+      "whole": "The whole building · roof terrace, dome and minaret"
+    }
+  },
+  "brandType": {
+    "label": "This is Rabita",
+    "sr": "This is Rabita — since 1987.",
+    "eyebrow": "Oslo Sentralmoské",
+    "line1": "THIS IS",
+    "line2": "RABITA",
+    "sig": "Since 1987."
   }
 }

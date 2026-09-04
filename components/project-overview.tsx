@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
-import { CAMPAIGN } from '@/lib/campaign';
+import { CAMPAIGN, PROJECT_PHASES } from '@/lib/campaign';
 import { Accent } from './accent';
 import type { AppLocale } from '@/i18n/routing';
 import { FigureIcon } from './figure-icons';
@@ -35,7 +35,7 @@ export async function ProjectOverview() {
       value: nf.format(CAMPAIGN.mensPrayerCapacityAfter + CAMPAIGN.womensPrayerCapacityAfter),
       label: t('figures.places'),
     },
-    { icon: 'calendar' as const, value: String(CAMPAIGN.siteClearedRamadan), label: t('figures.cleared') },
+    { icon: 'calendar' as const, value: String(PROJECT_PHASES[PROJECT_PHASES.length - 1].to), label: t('figures.done') },
   ];
 
   return (
@@ -93,7 +93,7 @@ export async function ProjectOverview() {
         {/* Words, on the reading side. */}
         <div className="max-w-xl">
           <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
-            {tp('pages.building.eyebrow')} · {CAMPAIGN.address}
+            {CAMPAIGN.address}
           </p>
           <h2
             id="project-overview-heading"

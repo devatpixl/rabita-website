@@ -1,18 +1,21 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
+import Image from 'next/image';
 import { CAMPAIGN } from '@/lib/campaign';
 import { ProgressPhases } from '@/components/progress-phases';
 import type { AppLocale } from '@/i18n/routing';
 import { FigureIcon, type FigureIconName } from '@/components/figure-icons';
 import { cn } from '@/lib/cn';
 import { Section, SectionBody } from '@/components/primitives';
-import { BuildingRises } from '@/components/building-rises';
+// Hidden for now, not deleted — see the note where it rendered.
+// import { BuildingRises } from '@/components/building-rises';
 import { ApartmentsCta } from '@/components/apartments-cta';
 import { GiftBuilds } from '@/components/gift-builds';
 import { ProjectGallery } from '@/components/project-gallery';
 import { GivingCard } from '@/components/giving-card';
-import { MotionRise } from '@/components/motion-rise';
-import { SadaqaBand } from '@/components/sadaqa-band';
+// import { MotionRise } from '@/components/motion-rise'; // hidden sadaqa band
+import { FloorByFloor } from '@/components/floor-by-floor';
+// import { SadaqaBand } from '@/components/sadaqa-band'; // hidden, not deleted
 
 import { Accent } from '@/components/accent';
 import {
@@ -51,7 +54,7 @@ export default async function ProjectPage({
               <span aria-hidden className="inline-block h-1.5 w-1.5 rotate-45 bg-gold-deep" />
               {t('giveBox.eyebrow')}
             </p>
-            <GivingCard presets={[20, 150, 500, 1000]} recommended={150} defaultAmount={150} purpose="building" compact />
+            <GivingCard purpose="building" fit />
           </div>
         }
       />
@@ -64,16 +67,18 @@ export default async function ProjectPage({
          through in detail, and it covers seven levels rather than four.
          Two answers to one question, the shorter one first. The component
          is untouched; four other pages still use it. */}
-      {/* The build, program by program. Moved here from the homepage, where
-         it was 800vh of a 25-viewport page — the deepest content on the site
-         sitting on the page that is meant to introduce things. */}
-      <BuildingRises />
+      {/* The build, program by program — HIDDEN, not deleted (client,
+         2026-09-03): the architect's real cutaways below replaced it, and
+         the hand-drawn SVG sequence is kept for reuse. Re-enable by
+         restoring the element below.
+      <BuildingRises /> */}
+      <FloorByFloor />
 
       {/* The renders, as a gallery. Replaced the single aerial plate on
          2026-08-30: the client wanted the whole set, paged with arrows,
          each with a line of context — set inside the picture rather than
          beside it, so the render keeps the full width. */}
-      <section className="bg-paper-2 pb-section-md">
+      <section className="bg-paper-2 pt-14 pb-section-md md:pt-20">
         <SectionBody>
           <ProjectGallery />
         </SectionBody>
@@ -119,7 +124,13 @@ export default async function ProjectPage({
         </SectionBody>
       </Section>
 
-      <Section tone="paper">
+      {/* Sage ground for the facts (client, 2026-09-04) — the same pale
+         green the "Dette er Rabita" and follow sections own. The section
+         above is paper, so the ground arrives through a tall soft gradient
+         instead of a hard seam: the fade IS the space between the two. */}
+      <section className="bg-[#e3eae4]">
+        <div aria-hidden className="h-28 bg-gradient-to-b from-paper to-[#e3eae4] md:h-40" />
+        <div className="pb-section-md">
         <SectionBody>
           {/* Key figures and capacity as two registers of the same design:
              mono label, 1px rule, hairline rows on one rhythm, serif values
@@ -252,17 +263,48 @@ export default async function ProjectPage({
                        block used to be; the credit line at the foot is gone. */}
                     </div>
 
-                    <div className={card}>
-                    <div className="flex items-center gap-3 mt-8 md:mt-0">
+                    <div className={cn(card, 'relative md:overflow-hidden')}>
+                    {/* The end panel: the photograph, bleeding off top,
+                       bottom and end, with paper fading over its start edge.
+                       Desktop only — on phones this register is a plain row
+                       and a bleed has no card to bleed from. */}
+                    <span aria-hidden className="pointer-events-none absolute inset-y-0 end-0 hidden w-[42%] md:block">
+                      <Image
+                        src="/photos/architect-fagernes.webp"
+                        alt=""
+                        fill
+                        sizes="20rem"
+                        className="object-cover object-[50%_22%]"
+                      />
+                      {/* The fade dies at 55% of the panel — past that the
+                         photograph stands at full strength, so the face is
+                         never behind a wash. */}
+                      <span className="absolute inset-0 bg-gradient-to-r from-paper-2 to-transparent to-55% rtl:bg-gradient-to-l" />
+                    </span>
+
+                    <div className="relative flex items-center gap-3 mt-8 md:mt-0 md:max-w-[60%]">
                       <FigureIcon name="building" className="hidden h-[18px] w-[18px] shrink-0 text-gold-deep md:block" />
                       <h2 className={label}>{t('facts.architect')}</h2>
                       <span aria-hidden className="hidden h-px flex-1 bg-gold-deep/30 md:block" />
                     </div>
-                    <dl className="mt-3 border-t border-ink md:mt-2 md:border-t-0">
+                    <dl className="relative mt-3 border-t border-ink md:mt-2 md:max-w-[55%] md:border-t-0">
                       <div className={cn(row, 'md:min-h-0')}>
-                        <dd className="flex flex-col gap-1 leading-none">
-                          <span className="font-serif text-[1.35rem] text-ink md:text-[1.5rem]">{CAMPAIGN.architect.split(',')[0]}</span>
-                          <span className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">{CAMPAIGN.architect.split(',').slice(1).join(',').trim()}</span>
+                        <dd className="flex items-center gap-4 leading-none md:py-14">
+                          {/* Phones keep the round portrait; the bleed panel
+                             replaces it from md. */}
+                          <span className="relative block h-16 w-16 shrink-0 overflow-hidden rounded-full ring-1 ring-rule md:hidden">
+                            <Image
+                              src="/photos/architect-fagernes.webp"
+                              alt=""
+                              fill
+                              sizes="64px"
+                              className="object-cover"
+                            />
+                          </span>
+                          <span className="flex min-w-0 flex-col gap-1.5">
+                            <span className="font-serif text-[1.35rem] text-ink md:text-[1.5rem]">{CAMPAIGN.architect.split(',')[0]}</span>
+                            <span className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">{CAMPAIGN.architect.split(',').slice(1).join(',').trim()}</span>
+                          </span>
                         </dd>
                       </div>
                     </dl>
@@ -274,19 +316,16 @@ export default async function ProjectPage({
             );
           })()}
         </SectionBody>
-      </Section>
-
-      {/* The same four gifts as a dark card grid. Swapped in for the row
-         version, which moved to the homepage — both read the same
-         `giftLadder` copy, so this is purely a change of treatment. */}
-      <ApartmentsCta locale={locale as AppLocale} />
+        </div>
+      </section>
 
       <GiftBuilds />
 
-      {/* Sadaqa jariya — a prayer space given in someone's name. Moved here
-         from the homepage (2026-08-30): the ask belongs next to the gifts
-         that build the hall. */}
-      <MotionRise><SadaqaBand /></MotionRise>
+      {/* The apartments band closes the page where the sadaqa section used
+         to (client, 2026-09-04) — the sadaqa band itself is off:
+      <MotionRise><SadaqaBand /></MotionRise> */}
+      <ApartmentsCta locale={locale as AppLocale} />
+
 
 {/* Ways to give and the assurance list were removed from this page on
          2026-08-30 (client request); both still run on the other project pages. */}

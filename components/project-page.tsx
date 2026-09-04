@@ -64,10 +64,15 @@ export function ProjectHero({
 
       {/* With a card in the hero the whole thing has to fit a 13-inch laptop
          screen: 8 units of padding, not the section default. */}
-      <SectionBody className={aside ? 'relative py-8' : 'relative py-section-md'}>
-        <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-dusk-60">{crumb}</p>
-        <div className={aside ? 'mt-5 grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12' : undefined}>
-        <div className={aside ? 'max-w-3xl lg:col-span-7' : 'mt-8 max-w-3xl'}>
+      <SectionBody className={aside ? 'relative py-10 md:py-14' : 'relative py-section-md'}>
+        {!aside && (
+          <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-dusk-60">{crumb}</p>
+        )}
+        <div className={aside ? 'grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12' : undefined}>
+        <div className={aside ? 'max-w-3xl lg:col-span-6' : 'mt-8 max-w-3xl'}>
+          {aside && (
+            <p className="mb-5 font-mono text-[0.75rem] uppercase tracking-[0.16em] text-dusk-60">{crumb}</p>
+          )}
           <h1 className="font-serif text-display text-balance text-paper">{title}</h1>
           {ledeShort ? (
             <>
@@ -99,7 +104,7 @@ export function ProjectHero({
             </div>
           )}
         </div>
-        {aside && <div className="lg:col-span-5 lg:justify-self-end lg:w-full lg:max-w-[24rem]">{aside}</div>}
+        {aside && <div className="lg:col-span-6 lg:justify-self-end lg:w-full lg:max-w-[32rem]">{aside}</div>}
         </div>
       </SectionBody>
     </section>

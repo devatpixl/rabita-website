@@ -49,13 +49,14 @@
   },
   "nav": {
     "wordmark": "Rabita",
-    "orgName": "Det Islamske Forbundet",
+    "orgName": "Oslo Sentralmoské",
     "skipToContent": "Hopp til innhold",
     "give": "Gi en gave",
     "prayerTimes": "Bønnetider",
     "openDaily": "ÅPENT DAGLIG",
     "items": {
       "project": "Moskeprosjektet",
+      "apartments": "Leiligheter",
       "prayer": "Bønn",
       "services": "Tjenester",
       "visit": "Besøk oss",
@@ -72,18 +73,9 @@
           "label": "Fremdrift",
           "blurb": "Tidslinje, faser og hva hver fase koster",
           "href": "/moskeprosjektet/fremdrift"
-        },
-        {
-          "label": "Leiligheter",
-          "blurb": "Femten leiligheter for salg i det nye bygget",
-          "href": "/moskeprosjektet/leiligheter"
-        },
-        {
-          "label": "Doner en bønneplass",
-          "blurb": "Sadaqa jariya i et navn",
-          "href": "/doner-en-bonneplass"
         }
       ],
+      "apartments": [],
       "prayer": [
         {
           "label": "Bønnetider",
@@ -234,7 +226,7 @@
     "openSheet": "Åpne givergiver",
     "closeSheet": "Lukk",
     "sheetTitle": "Gi til Rabita",
-    "question": "Hvor ofte vil du gi?",
+    "question": "Bidra med å bygge Europas største moské",
     "wizard": {
       "back": "Tilbake",
       "continue": "Fortsett",
@@ -276,7 +268,6 @@
         "fnrNote": "Rapporteres til Skatteetaten."
       },
       "errors": {
-        "required": "Påkrevd",
         "email": "Skriv en gyldig e-postadresse",
         "mobile": "Skriv et gyldig mobilnummer",
         "fnr": "Må være 11 sifre",
@@ -291,8 +282,6 @@
       "giveWithMonthly": "Gi <amount></amount> kr/mnd med {method}"
     },
     "perMonth": "/mnd",
-    "ledeMonthly": "Som fast giver gir du forutsigbar støtte og lavere administrasjonskostnader.",
-    "ledeOnce": "Ett bidrag, hvilket som helst beløp.",
     "sheetTitleBuilding": "Gi til bygget"
   },
   "meter": {
@@ -319,16 +308,15 @@
     "latticeCount": "{lit} av 100",
     "goalLabel": "Mål",
     "lastMonthLabel": "siste måned",
-    "subLabel": "Delmål {year} · {name}",
-    "subValue": "{raised} av {goal} kr",
-    "remaining": "{amount} kr gjenstår",
     "roadmap": "Veien til 2028",
     "now": "Nå",
     "phaseNotes": {
       "fundament": "Tomten er ryddet. Fundamentet støpes og råbygget reiser seg.",
       "interior": "Fasade, bønnesaler, skole og bibliotek innredes.",
       "ferdigstillelse": "Bygget åpner. Sju etasjer på én adresse."
-    }
+    },
+    "remainingLabel": "Gjenstår til målet",
+    "goalMark": "2028 · Dørene åpnes"
   },
   "trust": {
     "taxDeductible": "Skattefradrag opp til 25 000 kr/år",
@@ -942,9 +930,9 @@
   },
   "congregationToday": {
     "statement": {
-      "before": "Hva ",
-      "accent": "Rabita",
-      "after": " er til for."
+      "before": "Våre ",
+      "accent": "tjenester",
+      "after": "."
     },
     "carouselLabel": "Menigheten i dag, bilder",
     "prev": "Forrige bilde",
@@ -1160,7 +1148,11 @@
       "landmarks": {
         "oslo-s": "Oslo S / Jernbanetorget",
         "gronland": "Grønland T-bane",
-        "brugata": "Brugata trikk og buss"
+        "brugata": "Brugata trikk og buss",
+        "stortinget": "Stortinget",
+        "oslo-city": "Oslo City",
+        "bussterminalen": "Oslo bussterminal",
+        "operahuset": "Operahuset"
       }
     },
     "cols": {
@@ -1181,7 +1173,8 @@
     "social": {
       "facebook": "Facebook",
       "instagram": "Instagram",
-      "tiktok": "TikTok"
+      "tiktok": "TikTok",
+      "whatsapp": "WhatsApp"
     },
     "credit": "Utviklet av"
   },
@@ -1934,7 +1927,7 @@
       "area": "Bruksareal",
       "floors": "Etasjer opp / ned",
       "places": "Bønneplasser",
-      "cleared": "Tomten ryddet"
+      "done": "Planlagt ferdig"
     },
     "credit": "Arkitekt"
   },
@@ -1989,7 +1982,11 @@
       "stations": {
         "brugata": "Brugata trikk og buss",
         "oslo-s": "Oslo S / Jernbanetorget",
-        "gronland": "Grønland T-bane"
+        "gronland": "Grønland T-bane",
+        "oslo-city": "Oslo City",
+        "bussterminalen": "Oslo bussterminal",
+        "stortinget": "Stortinget",
+        "operahuset": "Operahuset"
       }
     },
     "interest": {
@@ -2018,7 +2015,7 @@
     },
     "location": {
       "eyebrow": "Sentral beliggenhet",
-      "heading": "Gangavstand til det <em>meste</em>.",
+      "heading": "Nær alt <em>som betyr noe</em>.",
       "lede": "Calmeyers gate ligger i et attraktivt og veletablert område i Oslo, med gangavstand til byens viktigste funksjoner.",
       "items": [
         "5–10 minutters gange til Oslo City, Stortinget og sentrale deler av sentrum",
@@ -2055,7 +2052,11 @@
           "body": "Med utsyn over byen."
         }
       },
-      "close": "Alt dette bidrar til et sosialt og inkluderende bomiljø."
+      "close": "Alt dette bidrar til et sosialt og inkluderende bomiljø.",
+      "chip": {
+        "title": "Bygget for fellesskap",
+        "body": "Rom som samler folk, hver dag."
+      }
     },
     "priceLabel": "Startspris fra",
     "priceUnit": "millioner",
@@ -2123,6 +2124,10 @@
       "tiktok": {
         "handle": "@oslomosque",
         "blurb": "Korte klipp fra moskeen"
+      },
+      "whatsapp": {
+        "handle": "+47 22 20 80 88",
+        "blurb": "Snakk med oss direkte"
       }
     }
   },
@@ -2130,8 +2135,8 @@
     "nextLabel": "Neste bønn",
     "progressLabel": "{name} om {m}m",
     "jumuahHeading": "Jumu'ah",
-    "jumuahNote": "Khutbaen begynner før bønnen.",
-    "jumuahImams": "Khutba og bønn ledet av imamene",
+    "jumuahNote": "Varighet 30 minutter.",
+    "jumuahImams": "Åpent for alle — menn, kvinner og barn",
     "glanceHeading": "I dag",
     "doorsOpen": "Dørene åpnes",
     "khutbaNo": "Norsk khutba",
@@ -2244,5 +2249,28 @@
     "heroEyebrow": "Fremdrift",
     "heroTitle": "Slik <em>vokser</em> det fram.",
     "heroLede": "Seks år, fra den første skissa til et ferdig bygg i Calmeyers gate. Her er hvor prosjektet står, og hva som kommer."
+  },
+  "floorByFloor": {
+    "eyebrow": "Etasje for etasje",
+    "heading": "Bygget, nedenfra og opp.",
+    "altFinal": "Arkitektens snitt av det ferdige bygget, med takterrasse, kuppel og minaret",
+    "floors": {
+      "lower": "Underetasjen · bønnerom og flerbrukshall",
+      "first": "1. etasje · hovedmoskeen",
+      "second": "2. etasje · kvinnenes moské",
+      "third": "3. etasje · skole og hage",
+      "fourth": "4. etasje · administrasjon og ungdomsklubb",
+      "fifth": "5. etasje · leiligheter",
+      "sixth": "6. etasje · leiligheter",
+      "whole": "Hele bygget · takterrasse, kuppel og minaret"
+    }
+  },
+  "brandType": {
+    "label": "Dette er Rabita",
+    "sr": "Dette er Rabita — siden 1987.",
+    "eyebrow": "Oslo Sentralmoské",
+    "line1": "DETTE ER",
+    "line2": "RABITA",
+    "sig": "Siden 1987."
   }
 }
