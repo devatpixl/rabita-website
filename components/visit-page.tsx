@@ -6,6 +6,30 @@ import { SectionBody } from './primitives';
 // The shape the Visit us section uses. The photograph comes first here, before any heading, because these pages answer where and when rather than why. Underneath it a rail of the three facts a visitor needs before setting off.
 const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
 
+// The three facts a visitor needs before setting off. Extracted from
+// VisitHero on 2026-09-05 so /besok-oss can print the same rail under its
+// new band without a second implementation of it — VisitHero's own markup
+// is unchanged, which is what keeps the two events pages exactly as they
+// were.
+export function VisitFacts({
+  facts,
+  className,
+}: {
+  facts: { term: string; detail: string }[];
+  className?: string;
+}) {
+  return (
+    <ul className={[className, 'grid gap-x-10 gap-y-6 border-t border-rule pt-8 md:grid-cols-3'].filter(Boolean).join(' ')}>
+      {facts.map((f) => (
+        <li key={f.term}>
+          <p className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">{f.term}</p>
+          <p className="mt-2 font-serif text-[1.15rem] leading-snug text-ink">{f.detail}</p>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function VisitHero({
   crumb,
   eyebrow,
@@ -44,14 +68,7 @@ export function VisitHero({
           <p className="md:col-span-6 max-w-prose self-end text-body text-ink-60">{lede}</p>
         </div>
 
-        <ul className="mt-12 grid gap-x-10 gap-y-6 border-t border-rule pt-8 md:grid-cols-3">
-          {facts.map((f) => (
-            <li key={f.term}>
-              <p className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">{f.term}</p>
-              <p className="mt-2 font-serif text-[1.15rem] leading-snug text-ink">{f.detail}</p>
-            </li>
-          ))}
-        </ul>
+        <VisitFacts facts={facts} className="mt-12" />
       </SectionBody>
     </section>
   );

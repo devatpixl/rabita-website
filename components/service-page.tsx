@@ -7,6 +7,14 @@ import { cn } from '@/lib/cn';
 // The shape every page under "Prayer and services" uses. Deliberately not the mosque project shape: that section opens on a full bleed dusk hero, this one opens light and split, so a reader can feel which part of the site they are in without reading the breadcrumb.
 const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
 
+// RETIRED 2026-09-05. The eleven subject pages moved to the band hero
+// (components/page-band.tsx) that the prayer page opens on, at the client's
+// request. Left in the tree unused, the same way ServiceVisit was, so it can
+// come back with one line if the split hero is ever wanted again.
+//
+// Two defects went with it and should not be reintroduced: it declared an
+// `eyebrow` prop it never rendered, and it printed `note` twice — a md:block
+// copy inside the text column and a md:hidden copy as a third grid child.
 export function ServiceHero({
   crumb,
   eyebrow,

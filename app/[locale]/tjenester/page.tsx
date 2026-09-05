@@ -12,8 +12,9 @@ export default async function ServicesIndex({
 
   return (
     <main>
-      {/* Full-bleed picture with the words in front (client, 2026-08-31).
-         The split ServiceHero still runs every /tjenester/[subject] page. */}
+      {/* The tallest band on the site (client, 2026-09-05), so the index
+         belongs to the same family as the eleven services under it while
+         still outranking them. Replaces the full-bleed hero of 2026-08-31. */}
       <ServicesHero />
       {/* Every service as grouped boxes (client 2026-08-30: the register of
          rows read as clutter). The two "how to start" cards went with it —

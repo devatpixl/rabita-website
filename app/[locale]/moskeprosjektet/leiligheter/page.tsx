@@ -181,53 +181,100 @@ export default async function ApartmentsPage({
       </Section>
 
       {/* ── sentral beliggenhet ─────────────────────────────────────────────
-         The four claims cm8 makes about the location, each on its own ruled
-         line with an oversized numeral — a register rather than a bullet
-         list, because bullets read as small print and these are the argument. */}
-      <section className="bg-paper-2 py-12 md:py-16">
-        <SectionBody>
+         The four claims cm8 makes about the location, built to the client's
+         mock (2026-09-04): an arch-topped photograph with a dot grid beside
+         it, and each claim as icon medallion / oversized numeral / line —
+         a register, because bullets read as small print and these are the
+         argument. */}
+      <section className="relative overflow-hidden bg-dusk py-10 text-paper md:py-14">
+        {/* A single warm bloom behind the arch, so the dark ground has a
+           light in it rather than reading as a flat block. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -start-24 top-1/3 h-[32rem] w-[32rem] rounded-full bg-gold/[0.07] blur-3xl"
+        />
+        <SectionBody className="relative">
           <div className="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
             <div className="md:sticky md:top-24 md:self-start">
-              <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
+              <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
                 {t('location.eyebrow')}
               </p>
-              <SectionHeading className="mt-3">
-                {t.rich('location.heading', { em: (chunks) => <Accent surface="paper">{chunks}</Accent> })}
+              <SectionHeading className="mt-3 text-paper">
+                {t.rich('location.heading', { em: (chunks) => <Accent surface="dusk">{chunks}</Accent> })}
               </SectionHeading>
-              <span aria-hidden className="mt-4 block h-0.5 w-10 bg-gold-deep" />
-              <p className="mt-4 max-w-[44ch] text-body text-ink-60">{t('location.lede')}</p>
-              {/* The street itself — Calmeyers gate's own neighbourhood. */}
-              <div className="relative mt-6 aspect-[16/10] overflow-hidden rounded-[14px]">
-                <Image
-                  src="/photos/calmeyers-street.webp"
-                  alt=""
-                  fill
-                  sizes="(min-width: 768px) 26rem, 92vw"
-                  className="object-cover"
-                />
+              <span aria-hidden className="mt-4 block h-0.5 w-10 bg-gold" />
+              <p className="mt-4 max-w-[42ch] text-body text-paper/70">{t('location.lede')}</p>
+
+              {/* The street itself, under an arch — the building's own
+                 doorway shape, the same one the facilities medallions use.
+                 The dot grid sits behind its shoulder, a printer's ornament
+                 rather than another picture. */}
+              <div className="relative mt-6 max-w-[22rem]">
+                <svg
+                  aria-hidden
+                  className="absolute -end-8 top-3 hidden h-20 w-20 text-gold/40 sm:block"
+                  viewBox="0 0 100 100"
+                >
+                  <defs>
+                    <pattern id="loc-dots" width="12.5" height="12.5" patternUnits="userSpaceOnUse">
+                      <circle cx="2" cy="2" r="1.6" fill="currentColor" />
+                    </pattern>
+                  </defs>
+                  <rect width="100" height="100" fill="url(#loc-dots)" />
+                </svg>
+                <div className="relative h-[clamp(13rem,30vh,19rem)] overflow-hidden rounded-b-[14px] rounded-t-[11rem] ring-1 ring-paper/15">
+                  <Image
+                    src="/photos/calmeyers-street.webp"
+                    alt=""
+                    fill
+                    sizes="(min-width: 768px) 24rem, 92vw"
+                    className="object-cover"
+                  />
+                </div>
               </div>
             </div>
 
-            <ol className="space-y-0">
+            <ol className="space-y-0 md:self-center">
               {(t.raw('location.items') as string[]).map((item, i) => (
-                <li key={item} className="flex items-center gap-5 border-b-[0.5px] border-rule py-4 first:pt-0">
-                  {/* The numeral in a gold-ringed seal, per the mock — a
-                     medallion, not small print. */}
+                <li key={item} className="flex items-center gap-4 border-b-[0.5px] border-paper/15 py-6 first:pt-0 md:gap-6">
+                  {/* The mark, in a soft seal: what the claim is ABOUT — on
+                     foot, cafés, transport, quiet streets. */}
                   <span
                     aria-hidden
-                    className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-gold-deep/40 bg-paper font-serif text-[1rem] tabular-nums text-gold-deep"
+                    className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-paper/[0.06] text-gold ring-1 ring-paper/10"
+                  >
+                    <LocationIcon index={i} className="h-[1.6rem] w-[1.6rem]" />
+                  </span>
+                  <span aria-hidden className="h-10 w-px shrink-0 bg-paper/15" />
+                  <span
+                    aria-hidden
+                    className="shrink-0 font-serif text-[1.7rem] leading-none tabular-nums text-gold md:text-[2.05rem]"
                   >
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <p className="max-w-[46ch] border-s border-rule ps-5 text-body text-ink">{item}</p>
+                  <p className="max-w-[42ch] text-body text-paper/85">{item}</p>
                 </li>
               ))}
-              <li className="pt-6">
-                <div className="rounded-[14px] bg-paper-deep/60 p-5 md:p-6">
-                  <span aria-hidden className="block font-serif text-[1.7rem] leading-none text-gold-deep">
+              <li className="pt-7">
+                {/* The closing line, with an arch drawn faintly at its end —
+                   the building itself, as a watermark. */}
+                <div className="relative overflow-hidden rounded-[14px] bg-paper/[0.06] p-5 ring-1 ring-paper/10 md:p-6">
+                  <svg
+                    aria-hidden
+                    viewBox="0 0 100 120"
+                    className="pointer-events-none absolute -bottom-2 end-4 h-[7.5rem] w-24 text-gold/25"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                  >
+                    <path d="M12 118V52a38 38 0 0 1 76 0v66" />
+                    <path d="M30 118V56a20 20 0 0 1 40 0v62" />
+                    <path d="M50 118V36" />
+                  </svg>
+                  <span aria-hidden className="relative block font-serif text-[1.7rem] leading-none text-gold">
                     &ldquo;
                   </span>
-                  <p className="mt-0.5 max-w-[46ch] font-serif text-[1.15rem] italic leading-snug text-ink">
+                  <p className="relative mt-0.5 max-w-[42ch] font-serif text-[1.15rem] italic leading-snug text-paper">
                     {t('location.close')}
                   </p>
                 </div>
@@ -242,24 +289,24 @@ export default async function ApartmentsPage({
          courtyard render with a community chip floating on it; the five
          facilities as arch-shaped medallions on one thread; the closing
          line as a quote bar. */}
-      <Section tone="paper">
+      <section className="bg-paper py-10 [@media(max-height:820px)]:py-6 md:py-14">
         <SectionBody>
-          <div className="grid items-center gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-14">
+          <div className="grid items-center gap-8 md:grid-cols-[0.9fr_1.1fr] md:gap-12">
             <div>
               <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
                 {t('quality.eyebrow')}
               </p>
-              <SectionHeading className="mt-4 max-w-[16ch]">
+              <SectionHeading className="mt-3 max-w-[16ch]">
                 {t.rich('quality.heading', { em: (chunks) => <Accent surface="paper">{chunks}</Accent> })}
               </SectionHeading>
-              <span aria-hidden className="mt-5 block h-0.5 w-10 bg-gold-deep" />
-              <p className="mt-6 max-w-[48ch] text-body text-ink-60">{t('quality.lede')}</p>
+              <span aria-hidden className="mt-4 block h-0.5 w-10 bg-gold-deep" />
+              <p className="mt-4 max-w-[46ch] text-body text-ink-60">{t('quality.lede')}</p>
             </div>
 
             {/* The courtyard at dusk — the minaret over the shared garden,
                every window lit. One oversized corner, per the mock. */}
             <div className="relative overflow-hidden rounded-[1.5rem] rounded-bl-[4.5rem]">
-              <div className="relative aspect-[16/11]">
+              <div className="relative h-[clamp(13rem,31vh,22rem)]">
                 <Image
                   src="/photos/courtyard-dusk.webp"
                   alt=""
@@ -269,7 +316,7 @@ export default async function ApartmentsPage({
                 />
               </div>
               {/* The chip, floating on the picture: what the picture is FOR. */}
-              <div className="absolute bottom-5 start-5 flex items-center gap-3.5 rounded-2xl bg-dusk/85 p-4 pe-6 text-paper backdrop-blur-sm">
+              <div className="absolute bottom-4 start-4 flex items-center gap-3 rounded-2xl bg-dusk/85 p-3.5 pe-5 text-paper backdrop-blur-sm">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-paper text-gold-deep">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden className="h-5 w-5">
                     <circle cx="9" cy="8" r="3" />
@@ -287,7 +334,7 @@ export default async function ApartmentsPage({
           </div>
 
           {/* The list label, running out along a hairline to a gold point. */}
-          <div className="mt-14 flex items-center gap-5 md:mt-16">
+          <div className="mt-8 flex items-center gap-5 md:mt-10">
             <p className="shrink-0 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-ink-60">
               {t('quality.listLabel')}
             </p>
@@ -298,30 +345,30 @@ export default async function ApartmentsPage({
           {/* Five medallions on one thread. The thread is a gentle wave
              drawn behind the arches (md+), so the row reads as beads on a
              string rather than five columns. */}
-          <div className="relative mt-10">
+          <div className="relative mt-7">
             <svg
               aria-hidden
               viewBox="0 0 1000 60"
               preserveAspectRatio="none"
-              className="absolute inset-x-0 top-9 hidden h-[60px] w-full text-gold-deep/30 md:block"
+              className="absolute inset-x-0 top-7 hidden h-[60px] w-full text-gold-deep/30 md:block"
             >
               <path d="M0 38 C 100 10, 180 52, 300 30 S 520 8, 640 34 S 880 54, 1000 22" fill="none" stroke="currentColor" strokeWidth="1.2" />
             </svg>
-            <ol className="relative grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 md:grid-cols-5 md:gap-x-6">
+            <ol className="relative grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 md:grid-cols-5 md:gap-x-6">
               {QUALITY_ITEMS.map((k, i) => (
                 <li key={k} className="flex flex-col items-center text-center md:border-s md:border-rule/70 md:first:border-s-0">
                   {/* The arch: the building's own doorway shape as the icon
                      plate. */}
-                  <span className="grid h-24 w-20 place-items-center rounded-t-full rounded-b-xl bg-paper-deep/60">
-                    <QualityIcon name={k} className="h-7 w-7 text-gold-deep" />
+                  <span className="grid h-16 w-[3.5rem] place-items-center rounded-t-full rounded-b-xl bg-paper-deep/60 md:h-[4.5rem] md:w-16">
+                    <QualityIcon name={k} className="h-6 w-6 text-gold-deep" />
                   </span>
-                  <span className="mt-4 font-mono text-[0.6875rem] tracking-[0.14em] text-gold-deep">
+                  <span className="mt-3 font-mono text-[0.6875rem] tracking-[0.14em] text-gold-deep">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <h3 className="mt-1.5 max-w-[16ch] font-serif text-[1.05rem] leading-tight text-ink">
+                  <h3 className="mt-1 max-w-[16ch] font-serif text-[1.02rem] leading-tight text-ink">
                     {t(`quality.items.${k}.title`)}
                   </h3>
-                  <p className="mt-2 max-w-[22ch] text-[13px] leading-snug text-ink-60">
+                  <p className="mt-1.5 max-w-[22ch] text-[12.5px] leading-snug text-ink-60">
                     {t(`quality.items.${k}.body`)}
                   </p>
                 </li>
@@ -331,15 +378,15 @@ export default async function ApartmentsPage({
 
           {/* The closing line as a quote bar: the oversized mark, a rule,
              the sentence. */}
-          <div className="mt-14 flex items-center gap-6 rounded-2xl bg-paper-deep/60 px-7 py-5 md:mt-16 md:px-9">
-            <span aria-hidden className="font-serif text-[2.6rem] leading-none text-gold-deep">&ldquo;</span>
+          <div className="mt-8 flex items-center gap-5 rounded-2xl bg-paper-deep/60 px-6 py-4 md:mt-10 md:px-8">
+            <span aria-hidden className="font-serif text-[2.2rem] leading-none text-gold-deep">&ldquo;</span>
             <span aria-hidden className="h-8 w-px shrink-0 bg-gold-deep/30" />
             <p className="font-serif text-[clamp(1.05rem,2vw,1.3rem)] italic leading-snug text-ink">
               {t('quality.close')}
             </p>
           </div>
         </SectionBody>
-      </Section>
+      </section>
 
       <section className="bg-paper-2 py-section-md">
         <SectionBody>
@@ -371,6 +418,61 @@ export default async function ApartmentsPage({
 
 /* The five marks for what the project includes. Line drawings at 20px, in the
    same weight as the site's other icon sets. */
+// The location marks: on foot, cafés, transport, quiet streets — one per
+// claim, in the order the copy makes them.
+function LocationIcon({ index, className }: { index: number; className?: string }) {
+  const common = {
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: 1.6,
+    strokeLinecap: 'round' as const,
+    strokeLinejoin: 'round' as const,
+    className,
+    'aria-hidden': true,
+  };
+  if (index === 0) {
+    // Walking.
+    return (
+      <svg {...common}>
+        <circle cx="13" cy="4.5" r="1.8" />
+        <path d="M12.5 21l-1.2-5.4 2.4-2.2-.8-4.4-3.4 1.6L8 13" />
+        <path d="M13.7 13.4l2.6 1.6 1.2 3.2" />
+      </svg>
+    );
+  }
+  if (index === 1) {
+    // A cup.
+    return (
+      <svg {...common}>
+        <path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z" />
+        <path d="M17 10.5h1.6a2.4 2.4 0 0 1 0 4.8H17" />
+        <path d="M7.5 3v2.5M11 3v2.5M14.5 3v2.5" />
+      </svg>
+    );
+  }
+  if (index === 2) {
+    // A train carriage.
+    return (
+      <svg {...common}>
+        <rect x="5" y="3" width="14" height="13" rx="3.5" />
+        <path d="M5 10h14" />
+        <circle cx="9" cy="13" r="1" fill="currentColor" stroke="none" />
+        <circle cx="15" cy="13" r="1" fill="currentColor" stroke="none" />
+        <path d="M8 16l-2.5 5M16 16l2.5 5" />
+      </svg>
+    );
+  }
+  // A tree, for the quiet side streets.
+  return (
+    <svg {...common}>
+      <path d="M12 21v-6" />
+      <path d="M12 15a5.5 5.5 0 0 0 0-11 5.5 5.5 0 0 0 0 11z" />
+      <path d="M12 12.5l3-3M12 10l-2.6-2.6" />
+    </svg>
+  );
+}
+
 function QualityIcon({ name, className }: { name: (typeof QUALITY_ITEMS)[number]; className?: string }) {
   const c = {
     viewBox: '0 0 24 24',

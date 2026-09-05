@@ -77,8 +77,13 @@ const HREFS: Record<SlideKey, string> = {
   counselling: '/tjenester/counselling',
   'hajj-umrah': '/tjenester/hajj-umrah',
   education: '/undervisning',
-  mediation: '/tjenester/megling',
-  youth: '/tjenester/barn-og-ungdom',
+  mediation: '/tjenester/counselling',
+  // /tjenester/barn-og-ungdom was removed on 2026-09-05. The teaching page
+  // is the successor rather than the services index: this card is about
+  // what children and young people do here, and /undervisning answers that
+  // directly. It would otherwise redirect, and a homepage card should not
+  // spend a hop.
+  youth: '/undervisning',
 };
 
 type Figure =

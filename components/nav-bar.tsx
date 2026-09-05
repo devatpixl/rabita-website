@@ -157,7 +157,7 @@ export function NavBar() {
            to home. */}
         <LinkVT
           href={`/${locale}`}
-          className="vt-wordmark flex min-h-10 shrink-0 items-center gap-2 whitespace-nowrap md:min-h-11 md:gap-3"
+          className="vt-wordmark flex min-h-10 shrink-0 items-center gap-2 whitespace-nowrap md:min-h-11 md:gap-3 md:pe-6 lg:pe-10"
           aria-label={`${t('orgName')}, ${t('wordmark')}`}
         >
           {/* Mark, then each line of the name, on the curve and duration the
@@ -228,7 +228,7 @@ export function NavBar() {
               // yields, because it is the only duplicate in the row: the
               // utility strip carries the same figure, and Prayer is one
               // click away in the nav itself.
-              'hidden min-[1620px]:block',
+              'hidden min-[1800px]:block',
               'overflow-hidden transition-[max-width,opacity] duration-[320ms]',
               '[transition-timing-function:cubic-bezier(0.32,0.72,0,1)]',
               compactVisible ? 'max-w-[220px] opacity-100' : 'max-w-0 opacity-0',

@@ -104,7 +104,14 @@ export function ProjectHero({
             </div>
           )}
         </div>
-        {aside && <div className="lg:col-span-6 lg:justify-self-end lg:w-full lg:max-w-[32rem]">{aside}</div>}
+        {aside && (
+          <div
+            className="no-scrollbar lg:col-span-6 lg:max-h-[var(--project-card-cap)] lg:w-full lg:justify-self-end lg:self-center lg:overflow-y-auto lg:max-w-[27.5rem]"
+            style={{ ['--project-card-cap' as string]: 'calc(100svh - 122px - clamp(12px, 100svh - 700px, 48px))' }}
+          >
+            {aside}
+          </div>
+        )}
         </div>
       </SectionBody>
     </section>

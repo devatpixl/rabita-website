@@ -696,3 +696,43 @@ body.sheet-open {
   }
   .brand-type-stage__sig em { color: #faf8f4; }
 }
+
+/* The enquiry plate's ground.
+   .star-texture above was calibrated at 1.5% against a dark surface it never
+   actually shipped on. The tile is brand gold (mean rgb(189,164,111)); at
+   1.5% over #16242E that is a three-unit shift — invisible, and it bands
+   before it reads. 4.5% is where the mark becomes a ground without becoming
+   a pattern. */
+.star-texture--plate::before {
+  opacity: 0.035;
+  background-size: 300px 300px;
+}
+
+/* The focus ring on a dusk form.
+   The base rule above paints #b4381f, which is the site's focus colour on
+   paper and the wrong one on navy: off-palette, and only about 3:1 against
+   #16242E. Gold is the plate's own accent and reads at a glance. Specificity
+   (0,2,0) against the base rule's (0,1,0), so it wins wherever it applies
+   and changes nothing anywhere else. */
+.field-dusk :where(input, textarea, select):focus-visible {
+  outline-color: #c0a165;
+}
+
+/* Autofilled controls on a dusk form.
+   Chrome and Safari paint their own pale background onto an autofilled
+   input; on a navy plate that is a white block with black type sitting in a
+   dark well, and it looks broken to exactly the returning visitors most
+   likely to autofill. A large inset shadow repaints the field in its own
+   colour, -webkit-text-fill-color puts the value back to paper, and the
+   absurd transition delay defeats the engines that re-apply the background a
+   tick later. #1E2C36 is #16242E with the field's own 6% paper wash baked
+   in, so an autofilled field matches an empty one. */
+.field-dusk input:-webkit-autofill,
+.field-dusk input:-webkit-autofill:hover,
+.field-dusk input:-webkit-autofill:focus,
+.field-dusk textarea:-webkit-autofill {
+  -webkit-text-fill-color: #faf8f4;
+  -webkit-box-shadow: 0 0 0 1000px #1e2c36 inset;
+  caret-color: #c0a165;
+  transition: background-color 9999s ease-in-out 0s;
+}

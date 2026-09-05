@@ -140,16 +140,6 @@
           "href": "/tjenester/kurs"
         },
         {
-          "label": "Children and youth activities",
-          "blurb": "Youth club, camps and activities for the youngest.",
-          "href": "/tjenester/barn-og-ungdom"
-        },
-        {
-          "label": "Muslim guides",
-          "blurb": "Young guides who visit schools and meet pupils.",
-          "href": "/tjenester/veivisere"
-        },
-        {
           "label": "Teaching",
           "blurb": "Arabic, Qur'an and adult courses",
           "href": "/undervisning"
@@ -1406,6 +1396,7 @@
     "contactPlaceholder": "you@example.com or +47 …",
     "preferred": "Preferred time (optional)",
     "preferredPlaceholder": "e.g. Saturday afternoon",
+    "notesLabel": "Your message",
     "notes": {
       "nikah": "Tell us briefly about the planned date and number of attendees.",
       "janaza": "Family contact and what has already been arranged.",
@@ -1414,20 +1405,22 @@
       "hajj-umrah": "Number of travellers, planned dates and any agency involved.",
       "visit": "Type of group, number and age of attendees.",
       "contact": "What is the enquiry about?",
-      "megling": "Briefly, who is involved and what the matter concerns.",
-      "barn-og-ungdom": "The child’s age and which activities you are interested in.",
       "apartments": "When would you like to move in, and anything else we should know?",
       "skole": "The child’s age and school year.",
       "koran": "Age, level, and whether it is for a child or an adult.",
-      "kurs": "Which course, and any previous experience.",
-      "veivisere": "School or organisation, year group and preferred date."
+      "kurs": "Which course, and any previous experience."
     },
     "submit": "Send",
+    "submitting": "Sending …",
     "privacy": "We reply within 3 working days. See privacy for how we store your data.",
     "doneTitle": "We have received your enquiry.",
     "doneBody": "You will hear from us within 3 working days. Please check your spam folder.",
     "bedrooms": "Bedrooms",
-    "bedroomsUnit": "bedrooms"
+    "bedroomsUnit": "bedrooms",
+    "errors": {
+      "network": "We could not send your enquiry. Check your connection and try again — or send us an email instead.",
+      "invalid": "Something was missing, so the enquiry was not sent. Please check your name and contact details and try again."
+    }
   },
   "bonnetiderPage": {
     "eyebrow": "Prayer times",
@@ -1609,11 +1602,6 @@
         "body": "Information, preparation and referrals.",
         "longBody": "Rabita does not organise trips itself, but we help with preparation, information and referrals to experienced agencies and imams accompanying groups."
       },
-      "barn-og-ungdom": {
-        "title": "Children and <em>youth activities</em>",
-        "body": "Youth club, camps and activities for the youngest.",
-        "longBody": "Rabita runs a youth club, camps and regular activities for children and young people all year, together with Norges Unge Muslimer. Register your interest and we will contact you about the next gathering."
-      },
       "skole": {
         "title": "Rabita <em>school</em>",
         "body": "Saturday school for children and young people aged 6 to 16.",
@@ -1628,11 +1616,6 @@
         "title": "Calligraphy and <em>geometry</em>",
         "body": "Courses in Islamic calligraphy and geometric art.",
         "longBody": "Rabita runs courses in Islamic calligraphy led by Ustadh Khalid Casado, and in Islamic geometry with Samira Mian, where participants learn to construct classical patterns with compass and ruler. In 2025 the courses drew participants from Germany, Spain and England. \"Geometry and tea\" is a monthly, low-threshold gathering between courses, for past and new participants alike."
-      },
-      "veivisere": {
-        "title": "Muslim <em>guides</em>",
-        "body": "Young guides who visit schools and meet pupils.",
-        "longBody": "Muslimske veivisere is a youth-to-youth programme working against prejudice and discrimination towards Norwegian Muslims. In 2025 the guides visited more than 200 schools and met over 10,000 pupils. It was developed by Rabita and Minotenk, and in 2024 was written into the government’s action plan against anti-Muslim attitudes. Schools and organisations can request a visit."
       }
     },
     "allEyebrow": "All services",
@@ -1640,8 +1623,7 @@
     "groups": {
       "religious": "Religious services",
       "guidance": "Guidance",
-      "teaching": "Teaching",
-      "community": "Children, youth and community"
+      "teaching": "Teaching"
     }
   },
   "aboutPage": {
@@ -2020,8 +2002,7 @@
       "items": [
         "5–10 minutes on foot to Oslo City, the Storting and the central parts of town",
         "A short walk to Grünerløkka, with its wide choice of cafés, restaurants and shops",
-        "Close to the main transport hubs — Jernbanetorget, Stortinget and Tøyen",
-        "Set in quiet side streets, more withdrawn and more comfortable than the main roads around it"
+        "Close to the main transport hubs — Jernbanetorget, Stortinget and Tøyen"
       ],
       "close": "It is a rare combination: central access, and a quiet place to live."
     },

@@ -2,7 +2,8 @@ import Image from 'next/image';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
-import { VisitClose, VisitHero } from '@/components/visit-page';
+import { VisitClose, VisitFacts } from '@/components/visit-page';
+import { PageBand } from '@/components/page-band';
 import { RequestForm } from '@/components/request-form';
 
 export default async function VisitPage({
@@ -17,15 +18,34 @@ export default async function VisitPage({
 
   return (
     <main>
-      <VisitHero
-        crumb={tv('crumb')}
-        eyebrow={tv('pages.visit.eyebrow')}
+      {/* The band, in the family the prayer page opens on (client,
+         2026-09-05). This page used to show the photograph with no words on
+         it and the headline underneath — two objects where there should be
+         one, which is exactly what the band fixes.
+
+         `over` rather than `split`: visit-entrance.webp is 2000x1100, wide
+         enough to carry the words at full measure. Only ~45% of the frame
+         survives the crop, so the object position is hand-set to keep the
+         entrance itself.
+
+         No kickerNote: visitPages.crumb and pages.visit.eyebrow are the
+         same string, which is why VisitHero carried an `eyebrow !== crumb`
+         guard. The band prints the crumb once and the guard dies with it.
+
+         mark="elevation" belongs here more than anywhere: this is the one
+         page whose subject is the building. */}
+      <PageBand
+        kicker={tv('crumb')}
         title={tv('pages.visit.title')}
         lede={tv('pages.visit.lede')}
         image="/photos/visit-entrance.webp"
         alt={tv('pages.visit.caption')}
-        facts={tv.raw('pages.visit.facts') as { term: string; detail: string }[]}
-      />
+        layout="over"
+        mark="elevation"
+        objectClass="object-[50%_58%] md:object-[50%_50%]"
+      >
+        <VisitFacts facts={tv.raw('pages.visit.facts') as { term: string; detail: string }[]} />
+      </PageBand>
       <Section tone="paper">
         <SectionBody>
           <div className="grid gap-10 md:grid-cols-12">
