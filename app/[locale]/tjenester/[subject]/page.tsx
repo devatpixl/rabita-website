@@ -148,74 +148,79 @@ export default async function ServiceDetail({
       </Section>
 
       {/* ── 3. Asking for it ───────────────────────────────────────────────
-         The form, on the pale green — the site's own #e3eae4, arriving
-         through the tall gradient the "Dette er Rabita", follow and project
-         sections use rather than as a hard seam.
+         The form, on the site's white (client, 2026-09-06).
+
+         It has been on a dusk plate and then on the pale green. The green
+         made the two halves of the page too alike in weight — "there should
+         be difference, second section is also same" — so the description
+         keeps the warm paper-2 and the enquiry steps UP to paper, which is
+         the lightest tone on the site. No gradient between them any more:
+         at eight units apart the fade had nothing to soften, and paper-2
+         meeting paper is the section rhythm the rest of the site already
+         runs on.
 
          Same opener as section 2 (eyebrow, heading, lede) and the same row
          language: the three ways to reach us are rows with a mono label, a
          serif value and the section-2 seal, so the two halves of the page
          read as one design. */}
-      <section id="enquiry" className="scroll-mt-24 bg-[#e3eae4]">
-        <div aria-hidden className="h-24 bg-gradient-to-b from-paper-2 to-[#e3eae4] md:h-36" />
-        <div className="pb-section-lg md:pb-24">
-          <SectionBody>
-            <div className="grid gap-10 md:grid-cols-12 md:gap-12 lg:gap-16">
-              <div className="md:col-span-5">
-                {/* The eyebrow is the SERVICE here, not the section name.
-                   Section 2 can print "What we offer" over the service's own
-                   headline because the two say different things; printing
-                   "Send an enquiry" over "Send an enquiry" is the echo that
-                   got the old ruled eyebrow removed in the first place. The
-                   service name in that slot earns its place — it says what
-                   the enquiry is about. */}
-                <Eyebrow tone="gold-deep">{plainTitle}</Eyebrow>
-                <SectionHeading className="mt-5">{t('detail.request')}</SectionHeading>
-                <p className="mt-6 max-w-[34ch] text-body text-ink-60">{tp('pages.services.note')}</p>
+      <Section id="enquiry" tone="paper" className="scroll-mt-24 pb-20 md:pb-28">
+        <SectionBody>
+          <div className="grid gap-10 md:grid-cols-12 md:gap-12 lg:gap-16">
+            <div className="md:col-span-5">
+              {/* The eyebrow is the SERVICE here, not the section name.
+                 Section 2 can print "What we offer" over the service's own
+                 headline because the two say different things; printing
+                 "Send an enquiry" over "Send an enquiry" is the echo that
+                 got the old ruled eyebrow removed in the first place. The
+                 service name in that slot earns its place — it says what
+                 the enquiry is about. */}
+              <Eyebrow tone="gold-deep">{plainTitle}</Eyebrow>
+              <SectionHeading className="mt-5">{t('detail.request')}</SectionHeading>
+              <p className="mt-6 max-w-[34ch] text-body text-ink-60">{tp('pages.services.note')}</p>
 
-                <ul className="mt-8 divide-y divide-ink/10 border-y border-ink/10">
-                  <ContactRow label={tf('email')} href={`mailto:${CAMPAIGN.contactEmail}`}>
-                    {CAMPAIGN.contactEmail}
-                  </ContactRow>
-                  <ContactRow
-                    label={tf('phone')}
-                    href={`tel:${CAMPAIGN.contactPhone.replace(/\s/g, '')}`}
-                  >
-                    {/* In an RTL paragraph the spaces inside a phone number
-                       are neutral, so the groups get reordered: +47 22 20 80
-                       88 renders as 88 80 20 22 47+, which is a different
-                       number. bdi isolates it and dir pins it LTR. */}
-                    <bdi dir="ltr">{CAMPAIGN.contactPhone}</bdi>
-                  </ContactRow>
-                  <ContactRow label={tf('address')}>{CAMPAIGN.address}</ContactRow>
-                </ul>
+              <ul className="mt-8 divide-y divide-ink/10 border-y border-ink/10">
+                <ContactRow label={tf('email')} href={`mailto:${CAMPAIGN.contactEmail}`}>
+                  {CAMPAIGN.contactEmail}
+                </ContactRow>
+                <ContactRow
+                  label={tf('phone')}
+                  href={`tel:${CAMPAIGN.contactPhone.replace(/\s/g, '')}`}
+                >
+                  {/* In an RTL paragraph the spaces inside a phone number
+                     are neutral, so the groups get reordered: +47 22 20 80
+                     88 renders as 88 80 20 22 47+, which is a different
+                     number. bdi isolates it and dir pins it LTR. */}
+                  <bdi dir="ltr">{CAMPAIGN.contactPhone}</bdi>
+                </ContactRow>
+                <ContactRow label={tf('address')}>{CAMPAIGN.address}</ContactRow>
+              </ul>
 
-                {/* The second photograph, moved down from section 2. It fills
-                   the tail of the rail, which was ~150px of empty green. */}
-                <div className="relative mt-8 hidden aspect-[3/2] overflow-hidden rounded-[1.25rem] rounded-se-[3rem] bg-paper-deep ring-1 ring-ink/5 md:block">
-                  <Image
-                    src={SERVICE_STORY[s].src}
-                    alt=""
-                    fill
-                    sizes="(min-width: 1152px) 430px, 40vw"
-                    className={cn('object-cover', SERVICE_STORY[s].objectClass)}
-                    // The site's own grade, so a second photograph on the
-                    // page sits in the same light as the band above it.
-                    style={{ filter: 'saturate(0.72) contrast(1.12) brightness(0.9)' }}
-                  />
-                </div>
-              </div>
-              <div className="md:col-span-7">
-                {/* A paper card on the green, so the form matches the card
-                   language section 2 sets. `card` also switches the wells to
-                   bg-paper-2, which is the correct fill inside a paper panel
-                   — a paper well on a paper card would vanish. */}
-                <RequestForm subject={s as RequestSubject} card rule={false} />
+              {/* The second photograph, moved down from section 2. It fills
+                 the tail of the rail, which was ~150px of empty green. */}
+              <div className="relative mt-8 hidden aspect-[3/2] overflow-hidden rounded-[1.25rem] rounded-se-[3rem] bg-paper-deep ring-1 ring-ink/5 md:block">
+                <Image
+                  src={SERVICE_STORY[s].src}
+                  alt=""
+                  fill
+                  sizes="(min-width: 1152px) 430px, 40vw"
+                  className={cn('object-cover', SERVICE_STORY[s].objectClass)}
+                  // The site's own grade, so a second photograph on the
+                  // page sits in the same light as the band above it.
+                  style={{ filter: 'saturate(0.72) contrast(1.12) brightness(0.9)' }}
+                />
               </div>
             </div>
-          </SectionBody>
-        </div>
-      </section>
+            <div className="md:col-span-7">
+              {/* The card is the same tone as the ground it stands on, so
+                 what reads is its radius and its long soft shadow rather
+                 than a fill — which is the point of a white section. `card`
+                 also switches the wells to bg-paper-2, and that is what
+                 carries the form: sunken warm fields on white. */}
+              <RequestForm subject={s as RequestSubject} card rule={false} />
+            </div>
+          </div>
+        </SectionBody>
+      </Section>
       {/* The "Coming in person" band (ServiceVisit) was removed on 2026-08-31:
          it repeated verbatim on this page, the services index and all eleven
          subject pages, so the address stopped registering as information and
