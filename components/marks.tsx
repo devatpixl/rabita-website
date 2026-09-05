@@ -123,119 +123,14 @@ export function OrbitMark({ className }: MarkProps) {
   );
 }
 
-/* A mashrabiya: the pierced screen. The one piece of this architecture whose
-   whole purpose is that you can see out and nobody sees in — so on the
-   counselling page, where the copy promises a confidential conversation, it
-   is a citation rather than an ornament.
-
-   Note the band on that page still draws NOTHING; that decision stands. This
-   is a different surface answering a different question. */
-export function LatticeMark({ className }: MarkProps) {
-  // The screen itself: a diamond lattice, struck as two families of 45deg
-  // lines and clipped to the frame.
-  //
-  // The first attempt drew verticals crossed by zigzags, which at feature
-  // size read as a roof truss rather than as a pierced screen. Diagonals on
-  // a single pitch are what the eye actually recognises as mashrabiya.
-  const diagonals: string[] = [];
-  for (let c = -300; c <= 240; c += 42) {
-    diagonals.push(`M60 ${60 + c}L420 ${420 + c}`); // one family
-    diagonals.push(`M60 ${420 + c}L420 ${60 + c}`); // and its mirror
-  }
-  return (
-    <svg {...COMMON} className={className} aria-hidden>
-      <defs>
-        <clipPath id="rabita-mark-lattice">
-          <path d="M120 340V150c0-44 54-74 120-74s120 30 120 74v190Z" />
-        </clipPath>
-      </defs>
-      {/* the frame, with a shallow arched head */}
-      <path d="M120 340V150c0-44 54-74 120-74s120 30 120 74v190" />
-      <g clipPath="url(#rabita-mark-lattice)">
-        {diagonals.map((d) => (
-          <path key={d} d={d} />
-        ))}
-        {/* the rail that divides the screen, and the head it springs from */}
-        <path d="M120 150h240M120 244h240" />
-      </g>
-      {/* the sill */}
-      <path d="M96 340h288" />
-      {/* the pull */}
-      <circle cx="240" cy="244" r="5" />
-    </svg>
-  );
-}
-
-/* A doorway with one leaf standing open, and the light it throws on the
-   floor. Not the mihrab — ArchMark is a niche you face; this is an opening
-   you walk through, which is what taking shahada is. */
-export function ThresholdMark({ className }: MarkProps) {
-  return (
-    <svg {...COMMON} className={className} aria-hidden>
-      {/* the opening */}
-      <path d="M150 316V152c0-50 40-90 90-90s90 40 90 90v164" />
-      <path d="M178 316V156c0-34 28-62 62-62s62 28 62 62v160" />
-      {/* the leaf, swung in */}
-      <path d="M302 316V116l56-26v226" />
-      <path d="M302 140l56-24" />
-      <circle cx="312" cy="216" r="4" />
-      {/* the step, and the light across it */}
-      <path d="M120 316h240" />
-      <path d="M96 340h288" />
-      <path d="M178 340l-34-24M240 340l-30-24M302 340l-26-24" />
-    </svg>
-  );
-}
-
-/* A rihal — the folding stand a mushaf rests on — with the book open on it.
-   For the Qur'an and Arabic teaching. */
-export function LecternMark({ className }: MarkProps) {
-  return (
-    <svg {...COMMON} className={className} aria-hidden>
-      {/* the two crossed leaves */}
-      <path d="M156 340l124-176M324 340L200 164" />
-      <path d="M186 258h108" />
-      {/* the book, two leaves and the spine between them */}
-      <path d="M240 150c-26-18-54-26-84-24v104c30-2 58 6 84 24" />
-      <path d="M240 150c26-18 54-26 84-24v104c-30-2-58 6-84 24" />
-      <path d="M240 150v104" />
-      {/* the floor */}
-      <path d="M120 340h240" />
-    </svg>
-  );
-}
-
-/* A lawh — the wooden tablet children learn to write on, hung on its peg,
-   with the ruled lines still on it. For the school. */
-export function SlateMark({ className }: MarkProps) {
-  return (
-    <svg {...COMMON} className={className} aria-hidden>
-      {/* the peg and its cord */}
-      <circle cx="240" cy="44" r="7" />
-      <path d="M240 51v29" />
-      {/* the handle, and the tablet hanging from it */}
-      <path d="M212 80h56a12 12 0 0 1 0 24h-56a12 12 0 0 1 0-24Z" />
-      <path d="M148 104h184v212H148Z" />
-      <path d="M164 120h152v180H164Z" />
-      {/* the ruled lines */}
-      <path d="M180 156h120M180 192h120M180 228h120M180 264h86" />
-      {/* the ground */}
-      <path d="M108 340h264" />
-    </svg>
-  );
-}
-
-// One map, imported by both the band and the service body, so the two
-// cannot drift apart.
-export const MARK_COMPONENTS = {
-  elevation: ElevationMark,
-  arch: ArchMark,
-  rosette: RosetteMark,
-  orbit: OrbitMark,
-  lattice: LatticeMark,
-  threshold: ThresholdMark,
-  lectern: LecternMark,
-  slate: SlateMark,
-} as const;
-
-export type MarkName = keyof typeof MARK_COMPONENTS;
+// Four marks, and four is the whole set. There were eight for one day: a
+// mashrabiya, an open door, a rihal and a lawh, drawn so the service pages
+// could carry one each as a FEATURE — a ~380px drawing on a lit plate
+// beside the copy. The client's verdict on seeing them was that they look
+// fake, and they were right: invented artwork does not survive being set
+// at full size a few hundred pixels under a photograph of real people.
+//
+// The four that remain are only ever watermarks, at about 6% behind a
+// headline on a photograph, where they are texture and not a picture.
+// That is the only job these are good at, and it is the only job they
+// still have.

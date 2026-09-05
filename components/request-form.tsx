@@ -151,6 +151,7 @@ export function RequestForm({
   heading,
   card = false,
   tone = 'paper',
+  rule = true,
 }: {
   subject: RequestSubject;
   /** Serif title set inside the form, above the first rule. */
@@ -164,8 +165,20 @@ export function RequestForm({
    *  Replaces the old `ornate` flag (2026-09-05, client). Everything ornate
    *  used to gate — the gold marks beside labels, the lock on the privacy
    *  line — is simply the form now, on every page; what actually differs
-   *  between placements is the ground, and that is what this says. */
+   *  between placements is the ground, and that is what this says.
+   *
+   *  Nothing passes 'dusk' at the moment: the service pages carried the
+   *  form on a dusk plate for a few hours before the client moved it to
+   *  the pale green. The dusk half stays because it is complete and tested
+   *  (down to repainting Chrome's autofill, which on navy is otherwise a
+   *  white block in a dark well), and because this form has already
+   *  changed ground twice. */
   tone?: FormTone;
+  /** The black hairline that opens the form. It exists for /kontakt and
+   *  /besok-oss, where the form follows body copy in the same column and
+   *  needs the break; pass false where the form already has a column, a
+   *  card or a plate of its own. */
+  rule?: boolean;
 }) {
   const t = useTranslations('requestForm');
   const c = TONE[tone];
@@ -232,7 +245,7 @@ export function RequestForm({
     return (
       // No border-t here any more. The heavy black rule the ornate variant
       // reinstated was never part of this panel; the diamond opens it.
-      <div className={cn(shell, tone === 'paper' && !card ? 'pt-8' : '')} role="status">
+      <div className={cn(shell, rule && tone === 'paper' && !card ? 'pt-8' : '')} role="status">
         <span aria-hidden className={cn('block h-2.5 w-2.5 rotate-45', c.diamond)} />
         <p className={cn('mt-5 font-serif text-[1.6rem] leading-tight', c.doneH)}>{t('doneTitle')}</p>
         <p className={cn('mt-3 max-w-prose text-body', c.doneB)}>{t('doneBody')}</p>
@@ -254,7 +267,7 @@ export function RequestForm({
          /kontakt and /besok-oss set the form directly under body copy and
          need the break. A card brings its own edge, and the dusk plate is
          its own edge. */}
-      {tone === 'paper' && !card && <div className={cn(heading ? 'mt-4' : '', 'border-t border-ink')} />}
+      {rule && tone === 'paper' && !card && <div className={cn(heading ? 'mt-4' : '', 'border-t border-ink')} />}
 
       {/* Name and contact share a row from sm. gap-y-4, not gap-y-7: the
          wells carry their own 3px of internal padding on every side, so the
@@ -266,7 +279,7 @@ export function RequestForm({
           // after a heading with no hairline, clear the heading; at the top
           // of its own column on the dusk plate, nothing — the form's first
           // field has to line up with the rail's eyebrow beside it.
-          tone === 'paper' && !card ? 'pt-6' : heading ? 'mt-6' : '',
+          rule && tone === 'paper' && !card ? 'pt-6' : heading ? 'mt-6' : '',
         )}
       >
         <Field id={`${uid}-name`} label={t('name')} icon="person" tone={tone} card={card}>

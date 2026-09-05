@@ -1,5 +1,4 @@
 import type { BandMark, BandTone } from '@/components/page-band';
-import type { MarkName } from '@/components/marks';
 
 // The service list, in one place. Both the index (components/service-index.tsx)
 // and the detail route (app/[locale]/tjenester/[subject]) read from here, so a
@@ -99,30 +98,6 @@ export const SERVICE_BAND: Record<
   skole: { objectClass: 'object-[50%_26%] md:object-[50%_30%]', tone: 'calm', mark: 'rosette' },
   koran: { objectClass: 'object-[50%_45%]', tone: 'calm', mark: 'rosette' },
   kurs: { objectClass: 'object-[50%_40%]', tone: 'calm', mark: 'rosette' },
-};
-
-// The drawing the BODY of a service page carries — deliberately NOT
-// SERVICE_BAND[k].mark. Two maps for the same reason SERVICE_FOCUS and
-// SERVICE_BAND are two maps: the band's mark is a watermark at 6% behind a
-// headline, this is a ~380px drawing on a lit sheet. They answer different
-// questions and want different pictures.
-//
-// A total Record with NO 'none' member, so a service page cannot exist
-// without a drawing — that is a type error rather than an empty plate.
-export const SERVICE_FEATURE_MARK: Record<ServiceKey, MarkName> = {
-  nikah: 'elevation', // a nikah happens at the mosque; the building itself
-  janaza: 'arch', // the prayer hall, where janaza salah is prayed
-  shahada: 'threshold', // a door standing open. Shahada is a beginning.
-  // The mashrabiya: the one piece of this architecture built so that you can
-  // see out and nobody sees in. The counselling copy promises a confidential
-  // conversation, so the screen is a citation, not an ornament. Its BAND
-  // still draws nothing — that decision stands, and this is a different
-  // surface answering a different question.
-  counselling: 'lattice',
-  'hajj-umrah': 'orbit',
-  skole: 'slate', // the lawh, the tablet children learn to write on
-  koran: 'lectern', // the rihal, the book on its stand
-  kurs: 'rosette', // the construction the geometry course actually teaches
 };
 
 // Which family a service belongs to, so the band can print a group label as

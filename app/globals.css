@@ -697,15 +697,15 @@ body.sheet-open {
   .brand-type-stage__sig em { color: #faf8f4; }
 }
 
-/* The enquiry plate's ground.
-   .star-texture above was calibrated at 1.5% against a dark surface it never
-   actually shipped on. The tile is brand gold (mean rgb(189,164,111)); at
-   1.5% over #16242E that is a three-unit shift — invisible, and it bands
-   before it reads. 4.5% is where the mark becomes a ground without becoming
-   a pattern. */
-.star-texture--plate::before {
+/* The star ground on a LIGHT surface.
+   .star-texture above is calibrated at 1.5% for a dark one. The tile is
+   brand gold (mean rgb(189,164,111)); over #F2EEE7 that is about a
+   one-unit shift, which is nothing. 3.5% is where the mosque's own mark
+   becomes a ground without becoming wallpaper, and the larger tile keeps
+   it reading as texture rather than as a repeat. */
+.star-texture--light::before {
   opacity: 0.035;
-  background-size: 300px 300px;
+  background-size: 320px 320px;
 }
 
 /* The focus ring on a dusk form.
