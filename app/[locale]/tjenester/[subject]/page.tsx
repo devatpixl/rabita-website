@@ -1,15 +1,18 @@
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
 import { RequestForm, type RequestSubject } from '@/components/request-form';
 import { PageBand } from '@/components/page-band';
 import { Accent } from '@/components/accent';
 import { CAMPAIGN } from '@/lib/campaign';
+import { cn } from '@/lib/cn';
 import {
   SERVICE_BAND,
   SERVICE_GROUP_OF,
   SERVICE_IMAGE,
   SERVICE_KEYS,
+  SERVICE_STORY,
   type ServiceKey,
 } from '@/lib/services';
 
@@ -76,53 +79,96 @@ export default async function ServiceDetail({
       />
 
       {/* ── 2. What this is ────────────────────────────────────────────────
-         One centred statement, and nothing else in the section.
+         A second real photograph, and the sentence that says what the
+         service is.
 
-         This replaced a two-column layout whose right half was a large
-         line-drawing on an "architect's sheet" plate — a mihrab, a lattice,
-         a lectern, one per service. The client's read, and it is the right
-         one: "looks fake, all these things you generated". They were
-         invented artwork sitting a few hundred pixels under a real
-         photograph of real people, and that is exactly how they read. Every
-         one of them is gone, along with the map that assigned them.
+         Two things have been tried here and rejected. First a large
+         invented line-drawing on an "architect's sheet" plate, one per
+         service — "looks fake", and it was: drawn artwork does not survive
+         being set at full size a few hundred pixels under a photograph of
+         real people. Then the drawing was simply removed and the sentence
+         centred on its own — "very basic", which it was, because a heading
+         and one paragraph is not a section.
 
-         What is left is the only thing on this page that has to be here:
-         the sentence that says what the service is. It gets the full
-         measure, set large, with air around it. That also settles the
-         layout problem for good — the copy runs 149-379 characters across
-         the eight services, and a single centred column cannot develop the
-         493px of dead space the old side-by-side grid did, whatever length
-         the copy turns out to be. */}
+         The answer to both is the same: real content. The photograph comes
+         from the mosque's own library (lib/services.ts, SERVICE_STORY) and
+         is never the one the band above is already showing.
+
+         The picture goes on the START side, opposite the band's, so the two
+         alternate down the page instead of stacking two pictures on the
+         same edge. items-center, because the copy runs 149-379 characters
+         across the eight services and the frame is a fixed 4:5 — top
+         aligned, the short pages would hang three lines beside a tall
+         photograph. */}
       <Section tone="paper-2" className="relative isolate overflow-hidden">
-        {/* Light in the ground rather than a flat tint. Two blooms, wide
-           and low-contrast, so the section has depth without an image. */}
+        {/* Light in the ground rather than a flat tint. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-32 start-1/2 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-gold/[0.06] blur-3xl"
+          className="pointer-events-none absolute -top-32 end-[6%] -z-10 h-[34rem] w-[34rem] rounded-full bg-gold/[0.06] blur-3xl"
         />
-        {/* And the mosque's own mark as ground, which is the one piece of
-           pattern on this page that is not invented — it is the logo, the
-           same tile the facade carries. On its own childless layer:
-           .star-texture sets `> * { position: relative }` and would drop
-           any absolutely positioned sibling into the flow. */}
+        {/* And the mosque's own mark as ground — the logo, the same tile the
+           facade carries. On its own childless layer: .star-texture sets
+           `> * { position: relative }` and would drop any absolutely
+           positioned sibling into the flow. */}
         <div
           aria-hidden
           className="star-texture star-texture--light pointer-events-none absolute inset-0 -z-10"
         />
         <SectionBody>
-          <div className="mx-auto max-w-[46rem] text-center">
-            {/* The house section-opener: a short gold tick. Centred, it
-               replaces the ruled eyebrow that used to sit here — that
-               eyebrow printed the heading's own words directly above the
-               heading, which reads as a design detail beside a column and
-               as a mistake in the middle of one. */}
-            <span aria-hidden className="mx-auto block h-0.5 w-10 bg-gold-deep" />
-            <SectionHeading className="mt-6">{t('detail.what')}</SectionHeading>
-            {/* Serif, and a size up from text-body: this is the page's
-               statement, not a paragraph inside something longer. */}
-            <p className="mx-auto mt-7 max-w-[42ch] font-serif text-[clamp(1.15rem,1.15rem+0.5vw,1.5rem)] leading-[1.55] text-pretty text-ink">
-              {t(`items.${s}.longBody`)}
-            </p>
+          <div className="grid gap-10 md:grid-cols-12 md:items-center md:gap-14 lg:gap-16">
+            <div className="relative md:col-span-5">
+              {/* The offset outline behind the frame: one hairline
+                 rectangle, pushed down and out. It gives the picture a
+                 second edge to sit against, which is what stops a lone
+                 photograph on a flat ground reading as a placeholder.
+                 Logical -end/-bottom, so it swaps sides in Arabic. */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 -z-10 hidden translate-x-4 translate-y-4 rounded-[1.5rem] rounded-se-[4.5rem] border border-gold-deep/30 sm:block rtl:-translate-x-4"
+              />
+              {/* rounded-se, the LOGICAL corner: start-end. It mirrors to the
+                 other shoulder in Arabic on its own, where rounded-tr would
+                 stay put and land on the wrong one. */}
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] rounded-se-[4.5rem] bg-paper-deep ring-1 ring-ink/5">
+                <Image
+                  src={SERVICE_STORY[s].src}
+                  alt=""
+                  fill
+                  sizes="(min-width: 1152px) 430px, (min-width: 768px) 40vw, calc(100vw - 3rem)"
+                  className={cn('object-cover', SERVICE_STORY[s].objectClass)}
+                  // The site's own grade, so a second photograph on the page
+                  // sits in the same light as the band above it.
+                  style={{ filter: 'saturate(0.72) contrast(1.12) brightness(0.9)' }}
+                />
+              </div>
+            </div>
+
+            <div className="md:col-span-6 md:col-start-7">
+              {/* The house section-opener: a short gold tick. It replaces
+                 the ruled eyebrow that used to sit here, which printed the
+                 heading's own words directly above the heading. */}
+              <span aria-hidden className="block h-0.5 w-10 bg-gold-deep" />
+              <SectionHeading className="mt-6">{t('detail.what')}</SectionHeading>
+              {/* Serif, and a size up from text-body: this is the page's
+                 statement, not a paragraph inside something longer. */}
+              <p className="mt-6 max-w-[44ch] font-serif text-[clamp(1.1rem,1.05rem+0.4vw,1.35rem)] leading-[1.55] text-pretty text-ink">
+                {t(`items.${s}.longBody`)}
+              </p>
+              {/* A foot for the column, and on a phone a genuine shortcut:
+                 the form is a long way down from here. */}
+              <a
+                href="#enquiry"
+                className="group mt-8 inline-flex min-h-11 items-center gap-3 border-t border-ink/15 pt-6 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink transition-colors hover:text-gold-deep"
+              >
+                {t('detail.request')}
+                <span
+                  aria-hidden
+                  className="transition-transform duration-200 group-hover:translate-y-0.5"
+                >
+                  &darr;
+                </span>
+              </a>
+            </div>
           </div>
         </SectionBody>
       </Section>
@@ -142,7 +188,7 @@ export default async function ServiceDetail({
          band it was an orphan hairline over 190px of nothing; beside the
          form it is what it always meant — the alternative to filling this
          in. */}
-      <section className="bg-[#e3eae4]">
+      <section id="enquiry" className="scroll-mt-24 bg-[#e3eae4]">
         <div aria-hidden className="h-24 bg-gradient-to-b from-paper-2 to-[#e3eae4] md:h-36" />
         <div className="pb-section-lg md:pb-24">
           <SectionBody>

@@ -100,6 +100,44 @@ export const SERVICE_BAND: Record<
   kurs: { objectClass: 'object-[50%_40%]', tone: 'calm', mark: 'rosette' },
 };
 
+// A SECOND photograph per service, for the body of the page.
+//
+// The section it fills held a large invented line-drawing until 2026-09-05
+// — a mihrab, a mashrabiya, a rihal — and the client's verdict was that
+// they look fake. They did: drawn artwork does not survive being set at
+// full size a few hundred pixels under a photograph of real people. What
+// replaced it was a centred paragraph on its own, and the verdict on that
+// was "very basic", which was also fair.
+//
+// So: another real photograph, from the mosque's own library, never the
+// one the band above is already showing. Every frame here is a 4:5
+// portrait, which is why the sources are chosen from the portrait and
+// square-ish end of the library rather than the 16:9 hero crops.
+//
+// The pairings are meant, not filled in:
+//   nikah        the room a nikah is actually held in
+//   janaza       an embrace — the consolation, not the funeral
+//   shahada      a welcome, which is what taking shahada is met with
+//   counselling  the women's circle; the copy promises a female counsellor
+//   hajj-umrah   a full congregation, the nearest thing here to the crowd
+//   skole        children at the mosque, not an empty room. learn-classroom
+//                was the obvious pick and it is a 1600x1000 lecture hall: in
+//                a 4:5 frame it crops to ceiling.
+//   koran        the mushaf open on its rihal
+//   kurs         the building's own brick geometry — the calligraphy and
+//                geometry course teaches exactly this construction, so the
+//                photograph is a citation rather than a decoration
+export const SERVICE_STORY: Record<ServiceKey, { src: string; objectClass: string }> = {
+  nikah: { src: '/photos/svc-prayer.webp', objectClass: 'object-center' },
+  janaza: { src: '/photos/svc-services.webp', objectClass: 'object-[42%_38%]' },
+  shahada: { src: '/photos/svc-gathering.webp', objectClass: 'object-[50%_45%]' },
+  counselling: { src: '/photos/community/womens-circle.webp', objectClass: 'object-[50%_40%]' },
+  'hajj-umrah': { src: '/photos/prayer-congregation.webp', objectClass: 'object-[50%_55%]' },
+  skole: { src: '/photos/event-workshop.webp', objectClass: 'object-[50%_45%]' },
+  koran: { src: '/photos/learn-school.webp', objectClass: 'object-[50%_60%]' },
+  kurs: { src: '/photos/svc-wudu.webp', objectClass: 'object-center' },
+};
+
 // Which family a service belongs to, so the band can print a group label as
 // the second half of its kicker. Same eight as SERVICE_GROUPS, but as a
 // lookup rather than an ordering.
