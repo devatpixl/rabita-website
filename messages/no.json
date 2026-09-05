@@ -116,7 +116,7 @@
         },
         {
           "label": "Hajj og umrah",
-          "blurb": "Informasjon, forberedelse og henvisninger.",
+          "blurb": "Egne hajj- og umra-reiser, organisert av Rabita.",
           "href": "/tjenester/hajj-umrah"
         },
         {
@@ -947,7 +947,7 @@
       },
       "hajj-umrah": {
         "title": "Hajj og umra",
-        "sentence": "Forberedelse, informasjon og henvisning til erfarne reiseledere."
+        "sentence": "Egne hajj- og umra-reiser hvert år, organisert av frivillige i Rabita."
       },
       "education": {
         "title": "Undervisning",
@@ -1580,42 +1580,229 @@
       "nikah": {
         "title": "Nikah: <em>ekteskapsseremoni</em>",
         "body": "Islamsk vielse, med eller uten juridisk registrering.",
-        "longBody": "Vi arrangerer nikah både på moskeen og på andre steder etter avtale. Vitner og imam koordineres. Juridisk registrering håndteres via norsk folkeregister; vi hjelper med formalia."
+        "longBody": "Vi arrangerer nikah både på moskeen og på andre steder etter avtale. Vitner og imam koordineres. Juridisk registrering håndteres via norsk folkeregister; vi hjelper med formalia.",
+        "offerTitle": "Nikah-en deres, godt forberedt",
+        "offerLede": "Vi holder den islamske seremonien, og hjelper dere gjennom formalitetene som kommer før den. Ta kontakt i god tid, så finner vi en dato sammen.",
+        "offer": [
+          {
+            "title": "Prøving av ekteskapsvilkår",
+            "body": "Første steg er Skatteetaten. Det er de som utsteder attesten som viser at dere kan gifte dere.",
+            "detail": "Ta kontakt med Skatteetaten før dere gjør noe annet. Uten denne attesten kommer verken vigsel eller nikah videre."
+          },
+          {
+            "title": "Den juridiske vigselen",
+            "body": "Med attesten på plass tar dere kontakt med en vigselsmann — Rådhuset eller en annen godkjent instans.",
+            "detail": "Rabita har søkt om vigselsrett og avventer svar. Per i dag kan vi derfor ikke stå for den juridiske vigselen selv."
+          },
+          {
+            "title": "Den islamske seremonien",
+            "body": "Selve nikah-en holder vi i moskeen, eller et annet sted etter avtale. Vitner og imam koordineres.",
+            "detail": "Ta kontakt for å avtale tid og sted. Fortell gjerne om planlagt dato og hvor mange dere venter."
+          },
+          {
+            "title": "Det vi trenger først",
+            "body": "Før vi lager en avtale må dere vise fram en godkjent vigselsattest.",
+            "detail": "Uten attesten kan Rabita dessverre ikke bistå. Dette er et krav vi ikke kan gjøre unntak fra."
+          }
+        ]
       },
       "janaza": {
         "title": "Janaza: <em>begravelse</em>",
         "body": "Vasking, bønn og koordinering med gravlund.",
-        "longBody": "Janaza-tjenesten er tilgjengelig døgnet rundt. Vi hjelper med praktiske avtaler mot Alfaset gravlund og andre begravelsesplasser i Oslo. Ingen kostnad for medlemmer."
+        "longBody": "Janaza-tjenesten er tilgjengelig døgnet rundt. Vi hjelper med praktiske avtaler mot Alfaset gravlund og andre begravelsesplasser i Oslo. Ingen kostnad for medlemmer.",
+        "offerTitle": "Vi er her, hele døgnet",
+        "offerLede": "Å miste noen er tungt nok. Vi tar imot henvendelser når som helst på døgnet, og hjelper med det praktiske rundt bønnen og gravferden.",
+        "offer": [
+          {
+            "title": "Døgnåpent",
+            "body": "Janaza-tjenesten er tilgjengelig hele døgnet, alle dager i året.",
+            "detail": "Ved hastesaker: ring resepsjonen framfor å skrive. Da får dere svar med én gang."
+          },
+          {
+            "title": "Janaza-bønnen",
+            "body": "Salat al-janaza holdes i moskeen. Vi tilrettelegger for familien og for dem som kommer."
+          },
+          {
+            "title": "Gravlund og praktiske avtaler",
+            "body": "Vi hjelper med avtaler mot Alfaset gravlund og andre begravelsesplasser i Oslo.",
+            "detail": "For den praktiske og juridiske gjennomføringen anbefaler vi at dere også bruker et begravelsesbyrå."
+          },
+          {
+            "title": "Ingen kostnad for medlemmer",
+            "body": "Janaza-tjenesten er gratis for medlemmer av Rabita."
+          }
+        ]
       },
       "shahada": {
         "title": "Shahada: <em>bekjennelse</em>",
         "body": "For deg som ønsker å ta shahada, med vitner.",
-        "longBody": "Vi tar imot både private og offentlige shahada-seremonier. Ta kontakt for å avtale tid. Vi ordner vitner ved behov og gir kort veiledning i etterkant."
+        "longBody": "Vi tar imot både private og offentlige shahada-seremonier. Ta kontakt for å avtale tid. Vi ordner vitner ved behov og gir kort veiledning i etterkant.",
+        "offerTitle": "Ta shahada, i ditt eget tempo",
+        "offerLede": "Ingen blir presset til noe her. Kom innom for en uforpliktende prat først, og ta steget når du selv er klar.",
+        "offer": [
+          {
+            "title": "En uforpliktende samtale",
+            "body": "Du kan komme innom for å lære mer eller stille spørsmål, uten at det forplikter deg til noe.",
+            "detail": "Send oss gjerne en e-post på forhånd, så sørger vi for at noen er til stede og møter deg."
+          },
+          {
+            "title": "Trosbekjennelsen",
+            "body": "For å bli muslim sier man shahada: «Ashhadu an la ilaha illa Allah wa-ashhadu anna Muhammadan rasul Allah».",
+            "detail": "«Jeg bevitner at Allah er den eneste guddom, og at Muhammad (fred være med ham) er hans sendebud.» Etter denne setningen er man muslim."
+          },
+          {
+            "title": "Vitner og seremoni",
+            "body": "Vi tar imot både private og offentlige seremonier, og ordner vitner ved behov.",
+            "detail": "Ta kontakt for å avtale tid. Vi gir også kort veiledning i etterkant."
+          },
+          {
+            "title": "Kurs for nye muslimer",
+            "body": "Hver fredag holder vi et kurs om grunnleggende temaer i islam. Ingen forkunnskaper kreves.",
+            "detail": "Fredager kl. 17:00–19:00 i Calmeyers gate 8, 3. etasje. Ingen påmelding. Spørsmål: nyemuslimer@rabita.no"
+          }
+        ]
       },
       "counselling": {
         "title": "Samtaler og <em>megling</em>",
         "body": "Fortrolige samtaler med imam eller kvinnelig rådgiver, og hjelp til å løse konflikter.",
-        "longBody": "Vi tilbyr både korte og lengre samtaler, individuelt eller i par. Alle henvendelser er konfidensielle. Vi kan tilby både mannlig imam og kvinnelig veileder. Imamene våre megler i konflikter mellom ektefeller, i familier og mellom naboer. Samtalene er konfidensielle og bygger på tillit fra begge parter. Ta kontakt for å avtale et første møte."
+        "longBody": "Vi tilbyr både korte og lengre samtaler, individuelt eller i par. Alle henvendelser er konfidensielle. Vi kan tilby både mannlig imam og kvinnelig veileder. Imamene våre megler i konflikter mellom ektefeller, i familier og mellom naboer. Samtalene er konfidensielle og bygger på tillit fra begge parter. Ta kontakt for å avtale et første møte.",
+        "offerTitle": "En trygg arena for samtale",
+        "offerLede": "Har du noe du vil snakke om — religion, familie eller det sosiale — er vi her. Tjenesten er gratis, og alt som sies blir mellom oss.",
+        "offer": [
+          {
+            "title": "Familiekonflikter",
+            "body": "Vi hjelper med å finne konstruktive løsninger, og veileder partene mot bedre dialog.",
+            "detail": "Samtalene er fortrolige og bygger på tillit fra begge parter."
+          },
+          {
+            "title": "Mekling i konfliktsituasjoner",
+            "body": "Vi kan tre inn som nøytral mekler der begge parter er enige om det.",
+            "detail": "Imamene våre megler mellom ektefeller, i familier og mellom naboer."
+          },
+          {
+            "title": "Personlige samtaler",
+            "body": "Er du usikker, bekymret, eller vil bare tenke høyt, er vi tilgjengelige for en åpen og fortrolig samtale.",
+            "detail": "Vi kan tilby både mannlig imam og kvinnelig rådgiver. Si gjerne fra hva du foretrekker."
+          },
+          {
+            "title": "Konversjon",
+            "body": "Vurderer du å konvertere til islam, eller er du rett og slett nysgjerrig? Ta kontakt, så tar vi en uforpliktende prat."
+          }
+        ]
       },
       "hajj-umrah": {
         "title": "Hajj og <em>umrah</em>",
-        "body": "Informasjon, forberedelse og henvisninger.",
-        "longBody": "Rabita organiserer ikke selv reiser, men vi hjelper med forberedelse, informasjon og henvisninger til erfarne reisebyråer og imamer som følger grupper."
+        "body": "Egne hajj- og umra-reiser, organisert av Rabita.",
+        "longBody": "Rabita har et eget hajj- og umrakontor, drevet av frivillige, og kontoret har blitt den største aktøren i Norge på dette feltet. Hajj-reiser tilbys hvert år i måneden dhul hijja, og umra-reiser to til tre ganger i året. Ta kontakt med kontoret på 40 29 20 20 eller Hajjogumrah@gmail.com.",
+        "offerTitle": "Reisen til Mekka, i trygge hender",
+        "offerLede": "Pilegrimsreisen er den femte søylen i islam. Rabita har et eget hajj- og umrakontor, drevet av frivillige som har gjort dette i mange år.",
+        "offer": [
+          {
+            "title": "Hajj hvert år",
+            "body": "Vi tilbyr hajj-reiser hvert år, i måneden dhul hijja.",
+            "detail": "Pilegrimsreisen til Mekka er et krav til enhver muslim som er finansielt og fysisk i stand til å ta den."
+          },
+          {
+            "title": "Umra to til tre ganger i året",
+            "body": "Umra-reiser går to til tre ganger i løpet av året."
+          },
+          {
+            "title": "Norges største aktør",
+            "body": "Kontoret vårt har blitt den største aktøren i Norge når det gjelder hajj og umra.",
+            "detail": "Reisene organiseres av et team frivillige i Rabita, som har stor glede av arbeidet."
+          },
+          {
+            "title": "Hajj- og umrakontoret",
+            "body": "Ta kontakt med kontoret direkte for program, priser og ledige plasser.",
+            "detail": "Telefon 40 29 20 20 · Hajjogumrah@gmail.com"
+          }
+        ]
       },
       "skole": {
         "title": "Rabita <em>skole</em>",
         "body": "Lørdagsskole for barn og unge fra 6 til 16 år.",
-        "longBody": "Rabita skole er lørdagsskolen vår for barn og unge i alderen 6–16 år. I 2025 hadde skolen 225 elever fordelt på 13 klasser. Undervisningen omfatter arabisk språk, islamsk lære og Koran, og holdes i leide lokaler ved Hersleb skole. Alle faste lærere har pedagogisk kompetanse og arbeider til daglig i norske utdanningsinstitusjoner. Skolen markerer også religiøse høytider gjennom året."
+        "longBody": "Rabita skole er lørdagsskolen vår for barn og unge i alderen 6–16 år. I 2025 hadde skolen 225 elever fordelt på 13 klasser. Undervisningen omfatter arabisk språk, islamsk lære og Koran, og holdes i leide lokaler ved Hersleb skole. Alle faste lærere har pedagogisk kompetanse og arbeider til daglig i norske utdanningsinstitusjoner. Skolen markerer også religiøse høytider gjennom året.",
+        "offerTitle": "Lørdagsskolen, uke etter uke",
+        "offerLede": "Rabita skole gir barn og unge undervisning i arabisk, islamsk lære og Koran — én dag i uken, gjennom hele skoleåret.",
+        "offer": [
+          {
+            "title": "For barn og unge fra 6 til 16",
+            "body": "Undervisningen foregår én gang i uken, som regel på lørdag eller søndag.",
+            "detail": "Skoleåret følger Oslo-skolens kalender, med høst- og vårsemester."
+          },
+          {
+            "title": "Fag og nivåer",
+            "body": "Koran, islamsk etikk og oppførsel, og å lære å lese og skrive arabisk.",
+            "detail": "Elevene grupperes etter nivå og ikke etter alder, så et barn som aldri har lest arabisk starter sammen med andre på samme sted."
+          },
+          {
+            "title": "Lærerne",
+            "body": "Alle faste lærere har pedagogisk kompetanse og arbeider til daglig i norske utdanningsinstitusjoner."
+          },
+          {
+            "title": "Påmelding og venteliste",
+            "body": "Medlemmer prioriteres ved påmelding. Får du ikke plass, kan du sette deg på venteliste.",
+            "detail": "Undervisningskontoret: fredag 12:00–17:00, lørdag og søndag 10:00–15:00. Utenom kontortid: WhatsApp 9600 4046 eller undervisning@rabita.no"
+          }
+        ]
       },
       "koran": {
         "title": "Koran og <em>arabisk</em>",
         "body": "Koranundervisning og arabisk for barn, unge og voksne.",
-        "longBody": "Koran og arabisk er kjernen i undervisningen ved Rabita skole, sammen med islamsk lære. For voksne holder imam Usman fredagskurset, et åpent undervisningstilbud i islamsk lære på norsk. Ta kontakt for å høre hvilke klasser som har ledige plasser."
+        "longBody": "Koran og arabisk er kjernen i undervisningen ved Rabita skole, sammen med islamsk lære. For voksne holder imam Usman fredagskurset, et åpent undervisningstilbud i islamsk lære på norsk. Ta kontakt for å høre hvilke klasser som har ledige plasser.",
+        "offerTitle": "Koran og arabisk, for alle aldre",
+        "offerLede": "Koran og arabisk er kjernen i undervisningen ved Rabita. Vi har tilbud for barn, for ungdom og for voksne som begynner fra bunnen.",
+        "offer": [
+          {
+            "title": "Koran med tajweed",
+            "body": "Å lese riktig, og å lære utenat.",
+            "detail": "For barn fra 6 til 15 år som allerede kan arabisk, og for voksne over 16 som vil lese med tajweed i tillegg til å memorere."
+          },
+          {
+            "title": "Arabisk for voksne",
+            "body": "Nivå 1 tar for seg alfabetet, grammatikk og grunnleggende ordforråd. Nivå 2 går i dybden og leser enkle tekster.",
+            "detail": "For voksne over 16 år. Ingen forkunnskaper er nødvendig på nivå 1."
+          },
+          {
+            "title": "Jenter i Fokus og Gutter i Fokus",
+            "body": "Islamundervisning for unge i to aldersgrupper: 10–13 år og 14–18 år.",
+            "detail": "Bønn, rituell vask, tawhid — og å styrke en norsk-muslimsk identitet."
+          },
+          {
+            "title": "Fredagskurset",
+            "body": "Imam Usman holder et åpent undervisningstilbud i islamsk lære, på norsk.",
+            "detail": "Fredager kl. 17:00–19:00. Ingen påmelding nødvendig."
+          }
+        ]
       },
       "kurs": {
         "title": "Kalligrafi og <em>geometri</em>",
         "body": "Kurs i islamsk kalligrafi og geometrisk kunst.",
-        "longBody": "Rabita arrangerer kurs i islamsk kalligrafi ledet av Ustadh Khalid Casado, og kurs i islamsk geometri med Samira Mian, hvor deltakerne lærer å konstruere klassiske mønstre med passer og linjal. I 2025 kom det deltakere helt fra Tyskland, Spania og England. «Geometri og te» er en månedlig lavterskelsamling mellom kursene, for både tidligere og nye deltakere."
+        "longBody": "Rabita arrangerer kurs i islamsk kalligrafi ledet av Ustadh Khalid Casado, og kurs i islamsk geometri med Samira Mian, hvor deltakerne lærer å konstruere klassiske mønstre med passer og linjal. I 2025 kom det deltakere helt fra Tyskland, Spania og England. «Geometri og te» er en månedlig lavterskelsamling mellom kursene, for både tidligere og nye deltakere.",
+        "offerTitle": "Kunsten, lært fra grunnen av",
+        "offerLede": "Kalligrafi og geometri er ikke pynt i denne tradisjonen — de er håndverk med egne regler. Kursene lærer deg reglene, med penn, passer og linjal.",
+        "offer": [
+          {
+            "title": "Arabisk kalligrafi",
+            "body": "Kurs med Pablo Khalid Casado, med vekt på skrifttypen thuluth for nybegynnere.",
+            "detail": "Han har diplom fra mesterkalligrafene Hasan Çelebi, Ferhat Kurlu og Nuria Garcia Masip innen den osmanske tradisjonen."
+          },
+          {
+            "title": "Islamsk geometri",
+            "body": "Konstruksjon av klassiske stjernemønstre med passer og linjal, og farge med akvarell på håndlaget papir.",
+            "detail": "Kurset går gjennom den seksdoble og den tolvdoble stjernen. Hver dag lager du ditt eget originale arbeid."
+          },
+          {
+            "title": "Mellom kursene",
+            "body": "«Kalligrafi og vaffel» er et lavterskeltilbud til kursdeltakere, første søndag i hver måned.",
+            "detail": "Kl. 15:00–18:00 i Rabita. Hjelp til pennespissing og blekk, råd og inspirasjon."
+          },
+          {
+            "title": "Datoer og påmelding",
+            "body": "Kursene settes opp gjennom året. Datoer kunngjøres når de er klare.",
+            "detail": "Følg med på rabita.no, Facebook eller Instagram for tidspunkt og påmelding."
+          }
+        ]
       }
     },
     "allEyebrow": "Alle tjenester",

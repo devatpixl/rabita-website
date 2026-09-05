@@ -116,7 +116,7 @@
         },
         {
           "label": "Hajj and umrah",
-          "blurb": "Information, preparation and referrals.",
+          "blurb": "Rabita's own hajj and umrah trips, organised in house.",
           "href": "/tjenester/hajj-umrah"
         },
         {
@@ -947,7 +947,7 @@
       },
       "hajj-umrah": {
         "title": "Hajj and umrah",
-        "sentence": "Preparation, information and referrals to experienced group leaders."
+        "sentence": "Rabita's own hajj and umrah trips each year, organised by volunteers."
       },
       "education": {
         "title": "Learning",
@@ -1580,42 +1580,229 @@
       "nikah": {
         "title": "Nikah: <em>wedding ceremony</em>",
         "body": "Islamic marriage, with or without legal registration.",
-        "longBody": "We host nikah both at the mosque and elsewhere by arrangement. Witnesses and imam are coordinated. Legal registration is handled through the Norwegian civil registry; we help with the formalities."
+        "longBody": "We host nikah both at the mosque and elsewhere by arrangement. Witnesses and imam are coordinated. Legal registration is handled through the Norwegian civil registry; we help with the formalities.",
+        "offerTitle": "Your nikah, carefully arranged",
+        "offerLede": "We host the Islamic ceremony, and we help you through the formalities that come before it. Get in touch in good time and we will find a date together.",
+        "offer": [
+          {
+            "title": "Proving the conditions for marriage",
+            "body": "The first step is the Norwegian Tax Administration. They issue the certificate showing that you are free to marry.",
+            "detail": "Contact Skatteetaten before anything else. Without that certificate neither the civil ceremony nor the nikah can go ahead."
+          },
+          {
+            "title": "The legal ceremony",
+            "body": "With the certificate in hand you contact a registrar — the City Hall or another approved body.",
+            "detail": "Rabita has applied for the right to solemnise marriages and is awaiting an answer. For now we cannot perform the legal ceremony ourselves."
+          },
+          {
+            "title": "The Islamic ceremony",
+            "body": "The nikah itself is held at the mosque, or elsewhere by arrangement. Witnesses and imam are coordinated.",
+            "detail": "Get in touch to arrange a time and a place. Tell us the planned date and roughly how many you expect."
+          },
+          {
+            "title": "What we need first",
+            "body": "Before we make an appointment you must show us an approved marriage certificate.",
+            "detail": "Without it Rabita cannot assist. This is a requirement we cannot make exceptions to."
+          }
+        ]
       },
       "janaza": {
         "title": "Janaza: <em>funeral</em>",
         "body": "Washing, prayer and coordination with the cemetery.",
-        "longBody": "The janaza service is available 24 hours. We help with practical arrangements with Alfaset cemetery and other burial grounds in Oslo. No cost for members."
+        "longBody": "The janaza service is available 24 hours. We help with practical arrangements with Alfaset cemetery and other burial grounds in Oslo. No cost for members.",
+        "offerTitle": "We are here, around the clock",
+        "offerLede": "Losing someone is hard enough. We take enquiries at any hour of the day or night, and we help with the practical side of the prayer and the burial.",
+        "offer": [
+          {
+            "title": "Around the clock",
+            "body": "The janaza service is available 24 hours a day, every day of the year.",
+            "detail": "For anything urgent, ring reception rather than writing. You will get an answer straight away."
+          },
+          {
+            "title": "The funeral prayer",
+            "body": "Salat al-janaza is held in the mosque. We make room for the family and for everyone who comes."
+          },
+          {
+            "title": "Cemetery and practical arrangements",
+            "body": "We help with arrangements at Alfaset cemetery and other burial grounds in Oslo.",
+            "detail": "For the practical and legal side of a burial we also recommend engaging a funeral director."
+          },
+          {
+            "title": "No cost for members",
+            "body": "The janaza service is free for members of Rabita."
+          }
+        ]
       },
       "shahada": {
         "title": "Shahada: <em>declaration of faith</em>",
         "body": "For those who wish to take shahada, with witnesses.",
-        "longBody": "We host both private and public shahada ceremonies. Get in touch to arrange a time. We provide witnesses if needed and offer brief guidance afterwards."
+        "longBody": "We host both private and public shahada ceremonies. Get in touch to arrange a time. We provide witnesses if needed and offer brief guidance afterwards.",
+        "offerTitle": "Take shahada, at your own pace",
+        "offerLede": "Nobody is pushed into anything here. Come by for an informal conversation first, and take the step when you are ready.",
+        "offer": [
+          {
+            "title": "An informal conversation",
+            "body": "You are welcome to come by and learn more or ask questions, with no obligation at all.",
+            "detail": "Send us an email beforehand and we will make sure somebody is there to meet you."
+          },
+          {
+            "title": "The declaration",
+            "body": "To become a Muslim you say the shahada: “Ashhadu an la ilaha illa Allah wa-ashhadu anna Muhammadan rasul Allah”.",
+            "detail": "“I bear witness that Allah is the only deity, and that Muhammad (peace be upon him) is His messenger.” After this sentence you are a Muslim."
+          },
+          {
+            "title": "Witnesses and ceremony",
+            "body": "We host both private and public ceremonies, and arrange witnesses if you want them.",
+            "detail": "Get in touch to arrange a time. We also offer brief guidance afterwards."
+          },
+          {
+            "title": "A course for new Muslims",
+            "body": "Every Friday we run a course on the basics of Islam. No prior knowledge is required.",
+            "detail": "Fridays 17:00–19:00 at Calmeyers gate 8, third floor. No registration. Questions: nyemuslimer@rabita.no"
+          }
+        ]
       },
       "counselling": {
         "title": "Counselling and <em>mediation</em>",
         "body": "Confidential conversations with an imam or female counsellor, and help resolving conflicts.",
-        "longBody": "We offer both short and longer conversations, individually or as a couple. All enquiries are confidential. We can offer both a male imam and a female counsellor. Our imams mediate in conflicts between spouses, within families and between neighbours. Conversations are confidential and rest on the trust of both parties. Get in touch to arrange a first meeting."
+        "longBody": "We offer both short and longer conversations, individually or as a couple. All enquiries are confidential. We can offer both a male imam and a female counsellor. Our imams mediate in conflicts between spouses, within families and between neighbours. Conversations are confidential and rest on the trust of both parties. Get in touch to arrange a first meeting.",
+        "offerTitle": "A safe place to talk",
+        "offerLede": "If there is something you want to talk about — faith, family or something social — we are here. The service is free, and what is said stays between us.",
+        "offer": [
+          {
+            "title": "Family conflicts",
+            "body": "We help find constructive solutions and guide both sides towards better dialogue.",
+            "detail": "The conversations are confidential and rest on the trust of both parties."
+          },
+          {
+            "title": "Mediation",
+            "body": "We can step in as a neutral mediator where both parties agree to it.",
+            "detail": "Our imams mediate between spouses, within families and between neighbours."
+          },
+          {
+            "title": "Personal conversations",
+            "body": "Whether you are unsure, worried, or just want to think out loud, we are available for an open and confidential conversation.",
+            "detail": "We can offer both a male imam and a female counsellor. Do say which you would prefer."
+          },
+          {
+            "title": "Converting to Islam",
+            "body": "Considering converting to Islam, or simply curious? Get in touch and we will have an informal talk."
+          }
+        ]
       },
       "hajj-umrah": {
         "title": "Hajj and <em>umrah</em>",
-        "body": "Information, preparation and referrals.",
-        "longBody": "Rabita does not organise trips itself, but we help with preparation, information and referrals to experienced agencies and imams accompanying groups."
+        "body": "Rabita's own hajj and umrah trips, organised in house.",
+        "longBody": "Rabita runs its own hajj and umrah office, staffed by volunteers, and it has become the largest operator in Norway in this field. Hajj trips are offered every year in the month of Dhul Hijjah, and umrah trips two to three times a year. Contact the office on 40 29 20 20 or Hajjogumrah@gmail.com.",
+        "offerTitle": "The journey to Mecca, in safe hands",
+        "offerLede": "The pilgrimage is the fifth pillar of Islam. Rabita runs its own hajj and umrah office, staffed by volunteers who have been doing this for years.",
+        "offer": [
+          {
+            "title": "Hajj every year",
+            "body": "We offer hajj trips every year, in the month of Dhul Hijjah.",
+            "detail": "The pilgrimage to Mecca is required of every Muslim who is financially and physically able to make it."
+          },
+          {
+            "title": "Umrah two or three times a year",
+            "body": "Umrah trips run two to three times over the course of the year."
+          },
+          {
+            "title": "Norway's largest operator",
+            "body": "Our office has become the largest operator in Norway for hajj and umrah.",
+            "detail": "The trips are organised by a team of volunteers at Rabita who take real pleasure in the work."
+          },
+          {
+            "title": "The hajj and umrah office",
+            "body": "Contact the office directly for programmes, prices and available places.",
+            "detail": "Telephone 40 29 20 20 · Hajjogumrah@gmail.com"
+          }
+        ]
       },
       "skole": {
         "title": "Rabita <em>school</em>",
         "body": "Saturday school for children and young people aged 6 to 16.",
-        "longBody": "Rabita school is our Saturday school for children and young people aged 6–16. In 2025 it had 225 pupils across 13 classes. Teaching covers Arabic, Islamic studies and the Quran, and takes place in rented rooms at Hersleb school. Every permanent teacher is a trained educator working in Norwegian schools day to day. The school also marks the religious festivals through the year."
+        "longBody": "Rabita school is our Saturday school for children and young people aged 6–16. In 2025 it had 225 pupils across 13 classes. Teaching covers Arabic, Islamic studies and the Quran, and takes place in rented rooms at Hersleb school. Every permanent teacher is a trained educator working in Norwegian schools day to day. The school also marks the religious festivals through the year.",
+        "offerTitle": "Saturday school, week after week",
+        "offerLede": "Rabita school teaches children and young people Arabic, Islamic studies and the Quran — one day a week, right through the school year.",
+        "offer": [
+          {
+            "title": "For children and young people aged 6 to 16",
+            "body": "Teaching runs once a week, usually on a Saturday or a Sunday.",
+            "detail": "The school year follows the Oslo school calendar, with an autumn and a spring term."
+          },
+          {
+            "title": "Subjects and levels",
+            "body": "The Quran, Islamic ethics and conduct, and learning to read and write Arabic.",
+            "detail": "Pupils are grouped by level rather than by age, so a child who has never read Arabic starts alongside others in the same place."
+          },
+          {
+            "title": "The teachers",
+            "body": "Every permanent teacher is a trained educator working in Norwegian schools day to day."
+          },
+          {
+            "title": "Enrolment and waiting list",
+            "body": "Members are given priority when places are allocated. If there is no place, you can join the waiting list.",
+            "detail": "The education office is open Friday 12:00–17:00 and Saturday–Sunday 10:00–15:00. Outside those hours: WhatsApp 9600 4046 or undervisning@rabita.no"
+          }
+        ]
       },
       "koran": {
         "title": "Quran and <em>Arabic</em>",
         "body": "Quran and Arabic teaching for children, young people and adults.",
-        "longBody": "Quran and Arabic are at the centre of the teaching at Rabita school, alongside Islamic studies. For adults, Imam Usman runs the Friday course, an open class in Islamic learning held in Norwegian. Get in touch to hear which classes have places."
+        "longBody": "Quran and Arabic are at the centre of the teaching at Rabita school, alongside Islamic studies. For adults, Imam Usman runs the Friday course, an open class in Islamic learning held in Norwegian. Get in touch to hear which classes have places.",
+        "offerTitle": "Quran and Arabic, at every age",
+        "offerLede": "The Quran and Arabic are at the centre of the teaching at Rabita. There are classes for children, for teenagers, and for adults starting from nothing.",
+        "offer": [
+          {
+            "title": "Quran with tajweed",
+            "body": "Reading correctly, and learning by heart.",
+            "detail": "For children aged 6 to 15 who already know Arabic, and for adults over 16 who want to read with tajweed as well as memorise."
+          },
+          {
+            "title": "Arabic for adults",
+            "body": "Level 1 covers the alphabet, grammar and basic vocabulary. Level 2 goes deeper and reads simple texts.",
+            "detail": "For adults over 16. No prior knowledge is needed at level 1."
+          },
+          {
+            "title": "Jenter i Fokus and Gutter i Fokus",
+            "body": "Islamic studies for young people in two age groups: 10 to 13, and 14 to 18.",
+            "detail": "Prayer, wudu and tawhid — and building a Norwegian-Muslim identity."
+          },
+          {
+            "title": "The Friday course",
+            "body": "Imam Usman runs an open class in Islamic learning, held in Norwegian.",
+            "detail": "Fridays 17:00–19:00. No registration needed."
+          }
+        ]
       },
       "kurs": {
         "title": "Calligraphy and <em>geometry</em>",
         "body": "Courses in Islamic calligraphy and geometric art.",
-        "longBody": "Rabita runs courses in Islamic calligraphy led by Ustadh Khalid Casado, and in Islamic geometry with Samira Mian, where participants learn to construct classical patterns with compass and ruler. In 2025 the courses drew participants from Germany, Spain and England. \"Geometry and tea\" is a monthly, low-threshold gathering between courses, for past and new participants alike."
+        "longBody": "Rabita runs courses in Islamic calligraphy led by Ustadh Khalid Casado, and in Islamic geometry with Samira Mian, where participants learn to construct classical patterns with compass and ruler. In 2025 the courses drew participants from Germany, Spain and England. \"Geometry and tea\" is a monthly, low-threshold gathering between courses, for past and new participants alike.",
+        "offerTitle": "The craft, learned from the ground up",
+        "offerLede": "Calligraphy and geometry are not decoration in this tradition — they are crafts with rules of their own. The courses teach the rules, with pen, compass and ruler.",
+        "offer": [
+          {
+            "title": "Arabic calligraphy",
+            "body": "A course with Pablo Khalid Casado, focused on the thuluth script for beginners.",
+            "detail": "He holds diplomas from the master calligraphers Hasan Çelebi, Ferhat Kurlu and Nuria Garcia Masip in the Ottoman tradition."
+          },
+          {
+            "title": "Islamic geometry",
+            "body": "Constructing classical star patterns with compass and ruler, then colouring them in watercolour on handmade paper.",
+            "detail": "The course works through the six-fold and the twelve-fold star. Each day you make an original piece of your own."
+          },
+          {
+            "title": "Between the courses",
+            "body": "“Calligraphy and waffles” is a low-threshold gathering for course participants, the first Sunday of every month.",
+            "detail": "15:00–18:00 at Rabita. Help with cutting pens and with ink, plus advice and inspiration."
+          },
+          {
+            "title": "Dates and enrolment",
+            "body": "Courses run through the year. Dates are announced as they are set.",
+            "detail": "Watch rabita.no, Facebook or Instagram for times and sign-up."
+          }
+        ]
       }
     },
     "allEyebrow": "All services",

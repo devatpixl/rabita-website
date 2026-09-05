@@ -110,9 +110,16 @@ export const SERVICE_BAND: Record<
 // was "very basic", which was also fair.
 //
 // So: another real photograph, from the mosque's own library, never the
-// one the band above is already showing. Every frame here is a 4:5
-// portrait, which is why the sources are chosen from the portrait and
-// square-ish end of the library rather than the 16:9 hero crops.
+// one the band above is already showing. The sources are chosen from the
+// portrait and square-ish end of the library rather than the 16:9 hero
+// crops.
+//
+// The FRAME is 3:2, at the foot of the enquiry rail. It was a 4:5 portrait
+// beside the copy until 2026-09-06, when the numbered offer list took that
+// column; these positions were retuned for the new shape. A 3:2 crop of a
+// 1400x2365 portrait keeps a thin horizontal band, so the y value moved a
+// long way on janaza — 38% was the ceiling of the room, 62% is the
+// embrace.
 //
 // The pairings are meant, not filled in:
 //   nikah        the room a nikah is actually held in
@@ -129,9 +136,9 @@ export const SERVICE_BAND: Record<
 //                photograph is a citation rather than a decoration
 export const SERVICE_STORY: Record<ServiceKey, { src: string; objectClass: string }> = {
   nikah: { src: '/photos/svc-prayer.webp', objectClass: 'object-center' },
-  janaza: { src: '/photos/svc-services.webp', objectClass: 'object-[42%_38%]' },
+  janaza: { src: '/photos/svc-services.webp', objectClass: 'object-[42%_62%]' },
   shahada: { src: '/photos/svc-gathering.webp', objectClass: 'object-[50%_45%]' },
-  counselling: { src: '/photos/community/womens-circle.webp', objectClass: 'object-[50%_40%]' },
+  counselling: { src: '/photos/community/womens-circle.webp', objectClass: 'object-[50%_45%]' },
   'hajj-umrah': { src: '/photos/prayer-congregation.webp', objectClass: 'object-[50%_55%]' },
   skole: { src: '/photos/event-workshop.webp', objectClass: 'object-[50%_45%]' },
   koran: { src: '/photos/learn-school.webp', objectClass: 'object-[50%_60%]' },
