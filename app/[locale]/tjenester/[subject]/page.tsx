@@ -112,6 +112,18 @@ export default async function ServiceDetail({
           aria-hidden
           className="star-texture star-texture--light pointer-events-none absolute inset-0 -z-10"
         />
+        {/* The seam. The band's plate ends flush with the section boundary
+           (padBottom="none"), so the ground changed colour on the exact line
+           the photograph ended and the two read as a cut rather than as a
+           step. This is a background layer INSIDE the section, not a spacer
+           between the two, so it costs no height — and it is painted last of
+           the three so the texture and the bloom fade in with it. It ends on
+           the section's own tone, which is what stops the gradient having a
+           visible bottom edge of its own. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-paper to-paper-2 md:h-40"
+        />
         <SectionBody>
           <div className="grid gap-10 md:grid-cols-12 md:gap-12 lg:gap-16">
             <div className="md:col-span-5">
@@ -163,7 +175,19 @@ export default async function ServiceDetail({
          language: the three ways to reach us are rows with a mono label, a
          serif value and the section-2 seal, so the two halves of the page
          read as one design. */}
-      <Section id="enquiry" tone="paper" className="scroll-mt-24 pb-20 md:pb-28">
+      <Section
+        id="enquiry"
+        tone="paper"
+        className="relative isolate scroll-mt-24 pb-20 md:pb-28"
+      >
+        {/* The same fade the other way up. The step to white is the whole
+           point of this section, so the gradient only softens the LINE — a
+           28-unit run out of the 8 that separate the two tones. Everything
+           below it is still plainly lighter than the section above. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-paper-2 to-paper md:h-40"
+        />
         <SectionBody>
           <div className="grid gap-10 md:grid-cols-12 md:gap-12 lg:gap-16">
             <div className="md:col-span-5">
