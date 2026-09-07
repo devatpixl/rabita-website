@@ -307,7 +307,6 @@ export function RequestForm({
             inputMode="email"
             value={contact}
             onChange={(e) => setContact(e.target.value)}
-            placeholder={t('contactPlaceholder')}
             className={cn(VALUE, c.value)}
           />
         </Field>
@@ -356,7 +355,6 @@ export function RequestForm({
               id={`${uid}-preferred`}
               value={preferred}
               onChange={(e) => setPreferred(e.target.value)}
-              placeholder={t('preferredPlaceholder')}
               className={cn(VALUE, c.value)}
             />
           </Field>

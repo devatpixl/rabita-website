@@ -1394,9 +1394,7 @@
   "requestForm": {
     "name": "Navn",
     "contact": "E-post eller telefon",
-    "contactPlaceholder": "navn@epost.no eller +47 …",
     "preferred": "Ønsket tid (valgfritt)",
-    "preferredPlaceholder": "F.eks. lørdag ettermiddag",
     "notesLabel": "Din melding",
     "notes": {
       "nikah": "Fortell kort om planlagt dato og deltakerantall.",

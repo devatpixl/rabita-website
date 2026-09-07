@@ -1394,9 +1394,7 @@
   "requestForm": {
     "name": "الاسم",
     "contact": "بريد إلكتروني أو هاتف",
-    "contactPlaceholder": "you@example.com أو +47 …",
     "preferred": "الوقت المفضّل (اختياري)",
-    "preferredPlaceholder": "مثلاً: بعد ظهر السبت",
     "notesLabel": "رسالتك",
     "notes": {
       "nikah": "أخبرنا باختصار عن التاريخ المخطَّط وعدد الحضور.",

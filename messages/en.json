@@ -1394,9 +1394,7 @@
   "requestForm": {
     "name": "Name",
     "contact": "Email or phone",
-    "contactPlaceholder": "you@example.com or +47 …",
     "preferred": "Preferred time (optional)",
-    "preferredPlaceholder": "e.g. Saturday afternoon",
     "notesLabel": "Your message",
     "notes": {
       "nikah": "Tell us briefly about the planned date and number of attendees.",
