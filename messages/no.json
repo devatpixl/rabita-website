@@ -1982,6 +1982,14 @@
       "visits": "besøkende i uken",
       "volunteers": "frivillige"
     },
+    "factNotes": {
+      "founded": "Starten på vår reise i Oslo",
+      "members": "Fra ulike nasjonaliteter",
+      "volunteers": "Som gjør en forskjell",
+      "pupils": "For en bedre fremtid",
+      "nationalities": "Et mangfoldig fellesskap",
+      "visits": "Fra hele Oslo og omegn"
+    },
     "history": {
       "p1": "Rabita ble stiftet i 1987 som den første moskeen i Oslo ikke tilknyttet én nasjonalitet. Det ideelle var enkelt: et sted for muslimer i Norge, uavhengig av hvor de kom fra.",
       "p2": "Menigheten vokste, skolen ble etablert, og kultursenteret ble en del av Oslos sivilsamfunn. Den gamle bygningen tok slutt på plassen for lenge siden.",
@@ -2164,7 +2172,8 @@
         "eyebrow": "Organisasjonen",
         "title": "Stiftet i 1987, og fortsatt i samme gate.",
         "lede": "Det Islamske Forbundet har holdt til på Grønland siden åttitallet. Menigheten vokste fra bygget for lenge siden, og det er hele grunnen til byggeprosjektet.",
-        "caption": "Den nye fasaden om kvelden, Norconsult"
+        "caption": "Den nye fasaden om kvelden, Norconsult",
+        "captionIftar": "Gateiftar på Grønland"
       },
       "news": {
         "index": "02",

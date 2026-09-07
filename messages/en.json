@@ -1982,6 +1982,14 @@
       "visits": "visitors a week",
       "volunteers": "volunteers"
     },
+    "factNotes": {
+      "founded": "The start of our journey in Oslo",
+      "members": "From many different nationalities",
+      "volunteers": "Who make the difference",
+      "pupils": "For a better future",
+      "nationalities": "A community of many backgrounds",
+      "visits": "From across Oslo and beyond"
+    },
     "history": {
       "p1": "Rabita was founded in 1987 as the first mosque in Oslo not tied to a single nationality. The idea was simple: a place for Muslims in Norway, regardless of where they came from.",
       "p2": "The congregation grew, the school was established, and the cultural centre became part of civil society in Oslo. The old building ran out of space long ago.",
@@ -2164,7 +2172,8 @@
         "eyebrow": "The organisation",
         "title": "Founded in 1987, and still on the same street.",
         "lede": "Det Islamske Forbundet has been in Gronland since the eighties. The congregation outgrew the building a long time ago, which is the whole reason for the build.",
-        "caption": "The new facade at night, Norconsult"
+        "caption": "The new facade at night, Norconsult",
+        "captionIftar": "The street iftar on Grønland"
       },
       "news": {
         "index": "02",

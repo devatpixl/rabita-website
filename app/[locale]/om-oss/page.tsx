@@ -26,9 +26,17 @@ export default async function AboutPage({
          objects doing the job the band does in one, and the reason this page
          opened differently from /besok-oss and /tjenester.
 
-         `over` at full measure: story-facade-night.webp is 2000x860, which
-         is 1.81 source pixels per CSS pixel across a 1104px plate — the same
-         ratio the prayer band was calibrated against.
+         The photograph is the street iftar, not the facade render it opened
+         on (client, 2026-09-08: "use a better image here"). This page is
+         about a congregation that grew from a flat to one of the largest
+         mosques in Norway; a render of the building that has not been built
+         yet answers a different question, and it was a dark diagonal slab at
+         band crop. Long tables of people read across a 4.6:1 letterbox in a
+         way a facade does not.
+
+         `over` at full measure: hero-iftar.webp is 2560x1707, 2.3 source
+         pixels per CSS pixel across a 1104px plate — comfortably above the
+         1.81 the prayer band was calibrated against.
 
          The headline pair swaps namespaces on purpose. aboutPage.title and
          .lede are short and declarative, which is the register the other
@@ -43,18 +51,25 @@ export default async function AboutPage({
         kickerNote={ts('pages.about.eyebrow')}
         title={t('title')}
         lede={t('lede')}
-        image="/photos/story-facade-night.webp"
-        alt={ts('pages.about.caption')}
+        image="/photos/hero-iftar.webp"
+        alt={ts('pages.about.captionIftar')}
         layout="over"
         mark="elevation"
-        objectClass="object-[50%_58%]"
+        // warm, not the default calm: this is a dusk photograph lit by
+        // Ramadan lights, and the site's standard grade pulls exactly the
+        // warmth out of it that makes it worth using.
+        tone="warm"
+        // 60%, measured off the frame rather than guessed. A 4.6:1 band
+        // keeps about a third of a 3:2 source; the crowd and the tables sit
+        // at 55-79% of the height and the crescent lights at 29-50%, so 60
+        // is where the window holds the people with the lights along its
+        // top edge. 46% put it on the underpass and cut the people off.
+        objectClass="object-[50%_60%]"
         padBottom="none"
       >
-        {/* The credit rides with the picture. It was StoryPlate's caption and
-           it is an attribution, not decoration, so it cannot be dropped with
-           the component. */}
+        {/* The caption rides with the picture, as StoryPlate's did. */}
         <p className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">
-          {ts('pages.about.caption')}
+          {ts('pages.about.captionIftar')}
         </p>
       </PageBand>
 
@@ -78,10 +93,13 @@ export default async function AboutPage({
           <SectionBody>
             <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
               {/* ── the story ────────────────────────────────────────── */}
-              <div className="lg:col-span-5 xl:col-span-4">
-                <p className="inline-flex items-center rounded-full bg-paper px-3.5 py-1.5 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60 ring-1 ring-ink/10">
-                  {t('historyChip')}
-                </p>
+              <div className="lg:col-span-4">
+                <div className="flex items-center gap-4">
+                  <p className="inline-flex shrink-0 items-center rounded-full bg-paper px-3.5 py-1.5 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60 ring-1 ring-ink/10">
+                    {t('historyChip')}
+                  </p>
+                  <span aria-hidden className="h-px flex-1 bg-gold-deep/30" />
+                </div>
                 <SectionHeading className="mt-5">{t('historyHeading')}</SectionHeading>
                 <div className="mt-7 space-y-5 text-body text-ink-60">
                   <p>{t('history.p1')}</p>
@@ -107,97 +125,120 @@ export default async function AboutPage({
               </div>
 
               {/* ── the figures ──────────────────────────────────────── */}
-              {/* On a card, the way the booking form is on /besok-oss. Six
-                 numbers on bare ground read as a table; on a card with a mark
-                 each they read as facts about one place. */}
-              <div className="lg:col-span-7 xl:col-span-6">
-                <div className="rounded-2xl bg-paper p-6 shadow-[0_1px_2px_rgba(26,26,24,0.04),0_24px_60px_-34px_rgba(26,26,24,0.28)] sm:p-8">
-                  <Eyebrow tone="gold-deep">{t('factsEyebrow')}</Eyebrow>
-                  <h2 className="mt-4 font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-tight text-balance text-ink">
-                    {t('factsHeading')}
-                  </h2>
+              {/* The ledger and the arch are ONE object now (client mockup,
+                 2026-09-08), not a card with a ghost floating behind it in
+                 the margin. The quote moves onto the photograph, where it
+                 has something to sit on, and the whole panel breaks a little
+                 way into the margin at xl the way the project hero's card
+                 does — the room outside SectionBody, capped, so it reaches
+                 zero on its own before the grid stacks. */}
+              <div
+                className="lg:col-span-8 xl:me-[var(--about-panel-pull)]"
+                style={{
+                  ['--about-panel-pull' as string]:
+                    'calc(-1 * clamp(0px, (100vw - 72rem) / 2 - 1.5rem, 6rem))',
+                }}
+              >
+                <div className="grid overflow-hidden rounded-2xl shadow-[0_1px_2px_rgba(26,26,24,0.04),0_24px_60px_-34px_rgba(26,26,24,0.28)] md:grid-cols-[1.15fr_0.85fr]">
+                  <div className="bg-paper p-6 sm:p-8">
+                    <Eyebrow tone="gold-deep">{t('factsEyebrow')}</Eyebrow>
+                    <h2 className="mt-4 font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-tight text-balance text-ink">
+                      {t('factsHeading')}
+                    </h2>
 
-                  {/* A ledger, not a grid. Two columns of three left the
-                     card ~260px shorter than the prose beside it, which is
-                     the hole this layout keeps having to be saved from. One
-                     row per figure — mark, label, leader, number — fills the
-                     column and reads as a set of accounts, which is what
-                     these are. The row idiom is the mosque project's own
-                     (moskeprosjektet/page.tsx). */}
-                  <dl className="mt-7">
-                    {/* Key figures as confirmed in Årsrapport 2025, in the
-                       order the client listed them (2026-08-30). */}
-                    {([
-                      ['calendar', String(CAMPAIGN.foundedYear), t('facts.founded')],
-                      ['people', CAMPAIGN.members.toLocaleString('nb-NO'), t('facts.members')],
-                      ['person', `${CAMPAIGN.volunteers}+`, t('facts.volunteers')],
-                      ['book', `${CAMPAIGN.pupils}+`, t('facts.pupils')],
-                      ['globe', `${CAMPAIGN.nationalities}+`, t('facts.nationalities')],
-                      ['route', CAMPAIGN.visitorsPerWeek.toLocaleString('nb-NO'), t('facts.visits')],
-                    ] as const).map(([icon, value, label]) => (
-                      <div
-                        key={label}
-                        className="flex items-center gap-4 border-t border-ink/10 py-3.5 first:border-t-0 first:pt-0"
-                      >
-                        <span
-                          aria-hidden
-                          className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gold-soft/40 text-gold-deep ring-1 ring-gold-deep/20"
+                    <dl className="mt-7">
+                      {/* Key figures as confirmed in Årsrapport 2025, in the
+                         order the client listed them (2026-08-30). The
+                         second line under each label is theirs too, from the
+                         mockup: it turns a number into a sentence. */}
+                      {([
+                        ['calendar', 'founded', String(CAMPAIGN.foundedYear)],
+                        ['people', 'members', CAMPAIGN.members.toLocaleString('nb-NO')],
+                        ['person', 'volunteers', `${CAMPAIGN.volunteers}+`],
+                        ['book', 'pupils', `${CAMPAIGN.pupils}+`],
+                        ['globe', 'nationalities', `${CAMPAIGN.nationalities}+`],
+                        ['route', 'visits', CAMPAIGN.visitorsPerWeek.toLocaleString('nb-NO')],
+                      ] as const).map(([icon, key, value]) => (
+                        <div
+                          key={key}
+                          className="flex items-center gap-4 border-t border-ink/10 py-3.5 first:border-t-0 first:pt-0"
                         >
-                          <FigureIcon name={icon} className="h-[18px] w-[18px]" />
-                        </span>
-                        <dt className="min-w-0 font-mono text-[0.625rem] uppercase leading-snug tracking-[0.16em] text-ink-60">
-                          {label}
-                        </dt>
-                        <span aria-hidden className="hidden h-px flex-1 bg-ink/10 sm:block" />
-                        <dd className="ms-auto shrink-0 font-serif text-[1.6rem] leading-none tabular-nums text-ink sm:ms-0">
-                          {value}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
+                          <span
+                            aria-hidden
+                            className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gold-soft/40 text-gold-deep ring-1 ring-gold-deep/20"
+                          >
+                            <FigureIcon name={icon} className="h-[18px] w-[18px]" />
+                          </span>
+                          <dt className="min-w-0 flex-1">
+                            <span className="block font-mono text-[0.625rem] uppercase leading-snug tracking-[0.16em] text-ink-60">
+                              {t(`facts.${key}`)}
+                            </span>
+                            <span className="mt-1 block font-serif text-[13px] italic leading-snug text-ink-40">
+                              {t(`factNotes.${key}`)}
+                            </span>
+                          </dt>
+                          <dd className="flex shrink-0 items-start gap-1 font-serif text-[1.5rem] leading-none tabular-nums text-ink">
+                            {value}
+                            {/* The rising mark, on every figure but the
+                               founding year — a year is not a quantity that
+                               grows. Decorative, so aria-hidden. */}
+                            {key !== 'founded' && (
+                              <svg
+                                aria-hidden
+                                viewBox="0 0 24 24"
+                                className="mt-0.5 h-3 w-3 shrink-0 text-gold-deep/70 rtl:-scale-x-100"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path d="M7 17L17 7M9 7h8v8" />
+                              </svg>
+                            )}
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </div>
+
+                  {/* The arch, now a panel rather than a ghost: the quote sits
+                     ON it, so the photograph carries something instead of
+                     hiding behind text. A scrim rather than a wash — it has
+                     to hold paper-coloured type at any crop. */}
+                  <div className="relative min-h-[15rem] md:min-h-0">
+                    <Image
+                      src="/photos/arch-light.jpg"
+                      alt=""
+                      fill
+                      sizes="(min-width: 768px) 340px, 100vw"
+                      className="object-cover object-[38%_50%]"
+                      style={{ filter: 'saturate(0.55) sepia(0.18) contrast(1.05)' }}
+                    />
+                    {/* One gradient, from the foot. A flat scrim over the
+                       whole panel put the window behind a grey sheet and
+                       there was nothing left worth showing; the type only
+                       needs cover where the type actually is. */}
+                    <span
+                      aria-hidden
+                      className="absolute inset-0 bg-gradient-to-t from-dusk/85 via-dusk/35 to-dusk/5"
+                    />
+                    <div className="relative flex h-full flex-col justify-end p-7 sm:p-8">
+                      <Image
+                        src="/logo/rabita-mark-256.png"
+                        alt=""
+                        width={30}
+                        height={30}
+                        aria-hidden
+                        className="h-[30px] w-[30px] opacity-85"
+                      />
+                      <p className="mt-4 max-w-[22ch] font-serif text-[1.05rem] italic leading-relaxed text-paper drop-shadow-[0_1px_8px_rgba(22,36,46,0.5)]">
+                        {`«${t('quote')}»`}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              {/* ── the margin note ──────────────────────────────────── */}
-              <aside className="relative hidden xl:col-span-2 xl:block">
-                {/* The arch, behind the note. A photograph graded until it
-                   reads as ground: colour mostly out, pushed warm, then a
-                   last veil in this section's own green so it settles into
-                   the ground rather than sitting on it. */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute -top-12 -end-14 -z-10 h-[32rem] w-[19rem] overflow-hidden rounded-t-[9rem] border border-gold-deep/20"
-                  style={{
-                    maskImage:
-                      'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 100%)',
-                    WebkitMaskImage:
-                      'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 100%)',
-                  }}
-                >
-                  <Image
-                    src="/photos/arch-light.jpg"
-                    alt=""
-                    fill
-                    sizes="304px"
-                    loading="eager"
-                    className="object-cover opacity-[0.45]"
-                    style={{ filter: 'saturate(0.25) sepia(0.45) contrast(1.06) brightness(1.02)' }}
-                  />
-                  <span aria-hidden className="absolute inset-0 bg-[#e3eae4]/25" />
-                </div>
-                <span aria-hidden className="block h-px w-10 bg-gold-deep/40" />
-                <p className="mt-6 font-serif text-[1.05rem] italic leading-relaxed text-ink-60">
-                  {`«${t('quote')}»`}
-                </p>
-                <Image
-                  src="/logo/rabita-mark-256.png"
-                  alt=""
-                  width={32}
-                  height={32}
-                  aria-hidden
-                  className="mt-7 h-8 w-8 opacity-60"
-                />
-              </aside>
             </div>
           </SectionBody>
         </div>
