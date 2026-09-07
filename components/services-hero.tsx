@@ -11,10 +11,13 @@ import { Accent } from './accent';
 // index that does not belong to the family its own children belong to is
 // the odd one out rather than the parent.
 //
-// It stays the parent by being the TALLEST band on the site — roughly a
-// 21:9 plate against the subject pages' 17rem — and by keeping text-display
-// for its headline where the eleven services clamp at 2.3rem. Same
-// vocabulary, one rank up.
+// It used to claim rank by being the TALLEST band on the site, with
+// text-display against the subject pages' 2.3rem clamp. The client picked
+// /besok-oss instead (2026-09-07): "this top heading should be like this,
+// the design and style". So the two overriding props are gone and this band
+// takes the family default — same height, same headline size as every other
+// band. The kicker keeps both halves, which is what still marks it as the
+// parent of the eight under it.
 //
 // The photograph is the 2560x1440 gateiftar crop, the only hero-grade asset
 // in the repo, so it carries `over` at full measure without breaking a
@@ -38,9 +41,6 @@ export async function ServicesHero() {
       objectClass="object-[32%_42%]"
       layout="over"
       mark="elevation"
-      // A rank above the eleven bands it is the parent of.
-      heightClass="min-h-[26rem] md:min-h-[30rem]"
-      titleClass="text-display"
       sizes="(min-width: 1152px) 1104px, calc(100vw - 3rem)"
     />
   );
