@@ -34,9 +34,22 @@ export default async function AboutPage({
          band crop. Long tables of people read across a 4.6:1 letterbox in a
          way a facade does not.
 
-         `over` at full measure: hero-iftar.webp is 2560x1707, 2.3 source
-         pixels per CSS pixel across a 1104px plate — comfortably above the
-         1.81 the prayer band was calibrated against.
+         Same subject, brighter frame (client, 2026-09-08: "a lighter
+         image"). Measured mean luminance over the actual band crop:
+         hero-iftar 49.2, zoom-gateiftar 100.7 — twice the light for the same
+         Grønland street iftar, so captionIftar stays literally true. It was
+         not the grade: `warm` is already the lightest of the three tones
+         (brightness 0.94), so the dark came from the photograph.
+
+         The cost is resolution. zoom-gateiftar.webp is 1600x1069, which is
+         1.45 source pixels per CSS pixel across a 1104px plate, under the
+         1.81 the prayer band was calibrated against and well under the 2.32
+         hero-iftar gave. It holds at 1x and softens on a 2x display. Every
+         2000px+ frame in the library was checked and none of them is this
+         page's subject — they are food trays, Quran pages, the unbuilt
+         facade, or a posed group portrait that loses its heads at 4.6:1. A
+         higher-resolution original of THIS frame is the real fix; until
+         there is one, light beats sharp on a band that carries a scrim.
 
          The headline pair swaps namespaces on purpose. aboutPage.title and
          .lede are short and declarative, which is the register the other
@@ -51,7 +64,7 @@ export default async function AboutPage({
         kickerNote={ts('pages.about.eyebrow')}
         title={t('title')}
         lede={t('lede')}
-        image="/photos/hero-iftar.webp"
+        image="/photos/zoom-gateiftar.webp"
         alt={ts('pages.about.captionIftar')}
         layout="over"
         mark="elevation"
@@ -59,12 +72,14 @@ export default async function AboutPage({
         // Ramadan lights, and the site's standard grade pulls exactly the
         // warmth out of it that makes it worth using.
         tone="warm"
-        // 60%, measured off the frame rather than guessed. A 4.6:1 band
-        // keeps about a third of a 3:2 source; the crowd and the tables sit
-        // at 55-79% of the height and the crescent lights at 29-50%, so 60
-        // is where the window holds the people with the lights along its
-        // top edge. 46% put it on the underpass and cut the people off.
-        objectClass="object-[50%_60%]"
+        // 45%, re-measured for this frame rather than inherited — 60% was
+        // calibrated against hero-iftar's composition and means nothing
+        // here. This source is 1600x1069, so the band keeps 33% of the
+        // height. Rendered at 30/45/60/75 and compared: 45 is where the
+        // marquee canopies and the gold stars hold the top third and the
+        // crowd runs beneath them. 30 is mostly empty tent roof; 75 drops to
+        // dark winter coats and loses both the tents and the lights.
+        objectClass="object-[50%_45%]"
         padBottom="none"
       >
         {/* The caption rides with the picture, as StoryPlate's did. */}
