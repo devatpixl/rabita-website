@@ -112,7 +112,54 @@ export default async function AboutPage({
             </div>
 
             {/* ── the margin note ────────────────────────────────────── */}
-            <aside className="hidden xl:col-span-2 xl:block">
+            <aside className="relative hidden xl:col-span-2 xl:block">
+              {/* The arch, behind the note. It is a photograph, not a
+                 drawing — the fretwork window and the light it throws, from
+                 the client (2026-09-07) — but it is graded and washed until
+                 it reads as ground rather than as a picture: colour mostly
+                 pulled out, warmed towards paper, and taken to 22%.
+
+                 The container is what makes it an arch: a tall box with a
+                 9rem top radius and a gold hairline on it, which is the
+                 outlined arch the mockup draws. The mask fades the foot away
+                 so the shape has no bottom edge to end on.
+
+                 It bleeds past its own column on purpose. -z-10 keeps it
+                 behind the card beside it, and the section is
+                 overflow-hidden, so it can spill toward the margin without
+                 escaping. */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -top-12 -end-14 -z-10 h-[32rem] w-[19rem] overflow-hidden rounded-t-[9rem] border border-gold-deep/20"
+                style={{
+                  maskImage:
+                    'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 100%)',
+                  WebkitMaskImage:
+                    'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 100%)',
+                }}
+              >
+                <Image
+                  src="/photos/arch-light.jpg"
+                  alt=""
+                  fill
+                  // 304px, not "19rem": a sizes value Next cannot resolve to a
+                  // viewport width makes it emit the whole width table, down
+                  // to 3840w, for a 15KB decoration.
+                  sizes="304px"
+                  // Eager. It is 15KB, it sits above the fold at the width
+                  // that shows it at all, and lazy-loading a background that
+                  // is only ever 45% present buys nothing.
+                  loading="eager"
+                  className="object-cover opacity-[0.45]"
+                  // Colour mostly out, pushed warm, so the marble and the
+                  // light land in the paper palette rather than beside it.
+                  style={{ filter: 'saturate(0.25) sepia(0.45) contrast(1.06) brightness(1.02)' }}
+                />
+                {/* A last veil in the section's own tone, so the photograph
+                   sits IN the ground instead of on it. */}
+                <span aria-hidden className="absolute inset-0 bg-paper-2/25" />
+              </div>
+
               <span aria-hidden className="block h-px w-10 bg-gold-deep/40" />
               <p className="mt-6 font-serif text-[1.05rem] italic leading-relaxed text-ink-60">
                 {`«${t('quote')}»`}
