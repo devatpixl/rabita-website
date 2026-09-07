@@ -19,7 +19,11 @@ export type FigureIconName =
   // time and a way of getting here.
   | 'pin'
   | 'clock'
-  | 'route';
+  | 'route'
+  // Added for the about page's figures (2026-09-07): pupils, and the
+  // fifty-odd nationalities in the congregation.
+  | 'book'
+  | 'globe';
 
 export function FigureIcon({
   name,
@@ -76,6 +80,23 @@ export function FigureIcon({
     );
   }
 
+  if (name === 'book') {
+    return (
+      <svg {...common}>
+        <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5Z" />
+        <path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5Z" />
+      </svg>
+    );
+  }
+  if (name === 'globe') {
+    return (
+      <svg {...common}>
+        <circle cx="12" cy="12" r="8.5" />
+        <path d="M3.5 12h17" />
+        <path d="M12 3.5c2.2 2.4 3.4 5.3 3.4 8.5s-1.2 6.1-3.4 8.5c-2.2-2.4-3.4-5.3-3.4-8.5S9.8 5.9 12 3.5Z" />
+      </svg>
+    );
+  }
   if (name === 'pin') {
     return (
       <svg {...common}>
