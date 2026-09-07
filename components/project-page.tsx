@@ -115,8 +115,26 @@ export function ProjectHero({
             // It was 27.5rem (440px) until now, which is a hard cap 80px
             // under the column, and that is exactly what made this card read
             // as thin beside the homepage's.
-            className="no-scrollbar lg:col-span-6 lg:max-h-[var(--project-card-cap)] lg:w-full lg:justify-self-end lg:self-center lg:overflow-y-auto lg:max-w-[40rem]"
-            style={{ ['--project-card-cap' as string]: 'calc(100svh - 122px - clamp(12px, 100svh - 700px, 48px))' }}
+            className="no-scrollbar lg:col-span-6 lg:me-[var(--project-card-pull)] lg:max-h-[var(--project-card-cap)] lg:w-full lg:justify-self-end lg:self-center lg:overflow-y-auto lg:max-w-[40rem]"
+            style={{
+              ['--project-card-cap' as string]: 'calc(100svh - 122px - clamp(12px, 100svh - 700px, 48px))',
+              // The card sits at the end of SectionBody, which is 84rem —
+              // but the homepage hero is the one full-bleed block on the
+              // site and runs on 92rem, so the same card there reaches
+              // 136px further right and this one read as parked in the
+              // middle of the photograph.
+              //
+              // Rather than widen this hero (which would drag the headline
+              // left with it), only the card breaks out. The pull is the
+              // room outside SectionBody on one side, less its own padding,
+              // capped at the 136px that is exactly the difference between
+              // the two measures — so it tracks the homepage's right edge
+              // at every width and reaches zero on its own by ~1152px,
+              // before the grid stacks. Logical margin, so Arabic pulls to
+              // the other edge.
+              ['--project-card-pull' as string]:
+                'calc(-1 * clamp(0px, (100vw - 72rem) / 2 - 1.5rem, 8.5rem))',
+            }}
           >
             {aside}
           </div>
