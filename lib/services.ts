@@ -158,3 +158,47 @@ export const SERVICE_GROUP_OF: Record<ServiceKey, 'religious' | 'guidance' | 'te
   koran: 'teaching',
   kurs: 'teaching',
 };
+
+// ─────────────────────────────────────────────────────────────────────────
+// DORMANT SERVICES — written, translated, and switched off.
+//
+// The client's Tjenester.docx (2026-09-07) describes five services this site
+// has no page for. Two of them, veivisere and barn-og-ungdom, WERE pages
+// until 2026-09-05, when the instruction was "keep those 8 pages only". The
+// instruction now is: write all of them, show the eight, "and if needed
+// later, we will just uncomment those".
+//
+// So the copy is already in messages/{no,en,ar}.json under
+// servicesIndex.items.<key> — title, body, longBody, offerTitle, offerLede
+// and four offer items each, in all three languages — plus a
+// requestForm.notes.<key> line so the enquiry form has its hint. None of it
+// renders: every consumer reads SERVICE_KEYS or SERVICE_GROUPS, and neither
+// mentions these. Nothing iterates the message file.
+//
+// TO TURN ONE ON, four edits:
+//   1. add the key to SERVICE_KEYS below, and its entries to the four total
+//      Records (the compiler will name every one you miss);
+//   2. add it to a SERVICE_GROUPS family so it appears on the index, and
+//      give that family a label under servicesIndex.groups if it is new —
+//      'community' was removed with these two and would need restoring;
+//   3. add a { label, blurb, href } entry to nav.menu.services in all three
+//      message files (the mega-menu is an array, not derived);
+//   4. for veivisere ONLY, delete its 308 in next.config.ts, or the route
+//      will redirect to /tjenester before it ever renders.
+//
+// The photographs below are picked from the unused end of the library and
+// are suggestions, not commitments — check the crop in the band and the 3:2
+// rail before shipping, the way SERVICE_STORY documents.
+//
+// 'veivisere'        band /photos/event-school-visit.webp   story /photos/cong-hall.webp
+// 'norsk'            band /photos/learn-classroom.webp      story /photos/community/volunteers-two.webp
+// 'ungdom'           band /photos/community/volunteers-street.webp  story /photos/svc-friday.webp
+// 'barn-og-familie'  band /photos/community/bazaar-stand.webp story /photos/hero-iftar.webp
+// 'fosterhjem'       band /photos/community/welcome-embrace.webp story /photos/cong-prayer.webp
+//
+// A note on barn-og-ungdom: the old key was 'barn-og-ungdom' and the doc
+// splits that subject in two — Ungdomsarbeid (NUM, 11-15 and up) and
+// Barn- og familieaktiviteter. They are written as two services, 'ungdom'
+// and 'barn-og-familie', not one. The old /tjenester/barn-og-ungdom
+// redirect can point at whichever of the two is turned on.
+// ─────────────────────────────────────────────────────────────────────────
