@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
-import { StoryColophon, StoryHero, StoryPlate } from '@/components/story-page';
+import { type ColophonLabels, StoryColophon, StoryHero, StoryPlate } from '@/components/story-page';
 
 // Volunteer signup. Simple checkbox list of interest areas + contact.
 const AREAS = ['events', 'teaching', 'library', 'youth', 'construction', 'admin'] as const;
@@ -108,14 +108,7 @@ export default function VolunteerPage() {
         heading={ts('colophon.heading')}
         body={ts('colophon.body')}
         hours={ts('colophon.hours')}
-        labels={ts.raw('colophon.labels') as {
-          founded: string;
-          orgNr: string;
-          members: string;
-          address: string;
-          hours: string;
-          bank: string;
-        }}
+        labels={ts.raw('colophon.labels') as ColophonLabels}
       />
     </main>
   );

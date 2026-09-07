@@ -2213,7 +2213,13 @@
         "members": "Medlemmer",
         "address": "Adresse",
         "hours": "Åpent",
-        "bank": "Bankkonto"
+        "bank": "Bankkonto",
+        "eyebrow": "Offisiell informasjon",
+        "groupOrg": "Organisasjon",
+        "groupVisit": "Besøk oss",
+        "register": "Alt du trenger å vite om organisasjonen",
+        "copy": "Kopier",
+        "copied": "Kopiert"
       },
       "hours": "Hver dag, 06:00 til 22:00"
     }

@@ -1,7 +1,7 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
-import { StoryColophon, StoryHero } from '@/components/story-page';
+import { type ColophonLabels, StoryColophon, StoryHero } from '@/components/story-page';
 
 // Combined privacy + accessibility statement — universell utforming is a
 // legal requirement in Norway (§8). Content is plain and short so a donor
@@ -65,14 +65,7 @@ export default async function PrivacyPage({
         heading={ts('colophon.heading')}
         body={ts('colophon.body')}
         hours={ts('colophon.hours')}
-        labels={ts.raw('colophon.labels') as {
-          founded: string;
-          orgNr: string;
-          members: string;
-          address: string;
-          hours: string;
-          bank: string;
-        }}
+        labels={ts.raw('colophon.labels') as ColophonLabels}
       />
     </main>
   );

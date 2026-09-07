@@ -1,6 +1,6 @@
 import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
 import { Section, SectionBody } from '@/components/primitives';
-import { StoryColophon, StoryHero, StoryPlate } from '@/components/story-page';
+import { type ColophonLabels, StoryColophon, StoryHero, StoryPlate } from '@/components/story-page';
 
 // News index. Kept static in phase 2 — a real CMS is a phase-4+ decision
 // (§13.5 blocker: who updates the site after handover).
@@ -55,14 +55,7 @@ export default async function NewsPage({
         heading={ts('colophon.heading')}
         body={ts('colophon.body')}
         hours={ts('colophon.hours')}
-        labels={ts.raw('colophon.labels') as {
-          founded: string;
-          orgNr: string;
-          members: string;
-          address: string;
-          hours: string;
-          bank: string;
-        }}
+        labels={ts.raw('colophon.labels') as ColophonLabels}
       />
     </main>
   );

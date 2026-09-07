@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
-import { StoryColophon, StoryHero, StoryPlate } from '@/components/story-page';
+import { type ColophonLabels, StoryColophon, StoryHero, StoryPlate } from '@/components/story-page';
 
 type Tier = 'ordinary' | 'voting' | 'youth';
 
@@ -114,14 +114,7 @@ export default function MembershipPage() {
         heading={ts('colophon.heading')}
         body={ts('colophon.body')}
         hours={ts('colophon.hours')}
-        labels={ts.raw('colophon.labels') as {
-          founded: string;
-          orgNr: string;
-          members: string;
-          address: string;
-          hours: string;
-          bank: string;
-        }}
+        labels={ts.raw('colophon.labels') as ColophonLabels}
       />
     </main>
   );

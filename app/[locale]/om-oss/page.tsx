@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
 import { Eyebrow, SectionBody, SectionHeading } from '@/components/primitives';
-import { StoryColophon } from '@/components/story-page';
+import { type ColophonLabels, StoryColophon } from '@/components/story-page';
 import { PageBand } from '@/components/page-band';
 import { FigureIcon } from '@/components/figure-icons';
 
@@ -255,14 +255,7 @@ export default async function AboutPage({
         heading={ts('colophon.heading')}
         body={ts('colophon.body')}
         hours={ts('colophon.hours')}
-        labels={ts.raw('colophon.labels') as {
-          founded: string;
-          orgNr: string;
-          members: string;
-          address: string;
-          hours: string;
-          bank: string;
-        }}
+        labels={ts.raw('colophon.labels') as ColophonLabels}
       />
     </main>
   );
