@@ -14,7 +14,12 @@ export type FigureIconName =
   | 'people'
   | 'person'
   | 'calendar'
-  | 'check';
+  | 'check'
+  // Added for the visit page's fact row (2026-09-07): a place, an opening
+  // time and a way of getting here.
+  | 'pin'
+  | 'clock'
+  | 'route';
 
 export function FigureIcon({
   name,
@@ -71,6 +76,31 @@ export function FigureIcon({
     );
   }
 
+  if (name === 'pin') {
+    return (
+      <svg {...common}>
+        <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" />
+        <circle cx="12" cy="10" r="2.5" />
+      </svg>
+    );
+  }
+  if (name === 'clock') {
+    return (
+      <svg {...common}>
+        <circle cx="12" cy="12" r="8.5" />
+        <path d="M12 7.5V12l3 2" />
+      </svg>
+    );
+  }
+  if (name === 'route') {
+    return (
+      <svg {...common}>
+        <circle cx="6" cy="18" r="2.5" />
+        <circle cx="18" cy="6" r="2.5" />
+        <path d="M8.5 18h5a4 4 0 0 0 0-8h-3a4 4 0 0 1 0-8h1" />
+      </svg>
+    );
+  }
   if (name === 'check') {
     return (
       <svg {...common}>

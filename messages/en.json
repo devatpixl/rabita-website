@@ -1539,7 +1539,10 @@
     "lede": "Open every day. Groups arrange in advance; short visits are free.",
     "addressHeading": "Address and hours",
     "formHeading": "Book a group visit",
-    "groups": "We host schools, universities, press and other groups. Shorter visits don't need advance booking."
+    "formTitle": "Come and visit",
+    "formLede": "Fill in the form below and we will get in touch to arrange a time and the details.",
+    "groups": "We host schools, universities, press and other groups. Shorter visits don't need advance booking.",
+    "quote": "An open door for anyone who wants to get to know the mosque."
   },
   "educationPage": {
     "eyebrow": "Education",

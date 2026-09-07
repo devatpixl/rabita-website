@@ -152,6 +152,7 @@ export function RequestForm({
   card = false,
   tone = 'paper',
   rule = true,
+  intro,
 }: {
   subject: RequestSubject;
   /** Serif title set inside the form, above the first rule. */
@@ -174,6 +175,11 @@ export function RequestForm({
    *  white block in a dark well), and because this form has already
    *  changed ground twice. */
   tone?: FormTone;
+  /** Anything that belongs INSIDE the card above the fields — an eyebrow,
+   *  a heading, a sentence of explanation. `heading` renders the house
+   *  serif title with its diamond; this is the slot for when the caller
+   *  wants to compose that opening itself. */
+  intro?: React.ReactNode;
   /** The black hairline that opens the form. It exists for /kontakt and
    *  /besok-oss, where the form follows body copy in the same column and
    *  needs the break; pass false where the form already has a column, a
@@ -257,6 +263,7 @@ export function RequestForm({
 
   return (
     <form onSubmit={onSubmit} className={shell} noValidate>
+      {intro}
       {heading && (
         <div className="flex items-baseline justify-between gap-4">
           <h3 className={cn('font-serif text-[1.75rem] leading-tight', c.doneH)}>{heading}</h3>

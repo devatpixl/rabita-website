@@ -1,10 +1,16 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
-import { Section, SectionBody, SectionHeading } from '@/components/primitives';
-import { VisitClose, VisitFacts } from '@/components/visit-page';
+import { Eyebrow, Section, SectionBody, SectionHeading } from '@/components/primitives';
+import { VisitClose } from '@/components/visit-page';
 import { PageBand } from '@/components/page-band';
 import { RequestForm } from '@/components/request-form';
+import { FigureIcon, type FigureIconName } from '@/components/figure-icons';
+
+// The three facts in the same order the copy lists them (Address, Open, How
+// to get here), each given the mark that says what kind of fact it is.
+const FACT_ICONS: FigureIconName[] = ['pin', 'clock', 'route'];
 
 export default async function VisitPage({
   params,
@@ -15,6 +21,7 @@ export default async function VisitPage({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'visitPage' });
   const tv = await getTranslations({ locale, namespace: 'visitPages' });
+  const facts = tv.raw('pages.visit.facts') as { term: string; detail: string }[];
 
   return (
     <main>
@@ -32,6 +39,12 @@ export default async function VisitPage({
          same string, which is why VisitHero carried an `eyebrow !== crumb`
          guard. The band prints the crumb once and the guard dies with it.
 
+         VisitFacts no longer hangs under the plate. The three facts moved
+         down into the section below, where the client's mockup puts them —
+         each with a mark, beside the address rather than under the picture.
+         The component itself is untouched: /arrangementer and every event
+         page still render it through VisitHero.
+
          mark="elevation" belongs here more than anywhere: this is the one
          page whose subject is the building. */}
       <PageBand
@@ -43,42 +56,154 @@ export default async function VisitPage({
         layout="over"
         mark="elevation"
         objectClass="object-[50%_58%] md:object-[50%_50%]"
-      >
-        <VisitFacts facts={tv.raw('pages.visit.facts') as { term: string; detail: string }[]} />
-      </PageBand>
-      <Section tone="paper">
+        padBottom="none"
+      />
+
+      {/* The visit, laid out to the client's mockup (2026-09-07): the address
+         as the headline with a chip over it, the three facts as marked rows
+         beneath, a photograph with a floating pill, and the booking form on a
+         raised card beside it.
+
+         Everything here is the vocabulary the service pages already use — the
+         Eyebrow's own rule, the gold seal from follow-us.tsx, the star-texture
+         ground, the paper card with sunken wells. Nothing new was invented for
+         this page; it was simply never given the language the rest of the site
+         had grown. */}
+      <Section tone="paper-2" className="relative isolate overflow-hidden">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-32 end-[4%] -z-10 h-[34rem] w-[34rem] rounded-full bg-gold/[0.06] blur-3xl"
+        />
+        {/* The mosque's own mark as ground. Its own childless layer:
+           .star-texture sets `> * { position: relative }` and would drop any
+           absolutely positioned sibling into the flow. */}
+        <div
+          aria-hidden
+          className="star-texture star-texture--light pointer-events-none absolute inset-0 -z-10"
+        />
+        {/* The seam, so the band's plate does not end on the same line the
+           ground changes colour. Painted last of the three so the texture and
+           the bloom fade in with it. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-paper to-paper-2 md:h-40"
+        />
         <SectionBody>
-          <div className="grid gap-10 md:grid-cols-12">
-            <div className="md:col-span-5 space-y-4">
-              <SectionHeading>{t('addressHeading')}</SectionHeading>
-              <address className="not-italic text-body text-ink">
-                <p>Rabita</p>
-                <p>{CAMPAIGN.address}</p>
-                <p className="text-ink-60">{CAMPAIGN.postalCity}</p>
-              </address>
-              <p className="text-body text-ink-60">{CAMPAIGN.openingHours}</p>
-              <p className="text-body text-ink">{t('groups')}</p>
-              <div className="relative mt-8 aspect-[4/3] overflow-hidden rounded-3xl bg-paper-2">
+          {/* Two columns at lg, three at xl. The quote only appears where
+             there is room for it: at lg the form takes 7 of 12 and keeps the
+             name/e-mail row genuinely side by side, and at xl the columns
+             re-cut to 4/6/2 so the margin note can join without squeezing
+             the form back down. gap-10, not gap-16: on a 12-column grid a
+             64px gutter eats 704px of a 1104px measure and a two-column
+             quote comes out one word wide. */}
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
+            {/* ── the place ──────────────────────────────────────────── */}
+            <div className="lg:col-span-5 xl:col-span-4">
+              {/* A chip, not a rule-and-label. The section's own name sits
+                 above the address because the ADDRESS is the headline here —
+                 that inversion is the mockup's, and it is right: nobody needs
+                 a heading that says "address" over an address. */}
+              <p className="inline-flex items-center rounded-full bg-paper px-3.5 py-1.5 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60 ring-1 ring-ink/10">
+                {t('addressHeading')}
+              </p>
+              <SectionHeading className="mt-5">{CAMPAIGN.address}</SectionHeading>
+
+              <ul className="mt-8 grid gap-x-8 gap-y-6 border-t border-ink/10 pt-7 sm:grid-cols-2 lg:grid-cols-1">
+                {facts.map((f, i) => (
+                  <li key={f.term} className="flex items-start gap-3.5">
+                    <span
+                      aria-hidden
+                      className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gold-soft/40 text-gold-deep ring-1 ring-gold-deep/20"
+                    >
+                      <FigureIcon name={FACT_ICONS[i] ?? 'pin'} className="h-[18px] w-[18px]" />
+                    </span>
+                    <span className="block min-w-0">
+                      <span className="block font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60">
+                        {f.term}
+                      </span>
+                      <span className="mt-1 block text-[15px] leading-snug text-ink">{f.detail}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <p className="mt-7 max-w-[42ch] text-body text-ink-60">{t('groups')}</p>
+
+              {/* The photograph, with the pill floating on it. The label is
+                 the existing "see what's on" line and it goes to the events
+                 page — a real destination. The mockup's "see more pictures"
+                 has nowhere to go: there is no gallery page. */}
+              <div className="group relative mt-8 aspect-[4/3] overflow-hidden rounded-[1.5rem] rounded-se-[3.5rem] bg-paper-deep ring-1 ring-ink/5">
                 <Image
                   src="/photos/visit-foyer.webp"
                   alt={tv('pages.visit.caption')}
                   fill
-                  loading="eager"
-                  sizes="(min-width: 768px) 38vw, 90vw"
-                  className="object-cover"
+                  sizes="(min-width: 1024px) 430px, calc(100vw - 3rem)"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
                   style={{ filter: 'saturate(0.72) contrast(1.12) brightness(0.9)' }}
                 />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-dusk/70 to-transparent"
+                />
+                <Link
+                  href={`/${locale}/arrangementer`}
+                  className="group/pill absolute bottom-4 start-4 inline-flex min-h-11 items-center gap-3 rounded-full bg-paper/95 px-4 py-2 text-[14px] font-semibold text-ink shadow-[0_2px_10px_-2px_rgba(26,26,24,0.35)] backdrop-blur-sm transition-colors hover:bg-paper"
+                >
+                  {tv('pages.visit.closeSecondary')}
+                  <span
+                    aria-hidden
+                    className="transition-transform duration-200 group-hover/pill:translate-x-1 rtl:rotate-180 rtl:group-hover/pill:-translate-x-1"
+                  >
+                    &rarr;
+                  </span>
+                </Link>
               </div>
             </div>
-            <div className="md:col-span-7">
-              <SectionHeading>{t('formHeading')}</SectionHeading>
-              <div className="mt-6">
-                <RequestForm subject="visit" />
-              </div>
+
+            {/* ── the booking ────────────────────────────────────────── */}
+            <div className="lg:col-span-7 xl:col-span-6">
+              <RequestForm
+                subject="visit"
+                card
+                rule={false}
+                intro={
+                  <div className="mb-7">
+                    <Eyebrow tone="gold-deep">{t('formHeading')}</Eyebrow>
+                    <h2 className="mt-4 font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-tight text-balance text-ink">
+                      {t('formTitle')}
+                    </h2>
+                    <p className="mt-3 max-w-[44ch] text-[15px] leading-snug text-ink-60">
+                      {t('formLede')}
+                    </p>
+                  </div>
+                }
+              />
             </div>
+
+            {/* ── the margin note ────────────────────────────────────── */}
+            {/* Only from xl, and only because there is a spare column there.
+               A pull quote squeezed into a 5-column grid is a paragraph with
+               delusions; given a margin of its own it is the thing the eye
+               rests on after the form. */}
+            <aside className="hidden xl:col-span-2 xl:block">
+              <span aria-hidden className="block h-px w-10 bg-gold-deep/40" />
+              <p className="mt-6 font-serif text-[1.05rem] italic leading-relaxed text-ink-60">
+                {`«${t('quote')}»`}
+              </p>
+              <Image
+                src="/logo/rabita-mark-256.png"
+                alt=""
+                width={32}
+                height={32}
+                aria-hidden
+                className="mt-7 h-8 w-8 opacity-60"
+              />
+            </aside>
           </div>
         </SectionBody>
       </Section>
+
       <VisitClose
         heading={tv('pages.visit.closeHeading')}
         body={tv('pages.visit.closeBody')}

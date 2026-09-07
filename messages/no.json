@@ -1539,7 +1539,10 @@
     "lede": "Åpent alle dager. Grupper avtaler i forkant, korte besøk er gratis.",
     "addressHeading": "Adresse og åpningstider",
     "formHeading": "Bestill gruppebesøk",
-    "groups": "Vi tar imot skoler, universiteter, presse og andre grupper. Kortere besøk trenger ikke forhåndsavtale."
+    "formTitle": "Bli med på besøk",
+    "formLede": "Fyll ut skjemaet nedenfor, så tar vi kontakt med deg for å avtale tid og detaljer.",
+    "groups": "Vi tar imot skoler, universiteter, presse og andre grupper. Kortere besøk trenger ikke forhåndsavtale.",
+    "quote": "En åpen dør for alle som vil bli kjent med moskeen."
   },
   "educationPage": {
     "eyebrow": "Undervisning",
