@@ -82,14 +82,32 @@ export default async function AboutPage({
          colour, and green is the tone this site keeps for the places that are
          about the congregation rather than about a service. */}
       <section className="relative isolate overflow-hidden bg-[#e3eae4]">
-        {/* The ground arrives rather than cutting in, the way it does
-           everywhere else the green is used. */}
-        <div aria-hidden className="h-24 bg-gradient-to-b from-paper to-[#e3eae4] md:h-36" />
         <div
           aria-hidden
           className="pointer-events-none absolute -top-24 end-[4%] -z-10 h-[34rem] w-[34rem] rounded-full bg-gold/[0.07] blur-3xl"
         />
-        <div className="pb-section-lg md:pb-24">
+        {/* The ground arrives rather than cutting in, the way it does
+           everywhere else the green is used — but as a BACKGROUND, which is
+           how /besok-oss draws the same seam.
+
+           This was an in-flow div, so its 144px of fade was also 144px of
+           empty layout, and the content below it had no top padding of its
+           own: every pixel between the band's caption and the HISTORIEN chip
+           was the gradient (client, 2026-09-08: "too much space"). One
+           element was doing two jobs and neither was tunable without
+           breaking the other.
+
+           Absolute and -z-10, it now costs nothing, so it can be LONGER than
+           before — a 160px fade instead of 144 — while the breathing room
+           below it is set on its own terms. Painted after the bloom so the
+           bloom fades in with it rather than sitting on top of the seam. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-paper to-[#e3eae4] md:h-40"
+        />
+        {/* 60/72 off the section scale, against 96/144 of pure gradient
+           before. Still spacious, half the hole. */}
+        <div className="pt-section-md pb-section-lg md:pb-24 md:pt-section-lg">
           <SectionBody>
             <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
               {/* ── the story ────────────────────────────────────────── */}
