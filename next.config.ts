@@ -4,6 +4,20 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 const nextConfig: NextConfig = {
+  // Where the build output goes. Default `.next`, overridable per command.
+  //
+  // `next build` and `next dev` share `.next` and fight over it: a build run
+  // while the dev server is up leaves dev serving half-written chunks, and
+  // the symptom is "Cannot find module './vendor-chunks/motion.js'" and a
+  // 500 on a page that was fine a second earlier. The workaround was to kill
+  // dev before every build and remember to start it again — which is exactly
+  // how the server kept ending up dead.
+  //
+  //   npm run dev                     -> .next
+  //   NEXT_DIST_DIR=.next-build next build -> .next-build
+  //
+  // Two directories, no collision, and dev never has to be stopped again.
+  distDir: process.env.NEXT_DIST_DIR || '.next',
   reactStrictMode: true,
   images: {
     formats: ['image/avif', 'image/webp'],
