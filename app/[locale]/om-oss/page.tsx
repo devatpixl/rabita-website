@@ -165,8 +165,12 @@ export default async function AboutPage({
                  way into the margin at xl the way the project hero's card
                  does — the room outside SectionBody, capped, so it reaches
                  zero on its own before the grid stacks. */}
+              {/* self-center, not items-center on the grid: the story column
+                 is the taller of the two, so centring the row would be a
+                 no-op on it and a claim about both. Only the card moves
+                 (client, 2026-09-08). Below lg they stack and it is inert. */}
               <div
-                className="lg:col-span-8 xl:me-[var(--about-panel-pull)]"
+                className="lg:col-span-8 lg:self-center xl:me-[var(--about-panel-pull)]"
                 style={{
                   ['--about-panel-pull' as string]:
                     'calc(-1 * clamp(0px, (100vw - 72rem) / 2 - 1.5rem, 6rem))',
