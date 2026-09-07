@@ -62,14 +62,37 @@ export function ProjectHero({
         />
       </div>
 
-      {/* With a card in the hero the whole thing has to fit a 13-inch laptop
-         screen: 8 units of padding, not the section default. */}
-      <SectionBody className={aside ? 'relative py-10 md:py-14' : 'relative py-section-md'}>
+      {/* WITH A CARD, this hero runs the homepage's rules, not its own.
+         Same measure (92rem against SectionBody's 84rem), same grid
+         (3fr / 2fr with a gap-20), same cap on the card (640px). Both heroes
+         are the one full-bleed block on their page carrying the same object,
+         and every time these were two sets of numbers the card came out a
+         different width or in a different place on the same screen. One set
+         of rules, one result, at every viewport — nothing left to tune.
+
+         The cost is the homepage's own, and deliberate there too: a wider
+         measure moves the text column left, so the headline no longer starts
+         under the wordmark. hero.tsx documents that trade.
+
+         Without a card nothing changes — SectionBody and the section rhythm,
+         as before. */}
+      {(() => {
+        const Body = aside
+          ? ({ children }: { children: ReactNode }) => (
+              <div className="relative z-10 mx-auto w-full max-w-[92rem] px-6 py-10 md:px-10 md:py-14 lg:px-12">
+                {children}
+              </div>
+            )
+          : ({ children }: { children: ReactNode }) => (
+              <SectionBody className="relative py-section-md">{children}</SectionBody>
+            );
+        return (
+      <Body>
         {!aside && (
           <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-dusk-60">{crumb}</p>
         )}
-        <div className={aside ? 'grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12' : undefined}>
-        <div className={aside ? 'max-w-3xl lg:col-span-6' : 'mt-8 max-w-3xl'}>
+        <div className={aside ? 'grid items-center gap-10 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:gap-20' : undefined}>
+        <div className={aside ? 'max-w-3xl' : 'mt-8 max-w-3xl'}>
           {aside && (
             <p className="mb-5 font-mono text-[0.75rem] uppercase tracking-[0.16em] text-dusk-60">{crumb}</p>
           )}
@@ -106,41 +129,26 @@ export function ProjectHero({
         </div>
         {aside && (
           <div
-            // 40rem, the SAME cap components/hero.tsx puts on the homepage
-            // card (maxWidth: '640px'). Neither page ever reaches it — the
-            // grid column is what decides, ~517px on the homepage and ~528px
-            // here — which is the point: with one cap the two cards are the
-            // same object at the same size, and the column does the work.
+            // Straight from components/hero.tsx: full width of the 2fr
+            // column, pushed to its far edge, capped at 640px — a cap
+            // neither page reaches, because the column is what decides.
+            // ms-auto not ml-auto: in Arabic the columns swap sides and
+            // ml-auto would push the card back towards the text.
             //
-            // It was 27.5rem (440px) until now, which is a hard cap 80px
-            // under the column, and that is exactly what made this card read
-            // as thin beside the homepage's.
-            className="no-scrollbar lg:col-span-6 lg:me-[var(--project-card-pull)] lg:max-h-[var(--project-card-cap)] lg:w-full lg:justify-self-end lg:self-center lg:overflow-y-auto lg:max-w-[40rem]"
-            style={{
-              ['--project-card-cap' as string]: 'calc(100svh - 122px - clamp(12px, 100svh - 700px, 48px))',
-              // The card sits at the end of SectionBody, which is 84rem —
-              // but the homepage hero is the one full-bleed block on the
-              // site and runs on 92rem, so the same card there reaches
-              // 136px further right and this one read as parked in the
-              // middle of the photograph.
-              //
-              // Rather than widen this hero (which would drag the headline
-              // left with it), only the card breaks out. The pull is the
-              // room outside SectionBody on one side, less its own padding,
-              // capped at the 136px that is exactly the difference between
-              // the two measures — so it tracks the homepage's right edge
-              // at every width and reaches zero on its own by ~1152px,
-              // before the grid stacks. Logical margin, so Arabic pulls to
-              // the other edge.
-              ['--project-card-pull' as string]:
-                'calc(-1 * clamp(0px, (100vw - 72rem) / 2 - 1.5rem, 8.5rem))',
-            }}
+            // What stays project-specific is the height cap. This hero has
+            // to fit a 13-inch laptop with a three-step giving flow in it,
+            // so the card scrolls inside itself rather than growing the
+            // section.
+            className="no-scrollbar w-full md:ms-auto md:max-w-[640px] lg:max-h-[var(--project-card-cap)] lg:self-center lg:overflow-y-auto"
+            style={{ ['--project-card-cap' as string]: 'calc(100svh - 122px - clamp(12px, 100svh - 700px, 48px))' }}
           >
             {aside}
           </div>
         )}
         </div>
-      </SectionBody>
+      </Body>
+        );
+      })()}
     </section>
   );
 }
