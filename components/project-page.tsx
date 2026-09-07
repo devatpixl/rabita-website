@@ -106,7 +106,16 @@ export function ProjectHero({
         </div>
         {aside && (
           <div
-            className="no-scrollbar lg:col-span-6 lg:max-h-[var(--project-card-cap)] lg:w-full lg:justify-self-end lg:self-center lg:overflow-y-auto lg:max-w-[27.5rem]"
+            // 40rem, the SAME cap components/hero.tsx puts on the homepage
+            // card (maxWidth: '640px'). Neither page ever reaches it — the
+            // grid column is what decides, ~517px on the homepage and ~528px
+            // here — which is the point: with one cap the two cards are the
+            // same object at the same size, and the column does the work.
+            //
+            // It was 27.5rem (440px) until now, which is a hard cap 80px
+            // under the column, and that is exactly what made this card read
+            // as thin beside the homepage's.
+            className="no-scrollbar lg:col-span-6 lg:max-h-[var(--project-card-cap)] lg:w-full lg:justify-self-end lg:self-center lg:overflow-y-auto lg:max-w-[40rem]"
             style={{ ['--project-card-cap' as string]: 'calc(100svh - 122px - clamp(12px, 100svh - 700px, 48px))' }}
           >
             {aside}
