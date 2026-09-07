@@ -25,8 +25,8 @@ import { Section, SectionBody, SectionHeading } from '@/components/primitives';
 //     and quality sections below.
 //
 // The headline price is derived from units that are FOR SALE, not from the
-// whole table: cm8's own front page still advertises "fra 2,8 millioner",
-// which was the 17 m² studio, and that studio is sold. See lib/apartments.ts.
+// whole table. See lib/apartments.ts — the rule is what keeps this figure
+// honest in both directions.
 
 const QUALITY_ITEMS = ['outdoor', 'hall', 'teaching', 'library', 'terrace'] as const;
 
@@ -41,10 +41,11 @@ export default async function ApartmentsPage({
 
   const stats = apartmentStats();
 
-  // "6 millioner" rather than "6 000 000 kr" — the project's own way of
-  // quoting it, and the shape a buyer reads at a glance. Whole millions only
-  // because every available unit is one; a stray 6,2 would need a decimal and
-  // the locale's own separator, so it is formatted rather than concatenated.
+  // "2,8 millioner" rather than "2 800 000 kr" — the project's own way of
+  // quoting it, and the shape a buyer reads at a glance. Formatted rather
+  // than concatenated precisely because of the decimal: nb-NO wants 2,8 and
+  // en-GB wants 2.8, and the cheapest unit has not always been a whole
+  // million.
   const fromMillions = new Intl.NumberFormat(
     locale === 'ar' ? 'ar-EG' : locale === 'en' ? 'en-GB' : 'nb-NO',
     { maximumFractionDigits: 1 },

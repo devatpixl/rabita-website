@@ -7,7 +7,7 @@
 // a flat that sold months ago.
 //
 // Sizes are the areas cm8 publishes per unit. Prices are NOK.
-export const APARTMENTS_AS_OF = '2026-09-02';
+export const APARTMENTS_AS_OF = '2026-09-07';
 export const APARTMENTS_SOURCE = 'https://cm8.no';
 
 export type Apartment = {
@@ -27,16 +27,16 @@ export const APARTMENTS: readonly Apartment[] = [
   { unit: 'H503', floor: 5, rooms: 3, m2: 62, balconyM2: 7, priceNok: 7_600_000, sold: false },
   { unit: 'H504', floor: 5, rooms: 3, m2: 74, balconyM2: 7, priceNok: 8_600_000, sold: false },
   { unit: 'H505', floor: 5, rooms: 2, m2: 61, balconyM2: 6, priceNok: 7_500_000, sold: false },
-  { unit: 'H506', floor: 5, rooms: 4, m2: 86, balconyM2: 6, priceNok: 9_500_000, sold: true },
+  { unit: 'H506', floor: 5, rooms: 4, m2: 86, balconyM2: 6, priceNok: 9_500_000, sold: false },
   { unit: 'H507', floor: 5, rooms: 4, m2: 98, balconyM2: 6, priceNok: 11_000_000, sold: false },
-  { unit: 'H508', floor: 5, rooms: 2, m2: 37, balconyM2: 6, priceNok: 5_000_000, sold: true },
+  { unit: 'H508', floor: 5, rooms: 2, m2: 37, balconyM2: 6, priceNok: 5_000_000, sold: false },
   { unit: 'H601', floor: 6, rooms: 1, m2: 47, balconyM2: 6, priceNok: 6_200_000, sold: false },
   { unit: 'H602', floor: 6, rooms: 3, m2: 55, balconyM2: 6, priceNok: 7_200_000, sold: false },
   { unit: 'H603', floor: 6, rooms: 3, m2: 62, balconyM2: 7, priceNok: 7_800_000, sold: false },
   { unit: 'H604', floor: 6, rooms: 3, m2: 74, balconyM2: 7, priceNok: 8_800_000, sold: false },
   { unit: 'H605', floor: 6, rooms: 4, m2: 82, balconyM2: 10, priceNok: 9_400_000, sold: false },
   { unit: 'H606', floor: 6, rooms: 4, m2: 77, balconyM2: 9, priceNok: 9_200_000, sold: false },
-  { unit: 'H607', floor: 6, rooms: 1, m2: 17, balconyM2: null, priceNok: 2_800_000, sold: true },
+  { unit: 'H607', floor: 6, rooms: 1, m2: 17, balconyM2: null, priceNok: 2_800_000, sold: false },
 ];
 
 const available = () => APARTMENTS.filter((a) => !a.sold);
@@ -45,11 +45,14 @@ const available = () => APARTMENTS.filter((a) => !a.sold);
  * The headline "from" price — computed from what is actually FOR SALE, not
  * from the whole table.
  *
- * This matters: cm8.no's own front page advertises "Startspris fra 2,8
- * millioner", which was the 17 m² studio H607 — and H607 is sold. Repeating
- * that figure here would be advertising a price nobody can buy at. The
- * cheapest available unit is what this returns, and it corrects itself as
- * the table is updated.
+ * On the 2026-09-02 snapshot this returned 6 millioner, because H506, H508
+ * and the 17 m² studio H607 were all marked sold and H607 is the 2,8. Read
+ * again on 2026-09-07 (client: the figure is wrong), cm8.no lists all
+ * fifteen as available, so those three flags were stale and the figure is
+ * 2,8 again — derived, not typed back in.
+ *
+ * The rule stays because it is the one that protects the number: if H607
+ * sells, this stops advertising a price nobody can buy at, on its own.
  */
 export function fromPriceNok(): number {
   return Math.min(...available().map((a) => a.priceNok));
