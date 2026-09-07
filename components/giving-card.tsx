@@ -411,6 +411,14 @@ const TOTAL_STEPS = 3;
         >
           {stepHeading}
         </h2>
+        {/* A reason for the choice, not just the choice. Step 1 only: steps
+           2 and 3 are a form and a payment method, and neither is a
+           decision this sentence could help with. */}
+        {step === 1 && (
+          <p className={cn('max-w-[46ch] text-ink-60', compact ? 'mt-1.5 text-[13px] leading-snug' : 'mt-2 text-[13px] leading-snug sm:text-[14px]')}>
+            {t('questionLede')}
+          </p>
+        )}
         <p className="sr-only" aria-live="polite">
           {t('wizard.stepAnnounce', {
             n: step,
@@ -641,7 +649,7 @@ function StepAmount({
 
       {/* Frequency toggle — shared selection language. */}
       <div
-        className={cn('relative inline-flex w-full items-center rounded-btn bg-paper-2 p-1', compact ? 'mb-3' : cn('mb-3 sm:mb-5', fit && FIT.toggle))}
+        className={cn('relative inline-flex w-full items-center rounded-full bg-paper-2 p-1', compact ? 'mb-3' : cn('mb-3 sm:mb-5', fit && FIT.toggle))}
         role="tablist"
         aria-label={t('sheetTitle')}
       >
@@ -655,7 +663,7 @@ function StepAmount({
               aria-selected={selected}
               onClick={() => setFrequency(f)}
               className={cn(
-                'relative z-10 flex-1 rounded-btn text-[14px] transition-colors',
+                'relative z-10 flex-1 rounded-full text-[14px] transition-colors',
                 compact ? 'min-h-9' : 'min-h-10 sm:min-h-11',
                 selected
                   ? 'bg-ink text-paper font-semibold'
@@ -690,23 +698,36 @@ function StepAmount({
                 setCustomAmount('');
               }}
               className={cn(
-                'relative flex items-baseline gap-1.5 rounded-btn text-start transition-colors',
+                'relative flex items-baseline gap-1.5 rounded-tile text-start transition-colors',
                 compact ? 'min-h-[3rem] px-3 py-2' : cn('min-h-[3.25rem] px-3 py-2 sm:min-h-[4.25rem] sm:px-4 sm:py-3', fit && FIT.presetCell),
+                // Selected is an OUTLINE in the brand gold, not a solid
+                // ink fill. Filled, the chosen amount was the only dark
+                // object on a light card — it read as a hole punched in the
+                // card rather than as the thing you had picked, and it put
+                // a second accent colour on a surface whose progress bar and
+                // primary button are both gold. This reverses the note in
+                // give-cta.tsx that reserved ink for selection; the card now
+                // speaks one colour.
+                //
+                // Unselected borders drop to ink/15 so the chosen one has
+                // something to stand out from.
                 selected
-                  ? 'border-[1.5px] border-ink bg-ink text-paper'
-                  : 'border-[1.5px] border-ink/30 bg-paper text-ink hover:border-ink',
+                  ? 'border-[1.5px] border-gold-deep bg-gold-soft/30 text-ink'
+                  : 'border-[1.5px] border-ink/15 bg-paper text-ink hover:border-ink/40',
               )}
             >
               {recommended && (
+                // One treatment at both sizes: a gold pill sitting ON the
+                // border. The full-size variant used to be a notched grey
+                // tab tucked under the top edge, which read as a sticker
+                // applied to the tile rather than part of it — and it had to
+                // invert itself on the selected tile because that tile was
+                // black. Nothing to invert now.
                 <span
                   className={cn(
-                    'absolute font-mono uppercase tracking-[0.14em]',
-                    // Compact boxes are too short to hang a tab inside, so
-                    // the tag becomes a pill straddling the top edge.
-                    compact
-                      ? '-top-2 end-2 rounded-full px-1.5 py-px text-[8px] leading-[1.6] shadow-[0_0_0_2px_var(--tw-shadow-color)] shadow-paper'
-                      : '-top-px end-3 rounded-b-md px-2 py-0.5 text-[10px]',
-                    selected && !compact ? 'bg-paper text-ink' : 'bg-gold-deep text-paper',
+                    'absolute -top-2 end-3 rounded-full bg-gold-deep font-mono uppercase tracking-[0.14em] text-paper',
+                    'shadow-[0_0_0_2px_var(--tw-shadow-color)] shadow-paper',
+                    compact ? 'px-1.5 py-px text-[8px] leading-[1.6]' : 'px-2 py-0.5 text-[9px] leading-[1.5]',
                   )}
                 >
                   {t('wizard.recommended')}
@@ -716,9 +737,7 @@ function StepAmount({
                 {formatAmount(locale, amount)} kr
               </span>
               {frequency === 'monthly' && (
-                <span className={cn('text-[12px]', selected ? 'text-paper/70' : 'text-ink-60')}>
-                  {t('perMonth')}
-                </span>
+                <span className="text-[12px] text-ink-60">{t('perMonth')}</span>
               )}
             </button>
           );
@@ -730,11 +749,11 @@ function StepAmount({
          clears it. */}
       <label
         className={cn(
-          'flex items-center justify-between gap-4 rounded-btn px-4 transition-colors',
+          'flex items-center justify-between gap-4 rounded-tile px-4 transition-colors',
           compact ? 'mb-3 min-h-[2.75rem]' : cn('mb-3 min-h-[2.75rem] sm:mb-5 sm:min-h-[3.5rem]', fit && FIT.other),
           presetAmount === 'custom'
-            ? 'border-[1.5px] border-ink'
-            : 'border-[1.5px] border-ink/30 focus-within:border-ink',
+            ? 'border-[1.5px] border-gold-deep bg-gold-soft/30'
+            : 'border-[1.5px] border-ink/15 focus-within:border-gold-deep',
         )}
       >
         <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-60">
@@ -760,7 +779,10 @@ function StepAmount({
 
       {/* Anonymous toggle — replaces the zakat box here; zakat is asked
          with the payment method instead. */}
-      <label className={cn('group flex cursor-pointer items-center gap-3 border-y border-rule', compact ? 'py-2' : cn('py-3', fit && FIT.anon))}>
+      {/* border-t only. Two rules around one checkbox was a third and
+         fourth horizontal line on a card that already carries a progress
+         bar and a payment strip. */}
+      <label className={cn('group flex cursor-pointer items-center gap-3 border-t border-rule', compact ? 'py-2' : cn('py-3', fit && FIT.anon))}>
         <span className="relative inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-[1.5px] border-ink transition-colors group-hover:border-gold">
           <input
             type="checkbox"

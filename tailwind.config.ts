@@ -78,6 +78,12 @@ const config: Config = {
       borderRadius: {
         chip: '4px',
         btn: '4px',
+        // The giving card's choice tiles (2026-09-07, client). 4px is the
+        // site's control radius and it is right for a field you type in;
+        // an amount you TAP wants more, or it reads as an input rather
+        // than a choice. Deliberately not applied site-wide — this is the
+        // vocabulary for a tile, not a new default.
+        tile: '10px',
       },
       maxWidth: {
         prose: '75ch',

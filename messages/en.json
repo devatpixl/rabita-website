@@ -217,6 +217,7 @@
     "closeSheet": "Close",
     "sheetTitle": "Give to Rabita",
     "question": "Help build Europe's largest mosque",
+    "questionLede": "Regular monthly gifts make the build predictable. One-off gifts help just as much.",
     "wizard": {
       "back": "Back",
       "continue": "Continue",
