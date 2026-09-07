@@ -226,37 +226,94 @@ export default async function ProjectPage({
                       <h2 className={label}>{t('capacity.heading')}</h2>
                       <span aria-hidden className="hidden h-px flex-1 bg-gold-deep/30 md:block" />
                     </div>
-                    <dl className="mt-3 border-t border-ink md:mt-2 md:space-y-2.5 md:border-t-0">
-                      {cap.map((c) => (
-                        <div
-                          key={c.key}
-                          className={cn(
-                            row,
-                            'flex-col items-start gap-2 md:flex-row md:items-center',
-                            // the phone's hairline, set on the row rather than
-                            // by divide-* — see the note on the <dl>
-                            '[&:not(:first-child)]:border-t-[0.5px] [&:not(:first-child)]:border-t-rule',
-                            // the inset panel from the mockup, gold edge first
-                            'md:rounded-lg md:border-s-2 md:border-gold-deep md:bg-paper md:px-4 md:[&:not(:first-child)]:border-t-0',
-                          )}
-                        >
-                          <span aria-hidden className={chip}>
-                            <FigureIcon name="person" className="h-[18px] w-[18px]" />
-                          </span>
-                          <dt className="text-[13px] text-ink-60 md:w-[7.5rem] md:shrink-0">{t(`capacity.${c.key}`)}</dt>
-                          <dd className="flex w-full flex-1 items-baseline gap-3 leading-none md:w-auto">
-                            <span className="font-serif text-[1.1rem] tabular-nums text-ink-60">{nf.format(c.before)}</span>
-                            <span aria-hidden className="text-ink-60 rtl:rotate-180">&rarr;</span>
-                            <span className="font-serif italic text-[clamp(2.25rem,3.6vw,3rem)] tabular-nums text-gold-deep">{nf.format(c.after)}</span>
-                            <span className="ms-auto shrink-0 font-mono text-[0.6875rem] tracking-[0.14em] text-gold-deep md:hidden">
-                              {Math.round(c.after / c.before)}×
-                            </span>
-                          </dd>
-                          <span className="hidden shrink-0 font-mono text-[0.6875rem] tracking-[0.14em] text-gold-deep md:inline">
-                            {Math.round(c.after / c.before)}×
-                          </span>
-                        </div>
-                      ))}
+                    {/* Capacity as a scale, not as two stat rows.
+                       (client, 2026-09-07: "a bespoke architectural
+                       information display rather than a standard UI
+                       statistics component".)
+
+                       Two vertical areas divided by one hairline. The number
+                       that matters is the new one, so it carries the type;
+                       the old one is a measure under it. Both measures live
+                       in the SAME 1fr track with the figures in a shared
+                       end column, which is the only way the ratio is
+                       honest — a bar sized against a track that a number is
+                       also sitting in would be short by the width of the
+                       number.
+
+                       The scale is per column, deliberately. Shared across
+                       both, women's 500 would be a quarter of men's 2000 and
+                       the old 100 a 5% sliver; the story this section tells
+                       is the growth, and the figures carry the comparison
+                       between the two on their own.
+
+                       Interaction is one thing only: the new measure and its
+                       chevron reach forward on hover or keyboard focus. */}
+                    <dl className="mt-5 grid gap-9 sm:grid-cols-2 sm:gap-0 md:mt-6">
+                      {cap.map((c, i) => {
+                        const times = Math.round(c.after / c.before);
+                        return (
+                          <div
+                            key={c.key}
+                            tabIndex={0}
+                            className={cn(
+                              'group relative outline-none',
+                              i === 0 ? 'sm:pe-9' : 'sm:border-s sm:border-rule sm:ps-9',
+                            )}
+                          >
+                            <div className="flex items-baseline justify-between gap-4">
+                              <dt className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60">
+                                {t(`capacity.${c.key}`)}
+                              </dt>
+                              <span
+                                aria-hidden
+                                className="font-mono text-[0.625rem] tabular-nums tracking-[0.14em] text-gold-deep/60 transition-colors duration-500 group-hover:text-gold-deep group-focus:text-gold-deep"
+                              >
+                                {times}&times;
+                              </span>
+                            </div>
+
+                            <dd className="mt-3">
+                              <span className="block font-serif italic leading-none tabular-nums text-gold-deep text-[clamp(2.6rem,5vw,3.5rem)]">
+                                {nf.format(c.after)}
+                              </span>
+                              <span className="mt-2.5 block font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60">
+                                {t('capacity.people')}
+                              </span>
+
+                              {/* The scale. aria-hidden: the figures either
+                                 side of it are already read out above and in
+                                 the row below, so this is the same fact a
+                                 third time for a screen reader. */}
+                              <div
+                                aria-hidden
+                                className="mt-6 grid grid-cols-[1fr_auto] items-center gap-x-3 gap-y-2.5"
+                              >
+                                <span className="h-px bg-ink/25" style={{ width: `${(c.before / c.after) * 100}%` }} />
+                                <span className="font-mono text-[10px] leading-none tabular-nums text-ink-40">
+                                  {nf.format(c.before)}
+                                </span>
+                                <span className="flex items-center">
+                                  <span className="h-[2px] flex-1 bg-gold-deep/55 transition-colors duration-500 ease-out group-hover:bg-gold-deep group-focus:bg-gold-deep" />
+                                  <svg
+                                    viewBox="0 0 8 10"
+                                    className="ms-1 h-2.5 w-2 shrink-0 text-gold-deep/55 transition-all duration-500 ease-out group-hover:translate-x-1 group-hover:text-gold-deep group-focus:translate-x-1 group-focus:text-gold-deep motion-reduce:transition-none rtl:rotate-180 rtl:group-hover:-translate-x-1"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  >
+                                    <path d="M2 1l4 4-4 4" />
+                                  </svg>
+                                </span>
+                                <span className="font-mono text-[10px] leading-none tabular-nums text-gold-deep">
+                                  {nf.format(c.after)}
+                                </span>
+                              </div>
+                            </dd>
+                          </div>
+                        );
+                      })}
                     </dl>
 
                     {/* The architect, as its own register where the school
