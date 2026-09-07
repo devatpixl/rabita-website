@@ -137,7 +137,10 @@ export function NavBar() {
       >
         <div
           className={cn(
-            'h-full w-full max-w-[83rem] rounded-full bg-paper/95 backdrop-blur',
+            // The capsule and the row below share one rule: both widen at
+            // 1800, which is exactly where the prayer chip switches on. The
+            // room and the thing that needs it now arrive together.
+            'h-full w-full max-w-[83rem] min-[1800px]:max-w-[97rem] rounded-full bg-paper/95 backdrop-blur',
             'shadow-[0_10px_30px_-12px_rgba(26,26,24,0.45)]',
             'transition-[opacity,transform] duration-[320ms] [transition-timing-function:cubic-bezier(0.32,0.72,0,1)]',
             'will-change-[opacity,transform] motion-reduce:transition-none',
@@ -150,7 +153,19 @@ export function NavBar() {
          row does not use is split equally between the two gaps rather than
          dumped on one side. At 1920 that is ~123px either side of the nav
          instead of 246px in a single hole after "About us". */}
-      <div className="relative mx-auto flex w-full max-w-[84rem] items-center justify-between px-4 py-2 md:px-10 md:py-4 lg:px-12">
+      {/* Above 1344 this row is capped, so its CONTENT box is a fixed
+         1248px however wide the screen gets — 1248 at 1440 and 1248 at
+         2560. The prayer chip below was gated on min-[1800px] as though a
+         wider screen meant more room; it does not, so the chip added up to
+         220px to a box that could not grow. Nothing visibly broke here only
+         because the chip is overflow-hidden and flex crushed it to zero —
+         measured slack at the end edge was 0px, so which of the two gave way
+         came down to font metrics, and on a 1920 desktop it was the language
+         switcher, which walked out past the capsule.
+
+         So the cap steps up at the same 1800 the chip does. Below that not a
+         pixel moves: a 1470 laptop is byte-identical to before. */}
+      <div className="relative mx-auto flex w-full max-w-[84rem] min-[1800px]:max-w-[98rem] items-center justify-between px-4 py-2 md:px-10 md:py-4 lg:px-12">
         {/* Wordmark — mark + two-line stacked name ("Oslo Sentralmoské"
            over "Rabita", client 2026-09-04; together they read the full
            name, Oslo Sentralmoské Rabita). No underline. Whole block links
