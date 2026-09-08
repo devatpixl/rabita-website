@@ -43,8 +43,13 @@ export function MembershipSignup() {
     }
   };
 
+  // A WELL, matching request-form's fields: filled a shade DARKER than the
+  // panel it sits on, inside a 1.5px box. It used to be bg-paper on a
+  // bg-paper card, which was invisible the moment this card stopped standing
+  // on the dusk section and moved onto paper-2 (2026-09-08) — the same
+  // "fields do not look like fields" the enquiry form was corrected for.
   const field =
-    'min-h-11 w-full rounded-btn border border-rule bg-paper px-3.5 py-2 text-body text-ink outline-none transition-colors placeholder:text-ink-40 focus:border-ink';
+    'min-h-11 w-full rounded-btn border-[1.5px] border-ink/20 bg-paper-2 px-3.5 py-2 text-body text-ink outline-none transition-colors placeholder:text-ink-40 hover:border-ink/35 focus:border-ink';
 
   if (done) {
     return (
