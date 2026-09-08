@@ -122,7 +122,11 @@ export default async function AboutPage({
         />
         {/* 60/72 off the section scale, against 96/144 of pure gradient
            before. Still spacious, half the hole. */}
-        <div className="pt-section-md pb-section-lg md:pb-24 md:pt-section-lg">
+        {/* 36px top and bottom on a phone, against 60/72 before. Those are
+           desktop measures: the bottom one stacked with the colophon's own
+           top padding for 132px of dead ground between the card and "Til
+           protokollen" at 390px (client, 2026-09-08). */}
+        <div className="pb-9 pt-9 md:pb-24 md:pt-section-lg">
           <SectionBody>
             <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
               {/* ── the story ────────────────────────────────────────── */}

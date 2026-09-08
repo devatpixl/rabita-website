@@ -71,18 +71,30 @@ export function SectionBody({ children, className }: { children: ReactNode; clas
 export function Section({
   id,
   tone = 'paper',
+  pad = 'default',
   children,
   className,
 }: {
   id?: string;
   tone?: 'paper' | 'paper-2' | 'paper-deep';
+  /**
+   * 'tight' takes the mobile rhythm down to 36px and keeps 60 from md.
+   * section-md is a DESKTOP measure: at 390px it is 60px of nothing above
+   * the fold, and where two sections meet it stacks with the one below it.
+   * Opt-in rather than the default only because that default is shared with
+   * every other page on the site.
+   */
+  pad?: 'default' | 'tight';
   children: ReactNode;
   className?: string;
 }) {
   const toneClass =
     tone === 'paper-2' ? 'bg-paper-2' : tone === 'paper-deep' ? 'bg-paper-deep' : 'bg-paper';
+  // Mutually exclusive, never an override: cn() is clsx-only here, so a
+  // later class does not beat an earlier one.
+  const padClass = pad === 'tight' ? 'py-9 md:py-section-md' : 'py-section-md';
   return (
-    <section id={id} className={cn('py-section-md', toneClass, className)}>
+    <section id={id} className={cn(padClass, toneClass, className)}>
       {children}
     </section>
   );

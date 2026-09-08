@@ -69,7 +69,7 @@ export default async function VisitPage({
          ground, the paper card with sunken wells. Nothing new was invented for
          this page; it was simply never given the language the rest of the site
          had grown. */}
-      <Section tone="paper-2" className="relative isolate overflow-hidden">
+      <Section tone="paper-2" pad="tight" className="relative isolate overflow-hidden">
         <div
           aria-hidden
           className="pointer-events-none absolute -top-32 end-[4%] -z-10 h-[34rem] w-[34rem] rounded-full bg-gold/[0.06] blur-3xl"
@@ -108,7 +108,11 @@ export default async function VisitPage({
               </p>
               <SectionHeading className="mt-5">{CAMPAIGN.address}</SectionHeading>
 
-              <ul className="mt-8 grid gap-x-8 gap-y-6 border-t border-ink/10 pt-7 sm:grid-cols-2 lg:grid-cols-1">
+              {/* 24/24 on a phone against 32/28: the margin and the rule's
+                 own padding stacked into 60px between the address and the
+                 first fact, which is the largest gap on the page that is not
+                 a section boundary. */}
+              <ul className="mt-6 grid gap-x-8 gap-y-6 border-t border-ink/10 pt-6 sm:grid-cols-2 md:mt-8 md:pt-7 lg:grid-cols-1">
                 {facts.map((f, i) => (
                   <li key={f.term} className="flex items-start gap-3.5">
                     <span

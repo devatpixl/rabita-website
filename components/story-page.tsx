@@ -132,7 +132,7 @@ export function StoryColophon({
     // change"). It also sets the page's last three grounds running pale
     // green -> near-white -> the dusk footer, which is a progression rather
     // than two warm sands meeting a dark block.
-    <section className="relative isolate overflow-hidden bg-paper-2 py-section-md">
+    <section className="relative isolate overflow-hidden bg-paper-2 py-9 md:py-section-md">
       <div
         aria-hidden
         className="pointer-events-none absolute -bottom-40 -start-32 -z-10 h-[26rem] w-[26rem] rounded-full bg-gold/[0.07] blur-3xl"
@@ -186,7 +186,7 @@ export function StoryColophon({
         {/* One block divided into six, not six blocks. gap-px over a tinted
            ground draws the interior rules: real borders would double up at
            every seam and break wherever the grid rewraps. */}
-        <dl className="mt-10 grid gap-px overflow-hidden rounded-2xl bg-ink/10 ring-1 ring-ink/10 shadow-[0_1px_2px_rgba(26,26,24,0.03),0_18px_40px_-32px_rgba(26,26,24,0.25)] sm:grid-cols-2 lg:grid-cols-3">
+        <dl className="mt-7 grid gap-px md:mt-10 overflow-hidden rounded-2xl bg-ink/10 ring-1 ring-ink/10 shadow-[0_1px_2px_rgba(26,26,24,0.03),0_18px_40px_-32px_rgba(26,26,24,0.25)] sm:grid-cols-2 lg:grid-cols-3">
           {facts.map((f) => (
             <div
               key={f.term}

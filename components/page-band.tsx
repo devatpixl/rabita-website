@@ -240,7 +240,12 @@ export function PageBand({
 
               <div
                 className={cn(
-                  'relative flex flex-col justify-end p-7 sm:p-8 md:max-w-[38rem] md:justify-center md:py-9 md:ps-10 md:pe-8 lg:ps-12',
+                  // p-6, not p-7/sm:p-8: below md the plate is bled to the
+                  // screen edges, so its own padding IS the page gutter now.
+                  // At 28px the headline sat 4px inside every other line on
+                  // the page and the left edge visibly staggered. md and up
+                  // sets all four sides itself.
+                  'relative flex flex-col justify-end p-6 md:max-w-[38rem] md:justify-center md:py-9 md:ps-10 md:pe-8 lg:ps-12',
                   heightClass ?? 'min-h-[19rem] md:min-h-[15rem]',
                 )}
               >
