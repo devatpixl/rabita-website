@@ -17,6 +17,16 @@ const config: Config = {
         ink: '#1A1A18',
         'ink-60': '#5B6157',
         'ink-40': '#A09F9C',
+        // Sage — the pale green the congregation sections stand on: "Dette
+        // er Rabita", the follow band, the project facts, the About story.
+        // It was a bare #e3eae4 literal in six places before the enquiry
+        // form needed to tint its fields with it and it earned a name.
+        // The two lighter steps are for type and controls that sit ON a
+        // white card rather than for grounds.
+        // TODO: migrate the six remaining #e3eae4 literals onto `sage`.
+        sage: '#E3EAE4',
+        'sage-soft': '#EFF4F0', // a well on a paper card
+        'sage-line': '#CBDCD1', // hairline on that well
         // Dusk — deep Oslo-winter blue. Punctuation mark, not a theme.
         // Used only where a section earns gravity.
         dusk: '#16242E',

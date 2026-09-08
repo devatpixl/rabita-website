@@ -51,7 +51,14 @@ const TONE = {
     box: 'border-ink/20 bg-paper hover:border-ink/35 focus-within:border-ink',
     // Inside the raised paper card the well has to go DARKER than its
     // panel, or a paper field on a paper card disappears entirely.
-    boxOnCard: 'border-ink/20 bg-paper-2 hover:border-ink/35 focus-within:border-ink',
+    //
+    // That darker step is sage rather than paper-2 (client, 2026-09-08:
+    // "use colour from our theme of green and white"). The card stands on
+    // the pale green these sections use, so tinting the wells with a lighter
+    // step of the same green ties the form to its ground instead of sitting
+    // on it as a grey box. Focus goes gold-deep, not ink, so the border
+    // agrees with the label — which already turns gold on focus.
+    boxOnCard: 'border-sage-line bg-sage-soft hover:border-gold-deep/45 focus-within:border-gold-deep',
     label: 'text-ink-60 group-focus-within:text-gold-deep',
     hint: 'text-ink-60',
     value: 'text-ink caret-gold-deep placeholder:text-ink-40',
@@ -109,7 +116,7 @@ export function Field({
   return (
     <div
       className={cn(
-        'group rounded-btn border-[1.5px] px-4 pb-3 pt-3 transition-colors',
+        'group rounded-2xl border-[1.5px] px-4 pb-3 pt-3 transition-colors',
         // No focus ring on the WELL. globals.css already draws one on the
         // control itself — its :where() selector has zero specificity but
         // still lands, because Tailwind's outline-none is a transparent
@@ -245,7 +252,7 @@ export function RequestForm({
     tone === 'dusk'
       ? 'text-paper'
       : card
-        ? 'rounded-2xl bg-paper p-6 text-ink shadow-[0_1px_2px_rgba(26,26,24,0.04),0_24px_60px_-34px_rgba(26,26,24,0.28)] sm:p-8'
+        ? 'rounded-[2rem] bg-paper p-6 text-ink ring-1 ring-sage-line/70 shadow-[0_1px_2px_rgba(26,26,24,0.04),0_28px_70px_-38px_rgba(26,26,24,0.3)] sm:p-8'
         : 'text-ink',
   );
 
@@ -395,7 +402,7 @@ export function RequestForm({
         {error && (
           <p
             role="alert"
-            className={cn('mt-5 flex items-start gap-2.5 rounded-btn border-[1.5px] px-4 py-3 text-[14px] leading-snug', c.error)}
+            className={cn('mt-5 flex items-start gap-2.5 rounded-2xl border-[1.5px] px-4 py-3 text-[14px] leading-snug', c.error)}
           >
             <span aria-hidden className={cn('mt-[7px] block h-1.5 w-1.5 shrink-0 rotate-45', c.diamond)} />
             <span>{t(`errors.${error}`)}</span>
