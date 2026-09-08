@@ -162,7 +162,13 @@ export default async function VisitPage({
             </div>
 
             {/* ── the booking ────────────────────────────────────────── */}
-            <div className="lg:col-span-7 xl:col-span-6">
+            {/* self-center, matching /om-oss: the place column is the taller
+               of the two — it carries the photograph — so the form card sat
+               at the top of a stretched cell with the slack dumped under it
+               (client, 2026-09-08). Only the card moves; the margin note
+               keeps its top alignment, which is where marginalia belongs.
+               Below lg the columns stack and it is inert. */}
+            <div className="lg:col-span-7 lg:self-center xl:col-span-6">
               <RequestForm
                 subject="visit"
                 card
