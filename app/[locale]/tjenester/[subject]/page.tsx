@@ -234,12 +234,18 @@ export default async function ServiceDetail({
                 />
               </div>
             </div>
-            <div className="md:col-span-7">
+            {/* self-center, as on /om-oss, /besok-oss and the event pages:
+               the contact column is taller — it carries a photograph — so
+               the card sat at the top of a stretched cell with the slack
+               dumped underneath (client, 2026-09-08). md, not lg: this grid
+               splits at md. Below that the columns stack and it is inert. */}
+            <div className="md:col-span-7 md:self-center">
               {/* The card is the same tone as the ground it stands on, so
                  what reads is its radius and its long soft shadow rather
                  than a fill — which is the point of a white section. `card`
-                 also switches the wells to bg-paper-2, and that is what
-                 carries the form: sunken warm fields on white. */}
+                 also switches the wells to sage, and that is what carries
+                 the form: fields tinted with the section's own green,
+                 sunken into white. */}
               <RequestForm subject={s as RequestSubject} card rule={false} />
             </div>
           </div>
