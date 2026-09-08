@@ -164,24 +164,9 @@
           "href": "/om-oss"
         },
         {
-          "label": "أخبار",
-          "blurb": "من الجماعة ومن ورشة البناء",
-          "href": "/aktuelt"
-        },
-        {
           "label": "انضم إلينا",
           "blurb": "العضوية والاشتراك",
           "href": "/bli-medlem"
-        },
-        {
-          "label": "تطوّع",
-          "blurb": "حيث نحتاج إليك",
-          "href": "/frivillig"
-        },
-        {
-          "label": "تواصل",
-          "blurb": "اتصل أو اكتب أو مرّ بيننا",
-          "href": "/kontakt"
         }
       ]
     },

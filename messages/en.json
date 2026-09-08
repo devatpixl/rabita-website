@@ -164,24 +164,9 @@
           "href": "/om-oss"
         },
         {
-          "label": "News",
-          "blurb": "From the congregation and the build",
-          "href": "/aktuelt"
-        },
-        {
           "label": "Become a member",
           "blurb": "Membership and the fee",
           "href": "/bli-medlem"
-        },
-        {
-          "label": "Volunteer",
-          "blurb": "Where people are needed",
-          "href": "/frivillig"
-        },
-        {
-          "label": "Contact",
-          "blurb": "Call, write or come by",
-          "href": "/kontakt"
         }
       ]
     },

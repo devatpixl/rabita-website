@@ -164,24 +164,9 @@
           "href": "/om-oss"
         },
         {
-          "label": "Aktuelt",
-          "blurb": "Nytt fra menigheten og bygget",
-          "href": "/aktuelt"
-        },
-        {
           "label": "Bli medlem",
           "blurb": "Medlemskap og kontingent",
           "href": "/bli-medlem"
-        },
-        {
-          "label": "Bli frivillig",
-          "blurb": "Der det trengs folk",
-          "href": "/frivillig"
-        },
-        {
-          "label": "Kontakt",
-          "blurb": "Ring, skriv eller kom innom",
-          "href": "/kontakt"
         }
       ]
     },
