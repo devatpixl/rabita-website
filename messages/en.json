@@ -2520,6 +2520,8 @@
     "goalNote": "The build cost is given in euro, as it is budgeted per phase. Our fundraising is in kroner and covers a share of it — the two are not the same figure, and we do not convert one into the other.",
     "stateDone": "Completed",
     "stateCurrent": "In progress",
+    "tasksShow": "Show tasks ({n})",
+    "tasksHide": "Hide tasks",
     "stateNext": "Ahead",
     "phases": {
       "planning": {

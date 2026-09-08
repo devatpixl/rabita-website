@@ -2520,6 +2520,8 @@
     "goalNote": "Byggekostnaden er oppgitt i euro, slik den er budsjettert per fase. Innsamlingen vår er i kroner og dekker en del av den — de to tallene er ikke det samme, og vi regner dem ikke om mot hverandre.",
     "stateDone": "Fullført",
     "stateCurrent": "Pågår",
+    "tasksShow": "Vis oppgaver ({n})",
+    "tasksHide": "Skjul oppgaver",
     "stateNext": "Kommer",
     "phases": {
       "planning": {

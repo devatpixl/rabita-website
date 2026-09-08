@@ -3,6 +3,7 @@ import { PROJECT_PHASES, TOTAL_BUILD_COST_EUR, CAMPAIGN, projectPhaseState } fro
 import { formatAmount } from '@/lib/format';
 import type { AppLocale } from '@/i18n/routing';
 import { cn } from '@/lib/cn';
+import { PhaseTasks } from './phase-tasks';
 
 // The project in five funded phases, as a rail.
 //
@@ -112,15 +113,23 @@ export async function ProgressPhases({
                 <span aria-hidden className="mt-4 block h-px w-full bg-rule sm:mt-5" />
 
                 {/* flex-1 on the list, so the status below it sits on the
-                   floor of every card and the five line up across the row. */}
-                <ul className="mt-3.5 flex-1 space-y-1.5 sm:mt-4">
-                  {items.map((item) => (
-                    <li key={item} className="flex gap-2 text-[13px] leading-snug text-ink-60">
-                      <span aria-hidden className="mt-[0.55em] block h-px w-2 shrink-0 bg-gold-deep/50" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                   floor of every card and the five line up across the row.
+                   On a phone a completed phase folds its list away — see
+                   PhaseTasks; from sm this is the plain list it always was. */}
+                <PhaseTasks
+                  collapsible={state === 'done'}
+                  labelShow={t('tasksShow', { n: items.length })}
+                  labelHide={t('tasksHide')}
+                >
+                  <ul className="mt-3.5 space-y-1.5 sm:mt-4">
+                    {items.map((item) => (
+                      <li key={item} className="flex gap-2 text-[13px] leading-snug text-ink-60">
+                        <span aria-hidden className="mt-[0.55em] block h-px w-2 shrink-0 bg-gold-deep/50" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </PhaseTasks>
 
                 <p
                   className={cn(
