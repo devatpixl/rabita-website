@@ -96,14 +96,6 @@ export type PageBandProps = {
   heightClass?: string;
   /** A note or fact rail, in the same measure under the plate. */
   children?: ReactNode;
-  /**
-   * Phones only: take the plate edge to edge and start it hard under the
-   * header. A 390px screen has 48px of side padding and a 24px radius doing
-   * nothing but shrinking the one photograph on the page, so below md the
-   * plate spends that space on the picture instead. From md it is inset and
-   * rounded exactly as before.
-   */
-  bleed?: boolean;
   /** 'none' when the section beneath the band supplies its own top padding
    *  and a rhythm gap here would read as the page ending. A prop, not a
    *  className: lib/cn.ts is clsx only, so a passed pb-0 would ship
@@ -178,7 +170,6 @@ export function PageBand({
   heightClass,
   children,
   padBottom = 'default',
-  bleed = false,
   className,
 }: PageBandProps) {
   const t = TONE[tone];
@@ -189,10 +180,9 @@ export function PageBand({
     // rather than a full section rhythm down.
     <section
       className={cn(
-        'bg-paper',
-        // pt-5 is the prayer band's mt-5. Bleeding, the plate meets the
-        // header instead.
-        bleed ? 'pt-0 md:pt-5' : 'pt-5',
+        // pt-5 is the prayer band's mt-5 — from md. On a phone the plate
+        // meets the header instead.
+        'bg-paper pt-0 md:pt-5',
         padBottom === 'none' ? 'pb-0' : 'pb-10 md:pb-section-md',
         className,
       )}
@@ -201,10 +191,17 @@ export function PageBand({
         <div
           className={cn(
             'relative isolate overflow-hidden bg-dusk text-paper',
+            // Phones take the plate edge to edge (client, 2026-09-08): a
+            // 390px screen gave 48px to side padding and another 24px to a
+            // radius, all of it off the one photograph on the page. Every
+            // PageBand is the first child of its <main>, so this is the
+            // behaviour rather than an option — a flag that is true at all
+            // seven call sites is a flag one of them will forget.
+            //
             // -mx-6 cancels SectionBody's px-6 exactly, which is why this is
             // a negative margin and not a 100vw trick: vw units include the
             // scrollbar and would overflow the page by its width.
-            bleed ? '-mx-6 rounded-none md:mx-0 md:rounded-3xl' : 'rounded-3xl',
+            '-mx-6 rounded-none md:mx-0 md:rounded-3xl',
           )}
         >
           {layout === 'over' ? (
@@ -214,11 +211,12 @@ export function PageBand({
                 alt={alt}
                 fill
                 priority={priority}
+                // The phone step is 100vw, not calc(100vw - 3rem): the
+                // plate is bled there, and understating it by 48px makes
+                // the browser pick an image a notch too small for it.
                 sizes={
                   sizes ??
-                  (bleed
-                    ? '(min-width: 1152px) 1104px, (min-width: 768px) calc(100vw - 3rem), 100vw'
-                    : '(min-width: 1152px) 1104px, calc(100vw - 3rem)')
+                  '(min-width: 1152px) 1104px, (min-width: 768px) calc(100vw - 3rem), 100vw'
                 }
                 className={cn('object-cover', objectClass)}
                 style={{ filter: t.grade }}
