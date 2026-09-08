@@ -187,7 +187,7 @@ export default async function AboutPage({
                       {t('factsHeading')}
                     </h2>
 
-                    <dl className="mt-7">
+                    <dl className="mt-5 md:mt-7">
                       {/* Key figures as confirmed in Årsrapport 2025, in the
                          order the client listed them (2026-08-30). The
                          second line under each label is theirs too, from the
@@ -202,7 +202,7 @@ export default async function AboutPage({
                       ] as const).map(([icon, key, value]) => (
                         <div
                           key={key}
-                          className="flex items-center gap-4 border-t border-ink/10 py-3.5 first:border-t-0 first:pt-0"
+                          className="flex items-center gap-4 border-t border-ink/10 py-3 first:border-t-0 first:pt-0 md:py-3.5"
                         >
                           <span
                             aria-hidden
@@ -247,7 +247,13 @@ export default async function AboutPage({
                      ON it, so the photograph carries something instead of
                      hiding behind text. A scrim rather than a wash — it has
                      to hold paper-coloured type at any crop. */}
-                  <div className="relative min-h-[15rem] md:min-h-0">
+                  {/* 11rem on a phone, not 15. The whole card has to clear
+                     783px — a 844px screen less the header — or "Rabita i
+                     dag" splits across two scrolls and stops reading as one
+                     object (client, 2026-09-08). At 240px the arch alone
+                     spent a third of that budget on a photograph that is
+                     carrying two lines of quote. */}
+                  <div className="relative min-h-[11rem] md:min-h-0">
                     <Image
                       src="/photos/arch-light.jpg"
                       alt=""
@@ -264,7 +270,7 @@ export default async function AboutPage({
                       aria-hidden
                       className="absolute inset-0 bg-gradient-to-t from-dusk/85 via-dusk/35 to-dusk/5"
                     />
-                    <div className="relative flex h-full flex-col justify-end p-7 sm:p-8">
+                    <div className="relative flex h-full flex-col justify-end p-6 sm:p-8">
                       <Image
                         src="/logo/rabita-mark-256.png"
                         alt=""
