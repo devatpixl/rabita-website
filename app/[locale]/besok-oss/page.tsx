@@ -57,6 +57,9 @@ export default async function VisitPage({
         mark="elevation"
         objectClass="object-[50%_58%] md:object-[50%_50%]"
         padBottom="none"
+        // Phones only (client, 2026-09-08). Trialled on this page alone
+        // before it goes near the other bands.
+        bleed
       />
 
       {/* The visit, laid out to the client's mockup (2026-09-07): the address
