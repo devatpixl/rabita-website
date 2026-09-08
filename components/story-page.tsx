@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import Image from 'next/image';
 import { CAMPAIGN } from '@/lib/campaign';
+import { cn } from '@/lib/cn';
 import { SectionBody } from './primitives';
 import { FigureIcon, type FigureIconName } from './figure-icons';
 import { CopyValue } from './copy-value';
@@ -93,6 +94,12 @@ type ColophonFact = {
   copy?: boolean;
   /** Latin or numeric data: isolate it so Arabic cannot reorder the groups. */
   ltr?: boolean;
+  /**
+   * Takes both columns on a phone. The org number and the bank account are
+   * the two values that must not wrap — one is unbreakable and the other
+   * would split mid-number — and neither fits a 133px half-column.
+   */
+  wide?: boolean;
 };
 
 export function StoryColophon({
@@ -116,11 +123,14 @@ export function StoryColophon({
 
   // Read straight from CAMPAIGN so the six pages that render this cannot
   // drift apart. Order runs institution -> money -> place -> time.
+  // Order pairs the two short values first so a phone's two columns fill
+  // evenly, then gives each long number a row of its own, then the place and
+  // the time. Reads identity -> numbers -> where -> when at every width.
   const facts: ColophonFact[] = [
     { icon: 'calendar', term: labels.founded, detail: String(CAMPAIGN.foundedYear), ltr: true },
-    { icon: 'building', term: labels.orgNr, detail: CAMPAIGN.orgNr, copy: true },
     { icon: 'people', term: labels.members, detail: CAMPAIGN.members.toLocaleString('nb-NO'), ltr: true },
-    { icon: 'book', term: labels.bank, detail: CAMPAIGN.bankAccount, copy: true },
+    { icon: 'building', term: labels.orgNr, detail: CAMPAIGN.orgNr, copy: true, wide: true },
+    { icon: 'book', term: labels.bank, detail: CAMPAIGN.bankAccount, copy: true, wide: true },
     { icon: 'pin', term: labels.address, detail: street, note: CAMPAIGN.postalCity, ltr: true },
     // The only value here that is translated prose, so the only one that
     // must follow the page's own direction.
@@ -132,7 +142,7 @@ export function StoryColophon({
     // change"). It also sets the page's last three grounds running pale
     // green -> near-white -> the dusk footer, which is a progression rather
     // than two warm sands meeting a dark block.
-    <section className="relative isolate overflow-hidden bg-paper-2 py-9 md:py-section-md">
+    <section className="relative isolate overflow-hidden bg-paper-2 py-8 md:py-section-md">
       <div
         aria-hidden
         className="pointer-events-none absolute -bottom-40 -start-32 -z-10 h-[26rem] w-[26rem] rounded-full bg-gold/[0.07] blur-3xl"
@@ -186,11 +196,17 @@ export function StoryColophon({
         {/* One block divided into six, not six blocks. gap-px over a tinted
            ground draws the interior rules: real borders would double up at
            every seam and break wherever the grid rewraps. */}
-        <dl className="mt-7 grid gap-px md:mt-10 overflow-hidden rounded-2xl bg-ink/10 ring-1 ring-ink/10 shadow-[0_1px_2px_rgba(26,26,24,0.03),0_18px_40px_-32px_rgba(26,26,24,0.25)] sm:grid-cols-2 lg:grid-cols-3">
+        <dl className="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-ink/10 ring-1 ring-ink/10 shadow-[0_1px_2px_rgba(26,26,24,0.03),0_18px_40px_-32px_rgba(26,26,24,0.25)] sm:mt-7 md:mt-10 lg:grid-cols-3">
           {facts.map((f) => (
             <div
               key={f.term}
-              className="group relative bg-paper p-6 transition-colors duration-200 hover:bg-gold-soft/15 sm:p-7"
+              className={cn(
+                'group relative bg-paper p-4 transition-colors duration-200 hover:bg-gold-soft/15 sm:p-7',
+                // Below sm only. A phone runs two columns and the long
+                // numbers take the whole row; from sm the grid is what it
+                // always was, so nothing outside a phone moves.
+                f.wide && 'max-sm:col-span-2',
+              )}
             >
               {/* The gold rule draws in along the cell's top edge — the house
                  hover, turned to match a cell rather than a row. */}
@@ -201,7 +217,7 @@ export function StoryColophon({
               <div className="flex items-center gap-3">
                 <span
                   aria-hidden
-                  className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gold-soft/40 text-gold-deep ring-1 ring-gold-deep/20"
+                  className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-gold-soft/40 text-gold-deep ring-1 ring-gold-deep/20 sm:h-9 sm:w-9"
                 >
                   <FigureIcon name={f.icon} className="h-[17px] w-[17px]" />
                 </span>
@@ -209,7 +225,7 @@ export function StoryColophon({
                   {f.term}
                 </dt>
               </div>
-              <dd className="mt-4 font-serif text-[1.45rem] leading-tight tabular-nums text-ink">
+              <dd className="mt-2.5 font-serif text-[1.3rem] leading-tight tabular-nums text-ink sm:mt-4 sm:text-[1.45rem]">
                 {f.copy ? (
                   <CopyValue value={f.detail} copyLabel={labels.copy} copiedLabel={labels.copied} />
                 ) : f.ltr ? (
