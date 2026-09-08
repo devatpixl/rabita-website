@@ -83,9 +83,11 @@ const TONE = {
   },
 } as const;
 
-const VALUE = 'mt-2 block w-full bg-transparent font-serif text-[1.15rem] leading-snug outline-none';
+// Exported so the event RSVP form can be built from the same control
+// rather than a second dialect of it. One well, one implementation.
+export const VALUE = 'mt-2 block w-full bg-transparent font-serif text-[1.15rem] leading-snug outline-none';
 
-function Field({
+export function Field({
   id,
   label,
   hint,
