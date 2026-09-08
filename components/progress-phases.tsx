@@ -35,7 +35,7 @@ export async function ProgressPhases({
 
   return (
     <div>
-      <ol className="grid items-stretch gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-x-4">
+      <ol className="grid items-stretch gap-x-5 gap-y-5 sm:grid-cols-2 sm:gap-y-8 lg:grid-cols-5 lg:gap-x-4">
         {PROJECT_PHASES.map((phase) => {
           const state = projectPhaseState(phase, now);
           const years =
@@ -48,7 +48,7 @@ export async function ProgressPhases({
                  breaks correctly when the grid wraps to two columns or one —
                  a single absolutely-positioned line would run through the
                  gaps and out the side. */}
-              <div aria-hidden className="relative mb-5 h-3">
+              <div aria-hidden className="relative mb-3 h-3 sm:mb-5">
                 <span
                   className={cn(
                     'absolute inset-x-0 top-1/2 block h-px -translate-y-1/2',
@@ -79,7 +79,7 @@ export async function ProgressPhases({
                  stays legible when four cards sit either side of it. */}
               <div
                 className={cn(
-                  'flex flex-1 flex-col rounded-[1.25rem] border p-5 md:p-6',
+                  'flex flex-1 flex-col rounded-[1.25rem] border p-4 sm:p-5 md:p-6',
                   state === 'current'
                     ? 'border-gold-deep/40 bg-paper-2 shadow-[0_18px_40px_-32px_rgba(28,25,23,0.55)]'
                     : 'border-rule bg-paper',
@@ -109,11 +109,11 @@ export async function ProgressPhases({
                   <span className="font-mono text-[0.75rem] tracking-[0.06em]">&euro;</span>
                 </p>
 
-                <span aria-hidden className="mt-5 block h-px w-full bg-rule" />
+                <span aria-hidden className="mt-4 block h-px w-full bg-rule sm:mt-5" />
 
                 {/* flex-1 on the list, so the status below it sits on the
                    floor of every card and the five line up across the row. */}
-                <ul className="mt-4 flex-1 space-y-1.5">
+                <ul className="mt-3.5 flex-1 space-y-1.5 sm:mt-4">
                   {items.map((item) => (
                     <li key={item} className="flex gap-2 text-[13px] leading-snug text-ink-60">
                       <span aria-hidden className="mt-[0.55em] block h-px w-2 shrink-0 bg-gold-deep/50" />
@@ -124,7 +124,7 @@ export async function ProgressPhases({
 
                 <p
                   className={cn(
-                    'mt-6 inline-flex items-center gap-1.5 self-start rounded-full px-3 py-1.5 font-mono text-[0.5625rem] uppercase tracking-[0.14em]',
+                    'mt-5 inline-flex items-center gap-1.5 self-start rounded-full px-3 py-1.5 font-mono text-[0.5625rem] uppercase tracking-[0.14em] sm:mt-6',
                     state === 'current'
                       ? 'bg-gold-deep text-paper'
                       : 'border border-rule text-ink-60',

@@ -248,7 +248,7 @@ export default async function ProjectPage({
 
                        Interaction is one thing only: the new measure and its
                        chevron reach forward on hover or keyboard focus. */}
-                    <dl className="mt-5 grid gap-9 sm:grid-cols-2 sm:gap-0 md:mt-6">
+                    <dl className="mt-5 grid gap-6 sm:grid-cols-2 sm:gap-0 md:mt-6">
                       {cap.map((c, i) => {
                         const times = Math.round(c.after / c.before);
                         return (
@@ -276,7 +276,7 @@ export default async function ProjectPage({
                               <span className="block font-serif italic leading-none tabular-nums text-gold-deep text-[clamp(2.6rem,5vw,3.5rem)]">
                                 {nf.format(c.after)}
                               </span>
-                              <span className="mt-2.5 block font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60">
+                              <span className="mt-2 block font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60 sm:mt-2.5">
                                 {t('capacity.people')}
                               </span>
 
@@ -284,15 +284,30 @@ export default async function ProjectPage({
                                  side of it are already read out above and in
                                  the row below, so this is the same fact a
                                  third time for a screen reader. */}
+                              {/* On a phone each measure is its own flex row,
+                                 so the figure sits directly after the bar it
+                                 belongs to. In the grid the numbers align in
+                                 a right-hand column, which is right at 200px
+                                 wide and wrong at 341: the 100 ended up some
+                                 250px from the end of its own bar and the two
+                                 rows read as stray lines with loose numerals
+                                 (client, 2026-09-08).
+
+                                 sm:contents flattens the wrappers back into
+                                 the grid from sm, so every width above a
+                                 phone renders exactly as before. */}
                               <div
                                 aria-hidden
-                                className="mt-6 grid grid-cols-[1fr_auto] items-center gap-x-3 gap-y-2.5"
+                                className="mt-5 space-y-2.5 sm:mt-6 sm:grid sm:grid-cols-[1fr_auto] sm:items-center sm:gap-x-3 sm:gap-y-2.5 sm:space-y-0"
                               >
-                                <span className="h-px bg-ink/25" style={{ width: `${(c.before / c.after) * 100}%` }} />
+                                <span className="flex items-center gap-3 sm:contents">
+                                <span className="h-px shrink-0 bg-ink/25 sm:shrink" style={{ width: `${(c.before / c.after) * 100}%` }} />
                                 <span className="font-mono text-[10px] leading-none tabular-nums text-ink-40">
                                   {nf.format(c.before)}
                                 </span>
-                                <span className="flex items-center">
+                                </span>
+                                <span className="flex items-center gap-3 sm:contents">
+                                <span className="flex flex-1 items-center">
                                   <span className="h-[2px] flex-1 bg-gold-deep/55 transition-colors duration-500 ease-out group-hover:bg-gold-deep group-focus:bg-gold-deep" />
                                   <svg
                                     viewBox="0 0 8 10"
@@ -308,6 +323,7 @@ export default async function ProjectPage({
                                 </span>
                                 <span className="font-mono text-[10px] leading-none tabular-nums text-gold-deep">
                                   {nf.format(c.after)}
+                                </span>
                                 </span>
                               </div>
                             </dd>
