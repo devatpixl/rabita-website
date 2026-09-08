@@ -91,57 +91,65 @@ export async function ProgressPhases({
                   <span className="tabular-nums text-ink-60">{years}</span>
                 </p>
 
-                <h3 className="mt-2.5 font-serif text-[1.15rem] leading-tight text-ink">
-                  {t(`phases.${phase.key}.name`)}
-                </h3>
+                {/* Name and sum share a line on a phone. At 341px the two
+                   fit side by side and stacking them spent 34px on a line
+                   break; the money is what the page is asking about, so it
+                   sits opposite the name rather than under it. From sm they
+                   stack exactly as before. */}
+                <div className="mt-2 flex items-baseline justify-between gap-3 sm:mt-0 sm:block">
+                  <h3 className="font-serif text-[1.15rem] leading-tight text-ink sm:mt-2.5">
+                    {t(`phases.${phase.key}.name`)}
+                  </h3>
 
-                {/* Every sum in gold, and the current one a size larger.
-                   Dimming the phases still ahead would be the wrong signal on
-                   a page asking people to pay for them. */}
-                <p
-                  className={cn(
-                    'mt-3 font-serif leading-none tabular-nums text-gold-deep',
-                    state === 'current'
-                      ? 'text-[clamp(1.5rem,2.5vw,1.9rem)]'
-                      : 'text-[clamp(1.35rem,2.2vw,1.65rem)]',
-                  )}
-                >
-                  {formatAmount(locale, phase.eur)}{' '}
-                  <span className="font-mono text-[0.75rem] tracking-[0.06em]">&euro;</span>
-                </p>
+                  {/* Every sum in gold, and the current one a size larger.
+                     Dimming the phases still ahead would be the wrong signal
+                     on a page asking people to pay for them. */}
+                  <p
+                    className={cn(
+                      'shrink-0 font-serif leading-none tabular-nums text-gold-deep sm:mt-3',
+                      state === 'current'
+                        ? 'text-[clamp(1.5rem,2.5vw,1.9rem)]'
+                        : 'text-[clamp(1.35rem,2.2vw,1.65rem)]',
+                    )}
+                  >
+                    {formatAmount(locale, phase.eur)}{' '}
+                    <span className="font-mono text-[0.75rem] tracking-[0.06em]">&euro;</span>
+                  </p>
+                </div>
 
-                <span aria-hidden className="mt-4 block h-px w-full bg-rule sm:mt-5" />
-
-                {/* flex-1 on the list, so the status below it sits on the
-                   floor of every card and the five line up across the row.
-                   On a phone a completed phase folds its list away — see
-                   PhaseTasks; from sm this is the plain list it always was. */}
+                {/* Everything but the current phase folds its rule and list
+                   away on a phone. From sm this is the card it always was. */}
                 <PhaseTasks
-                  collapsible={state === 'done'}
+                  collapsible={state !== 'current'}
                   labelShow={t('tasksShow', { n: items.length })}
                   labelHide={t('tasksHide')}
-                >
-                  <ul className="mt-3.5 space-y-1.5 sm:mt-4">
-                    {items.map((item) => (
-                      <li key={item} className="flex gap-2 text-[13px] leading-snug text-ink-60">
-                        <span aria-hidden className="mt-[0.55em] block h-px w-2 shrink-0 bg-gold-deep/50" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </PhaseTasks>
-
-                <p
-                  className={cn(
-                    'mt-5 inline-flex items-center gap-1.5 self-start rounded-full px-3 py-1.5 font-mono text-[0.5625rem] uppercase tracking-[0.14em] sm:mt-6',
-                    state === 'current'
-                      ? 'bg-gold-deep text-paper'
-                      : 'border border-rule text-ink-60',
-                  )}
-                >
-                  <StateMark state={state} />
-                  {state === 'done' ? t('stateDone') : state === 'current' ? t('stateCurrent') : t('stateNext')}
-                </p>
+                  panel={
+                    <>
+                      <span aria-hidden className="mt-4 block h-px w-full bg-rule sm:mt-5" />
+                      <ul className="mt-3.5 space-y-1.5 sm:mt-4">
+                        {items.map((item) => (
+                          <li key={item} className="flex gap-2 text-[13px] leading-snug text-ink-60">
+                            <span aria-hidden className="mt-[0.55em] block h-px w-2 shrink-0 bg-gold-deep/50" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  }
+                  footer={
+                    <p
+                      className={cn(
+                        'inline-flex items-center gap-1.5 self-start rounded-full px-3 py-1.5 font-mono text-[0.5625rem] uppercase tracking-[0.14em]',
+                        state === 'current'
+                          ? 'bg-gold-deep text-paper'
+                          : 'border border-rule text-ink-60',
+                      )}
+                    >
+                      <StateMark state={state} />
+                      {state === 'done' ? t('stateDone') : state === 'current' ? t('stateCurrent') : t('stateNext')}
+                    </p>
+                  }
+                />
               </div>
             </li>
           );

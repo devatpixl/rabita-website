@@ -260,7 +260,13 @@ export default async function ProjectPage({
                               i === 0 ? 'sm:pe-9' : 'sm:border-s sm:border-rule sm:ps-9',
                             )}
                           >
-                            <div className="flex items-baseline justify-between gap-4">
+                            {/* justify-start on a phone: at 341px
+                               justify-between put the 5x a quarter of a
+                               screen from the label it modifies, reading as a
+                               loose numeral rather than a multiplier. The
+                               desktop column is narrow enough that the two
+                               still pair, so it keeps justify-between. */}
+                            <div className="flex items-baseline justify-start gap-3 sm:justify-between sm:gap-4">
                               <dt className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60">
                                 {t(`capacity.${c.key}`)}
                               </dt>
@@ -273,12 +279,17 @@ export default async function ProjectPage({
                             </div>
 
                             <dd className="mt-3">
-                              <span className="block font-serif italic leading-none tabular-nums text-gold-deep text-[clamp(2.6rem,5vw,3.5rem)]">
-                                {nf.format(c.after)}
-                              </span>
-                              <span className="mt-2 block font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60 sm:mt-2.5">
-                                {t('capacity.people')}
-                              </span>
+                              {/* "personer" sits on the figure's baseline on a
+                                 phone and drops under it from sm. It is the
+                                 figure's unit, not a line of its own. */}
+                              <div className="flex items-baseline gap-2.5 sm:block">
+                                <span className="font-serif italic leading-none tabular-nums text-gold-deep text-[clamp(2.6rem,5vw,3.5rem)]">
+                                  {nf.format(c.after)}
+                                </span>
+                                <span className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60 sm:mt-2.5 sm:block">
+                                  {t('capacity.people')}
+                                </span>
+                              </div>
 
                               {/* The scale. aria-hidden: the figures either
                                  side of it are already read out above and in
