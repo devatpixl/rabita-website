@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/cn';
 import { scrollTo } from '@/lib/scroll-to';
-import { FloorMarkers } from './floor-markers';
+import { FloorLegend, FloorMarkers } from './floor-markers';
 
 // The building floor by floor, from the architect's own labelled cutaways
 // (Fasiliteter.pdf, client 2026-09-03), shown bottom to top: the lower-floor
@@ -109,7 +109,7 @@ export function FloorByFloor() {
           reduced ? 'py-section-md' : 'sticky top-0 h-[100svh] overflow-hidden',
         )}
       >
-        <header className="shrink-0 px-6 pt-24 md:pt-28">
+        <header className="shrink-0 px-6 pt-16 md:pt-28">
           <div className="mx-auto flex max-w-6xl items-start justify-between gap-8">
             {/* min-w-0 flex-1: the heading's lines are all absolutely
                positioned now, so this column has no in-flow content to size
@@ -158,15 +158,23 @@ export function FloorByFloor() {
 
                  Stacked absolutely and cross-faded, the same way the floor
                  caption below does it, so the header never reflows as the
-                 lines change length. The box is three lines tall on a phone
-                 and two from sm, since the longest statement wraps.
+                 lines change length.
+
+                 The reserve is measured, not assumed: the longest statement
+                 ("Bygget nedenfra og opp, tomten er ryddet.") runs to three
+                 lines only below 375px. From 375 up — which is every phone
+                 in use — it is two, so the box is two lines and the third is
+                 bought back only where it is needed. That 26px goes to the
+                 drawing, which on a short phone is the thing starved for
+                 room. max-[374px] and sm are disjoint queries, so their
+                 order in the sheet cannot matter.
 
                  Only the active stage is exposed: the rest are aria-hidden,
                  so the accessible name of this h2 is always the line on
                  screen. */}
               <h2
                 id="floor-by-floor-heading"
-                className="relative mt-3 h-[4.6rem] w-full max-w-xl overflow-hidden font-serif text-[clamp(1.35rem,3vw,2.25rem)] leading-[1.1] text-paper sm:h-[5rem]"
+                className="relative mt-3 h-[3rem] w-full max-w-xl overflow-hidden font-serif text-[clamp(1.35rem,3vw,2.25rem)] leading-[1.1] text-paper max-[374px]:h-[4.6rem] sm:h-[5rem]"
               >
                 {STAGES.map((line, i) => (
                   <span
@@ -228,8 +236,28 @@ export function FloorByFloor() {
         {/* Which floor this is, and the progress rail under it. The label is
            keyed so it cross-fades in step with the drawing above it. */}
         {!reduced && (
-          <div className="shrink-0 px-6 pb-14 pt-4 md:pb-20">
+          <div className="shrink-0 px-6 pb-8 pt-3 md:pb-20 md:pt-4">
             <div className="mx-auto max-w-6xl">
+              {/* PHONE ONLY — the key to the numbered points on the drawing.
+                 There is no gutter beside a drawing on a phone to run
+                 leaders into, so the names come down here and the points
+                 carry numerals instead (see FloorMarkers).
+
+                 Fixed height at six rows, the most any floor has, because
+                 the eight keys stack absolutely for the cross-fade and the
+                 caption below must not jump as the count changes floor to
+                 floor. 6 x 14px + 5 x 3px. Top-aligned, so the key always
+                 hugs the drawing it belongs to and the slack falls above
+                 the caption rather than between them.
+
+                 Below 360px it is dropped along with the numbers on the
+                 drawing (see FloorMarkers): on a 320px screen the key costs
+                 more of the pane than the drawing has left to give. */}
+              <div className="relative mb-3 h-[99px] max-[359px]:hidden md:hidden">
+                {KEYS.map((k, i) => (
+                  <FloorLegend key={k} floorKey={k} active={i === step} />
+                ))}
+              </div>
               {/* Fixed height, because the labels stack absolutely for the
                  cross-fade — but the longest label runs two lines on a
                  phone, so the box is two lines tall until sm. */}
