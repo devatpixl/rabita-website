@@ -381,7 +381,7 @@
     "etasje": "Floor {n}",
     "svg": {
       "groundLevel": "STREET LEVEL · CALMEYERS GATE",
-      "plot": "PLOT · 6 762 M²",
+      "plot": "PLOT · 5 745 M²",
       "floorsUp": "FLOORS TO RISE",
       "belowGround": "two below street"
     },
@@ -479,7 +479,7 @@
   },
   "floors": {
     "eyebrow": "The building, floor by floor",
-    "heading": "Six floors above ground, two below. 6 762 square metres.",
+    "heading": "Six floors above ground, one below. 5 745 square metres.",
     "attribution": "Architect: {architect}. The Alhambra references are visible, but the building also speaks Norwegian, in materials, daylight and its relationship to the street.",
     "floorLabel": "Floor {floor}",
     "items": {
@@ -618,7 +618,7 @@
         "primary": "Give to the building",
         "secondary": "Where the money goes",
         "briefLabel": "In short",
-        "brief": "The old mosque was demolished in 2025. What replaces it is one building doing the work of five, on a 6 762 square metre plot, designed so the ground floor stays open to the street rather than turning its back on it.",
+        "brief": "The old mosque was demolished in 2025. What replaces it is one building doing the work of five, on a 5 745 square metre plot, designed so the ground floor stays open to the street rather than turning its back on it.",
         "colEyebrow": "Floor by floor",
         "colHeading": "What each level is for.",
         "items": [

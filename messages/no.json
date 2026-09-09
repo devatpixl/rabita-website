@@ -381,7 +381,7 @@
     "etasje": "Etasje {n}",
     "svg": {
       "groundLevel": "GATENIVÅ · CALMEYERS GATE",
-      "plot": "TOMT · 6 762 M²",
+      "plot": "TOMT · 5 745 M²",
       "floorsUp": "ETASJER SKAL OPP",
       "belowGround": "to under bakken"
     },
@@ -479,7 +479,7 @@
   },
   "floors": {
     "eyebrow": "Bygget, etasje for etasje",
-    "heading": "Seks etasjer over bakken, to under. 6 762 kvadratmeter.",
+    "heading": "Seks etasjer over bakken, én under. 5 745 kvadratmeter.",
     "attribution": "Arkitekt: {architect}. Referansene til Alhambra er tydelige, men bygget snakker også norsk, i materialbruk, dagslys og forholdet til gaten.",
     "floorLabel": "Etasje {floor}",
     "items": {
@@ -618,7 +618,7 @@
         "primary": "Gi til bygget",
         "secondary": "Hvor pengene går",
         "briefLabel": "Kort sagt",
-        "brief": "Den gamle moskeen ble revet i 2025. Det som kommer i stedet er ett bygg som gjør jobben til fem, på en tomt på 6 762 kvadratmeter, tegnet slik at første etasje står åpen mot gata.",
+        "brief": "Den gamle moskeen ble revet i 2025. Det som kommer i stedet er ett bygg som gjør jobben til fem, på en tomt på 5 745 kvadratmeter, tegnet slik at første etasje står åpen mot gata.",
         "colEyebrow": "Etasje for etasje",
         "colHeading": "Hva hver etasje er til for.",
         "items": [

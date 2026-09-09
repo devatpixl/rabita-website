@@ -66,7 +66,7 @@ export default async function HomePage({
          said what the new mosque IS — the zoom parallax shows it, wordlessly,
          and nothing names it. The goal is also unreadable without it:
          100 000 000 kr is either enormous or reasonable depending entirely
-         on whether you know it buys 6 762 m² and 2 500 prayer places.
+         on whether you know it buys 5 745 m² and 2 500 prayer places.
          Each section now supplies what the next one needs. */}
       <ProjectOverview />
       <MotionRise><CampaignMeter /></MotionRise>

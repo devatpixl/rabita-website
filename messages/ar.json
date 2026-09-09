@@ -381,7 +381,7 @@
     "etasje": "الطابق {n}",
     "svg": {
       "groundLevel": "منسوب الشارع · Calmeyers gate",
-      "plot": "الأرض · 6 762 م²",
+      "plot": "الأرض · 5 745 م²",
       "floorsUp": "طوابق سترتفع",
       "belowGround": "طابقان تحت الأرض"
     },
@@ -479,7 +479,7 @@
   },
   "floors": {
     "eyebrow": "البناء طابقاً طابقاً",
-    "heading": "ست طوابق فوق الأرض، اثنان تحتها. 6 762 متراً مربّعاً.",
+    "heading": "ست طوابق فوق الأرض، وطابق واحد تحتها. 5 745 متراً مربّعاً.",
     "attribution": "المعماري: {architect}. الإشارات إلى قصر الحمراء واضحة، لكن البناء يتحدّث النرويجية أيضاً، في المواد وضوء النهار والعلاقة بالشارع.",
     "floorLabel": "الطابق {floor}",
     "items": {
@@ -618,7 +618,7 @@
         "primary": "تبرّع للمبنى",
         "secondary": "أين تذهب الأموال",
         "briefLabel": "باختصار",
-        "brief": "The old mosque was demolished in 2025. What replaces it is one building doing the work of five, on a 6 762 square metre plot, designed so the ground floor stays open to the street rather than turning its back on it.",
+        "brief": "The old mosque was demolished in 2025. What replaces it is one building doing the work of five, on a 5 745 square metre plot, designed so the ground floor stays open to the street rather than turning its back on it.",
         "colEyebrow": "طابقاً بطابق",
         "colHeading": "ما الغرض من كل طابق.",
         "items": [
