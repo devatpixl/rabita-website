@@ -1,3 +1,5 @@
+import Image from 'next/image';
+import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { CAMPAIGN, PHASES, currentPhaseKey } from '@/lib/campaign';
 import { formatAmount, formatDate } from '@/lib/format';
@@ -19,6 +21,70 @@ import { PhasePopover, type PhaseStep } from './phase-popover';
 // stat, and "last month" is now the second-largest figure on the page,
 // because "how much, and how is it moving" is the question this section
 // answers. Every figure comes from lib/campaign.ts.
+// The phone layout's small marks. Inline rather than an icon package: five
+// glyphs at 16px, all one stroke weight, and the set never grows.
+const ICON = 'h-[15px] w-[15px]';
+const stroke = {
+  fill: 'none' as const,
+  stroke: 'currentColor',
+  strokeWidth: 1.6,
+  strokeLinecap: 'round' as const,
+  strokeLinejoin: 'round' as const,
+};
+
+function IconPeople() {
+  return (
+    <svg viewBox="0 0 24 24" className={ICON} {...stroke} aria-hidden>
+      <path d="M16 20v-1.5a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4V20" />
+      <circle cx="9" cy="7" r="3.2" />
+      <path d="M22 20v-1.5a4 4 0 0 0-3-3.87M16.5 4.13a4 4 0 0 1 0 5.74" />
+    </svg>
+  );
+}
+function IconTarget() {
+  return (
+    <svg viewBox="0 0 24 24" className={ICON} {...stroke} aria-hidden>
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="12" cy="12" r="1.2" />
+    </svg>
+  );
+}
+function IconCalendar() {
+  return (
+    <svg viewBox="0 0 24 24" className={ICON} {...stroke} aria-hidden>
+      <rect x="3" y="5" width="18" height="16" rx="2.5" />
+      <path d="M3 10h18M8 3v4M16 3v4" />
+    </svg>
+  );
+}
+function IconFoundation() {
+  return (
+    <svg viewBox="0 0 24 24" className={ICON} {...stroke} aria-hidden>
+      <path d="M3 20h18" />
+      <path d="M6 20v-6h12v6" />
+      <path d="M12 14V8" />
+      <path d="M8.5 8h7l-3.5-4.5L8.5 8Z" />
+    </svg>
+  );
+}
+function IconHeart() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" {...stroke} strokeWidth={1.8} aria-hidden>
+      <path d="M12 20s-7-4.3-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.7-7 9-7 9Z" />
+    </svg>
+  );
+}
+
+// A label in a tinted tile, the phone layout's repeating unit.
+function Tile({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gold-soft/45 text-gold-deep">
+      {children}
+    </span>
+  );
+}
+
 export async function CampaignMeter() {
   const locale = (await getLocale()) as AppLocale;
   const t = await getTranslations('meter');
@@ -49,9 +115,11 @@ export async function CampaignMeter() {
           })}
         </h2>
 
-        {/* Raised and goal as two figures on one baseline — the goal is the
+        {/* ── tablet and up: unchanged ─────────────────────────────────
+           Raised and goal as two figures on one baseline — the goal is the
            other half of the story, so it is set in the same serif rather
            than as a caption. The button closes the row. */}
+        <div className="hidden md:block">
         <div className="mt-6 flex flex-col gap-6 md:mt-8 md:flex-row md:items-end md:justify-between md:gap-12">
           <dl className="flex flex-col gap-4 sm:flex-row sm:items-end sm:gap-12">
             <div>
@@ -159,6 +227,156 @@ export async function CampaignMeter() {
             </dt>
           </div>
         </dl>
+        </div>
+
+        {/* ── phone ────────────────────────────────────────────────────
+           A separate layout, not the desktop one reflowed (client,
+           2026-09-10, with a reference design). The desktop version reads
+           as one continuous ledger — figures on a baseline, hairline rules,
+           a bar across the full measure — and a phone cannot hold that
+           measure, so on a 390px screen it became six stacked rows that all
+           looked alike.
+
+           The reference answers it the way donation pages do: the money is
+           the page, everything supporting it is a card, and every card is
+           announced by a mark. Same figures, same order, same strings — no
+           new copy, nothing dropped.
+
+           Rabita's palette rather than the reference's green: gold-deep on
+           gold-soft tiles, because every other call to give on this site is
+           gold and one green button here would read as a different site.
+           Say the word and it is one token. */}
+        <div className="relative mt-7 md:hidden">
+          {/* The reference sets a mosque illustration behind the figure. Ours
+             is the Rabita mark, which is the same gesture in the house's own
+             hand: large, faint, cropped by the corner, and aria-hidden. */}
+          <Image
+            src="/logo/rabita-mark-256.png"
+            alt=""
+            aria-hidden
+            width={256}
+            height={256}
+            className="pointer-events-none absolute -top-6 -end-10 h-40 w-40 opacity-[0.07]"
+          />
+
+          <div className="relative">
+            <p className="flex items-baseline gap-2 font-serif leading-none tabular-nums tracking-[-0.03em] text-ink">
+              <span className="text-[clamp(2.4rem,11.5vw,3.4rem)]">
+                <Counter to={raised} locale={locale} />
+              </span>
+              <span className="text-xl text-ink-60">kr</span>
+            </p>
+            <p className="mt-3 flex items-center gap-2 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-ink-60">
+              <span className="text-gold-deep">
+                <IconPeople />
+              </span>
+              {t('label')}
+            </p>
+
+            <p className="mt-6 flex items-center gap-2 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-ink-60">
+              <span className="text-gold-deep">
+                <IconTarget />
+              </span>
+              {t('goalLabel')}
+            </p>
+            <p className="mt-2 flex items-baseline gap-2 font-serif italic leading-none tabular-nums tracking-[-0.02em] text-gold-deep">
+              <span className="text-[1.75rem]">{formatAmount(locale, goal)}</span>
+              <span className="text-base">kr</span>
+            </p>
+
+            {/* Thicker and fully rounded, per the reference: on a phone the
+               bar is the one graphic on the screen, and a 2.5px hairline
+               reads as a rule rather than as a measure. */}
+            <AnimatedProgress
+              percent={pct}
+              className="mt-5 h-3 rounded-full bg-paper ring-1 ring-rule"
+              fillClassName="rounded-full bg-gradient-to-r from-gold to-gold-deep"
+            />
+            <div className="mt-2.5 flex items-baseline justify-between font-mono text-[0.625rem] uppercase tracking-[0.14em]">
+              <span className="tabular-nums text-gold-deep">{pctInt} %</span>
+              <span className="text-ink-60">{t('goalMark')}</span>
+            </div>
+
+            <GiveCTA
+              label={t('give')}
+              fullWidth
+              leadingIcon={<IconHeart />}
+              className="mt-6 min-h-14 text-base"
+            />
+          </div>
+
+          {/* The two supporting figures, one card each. Mark and label on the
+             first line, figure under it — the reference's order, and the one
+             that lets a two-line label sit beside a 9px tile without
+             pushing the figure off its own baseline. */}
+          <dl className="mt-3 grid grid-cols-2 gap-3">
+            {/* flex-col + mt-auto, because one label runs to two lines and
+               the other to one: without it the two figures sit at different
+               heights and the pair reads as a mistake. whitespace-nowrap on
+               the figures for the same reason — "73 004 821 kr" is the
+               longest string either card will ever hold, and it breaks
+               after the last group if it is allowed to.
+
+               Which means the size has to be fluid, or nowrap just moves the
+               problem outside the card: measured, that string is 121px at
+               20px type and a card is only 97px wide inside its padding at
+               320. The clamp keeps it at 20px from 421px up and scales it
+               down below, with 5px to spare on the narrowest screen. */}
+            <div className="flex flex-col rounded-2xl bg-paper p-4 ring-1 ring-rule">
+              <div className="flex items-start gap-2.5">
+                <Tile>
+                  <IconPeople />
+                </Tile>
+                <dt className="font-mono text-[0.5625rem] uppercase leading-[1.6] tracking-[0.1em] text-ink-60">
+                  {t('lastMonthLabel')}
+                </dt>
+              </div>
+              <dd className="mt-auto whitespace-nowrap pt-3 font-serif text-[clamp(0.95rem,4.75vw,1.25rem)] leading-none tabular-nums text-gold-deep">
+                +{formatAmount(locale, CAMPAIGN.lastMonthNok)} <span className="text-[0.8em]">kr</span>
+              </dd>
+            </div>
+            <div className="flex flex-col rounded-2xl bg-paper p-4 ring-1 ring-rule">
+              <div className="flex items-start gap-2.5">
+                <Tile>
+                  <IconCalendar />
+                </Tile>
+                <dt className="font-mono text-[0.5625rem] uppercase leading-[1.6] tracking-[0.1em] text-ink-60">
+                  {t('remainingLabel')}
+                </dt>
+              </div>
+              <dd className="mt-auto whitespace-nowrap pt-3 font-serif text-[clamp(0.95rem,4.75vw,1.25rem)] leading-none tabular-nums text-ink">
+                {formatAmount(locale, goal - raised)} <span className="text-[0.8em]">kr</span>
+              </dd>
+            </div>
+          </dl>
+
+          {/* The phase, full width, with somewhere to go. PhasePopover is
+             switched off below 640px by design — it is a hover affordance —
+             so on a phone the arrow leads to the page that holds the whole
+             roadmap instead of floating a card that cannot be dismissed. */}
+          <Link
+            href={`/${locale}/moskeprosjektet/fremdrift`}
+            className="mt-3 flex items-center gap-3 rounded-2xl bg-sage-soft p-4 ring-1 ring-sage-line transition-colors hover:bg-sage"
+          >
+            <Tile>
+              <IconFoundation />
+            </Tile>
+            <span className="min-w-0 flex-1">
+              <span className="block font-serif text-[1.0625rem] leading-snug text-ink">
+                {t(`phaseNow.${phase?.key ?? 'fundament'}`)}
+              </span>
+              <span className="mt-1.5 flex items-center gap-2 font-mono text-[0.5625rem] uppercase tracking-[0.12em] text-ink-60">
+                <span className="pulse-dot text-gold-deep" aria-hidden />
+                {t('updated', { date: formatDate(locale, CAMPAIGN.raisedAsOf) })}
+              </span>
+            </span>
+            <span aria-hidden className="shrink-0 text-gold-deep rtl:rotate-180">
+              <svg viewBox="0 0 24 24" className="h-4 w-4" {...stroke} strokeWidth={1.8}>
+                <path d="M5 12h14M13 5l7 7-7 7" />
+              </svg>
+            </span>
+          </Link>
+        </div>
       </div>
     </section>
   );
