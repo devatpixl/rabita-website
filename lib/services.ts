@@ -46,17 +46,22 @@ export const SERVICE_IMAGE: Record<ServiceKey, string> = {
   // October open-house event, so this is a new file rather than an
   // overwrite.
   kurs: '/photos/subj-kurs-calligraphy.webp',
-  // PROVISIONAL, all five (client, 2026-09-10: "let me get photos which i
-  // can, one by one we use"). Nothing here is wrong for its page, but two
-  // are stand-ins rather than pictures of the thing: `veivisere` has no
-  // photograph of a school visit and `norsk` none of a language class.
-  // `fosterhjem` is deliberately two adults — a foster-care page must not
-  // show identifiable children.
+  // Still provisional for two of the five (client, 2026-09-10: "let me get
+  // photos which i can, one by one we use"). `veivisere` has no photograph
+  // of a school visit and `norsk` none of a language class; both are
+  // stand-ins. The other three are the real thing.
   norsk: '/photos/svc-counsel.webp',
   veivisere: '/photos/cong-volunteers.webp',
   ungdom: '/photos/community/youth-table.webp',
-  'barn-og-familie': '/photos/brand-gateiftar.webp',
-  fosterhjem: '/photos/svc-services.webp',
+  // A grown-up crouching to a child's height to show him something on a
+  // phone, which is what "barn og familie" actually looks like. It replaces
+  // a street-iftar frame, and iftar is a season rather than the year-round
+  // programme the page describes.
+  'barn-og-familie': '/photos/svc-barn-phone.webp',
+  // Rabita's own foster-care information meeting: the imam presenting
+  // "Behovet i Oslo" to a room. The doc says Rabita's role here is to
+  // inform and to be a bridge, and this is that, being done.
+  fosterhjem: '/photos/svc-fosterhjem-meeting.webp',
 };
 
 // What the index shows — and, since 2026-09-05, the whole of what exists.
@@ -95,9 +100,6 @@ export const SERVICE_GROUPS = [
 // Anything absent from here is centred.
 export const SERVICE_FOCUS: Partial<Record<ServiceKey, string>> = {
   skole: '50% 32%',
-  // 1400x2365 is the tallest source on the site; a 4:3 frame keeps 44% of
-  // it, and the two faces sit above the middle.
-  fosterhjem: '50% 35%',
 };
 
 // Per-subject art direction for the band hero (components/page-band.tsx).
@@ -139,11 +141,11 @@ export const SERVICE_BAND: Record<
   norsk: { objectClass: 'object-[50%_40%]', tone: 'calm', mark: 'rosette' },
   veivisere: { objectClass: 'object-[50%_42%]', tone: 'warm', mark: 'arch' },
   ungdom: { objectClass: 'object-[50%_45%]', tone: 'warm', mark: 'orbit' },
-  'barn-og-familie': { objectClass: 'object-[50%_45%]', tone: 'warm', mark: 'rosette' },
+  'barn-og-familie': { objectClass: 'object-[50%_42%]', tone: 'warm', mark: 'rosette' },
   // mark: 'none' and tone: 'calm', the pair counselling carries. A page
   // about taking someone else's child into your home is not a page to
   // decorate.
-  fosterhjem: { objectClass: 'object-[50%_35%]', tone: 'calm', mark: 'none' },
+  fosterhjem: { objectClass: 'object-[50%_45%]', tone: 'calm', mark: 'none' },
 };
 
 // A SECOND photograph per service, for the body of the page.
@@ -206,7 +208,11 @@ export const SERVICE_STORY: Record<ServiceKey, { src: string; objectClass: strin
   // as a photograph. It was also the hero of /undervisning, so the same
   // picture appeared twice in the teaching pages. A room of people learning
   // suits a small landscape frame, and it is what the service is.
-  koran: { src: '/photos/learning-lecture.webp', objectClass: 'object-[50%_45%]' },
+  // A Quran class in the round on the mosque carpet (client, 2026-09-10).
+  // The band is the mushaf on its rihal, so the page now shows the book and
+  // then the class rather than the book twice or a lecture that could be
+  // about anything.
+  koran: { src: '/photos/svc-koran-circle.webp', objectClass: 'object-center' },
   // A second calligraphy photograph (client, 2026-09-10), so the page no
   // longer has to borrow the building for its illustration: the band leads
   // on the calligrapher at her desk, this one is the qalam on the practice
@@ -217,11 +223,17 @@ export const SERVICE_STORY: Record<ServiceKey, { src: string; objectClass: strin
   // learn-classroom is four-fifths ceiling, so the crop sits almost on the
   // floor of the frame to reach the room.
   veivisere: { src: '/photos/learn-classroom.webp', objectClass: 'object-[50%_88%]' },
-  ungdom: { src: '/photos/community/bazaar-cakes.webp', objectClass: 'object-[50%_45%]' },
+  // Four boys, plainly the 11-15 the youth pages name. The client offered
+  // this for barn-og-familie; it is here because that page is about
+  // families with small children and this is Gutter i fokus. One line to
+  // move it back.
+  ungdom: { src: '/photos/svc-ungdom-four.webp', objectClass: 'object-center' },
   'barn-og-familie': { src: '/photos/community/iftar-sweets.webp', objectClass: 'object-center' },
-  // A table laid and waiting, which is the nearest honest picture of what
-  // this page asks for and shows nobody's child.
-  fosterhjem: { src: '/photos/community/iftar-table-set.webp', objectClass: 'object-center' },
+  // The fosterhjem.no stand Rabita staffs at an outdoor event: "Har du rom
+  // til en til?" on the banner, and two of the people who answer questions
+  // at it. 1200x1600 in a 3:2 frame keeps half the height, and 55% holds
+  // the banner's question and both faces.
+  fosterhjem: { src: '/photos/svc-fosterhjem-stand.webp', objectClass: 'object-[50%_55%]' },
 };
 
 // Which family a service belongs to, so the band can print a group label as
