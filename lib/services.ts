@@ -143,9 +143,11 @@ export const SERVICE_BAND: Record<
 //                was the obvious pick and it is a 1600x1000 lecture hall: in
 //                a 4:5 frame it crops to ceiling.
 //   koran        the mushaf open on its rihal
-//   kurs         the building's own brick geometry — the calligraphy and
-//                geometry course teaches exactly this construction, so the
-//                photograph is a citation rather than a decoration
+//   kurs         the qalam on the practice sheet. It was the building's own
+//                brick lattice — a citation of the geometry the course
+//                teaches — until the client supplied two calligraphy
+//                photographs on 2026-09-10 and the page could stop
+//                borrowing the architecture
 export const SERVICE_STORY: Record<ServiceKey, { src: string; objectClass: string }> = {
   nikah: { src: '/photos/svc-prayer.webp', objectClass: 'object-center' },
   // The janaza prayer itself (client, 2026-09-10). The embrace that stood
@@ -171,7 +173,12 @@ export const SERVICE_STORY: Record<ServiceKey, { src: string; objectClass: strin
   // picture appeared twice in the teaching pages. A room of people learning
   // suits a small landscape frame, and it is what the service is.
   koran: { src: '/photos/learning-lecture.webp', objectClass: 'object-[50%_45%]' },
-  kurs: { src: '/photos/svc-wudu.webp', objectClass: 'object-center' },
+  // A second calligraphy photograph (client, 2026-09-10), so the page no
+  // longer has to borrow the building for its illustration: the band leads
+  // on the calligrapher at her desk, this one is the qalam on the practice
+  // sheet. 1170x767 is 1.53:1 in a 3:2 frame, so it keeps nearly all of the
+  // picture and only needs centring.
+  kurs: { src: '/photos/subj-kurs-qalam.webp', objectClass: 'object-center' },
 };
 
 // Which family a service belongs to, so the band can print a group label as
