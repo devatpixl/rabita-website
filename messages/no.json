@@ -619,7 +619,7 @@
       "building": {
         "eyebrow": "Bygget",
         "title": "Sju etasjer på <em>én</em> adresse.",
-        "lede": "En moské, en skole, et bibliotek, et kjøkken og en sal på én tomt i Calmeyers gate 8 – to etasjer under gata, fem over. Den gamle moskeen ble revet i 2025. Det som reiser seg er ett bygg som gjør jobben til fem, med første etasje åpen mot gata.",
+        "lede": "Rabita bygger nytt i Calmeyers gate 8: Europas største moské med plass til {places} bønneplasser, skole, bibliotek, café og restaurant mot gata, ungdomsklubb, studio og takterrasse. Det gamle bygget er revet, tillatelsene er gitt, entreprenøren er klar. Vi mangler bare din støtte.",
         "primary": "Gi til bygget",
         "secondary": "Hvor pengene går",
         "briefLabel": "Kort sagt",
@@ -644,7 +644,7 @@
             "body": "En første etasje åpen for hele byen, uten terskel mellom gata og bygget."
           }
         ],
-        "ledeShort": "Moské, skole, bibliotek, kjøkken og sal på én tomt i Calmeyers gate 8. Første etasje åpen mot gata."
+        "ledeShort": "Europas største moské med plass til {places} bønneplasser, skole, bibliotek og takterrasse i Calmeyers gate 8. Vi mangler bare din støtte."
       },
       "money": {
         "eyebrow": "Hvor pengene går",

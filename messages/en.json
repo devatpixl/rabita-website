@@ -619,7 +619,7 @@
       "building": {
         "eyebrow": "The building",
         "title": "Seven floors on <em>one</em> address.",
-        "lede": "A mosque, a school, a library, a kitchen and a hall on one plot at Calmeyers gate 8 — two floors below the street, five above. The old mosque was demolished in 2025. What rises in its place is one building doing the work of five, with its ground floor open to the street.",
+        "lede": "Rabita is building anew at Calmeyers gate 8: Europe's largest mosque, with room for {places} prayer places, a school, a library, a café and restaurant facing the street, a youth club, a studio and a roof terrace. The old building is down, the permissions are granted, the contractor is ready. All that is missing is your support.",
         "primary": "Give to the building",
         "secondary": "Where the money goes",
         "briefLabel": "In short",
@@ -644,7 +644,7 @@
             "body": "A ground floor open to the whole city, with no threshold between the street and the building."
           }
         ],
-        "ledeShort": "A mosque, school, library, kitchen and hall on one plot at Calmeyers gate 8. Ground floor open to the street."
+        "ledeShort": "Europe's largest mosque, with room for {places} prayer places, a school, a library and a roof terrace at Calmeyers gate 8. All that is missing is your support."
       },
       "money": {
         "eyebrow": "Where the money goes",

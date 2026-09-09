@@ -31,21 +31,31 @@ export default async function ProjectPage({
   const t = await getTranslations({ locale, namespace: 'projectPage' });
   const tp = await getTranslations({ locale, namespace: 'projectPages' });
   const tf = await getTranslations({ locale, namespace: 'fremdrift' });
+  const PLACES = new Intl.NumberFormat('nb-NO').format(
+    CAMPAIGN.mensPrayerCapacityAfter + CAMPAIGN.womensPrayerCapacityAfter,
+  );
 
   return (
     <main>
+      {/* One call to action, not two (client, Hjem.pdf 2026-09-09). The
+         giving one stays: the lede now ends on "vi mangler bare din støtte",
+         and the whole giving flow is in the card beside it. "Hvor pengene
+         går" is still reachable from the nav and the footer, and
+         ProjectHero's `secondary` was already optional.
+
+         {places} in the lede is interpolated rather than typed: the same
+         figure is derived in the ledger below and on the home page. */}
       <ProjectHero
         crumb={tp('crumb')}
         eyebrow={tp('pages.building.eyebrow')}
         title={tp.rich('pages.building.title', {
           em: (chunks) => <Accent surface="dusk">{chunks}</Accent>,
         })}
-        lede={tp('pages.building.lede')}
-        ledeShort={tp('pages.building.ledeShort')}
+        lede={tp('pages.building.lede', { places: PLACES })}
+        ledeShort={tp('pages.building.ledeShort', { places: PLACES })}
         image="/photos/band-facade.webp"
         alt={tp('pages.building.eyebrow')}
         primary={{ label: tp('pages.building.primary'), give: true }}
-        secondary={{ label: tp('pages.building.secondary'), href: `/${locale}/hvor-pengene-gar` }}
         aside={
           // The whole giving flow, in place: amounts, details, payment, all
           // inside the hero card, earmarked for the building.
