@@ -151,7 +151,7 @@ export default async function ProjectPage({
               muted?: boolean;
             }[] = [
               { key: 'building', icon: 'building', value: nf.format(CAMPAIGN.buildingM2), unit: 'm²' },
-              { key: 'floors', icon: 'floors', value: `${CAMPAIGN.floorsAbove}+${CAMPAIGN.floorsBelow}` },
+              { key: 'floors', icon: 'floors', value: `${CAMPAIGN.floorsAbove} + U${CAMPAIGN.floorsBelow}` },
               { key: 'startConstruction', icon: 'calendar', value: CAMPAIGN.constructionStart },
               CAMPAIGN.completionDate
                 ? { key: 'completion', icon: 'check', value: CAMPAIGN.completionDate }

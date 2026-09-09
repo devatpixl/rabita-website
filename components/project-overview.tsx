@@ -29,7 +29,7 @@ export async function ProjectOverview() {
   // off-white: the one gold accent in this section is "one" in the headline.
   const figures = [
     { icon: 'building' as const, value: nf.format(CAMPAIGN.buildingM2), unit: 'm²', label: t('figures.area') },
-    { icon: 'floors' as const, value: `${CAMPAIGN.floorsAbove}+${CAMPAIGN.floorsBelow}`, label: t('figures.floors') },
+    { icon: 'floors' as const, value: `${CAMPAIGN.floorsAbove} + U${CAMPAIGN.floorsBelow}`, label: t('figures.floors') },
     {
       icon: 'people' as const,
       value: nf.format(CAMPAIGN.mensPrayerCapacityAfter + CAMPAIGN.womensPrayerCapacityAfter),

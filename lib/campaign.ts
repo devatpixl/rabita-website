@@ -54,9 +54,13 @@ export const CAMPAIGN = Object.freeze({
   mensPrayerCapacityAfter: 2_000,
 
   // Building — §10
-  buildingM2: 6_762,
+  buildingM2: 5_745, // client, Hjem.pdf 2026-09-09 (was 6 762)
   floorsAbove: 6,
-  floorsBelow: 2,
+  // One basement, not two (client, Hjem.pdf 2026-09-09: "6 etasjer + U1").
+  // It also settles a contradiction: the architect's floor drawings run
+  // lower floor + six storeys = seven, which is the "sju etasjer" this site
+  // has been claiming all along, and 6+2 would have made eight.
+  floorsBelow: 1,
   rentalApartments: 15,
   architect: 'Håvard Lindgard Fagernes, Norconsult',
   siteClearedRamadan: 2025,
