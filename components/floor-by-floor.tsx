@@ -97,6 +97,40 @@ export function FloorByFloor() {
   // Two steps per statement, clamped so the last pair cannot overrun.
   const stage = Math.min(STAGES.length - 1, Math.floor(step / (STEPS / STAGES.length)));
 
+  // The way out. This section pins for several viewports; a reader who has
+  // seen enough should not have to scroll the whole rail to leave it. Null
+  // under prefers-reduced-motion, where the pin is dropped and there is
+  // nothing to skip.
+  //
+  // One element, rendered into two slots that are never both shown: top
+  // left above the eyebrow from md, and under the step counter on a phone
+  // (client, 2026-09-10). The phone slot is not a preference — the left
+  // column there is the eyebrow and a two-line heading with nothing to
+  // spare, while the right column is a single 14px counter with the rest of
+  // the header empty beneath it. Moving the control there gives 52px of
+  // header back to the drawing.
+  //
+  // The label is building.skip, the string the old control on BuildingRises
+  // used. Same control, same words — a second copy in this namespace would
+  // only drift.
+  const skipControl = reduced ? null : (
+    <button
+      type="button"
+      onClick={skip}
+      className="group inline-flex min-h-9 items-center gap-2 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-paper/55 transition-colors hover:text-gold"
+    >
+      <span className="border-b border-paper/25 pb-px group-hover:border-gold">
+        {tBuilding('skip')}
+      </span>
+      <span
+        aria-hidden
+        className="transition-transform duration-200 group-hover:translate-y-0.5 motion-reduce:transition-none"
+      >
+        &darr;
+      </span>
+    </button>
+  );
+
   return (
     <section
       ref={track}
@@ -116,33 +150,8 @@ export function FloorByFloor() {
                from and a flex item collapses to its widest in-flow child —
                which was the eyebrow, wrapping the heading to about 120px. */}
             <div className="min-w-0 flex-1">
-              {/* The way out, restored (client, 2026-09-10) and moved to the
-                 top left, above the eyebrow. This section pins for several
-                 viewports; a reader who has seen enough should not have to
-                 scroll the whole rail to leave it. Hidden under
-                 prefers-reduced-motion, where the pin is dropped and there
-                 is nothing to skip.
-
-                 The label is building.skip, the string the old control on
-                 BuildingRises used. Same control, same words — a second copy
-                 in this namespace would only drift. */}
-              {!reduced && (
-                <button
-                  type="button"
-                  onClick={skip}
-                  className="group mb-4 inline-flex min-h-9 items-center gap-2 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-paper/55 transition-colors hover:text-gold"
-                >
-                  <span className="border-b border-paper/25 pb-px group-hover:border-gold">
-                    {tBuilding('skip')}
-                  </span>
-                  <span
-                    aria-hidden
-                    className="transition-transform duration-200 group-hover:translate-y-0.5 motion-reduce:transition-none"
-                  >
-                    &darr;
-                  </span>
-                </button>
-              )}
+              {/* Tablet and up. The phone copy lives under the counter. */}
+              <div className="mb-4 hidden md:block">{skipControl}</div>
               <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
                 {t('eyebrow')}
               </p>
@@ -191,9 +200,15 @@ export function FloorByFloor() {
               </h2>
             </div>
             {!reduced && (
-              <p className="shrink-0 pt-1 font-mono text-[0.6875rem] tabular-nums tracking-[0.14em] text-paper/55">
-                <span className="text-paper">{String(step + 1).padStart(2, '0')}</span> / {String(STEPS).padStart(2, '0')}
-              </p>
+              <div className="shrink-0 text-end">
+                <p className="pt-1 font-mono text-[0.6875rem] tabular-nums tracking-[0.14em] text-paper/55">
+                  <span className="text-paper">{String(step + 1).padStart(2, '0')}</span> / {String(STEPS).padStart(2, '0')}
+                </p>
+                {/* Phones only — the same control the left column carries
+                   from md. Only ever one of the two is displayed, so the
+                   other is out of the accessibility tree too. */}
+                <div className="mt-3 md:hidden">{skipControl}</div>
+              </div>
             )}
           </div>
         </header>
