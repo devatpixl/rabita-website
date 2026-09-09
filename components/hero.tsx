@@ -311,8 +311,10 @@ export async function Hero() {
                 {t('cta.primary')}
                 <ArrowIcon className="h-3.5 w-3.5" />
               </Link>
+              {/* The second button is a donation link now, not a jump to the
+                 testimonials further down (client, 2026-09-09). */}
               <a
-                href="#menigheten-forteller"
+                href={`/${locale}/gi-en-gave`}
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-paper/60 px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:bg-paper/10 sm:justify-start"
               >
                 {t('cta.secondary')}
