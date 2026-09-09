@@ -36,6 +36,16 @@ export const CAMPAIGN = Object.freeze({
   visitorsPerWeek: 10_000, // "10.000 besøkende i uken"
   nationalities: 50, // "mer enn 50 nasjonaliteter"
   pupils: 400, // "over 400 studenter/elever på Rabita"
+  // Two separate counts, and they are not interchangeable. `pupils` is who
+  // is enrolled at the weekend school — it is what "400+ pupils every
+  // weekend" on the home page and /undervisning both mean.
+  // `studentsPerYear` is everyone who sits in a class across a year, adults
+  // and evening courses included (client, Hjem.pdf 2026-09-09: "over 5000
+  // elever i året"). Note it collides numerically with
+  // studentVisitorsPerYear below, which counts visiting school and
+  // university GROUPS and is a third thing again.
+  studentsPerYear: 5_000,
+  newMembersLastYear: 184, // client, Hjem.pdf: "184 nye bare i fjor"
   studentVisitorsPerYear: 5_000, // school/university visits — not in the report; §10 brief
   teachers: 19,
   womensPrayerCapacityBefore: 100,

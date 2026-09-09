@@ -343,22 +343,22 @@
       "history": {
         "name": "History",
         "title": "Founded in <em>{year}</em>.",
-        "body": "The first mosque in Oslo not tied to one nationality: a place for Muslims in Norway, wherever they came from. The building we are raising makes room for all of it."
+        "body": "The first mosque in Oslo not tied to a single nationality: a place for Muslims in Norway, wherever they come from. Still the only one that works that way, and you are met with warmth before questions."
       },
       "family": {
         "name": "Community",
         "title": "<em>{members}</em> members. One community.",
-        "body": "From more than {nationalities} nationalities. We stand together, in prayer and in learning, in joy and in grief, with each other and with our neighbours."
+        "body": "From more than {nationalities} nationalities, {newMembers} of them new last year alone. We stand together in prayer and in learning, in joy and in grief, and we outgrew our walls long ago."
       },
       "learning": {
         "name": "Learning",
-        "title": "Over <em>{pupils}</em> pupils.",
-        "body": "Evening talks, Quran classes for children, Arabic for beginners, calligraphy and philosophy. Waiting lists in every class."
+        "title": "Over <em>{students}</em> students a year.",
+        "body": "Every weekend the classrooms fill with children learning Quran and Arabic. In the evenings the adults take over: lectures, calligraphy, philosophy."
       },
       "volunteer": {
         "name": "Volunteering",
         "title": "<em>{volunteers}</em> volunteers, all year.",
-        "body": "Around {visitors} visitors a week. Volunteers in yellow vests hand out food, coordinate with the district and stand with neighbours in good times and bad."
+        "body": "Around {visitors} visitors a week. Volunteers in yellow vests hand out food, coordinate with the borough and stand with neighbours in good times and bad. One vest is free for you."
       }
     }
   },

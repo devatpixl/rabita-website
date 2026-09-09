@@ -343,22 +343,22 @@
       "history": {
         "name": "Historie",
         "title": "Grunnlagt i <em>{year}</em>.",
-        "body": "Den første moskeen i Oslo som ikke var knyttet til én nasjonalitet: et sted for muslimer i Norge, uavhengig av hvor de kom fra. Bygget vi reiser gir plass til alt dette."
+        "body": "Den første moskeen i Oslo som ikke var knyttet til én nasjonalitet: et sted for muslimer i Norge, uavhengig av hvor de kommer fra. Fortsatt den eneste som fungerer sånn, og du blir møtt med varme før spørsmål."
       },
       "family": {
         "name": "Fellesskap",
         "title": "<em>{members}</em> medlemmer. Ett fellesskap.",
-        "body": "Fra mer enn {nationalities} nasjonaliteter. Vi står sammen, i bønn og i lære, i glede og i sorg, med hverandre og med naboene våre."
+        "body": "Fra mer enn {nationalities} nasjonaliteter, {newMembers} nye bare i fjor. Vi står sammen i bønn og i lære, i glede og i sorg, og vi har for lengst vokst ut av veggene våre."
       },
       "learning": {
         "name": "Undervisning",
-        "title": "Over <em>{pupils}</em> elever.",
-        "body": "Kveldsforedrag, Quran-klasser for barn, arabisk for begynnere, kalligrafi og filosofi. Ventelister i alle klasser."
+        "title": "Over <em>{students}</em> elever i året.",
+        "body": "Hver helg fylles klasserommene av barn som lærer Quran og arabisk. På kveldene tar de voksne over: foredrag, kalligrafi, filosofi."
       },
       "volunteer": {
         "name": "Frivillighet",
         "title": "<em>{volunteers}</em> frivillige, hele året.",
-        "body": "Rundt {visitors} besøkende i uken. Frivillige i gule vester deler ut mat, koordinerer med bydelen og står med naboer i medgang og motgang."
+        "body": "Rundt {visitors} besøkende i uken. Frivillige i gule vester deler ut mat, koordinerer med bydelen og står med naboer i medgang og motgang. Én vest er ledig til deg."
       }
     }
   },

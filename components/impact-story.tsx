@@ -61,8 +61,15 @@ export function ImpactStory() {
   const n = (v: number) => formatAmount(locale, v);
   const values: Record<ChapterKey, Record<string, string>> = {
     history: { year: String(CAMPAIGN.foundedYear) },
-    family: { members: n(CAMPAIGN.members), nationalities: String(CAMPAIGN.nationalities) },
-    learning: { pupils: n(CAMPAIGN.pupils) },
+    family: {
+      members: n(CAMPAIGN.members),
+      nationalities: String(CAMPAIGN.nationalities),
+      newMembers: n(CAMPAIGN.newMembersLastYear),
+    },
+    // studentsPerYear, not pupils: this chapter counts everyone who sits in
+    // a class across a year, which is what the client's copy claims. `pupils`
+    // is the weekend-school enrolment and stays on the pages that say so.
+    learning: { students: n(CAMPAIGN.studentsPerYear) },
     volunteer: { volunteers: n(CAMPAIGN.volunteers), visitors: n(CAMPAIGN.visitorsPerWeek) },
   };
 
