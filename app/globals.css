@@ -494,7 +494,11 @@ body.sheet-open {
 .brand-type-stage {
   --p: 0;
   --eased: calc(var(--p) * var(--p) * var(--p));
-  --scale: calc(1 + var(--eased) * 60);
+  /* One number sets how big the type is at rest, and because it multiplies
+     the whole ramp it sets the dive's ceiling too. 1 on a landscape screen;
+     the phone block below turns it down to fit a portrait slice. */
+  --type-fit: 1;
+  --scale: calc((1 + var(--eased) * 60) * var(--type-fit));
   --photo-scale: calc(1 + var(--p) * 0.18);
   --label-fade: calc(1 - var(--p) * 7);
   --final-opacity: clamp(0, calc((var(--p) - 0.55) * 2.85), 1);
@@ -653,82 +657,65 @@ body.sheet-open {
   .brand-type-stage { position: relative; height: auto; aspect-ratio: 16 / 9; }
 }
 @media (max-width: 700px) {
-  /* Phones: the sticky runway goes ENTIRELY — Innocents' users read the
-     near-empty paper viewport as a blank screen, and mobile Safari bails
-     on SVG masks at extreme scales, leaving the paper rect covering the
-     photo. Their replacement, kept: one editorial card, photo + dusk
-     scrim + the two lines legible in paper. */
-  .brand-type-section {
-    height: auto;
-    padding: clamp(56px, 9vh, 96px) 0;
-    background: #16242e;
-    border-top: 0;
-    border-bottom: 0;
-  }
-  .brand-type-stage {
-    position: relative;
-    top: auto;
-    height: 78svh;
-    min-height: 460px;
-    max-height: 720px;
-    width: calc(100% - 3rem);
-    margin: 0 auto;
-    border-radius: 14px;
-    overflow: hidden;
-    isolation: isolate;
-  }
-  .brand-type-stage__photo {
-    transform: none;
-    inset: 0;
-    z-index: 1;
-    will-change: auto;
-    background-attachment: scroll;
-    /* The phone card never scales the photograph and is a few hundred px
-       wide, so it has no use for the 1.5MB desktop frame — and a phone is
+  /* Phones run the same scroll as a laptop (client, 2026-09-10). Innocents
+     shipped a static card here; what that card was really working around is
+     the geometry, and the geometry is fixable.
+
+     preserveAspectRatio is "slice" on a 16:9 viewBox, so a portrait screen
+     crops the WIDTH hard: at 390x844 only 415 of the 1600 user units are on
+     screen. "DETTE ER" is 1069 units wide at rest, so at full size the phone
+     would show the middle of one letter — which is exactly the near-empty
+     paper viewport their users complained about.
+
+     --type-fit 0.32 puts it at 342 units, inside the 415 with a margin
+     either side, and because it multiplies the whole ramp the mask peaks
+     near 10x here against 32x on a laptop. The narrow screen ends up the
+     gentler case for Safari, not the harsher one.
+
+     The runway is shorter too: 320vh is 2.7 screens of scrolling on a phone
+     for one gesture, 260vh is 2.2. */
+  .brand-type-section { height: 260vh; }
+  .brand-type-stage { --type-fit: 0.32; }
+  .brand-type-stage__photo,
+  .brand-type-stage__final {
+    /* The photograph only ever reaches 1.23x and the screen is a few hundred
+       px wide, so it has no use for the 1.6MB desktop frame — and a phone is
        where that download costs most. */
     background-image:
       linear-gradient(180deg, rgba(22, 36, 46, 0.12), rgba(22, 36, 46, 0.28)),
       url('/photos/brand-eid-sm.webp');
   }
-  .brand-type-stage__svg,
-  .brand-type-stage__final,
-  .brand-type-stage__vignette { display: none; }
-  .brand-type-stage::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(22, 36, 46, 0.55) 0%,
-      rgba(22, 36, 46, 0.2) 40%,
-      rgba(22, 36, 46, 0.78) 100%
-    );
-    z-index: 2;
-    pointer-events: none;
-  }
+  /* The captions sit closer to the edges and a size down, the way every
+     other overlay on the site does on a phone. */
   .brand-type-stage__eyebrow {
     top: clamp(28px, 6vh, 56px);
-    color: #faf8f4;
-    opacity: 1;
-    transform: translateX(-50%);
-    z-index: 3;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    gap: 10px;
   }
   .brand-type-stage__eyebrow::before,
-  .brand-type-stage__eyebrow::after {
-    width: 24px;
-    background: #faf8f4;
-  }
+  .brand-type-stage__eyebrow::after { width: 24px; }
   .brand-type-stage__sig {
     bottom: clamp(28px, 6vh, 56px);
-    color: #faf8f4;
-    opacity: 1;
-    transform: translateX(-50%);
-    font-size: clamp(20px, 5.2vw, 28px);
-    text-align: center;
-    width: 90%;
-    z-index: 3;
+    font-size: 15px;
   }
-  .brand-type-stage__sig em { color: #faf8f4; }
+}
+@media (max-width: 700px) and (prefers-reduced-motion: reduce) {
+  /* The reduced-motion block above drops the pin and gives the stage a
+     frame. A wide box shows most of the 1600-unit viewBox, the same as a
+     laptop does, so the type wants its full size back rather than the
+     portrait fit — at 0.32 it would sit tiny in the middle of the frame.
+
+     4:3 rather than 16:9, and the captions pulled in: a 16:9 frame is only
+     213px tall on a 390px screen, which puts the signature straight through
+     the bottom of RABITA. 4:3 gives 292px, still shows 1203 units of the
+     1600 so the words fit, and leaves the two captions clear of the type. */
+  .brand-type-stage {
+    --type-fit: 1;
+    aspect-ratio: 4 / 3;
+  }
+  .brand-type-stage__eyebrow { top: 14px; }
+  .brand-type-stage__sig { bottom: 14px; }
 }
 
 /* The star ground on a LIGHT surface.

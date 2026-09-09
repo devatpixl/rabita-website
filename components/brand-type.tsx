@@ -21,10 +21,21 @@ import { useTranslations } from 'next-intl';
 //   - past --p 0.55 the full photograph fades in over the top and the
 //     section hands over.
 //
-// On phones (≤700px) the sticky runway is dropped ENTIRELY in CSS and a
-// single editorial card renders instead — Innocents shipped that after
-// real users read the near-empty paper viewport as a blank screen, and
-// mobile Safari abandons SVG masks at extreme scales. Their fix, kept.
+// Phones run it too (client, 2026-09-10: "i want same animation of dette er
+// rabita here, like on laptop"). Innocents shipped a static card below 700px
+// instead, for two reasons, and both are answered rather than ignored:
+//
+//   - their users read the near-empty paper viewport as a blank screen. The
+//     phone type is set to --type-fit 0.32 so both words fit the narrow
+//     visible band of a portrait slice; the viewport is never near-empty,
+//     it carries the two words until the dive takes them.
+//   - mobile Safari bails on SVG masks at extreme scales. --type-fit
+//     multiplies the whole scale ramp, so the phone's mask peaks around 10x
+//     where the photograph has already covered it, against 32x on a laptop.
+//     The phone is now the GENTLER case, not the harsher one.
+//
+// Still worth a look on a real iPhone before this goes out: masks are the
+// one part of this that a desktop Chrome cannot vouch for.
 
 export function BrandType() {
   const t = useTranslations('brandType');
@@ -37,8 +48,7 @@ export function BrandType() {
     if (!wrap || !stage) return;
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobile = window.matchMedia('(max-width: 700px)').matches;
-    if (reduced || isMobile) {
+    if (reduced) {
       stage.style.setProperty('--p', '0');
       return;
     }
