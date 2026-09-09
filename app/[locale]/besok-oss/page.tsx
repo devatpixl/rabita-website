@@ -138,9 +138,23 @@ export default async function VisitPage({
                  page — a real destination. The mockup's "see more pictures"
                  has nowhere to go: there is no gallery page. */}
               <div className="group relative mt-8 aspect-[4/3] overflow-hidden rounded-[1.5rem] rounded-se-[3.5rem] bg-paper-deep ring-1 ring-ink/5">
+                {/* The building itself: the door at Calmeyers gate 8a with
+                   the sign over it and the congregation on the pavement
+                   (client, 2026-09-09). It is the first real photograph of
+                   Rabita as it stands that this site has had.
+
+                   Here rather than in the band, which was the obvious slot
+                   and the wrong one: the band lays its headline over the
+                   left under a dusk gradient, and simulating that showed the
+                   sign dimmed to nothing and the left half almost black. The
+                   whole worth of this frame is the sign and the faces, and
+                   this card only darkens its bottom strip for the pill.
+
+                   It also ends a duplication — visit-foyer.webp was carrying
+                   both this card and the closing block below. */}
                 <Image
-                  src="/photos/visit-foyer.webp"
-                  alt={tv('pages.visit.caption')}
+                  src="/photos/visit-doorway.webp"
+                  alt={tv('pages.visit.captionDoorway')}
                   fill
                   sizes="(min-width: 1024px) 430px, calc(100vw - 3rem)"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
