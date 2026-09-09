@@ -64,11 +64,19 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
                 strokeOpacity={0.95}
                 vectorEffect="non-scaling-stroke"
               />
+              {/* The disc is the section's own dusk, not hollow (client,
+                 2026-09-09: a gold dot is hard to find on the building).
+                 Filled dark it reads instantly against pale walls and roof
+                 decks, which is where most of these points land — and the
+                 gold ring keeps it findable on the dark green prayer halls,
+                 where a dusk dot on its own would disappear. Dark disc, gold
+                 ring, gold pip: one marker that works on every surface in
+                 the drawing. */}
               <circle
                 cx={m.x}
                 cy={m.y}
                 r={3}
-                fill="none"
+                fill="#16242E"
                 stroke="#9B7F4A"
                 strokeWidth={1.25}
                 vectorEffect="non-scaling-stroke"
