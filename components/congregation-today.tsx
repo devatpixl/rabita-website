@@ -44,10 +44,11 @@ const SLIDE_KEYS = [
   // (client, 2026-09-09) — a swap rather than an insert, so the run stays
   // eight slides and nothing else shifts position.
   'counselling',
-  // Mediation and janaza traded places (client, 2026-09-10). Same kind of
-  // swap: eight slides, nothing else moves.
-  'mediation',
+  // Two swaps on 2026-09-10 (client): mediation came up from eighth in place
+  // of janaza, then traded again with hajj and umra. Both were swaps rather
+  // than inserts, so the run is still eight slides and nothing else moved.
   'hajj-umrah',
+  'mediation',
   'shahada',
   'youth',
   'nikah',
