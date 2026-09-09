@@ -57,7 +57,16 @@ const PHOTOS: Record<SlideKey, { src: string; alt: string; width: number; height
   nikah: { src: '/photos/svc-nikah-ceremony.webp', alt: 'A nikah ceremony in the hall: the couple and the imam at a table, guests seated on the carpet', width: 1086, height: 1448 },
   janaza: { src: '/photos/svc-janaza-prayer.webp', alt: 'Janaza prayer: the congregation standing in rows, heads bowed, facing the timber qibla wall', width: 1086, height: 1448 },
   shahada: { src: '/photos/subj-shahada.webp', alt: 'A shahada taken with witnesses at Rabita', width: 1600, height: 1000 },
-  counselling: { src: '/photos/subj-counselling.webp', alt: 'A quiet conversation with an imam at Rabita', width: 1600, height: 1000 },
+  counselling: {
+    // New file, not over subj-counselling.webp: lib/services.ts still
+    // renders that frame.
+    src: '/photos/community/speaker-mic.webp',
+    alt: 'A young speaker addressing a gathering with a microphone',
+    // 3:4, matching the card. The old 8:5 was a landscape ratio in a
+    // portrait slot, so next/image reserved the wrong box.
+    width: 1200,
+    height: 1600,
+  },
   'hajj-umrah': { src: '/photos/hajj-kaaba.webp', alt: 'Pilgrims in ihram circling the Kaaba in Makkah, the clock tower behind', width: 1200, height: 1600 },
   education: {
     // Not learning-lecture.webp: impact-story.tsx still renders that frame,
