@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/cn';
 import { scrollTo } from '@/lib/scroll-to';
-import { FloorLegend, FloorMarkers } from './floor-markers';
+import { FloorMarkers } from './floor-markers';
 
 // The building floor by floor, from the architect's own labelled cutaways
 // (Fasiliteter.pdf, client 2026-09-03), shown bottom to top: the lower-floor
@@ -200,7 +200,12 @@ export function FloorByFloor() {
 
         {/* The drawings. All eight stacked in one frame; only opacity changes,
            so the browser never re-lays anything out mid-scroll. */}
-        <div className="relative mt-2 min-h-0 flex-1 px-6 pb-8 md:mt-4">
+        {/* px-2 on phones, not px-6: the drawing is a figure, and at this
+           size every millimetre of it is type on the building as well as
+           building. 24px of side padding either side costs 43px of drawing
+           width, which is a whole point of label size. Desktop keeps its
+           margin. */}
+        <div className="relative mt-2 min-h-0 flex-1 px-2 pb-8 md:mt-4 md:px-6">
           {/* No plate and no blend trick: the frames carry real alpha. The
              sheet was cut out of the images themselves — a flood fill from
              the borders, so only white CONNECTED to the outside went; the
@@ -238,26 +243,6 @@ export function FloorByFloor() {
         {!reduced && (
           <div className="shrink-0 px-6 pb-8 pt-3 md:pb-20 md:pt-4">
             <div className="mx-auto max-w-6xl">
-              {/* PHONE ONLY — the key to the numbered points on the drawing.
-                 There is no gutter beside a drawing on a phone to run
-                 leaders into, so the names come down here and the points
-                 carry numerals instead (see FloorMarkers).
-
-                 Fixed height at six rows, the most any floor has, because
-                 the eight keys stack absolutely for the cross-fade and the
-                 caption below must not jump as the count changes floor to
-                 floor. 6 x 14px + 5 x 3px. Top-aligned, so the key always
-                 hugs the drawing it belongs to and the slack falls above
-                 the caption rather than between them.
-
-                 Below 360px it is dropped along with the numbers on the
-                 drawing (see FloorMarkers): on a 320px screen the key costs
-                 more of the pane than the drawing has left to give. */}
-              <div className="relative mb-3 h-[99px] max-[359px]:hidden md:hidden">
-                {KEYS.map((k, i) => (
-                  <FloorLegend key={k} floorKey={k} active={i === step} />
-                ))}
-              </div>
               {/* Fixed height, because the labels stack absolutely for the
                  cross-fade — but the longest label runs two lines on a
                  phone, so the box is two lines tall until sm. */}

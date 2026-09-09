@@ -12,6 +12,12 @@
 //
 // `align` says which side of the label the leader arrives on, so the text
 // runs away from the building rather than back across it.
+//
+// `mx`/`my` are a phone-only override for `x`/`y`. On a phone the name sits
+// ON the room rather than out on a leader, so two labels close together are
+// two whole chips close together, not two dots. Where that makes a pair
+// touch, the phone label moves a few percent and the desktop point does not
+// — which is why the override exists rather than a change to `x`/`y`.
 export type FloorMarker = {
   /** Indexes floorByFloor.rooms.<id> for the label text. */
   id: string;
@@ -20,6 +26,10 @@ export type FloorMarker = {
   lx: number;
   ly: number;
   align: 'start' | 'end';
+  /** Phone-only x, when the chip needs to clear a neighbour. */
+  mx?: number;
+  /** Phone-only y, when the chip needs to clear a neighbour. */
+  my?: number;
 };
 
 export const FLOOR_MARKERS: Record<string, FloorMarker[]> = {
@@ -40,7 +50,7 @@ export const FLOOR_MARKERS: Record<string, FloorMarker[]> = {
   first: [
     { id: 'prayerMain', x: 50, y: 42, lx: 27, ly: 15, align: 'end' },
     { id: 'cafe', x: 25, y: 63, lx: 8, ly: 45, align: 'end' },
-    { id: 'residentsEntrance', x: 24, y: 80, lx: 11, ly: 93, align: 'end' },
+    { id: 'residentsEntrance', x: 24, y: 80, lx: 11, ly: 93, align: 'end', mx: 18 },
     { id: 'foyer', x: 55, y: 80, lx: 72, ly: 95, align: 'start' },
     { id: 'library', x: 74, y: 71, lx: 97, ly: 60, align: 'start' },
   ],
@@ -63,7 +73,7 @@ export const FLOOR_MARKERS: Record<string, FloorMarker[]> = {
     { id: 'administration', x: 48, y: 33, lx: 93, ly: 22, align: 'start' },
     { id: 'studio', x: 25, y: 45, lx: 5, ly: 33, align: 'end' },
     { id: 'youthClub', x: 22, y: 62, lx: 34, ly: 96, align: 'end' },
-    { id: 'guestArea', x: 52, y: 68, lx: 98, ly: 78, align: 'start' },
+    { id: 'guestArea', x: 52, y: 68, lx: 98, ly: 78, align: 'start', my: 73 },
   ],
   fifth: [{ id: 'apartments', x: 38, y: 24, lx: 19, ly: 10, align: 'end' }],
   sixth: [{ id: 'apartments', x: 42, y: 18, lx: 23, ly: 8, align: 'end' }],
