@@ -26,6 +26,7 @@ import {
 import { SectionBody } from './primitives';
 import { Accent } from './accent';
 import { cn } from '@/lib/cn';
+import { scrollTo } from '@/lib/scroll-to';
 
 // §4.04 — architectural cross-section with an opening state.
 //
@@ -54,24 +55,6 @@ const RIGHT_NB_X = 790;
 const RIGHT_NB_W = 36;
 const RIGHT_NB_TOP = 200;
 
-// Native smooth scroll, with a guarantee: if the page has not arrived
-// within 700ms (smooth scrolling is throttled in background tabs and off
-// in some settings) it jumps instantly. Reduced-motion jumps straight
-// away. Either way the reader always ends up where they asked to go.
-function scrollTo(target: number) {
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const top = Math.max(0, Math.round(target));
-  if (reduced) {
-    window.scrollTo({ top, behavior: 'instant' as ScrollBehavior });
-    return;
-  }
-  window.scrollTo({ top, behavior: 'smooth' });
-  window.setTimeout(() => {
-    if (Math.abs(window.scrollY - top) > 40) {
-      window.scrollTo({ top, behavior: 'instant' as ScrollBehavior });
-    }
-  }, 700);
-}
 
 export function BuildingRises() {
   const t = useTranslations('building');

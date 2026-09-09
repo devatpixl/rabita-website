@@ -1,9 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/cn';
+import { scrollTo } from '@/lib/scroll-to';
 import { FloorMarkers } from './floor-markers';
 
 // The building floor by floor, from the architect's own labelled cutaways
@@ -42,6 +43,7 @@ const KEYS = [
 
 export function FloorByFloor() {
   const t = useTranslations('floorByFloor');
+  const tBuilding = useTranslations('building');
   const STAGES = t.raw('stages') as string[];
   const track = useRef<HTMLDivElement>(null);
   const [step, setStep] = useState(0);
@@ -83,6 +85,15 @@ export function FloorByFloor() {
     };
   }, [reduced]);
 
+  // Straight to where the pin releases, so the next section follows at
+  // once. The track is one viewport taller than the pane, so the release
+  // point is its bottom minus the viewport.
+  const skip = useCallback(() => {
+    const el = track.current;
+    if (!el) return;
+    scrollTo(el.getBoundingClientRect().top + window.scrollY + el.offsetHeight - window.innerHeight + 1);
+  }, []);
+
   // Two steps per statement, clamped so the last pair cannot overrun.
   const stage = Math.min(STAGES.length - 1, Math.floor(step / (STEPS / STAGES.length)));
 
@@ -100,7 +111,38 @@ export function FloorByFloor() {
       >
         <header className="shrink-0 px-6 pt-24 md:pt-28">
           <div className="mx-auto flex max-w-6xl items-start justify-between gap-8">
-            <div>
+            {/* min-w-0 flex-1: the heading's lines are all absolutely
+               positioned now, so this column has no in-flow content to size
+               from and a flex item collapses to its widest in-flow child —
+               which was the eyebrow, wrapping the heading to about 120px. */}
+            <div className="min-w-0 flex-1">
+              {/* The way out, restored (client, 2026-09-10) and moved to the
+                 top left, above the eyebrow. This section pins for several
+                 viewports; a reader who has seen enough should not have to
+                 scroll the whole rail to leave it. Hidden under
+                 prefers-reduced-motion, where the pin is dropped and there
+                 is nothing to skip.
+
+                 The label is building.skip, the string the old control on
+                 BuildingRises used. Same control, same words — a second copy
+                 in this namespace would only drift. */}
+              {!reduced && (
+                <button
+                  type="button"
+                  onClick={skip}
+                  className="group mb-4 inline-flex min-h-9 items-center gap-2 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-paper/55 transition-colors hover:text-gold"
+                >
+                  <span className="border-b border-paper/25 pb-px group-hover:border-gold">
+                    {tBuilding('skip')}
+                  </span>
+                  <span
+                    aria-hidden
+                    className="transition-transform duration-200 group-hover:translate-y-0.5 motion-reduce:transition-none"
+                  >
+                    &darr;
+                  </span>
+                </button>
+              )}
               <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
                 {t('eyebrow')}
               </p>
@@ -124,7 +166,7 @@ export function FloorByFloor() {
                  screen. */}
               <h2
                 id="floor-by-floor-heading"
-                className="relative mt-3 h-[4.6rem] max-w-xl overflow-hidden font-serif text-[clamp(1.35rem,3vw,2.25rem)] leading-[1.1] text-paper sm:h-[5rem]"
+                className="relative mt-3 h-[4.6rem] w-full max-w-xl overflow-hidden font-serif text-[clamp(1.35rem,3vw,2.25rem)] leading-[1.1] text-paper sm:h-[5rem]"
               >
                 {STAGES.map((line, i) => (
                   <span
