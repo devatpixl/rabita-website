@@ -42,6 +42,7 @@ const KEYS = [
 
 export function FloorByFloor() {
   const t = useTranslations('floorByFloor');
+  const STAGES = t.raw('stages') as string[];
   const track = useRef<HTMLDivElement>(null);
   const [step, setStep] = useState(0);
   const [reduced, setReduced] = useState(false);
@@ -82,6 +83,9 @@ export function FloorByFloor() {
     };
   }, [reduced]);
 
+  // Two steps per statement, clamped so the last pair cannot overrun.
+  const stage = Math.min(STAGES.length - 1, Math.floor(step / (STEPS / STAGES.length)));
+
   return (
     <section
       ref={track}
@@ -100,11 +104,40 @@ export function FloorByFloor() {
               <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
                 {t('eyebrow')}
               </p>
+              {/* The heading advances with the scroll (client, Hjem.pdf
+                 2026-09-09). The drawing tells the spatial story — which
+                 floor — and the caption under it names that floor, so the
+                 heading is free to tell the project's status story instead:
+                 site cleared, permissions, contractor, opening.
+
+                 Four statements over eight steps, so each covers two. That
+                 lands "dørene åpner 2028" on the last pair, which is the
+                 sixth floor and the finished building.
+
+                 Stacked absolutely and cross-faded, the same way the floor
+                 caption below does it, so the header never reflows as the
+                 lines change length. The box is three lines tall on a phone
+                 and two from sm, since the longest statement wraps.
+
+                 Only the active stage is exposed: the rest are aria-hidden,
+                 so the accessible name of this h2 is always the line on
+                 screen. */}
               <h2
                 id="floor-by-floor-heading"
-                className="mt-3 max-w-xl font-serif text-[clamp(1.35rem,3vw,2.25rem)] leading-[1.1] text-paper"
+                className="relative mt-3 h-[4.6rem] max-w-xl overflow-hidden font-serif text-[clamp(1.35rem,3vw,2.25rem)] leading-[1.1] text-paper sm:h-[5rem]"
               >
-                {t('heading')}
+                {STAGES.map((line, i) => (
+                  <span
+                    key={line}
+                    aria-hidden={i !== stage}
+                    className={cn(
+                      'absolute inset-x-0 top-0 transition-opacity duration-500 ease-out motion-reduce:transition-none',
+                      i === stage ? 'opacity-100' : 'opacity-0',
+                    )}
+                  >
+                    {line}
+                  </span>
+                ))}
               </h2>
             </div>
             {!reduced && (

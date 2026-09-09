@@ -2578,6 +2578,12 @@
   "floorByFloor": {
     "eyebrow": "Floor by floor",
     "heading": "The building, from the ground up.",
+    "stages": [
+      "The building from the ground up, the site is cleared.",
+      "All permissions are granted.",
+      "The contractor is chosen.",
+      "The doors open in 2028."
+    ],
     "altFinal": "Architect's cutaway of the finished building, with the roof terrace, dome and minaret",
     "rooms": {
       "garderober": "Changing rooms",

@@ -2578,6 +2578,12 @@
   "floorByFloor": {
     "eyebrow": "Etasje for etasje",
     "heading": "Bygget, nedenfra og opp.",
+    "stages": [
+      "Bygget nedenfra og opp, tomten er ryddet.",
+      "Alle tillatelser er gitt.",
+      "Entreprenør er valgt.",
+      "Dørene åpner 2028."
+    ],
     "altFinal": "Arkitektens snitt av det ferdige bygget, med takterrasse, kuppel og minaret",
     "rooms": {
       "garderober": "Garderober",
