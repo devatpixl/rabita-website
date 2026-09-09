@@ -140,8 +140,16 @@ export async function CampaignMeter() {
           <div className="col-span-2 border-t border-rule pt-5 sm:col-span-1 sm:border-t-0 sm:border-s sm:border-rule sm:ps-8 sm:pt-0">
             <dd>
               <PhasePopover steps={steps} label={t('roadmap')} currentLabel={t('now')} align="end">
-                <span className="block font-serif text-[clamp(1.6rem,2.6vw,2.25rem)] leading-none text-ink">
-                  {tPhase(phase?.key ?? 'fundament')}
+                {/* A sentence, not the bare word "Fundament" (client,
+                   Hjem.pdf 2026-09-09), and keyed off the current phase so
+                   it stays true when the build moves on. Set smaller than
+                   the two money figures beside it and given leading: this
+                   tile now states where the project is rather than printing
+                   a value, and a sentence at 2.25rem would dwarf them.
+                   meter.phases keeps the short words for the roadmap list
+                   inside this popover. */}
+                <span className="block max-w-[22ch] font-serif text-[clamp(1.15rem,1.8vw,1.5rem)] leading-snug text-ink">
+                  {t(`phaseNow.${phase?.key ?? 'fundament'}`)}
                 </span>
               </PhasePopover>
             </dd>

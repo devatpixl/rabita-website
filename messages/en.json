@@ -263,7 +263,7 @@
   "meter": {
     "lattice": "Each mark is 1 000 000 kr",
     "label": "Raised so far",
-    "eyebrow": "Raised for the <em>new mosque</em>",
+    "eyebrow": "Raised for the <em>mosque project</em>",
     "updated": "as of {date}",
     "of": "of",
     "financed": "financed",
@@ -272,6 +272,11 @@
     "lastUpdated": "Last updated {date}",
     "lastMonth": "+{amount} kr last month",
     "note": "The total updates automatically.",
+    "phaseNow": {
+      "fundament": "We are in the foundation phase.",
+      "interior": "We are in the fit-out phase.",
+      "ferdigstillelse": "We are in the completion phase."
+    },
     "phases": {
       "fundament": "Foundation",
       "interior": "Interior",

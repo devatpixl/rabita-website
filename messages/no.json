@@ -263,7 +263,7 @@
   "meter": {
     "lattice": "Hvert merke er 1 000 000 kr",
     "label": "Samlet inn",
-    "eyebrow": "Samlet inn til <em>den nye moskeen</em>",
+    "eyebrow": "Samlet inn til <em>mosképrosjektet</em>",
     "updated": "per {date}",
     "of": "av",
     "financed": "finansiert",
@@ -272,6 +272,11 @@
     "lastUpdated": "Sist oppdatert {date}",
     "lastMonth": "+{amount} kr forrige måned",
     "note": "Totalen oppdateres automatisk.",
+    "phaseNow": {
+      "fundament": "Vi befinner oss i fundamentfasen.",
+      "interior": "Vi befinner oss i innredningsfasen.",
+      "ferdigstillelse": "Vi befinner oss i ferdigstillelsesfasen."
+    },
     "phases": {
       "fundament": "Fundament",
       "interior": "Interiør",
