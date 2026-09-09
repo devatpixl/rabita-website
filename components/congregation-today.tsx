@@ -65,8 +65,9 @@ const PHOTOS: Record<SlideKey, { src: string; alt: string; width: number; height
   janaza: { src: '/photos/svc-janaza-prayer.webp', alt: 'Janaza prayer: the congregation standing in rows, heads bowed, facing the timber qibla wall', width: 1086, height: 1448 },
   shahada: { src: '/photos/subj-shahada.webp', alt: 'A shahada taken with witnesses at Rabita', width: 1600, height: 1000 },
   counselling: {
-    // New file, not over subj-counselling.webp: lib/services.ts still
-    // renders that frame.
+    // A new file rather than an overwrite of subj-counselling.webp, which
+    // lib/services.ts pointed at when this changed. That page has since
+    // moved to this frame too, so the old one is now unused.
     src: '/photos/community/speaker-mic.webp',
     alt: 'A young speaker addressing a gathering with a microphone',
     // 3:4, matching the card. The old 8:5 was a landscape ratio in a
@@ -92,8 +93,9 @@ const PHOTOS: Record<SlideKey, { src: string; alt: string; width: number; height
     width: 1200,
     height: 1600,
   },
-  // Not over bazaar-child.webp: lib/services.ts still points at that
-  // frame, and overwriting it would have changed a second place.
+  // A new file rather than an overwrite of bazaar-child.webp, which
+  // lib/services.ts pointed at when this changed. /tjenester has since moved
+  // its school entry to learning-class.webp, so the old one is now unused.
   youth: {
     src: '/photos/community/youth-table.webp',
     alt: 'Children around tables at a Rabita youth session, the group\u2019s own posters on the wall behind them',

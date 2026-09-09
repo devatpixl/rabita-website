@@ -22,9 +22,13 @@ export const SERVICE_IMAGE: Record<ServiceKey, string> = {
   nikah: '/photos/subj-nikah.webp',
   janaza: '/photos/subj-janaza.webp',
   shahada: '/photos/subj-shahada.webp',
-  counselling: '/photos/subj-counselling.webp',
+  // Matching the Conversations slide on the home page.
+  counselling: '/photos/community/speaker-mic.webp',
   'hajj-umrah': '/photos/subj-hajj.webp',
-  skole: '/photos/community/bazaar-child.webp',
+  // The certificate class, matching the Learning slide on the home page
+  // (client, 2026-09-09). bazaar-child was a girl with face paint at a
+  // bazaar — a nice photograph, but not a school.
+  skole: '/photos/learning-class.webp',
   koran: '/photos/community/quran-carpet.webp',
   kurs: '/photos/event-lecture-hall.webp',
 };
