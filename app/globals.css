@@ -516,6 +516,14 @@ body.sheet-open {
   inset: 0;
   /* dusk-tinted, not navy: the same grade the site's other full-bleed
      photography carries */
+  /* 3072 wide, and deliberately so. The 61x in --scale drives the
+     LETTERFORMS; the photograph only ever reaches 1.23x (--photo-scale
+     1.18, and 1.04 again on __final), so it is shown at close to native
+     size for the whole scroll and every compression artefact stays
+     visible. Crisp needs ~2362px on a 1920 display and ~3149px on a 2560
+     one. A phone gets a 341KB file instead — see the max-width:700px
+     block; this is a CSS background, so there is no srcset to do it for
+     us. */
   background-image:
     linear-gradient(180deg, rgba(22, 36, 46, 0.12), rgba(22, 36, 46, 0.28)),
     url('/photos/brand-eid.webp');
@@ -655,6 +663,12 @@ body.sheet-open {
     z-index: 1;
     will-change: auto;
     background-attachment: scroll;
+    /* The phone card never scales the photograph and is a few hundred px
+       wide, so it has no use for the 1.5MB desktop frame — and a phone is
+       where that download costs most. */
+    background-image:
+      linear-gradient(180deg, rgba(22, 36, 46, 0.12), rgba(22, 36, 46, 0.28)),
+      url('/photos/brand-eid-sm.webp');
   }
   .brand-type-stage__svg,
   .brand-type-stage__final,
