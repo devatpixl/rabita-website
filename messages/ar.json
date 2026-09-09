@@ -140,6 +140,31 @@
           "href": "/tjenester/kurs"
         },
         {
+          "label": "النرويجية والمشاركة",
+          "blurb": "دروس نرويجية للكبار ممن لا تشملهم البرامج العامة.",
+          "href": "/tjenester/norsk"
+        },
+        {
+          "label": "مرشدون مسلمون",
+          "blurb": "زيارات مدرسية يلتقي فيها شباب مسلمون بالطلاب وجهاً لوجه.",
+          "href": "/tjenester/veivisere"
+        },
+        {
+          "label": "شباب النرويج المسلمون",
+          "blurb": "منظّمة الشباب في رابطة، يديرها الشباب ولهم.",
+          "href": "/tjenester/ungdom"
+        },
+        {
+          "label": "الأطفال والأسرة",
+          "blurb": "أنشطة وملتقيات للأطفال والأسر على مدار العام.",
+          "href": "/tjenester/barn-og-familie"
+        },
+        {
+          "label": "كن أسرة حاضنة",
+          "blurb": "معلومات وإرشاد للأسر التي تفكّر في الحضانة.",
+          "href": "/tjenester/fosterhjem"
+        },
+        {
           "label": "التعليم",
           "blurb": "العربية والقرآن ودورات للكبار",
           "href": "/undervisning"
@@ -1946,7 +1971,8 @@
     "groups": {
       "religious": "خدمات دينية",
       "guidance": "الإرشاد",
-      "teaching": "التعليم"
+      "teaching": "التعليم",
+      "community": "المجتمع والمشاركة"
     }
   },
   "aboutPage": {

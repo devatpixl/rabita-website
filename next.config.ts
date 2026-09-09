@@ -34,22 +34,19 @@ const nextConfig: NextConfig = {
         destination: '/:locale/tjenester/counselling',
         permanent: true,
       },
-      // Children-and-youth and the school-visit programme came off the
-      // services index on 2026-08-31 and off the site on 2026-09-05
-      // (client: keep pages only for the eight the index lists). Neither
-      // has a single successor page the way megling had counselling, so
-      // both land on the index, which is where someone following an old
-      // link can see what does exist.
+      // Children-and-youth came off the site on 2026-09-05 and came back on
+      // 2026-09-10 under a different slug: the copy the client supplied is
+      // "Barn- og familieaktiviteter", not children-and-youth, so the old
+      // link now has a successor to point at rather than the index.
       {
         source: '/:locale(no|en|ar)/tjenester/barn-og-ungdom',
-        destination: '/:locale/tjenester',
+        destination: '/:locale/tjenester/barn-og-familie',
         permanent: true,
       },
-      {
-        source: '/:locale(no|en|ar)/tjenester/veivisere',
-        destination: '/:locale/tjenester',
-        permanent: true,
-      },
+      // The veivisere redirect is GONE, not edited: /tjenester/veivisere is
+      // a real page again, and a redirect on that source would have shadowed
+      // it — the rule runs before routing, so the page would have been
+      // unreachable at its own address.
     ];
   },
 };

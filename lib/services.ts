@@ -13,6 +13,16 @@ export const SERVICE_KEYS = [
   'skole',
   'koran',
   'kurs',
+  // Restored 2026-09-10 (client), after the 2026-09-05 trim to eight. All
+  // five were already written in full — title, body, longBody, offerTitle,
+  // offerLede and a four-item offer, in all three locales — so this is a
+  // wiring job, not a writing one. See Tjenester.docx (client, 2026-09-07),
+  // which describes thirteen services where the trim had left eight.
+  'norsk',
+  'veivisere',
+  'ungdom',
+  'barn-og-familie',
+  'fosterhjem',
 ] as const;
 
 export type ServiceKey = (typeof SERVICE_KEYS)[number];
@@ -36,6 +46,17 @@ export const SERVICE_IMAGE: Record<ServiceKey, string> = {
   // October open-house event, so this is a new file rather than an
   // overwrite.
   kurs: '/photos/subj-kurs-calligraphy.webp',
+  // PROVISIONAL, all five (client, 2026-09-10: "let me get photos which i
+  // can, one by one we use"). Nothing here is wrong for its page, but two
+  // are stand-ins rather than pictures of the thing: `veivisere` has no
+  // photograph of a school visit and `norsk` none of a language class.
+  // `fosterhjem` is deliberately two adults — a foster-care page must not
+  // show identifiable children.
+  norsk: '/photos/svc-counsel.webp',
+  veivisere: '/photos/cong-volunteers.webp',
+  ungdom: '/photos/community/youth-table.webp',
+  'barn-og-familie': '/photos/brand-gateiftar.webp',
+  fosterhjem: '/photos/svc-services.webp',
 };
 
 // What the index shows — and, since 2026-09-05, the whole of what exists.
@@ -60,7 +81,9 @@ export const SERVICE_IMAGE: Record<ServiceKey, string> = {
 export const SERVICE_GROUPS = [
   { key: 'religious', items: ['nikah', 'janaza', 'shahada', 'hajj-umrah'] },
   { key: 'guidance', items: ['counselling'] },
-  { key: 'teaching', items: ['skole', 'koran', 'kurs'] },
+  { key: 'teaching', items: ['skole', 'koran', 'kurs', 'norsk'] },
+  // The community family, reinstated with the pages that retired it.
+  { key: 'community', items: ['veivisere', 'ungdom', 'barn-og-familie', 'fosterhjem'] },
 ] as const satisfies ReadonlyArray<{ key: string; items: readonly ServiceKey[] }>;
 
 // Where to hold the crop, for sources whose subject is not dead centre.
@@ -72,6 +95,9 @@ export const SERVICE_GROUPS = [
 // Anything absent from here is centred.
 export const SERVICE_FOCUS: Partial<Record<ServiceKey, string>> = {
   skole: '50% 32%',
+  // 1400x2365 is the tallest source on the site; a 4:3 frame keeps 44% of
+  // it, and the two faces sit above the middle.
+  fosterhjem: '50% 35%',
 };
 
 // Per-subject art direction for the band hero (components/page-band.tsx).
@@ -110,6 +136,14 @@ export const SERVICE_BAND: Record<
   // bottom, and the hands and the sheet sit across the middle of the frame,
   // so this one is centred rather than pulled up like its neighbours.
   kurs: { objectClass: 'object-[50%_50%]', tone: 'calm', mark: 'rosette' },
+  norsk: { objectClass: 'object-[50%_40%]', tone: 'calm', mark: 'rosette' },
+  veivisere: { objectClass: 'object-[50%_42%]', tone: 'warm', mark: 'arch' },
+  ungdom: { objectClass: 'object-[50%_45%]', tone: 'warm', mark: 'orbit' },
+  'barn-og-familie': { objectClass: 'object-[50%_45%]', tone: 'warm', mark: 'rosette' },
+  // mark: 'none' and tone: 'calm', the pair counselling carries. A page
+  // about taking someone else's child into your home is not a page to
+  // decorate.
+  fosterhjem: { objectClass: 'object-[50%_35%]', tone: 'calm', mark: 'none' },
 };
 
 // A SECOND photograph per service, for the body of the page.
@@ -179,12 +213,24 @@ export const SERVICE_STORY: Record<ServiceKey, { src: string; objectClass: strin
   // sheet. 1170x767 is 1.53:1 in a 3:2 frame, so it keeps nearly all of the
   // picture and only needs centring.
   kurs: { src: '/photos/subj-kurs-qalam.webp', objectClass: 'object-center' },
+  norsk: { src: '/photos/event-school-visit.webp', objectClass: 'object-center' },
+  // learn-classroom is four-fifths ceiling, so the crop sits almost on the
+  // floor of the frame to reach the room.
+  veivisere: { src: '/photos/learn-classroom.webp', objectClass: 'object-[50%_88%]' },
+  ungdom: { src: '/photos/community/bazaar-cakes.webp', objectClass: 'object-[50%_45%]' },
+  'barn-og-familie': { src: '/photos/community/iftar-sweets.webp', objectClass: 'object-center' },
+  // A table laid and waiting, which is the nearest honest picture of what
+  // this page asks for and shows nobody's child.
+  fosterhjem: { src: '/photos/community/iftar-table-set.webp', objectClass: 'object-center' },
 };
 
 // Which family a service belongs to, so the band can print a group label as
 // the second half of its kicker. Same eight as SERVICE_GROUPS, but as a
 // lookup rather than an ordering.
-export const SERVICE_GROUP_OF: Record<ServiceKey, 'religious' | 'guidance' | 'teaching'> = {
+export const SERVICE_GROUP_OF: Record<
+  ServiceKey,
+  'religious' | 'guidance' | 'teaching' | 'community'
+> = {
   nikah: 'religious',
   janaza: 'religious',
   shahada: 'religious',
@@ -193,6 +239,11 @@ export const SERVICE_GROUP_OF: Record<ServiceKey, 'religious' | 'guidance' | 'te
   skole: 'teaching',
   koran: 'teaching',
   kurs: 'teaching',
+  norsk: 'teaching',
+  veivisere: 'community',
+  ungdom: 'community',
+  'barn-og-familie': 'community',
+  fosterhjem: 'community',
 };
 
 // ─────────────────────────────────────────────────────────────────────────

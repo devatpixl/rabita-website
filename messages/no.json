@@ -140,6 +140,31 @@
           "href": "/tjenester/kurs"
         },
         {
+          "label": "Norsk og samfunnsdeltakelse",
+          "blurb": "Norskundervisning for voksne som faller utenfor de ordinære tilbudene.",
+          "href": "/tjenester/norsk"
+        },
+        {
+          "label": "Muslimske veivisere",
+          "blurb": "Skolebesøk der unge muslimer møter elever ansikt til ansikt.",
+          "href": "/tjenester/veivisere"
+        },
+        {
+          "label": "Norges Unge Muslimer",
+          "blurb": "Rabitas ungdomsorganisasjon, drevet av og for ungdom.",
+          "href": "/tjenester/ungdom"
+        },
+        {
+          "label": "Barn og familie",
+          "blurb": "Aktiviteter og møteplasser for barn og familier gjennom hele året.",
+          "href": "/tjenester/barn-og-familie"
+        },
+        {
+          "label": "Bli fosterfamilie",
+          "blurb": "Informasjon og veiledning for familier som vurderer å bli fosterhjem.",
+          "href": "/tjenester/fosterhjem"
+        },
+        {
           "label": "Undervisning",
           "blurb": "Arabisk, Koran og kurs for voksne",
           "href": "/undervisning"
@@ -1946,7 +1971,8 @@
     "groups": {
       "religious": "Religiøse tjenester",
       "guidance": "Veiledning",
-      "teaching": "Undervisning"
+      "teaching": "Undervisning",
+      "community": "Fellesskap og samfunn"
     }
   },
   "aboutPage": {

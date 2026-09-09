@@ -140,6 +140,31 @@
           "href": "/tjenester/kurs"
         },
         {
+          "label": "Norwegian and taking part",
+          "blurb": "Norwegian classes for adults who fall outside the ordinary provision.",
+          "href": "/tjenester/norsk"
+        },
+        {
+          "label": "Muslim guides",
+          "blurb": "School visits where young Muslims meet pupils face to face.",
+          "href": "/tjenester/veivisere"
+        },
+        {
+          "label": "Norges Unge Muslimer",
+          "blurb": "Rabita’s youth organisation, run by and for young people.",
+          "href": "/tjenester/ungdom"
+        },
+        {
+          "label": "Children and family",
+          "blurb": "Activities and places to meet for children and families, all year round.",
+          "href": "/tjenester/barn-og-familie"
+        },
+        {
+          "label": "Become a foster family",
+          "blurb": "Information and guidance for families considering fostering.",
+          "href": "/tjenester/fosterhjem"
+        },
+        {
           "label": "Teaching",
           "blurb": "Arabic, Qur'an and adult courses",
           "href": "/undervisning"
@@ -1946,7 +1971,8 @@
     "groups": {
       "religious": "Religious services",
       "guidance": "Guidance",
-      "teaching": "Teaching"
+      "teaching": "Teaching",
+      "community": "Community and society"
     }
   },
   "aboutPage": {
