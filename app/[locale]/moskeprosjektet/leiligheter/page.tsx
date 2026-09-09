@@ -224,12 +224,22 @@ export default async function ApartmentsPage({
                   <rect width="100" height="100" fill="url(#loc-dots)" />
                 </svg>
                 <div className="relative h-[clamp(13rem,30vh,19rem)] overflow-hidden rounded-b-[14px] rounded-t-[11rem] ring-1 ring-paper/15">
+                  {/* The building itself, not a street it could be any
+                     street on (client, 2026-09-09). calmeyers-street.webp was
+                     a generic Oslo block with no mosque in it — and at
+                     399x317 it was under half the pixels this arch needs.
+                     This is the architect's dusk render at 2000px: the
+                     lattice lit from within, at the pavement, with people on
+                     it — which is what a section about the location is
+                     claiming. */}
                   <Image
-                    src="/photos/calmeyers-street.webp"
+                    src="/photos/proj-facade-evening.webp"
                     alt=""
                     fill
                     sizes="(min-width: 768px) 24rem, 92vw"
-                    className="object-cover"
+                    // Low, so the arch holds the doorways and the street
+                    // rather than filling with sky.
+                    className="object-cover object-[50%_62%]"
                   />
                 </div>
               </div>
