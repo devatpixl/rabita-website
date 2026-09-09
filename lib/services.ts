@@ -148,12 +148,29 @@ export const SERVICE_BAND: Record<
 //                photograph is a citation rather than a decoration
 export const SERVICE_STORY: Record<ServiceKey, { src: string; objectClass: string }> = {
   nikah: { src: '/photos/svc-prayer.webp', objectClass: 'object-center' },
-  janaza: { src: '/photos/svc-services.webp', objectClass: 'object-[42%_62%]' },
+  // The janaza prayer itself (client, 2026-09-10). The embrace that stood
+  // here is a fine photograph, but a reader who lands on this page is
+  // usually looking for what Rabita actually does when someone dies, and
+  // the answer is this: the congregation in rows, facing the qibla wall.
+  // 1086x1448 in a 3:2 frame shows half the height; 45% holds the bowed
+  // heads and the top of the timber wall.
+  janaza: { src: '/photos/svc-janaza-prayer.webp', objectClass: 'object-[50%_45%]' },
   shahada: { src: '/photos/svc-gathering.webp', objectClass: 'object-[50%_45%]' },
   counselling: { src: '/photos/community/womens-circle.webp', objectClass: 'object-[50%_45%]' },
   'hajj-umrah': { src: '/photos/prayer-congregation.webp', objectClass: 'object-[50%_55%]' },
-  skole: { src: '/photos/event-workshop.webp', objectClass: 'object-[50%_45%]' },
-  koran: { src: '/photos/learn-school.webp', objectClass: 'object-[50%_60%]' },
+  // The source was saved on its side and rendered on its side (client,
+  // 2026-09-10: "why is this image rotated?"). The turn is baked into the
+  // file now, so the news-events card that also uses it is fixed with it.
+  // Landscape at 1200x675, so the frame keeps the full height and the Y in
+  // the old crop no longer had anything to do.
+  skole: { src: '/photos/event-workshop.webp', objectClass: 'object-center' },
+  // Not learn-school.webp (client, 2026-09-10: "why zoomed"). That file is a
+  // 2200x1000 panorama of the mushaf on its rihal; a 3:2 frame keeps 68% of
+  // its width, which at 430px wide reads as a close-up of a book rather than
+  // as a photograph. It was also the hero of /undervisning, so the same
+  // picture appeared twice in the teaching pages. A room of people learning
+  // suits a small landscape frame, and it is what the service is.
+  koran: { src: '/photos/learning-lecture.webp', objectClass: 'object-[50%_45%]' },
   kurs: { src: '/photos/svc-wudu.webp', objectClass: 'object-center' },
 };
 
