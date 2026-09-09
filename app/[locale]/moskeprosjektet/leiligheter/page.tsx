@@ -391,7 +391,7 @@ export default async function ApartmentsPage({
 
       <section className="bg-paper-2 py-section-md">
         <SectionBody>
-          <ProjectGallery only={['aerial', 'garden', 'facadeDay', 'facadeNight']} />
+          <ProjectGallery only={['roofTerrace', 'garden', 'minaret', 'facadeEvening']} />
         </SectionBody>
       </section>
 

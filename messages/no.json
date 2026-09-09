@@ -1214,59 +1214,53 @@
       "next": "Neste bilde",
       "goto": "Gå til bilde {n}",
       "items": {
-        "aerial": {
-          "tag": "Ovenfra",
-          "title": "Takhagen over Calmeyers gate",
-          "caption": "Kvartalet sett ovenfra: takterrasse med beplantning, den lille minareten og det gule takoppbygget over trappen.",
-          "alt": "Bygget sett ovenfra, takhage og minaret"
-        },
-        "facadeDay": {
-          "tag": "Fasaden",
-          "title": "Mursteinsgitteret mot gata",
-          "caption": "Diamantmønsteret i tegl lar lyset inn i bønnesalene og gjør bygget gjenkjennelig fra begge ender av gata.",
-          "alt": "Fasaden i dagslys, gitter i tegl og glass"
-        },
-        "facadeNight": {
-          "tag": "Kveld",
+        "facadeEvening": {
+          "tag": "Fasaden om kvelden",
           "title": "Når lyset kommer innenfra",
-          "caption": "Om kvelden snus bildet: salene lyser ut gjennom gitteret, og gata får en lykt.",
-          "alt": "Fasaden om kvelden, opplyst innenfra"
+          "caption": "Om kvelden snur bildet: salene lyser ut gjennom teglgitteret, og gata får en lykt.",
+          "alt": "Fasaden i skumringen, med lys gjennom teglgitteret"
         },
-        "mainHall": {
-          "tag": "Hovedsalen",
-          "title": "Bønnerom over tre etasjer",
-          "caption": "Under lyskronen, med mihraben innerst. Plass til 2 000 menn når salen er full.",
-          "alt": "Hovedbønnesalen med lyskrone og mihrab"
-        },
-        "womensHall": {
-          "tag": "Kvinnesalen",
-          "title": "Egen sal, egen inngang",
-          "caption": "Plass til 500 kvinner, opp fra 100 i dag, med utsyn ned i hovedrommet.",
-          "alt": "Kvinnenes bønnesal, grønt teppe under en opplyst vegg"
-        },
-        "qibla": {
-          "tag": "Qibla-veggen",
-          "title": "Tre, gull og marmor",
-          "caption": "Utskjært tre og gull, opplyst gjennom marmoren bak. Veggen alle vender seg mot.",
-          "alt": "Qibla-veggen sett ovenfra"
-        },
-        "minaret": {
-          "tag": "Minareten",
-          "title": "Et tegn over takene",
-          "caption": "Lav og slank, tegnet for et boligkvartal i Oslo – et merke, ikke et tårn.",
-          "alt": "Minareten mot kveldshimmelen"
+        "foyer": {
+          "tag": "Foajeen",
+          "title": "Trappen i midten",
+          "caption": "Du kommer inn i et rom med dagslys ovenfra, biblioteket til siden og trappen som binder etasjene sammen.",
+          "alt": "Foajeen med spiraltrapp og bibliotekskranke"
         },
         "garden": {
           "tag": "Hagen",
-          "title": "Et grønt rom i byen",
-          "caption": "Takhagen gir skolen og ungdomsklubben et uterom midt i sentrum.",
-          "alt": "Takhagen med benker og beplantning"
+          "title": "Gårdsrommet med fontenen",
+          "caption": "Et skjermet uterom midt i kvartalet: benker, blomster og en fontene med åttekantet stjerne.",
+          "alt": "Gårdshagen sett ovenfra, med fontene og blomsterbed"
         },
-        "wudu": {
-          "tag": "Wudu",
-          "title": "Rommet før bønnen",
-          "caption": "Lyse vaskerom for kvinner og menn, rett ved inngangen til salene.",
-          "alt": "Wudu-rommet i lys stein"
+        "mainHall": {
+          "tag": "Hovedmoskeen",
+          "title": "Bønnesalen",
+          "caption": "Rader i grønt under galleriet, med lysringene i taket. Salen alle samles i på fredager.",
+          "alt": "Hovedbønnesalen med grønt teppe og galleriet over"
+        },
+        "minaret": {
+          "tag": "Minareten",
+          "title": "Minareten sett fra leilighetene",
+          "caption": "Den lille minareten står i gårdsrommet, med balkongene og blomsterkassene rundt.",
+          "alt": "Minareten sett fra en balkong i leilighetene"
+        },
+        "youthClub": {
+          "tag": "Ungdomsklubben",
+          "title": "Rommet ungdommene får",
+          "caption": "Fotballspill, sjakk, skjermer og plass til lekser — med gata i de rutete vinduene.",
+          "alt": "Ungdomsklubben med fotballspill, sjakk og datamaskiner"
+        },
+        "meetingRoom": {
+          "tag": "Møterommet",
+          "title": "Der arbeidet planlegges",
+          "caption": "Møterom for styret, for kurs og for utleie, med kontorene innenfor glassveggen.",
+          "alt": "Møterommet med langbord og kontorer bak glassveggen"
+        },
+        "roofTerrace": {
+          "tag": "Takterrassen",
+          "title": "Takterrassen over byen",
+          "caption": "Bord under gule seil, planter og utsikt utover takene. Uterommet for skolen og klubben.",
+          "alt": "Takterrassen med gule solseil og bord"
         }
       }
     },

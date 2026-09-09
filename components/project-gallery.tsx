@@ -12,16 +12,19 @@ import { cn } from '@/lib/cn';
 // Arrows bottom-right, a thumbnail strip underneath, keyboard arrows and
 // swipe on touch. Cross-fade between plates; nothing else moves.
 
+// The eight architect renders, in the client's order (2026-09-09). They
+// replace the nine earlier frames, which were a mix of the same building
+// shot from further away; these are the drawings the project is actually
+// presented with.
 const SLIDES = [
-  { key: 'aerial', src: '/photos/project-aerial.webp', pos: '50% 40%' },
-  { key: 'facadeDay', src: '/photos/band-facade.webp', pos: '50% 60%' },
-  { key: 'facadeNight', src: '/photos/story-facade-night.webp', pos: '50% 50%' },
-  { key: 'mainHall', src: '/photos/room-main-hall.webp', pos: '50% 50%' },
-  { key: 'womensHall', src: '/photos/room-womens-hall.webp', pos: '50% 50%' },
-  { key: 'qibla', src: '/photos/zoom-qibla-wall.webp', pos: '50% 50%' },
-  { key: 'minaret', src: '/photos/zoom-minaret.webp', pos: '50% 40%' },
-  { key: 'garden', src: '/photos/zoom-garden.webp', pos: '50% 50%' },
-  { key: 'wudu', src: '/photos/zoom-wudu.webp', pos: '50% 50%' },
+  { key: 'facadeEvening', src: '/photos/proj-facade-evening.webp', pos: '50% 50%' },
+  { key: 'foyer', src: '/photos/proj-foyer.webp', pos: '50% 50%' },
+  { key: 'garden', src: '/photos/proj-garden.webp', pos: '50% 50%' },
+  { key: 'mainHall', src: '/photos/proj-main-hall.webp', pos: '50% 50%' },
+  { key: 'minaret', src: '/photos/proj-minaret-apartments.webp', pos: '50% 50%' },
+  { key: 'youthClub', src: '/photos/proj-youth-club.webp', pos: '50% 50%' },
+  { key: 'meetingRoom', src: '/photos/proj-meeting-room.webp', pos: '50% 50%' },
+  { key: 'roofTerrace', src: '/photos/proj-roof-terrace.webp', pos: '50% 50%' },
 ] as const;
 export type SlideKey = (typeof SLIDES)[number]['key'];
 

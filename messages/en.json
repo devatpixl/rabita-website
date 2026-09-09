@@ -1214,59 +1214,53 @@
       "next": "Next picture",
       "goto": "Go to picture {n}",
       "items": {
-        "aerial": {
-          "tag": "From above",
-          "title": "The roof garden over Calmeyers gate",
-          "caption": "The block seen from above: a planted roof terrace, the small minaret and the yellow stair housing.",
-          "alt": "The building from above, roof garden and minaret"
-        },
-        "facadeDay": {
-          "tag": "The facade",
-          "title": "The brick lattice on the street",
-          "caption": "The diamond pattern in brick lets light into the prayer halls and makes the building recognisable from either end of the street.",
-          "alt": "The facade in daylight, brick and glass lattice"
-        },
-        "facadeNight": {
-          "tag": "Evening",
+        "facadeEvening": {
+          "tag": "The facade at dusk",
           "title": "When the light comes from inside",
-          "caption": "In the evening the picture reverses: the halls glow out through the lattice and the street gets a lantern.",
-          "alt": "The facade at night, lit from within"
+          "caption": "In the evening the picture reverses: the halls glow out through the brick lattice and the street gets a lantern.",
+          "alt": "The facade at dusk, light coming through the brick lattice"
         },
-        "mainHall": {
-          "tag": "Main hall",
-          "title": "Prayer space over three floors",
-          "caption": "Under the chandelier, with the mihrab at the far end. Room for 2,000 men when the hall is full.",
-          "alt": "The main prayer hall with chandelier and mihrab"
-        },
-        "womensHall": {
-          "tag": "Women's hall",
-          "title": "Its own hall, its own entrance",
-          "caption": "Room for 500 women, up from 100 today, looking down into the main hall.",
-          "alt": "The women's prayer hall, green carpet under a lit wall"
-        },
-        "qibla": {
-          "tag": "Qibla wall",
-          "title": "Wood, gold and marble",
-          "caption": "Carved wood and gold, lit through the marble behind. The wall everyone faces.",
-          "alt": "The qibla wall from above"
-        },
-        "minaret": {
-          "tag": "The minaret",
-          "title": "A sign above the roofs",
-          "caption": "Low and slender, drawn for a residential block in Oslo — a mark, not a tower.",
-          "alt": "The minaret against the evening sky"
+        "foyer": {
+          "tag": "The foyer",
+          "title": "The stair in the middle",
+          "caption": "You arrive in a room lit from above, the library to one side and the stair tying the floors together.",
+          "alt": "The foyer with its spiral stair and library counter"
         },
         "garden": {
           "tag": "The garden",
-          "title": "A green room in the city",
-          "caption": "The roof garden gives the school and youth club an outdoor space in the centre.",
-          "alt": "The roof garden with benches and planting"
+          "title": "The courtyard and its fountain",
+          "caption": "A sheltered outdoor room in the middle of the block: benches, flowers, and a fountain with an eight-point star.",
+          "alt": "The courtyard garden from above, fountain and flower beds"
         },
-        "wudu": {
-          "tag": "Wudu",
-          "title": "The room before prayer",
-          "caption": "Bright ablution rooms for women and men, right by the entrance to the halls.",
-          "alt": "The wudu room in pale stone"
+        "mainHall": {
+          "tag": "The main hall",
+          "title": "The prayer hall",
+          "caption": "Rows in green beneath the gallery, light rings overhead. The hall everyone gathers in on Fridays.",
+          "alt": "The main prayer hall, green carpet and the gallery above"
+        },
+        "minaret": {
+          "tag": "The minaret",
+          "title": "The minaret from the flats",
+          "caption": "The small minaret stands in the courtyard, balconies and flower boxes around it.",
+          "alt": "The minaret seen from a balcony in the apartments"
+        },
+        "youthClub": {
+          "tag": "The youth club",
+          "title": "A room of their own",
+          "caption": "Table football, chess, screens and space for homework — with the street framed in the diamond windows.",
+          "alt": "The youth club with table football, chess and computers"
+        },
+        "meetingRoom": {
+          "tag": "The meeting room",
+          "title": "Where the work is planned",
+          "caption": "A room for the board, for courses and for hire, with the offices behind the glass wall.",
+          "alt": "The meeting room, long table and offices behind glass"
+        },
+        "roofTerrace": {
+          "tag": "The roof terrace",
+          "title": "The terrace above the city",
+          "caption": "Tables under yellow canopies, planting, and a view out across the roofs. The outdoor room for the school and the club.",
+          "alt": "The roof terrace with yellow canopies and tables"
         }
       }
     },
