@@ -47,14 +47,21 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
               )}
               style={{ transitionDelay: active ? `${180 + i * 90}ms` : '0ms' }}
             >
+              {/* gold-deep, not gold (client, 2026-09-09: the line was hard
+                 to follow). Most of a leader runs over the dusk ground but
+                 its last stretch crosses the building's white walls, so the
+                 colour has to work against both: #9B7F4A is darker than the
+                 drawing and lighter than the ground, where plain gold washed
+                 out on the walls and a truly dark line would have vanished
+                 on the ground instead. */}
               <line
                 x1={m.x}
                 y1={m.y}
                 x2={m.lx}
                 y2={m.ly}
-                stroke="#C0A165"
-                strokeWidth={1}
-                strokeOpacity={0.55}
+                stroke="#9B7F4A"
+                strokeWidth={1.25}
+                strokeOpacity={0.95}
                 vectorEffect="non-scaling-stroke"
               />
               <circle
@@ -62,12 +69,12 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
                 cy={m.y}
                 r={3}
                 fill="none"
-                stroke="#C0A165"
-                strokeWidth={1}
+                stroke="#9B7F4A"
+                strokeWidth={1.25}
                 vectorEffect="non-scaling-stroke"
                 style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
               />
-              <circle cx={m.x} cy={m.y} r={1} fill="#C0A165" vectorEffect="non-scaling-stroke" />
+              <circle cx={m.x} cy={m.y} r={1} fill="#9B7F4A" vectorEffect="non-scaling-stroke" />
             </g>
           ))}
         </svg>
