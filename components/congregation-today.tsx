@@ -67,7 +67,15 @@ const PHOTOS: Record<SlideKey, { src: string; alt: string; width: number; height
     width: 1200,
     height: 1600,
   },
-  mediation: { src: '/photos/svc-counsel.webp', alt: 'Two people in conversation with an imam mediating', width: 1600, height: 1000 },
+  mediation: {
+    src: '/photos/community/mother-child.webp',
+    alt: 'A woman carrying a child on her back at a Rabita gathering, both smiling',
+    // 3:4 like the other portrait slides, not the 8:5 the old frame
+    // declared — this card is portrait and a landscape ratio only made
+    // next/image reserve the wrong box before the picture arrived.
+    width: 1200,
+    height: 1600,
+  },
   // Not over bazaar-child.webp: lib/services.ts still points at that
   // frame, and overwriting it would have changed a second place.
   youth: {
