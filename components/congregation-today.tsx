@@ -98,9 +98,11 @@ const PHOTOS: Record<SlideKey, { src: string; alt: string; width: number; height
   // its school entry to learning-class.webp, so the old one is now unused.
   youth: {
     src: '/photos/community/youth-table.webp',
-    alt: 'Children around tables at a Rabita youth session, the group\u2019s own posters on the wall behind them',
-    width: 1200,
-    height: 1600,
+    alt: 'Young people around a table at a Rabita youth session, sharing a meal',
+    // 900x1200: the crop is 799px wide in the source, so a larger file would
+    // be invented pixels. The card never renders above 400.
+    width: 900,
+    height: 1200,
   },
 };
 
