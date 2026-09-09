@@ -116,9 +116,27 @@ export async function ProjectOverview() {
           </p>
           <Link
             href={`/${locale}/moskeprosjektet`}
-            className="group mt-8 inline-flex min-h-11 items-center gap-3 text-[15px] font-semibold text-paper transition-colors hover:text-gold"
+            className="group mt-8 hidden min-h-11 items-center gap-3 text-[15px] font-semibold text-paper transition-colors hover:text-gold md:inline-flex"
           >
             <span className="border-b border-gold pb-0.5">{t('cta')}</span>
+            <span
+              aria-hidden
+              className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
+            >
+              &rarr;
+            </span>
+          </Link>
+          {/* Phone: a full-width pill instead of an underlined link — a real
+             tap target rather than a 15px word. OUTLINED, not filled: the
+             campaign meter sits immediately below this section with a filled
+             gold "Gi en gave", and two filled pills one after the other would
+             leave a reader unsure which is the ask. This one navigates; that
+             one gives. */}
+          <Link
+            href={`/${locale}/moskeprosjektet`}
+            className="group mt-8 flex min-h-12 w-full items-center justify-center gap-3 rounded-full text-[15px] font-semibold text-paper ring-1 ring-paper/30 transition-colors hover:bg-paper/5 hover:ring-gold md:hidden"
+          >
+            {t('cta')}
             <span
               aria-hidden
               className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
@@ -129,32 +147,48 @@ export async function ProjectOverview() {
         </div>
 
         {/* ── the ledger, phone ──────────────────────────────────────────
-           Untouched (client, 2026-08-31: "dont change on phone"). Four
-           figures in two columns with plain rules, held to the headline's
-           measure. The cartouche below replaces it from md up. */}
-        <dl className="mt-14 grid max-w-xl grid-cols-2 border-t border-paper/20 sm:grid-cols-4 md:mt-16 md:hidden">
-          {figures.map((f, i) => (
-            <div
-              key={f.label}
-              className={[
-                'py-5 pe-4 lg:py-6',
-                i % 2 === 1 ? 'border-s border-paper/15 ps-4' : '',
-                i >= 2 ? 'border-t border-paper/15 sm:border-t-0' : '',
-                i === 2 ? 'sm:border-s sm:ps-4' : '',
-              ].join(' ')}
-            >
-              <dd className="flex items-baseline gap-1.5 font-serif text-[clamp(1.75rem,3vw,2.5rem)] leading-none tabular-nums text-paper">
-                <span>{f.value}</span>
-                {f.unit && (
-                  <span className="font-mono text-[11px] tracking-[0.08em] text-paper/55">{f.unit}</span>
-                )}
-              </dd>
-              <dt className="mt-2.5 whitespace-nowrap font-mono text-[0.625rem] uppercase tracking-[0.14em] text-paper/55">
-                {f.label}
-              </dt>
-            </div>
-          ))}
-        </dl>
+           Rebuilt 2026-09-10 (client). It was four figures in a bare 2x2 of
+           hairline rules — the desktop cartouche with its frame and its
+           diamonds taken away, which left the plainest thing on the page
+           sitting under the most considered.
+
+           It takes the card technique from the campaign meter below, but not
+           its marks: the meter's are in rounded tiles on paper, these are in
+           DIAMONDS on dusk, which is this section's own figure language two
+           breakpoints up. The two sections are adjacent, so they have to be
+           relatives rather than twins.
+
+           The gold rule under each label is the cartouche's too. */}
+        <div className="mt-10 md:hidden">
+          <dl className="grid grid-cols-2 gap-3">
+            {figures.map((f) => (
+              <div key={f.label} className="rounded-2xl bg-paper/[0.045] p-4 ring-1 ring-paper/[0.12]">
+                {/* The frame is a rotated square; the icon is not, so it
+                   stays upright inside it. */}
+                <span className="relative grid h-9 w-9 place-items-center">
+                  <span aria-hidden className="absolute inset-0.5 rotate-45 border border-gold/45" />
+                  <FigureIcon name={f.icon} className="relative h-4 w-4 text-gold/85" />
+                </span>
+                <dd className="mt-3.5 flex items-baseline gap-1.5 font-serif text-[clamp(1.5rem,6.2vw,1.9rem)] leading-none tabular-nums text-paper">
+                  <span>{f.value}</span>
+                  {f.unit && (
+                    <span className="font-mono text-[10px] tracking-[0.08em] text-paper/55">{f.unit}</span>
+                  )}
+                </dd>
+                <dt className="mt-2 font-mono text-[0.5625rem] uppercase leading-[1.5] tracking-[0.1em] text-paper/55">
+                  {f.label}
+                </dt>
+                <span aria-hidden className="mt-2.5 block h-px w-6 bg-gold/70" />
+              </div>
+            ))}
+          </dl>
+          {/* The architect, who on a phone was credited nowhere: the caption
+             beside the plate is md-and-up, and a plate this size deserves
+             its line. */}
+          <p className="mt-5 font-mono text-[10px] uppercase leading-relaxed tracking-[0.14em] text-paper/40">
+            {t('credit')} · {CAMPAIGN.architect}
+          </p>
+        </div>
 
         {/* ── the ledger, desktop ────────────────────────────────────────
            The same four figures, set as a cartouche (client reference,
