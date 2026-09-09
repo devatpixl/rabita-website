@@ -103,7 +103,17 @@ export async function ProjectOverview() {
               em: (chunks) => <Accent surface="dusk">{chunks}</Accent>,
             })}
           </h2>
-          <p className="mt-6 max-w-[44ch] text-body text-paper/80">{t('briefShort')}</p>
+          {/* {places} rather than a typed "2 500": the figure is derived
+             two lines down in the ledger, and a number written twice is a
+             number that drifts. 50ch, not 44 — this paragraph is four times
+             the length of the one it replaced. */}
+          <p className="mt-6 max-w-[50ch] text-body text-paper/80">
+            {t('briefShort', {
+              places: nf.format(
+                CAMPAIGN.mensPrayerCapacityAfter + CAMPAIGN.womensPrayerCapacityAfter,
+              ),
+            })}
+          </p>
           <Link
             href={`/${locale}/moskeprosjektet`}
             className="group mt-8 inline-flex min-h-11 items-center gap-3 text-[15px] font-semibold text-paper transition-colors hover:text-gold"
