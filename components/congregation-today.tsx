@@ -38,12 +38,15 @@ const SLIDE_KEYS = [
   // nikah is a handful of families a year, and a wedding is a narrower first
   // impression of what the mosque does than a classroom.
   'education',
-  'nikah',
+  // Conversations takes second place and nikah takes its old seventh
+  // (client, 2026-09-09) — a swap rather than an insert, so the run stays
+  // eight slides and nothing else shifts position.
+  'counselling',
   'janaza',
   'hajj-umrah',
   'shahada',
   'youth',
-  'counselling',
+  'nikah',
   'mediation',
 ] as const;
 type SlideKey = (typeof SLIDE_KEYS)[number];
