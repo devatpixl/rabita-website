@@ -30,7 +30,12 @@ export const SERVICE_IMAGE: Record<ServiceKey, string> = {
   // bazaar — a nice photograph, but not a school.
   skole: '/photos/learning-class.webp',
   koran: '/photos/community/quran-carpet.webp',
-  kurs: '/photos/event-lecture-hall.webp',
+  // A calligrapher at work, client-supplied 2026-09-10. What stood here was
+  // event-lecture-hall.webp — children singing on a stage — under a card
+  // headed "Kalligrafi og geometri". The photograph is still in use on the
+  // October open-house event, so this is a new file rather than an
+  // overwrite.
+  kurs: '/photos/subj-kurs-calligraphy.webp',
 };
 
 // What the index shows — and, since 2026-09-05, the whole of what exists.
@@ -101,7 +106,10 @@ export const SERVICE_BAND: Record<
   // up to keep her face — the same reason SERVICE_FOCUS carries it.
   skole: { objectClass: 'object-[50%_26%] md:object-[50%_30%]', tone: 'calm', mark: 'rosette' },
   koran: { objectClass: 'object-[50%_45%]', tone: 'calm', mark: 'rosette' },
-  kurs: { objectClass: 'object-[50%_40%]', tone: 'calm', mark: 'rosette' },
+  // 1170x767 (1.53:1) in a ~1.7:1 panel loses about a tenth off the top and
+  // bottom, and the hands and the sheet sit across the middle of the frame,
+  // so this one is centred rather than pulled up like its neighbours.
+  kurs: { objectClass: 'object-[50%_50%]', tone: 'calm', mark: 'rosette' },
 };
 
 // A SECOND photograph per service, for the body of the page.
