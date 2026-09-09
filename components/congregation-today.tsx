@@ -33,8 +33,12 @@ import { cn } from '@/lib/cn';
 // Order alternates the interior renders (nikah / janaza / shahada /
 // counselling) with photographs, so no two look-alike cards sit together.
 const SLIDE_KEYS = [
-  'nikah',
+  // Learning opens the carousel (client, 2026-09-09). It is the service the
+  // most people here actually touch — 400+ pupils every weekend — where a
+  // nikah is a handful of families a year, and a wedding is a narrower first
+  // impression of what the mosque does than a classroom.
   'education',
+  'nikah',
   'janaza',
   'hajj-umrah',
   'shahada',
