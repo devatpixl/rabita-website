@@ -23,6 +23,17 @@ const CHAPTERS: {
   key: ChapterKey;
   photo: string;
   photoAlt: string;
+  /**
+   * Where the phone crop should sit, below md only.
+   *
+   * The desktop frame is 4:5 and the sources are 4:5 or taller, so it shows
+   * essentially the whole picture. The phone frame is 16/11, which of a 4:5
+   * source keeps only 55% of the height — centred by default, and on a
+   * portrait photograph of people standing up that band lands on their
+   * chests. A per-photo value, because "where the faces are" is a fact about
+   * each picture and not something one number can cover.
+   */
+  mobileCrop?: string;
 }[] = [
   {
     key: 'history',
@@ -32,6 +43,11 @@ const CHAPTERS: {
     // has confirmed. The client can add the name.
     photoAlt:
       'A guest in conversation with a Rabita representative in front of the mosque project banner',
+    // Both faces sit between 9% and 26% down the 1500px frame. A centred
+    // 16/11 crop starts at 22.5% and cuts them off at the eyes (client,
+    // 2026-09-10). 12% puts the band at 5.4-60.4%, which clears the
+    // ceiling, holds both heads and still reads the banner behind them.
+    mobileCrop: 'max-md:[object-position:50%_12%]',
   },
   {
     key: 'family',
@@ -128,7 +144,15 @@ export function ImpactStory() {
   const activeIndex = CHAPTERS.findIndex((c) => c.key === active);
 
   return (
-    <section id="menigheten-forteller" className="bg-paper-2 pb-section-sm">
+    /* pt-14 on phones: "Dette er Rabita" now ends on a full-bleed
+       photograph that is cut off by the section boundary, and this section
+       opens with a photograph of its own pinned at the very top — two
+       pictures butted together with nothing between them (client,
+       2026-09-10: "why is this breaking? the top"). Before the scroll ran on
+       phones the band below that card supplied the gap. Desktop needs
+       nothing: the story photo is centred in a 100svh column there, so it
+       already has air above it. */
+    <section id="menigheten-forteller" className="bg-paper-2 pt-14 pb-section-sm md:pt-0">
       <SectionBody>
         <div className="md:grid md:gap-10 md:grid-cols-12">
           {/* Sticky photo column */}
@@ -163,7 +187,7 @@ export function ImpactStory() {
                       alt={c.photoAlt}
                       fill
                       sizes="(min-width: 768px) 50vw, 90vw"
-                      className="object-cover editorial-photo"
+                      className={`object-cover editorial-photo ${c.mobileCrop ?? ''}`}
                     />
                   </div>
                 ))}
