@@ -68,7 +68,14 @@ const PHOTOS: Record<SlideKey, { src: string; alt: string; width: number; height
     height: 1600,
   },
   mediation: { src: '/photos/svc-counsel.webp', alt: 'Two people in conversation with an imam mediating', width: 1600, height: 1000 },
-  youth: { src: '/photos/community/bazaar-child.webp', alt: 'A child at a Rabita community bazaar', width: 1125, height: 1500 },
+  // Not over bazaar-child.webp: lib/services.ts still points at that
+  // frame, and overwriting it would have changed a second place.
+  youth: {
+    src: '/photos/community/youth-table.webp',
+    alt: 'Children around tables at a Rabita youth session, the group\u2019s own posters on the wall behind them',
+    width: 1200,
+    height: 1600,
+  },
 };
 
 // Where each card leads.
