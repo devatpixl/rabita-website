@@ -30,8 +30,10 @@ import { cn } from '@/lib/cn';
 // The eight services the client listed (2026-08-30): this section is
 // "what Rabita is for", so it shows the services, one card each, and each
 // card hands off to the service's own page.
-// Order alternates the interior renders (nikah / janaza / shahada /
-// counselling) with photographs, so no two look-alike cards sit together.
+// The order was originally set to alternate the interior renders (nikah /
+// janaza / shahada / counselling) with photographs so no two look-alike
+// cards sat together. All eight now carry photographs, so that rule no
+// longer decides anything; the order is the client's.
 const SLIDE_KEYS = [
   // Learning opens the carousel (client, 2026-09-09). It is the service the
   // most people here actually touch — 400+ pupils every weekend — where a
@@ -42,12 +44,14 @@ const SLIDE_KEYS = [
   // (client, 2026-09-09) — a swap rather than an insert, so the run stays
   // eight slides and nothing else shifts position.
   'counselling',
-  'janaza',
+  // Mediation and janaza traded places (client, 2026-09-10). Same kind of
+  // swap: eight slides, nothing else moves.
+  'mediation',
   'hajj-umrah',
   'shahada',
   'youth',
   'nikah',
-  'mediation',
+  'janaza',
 ] as const;
 type SlideKey = (typeof SLIDE_KEYS)[number];
 const TOTAL = SLIDE_KEYS.length;
