@@ -2573,6 +2573,12 @@
     "eyebrow": "Etasje for etasje",
     "heading": "Bygget, nedenfra og opp.",
     "altFinal": "Arkitektens snitt av det ferdige bygget, med takterrasse, kuppel og minaret",
+    "rooms": {
+      "garderober": "Garderober",
+      "prayerMen": "Bønnerom menn",
+      "wuduMen": "Wudu menn",
+      "sportsHall": "Flerbrukshall"
+    },
     "floors": {
       "lower": "Underetasjen · bønnerom og flerbrukshall",
       "first": "1. etasje · hovedmoskeen",

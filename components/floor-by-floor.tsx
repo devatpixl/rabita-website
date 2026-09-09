@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/cn';
+import { FloorMarkers } from './floor-markers';
 
 // The building floor by floor, from the architect's own labelled cutaways
 // (Fasiliteter.pdf, client 2026-09-03), shown bottom to top: the lower-floor
@@ -140,6 +141,11 @@ export function FloorByFloor() {
                   i === step ? 'opacity-100' : 'opacity-0',
                 )}
               />
+            ))}
+
+            {/* Our own labels, over the drawing that is currently lit. */}
+            {KEYS.map((k, i) => (
+              <FloorMarkers key={k} floorKey={k} active={i === step} />
             ))}
           </div>
         </div>

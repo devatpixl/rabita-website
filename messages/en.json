@@ -2573,6 +2573,12 @@
     "eyebrow": "Floor by floor",
     "heading": "The building, from the ground up.",
     "altFinal": "Architect's cutaway of the finished building, with the roof terrace, dome and minaret",
+    "rooms": {
+      "garderober": "Changing rooms",
+      "prayerMen": "Men's prayer hall",
+      "wuduMen": "Men's ablutions",
+      "sportsHall": "Sports hall"
+    },
     "floors": {
       "lower": "Lower floor · prayer hall and sports hall",
       "first": "1st floor · the main mosque",
