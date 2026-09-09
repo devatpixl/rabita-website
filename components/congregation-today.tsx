@@ -309,7 +309,13 @@ export function CongregationToday() {
             <h2
               className="display-opsz font-serif text-ink text-balance"
               style={{
-                fontSize: 'clamp(28px, 3vw, 44px)',
+                // clamp(2.25rem, 5vw, 4rem) — the same expression the
+                // project overview's "Sju etasjer på én adresse." uses, which
+                // is the section heading directly below this one. At 44px
+                // this sat a whole step under it and read as a label rather
+                // than as a section (client, Hjem.pdf 2026-09-09: make it
+                // bigger). 36 -> 64px across the range.
+                fontSize: 'clamp(2.25rem, 5vw, 4rem)',
                 lineHeight: 1.12,
                 fontWeight: 600,
                 letterSpacing: '-0.015em',
