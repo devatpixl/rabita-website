@@ -26,9 +26,12 @@ const CHAPTERS: {
 }[] = [
   {
     key: 'history',
-    photo: '/photos/prayer-mat-underpass.webp',
+    photo: '/photos/story-visit-banner.webp',
+    // Not naming the visitor: he is plainly a public figure, but an alt
+    // text on a live site should not assert an identification nobody here
+    // has confirmed. The client can add the name.
     photoAlt:
-      'Rabita worshippers bowing in prayer on a mat under the Grønland underpass, imam leading at the front',
+      'A guest in conversation with a Rabita representative in front of the mosque project banner',
   },
   {
     key: 'family',
