@@ -516,17 +516,37 @@ body.sheet-open {
   inset: 0;
   /* dusk-tinted, not navy: the same grade the site's other full-bleed
      photography carries */
-  /* 3072 wide, and deliberately so. The 61x in --scale drives the
-     LETTERFORMS; the photograph only ever reaches 1.23x (--photo-scale
-     1.18, and 1.04 again on __final), so it is shown at close to native
-     size for the whole scroll and every compression artefact stays
-     visible. Crisp needs ~2362px on a 1920 display and ~3149px on a 2560
-     one. A phone gets a 341KB file instead — see the max-width:700px
-     block; this is a CSS background, so there is no srcset to do it for
-     us. */
+  /* The 61x in --scale drives the LETTERFORMS. The photograph only ever
+     reaches 1.23x (--photo-scale 1.18, and 1.04 again on __final), so it
+     is shown at close to native size for the whole scroll and every
+     compression artefact stays on screen. Crisp needs ~2362px on a 1920
+     display, ~3149px on a 2560, ~4723px on a 1920 at 2x.
+
+     This is a CSS background: no srcset, no next/image. So the tiers are
+     written by hand, and there are three.
+
+       phone   1600 q82  0.36MB   max-width:700px block below
+       1x      3072 q88  1.62MB   covers 1920 and 2560 desktops
+       2x      4096 q90  3.17MB   retina, where it is actually needed
+
+     The plain url() first is the fallback for anything without
+     image-set; the two image-set lines override it where supported. A 1x
+     desktop never downloads the 4K file. */
   background-image:
     linear-gradient(180deg, rgba(22, 36, 46, 0.12), rgba(22, 36, 46, 0.28)),
     url('/photos/brand-eid.webp');
+  background-image:
+    linear-gradient(180deg, rgba(22, 36, 46, 0.12), rgba(22, 36, 46, 0.28)),
+    -webkit-image-set(
+      url('/photos/brand-eid.webp') 1x,
+      url('/photos/brand-eid-2x.webp') 2x
+    );
+  background-image:
+    linear-gradient(180deg, rgba(22, 36, 46, 0.12), rgba(22, 36, 46, 0.28)),
+    image-set(
+      url('/photos/brand-eid.webp') 1x,
+      url('/photos/brand-eid-2x.webp') 2x
+    );
   background-size: cover;
   background-position: center 50%;
   transform-origin: center;
