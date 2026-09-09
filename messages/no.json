@@ -970,13 +970,33 @@
         "figureLabel": "elever hver helg",
         "sentence": "Quran, arabisk og troslære for barn og voksne. Ventelister i alle klasser."
       },
-      "mediation": {
-        "title": "Megling",
-        "sentence": "Hjelp til å løse konflikter i familie og nabolag, med tillit og diskresjon."
-      },
       "youth": {
         "title": "Barn og ungdom",
         "sentence": "Ungdomsklubb, leir og faste aktiviteter. Trygge møteplasser for de yngste."
+      },
+      "koran": {
+        "title": "Koran og arabisk",
+        "sentence": "Koranundervisning og arabisk for barn, unge og voksne."
+      },
+      "kurs": {
+        "title": "Kalligrafi og geometri",
+        "sentence": "Kurs i islamsk kalligrafi og geometrisk kunst."
+      },
+      "norsk": {
+        "title": "Norsk og samfunnsdeltakelse",
+        "sentence": "Norskundervisning for voksne som faller utenfor de ordinære tilbudene."
+      },
+      "veivisere": {
+        "title": "Muslimske veivisere",
+        "sentence": "Skolebesøk der unge muslimer møter elever ansikt til ansikt."
+      },
+      "barn-og-familie": {
+        "title": "Barn og familie",
+        "sentence": "Aktiviteter og møteplasser for barn og familier gjennom hele året."
+      },
+      "fosterhjem": {
+        "title": "Bli fosterfamilie",
+        "sentence": "Informasjon og veiledning for familier som vurderer å bli fosterhjem."
       }
     },
     "readMore": "Les mer"

@@ -45,14 +45,25 @@ const SLIDE_KEYS = [
   // eight slides and nothing else shifts position.
   'counselling',
   // Two swaps on 2026-09-10 (client): mediation came up from eighth in place
-  // of janaza, then traded again with hajj and umra. Both were swaps rather
-  // than inserts, so the run is still eight slides and nothing else moved.
+  // of janaza, then traded again with hajj and umra.
   'hajj-umrah',
-  'mediation',
+  // `mediation` was the fourth card and is gone (client, 2026-09-10). It led
+  // to /tjenester/counselling — the same page as the card two above it —
+  // because the service it named was merged into "Samtaler og megling" in
+  // August. Eight cards were reaching six pages.
   'shahada',
   'youth',
   'nikah',
   'janaza',
+  // The six services that had no card at all. The seven above keep the
+  // positions the client set; these follow in the order /tjenester lists
+  // them, so the two surfaces now name the same thirteen things.
+  'koran',
+  'kurs',
+  'norsk',
+  'veivisere',
+  'barn-og-familie',
+  'fosterhjem',
 ] as const;
 type SlideKey = (typeof SLIDE_KEYS)[number];
 const TOTAL = SLIDE_KEYS.length;
@@ -89,15 +100,6 @@ const PHOTOS: Record<SlideKey, { src: string; alt: string; width: number; height
     width: 1200,
     height: 1600,
   },
-  mediation: {
-    src: '/photos/community/mother-child.webp',
-    alt: 'A woman carrying a child on her back at a Rabita gathering, both smiling',
-    // 3:4 like the other portrait slides, not the 8:5 the old frame
-    // declared — this card is portrait and a landscape ratio only made
-    // next/image reserve the wrong box before the picture arrived.
-    width: 1200,
-    height: 1600,
-  },
   // A new file rather than an overwrite of bazaar-child.webp, which
   // lib/services.ts pointed at when this changed. /tjenester has since moved
   // its school entry to learning-class.webp, so the old one is now unused.
@@ -109,6 +111,47 @@ const PHOTOS: Record<SlideKey, { src: string; alt: string; width: number; height
     width: 900,
     height: 1200,
   },
+  // The six new cards. Five of these are LANDSCAPE sources in a 3:4 card, so
+  // object-cover keeps the middle half of their width — which is fine for
+  // one subject and lossy for a group. Portrait replacements are owed for
+  // koran, kurs, norsk, veivisere and barn-og-familie; fosterhjem is already
+  // 1200x1600 and needs nothing.
+  koran: {
+    src: '/photos/svc-koran-circle.webp',
+    alt: 'Boys sitting in a circle on the mosque carpet, each with a Quran open in front of them',
+    width: 1600,
+    height: 1200,
+  },
+  kurs: {
+    src: '/photos/subj-kurs-calligraphy.webp',
+    alt: 'A calligrapher at her desk, working an Arabic line across a ruled sheet',
+    width: 1170,
+    height: 767,
+  },
+  norsk: {
+    src: '/photos/svc-counsel.webp',
+    alt: 'A group at Rabita in front of the mosque project banners',
+    width: 1600,
+    height: 1000,
+  },
+  veivisere: {
+    src: '/photos/cong-volunteers.webp',
+    alt: 'Volunteers in Rabita vests at the street iftar under Grønland bridge',
+    width: 1600,
+    height: 1066,
+  },
+  'barn-og-familie': {
+    src: '/photos/svc-barn-phone.webp',
+    alt: 'A man crouching to a child\u2019s height to show him something on a phone',
+    width: 1800,
+    height: 1201,
+  },
+  fosterhjem: {
+    src: '/photos/svc-fosterhjem-stand.webp',
+    alt: 'The fosterhjem.no stand at an outdoor event, staffed by two women',
+    width: 1200,
+    height: 1600,
+  },
 };
 
 // Where each card leads.
@@ -118,14 +161,17 @@ const HREFS: Record<SlideKey, string> = {
   shahada: '/tjenester/shahada',
   counselling: '/tjenester/counselling',
   'hajj-umrah': '/tjenester/hajj-umrah',
-  education: '/undervisning',
-  mediation: '/tjenester/counselling',
-  // /tjenester/barn-og-ungdom was removed on 2026-09-05. The teaching page
-  // is the successor rather than the services index: this card is about
-  // what children and young people do here, and /undervisning answers that
-  // directly. It would otherwise redirect, and a homepage card should not
-  // spend a hop.
-  youth: '/undervisning',
+  // These two led to /undervisning until 2026-09-10, when the services they
+  // name got pages of their own back. A card that names a service should
+  // land on that service.
+  education: '/tjenester/skole',
+  youth: '/tjenester/ungdom',
+  koran: '/tjenester/koran',
+  kurs: '/tjenester/kurs',
+  norsk: '/tjenester/norsk',
+  veivisere: '/tjenester/veivisere',
+  'barn-og-familie': '/tjenester/barn-og-familie',
+  fosterhjem: '/tjenester/fosterhjem',
 };
 
 type Figure =

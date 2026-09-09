@@ -970,13 +970,33 @@
         "figureLabel": "pupils every weekend",
         "sentence": "Quran, Arabic and faith studies for children and adults. Waiting lists in every class."
       },
-      "mediation": {
-        "title": "Mediation",
-        "sentence": "Help resolving conflicts in families and neighbourhoods, with trust and discretion."
-      },
       "youth": {
         "title": "Children and youth",
         "sentence": "Youth club, camps and regular activities. Safe places for the youngest."
+      },
+      "koran": {
+        "title": "Quran and Arabic",
+        "sentence": "Quran and Arabic teaching for children, young people and adults."
+      },
+      "kurs": {
+        "title": "Calligraphy and geometry",
+        "sentence": "Courses in Islamic calligraphy and geometric art."
+      },
+      "norsk": {
+        "title": "Norwegian and taking part",
+        "sentence": "Norwegian classes for adults who fall outside the ordinary provision."
+      },
+      "veivisere": {
+        "title": "Muslim guides",
+        "sentence": "School visits where young Muslims meet pupils face to face."
+      },
+      "barn-og-familie": {
+        "title": "Children and family",
+        "sentence": "Activities and places to meet for children and families, all year round."
+      },
+      "fosterhjem": {
+        "title": "Become a foster family",
+        "sentence": "Information and guidance for families considering fostering."
       }
     },
     "readMore": "Read more"

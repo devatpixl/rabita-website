@@ -220,9 +220,14 @@ export const SERVICE_STORY: Record<ServiceKey, { src: string; objectClass: strin
   // picture and only needs centring.
   kurs: { src: '/photos/subj-kurs-qalam.webp', objectClass: 'object-center' },
   norsk: { src: '/photos/event-school-visit.webp', objectClass: 'object-center' },
-  // learn-classroom is four-fifths ceiling, so the crop sits almost on the
-  // floor of the frame to reach the room.
-  veivisere: { src: '/photos/learn-classroom.webp', objectClass: 'object-[50%_88%]' },
+  // NOT learn-classroom (client, 2026-09-10: "its to up, bring a bit down").
+  // The crop could not be brought down, because it was doing nothing: that
+  // file is 1600x1000, wider than this 3:2 frame, so object-cover fills the
+  // height and shows ALL of it — and four-fifths of it is ceiling. The Y in
+  // an object-position only bites when the source is TALLER than its frame.
+  // learning-lecture is a room of people at 1200x1600, which is both about
+  // the right thing and croppable.
+  veivisere: { src: '/photos/learning-lecture.webp', objectClass: 'object-[50%_45%]' },
   // Four boys, plainly the 11-15 the youth pages name. The client offered
   // this for barn-og-familie; it is here because that page is about
   // families with small children and this is Gutter i fokus. One line to
