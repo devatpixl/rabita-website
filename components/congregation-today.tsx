@@ -60,8 +60,10 @@ const PHOTOS: Record<SlideKey, { src: string; alt: string; width: number; height
   counselling: { src: '/photos/subj-counselling.webp', alt: 'A quiet conversation with an imam at Rabita', width: 1600, height: 1000 },
   'hajj-umrah': { src: '/photos/hajj-kaaba.webp', alt: 'Pilgrims in ihram circling the Kaaba in Makkah, the clock tower behind', width: 1200, height: 1600 },
   education: {
-    src: '/photos/learning-lecture.webp',
-    alt: 'Weekend-school session at Rabita, teachers at the front, pupils following the lesson',
+    // Not learning-lecture.webp: impact-story.tsx still renders that frame,
+    // and overwriting it would have changed a second place silently.
+    src: '/photos/learning-class.webp',
+    alt: 'Weekend school at Rabita: pupils holding their certificates with their teacher, the Arabic alphabet on the board behind them',
     width: 1200,
     height: 1600,
   },
