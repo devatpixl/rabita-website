@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
-import { SERVICE_FOCUS, SERVICE_GROUPS, SERVICE_IMAGE, type ServiceKey } from '@/lib/services';
+import { SERVICE_FOCUS, SERVICE_IMAGE, SERVICE_KEYS, SERVICE_ORDER, type ServiceKey } from '@/lib/services';
 import { Section, SectionBody } from './primitives';
 import { Accent } from './accent';
 import { Reveal } from './reveal';
@@ -33,9 +33,17 @@ import { cn } from '@/lib/cn';
 // ships opacity:0 in the HTML and left this page blank when the observer
 // missed. Content is visible in the markup; the animation only ever adds.
 
-// Flattened in group order: the grouping no longer prints, but it still
-// decides the sequence, so related services stay next to each other.
-const ITEMS = SERVICE_GROUPS.flatMap((g) => g.items.map((key) => ({ key: key as ServiceKey })));
+// SERVICE_ORDER, not group order (client, 2026-09-10): the index runs in the
+// same sequence as the home carousel, so a reader who saw the cards there
+// meets the same thirteen in the same order here.
+//
+// Concatenated with whatever SERVICE_ORDER left out, so a service added to
+// SERVICE_KEYS alone lands at the end of the index rather than vanishing
+// from it.
+const ORDERED = SERVICE_ORDER as readonly ServiceKey[];
+const ITEMS = [...ORDERED, ...SERVICE_KEYS.filter((k) => !ORDERED.includes(k))].map((key) => ({
+  key,
+}));
 
 export function ServiceIndex() {
   const locale = useLocale();

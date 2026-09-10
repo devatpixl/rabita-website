@@ -241,6 +241,33 @@ export const SERVICE_STORY: Record<ServiceKey, { src: string; objectClass: strin
   fosterhjem: { src: '/photos/svc-fosterhjem-stand.webp', objectClass: 'object-[50%_55%]' },
 };
 
+// The order the thirteen are shown in, on /tjenester and on the home
+// carousel (client, 2026-09-10: "as order on home page, use same on main
+// services page"). It is NOT the grouping order: the client's sequence puts
+// the school first and the two religious ceremonies late, which scatters the
+// families. That costs nothing on the index, where the grouping has not
+// printed since 2026-09-06 and only ever set the sequence — and the group
+// label still reaches each service page through SERVICE_GROUP_OF below.
+//
+// Anything missing from this list is appended by the index rather than
+// dropped, so adding a service to SERVICE_KEYS and forgetting this one
+// leaves it last instead of leaving it out.
+export const SERVICE_ORDER = [
+  'skole',
+  'counselling',
+  'hajj-umrah',
+  'shahada',
+  'ungdom',
+  'nikah',
+  'janaza',
+  'koran',
+  'kurs',
+  'norsk',
+  'veivisere',
+  'barn-og-familie',
+  'fosterhjem',
+] as const satisfies readonly ServiceKey[];
+
 // Which family a service belongs to, so the band can print a group label as
 // the second half of its kicker. Same eight as SERVICE_GROUPS, but as a
 // lookup rather than an ordering.
