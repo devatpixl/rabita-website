@@ -51,11 +51,25 @@ export default async function VisitPage({
         kicker={tv('crumb')}
         title={tv('pages.visit.title')}
         lede={tv('pages.visit.lede')}
-        image="/photos/visit-entrance.webp"
+        // The entrance itself (client, 2026-09-10): a crowd outside Calmeyers
+        // gate 8 in the rain, with the Det Islamske Forbundet sign over the
+        // door. On a page headed "Kom og se stedet" the door is the subject,
+        // and the picture that was here — people in conversation at the
+        // street iftar — has gone to /om-oss, where it belongs.
+        //
+        // 4240x2622 down to 2000 wide. The crop is set off a row-luminance
+        // profile of the file rather than off the thumbnail: the frame is
+        // 4.6:1 so it keeps 35% of the source's height, brick runs bright to
+        // 60%, the crowd is the dark band from 60 to 80, and the sign over
+        // the door sits on that boundary near 57%. 48% opens the window at
+        // 31%, which puts the facade above, the sign about three-quarters
+        // down and the first rows of the crowd along the foot. 25% was all
+        // brick and 62% dropped into the dark.
+        image="/photos/visit-doorway-crowd.webp"
         alt={tv('pages.visit.caption')}
         layout="over"
         mark="elevation"
-        objectClass="object-[50%_58%] md:object-[50%_50%]"
+        objectClass="object-[50%_46%] md:object-[50%_48%]"
         padBottom="none"
       />
 

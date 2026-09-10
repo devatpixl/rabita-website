@@ -64,7 +64,7 @@ export default async function AboutPage({
         kickerNote={ts('pages.about.eyebrow')}
         title={t('title')}
         lede={t('lede')}
-        image="/photos/zoom-gateiftar.webp"
+        image="/photos/visit-entrance.webp"
         alt={ts('pages.about.captionIftar')}
         layout="over"
         mark="elevation"
@@ -72,13 +72,17 @@ export default async function AboutPage({
         // Ramadan lights, and the site's standard grade pulls exactly the
         // warmth out of it that makes it worth using.
         tone="warm"
-        // 45%, re-measured for this frame rather than inherited — 60% was
-        // calibrated against hero-iftar's composition and means nothing
-        // here. This source is 1600x1069, so the band keeps 33% of the
-        // height. Rendered at 30/45/60/75 and compared: 45 is where the
-        // marquee canopies and the gold stars hold the top third and the
-        // crowd runs beneath them. 30 is mostly empty tent roof; 75 drops to
-        // dark winter coats and loses both the tents and the lights.
+        // The picture changed on 2026-09-10 (client) from zoom-gateiftar,
+        // which was the canopies from above, to the conversation under them:
+        // three people talking, the marquees and the gold stars behind. Same
+        // evening, same event, so "Gateiftar på Grønland" still captions it —
+        // and "Rabita siden 1987" over people talking says more about the
+        // organisation than a picture of tents does.
+        //
+        // 45% re-measured for the new source. It is 2000x1100 rather than
+        // 1600x1069, so the band keeps 40% of the height instead of 33%, and
+        // the faces sit between 33% and 55% of the frame. 45 puts them
+        // through the middle with the canopies still above them.
         objectClass="object-[50%_45%]"
         padBottom="none"
       >
