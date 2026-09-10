@@ -43,6 +43,19 @@ const nextConfig: NextConfig = {
         destination: '/:locale/tjenester/barn-og-familie',
         permanent: true,
       },
+      // /undervisning was the teaching landing page from before any teaching
+      // service had one of its own. By 2026-09-10 the four programmes it
+      // described — arabisk, koran, ungdom, kalligrafi — were four service
+      // pages, plus norsk, all listed directly above it in the same menu. It
+      // was the only page on the site using its own template, reached by one
+      // link, and its "Undervisning" menu entry collided with the group
+      // heading of the same name on the index. Its enrolment copy moved to
+      // /tjenester/skole; the page itself lands on the index (client).
+      {
+        source: '/:locale(no|en|ar)/undervisning',
+        destination: '/:locale/tjenester',
+        permanent: true,
+      },
       // The veivisere redirect is GONE, not edited: /tjenester/veivisere is
       // a real page again, and a redirect on that source would have shadowed
       // it — the rule runs before routing, so the page would have been

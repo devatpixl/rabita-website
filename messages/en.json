@@ -163,11 +163,6 @@
           "label": "Become a foster family",
           "blurb": "Information and guidance for families considering fostering.",
           "href": "/tjenester/fosterhjem"
-        },
-        {
-          "label": "Teaching",
-          "blurb": "Arabic, Qur'an and adult courses",
-          "href": "/undervisning"
         }
       ],
       "visit": [
@@ -1572,38 +1567,6 @@
     "groups": "We host schools, universities, press and other groups. Shorter visits don't need advance booking.",
     "quote": "An open door for anyone who wants to get to know the mosque."
   },
-  "educationPage": {
-    "eyebrow": "Education",
-    "title": "Norway's largest Arabic school, and more.",
-    "lede": "Arabic, Quran, youth programme and calligraphy. Classes every week of the year.",
-    "stats": {
-      "pupils": "pupils",
-      "teachers": "teachers",
-      "school": "school (largest of its kind)",
-      "classes": "classes"
-    },
-    "programs": {
-      "heading": "Programmes",
-      "items": {
-        "arabic": {
-          "title": "Arabic for non-Arabic speakers",
-          "body": "Beginner to advanced. Weekly classes throughout the school year."
-        },
-        "quran": {
-          "title": "Quran and tajweed",
-          "body": "Pronunciation, recognition and memorisation. Children and adults in separate groups."
-        },
-        "youth": {
-          "title": "Youth programme",
-          "body": "Social gatherings and projects for teenagers. Friday evenings."
-        },
-        "calligraphy": {
-          "title": "Calligraphy",
-          "body": "Introduction and practice in classical Arabic calligraphy."
-        }
-      }
-    }
-  },
   "servicesIndex": {
     "eyebrow": "Services",
     "title": "Nikah, janaza, shahada and more.",
@@ -1783,6 +1746,11 @@
             "title": "Enrolment and contact",
             "body": "Information about registration and available places is announced through Rabita’s own channels.",
             "detail": "Questions about the teaching, year groups, registration or available places: undervisning@arabiskald.no"
+          },
+          {
+            "title": "Enrolling a child",
+            "body": "Places are grouped by level rather than by age, so a child who has never read Arabic sits with others starting in the same place.",
+            "detail": "Term: Autumn and spring, following the Oslo school calendar. Age: From six years old, in groups by reading level. Fee: Set per term, and no child is turned away over it."
           }
         ]
       },
@@ -2110,36 +2078,6 @@
     "shareWhatsapp": "Share on WhatsApp",
     "shareEmail": "Share by email",
     "back": "Back to the front page"
-  },
-  "learnPages": {
-    "crumb": "Education",
-    "pages": {
-      "teaching": {
-        "eyebrow": "Teaching",
-        "title": "Arabic, Qur'an, and a school week that fits around the Norwegian one.",
-        "lede": "Four hundred pupils and nineteen teachers, running every week of term. The new building gives the school its own floor instead of the rooms it borrows now.",
-        "caption": "A Qur'an on the rehal at Rabita"
-      }
-    },
-    "close": {
-      "heading": "Enrolling a child.",
-      "body": "Places are grouped by level rather than by age, so a child who has never read Arabic sits with others starting in the same place.",
-      "items": [
-        {
-          "term": "Term",
-          "detail": "Autumn and spring, following the Oslo school calendar."
-        },
-        {
-          "term": "Age",
-          "detail": "From six years old, in groups by reading level."
-        },
-        {
-          "term": "Fee",
-          "detail": "Set per term, and no child is turned away over it."
-        }
-      ],
-      "cta": "Ask about a place"
-    }
   },
   "visitPages": {
     "crumb": "Visit us",

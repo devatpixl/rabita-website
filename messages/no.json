@@ -163,11 +163,6 @@
           "label": "Bli fosterfamilie",
           "blurb": "Informasjon og veiledning for familier som vurderer å bli fosterhjem.",
           "href": "/tjenester/fosterhjem"
-        },
-        {
-          "label": "Undervisning",
-          "blurb": "Arabisk, Koran og kurs for voksne",
-          "href": "/undervisning"
         }
       ],
       "visit": [
@@ -1572,38 +1567,6 @@
     "groups": "Vi tar imot skoler, universiteter, presse og andre grupper. Kortere besøk trenger ikke forhåndsavtale.",
     "quote": "En åpen dør for alle som vil bli kjent med moskeen."
   },
-  "educationPage": {
-    "eyebrow": "Undervisning",
-    "title": "Norges største skole i arabisk, og mer.",
-    "lede": "Arabisk, Quran, ungdomsprogram og kalligrafi. Klasser hver uke i året.",
-    "stats": {
-      "pupils": "elever",
-      "teachers": "lærere",
-      "school": "skole (den største i sitt slag)",
-      "classes": "klasser"
-    },
-    "programs": {
-      "heading": "Programmer",
-      "items": {
-        "arabic": {
-          "title": "Arabisk for ikke-arabisktalende",
-          "body": "Fra nybegynner til avansert nivå. Undervises ukentlig gjennom hele skoleåret."
-        },
-        "quran": {
-          "title": "Quran og tajweed",
-          "body": "Uttale, gjenkjenning og memorering. Barn og voksne, separate grupper."
-        },
-        "youth": {
-          "title": "Ungdomsprogram",
-          "body": "Sosiale samlinger og prosjekter for tenåringer. Fredagskvelder."
-        },
-        "calligraphy": {
-          "title": "Kalligrafi",
-          "body": "Innføring og øving i klassisk arabisk kalligrafi."
-        }
-      }
-    }
-  },
   "servicesIndex": {
     "eyebrow": "Tjenester",
     "title": "Nikah, janaza, shahada og mer.",
@@ -1783,6 +1746,11 @@
             "title": "Påmelding og kontakt",
             "body": "Informasjon om registrering og ledige plasser annonseres gjennom Rabitas kanaler.",
             "detail": "Spørsmål om undervisningen, klassetrinn, registrering eller ledige plasser: undervisning@arabiskald.no"
+          },
+          {
+            "title": "Å melde på et barn",
+            "body": "Plassene deles etter nivå og ikke etter alder, slik at et barn som aldri har lest arabisk sitter med andre som begynner på samme sted.",
+            "detail": "Semester: Høst og vår, etter Oslo sin skolerute. Alder: Fra seks år, i grupper etter lesenivå. Pris: Fastsatt per semester, og ingen avvises på grunn av den."
           }
         ]
       },
@@ -2110,36 +2078,6 @@
     "shareWhatsapp": "Del på WhatsApp",
     "shareEmail": "Del på e-post",
     "back": "Tilbake til forsiden"
-  },
-  "learnPages": {
-    "crumb": "Undervisning",
-    "pages": {
-      "teaching": {
-        "eyebrow": "Undervisning",
-        "title": "Arabisk, Koran og en skoleuke som passer rundt den norske.",
-        "lede": "Fire hundre elever og nitten lærere, hver uke i semesteret. Det nye bygget gir skolen sin egen etasje i stedet for rommene den låner i dag.",
-        "caption": "En koran på rehalen på Rabita"
-      }
-    },
-    "close": {
-      "heading": "Å melde på et barn.",
-      "body": "Plassene deles etter nivå og ikke etter alder, slik at et barn som aldri har lest arabisk sitter med andre som begynner på samme sted.",
-      "items": [
-        {
-          "term": "Semester",
-          "detail": "Høst og vår, etter Oslo sin skolerute."
-        },
-        {
-          "term": "Alder",
-          "detail": "Fra seks år, i grupper etter lesenivå."
-        },
-        {
-          "term": "Pris",
-          "detail": "Fastsatt per semester, og ingen avvises på grunn av den."
-        }
-      ],
-      "cta": "Spør om en plass"
-    }
   },
   "visitPages": {
     "crumb": "Besøk oss",
