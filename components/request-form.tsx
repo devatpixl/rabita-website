@@ -453,7 +453,7 @@ export function RequestForm({
 
 /* The marks beside the field labels. Line drawings at 15px so they read as
    part of the mono label rather than as buttons next to it. */
-type FieldIconName = 'person' | 'mail' | 'calendar' | 'message' | 'lock';
+type FieldIconName = 'person' | 'mail' | 'phone' | 'calendar' | 'message' | 'lock';
 
 function FieldIcon({ name, className }: { name: FieldIconName; className?: string }) {
   const common = {
@@ -479,6 +479,15 @@ function FieldIcon({ name, className }: { name: FieldIconName; className?: strin
       <svg {...common}>
         <rect x="3" y="5" width="18" height="14" rx="2" />
         <path d="m3.5 7 8.5 6 8.5-6" />
+      </svg>
+    );
+  }
+  // Added 2026-09-10 for the membership form's telephone field. The set is
+  // shared, so a phone field cannot be the one row in a form without a mark.
+  if (name === 'phone') {
+    return (
+      <svg {...common}>
+        <path d="M6.5 3h3l1.5 4-2 1.2a12 12 0 0 0 5.8 5.8L16 12l4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 3 6.2 2 2 0 0 1 5 4h1.5Z" />
       </svg>
     );
   }

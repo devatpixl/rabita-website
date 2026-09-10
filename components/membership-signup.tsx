@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/cn';
+import { Field, VALUE } from './request-form';
 
 // The signup card. Same shape as the giving card in the hero — a bordered
 // panel on the right of a dark split — because that pairing is the site's
@@ -17,6 +18,9 @@ type Tier = 'ordinary' | 'voting' | 'youth';
 const TIERS: Tier[] = ['ordinary', 'voting', 'youth'];
 
 export function MembershipSignup() {
+  // Ids for the shared Field wells: the label is a <label for>, so every
+  // control needs one that is unique on the page.
+  const uid = useId();
   const t = useTranslations('medlemskapPage');
   const [tier, setTier] = useState<Tier>('voting');
   const [name, setName] = useState('');
@@ -48,12 +52,13 @@ export function MembershipSignup() {
   // bg-paper card, which was invisible the moment this card stopped standing
   // on the dusk section and moved onto paper-2 (2026-09-08) — the same
   // "fields do not look like fields" the enquiry form was corrected for.
-  const field =
-    'min-h-11 w-full rounded-btn border-[1.5px] border-ink/20 bg-paper-2 px-3.5 py-2 text-body text-ink outline-none transition-colors placeholder:text-ink-40 hover:border-ink/35 focus:border-ink';
+  // The value styling request-form's paper tone puts on its own inputs. Its
+  // TONE map is private, and paper is the only ground this form stands on.
+  const field = cn(VALUE, 'text-ink caret-gold-deep placeholder:text-ink-40');
 
   if (done) {
     return (
-      <div className="rounded-2xl border border-gold/30 bg-paper p-8 text-center">
+      <div className="rounded-[2rem] bg-paper p-8 text-center ring-1 ring-sage-line/70">
         <p className="font-serif text-[1.4rem] text-ink">{t('done.title')}</p>
         <p className="mt-3 text-body text-ink-60">{t('done.body')}</p>
       </div>
@@ -77,7 +82,7 @@ export function MembershipSignup() {
          moment you picked one. */}
       <form
         onSubmit={onSubmit}
-        className="relative rounded-2xl border border-gold/30 bg-paper p-6 text-ink shadow-[0_1px_2px_rgba(0,0,0,0.06),0_28px_60px_-24px_rgba(0,0,0,0.4)] md:p-7"
+        className="relative rounded-[2rem] bg-paper p-6 text-ink ring-1 ring-sage-line/70 shadow-[0_1px_2px_rgba(26,26,24,0.04),0_28px_70px_-38px_rgba(26,26,24,0.3)] sm:p-8"
       >
         <fieldset className="border-0 p-0">
           <legend className="font-serif text-card text-ink">{t('choose')}</legend>
@@ -89,12 +94,17 @@ export function MembershipSignup() {
                 onClick={() => setTier(k)}
                 aria-pressed={tier === k}
                 className={cn(
-                  'rounded-chip px-2 py-2.5 text-center transition-colors',
+                  'rounded-2xl border-[1.5px] px-2 py-3 text-center transition-colors',
                   // Both branches name a text colour. Keeping them symmetric
                   // is what stops the inherited-paper-on-paper bug returning.
+                  //
+                  // Same sage well as the fields below, so the chips read as
+                  // the first question of one form rather than as a separate
+                  // control strip. Selected takes the gold border the wells
+                  // take on focus.
                   tier === k
-                    ? 'border-[1.5px] border-ink bg-paper text-ink'
-                    : 'border border-rule text-ink-60 hover:border-ink hover:text-ink',
+                    ? 'border-gold-deep bg-paper text-ink'
+                    : 'border-sage-line bg-sage-soft text-ink-60 hover:border-gold-deep/45 hover:text-ink',
                 )}
               >
                 <span className="block text-[13px] font-semibold">{t(`tiers.${k}.name`)}</span>
@@ -116,18 +126,15 @@ export function MembershipSignup() {
         </fieldset>
 
         <div className="mt-5 space-y-2.5 border-t border-rule pt-5">
-          <label className="block">
-            <span className="mb-1 block text-[13px] text-ink-60">{t('form.name')}</span>
-            <input required autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} className={field} />
-          </label>
-          <label className="block">
-            <span className="mb-1 block text-[13px] text-ink-60">{t('form.email')}</span>
-            <input required type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} className={field} />
-          </label>
-          <label className="block">
-            <span className="mb-1 block text-[13px] text-ink-60">{t('form.phone')}</span>
-            <input type="tel" autoComplete="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className={field} />
-          </label>
+          <Field id={`${uid}-name`} label={t('form.name')} icon="person" tone="paper" card>
+            <input id={`${uid}-name`} required autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} className={field} />
+          </Field>
+          <Field id={`${uid}-email`} label={t('form.email')} icon="mail" tone="paper" card>
+            <input id={`${uid}-email`} required type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} className={field} />
+          </Field>
+          <Field id={`${uid}-phone`} label={t('form.phone')} icon="phone" tone="paper" card>
+            <input id={`${uid}-phone`} type="tel" autoComplete="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className={field} />
+          </Field>
           {/* Two fields, not one. "Guardian (name and phone)" asked for two
              different pieces of data in a single box: nothing could validate
              it, autofill could not help, and whatever arrived had to be
@@ -136,8 +143,7 @@ export function MembershipSignup() {
              required rather than optional. */}
           {tier === 'youth' && (
             <div className="grid gap-2.5 sm:grid-cols-2">
-              <label className="block">
-                <span className="mb-1 block text-[13px] text-ink-60">{t('form.guardianName')}</span>
+              <Field id={`${uid}-guardianName`} label={t('form.guardianName')} icon="person" tone="paper" card>
                 <input
                   required
                   autoComplete="off"
@@ -145,9 +151,8 @@ export function MembershipSignup() {
                   onChange={(e) => setGuardianName(e.target.value)}
                   className={field}
                 />
-              </label>
-              <label className="block">
-                <span className="mb-1 block text-[13px] text-ink-60">{t('form.guardianPhone')}</span>
+              </Field>
+              <Field id={`${uid}-guardianPhone`} label={t('form.guardianPhone')} icon="phone" tone="paper" card>
                 <input
                   required
                   type="tel"
@@ -156,7 +161,7 @@ export function MembershipSignup() {
                   onChange={(e) => setGuardianPhone(e.target.value)}
                   className={field}
                 />
-              </label>
+              </Field>
             </div>
           )}
         </div>
