@@ -232,10 +232,29 @@ const TOTAL_STEPS = 3;
 
   // ── Step change animation + focus ──────────────────────────────
   const headingRef = useRef<HTMLHeadingElement | null>(null);
+  // The step this effect last focused for. It starts equal to `step`, so the
+  // mount pass focuses NOTHING — focusing an element scrolls it into view,
+  // and this card is a long way down the page on a phone, where hero-give
+  // renders it under the hero rather than inside it. The result was that
+  // /en opened already scrolled past its own headline (client, 2026-09-10:
+  // "why starts from a little below?"). Same on /gi-en-gave and
+  // /moskeprosjektet, which also mount the card below the fold.
+  //
+  // A plain "skip the first run" flag would not do: `reduced` is set from a
+  // media query in an effect, so it can flip once just after mount and fire
+  // this a second time with the step unchanged. Comparing the step is what
+  // makes it fire on a real step change and nothing else.
+  //
+  // The sheet does not need this either way: it is a <dialog> opened with
+  // showModal(), which moves focus itself.
+  const focusedStep = useRef(step);
   useEffect(() => {
     // Focus the heading on step change (a11y — announce which step
     // the user is on now).
-    headingRef.current?.focus();
+    if (focusedStep.current !== step) {
+      focusedStep.current = step;
+      headingRef.current?.focus();
+    }
     // Kick the enter animation for the new step.
     if (reduced) {
       setEntered(true);
