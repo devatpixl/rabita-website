@@ -134,11 +134,18 @@ const PHOTOS: Record<SlideKey, { src: string; alt: string; width: number; height
     width: 1600,
     height: 1000,
   },
+  // Portrait, which is what this 3:4 card wants (client, 2026-09-10): the
+  // volunteers frame was 1600x1066 and lost half its width to the crop.
+  //
+  // NOTE it is also the fourth chapter photograph in "Dette er Rabita", one
+  // section up the same page. Deliberate, and the client's pick — but the
+  // two are close enough on the scroll that a portrait photograph of a
+  // school visit should replace this one when there is one.
   veivisere: {
-    src: '/photos/cong-volunteers.webp',
-    alt: 'Volunteers in Rabita vests at the street iftar under Grønland bridge',
-    width: 1600,
-    height: 1066,
+    src: '/photos/volunteer-megaphone.webp',
+    alt: 'A Rabita volunteer with a megaphone, high-vis vest reading RABITA',
+    width: 933,
+    height: 1400,
   },
   'barn-og-familie': {
     src: '/photos/svc-barn-phone.webp',
