@@ -504,20 +504,63 @@ export function CongregationToday() {
                       {String(i + 1).padStart(2, '0')}
                     </span>
                   )}
-                  <div
-                    className="relative w-full h-full"
-                    style={{ borderRadius: '10px', overflow: 'hidden' }}
-                  >
-                    <Image
-                      src={photo.src}
-                      alt={isCenter ? photo.alt : ''}
-                      fill
-                      priority={i === 0}
-                      loading={i === 0 ? 'eager' : 'lazy'}
-                      sizes="(min-width: 768px) 30vw, 90vw"
-                      className="object-cover"
-                    />
-                  </div>
+                  {/* The centre card's picture is the link to its service
+                     (client, 2026-09-10: "when clicked on images, it
+                     redirects to that page, in laptops also"). Until now the
+                     centre was inert — you are already on that card — so the
+                     only way through was the "Read more" line under it, and
+                     a picture that large reads as clickable whether or not
+                     it is.
+
+                     Side cards keep goTo: clicking a peek should bring it to
+                     the middle, not leave the page from a card you cannot
+                     properly see.
+
+                     aria-hidden + tabIndex -1, the same treatment
+                     service-index gives its picture links: "Read more" is
+                     already the accessible route to this page, and a second
+                     tab stop to the same href is noise on a screen reader.
+
+                     The drag guard is the one the side cards use. Without it
+                     a swipe that ends over the centre card fires a click and
+                     navigates mid-gesture. */}
+                  {isCenter ? (
+                    <Link
+                      href={`/${locale}${HREFS[key]}`}
+                      aria-hidden
+                      tabIndex={-1}
+                      onClick={(e) => {
+                        if (cameFromDrag.current) e.preventDefault();
+                      }}
+                      className="relative block w-full h-full"
+                      style={{ borderRadius: '10px', overflow: 'hidden' }}
+                    >
+                      <Image
+                        src={photo.src}
+                        alt={photo.alt}
+                        fill
+                        priority={i === 0}
+                        loading={i === 0 ? 'eager' : 'lazy'}
+                        sizes="(min-width: 768px) 30vw, 90vw"
+                        className="object-cover"
+                      />
+                    </Link>
+                  ) : (
+                    <div
+                      className="relative w-full h-full"
+                      style={{ borderRadius: '10px', overflow: 'hidden' }}
+                    >
+                      <Image
+                        src={photo.src}
+                        alt=""
+                        fill
+                        priority={i === 0}
+                        loading={i === 0 ? 'eager' : 'lazy'}
+                        sizes="(min-width: 768px) 30vw, 90vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
                 </div>
               );
             })}
