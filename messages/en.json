@@ -1449,6 +1449,7 @@
     "bedrooms": "Bedrooms",
     "bedroomsUnit": "bedrooms",
     "errors": {
+      "empty": "Fill in your name and contact details, and we will pass the enquiry on.",
       "network": "We could not send your enquiry. Check your connection and try again — or send us an email instead.",
       "invalid": "Something was missing, so the enquiry was not sent. Please check your name and contact details and try again."
     }

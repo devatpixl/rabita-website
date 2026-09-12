@@ -456,10 +456,13 @@ body.sheet-open {
 }
 @keyframes field-blink {
   0%, 42%, 100% { border-color: theme('colors.rule'); box-shadow: none; }
-  16%, 60% { border-color: #dc2626; box-shadow: 0 0 0 1.5px rgb(220 38 38 / 0.55); }
+  /* theme('colors.alert'), not a hard-coded #dc2626: this keyframe was the
+     only red on the site, and the border it blinks into is now the same
+     token, so the flash and the resting error state agree. */
+  16%, 60% { border-color: theme('colors.alert'); box-shadow: 0 0 0 1.5px rgb(179 38 30 / 0.55); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .field-blink { animation: none; border-color: #dc2626; }
+  .field-blink { animation: none; border-color: theme('colors.alert'); }
 }
 
 /* ============================================================

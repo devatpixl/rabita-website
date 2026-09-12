@@ -37,6 +37,23 @@ const config: Config = {
         gold: '#C0A165',
         'gold-deep': '#9B7F4A',
         'gold-soft': '#E9DBBC',
+        // The one red on the site, and only for things that have gone wrong
+        // (client, 2026-09-12: "gjør feilmelding rød når du ikke fyller
+        // ut"). Every invalid state was gold until now — the same colour as
+        // the accents, the buttons and the section marks — so a warning read
+        // as decoration.
+        //
+        // A brick rather than a browser red: it has to sit beside gold
+        // #C0A165 without the two arguing. globals.css already reached for
+        // #dc2626 inside the field-blink keyframe, which is where the need
+        // first showed up; that animation now uses this token, so the blink
+        // and the border it settles into are the same colour.
+        //
+        // `alert-light` exists because a #B3261E border is close to
+        // invisible on dusk.
+        alert: '#B3261E',
+        'alert-soft': '#FAEAE8',
+        'alert-light': '#E2938A',
         // Hairlines, borders.
         rule: '#E4DED3',
       },

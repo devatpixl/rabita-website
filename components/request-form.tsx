@@ -66,7 +66,13 @@ const TONE = {
     rule: 'border-rule',
     button: 'bg-ink text-paper hover:bg-gold-deep',
     meta: 'text-ink-60',
-    error: 'border-gold-deep/50 bg-gold-soft/40 text-ink',
+    error: 'border-alert/45 bg-alert-soft text-alert',
+    // A COMPLETE well, not an override. Adding `!border-alert` on top of the
+    // tone's own border-colour class meant two single-class rules competing,
+    // and clsx only concatenates — which of them wins is Tailwind's output
+    // order, not mine. Swapping the whole string removes the question.
+    boxInvalid: 'border-alert bg-paper',
+    boxInvalidOnCard: 'border-alert bg-sage-soft',
     diamond: 'bg-gold-deep',
     doneH: 'text-ink',
     doneB: 'text-ink-60',
@@ -83,7 +89,9 @@ const TONE = {
     // where paper on #9B7F4A is a borderline 4.3:1.
     button: 'bg-gold text-dusk hover:bg-paper hover:text-ink',
     meta: 'text-paper/60',
-    error: 'border-gold/50 bg-gold/10 text-paper',
+    error: 'border-alert-light/55 bg-alert-light/10 text-alert-light',
+    boxInvalid: 'border-alert-light bg-paper/[0.06]',
+    boxInvalidOnCard: 'border-alert-light bg-paper/[0.06]',
     diamond: 'bg-gold',
     doneH: 'text-paper',
     doneB: 'text-paper/70',
@@ -101,6 +109,7 @@ export function Field({
   icon,
   tone,
   card,
+  invalid,
   children,
 }: {
   id: string;
@@ -110,6 +119,9 @@ export function Field({
   icon?: FieldIconName;
   tone: FormTone;
   card?: boolean;
+  /** Draws the well in the alert colour. Set from state, because the form
+   *  is noValidate and the browser never marks a field invalid itself. */
+  invalid?: boolean;
   children: React.ReactNode;
 }) {
   const c = TONE[tone];
@@ -130,7 +142,14 @@ export function Field({
         tone === 'dusk' && 'field-dusk',
         // dusk has no separate on-card well — the shell ignores `card`
         // there too, so an empty boxOnCard must fall back, not blank out.
-        card && c.boxOnCard ? c.boxOnCard : c.box,
+        //
+        // An invalid well takes its own string instead of the normal one, so
+        // nothing has to out-rank anything: it also drops the hover and
+        // focus-within colours, which is right — while a field is flagged,
+        // hovering it should not quietly turn the warning back to ink.
+        invalid
+          ? (card && c.boxInvalidOnCard ? c.boxInvalidOnCard : c.boxInvalid)
+          : (card && c.boxOnCard ? c.boxOnCard : c.box),
       )}
     >
       <label
@@ -205,11 +224,23 @@ export function RequestForm({
   const [bedrooms, setBedrooms] = useState<string>('');
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
-  const [error, setError] = useState<'network' | 'invalid' | null>(null);
+  const [error, setError] = useState<'empty' | 'network' | 'invalid' | null>(null);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (submitting || !name.trim() || !contact.trim()) return;
+    if (submitting) return;
+    // This used to be part of the guard above, as `|| !name.trim() ||
+    // !contact.trim()) return;` — so pressing Send with an empty field did
+    // nothing whatsoever. No message, no red, no movement (client,
+    // 2026-09-12: "gjør feilmelding rød når du ikke fyller ut"). The colour
+    // was the smaller half of that; the missing half was any feedback at all.
+    //
+    // The form is noValidate, so the browser will not do this for us and
+    // :user-invalid never matches — it has to be state.
+    if (!name.trim() || !contact.trim()) {
+      setError('empty');
+      return;
+    }
     setSubmitting(true);
     setError(null);
     try {
@@ -268,8 +299,6 @@ export function RequestForm({
     );
   }
 
-  const ready = name.trim().length > 0 && contact.trim().length > 0;
-
   return (
     <form onSubmit={onSubmit} className={shell} noValidate>
       {intro}
@@ -298,7 +327,14 @@ export function RequestForm({
           rule && tone === 'paper' && !card ? 'pt-6' : heading ? 'mt-6' : '',
         )}
       >
-        <Field id={`${uid}-name`} label={t('name')} icon="person" tone={tone} card={card}>
+        <Field
+          id={`${uid}-name`}
+          label={t('name')}
+          icon="person"
+          tone={tone}
+          card={card}
+          invalid={error === 'empty' && !name.trim()}
+        >
           <input
             id={`${uid}-name`}
             required
@@ -308,7 +344,14 @@ export function RequestForm({
             className={cn(VALUE, c.value)}
           />
         </Field>
-        <Field id={`${uid}-contact`} label={t('contact')} icon="mail" tone={tone} card={card}>
+        <Field
+          id={`${uid}-contact`}
+          label={t('contact')}
+          icon="mail"
+          tone={tone}
+          card={card}
+          invalid={error === 'empty' && !contact.trim()}
+        >
           <input
             id={`${uid}-contact`}
             required
@@ -424,7 +467,15 @@ export function RequestForm({
           <span aria-hidden className={cn('hidden h-px w-10 sm:block', tone === 'dusk' ? 'bg-gold/45' : 'bg-gold-deep/45')} />
           <button
             type="submit"
-            disabled={submitting || !ready}
+            // Only the in-flight state disables this. It used to be disabled
+            // whenever name or contact was blank, which meant a reader who
+            // pressed Send on an empty form got nothing at all: no movement,
+            // no message, no clue which field was wanted (client, Versjon 3:
+            // "gjor feilmelding rod nar du ikke fyller ut"). The error the
+            // client asked for can only appear if the button can be pressed,
+            // so the guard moved out of `disabled` and into onSubmit, where
+            // it sets the red state and marks the two empty wells.
+            disabled={submitting}
             className={cn(
               'group inline-flex min-h-12 items-center justify-center gap-3 rounded-full px-7 text-[15px] font-semibold transition-colors active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-40',
               c.button,

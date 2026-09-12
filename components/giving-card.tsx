@@ -1084,7 +1084,7 @@ function StepDetails({
             aria-invalid={!!errors.fnr}
             className={cn(
               'w-full min-h-11 rounded-btn border bg-transparent px-3 py-2 text-[14px] tabular-nums text-ink outline-none transition-colors',
-              errors.fnr ? 'border-[1.5px] border-gold-deep' : 'border border-rule focus:border-ink',
+              errors.fnr ? 'border-[1.5px] border-alert' : 'border border-rule focus:border-ink',
             )}
           />
         </label>
@@ -1174,13 +1174,13 @@ function Field({
         className={cn(
           'w-full min-h-11 rounded-btn border bg-transparent px-3 py-2 text-[14px] text-ink outline-none transition-colors',
           error
-            ? 'border-[1.5px] border-gold-deep'
+            ? 'border-[1.5px] border-alert'
             : 'border border-rule focus:border-ink',
           flash && 'field-blink',
         )}
       />
       {error && (
-        <p className="mt-1 border-s border-gold-deep ps-2 text-[12px] leading-snug text-ink-60">
+        <p className="mt-1 border-s border-alert ps-2 text-[12px] leading-snug text-alert">
           {error}
         </p>
       )}

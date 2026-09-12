@@ -1449,6 +1449,7 @@
     "bedrooms": "Antall soverom",
     "bedroomsUnit": "soverom",
     "errors": {
+      "empty": "Fyll inn navn og kontaktopplysninger, så sender vi henvendelsen videre.",
       "network": "Vi fikk ikke sendt henvendelsen. Sjekk nettforbindelsen og prøv igjen — eller send oss en e-post.",
       "invalid": "Noe manglet, så henvendelsen ble ikke sendt. Kontroller navn og kontaktopplysninger, og prøv igjen."
     }
