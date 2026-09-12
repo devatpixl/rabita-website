@@ -469,7 +469,11 @@
   "giftLadder": {
     "eyebrow": "HVA GAVEN BYGGER",
     "heading": "Budsjettet er kostet rom for <em>rom</em>.",
+    "lede": "Hvert bidrag, uansett størrelse, blir en del av bygget og er med på å reise et varig hjem for bønn, læring og fellesskap i Norge.",
     "anchorLabel": "FULLT SKATTEFRADRAG",
+    "ctaAll": "Se alle måter å gi",
+    "prev": "Forrige gave",
+    "next": "Neste gave",
     "cta": "Velg et beløp",
     "footnote": "Fradragsberettiget opp til 25 000 kr i året.",
     "items": {

@@ -469,7 +469,11 @@
   "giftLadder": {
     "eyebrow": "WHAT YOUR GIFT BUILDS",
     "heading": "The budget is costed room by <em>room</em>.",
+    "lede": "Every contribution, whatever its size, becomes part of the building and helps raise a lasting home for prayer, learning and community in Norway.",
     "anchorLabel": "FULL TAX DEDUCTION",
+    "ctaAll": "See all ways to give",
+    "prev": "Previous gift",
+    "next": "Next gift",
     "cta": "Choose an amount",
     "footnote": "Tax deductible up to 25 000 kr per year.",
     "items": {
