@@ -323,7 +323,11 @@ export function GiftBuilds() {
              giftLadder.ctaAll stays in the message files, unreferenced — it
              cost three translations and the second CTA may well come back
              somewhere on the giving pages. */}
-          <p className="mt-8 text-center text-[13.5px] text-paper/55">{t('footnote')}</p>
+          {/* No tax line here (client, 2026-09-13). The fact is not lost:
+             trust.taxDeductible carries it in the trust strip, and
+             whereMoneyGoes and wmgPage both state it in full with the cap
+             and the reporting. giftLadder.footnote stays in the message
+             files -- components/gift-ladder.tsx still renders it. */}
         </div>
       </SectionBody>
     </section>
