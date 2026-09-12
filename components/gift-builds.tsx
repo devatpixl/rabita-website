@@ -46,7 +46,11 @@ import { openGiveSheet } from './giving-sheet';
 const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
 
 const SHOTS: Record<string, string> = {
-  prayer: '/photos/gift-prayer.webp',
+  // Client-supplied, 2026-09-13. The shot it replaces was a single red
+  // prayer rug, which reads as one mat; this tier buys a square metre of
+  // the HALL floor, and a carpeted hall running away between the columns
+  // is what that actually looks like.
+  prayer: '/photos/gift-prayer-floor.webp',
   // Client-supplied, 2026-09-13. The shot it replaces was an open Qur'an
   // lying flat on a rug; this one is on a rehal, which reads as a library
   // rather than as a prayer hall — the tier is a shelf section.
