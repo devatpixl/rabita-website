@@ -34,7 +34,7 @@ export type FloorMarker = {
 
 export const FLOOR_MARKERS: Record<string, FloorMarker[]> = {
   lower: [
-    { id: 'garderober', x: 26, y: 70, lx: 6, ly: 60, align: 'end' },
+    { id: 'garderober', x: 41, y: 78, lx: 14, ly: 91, align: 'end' },
     { id: 'prayerMen', x: 52, y: 61, lx: 24, ly: 33, align: 'end' },
     { id: 'wuduMen', x: 73, y: 74, lx: 90, ly: 62, align: 'start' },
     { id: 'sportsHall', x: 66, y: 86, lx: 86, ly: 93, align: 'start' },
