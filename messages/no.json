@@ -275,7 +275,6 @@
       "give": "Gi <amount></amount> kr",
       "giveMonthly": "Gi <amount></amount> kr/mnd",
       "todoSubmit": "Betalingsintegrasjonen er ikke koblet på ennå. Knappen på siste steg er en plassholder.",
-      "switchMethod": "Bytt betalingsmåte",
       "monthlyOnly": "Kun månedlig",
       "giveWith": "Gi <amount></amount> kr med {method}",
       "giveWithMonthly": "Gi <amount></amount> kr/mnd med {method}"

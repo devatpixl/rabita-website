@@ -275,7 +275,6 @@
       "give": "تبرّع بـ <amount></amount> كرونة",
       "giveMonthly": "تبرّع بـ <amount></amount> كرونة/شهريًا",
       "todoSubmit": "تكامل الدفع غير موصّل بعد. الزر في الخطوة الأخيرة عنصر نائب.",
-      "switchMethod": "تغيير طريقة الدفع",
       "monthlyOnly": "شهري فقط",
       "giveWith": "تبرّع بـ <amount></amount> كرونة عبر {method}",
       "giveWithMonthly": "تبرّع بـ <amount></amount> كرونة/شهر عبر {method}"

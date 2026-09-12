@@ -29,9 +29,10 @@ import type { GivePurpose } from './giving-sheet';
 // Three-step wizard (order set by the client, 2026-08-30):
 //   1. Amount        — Monthly/Once toggle, 5 presets + Other, anonymous
 //   2. Your details  — name / email / mobile / tax deduction (fnr) / consent
-//   3. Payment       — opens straight on Vipps with a "switch" link that
-//                      reveals Apple Pay / Google Pay / card / AvtaleGiro
-//                      as logo tiles; zakat is asked here.
+//   3. Payment       — all five methods as logo tiles, marks only; zakat is
+//                      asked here. It used to open on Vipps alone behind a
+//                      "switch method" link (client, 2026-09-12: "kom rett
+//                      til alle valgene istedenfor bare vipps").
 //
 // Progress indicator reuses the carousel's language (2px hair segments,
 // --gold-deep active + completed, --rule track, 6px gap).
@@ -170,7 +171,6 @@ export function GivingCard({
 
   // ── Step 3 state (payment) ─────────────────────────────────────
   const [method, setMethod] = useState<PaymentMethod>('vipps');
-  const [switching, setSwitching] = useState(false);
   const [touched, setTouched] = useState<
     Partial<Record<keyof Details, boolean>>
   >({});
@@ -495,8 +495,6 @@ const TOTAL_STEPS = 3;
             <StepPayment
               method={method}
               setMethod={setMethod}
-              switching={switching}
-              setSwitching={setSwitching}
               monthly={frequency === 'monthly'}
               isZakat={isZakat}
               setIsZakat={setIsZakat}
@@ -829,15 +827,19 @@ function StepAmount({
 }
 
 // ─────────────────────────────────────────────────────────────────
-// Step 3 — payment. Opens on Vipps with one line to switch; switching
-// reveals the methods as logo tiles. No description text under each —
-// the mark is the description.
+// Step 3 — payment. All five methods at once, as logo tiles, with no name
+// under any of them: the mark IS the name, which is why they are
+// recognisable at a glance in the first place (client, 2026-09-12: "fjern
+// alle navnene på de ulike betalingsmetodene").
+//
+// AvtaleGiro keeps one line, because it is the one tile that can be
+// disabled — it is monthly only — and a greyed square with no explanation
+// is worse than a greyed square with a reason. Its own mark carries its
+// name anyway, so nothing is repeated.
 // ─────────────────────────────────────────────────────────────────
 type StepPaymentProps = {
   method: PaymentMethod;
   setMethod: (m: PaymentMethod) => void;
-  switching: boolean;
-  setSwitching: (v: boolean) => void;
   monthly: boolean;
   isZakat: boolean;
   setIsZakat: (v: boolean) => void;
@@ -846,78 +848,61 @@ type StepPaymentProps = {
 function StepPayment({
   method,
   setMethod,
-  switching,
-  setSwitching,
   monthly,
   isZakat,
   setIsZakat,
   t,
 }: StepPaymentProps) {
-  const name = (m: PaymentMethod) => t(`wizard.methods.${m}.name`);
   return (
     <div className="flex flex-col gap-4">
-      {!switching ? (
-        // The chosen method, as one tile, and the way out of it.
-        <div className="flex items-center justify-between gap-4 rounded-btn border-[1.5px] border-ink bg-paper px-4 py-3">
-          <span className="flex items-center gap-3">
-            <MethodMark method={method} className="h-7 w-16" />
-            <span className="text-[15px] font-semibold text-ink">{name(method)}</span>
-          </span>
-          <button
-            type="button"
-            onClick={() => setSwitching(true)}
-            className="min-h-11 text-[14px] font-medium text-gold-deep underline underline-offset-4 hover:text-ink"
-          >
-            {t('wizard.switchMethod')}
-          </button>
-        </div>
-      ) : (
-        <fieldset
-          className="border-0 p-0 m-0 grid grid-cols-2 gap-2.5 sm:grid-cols-3"
-          role="radiogroup"
-          aria-label={t('wizard.step2Title')}
-        >
-          <legend className="sr-only">{t('wizard.step2Title')}</legend>
-          {METHODS.map((m) => {
-            const selected = method === m;
-            const disabled = m === 'avtalegiro' && !monthly;
-            return (
-              <label
-                key={m}
-                className={cn(
-                  'flex min-h-[4.5rem] cursor-pointer flex-col items-center justify-center gap-1.5 rounded-btn px-2 py-3 transition-colors',
-                  selected
-                    ? 'border-[1.5px] border-ink bg-paper-2 text-ink'
-                    : 'border-[1.5px] border-ink/30 bg-paper text-ink hover:border-ink',
-                  disabled && 'cursor-not-allowed opacity-40 hover:border-ink/30',
-                )}
-              >
-                <input
-                  type="radio"
-                  name="method"
-                  value={m}
-                  checked={selected}
-                  disabled={disabled}
-                  onChange={() => {
-                    setMethod(m);
-                    setSwitching(false);
-                  }}
-                  className="sr-only"
-                />
-                <MethodMark method={m} className="h-6 w-14" />
-                {/* AvtaleGiro's mark IS its name, so no second line. */}
-                <span className="text-[12px] font-medium leading-tight text-center">
-                  {m === 'avtalegiro' ? (
-                    <span className="block font-normal opacity-70">{t('wizard.monthlyOnly')}</span>
-                  ) : (
-                    name(m)
-                  )}
+      <fieldset
+        className="border-0 p-0 m-0 grid grid-cols-2 gap-2.5 sm:grid-cols-3"
+        role="radiogroup"
+        aria-label={t('wizard.step2Title')}
+      >
+        <legend className="sr-only">{t('wizard.step2Title')}</legend>
+        {METHODS.map((m) => {
+          const selected = method === m;
+          const disabled = m === 'avtalegiro' && !monthly;
+          return (
+            <label
+              key={m}
+              className={cn(
+                'flex min-h-[3.75rem] cursor-pointer flex-col items-center justify-center gap-1 rounded-btn px-2 py-3 transition-colors',
+                selected
+                  ? 'border-[1.5px] border-ink bg-paper-2 text-ink'
+                  : 'border-[1.5px] border-ink/30 bg-paper text-ink hover:border-ink',
+                disabled && 'cursor-not-allowed opacity-40 hover:border-ink/30',
+              )}
+            >
+              <input
+                type="radio"
+                name="method"
+                value={m}
+                checked={selected}
+                disabled={disabled}
+                onChange={() => setMethod(m)}
+                className="sr-only"
+              />
+              {/* The accessible name, since the tile is now a mark and
+                 nothing else — a logo has no text for a screen reader to
+                 read. Except AvtaleGiro, whose "mark" is its name set as
+                 type, so adding this would have it announced twice. */}
+              {m !== 'avtalegiro' && (
+                <span className="sr-only">{t(`wizard.methods.${m}.name`)}</span>
+              )}
+              <MethodMark method={m} className="h-6 w-14" />
+              {/* Only AvtaleGiro says anything, and only because it is the
+                 one tile that greys out. */}
+              {m === 'avtalegiro' && (
+                <span className="block text-center text-[11px] font-normal leading-tight opacity-70">
+                  {t('wizard.monthlyOnly')}
                 </span>
-              </label>
-            );
-          })}
-        </fieldset>
-      )}
+              )}
+            </label>
+          );
+        })}
+      </fieldset>
 
       {/* Zakat, asked with the payment method (moved from the amount step). */}
       <label className="flex items-center gap-3 border-t border-rule pt-4 cursor-pointer group">
