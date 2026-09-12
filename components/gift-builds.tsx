@@ -40,7 +40,15 @@ const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
 
 const SHOTS: Record<string, string> = {
   prayer: '/photos/gift-prayer.webp',
-  shelf: '/photos/gift-library.webp',
+  // Client-supplied, 2026-09-13. The shot it replaces was an open Qur'an
+  // lying flat on a rug; this one is on a rehal, which reads as a library
+  // rather than as a prayer hall — the tier is a shelf section.
+  //
+  // It is 347x356, well under the 1200x900 of the other three. In a 304px
+  // card that is fine at 1x and soft at 2x, so a larger original is worth
+  // asking for. Kept at native size rather than upscaled: upscaling adds
+  // bytes without adding detail.
+  shelf: '/photos/gift-quran.webp',
   desk: '/photos/gift-school.webp',
   panel: '/photos/gift-facade.webp',
 };
