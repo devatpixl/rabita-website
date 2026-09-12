@@ -62,8 +62,17 @@ const SCRIM_FOOT =
 // Phones get a vertical wash instead: there is no room for a column beside
 // the building, so the words go under it and the shade has to come up from
 // the foot rather than in from the side.
+//
+// It is also heavier than the desktop scrim, and heaviest at the very top
+// (client, 2026-09-13: "on mobile, not clearly seen"). Two reasons the phone
+// needs more shade than the maths suggests: a 16:10 render cropped into a
+// portrait stage shows only its middle third, so whatever lands behind the
+// words is unpredictable — on the meeting room it is a wall of pendant
+// lights — and the counter sits at the very top where a foot-up gradient has
+// nothing left to give. Hence the bump at 0%, easing off by 18% so the
+// picture still opens bright.
 const SCRIM_PHONE =
-  'linear-gradient(180deg, rgba(22,36,46,0.35) 0%, rgba(22,36,46,0.55) 32%, rgba(22,36,46,0.92) 68%, rgba(22,36,46,0.97) 100%)';
+  'linear-gradient(180deg, rgba(22,36,46,0.62) 0%, rgba(22,36,46,0.48) 18%, rgba(22,36,46,0.62) 38%, rgba(22,36,46,0.94) 66%, rgba(22,36,46,0.98) 100%)';
 
 export function ProjectGallery({
   only,
@@ -158,7 +167,7 @@ export function ProjectGallery({
           {/* The counter, top right, the way the mockup marks position. The
              section label sits with it rather than as a heading, because the
              plate's own title is the heading here. */}
-          <div className="flex items-baseline justify-end gap-3 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-paper/55">
+          <div className="flex items-baseline justify-end gap-3 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-paper/75 sm:text-[0.625rem] sm:text-paper/55">
             <span className="hidden text-gold sm:inline">{t('label')}</span>
             <span aria-hidden className="hidden h-px w-8 bg-paper/25 sm:block" />
             <span className="tabular-nums">
@@ -166,18 +175,38 @@ export function ProjectGallery({
             </span>
           </div>
 
-          {/* The words. mode="wait" so one set is gone before the next
-             arrives — two titles at hero scale cross-fading through each
-             other is a smear. */}
-          <div className="flex flex-1 items-end pb-8 md:items-center md:pb-0">
-            <AnimatePresence mode="wait" initial={false}>
+          {/* The words.
+             NOT mode="wait", which is the obvious way to write this and
+             deadlocks: the exiting block never reported exit-complete, so
+             the incoming one never mounted, and the headline froze on one
+             render while the counter and the picture went on advancing.
+             Caught because the counter sits outside this AnimatePresence —
+             05 -> 06 with the title unchanged is not a state bug.
+
+             Instead the hand-off is timed. Exit is quick and the entrance
+             waits for it, which is what mode="wait" was wanted for: two
+             titles at hero scale fading through each other is a smear.
+
+             grid, not flex, with both children in the SAME cell: during the
+             overlap there are briefly two blocks, and in flow the second
+             would shove the first. The cell also keeps the taller of the
+             two, so nothing jumps as captions change length. */}
+          <div className="grid flex-1 items-end pb-8 md:items-center md:pb-0">
+            <AnimatePresence initial={false}>
               <motion.div
                 key={k}
-                className="max-w-[34rem]"
+                className="col-start-1 row-start-1 max-w-[34rem]"
                 initial={reduced ? false : { opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: reduced ? 0 : 0.35, ease: [0.22, 1, 0.36, 1] }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: reduced ? 0 : 0.34, delay: reduced ? 0 : 0.16, ease: [0.22, 1, 0.36, 1] },
+                }}
+                exit={{
+                  opacity: 0,
+                  y: -8,
+                  transition: { duration: reduced ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] },
+                }}
               >
                 <p className="flex items-center gap-3 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-gold">
                   <span aria-hidden className="h-px w-7 shrink-0 bg-gold/70" />
@@ -223,19 +252,19 @@ export function ProjectGallery({
                         // Ring INSIDE the box, not ring-offset: these sit on
                         // the photograph, and an offset ring needs a solid
                         // colour behind it to offset against.
-                        'relative block h-[4.5rem] w-[7.5rem] overflow-hidden rounded-xl text-start transition-all duration-300 sm:h-20 sm:w-36',
+                        'relative block h-[5.25rem] w-[8.75rem] overflow-hidden rounded-xl text-start transition-all duration-300 sm:h-20 sm:w-36',
                         on
                           ? 'ring-2 ring-gold shadow-[0_0_0_1px_rgba(22,36,46,0.5),0_10px_30px_-12px_rgba(0,0,0,0.8)]'
-                          : 'opacity-60 ring-1 ring-paper/20 hover:opacity-95 hover:ring-paper/45',
+                          : 'opacity-75 ring-1 ring-paper/30 hover:opacity-95 hover:ring-paper/45 sm:opacity-60 sm:ring-paper/20',
                       )}
                     >
                       <Image src={s.src} alt="" fill sizes="144px" className="object-cover" style={{ objectPosition: s.pos }} />
                       <span
                         aria-hidden
                         className="absolute inset-0"
-                        style={{ background: 'linear-gradient(180deg, rgba(22,36,46,0) 40%, rgba(22,36,46,0.85) 100%)' }}
+                        style={{ background: 'linear-gradient(180deg, rgba(22,36,46,0) 18%, rgba(22,36,46,0.6) 55%, rgba(22,36,46,0.95) 100%)' }}
                       />
-                      <span className="absolute inset-x-0 bottom-0 flex items-baseline gap-1.5 px-2 pb-1.5 font-mono text-[0.5625rem] uppercase tracking-[0.12em]">
+                      <span className="absolute inset-x-0 bottom-0 flex items-baseline gap-1.5 px-2 pb-2 font-mono text-[0.625rem] uppercase tracking-[0.1em] sm:pb-1.5 sm:text-[0.5625rem] sm:tracking-[0.12em]">
                         <span className={cn('tabular-nums', on ? 'text-gold' : 'text-paper/60')}>
                           {String(idx + 1).padStart(2, '0')}
                         </span>
