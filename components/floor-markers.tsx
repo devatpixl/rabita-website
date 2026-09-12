@@ -51,6 +51,33 @@ const FRAME_H = 1400;
 // one. The floor with the tightest pair of rooms is the second (the
 // children's room and the imam's office, 36px apart) — they clear because
 // the separation there is mostly vertical and a one-line chip is 14px tall.
+// Percentages in, viewBox units out. The marker data is authored as
+// percentages of the drawing because that is what you can read off it with a
+// grid; both overlays draw in the frame's own 1258x1400 units because that is
+// the only space a meet-fit can be exact in. These two convert.
+const px = (p: number) => (p * FRAME_W) / 100;
+const py = (p: number) => (p * FRAME_H) / 100;
+
+// The desktop marker, restated in viewBox units from the 3% and 1% of the
+// frame it used to be, so it is the same size on screen as before.
+const DISC_R = (3 * FRAME_W) / 100;
+const DOT_R = (1 * FRAME_W) / 100;
+
+// The desktop label. LABEL_BOX_W is the measure the text is aligned inside,
+// not a drawn width — the longest name here, "Konferanse- og
+// selskapslokaler", runs about 410 units at this type size, so 560 holds it
+// with room and nothing has to wrap. LABEL_BOX_H reserves one line and
+// centres on the leader's end; a foreignObject clips to its box.
+//
+// LABEL_TYPE_DESKTOP 24 is the old fixed 10px restated: the drawing paints
+// about 545 units wide on a 13" laptop, a scale of 0.43, and 24 x 0.43 is
+// 10.4px. Across the desktop range it lands between 8px and 13px, and it
+// now tracks the drawing rather than ignoring it.
+const LABEL_BOX_W = 560;
+const LABEL_BOX_H = 90;
+const LABEL_GAP = 20;
+const LABEL_TYPE_DESKTOP = 24;
+
 const CHIP_W = 460;
 const CHIP_H = 200;
 const LABEL_TYPE = 34;
@@ -126,23 +153,32 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
       </svg>
 
       {/* ── tablet and up: leaders and names ───────────────────────────
-         Mirrors the drawing's own painted box. The <Image> is object-contain
-         object-bottom, so on a pane taller than the frame's 1258/1400 the
-         picture is height-constrained and bottom-aligned — which is exactly
-         what an items-end box of the same aspect ratio reproduces. */}
+         ONE meet-fit SVG, the same device the phone layer uses, spanning the
+         whole pane: preserveAspectRatio="xMidYMax meet" IS object-contain +
+         object-bottom, which is exactly how the <Image> beneath paints. So
+         every coordinate here lands on the same spot of the drawing at any
+         pane size.
+
+         This replaces a box that carried the frame's aspect ratio at
+         height:100% and assumed the drawing was always height-constrained.
+         It usually is on a desktop, so the old box usually agreed — but
+         "usually" is not a guarantee, and the client has asked for the
+         drawing to be scaled up (2026-09-12), which changes the pane's
+         proportions. A width-constrained pane would have shrunk the picture
+         and left the box at full height, sliding every marker off its room.
+         The meet-fit cannot drift, because it is the same fit.
+
+         Coordinates are still authored as percentages; they are multiplied
+         into viewBox units at the point of use. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 hidden items-end justify-center md:flex"
+        className="pointer-events-none absolute inset-0 hidden md:block"
       >
-        <div className="relative h-full" style={{ aspectRatio: `${FRAME_W} / ${FRAME_H}` }}>
-          {/* Leaders and points. viewBox in the same percentage space as the
-             marker data; non-scaling-stroke keeps the hairline a hairline
-             however the box is stretched. */}
-          <svg
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            className="absolute inset-0 h-full w-full overflow-visible"
-          >
+        <svg
+          viewBox={`0 0 ${FRAME_W} ${FRAME_H}`}
+          preserveAspectRatio="xMidYMax meet"
+          className="absolute inset-0 h-full w-full overflow-visible"
+        >
             {markers.map((m, i) => (
               <g
                 key={m.id}
@@ -160,10 +196,10 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
                    out on the walls and a truly dark line would have vanished
                    on the ground instead. */}
                 <line
-                  x1={m.x}
-                  y1={m.y}
-                  x2={m.lx}
-                  y2={m.ly}
+                  x1={px(m.x)}
+                  y1={py(m.y)}
+                  x2={px(m.lx)}
+                  y2={py(m.ly)}
                   stroke="#9B7F4A"
                   strokeWidth={1.25}
                   strokeOpacity={0.95}
@@ -175,44 +211,78 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
                    decks, which is where most of these points land — and the
                    gold ring keeps it findable on the dark green prayer halls,
                    where a dusk dot on its own would disappear. */}
+                {/* DISC_R and DOT_R are the old 3% and 1% of the frame
+                   restated in viewBox units, so the marker is the same size
+                   on screen as before the fit changed. The old 100x100
+                   viewBox was stretched (preserveAspectRatio="none"), which
+                   made these "circles" very slightly elliptical; uniform
+                   units make them round, which is what they always looked
+                   like anyway. */}
                 <circle
-                  cx={m.x}
-                  cy={m.y}
-                  r={3}
+                  cx={px(m.x)}
+                  cy={py(m.y)}
+                  r={DISC_R}
                   fill="#16242E"
                   stroke="#9B7F4A"
                   strokeWidth={1.25}
                   vectorEffect="non-scaling-stroke"
-                  style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
                 />
-                <circle cx={m.x} cy={m.y} r={1} fill="#9B7F4A" vectorEffect="non-scaling-stroke" />
+                <circle cx={px(m.x)} cy={py(m.y)} r={DOT_R} fill="#9B7F4A" vectorEffect="non-scaling-stroke" />
               </g>
             ))}
-          </svg>
 
-          {/* The names. HTML rather than SVG text, so they keep the site's own
-             mono face and letter-spacing at any size. */}
-          {markers.map((m, i) => (
-            <span
-              key={m.id}
-              className={cn(
-                'absolute whitespace-nowrap font-mono text-[0.625rem] uppercase leading-none tracking-[0.16em] text-paper/90 transition-opacity duration-500 ease-out motion-reduce:transition-none',
-                active ? 'opacity-100' : 'opacity-0',
-              )}
-              style={{
-                left: `${m.lx}%`,
-                top: `${m.ly}%`,
-                // The leader arrives on the label's inner edge, so the text
-                // always runs AWAY from the building.
-                transform: `translate(${m.align === 'end' ? '-100%' : '0'}, -50%)`,
-                paddingInline: m.align === 'end' ? '0 0.5rem' : '0.5rem 0',
-                transitionDelay: active ? `${240 + i * 90}ms` : '0ms',
-              }}
-            >
-              {t(m.id)}
-            </span>
-          ))}
-        </div>
+            {/* The names, in the SAME fit as the leaders that reach them.
+               They used to be an HTML layer positioned in percentages of the
+               aspect box; now that the box is gone they live here, so a label
+               and its leader can never disagree about where the drawing is.
+
+               foreignObject, not <text>, to keep the site's own mono face,
+               letter-spacing and uppercasing. Inside a foreignObject, px ARE
+               viewBox units, so the type is sized in them — which also means
+               the labels grow with the drawing instead of staying 10px while
+               it is scaled up. */}
+            {markers.map((m, i) => (
+              <foreignObject
+                key={`${m.id}-label`}
+                x={m.align === 'end' ? px(m.lx) - LABEL_BOX_W : px(m.lx)}
+                y={py(m.ly) - LABEL_BOX_H / 2}
+                width={LABEL_BOX_W}
+                height={LABEL_BOX_H}
+                className={cn(
+                  'overflow-visible transition-opacity duration-500 ease-out motion-reduce:transition-none',
+                  active ? 'opacity-100' : 'opacity-0',
+                )}
+                style={{ transitionDelay: active ? `${240 + i * 90}ms` : '0ms' }}
+              >
+                {/* The leader arrives on the label's inner edge, so the text
+                   always runs AWAY from the building. */}
+                <div
+                  style={{
+                    display: 'flex',
+                    width: '100%',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: m.align === 'end' ? 'flex-end' : 'flex-start',
+                    paddingInline: m.align === 'end' ? `0 ${LABEL_GAP}px` : `${LABEL_GAP}px 0`,
+                  }}
+                >
+                  <span
+                    style={{
+                      whiteSpace: 'nowrap',
+                      fontFamily: 'var(--font-mono), ui-monospace, monospace',
+                      fontSize: `${LABEL_TYPE_DESKTOP}px`,
+                      lineHeight: 1,
+                      letterSpacing: '0.16em',
+                      textTransform: 'uppercase',
+                      color: 'rgb(250 248 244 / 0.9)',
+                    }}
+                  >
+                    {t(m.id)}
+                  </span>
+                </div>
+              </foreignObject>
+            ))}
+          </svg>
       </div>
     </>
   );
