@@ -58,7 +58,7 @@ export const FLOOR_MARKERS: Record<string, FloorMarker[]> = {
     { id: 'school', x: 50, y: 35, lx: 24, ly: 10, align: 'end' },
     { id: 'amphi', x: 65, y: 53, lx: 97, ly: 36, align: 'start' },
     { id: 'garden', x: 70, y: 64, lx: 99, ly: 66, align: 'start' },
-    { id: 'conference', x: 28, y: 64, lx: 12, ly: 92, align: 'end' },
+    { id: 'conference', x: 30, y: 57, lx: 10, ly: 86, align: 'end' },
   ],
   fourth: [
     { id: 'meetingRooms', x: 44, y: 30, lx: 18, ly: 10, align: 'end' },
