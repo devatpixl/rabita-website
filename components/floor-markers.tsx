@@ -58,10 +58,10 @@ const FRAME_H = 1400;
 const px = (p: number) => (p * FRAME_W) / 100;
 const py = (p: number) => (p * FRAME_H) / 100;
 
-// The desktop marker, restated in viewBox units from the 3% of the frame it
-// used to be, so it is the same size on screen as before. The 1% inner dot
-// went with the centre (client, 2026-09-13).
+// The desktop marker, restated in viewBox units from the 3% and 1% of the
+// frame it used to be, so it is the same size on screen as before.
 const DISC_R = (3 * FRAME_W) / 100;
+const DOT_R = (1 * FRAME_W) / 100;
 
 // The desktop label. LABEL_BOX_W is the measure the text is aligned inside,
 // not a drawn width — the longest name here, "Konferanse- og
@@ -215,26 +215,38 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
                   strokeOpacity={0.95}
                   vectorEffect="non-scaling-stroke"
                 />
-                {/* One solid gold disc. Nothing inside it (client,
-                   2026-09-13: "not even the dark colour inside, the small
-                   one, full filled with orange").
+                {/* Gold disc, dusk centre. Filled with the gold it used
+                   to be outlined in, and the middle left as the section's
+                   own dusk — an exact inversion of the marker this section
+                   shipped with.
 
-                   Where this got to, in order: a dusk disc with a gold ring
-                   and gold centre; then hollow, gold only, because the
-                   client asked for the black circle gone; then gold-filled
-                   with a dusk centre, because hollow vanished on the second
-                   floor's busy right-hand cluster; now the centre goes too.
+                   Four rounds with the client got here, and the last two
+                   are worth keeping straight so nobody reopens them:
 
-                   I argued for keeping the centre -- a plate annotation
-                   should say WHERE, not just "something here", and a solid
-                   disc covers its own centre point. The client has asked for
-                   it twice, so it is their call, and being unmissable is
-                   the thing they have been asking for throughout. If it
-                   ever reads heavy, DISC_R is one number.
+                     dusk disc, gold ring, gold centre   (the original)
+                     -> hollow, gold only                 "fjerne den svarte
+                                                           sirkelen"
+                     -> gold fill, dusk centre            hollow vanished on
+                                                           the second floor's
+                                                           busy right cluster
+                     -> solid gold, no centre             "not even the dark
+                                                           colour inside"
+                     -> gold fill, dusk centre            "let dark remain,
+                                                           solid disks look
+                                                           so bad"
 
-                   DISC_R is 3% of the frame in viewBox units, so the marker
-                   keeps its proportions at any size. */}
+                   So it is back where it was one step ago, by the client's
+                   own eye rather than by argument. Solid gold is the version
+                   to leave alone: it reads as a blob, it covers the point it
+                   is supposed to mark, and it has now been rejected on
+                   sight.
+
+                   No stroke — a gold ring around a gold fill draws nothing.
+
+                   DISC_R and DOT_R are 3% and 1% of the frame in viewBox
+                   units, so the marker keeps its proportions at any size. */}
                 <circle cx={px(m.x)} cy={py(m.y)} r={DISC_R} fill="#9B7F4A" />
+                <circle cx={px(m.x)} cy={py(m.y)} r={DOT_R} fill="#16242E" />
               </g>
             ))}
 
