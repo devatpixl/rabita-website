@@ -275,13 +275,17 @@ export async function ProjectOverview() {
       </div>
 
       {/* Architect credit, out of the ledger: bottom-right of the plate, set
-         like a caption. */}
+         like a caption.
+
+         Two lines, not three. This used to split CAMPAIGN.architect on its
+         comma and stack the firm under the name -- which is the "Norconsult
+         pa Havard" the client asked to remove (Versjon 3). With the firm
+         gone from the value there is nothing after the comma, and the split
+         would have printed a <br /> and an empty third line. */}
       <p className="absolute bottom-4 end-6 hidden text-end font-mono text-[10px] uppercase leading-relaxed tracking-[0.14em] text-paper/45 md:block lg:end-12">
         {t('credit')}
         <br />
-        {CAMPAIGN.architect.split(',')[0]}
-        <br />
-        {CAMPAIGN.architect.split(',').slice(1).join(',').trim()}
+        {CAMPAIGN.architect}
       </p>
     </section>
   );

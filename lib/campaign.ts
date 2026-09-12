@@ -62,7 +62,11 @@ export const CAMPAIGN = Object.freeze({
   // has been claiming all along, and 6+2 would have made eight.
   floorsBelow: 1,
   rentalApartments: 15,
-  architect: 'Håvard Lindgard Fagernes, Norconsult',
+  // The person, without a firm after his name (client, Versjon 3: "fjern
+  // Norconsult pa Havard"). He drew the first sketches in 2019 as the
+  // project's architect; Norconsult came later and is credited on its own
+  // renders, in three image captions that are NOT affected by this.
+  architect: 'Håvard Lindgard Fagernes',
   siteClearedRamadan: 2025,
   constructionStart: '2026-Q1',
   completionDate: null as string | null, // TODO §13.1
