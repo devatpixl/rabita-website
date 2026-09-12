@@ -235,8 +235,15 @@ export function ProjectGallery({
 
           {/* The strip, and the arrows that close the row. */}
           <div className="flex items-end gap-4 sm:gap-6">
+            {/* py, not just pb. Setting overflow-x promotes overflow-y from
+               visible to auto, so this strip clips vertically whether or not
+               it is asked to — and the current thumbnail's gold ring is a
+               box-shadow, drawn OUTSIDE its box. With no top padding the
+               thumbnails sat flush against the top edge and the ring was
+               shaved off up there while the bottom had room (client,
+               2026-09-13: "the top here of images missing"). */}
             <ol
-              className="no-scrollbar -mx-1 flex flex-1 gap-3 overflow-x-auto px-1 pb-1"
+              className="no-scrollbar -mx-1 flex flex-1 gap-3 overflow-x-auto px-1 py-1.5"
               aria-label={t('label')}
             >
               {slides.map((s, idx) => {
@@ -254,7 +261,11 @@ export function ProjectGallery({
                         // colour behind it to offset against.
                         'relative block h-[5.25rem] w-[8.75rem] overflow-hidden rounded-xl text-start transition-all duration-300 sm:h-20 sm:w-36',
                         on
-                          ? 'ring-2 ring-gold shadow-[0_0_0_1px_rgba(22,36,46,0.5),0_10px_30px_-12px_rgba(0,0,0,0.8)]'
+                          // No drop shadow: a 30px blur inside a container
+                          // that clips at 6px is a smudge along the edge, not
+                          // a lift. The 1px liner stays — it separates the
+                          // gold ring from a pale render behind it.
+                          ? 'ring-2 ring-gold shadow-[0_0_0_1px_rgba(22,36,46,0.55)]'
                           : 'opacity-75 ring-1 ring-paper/30 hover:opacity-95 hover:ring-paper/45 sm:opacity-60 sm:ring-paper/20',
                       )}
                     >
