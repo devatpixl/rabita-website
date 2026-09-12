@@ -47,12 +47,12 @@ export const FLOOR_MARKERS: Record<string, FloorMarker[]> = {
     { id: 'library', x: 77, y: 72, lx: 97, ly: 60, align: 'start' },
   ],
   second: [
-    { id: 'prayerWomen', x: 48, y: 45, lx: 30, ly: 12, align: 'end' },
-    { id: 'prayerScreened', x: 62, y: 34, lx: 85, ly: 18, align: 'start' },
-    { id: 'commercial', x: 30, y: 72, lx: 12, ly: 92, align: 'end' },
-    { id: 'wuduWomen', x: 77, y: 64, lx: 93, ly: 52, align: 'start', mx: 78, my: 57 },
-    { id: 'childrensRoom', x: 64, y: 77, lx: 94, ly: 68, align: 'start', mx: 62, my: 70 },
-    { id: 'imamOffice', x: 76, y: 83, lx: 95, ly: 92, align: 'start' },
+    { id: 'prayerWomen', x: 50, y: 44, lx: 30, ly: 12, align: 'end' },
+    { id: 'prayerScreened', x: 65, y: 33, lx: 85, ly: 18, align: 'start' },
+    { id: 'commercial', x: 48, y: 79, lx: 12, ly: 92, align: 'end', mx: 34, my: 76 },
+    { id: 'wuduWomen', x: 76, y: 64, lx: 93, ly: 52, align: 'start' },
+    { id: 'childrensRoom', x: 68, y: 70, lx: 94, ly: 66, align: 'start' },
+    { id: 'imamOffice', x: 67, y: 81, lx: 95, ly: 92, align: 'start' },
   ],
   third: [
     { id: 'school', x: 50, y: 35, lx: 24, ly: 10, align: 'end' },
