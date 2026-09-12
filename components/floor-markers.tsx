@@ -73,14 +73,20 @@ const DOT_R = (1 * FRAME_W) / 100;
 // set from an estimate of how big the drawing paints; measured on a real
 // 1440x900 Air it paints 451 tall, a scale of 0.32, which put these names at
 // 7.7px -- which is what the client could not read. With the padding
-// reclaimed the same screen paints about 574 tall, and 28 units lands at
-// 11.5px there and 9.5px on a 1280x800. LABEL_BOX_W grew with it: the
-// longest name, "Konferanse- og selskapslokaler", needs about 510 units at
-// this size, and a foreignObject clips rather than overflowing.
-const LABEL_BOX_W = 680;
-const LABEL_BOX_H = 100;
+// reclaimed the same screen paints 567 tall, and 32 units lands at 13px
+// there (client, 2026-09-13: bigger, "not soo much but the perfect
+// amount"), 10.7px on a 1280x800 and 17.9px on a 16".
+//
+// LABEL_BOX_W has to grow faster than the type, because a foreignObject
+// CLIPS what overflows it rather than letting it spill. The longest name,
+// "Konferanse- og selskapslokaler", is 30 characters of mono at 0.16em
+// tracking, so about 0.76em each: 730 units at this size, plus the gap.
+// 820 covers it with room, and is free -- the box is a measure to align
+// inside, not a drawn width.
+const LABEL_BOX_W = 820;
+const LABEL_BOX_H = 110;
 const LABEL_GAP = 20;
-const LABEL_TYPE_DESKTOP = 28;
+const LABEL_TYPE_DESKTOP = 32;
 
 const CHIP_W = 460;
 const CHIP_H = 200;
