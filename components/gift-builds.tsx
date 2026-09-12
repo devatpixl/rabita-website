@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useInView, useReducedMotion } from 'motion/react';
 import { useLocale, useTranslations } from 'next-intl';
 import { GIFTS } from '@/lib/gifts';
@@ -132,8 +131,43 @@ export function GiftBuilds() {
     <section
       id="hva-din-gave-bygger"
       aria-labelledby="gift-builds-heading"
-      className="bg-dusk py-12 text-paper"
+      className="relative isolate overflow-hidden bg-dusk py-14 text-paper"
     >
+      {/* The ground is a photograph, not a colour (client, 2026-09-13). It
+         stays behind the section rather than scrolling with the page, and
+         bg-dusk underneath is only the colour it falls back to while the
+         file loads — not a panel the picture sits on. */}
+      <Image
+        src="/photos/gift-bg.webp"
+        alt=""
+        aria-hidden
+        fill
+        sizes="100vw"
+        // eager, not lazy. This is the section's ground, not a picture in
+        // it: lazily loaded it arrives after the reader does, and the
+        // section flashes flat dusk first. 72KB is a fair price for the
+        // thing the whole treatment rests on. Not `priority` — that
+        // preloads for LCP, and this is well below the fold.
+        loading="eager"
+        className="-z-10 select-none object-cover object-center"
+        draggable={false}
+      />
+      {/* One wash, in the section's own dusk so it reads as shade rather
+         than as a grey sheet. Strongest at the head and the foot, where
+         type sits directly on it, and lightest across the middle third —
+         that is where the cards are, and they carry their own gradients,
+         so the room behind them can stay legible. The photograph is
+         already near-dusk in the centre and keeps its warm light at the
+         edges: the mashrabiya on the left, the chandelier and the arch on
+         the right. Those are the whole point of using it. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(22,36,46,0.86) 0%, rgba(22,36,46,0.62) 20%, rgba(22,36,46,0.5) 52%, rgba(22,36,46,0.72) 84%, rgba(22,36,46,0.88) 100%)',
+        }}
+      />
       <SectionBody>
         {/* The head, as a spread: heading left, lede right behind a rule. */}
         <div className="grid gap-6 lg:grid-cols-12 lg:items-start lg:gap-12">
@@ -200,8 +234,8 @@ export function GiftBuilds() {
                         // The current card is taller. Height, not scale: a
                         // scaled card blurs its own photograph and its text.
                         on
-                          ? 'h-[23rem] opacity-100 ring-1 ring-gold/70'
-                          : 'h-[20rem] opacity-70 ring-1 ring-paper/10 hover:opacity-95',
+                          ? 'h-[27rem] opacity-100 ring-1 ring-gold/70 sm:h-[29rem]'
+                          : 'h-[24rem] opacity-70 ring-1 ring-paper/10 hover:opacity-95 sm:h-[25.5rem]',
                       )}
                     >
                       <Image
@@ -227,7 +261,7 @@ export function GiftBuilds() {
                         }}
                       />
 
-                      <span className="absolute inset-x-0 bottom-0 block p-4">
+                      <span className="absolute inset-x-0 bottom-0 block p-5">
                         <span className="mb-3 flex items-center gap-2.5">
                           <span
                             className={cn(
@@ -263,7 +297,7 @@ export function GiftBuilds() {
                            every card it would be four asks and no choice. */}
                         <span
                           className={cn(
-                            'mt-4 inline-flex min-h-10 items-center gap-2.5 rounded-full border px-4 text-[14px] transition-all duration-300',
+                            'mt-5 inline-flex min-h-10 items-center gap-2.5 rounded-full border px-4 text-[14px] transition-all duration-300',
                             on
                               ? 'translate-y-0 border-gold/60 bg-gold/10 text-paper opacity-100 group-hover:bg-gold group-hover:text-dusk'
                               : 'pointer-events-none translate-y-2 border-transparent opacity-0',
@@ -280,48 +314,16 @@ export function GiftBuilds() {
             })}
           </ul>
 
-          {/* Position, and the way to move without a swipe. */}
-          <ol className="mt-4 flex items-center justify-center gap-2" aria-label={t('eyebrow')}>
-            {GIFTS.map((g, i) => (
-              <li key={g.key}>
-                <button
-                  type="button"
-                  onClick={() => go(i)}
-                  aria-label={`${formatAmount(locale, g.amountNok)} kr`}
-                  aria-current={i === active ? 'true' : undefined}
-                  className="grid h-8 w-7 place-items-center"
-                >
-                  <span
-                    className={cn(
-                      'block h-[2px] rounded-full transition-all duration-300',
-                      i === active ? 'w-6 bg-gold' : 'w-3 bg-paper/25',
-                    )}
-                  />
-                </button>
-              </li>
-            ))}
-          </ol>
+          {/* No dots and no closing CTA row here (client, 2026-09-13:
+             "just remove these and keep page like before"). The rail is
+             paged by its arrows, by clicking a card, and by swipe; the ask
+             is the button on the current card, which is where the reference
+             put it too. The section ends on the tax line it always ended on.
 
-          {/* The way on. A ladder that ends in silence is a dead end. */}
-          <div className="mt-8 flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-center sm:gap-5">
-            <button
-              type="button"
-              onClick={() => openGiveSheet(GIFTS[active].amountNok)}
-              className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-gold px-6 text-[15px] font-semibold text-dusk transition-colors hover:bg-paper"
-            >
-              {t('cta')}
-              <span aria-hidden className="rtl:-scale-x-100">&rarr;</span>
-            </button>
-            <Link
-              href={`/${locale}/gi-en-gave`}
-              className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-paper/30 px-6 text-[15px] text-paper transition-colors hover:border-gold hover:text-gold"
-            >
-              {t('ctaAll')}
-              <span aria-hidden className="rtl:-scale-x-100">&rarr;</span>
-            </Link>
-          </div>
-
-          <p className="mt-6 text-center text-[13.5px] text-paper/55">{t('footnote')}</p>
+             giftLadder.ctaAll stays in the message files, unreferenced — it
+             cost three translations and the second CTA may well come back
+             somewhere on the giving pages. */}
+          <p className="mt-8 text-center text-[13.5px] text-paper/55">{t('footnote')}</p>
         </div>
       </SectionBody>
     </section>
