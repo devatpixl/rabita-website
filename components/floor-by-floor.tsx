@@ -102,18 +102,14 @@ export function FloorByFloor() {
   // under prefers-reduced-motion, where the pin is dropped and there is
   // nothing to skip.
   //
-  // One element, rendered into two slots that are never both shown: top
-  // left above the eyebrow from md, and under the step counter on a phone
-  // (client, 2026-09-10). The phone slot is not a preference — the left
-  // column there is the eyebrow and a two-line heading with nothing to
-  // spare, while the right column is a single 14px counter with the rest of
-  // the header empty beneath it. Moving the control there gives 52px of
-  // header back to the drawing.
+  // TWO shapes, because the two screens put it in different places and a
+  // control sized for one crowds the other.
   //
-  // The label is building.skip, the string the old control on BuildingRises
-  // used. Same control, same words — a second copy in this namespace would
-  // only drift.
-  const skipControl = reduced ? null : (
+  // PHONE — text and a caret, under the step counter (client, 2026-09-10).
+  // That slot is not a preference: the left column there is the eyebrow and
+  // a two-line heading with nothing to spare, while the right column is a
+  // single 14px counter with the rest of the header empty beneath it.
+  const skipPhone = reduced ? null : (
     <button
       type="button"
       onClick={skip}
@@ -127,6 +123,53 @@ export function FloorByFloor() {
         className="transition-transform duration-200 group-hover:translate-y-0.5 motion-reduce:transition-none"
       >
         &darr;
+      </span>
+    </button>
+  );
+
+  // TABLET AND UP — at the FOOT of the section, and an actual arrow (client,
+  // Moskeprosjektet item 6: "flytt hopp over til nede eller legg en fin
+  // pil"). Both halves of that sentence at once: it moves down, and the
+  // caret becomes a gold ring with a real arrow in it that fills on hover —
+  // the seal FollowUs already uses, in this section's colours.
+  //
+  // It goes on the floor caption's own row rather than a row of its own. The
+  // caption is 20px and this is 36, so sharing costs 16px where a new row
+  // would cost 52; and dropping the old top-left slot gives back 52. The
+  // drawing nets 36px, which is the opposite of what moving a control
+  // usually costs.
+  //
+  // Why the bottom is the better place anyway: this is where a reader who
+  // has seen enough is already looking — at the end of the thing, not above
+  // it — and the top slot sat above the eyebrow, which made the eyebrow the
+  // second thing in the section rather than the first.
+  //
+  // Both carry building.skip, the string the old control on BuildingRises
+  // used. Same words in both shapes; a second copy would only drift.
+  const skipDesktop = reduced ? null : (
+    <button
+      type="button"
+      onClick={skip}
+      className="group inline-flex items-center gap-3 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-paper/55 transition-colors hover:text-gold"
+    >
+      <span className="border-b border-transparent pb-px group-hover:border-gold">
+        {tBuilding('skip')}
+      </span>
+      <span
+        aria-hidden
+        className="grid h-9 w-9 shrink-0 place-items-center rounded-full ring-1 ring-gold/40 transition-colors duration-300 group-hover:bg-gold group-hover:ring-gold"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          className="h-4 w-4 text-gold transition-[transform,color] duration-300 group-hover:translate-y-0.5 group-hover:text-dusk motion-reduce:transition-none"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M12 5v14M19 12l-7 7-7-7" />
+        </svg>
       </span>
     </button>
   );
@@ -156,8 +199,6 @@ export function FloorByFloor() {
                from and a flex item collapses to its widest in-flow child —
                which was the eyebrow, wrapping the heading to about 120px. */}
             <div className="min-w-0 flex-1">
-              {/* Tablet and up. The phone copy lives under the counter. */}
-              <div className="mb-4 hidden md:block">{skipControl}</div>
               <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
                 {t('eyebrow')}
               </p>
@@ -213,7 +254,7 @@ export function FloorByFloor() {
                 {/* Phones only — the same control the left column carries
                    from md. Only ever one of the two is displayed, so the
                    other is out of the accessibility tree too. */}
-                <div className="mt-3 md:hidden">{skipControl}</div>
+                <div className="mt-3 md:hidden">{skipPhone}</div>
               </div>
             )}
           </div>
@@ -274,20 +315,29 @@ export function FloorByFloor() {
               {/* Fixed height, because the labels stack absolutely for the
                  cross-fade — but the longest label runs two lines on a
                  phone, so the box is two lines tall until sm. */}
-              <p className="relative h-8 overflow-hidden sm:h-5">
-                {KEYS.map((k, i) => (
-                  <span
-                    key={k}
-                    aria-hidden={i !== step}
-                    className={cn(
-                      'absolute inset-x-0 top-0 text-center font-mono text-[0.625rem] uppercase leading-snug tracking-[0.16em] transition-opacity duration-500 sm:text-start',
-                      i === step ? 'text-paper opacity-100' : 'opacity-0',
-                    )}
-                  >
-                    {t(`floors.${k}`)}
-                  </span>
-                ))}
-              </p>
+              {/* The floor name and, from md, the way out — one row, so the
+                 control costs 16px rather than a row of its own. min-w-0 on
+                 the caption because its own children are absolute: without
+                 it the flex item has nothing in flow to size from. */}
+              <div className="flex items-center justify-between gap-6">
+                <p className="relative h-8 min-w-0 flex-1 overflow-hidden sm:h-5">
+                  {KEYS.map((k, i) => (
+                    <span
+                      key={k}
+                      aria-hidden={i !== step}
+                      className={cn(
+                        'absolute inset-x-0 top-0 text-center font-mono text-[0.625rem] uppercase leading-snug tracking-[0.16em] transition-opacity duration-500 sm:text-start',
+                        i === step ? 'text-paper opacity-100' : 'opacity-0',
+                      )}
+                    >
+                      {t(`floors.${k}`)}
+                    </span>
+                  ))}
+                </p>
+                {/* Only ever one of the two skip controls is displayed, so
+                   the other is out of the accessibility tree too. */}
+                <div className="hidden shrink-0 md:block">{skipDesktop}</div>
+              </div>
               <div className="mt-3 flex items-center gap-1.5">
                 {Array.from({ length: STEPS }).map((_, i) => (
                   <span
