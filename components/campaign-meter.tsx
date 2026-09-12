@@ -32,6 +32,23 @@ const stroke = {
   strokeLinejoin: 'round' as const,
 };
 
+function IconFoundation() {
+  return (
+    <svg viewBox="0 0 24 24" className={ICON} {...stroke} aria-hidden>
+      <path d="M3 20h18" />
+      <path d="M6 20v-6h12v6" />
+      <path d="M12 14V8" />
+      <path d="M8.5 8h7l-3.5-4.5L8.5 8Z" />
+    </svg>
+  );
+}
+function IconHeart() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" {...stroke} strokeWidth={1.8} aria-hidden>
+      <path d="M12 20s-7-4.3-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.7-7 9-7 9Z" />
+    </svg>
+  );
+}
 function IconPeople() {
   return (
     <svg viewBox="0 0 24 24" className={ICON} {...stroke} aria-hidden>
@@ -50,32 +67,6 @@ function IconTarget() {
     </svg>
   );
 }
-function IconCalendar() {
-  return (
-    <svg viewBox="0 0 24 24" className={ICON} {...stroke} aria-hidden>
-      <rect x="3" y="5" width="18" height="16" rx="2.5" />
-      <path d="M3 10h18M8 3v4M16 3v4" />
-    </svg>
-  );
-}
-function IconFoundation() {
-  return (
-    <svg viewBox="0 0 24 24" className={ICON} {...stroke} aria-hidden>
-      <path d="M3 20h18" />
-      <path d="M6 20v-6h12v6" />
-      <path d="M12 14V8" />
-      <path d="M8.5 8h7l-3.5-4.5L8.5 8Z" />
-    </svg>
-  );
-}
-function IconHeart() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-4 w-4" {...stroke} strokeWidth={1.8} aria-hidden>
-      <path d="M12 20s-7-4.3-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.7-7 9-7 9Z" />
-    </svg>
-  );
-}
-
 // A label in a tinted tile, the phone layout's repeating unit.
 function Tile({ children }: { children: React.ReactNode }) {
   return (
@@ -115,10 +106,15 @@ export async function CampaignMeter() {
           })}
         </h2>
 
-        {/* ── tablet and up: unchanged ─────────────────────────────────
-           Raised and goal as two figures on one baseline — the goal is the
-           other half of the story, so it is set in the same serif rather
-           than as a caption. The button closes the row. */}
+        {/* ── tablet and up ───────────────────────────────────────────
+           ONE figure on this baseline: what has come in. The goal used to
+           stand beside it in gold italic, and the client moved it down into
+           the stats row (Versjon 3: "flytte 100 000 000,- til der det star
+           73 millioner,-"), leaving nothing in its place. Two nine-figure
+           numbers on one line were competing, and the goal was also being
+           said twice — the stats row carried "remaining", which is only
+           this number minus the one on the left. The button closes the
+           row. */}
         <div className="hidden md:block">
         <div className="mt-6 flex flex-col gap-6 md:mt-8 md:flex-row md:items-end md:justify-between md:gap-12">
           <dl className="flex flex-col gap-4 sm:flex-row sm:items-end sm:gap-12">
@@ -131,22 +127,6 @@ export async function CampaignMeter() {
               </dd>
               <dt className="mt-2 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60 md:mt-3">
                 {t('label')}
-              </dt>
-            </div>
-            <div className="sm:border-s sm:border-rule sm:ps-12">
-              {/* The goal in the site's accent — gold italic — so the two
-                 figures read as "what we have" and "what we are reaching
-                 for" rather than two of the same. */}
-              <dd>
-                <PhasePopover steps={steps} label={t('roadmap')} currentLabel={t('now')}>
-                  <span className="flex items-baseline gap-2 font-serif italic leading-none tabular-nums tracking-[-0.02em] text-gold-deep">
-                    <span className="text-[clamp(1.65rem,3.2vw,3.25rem)]">{formatAmount(locale, goal)}</span>
-                    <span className="text-xl md:text-2xl">kr</span>
-                  </span>
-                </PhasePopover>
-              </dd>
-              <dt className="mt-2 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60 md:mt-3">
-                {t('goalLabel')}
               </dt>
             </div>
           </dl>
@@ -198,11 +178,17 @@ export async function CampaignMeter() {
             </dt>
           </div>
           <div className="border-s border-rule ps-5 sm:ps-8">
-            <dd className="font-serif text-[clamp(1.6rem,2.6vw,2.25rem)] leading-none tabular-nums text-ink">
-              {formatAmount(locale, CAMPAIGN.goalNok - CAMPAIGN.raisedNok)} kr
+            {/* The goal, in the gold italic it has always been set in — it
+               has moved down from the headline row, not changed its nature,
+               and the contrast with the ink figure above it is still "what
+               we have" against "what we are reaching for". Gold on the
+               month's movement beside it is the same accent doing a
+               different job; the italic and the label separate them. */}
+            <dd className="font-serif italic text-[clamp(1.6rem,2.6vw,2.25rem)] leading-none tabular-nums tracking-[-0.02em] text-gold-deep">
+              {formatAmount(locale, goal)} kr
             </dd>
             <dt className="mt-2 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">
-              {t('remainingLabel')}
+              {t('goalLabel')}
             </dt>
           </div>
           <div className="col-span-2 border-t border-rule pt-5 sm:col-span-1 sm:border-t-0 sm:border-s sm:border-rule sm:ps-8 sm:pt-0">
@@ -273,23 +259,19 @@ export async function CampaignMeter() {
               {t('label')}
             </p>
 
-            <p className="mt-6 flex items-center gap-2 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-ink-60">
-              <span className="text-gold-deep">
-                <IconTarget />
-              </span>
-              {t('goalLabel')}
-            </p>
-            <p className="mt-2 flex items-baseline gap-2 font-serif italic leading-none tabular-nums tracking-[-0.02em] text-gold-deep">
-              <span className="text-[1.75rem]">{formatAmount(locale, goal)}</span>
-              <span className="text-base">kr</span>
-            </p>
-
             {/* Thicker and fully rounded, per the reference: on a phone the
                bar is the one graphic on the screen, and a 2.5px hairline
-               reads as a rule rather than as a measure. */}
+               reads as a rule rather than as a measure.
+
+               mt-7, not the mt-5 it had: this used to follow the goal
+               figure, which is now down in the cards, so the bar sits
+               under the 10px "samlet inn" label instead. At mt-5 it
+               crowded it — the gap has to read as a break between the
+               headline figure and its measure, and 20px under a caption
+               reads as part of the caption. */}
             <AnimatedProgress
               percent={pct}
-              className="mt-5 h-3 rounded-full bg-paper ring-1 ring-rule"
+              className="mt-7 h-3 rounded-full bg-paper ring-1 ring-rule"
               fillClassName="rounded-full bg-gradient-to-r from-gold to-gold-deep"
             />
             <div className="mt-2.5 flex items-baseline justify-between font-mono text-[0.625rem] uppercase tracking-[0.14em]">
@@ -310,18 +292,27 @@ export async function CampaignMeter() {
              that lets a two-line label sit beside a 9px tile without
              pushing the figure off its own baseline. */}
           <dl className="mt-3 grid grid-cols-2 gap-3">
-            {/* flex-col + mt-auto, because one label runs to two lines and
-               the other to one: without it the two figures sit at different
+            {/* flex-col + mt-auto, because the labels can run to different
+               numbers of lines: without it the two figures sit at different
                heights and the pair reads as a mistake. whitespace-nowrap on
-               the figures for the same reason — "73 004 821 kr" is the
-               longest string either card will ever hold, and it breaks
-               after the last group if it is allowed to.
+               the figures for the same reason — these numbers break after a
+               digit group if they are allowed to.
 
-               Which means the size has to be fluid, or nowrap just moves the
-               problem outside the card: measured, that string is 121px at
-               20px type and a card is only 97px wide inside its padding at
-               320. The clamp keeps it at 20px from 421px up and scales it
-               down below, with 5px to spare on the narrowest screen. */}
+               Which means the size has to be fluid, or nowrap just moves
+               the problem outside the card — and the longest string in the
+               pair got longer when the goal moved in here: "100 000 000 kr"
+               against the "73 004 821 kr" this card used to hold.
+
+               ONE clamp across both cards, not one each. Sizing them
+               separately so each just fits its own string is what a
+               per-card measurement leads to, and it looks like a bug: two
+               figures side by side in identical cards, set 2px apart.
+
+               Re-measured in the browser at 320/360/390/430 rather than
+               scaled off the old numbers: the figure runs 6.87px of width
+               per 1px of type, and a card is 96px inside its padding at
+               320. So 0.84rem is the floor, which leaves about 4px there,
+               and 4.2vw reaches it at 320 and the 20px ceiling at 477. */}
             <div className="flex flex-col rounded-2xl bg-paper p-4 ring-1 ring-rule">
               <div className="flex items-start gap-2.5">
                 <Tile>
@@ -331,21 +322,21 @@ export async function CampaignMeter() {
                   {t('lastMonthLabel')}
                 </dt>
               </div>
-              <dd className="mt-auto whitespace-nowrap pt-3 font-serif text-[clamp(0.95rem,4.75vw,1.25rem)] leading-none tabular-nums text-gold-deep">
+              <dd className="mt-auto whitespace-nowrap pt-3 font-serif text-[clamp(0.84rem,4.2vw,1.25rem)] leading-none tabular-nums text-gold-deep">
                 +{formatAmount(locale, CAMPAIGN.lastMonthNok)} <span className="text-[0.8em]">kr</span>
               </dd>
             </div>
             <div className="flex flex-col rounded-2xl bg-paper p-4 ring-1 ring-rule">
               <div className="flex items-start gap-2.5">
                 <Tile>
-                  <IconCalendar />
+                  <IconTarget />
                 </Tile>
                 <dt className="font-mono text-[0.5625rem] uppercase leading-[1.6] tracking-[0.1em] text-ink-60">
-                  {t('remainingLabel')}
+                  {t('goalLabel')}
                 </dt>
               </div>
-              <dd className="mt-auto whitespace-nowrap pt-3 font-serif text-[clamp(0.95rem,4.75vw,1.25rem)] leading-none tabular-nums text-ink">
-                {formatAmount(locale, goal - raised)} <span className="text-[0.8em]">kr</span>
+              <dd className="mt-auto whitespace-nowrap pt-3 font-serif italic text-[clamp(0.84rem,4.2vw,1.25rem)] leading-none tabular-nums tracking-[-0.02em] text-gold-deep">
+                {formatAmount(locale, goal)} <span className="text-[0.8em]">kr</span>
               </dd>
             </div>
           </dl>
