@@ -193,29 +193,47 @@ export function DesktopNav() {
                   </button>
                 );
               })()}
+
+              {/* The panel now hangs off the item that opens it, not off the
+                 header (client, 2026-09-12: "why such a big width, make it
+                 fit to longest word"). It used to be inset-x-0 with an inner
+                 max-w-[84rem] card, which was right when it held thirteen
+                 items in three columns each carrying a sentence. Against one
+                 column of keywords that was a 1344px card holding a 200px
+                 list.
+                 
+                 w-max sizes it to its longest label. start-0 anchors it to
+                 the item, and mirrors itself in Arabic.
+
+                 pt-[10px] rather than a margin: the gap between the label
+                 and the card has to be part of the hoverable area, or the
+                 pointer crosses dead space on the way down and the menu
+                 shuts. And because the card is now a DESCENDANT of the item,
+                 mouseleave on <nav> cannot fire while the pointer is inside
+                 it — moving from label to card is no longer a hover problem
+                 to be defended against. */}
+              <AnimatePresence>
+                {active && hasMenu(key) && (
+                  <motion.div
+                    key="panel"
+                    initial={reduced ? false : { opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                    onMouseEnter={clear}
+                    className="absolute start-0 top-full z-40 hidden pt-[10px] md:block"
+                  >
+                    <div className="w-max min-w-[13rem] rounded-2xl border border-rule bg-paper px-4 py-2 shadow-[0_24px_48px_-28px_rgba(0,0,0,0.4)]">
+                      <MegaPanel navKey={key} onNavigate={() => setOpenKey(null)} />
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           );
         })}
       </nav>
 
-      <AnimatePresence>
-        {openKey && (
-          <motion.div
-            key="mega"
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            onMouseEnter={clear}
-            onMouseLeave={close}
-            className="absolute inset-x-0 top-full hidden md:block"
-          >
-            <div className="mx-auto mt-[6px] w-full max-w-[84rem] rounded-3xl border border-rule bg-paper px-9 py-4 shadow-[0_24px_48px_-28px_rgba(0,0,0,0.4)]">
-              <MegaPanel navKey={openKey} onNavigate={() => setOpenKey(null)} />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
