@@ -399,11 +399,10 @@ export default async function ApartmentsPage({
         </SectionBody>
       </section>
 
-      <section className="bg-paper-2 py-section-md">
-        <SectionBody>
-          <ProjectGallery only={['roofTerrace', 'garden', 'minaret', 'facadeEvening']} />
-        </SectionBody>
-      </section>
+      {/* Full-bleed, like the project page's. No CTA here: the only place
+         it would sensibly point is /moskeprosjektet, and the interest
+         section directly below is this page's actual ask. */}
+      <ProjectGallery only={['roofTerrace', 'garden', 'minaret', 'facadeEvening']} />
 
       {/* Interest. */}
       <Section tone="paper-2" id="interesse">

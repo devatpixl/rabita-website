@@ -1260,6 +1260,7 @@
       "prev": "Previous picture",
       "next": "Next picture",
       "goto": "Go to picture {n}",
+      "cta": "See the progress",
       "items": {
         "facadeEvening": {
           "tag": "The facade at dusk",

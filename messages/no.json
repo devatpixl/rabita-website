@@ -1260,6 +1260,7 @@
       "prev": "Forrige bilde",
       "next": "Neste bilde",
       "goto": "Gå til bilde {n}",
+      "cta": "Se fremdriften",
       "items": {
         "facadeEvening": {
           "tag": "Fasaden om kvelden",

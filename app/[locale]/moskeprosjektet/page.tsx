@@ -84,15 +84,12 @@ export default async function ProjectPage({
       <BuildingRises /> */}
       <FloorByFloor />
 
-      {/* The renders, as a gallery. Replaced the single aerial plate on
-         2026-08-30: the client wanted the whole set, paged with arrows,
-         each with a line of context — set inside the picture rather than
-         beside it, so the render keeps the full width. */}
-      <section className="bg-paper-2 pt-14 pb-section-md md:pt-20">
-        <SectionBody>
-          <ProjectGallery />
-        </SectionBody>
-      </section>
+      {/* The renders. Full-bleed since 2026-09-13, to the client's mockup,
+         so the component owns its own section and ground — no band, no
+         SectionBody, no paper. The CTA points at Fremdrift: "read more
+         about the project" is circular on the project page, and the one
+         thing these renders do not answer is when. */}
+      <ProjectGallery cta={{ href: `/${locale}/moskeprosjektet/fremdrift`, label: t('gallery.cta') }} />
 
       {/* Fremdrift, in digest. Sits here deliberately: the renders above
          answer "what will it look like", the key figures below open with
