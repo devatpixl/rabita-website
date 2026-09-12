@@ -17,6 +17,14 @@ import { openGiveSheet } from './giving-sheet';
 // What your gift builds — the costed items, as a rail of plates you page
 // through, on dusk to break the run of paper sections.
 //
+// Sized to a laptop. At the reference's proportions this section came to
+// 999px, which is 209 more than a 13" Air has and meant scrolling the best
+// part of a screen to reach the ask (client, 2026-09-13: "we need to scroll
+// a lot to see shit fully, the cta at end"). The height came off the padding,
+// the gaps and — mostly — the cards, rather than from moving the CTA out of
+// the closing position, which is where the reference puts it and where it
+// reads as the point of the section rather than a button in a header.
+//
 // Rebuilt to the client's reference (2026-09-13). Against the four-across
 // grid this was:
 //
@@ -124,7 +132,7 @@ export function GiftBuilds() {
     <section
       id="hva-din-gave-bygger"
       aria-labelledby="gift-builds-heading"
-      className="bg-dusk py-section-lg text-paper"
+      className="bg-dusk py-12 text-paper"
     >
       <SectionBody>
         {/* The head, as a spread: heading left, lede right behind a rule. */}
@@ -148,7 +156,7 @@ export function GiftBuilds() {
           </div>
         </div>
 
-        <div ref={root} className="relative mt-12 md:mt-16">
+        <div ref={root} className="relative mt-10">
           {/* Arrows in the page gutter, not over the cards. -inset-x-2 put
              them ON the first and last card, covering their titles. The
              section body is max-w-6xl centred, so the gutter is 64px at the
@@ -164,7 +172,7 @@ export function GiftBuilds() {
              grows UPWARD out of the row rather than shunting the rest. */}
           <ul
             ref={railRef}
-            className="no-scrollbar -mx-1 flex snap-x snap-mandatory items-end gap-4 overflow-x-auto px-1 pb-2 pt-6 sm:gap-5"
+            className="no-scrollbar -mx-1 flex snap-x snap-mandatory items-end gap-4 overflow-x-auto px-1 pb-2 pt-5 sm:gap-5"
           >
             {GIFTS.map((g, i) => {
               const on = i === active;
@@ -192,8 +200,8 @@ export function GiftBuilds() {
                         // The current card is taller. Height, not scale: a
                         // scaled card blurs its own photograph and its text.
                         on
-                          ? 'h-[27rem] opacity-100 ring-1 ring-gold/70 sm:h-[29rem]'
-                          : 'h-[24rem] opacity-70 ring-1 ring-paper/10 hover:opacity-95 sm:h-[25.5rem]',
+                          ? 'h-[23rem] opacity-100 ring-1 ring-gold/70'
+                          : 'h-[20rem] opacity-70 ring-1 ring-paper/10 hover:opacity-95',
                       )}
                     >
                       <Image
@@ -219,7 +227,7 @@ export function GiftBuilds() {
                         }}
                       />
 
-                      <span className="absolute inset-x-0 bottom-0 block p-5">
+                      <span className="absolute inset-x-0 bottom-0 block p-4">
                         <span className="mb-3 flex items-center gap-2.5">
                           <span
                             className={cn(
@@ -255,7 +263,7 @@ export function GiftBuilds() {
                            every card it would be four asks and no choice. */}
                         <span
                           className={cn(
-                            'mt-5 inline-flex min-h-10 items-center gap-2.5 rounded-full border px-4 text-[14px] transition-all duration-300',
+                            'mt-4 inline-flex min-h-10 items-center gap-2.5 rounded-full border px-4 text-[14px] transition-all duration-300',
                             on
                               ? 'translate-y-0 border-gold/60 bg-gold/10 text-paper opacity-100 group-hover:bg-gold group-hover:text-dusk'
                               : 'pointer-events-none translate-y-2 border-transparent opacity-0',
@@ -273,7 +281,7 @@ export function GiftBuilds() {
           </ul>
 
           {/* Position, and the way to move without a swipe. */}
-          <ol className="mt-6 flex items-center justify-center gap-2" aria-label={t('eyebrow')}>
+          <ol className="mt-4 flex items-center justify-center gap-2" aria-label={t('eyebrow')}>
             {GIFTS.map((g, i) => (
               <li key={g.key}>
                 <button
@@ -295,7 +303,7 @@ export function GiftBuilds() {
           </ol>
 
           {/* The way on. A ladder that ends in silence is a dead end. */}
-          <div className="mt-10 flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-center sm:gap-5">
+          <div className="mt-8 flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-center sm:gap-5">
             <button
               type="button"
               onClick={() => openGiveSheet(GIFTS[active].amountNok)}
@@ -313,7 +321,7 @@ export function GiftBuilds() {
             </Link>
           </div>
 
-          <p className="mt-8 text-center text-[13.5px] text-paper/55">{t('footnote')}</p>
+          <p className="mt-6 text-center text-[13.5px] text-paper/55">{t('footnote')}</p>
         </div>
       </SectionBody>
     </section>
