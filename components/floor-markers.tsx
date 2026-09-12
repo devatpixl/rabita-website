@@ -58,10 +58,10 @@ const FRAME_H = 1400;
 const px = (p: number) => (p * FRAME_W) / 100;
 const py = (p: number) => (p * FRAME_H) / 100;
 
-// The desktop marker, restated in viewBox units from the 3% and 1% of the
-// frame it used to be, so it is the same size on screen as before.
+// The desktop marker, restated in viewBox units from the 3% of the frame it
+// used to be, so it is the same size on screen as before. The 1% inner dot
+// went with the centre (client, 2026-09-13).
 const DISC_R = (3 * FRAME_W) / 100;
-const DOT_R = (1 * FRAME_W) / 100;
 
 // The desktop label. LABEL_BOX_W is the measure the text is aligned inside,
 // not a drawn width — the longest name here, "Konferanse- og
@@ -215,31 +215,26 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
                   strokeOpacity={0.95}
                   vectorEffect="non-scaling-stroke"
                 />
-                {/* Gold disc, dusk centre — an exact inversion of what
-                   stood here (client, 2026-09-12: remove the black circle
-                   and keep the gold; then, seeing a hollow ring, "try
-                   filling in with orange ... so easily shown").
+                {/* One solid gold disc. Nothing inside it (client,
+                   2026-09-13: "not even the dark colour inside, the small
+                   one, full filled with orange").
 
-                   Filled with the gold rather than outlined in it, because
-                   hollow disappeared exactly where the client said it would
-                   in September: the second floor's right-hand cluster, three
-                   small rooms with a lot of linework behind them. Gold is
-                   the loud half of this palette, so the fill is the version
-                   that survives a busy background.
+                   Where this got to, in order: a dusk disc with a gold ring
+                   and gold centre; then hollow, gold only, because the
+                   client asked for the black circle gone; then gold-filled
+                   with a dusk centre, because hollow vanished on the second
+                   floor's busy right-hand cluster; now the centre goes too.
 
-                   The centre stays, in the section's own dusk, so the marker
-                   still reads as pointing AT a spot. Solid gold with no
-                   centre was tried and is a blob — it says "something here"
-                   without saying where. A paper centre was tried too and
-                   pops slightly harder, but white centres read as a UI
-                   control rather than a plate annotation.
+                   I argued for keeping the centre -- a plate annotation
+                   should say WHERE, not just "something here", and a solid
+                   disc covers its own centre point. The client has asked for
+                   it twice, so it is their call, and being unmissable is
+                   the thing they have been asking for throughout. If it
+                   ever reads heavy, DISC_R is one number.
 
-                   No stroke: a gold ring around a gold fill draws nothing.
-
-                   DISC_R and DOT_R are 3% and 1% of the frame in viewBox
-                   units, so the marker keeps its proportions at any size. */}
+                   DISC_R is 3% of the frame in viewBox units, so the marker
+                   keeps its proportions at any size. */}
                 <circle cx={px(m.x)} cy={py(m.y)} r={DISC_R} fill="#9B7F4A" />
-                <circle cx={px(m.x)} cy={py(m.y)} r={DOT_R} fill="#16242E" />
               </g>
             ))}
 
