@@ -215,26 +215,31 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
                   strokeOpacity={0.95}
                   vectorEffect="non-scaling-stroke"
                 />
-                {/* The disc is the section's own dusk, not hollow (client,
-                   2026-09-09: a gold dot is hard to find on the building).
-                   Filled dark it reads instantly against pale walls and roof
-                   decks, which is where most of these points land — and the
-                   gold ring keeps it findable on the dark green prayer halls,
-                   where a dusk dot on its own would disappear. */}
-                {/* DISC_R and DOT_R are the old 3% and 1% of the frame
-                   restated in viewBox units, so the marker is the same size
-                   on screen as before the fit changed. The old 100x100
-                   viewBox was stretched (preserveAspectRatio="none"), which
-                   made these "circles" very slightly elliptical; uniform
-                   units make them round, which is what they always looked
-                   like anyway. */}
+                {/* Hollow, not filled (client, 2026-09-12: "fjerne den
+                   svarte sirkelen bare ha gull greia"). The ring and the
+                   centre dot are the gold; the drawing shows through
+                   between them.
+
+                   This reverses the dusk fill added on 2026-09-09, when the
+                   same client found a gold dot hard to pick out on the
+                   building — so it may well come back. Two things make the
+                   hollow version a fairer test than it was then: the figure
+                   is now a quarter bigger, so the ring is a bigger target,
+                   and the ring is 1.75px rather than 1.25px. The stroke does
+                   not scale (vectorEffect), so when the drawing grew the old
+                   hairline got proportionally thinner — it is now carrying
+                   the marker on its own instead of edging a dark disc, and
+                   1.25px was set for the latter job.
+
+                   DISC_R and DOT_R are 3% and 1% of the frame in viewBox
+                   units, so the marker keeps its proportions at any size. */}
                 <circle
                   cx={px(m.x)}
                   cy={py(m.y)}
                   r={DISC_R}
-                  fill="#16242E"
+                  fill="none"
                   stroke="#9B7F4A"
-                  strokeWidth={1.25}
+                  strokeWidth={1.75}
                   vectorEffect="non-scaling-stroke"
                 />
                 <circle cx={px(m.x)} cy={py(m.y)} r={DOT_R} fill="#9B7F4A" vectorEffect="non-scaling-stroke" />
