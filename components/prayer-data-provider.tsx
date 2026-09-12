@@ -46,5 +46,11 @@ export function usePrayerDayAfter(now: Date | null): PrayerDay | null {
 
 /** Jumu'ah slots as one string: "14:00 · 15:00". */
 export function joinJumuah(slots: string[]): string {
-  return slots.join(' · ');
+  // A slash, not a middot (client, 2026-09-12: "skille tydeligere mellom 14
+  // og 15"). The utility strip divides its own segments with a middot too —
+  // next prayer · jumu'ah · hijri date — so joining the two jumu'ah slots
+  // with the same character made "14:00 · 15:00" read as two unrelated
+  // fields rather than as two prayers on one day. The slash is a different
+  // mark doing a different job.
+  return slots.join(' / ');
 }

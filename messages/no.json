@@ -20,7 +20,7 @@
   },
   "utility": {
     "prayer": {
-      "jumua": "Fredag",
+      "jumua": "Fredagsbønn",
       "hourUnit": "t",
       "minuteUnit": "m",
       "nextLabel": "neste",

@@ -20,7 +20,7 @@
   },
   "utility": {
     "prayer": {
-      "jumua": "Friday",
+      "jumua": "Friday prayer",
       "hourUnit": "h",
       "minuteUnit": "m",
       "nextLabel": "next",

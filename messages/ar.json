@@ -20,7 +20,7 @@
   },
   "utility": {
     "prayer": {
-      "jumua": "الجمعة",
+      "jumua": "صلاة الجمعة",
       "hourUnit": "س",
       "minuteUnit": "د",
       "nextLabel": "التالي",
