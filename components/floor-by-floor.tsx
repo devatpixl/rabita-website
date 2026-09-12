@@ -143,7 +143,13 @@ export function FloorByFloor() {
           reduced ? 'py-section-md' : 'sticky top-0 h-[100svh] overflow-hidden',
         )}
       >
-        <header className="shrink-0 px-6 pt-16 md:pt-28">
+        {/* pt-16 at every width now. It was md:pt-28, 112px, which is
+           generous for a section that is PINNED -- nothing scrolls past
+           this header, so the air above it is never read as breathing
+           room, only as a smaller drawing. That 48px goes to the figure
+           (client, 2026-09-13: "too small ... can hardly see the diagram
+           and names" on a 13" Air). Phone value unchanged. */}
+        <header className="shrink-0 px-6 pt-16">
           <div className="mx-auto flex max-w-6xl items-start justify-between gap-8">
             {/* min-w-0 flex-1: the heading's lines are all absolutely
                positioned now, so this column has no in-flow content to size
@@ -220,14 +226,21 @@ export function FloorByFloor() {
            building. 24px of side padding either side costs 43px of drawing
            width, which is a whole point of label size. Desktop keeps its
            margin. */}
-        <div className="relative mt-2 min-h-0 flex-1 px-2 pb-8 md:mt-4 md:px-6">
+        <div className="relative mt-2 min-h-0 flex-1 px-2 pb-8 md:mt-4 md:px-6 md:pb-3">
           {/* No plate and no blend trick: the frames carry real alpha. The
              sheet was cut out of the images themselves — a flood fill from
              the borders, so only white CONNECTED to the outside went; the
              building's own white walls and the label boxes are enclosed by
              linework and survive. A 2px dilate eats the anti-aliased rim
              that would otherwise halo pale against the dark ground. */}
-          <div className="relative mx-auto h-full w-full max-w-3xl">
+          {/* max-w-5xl, not 3xl. The drawing is height-constrained at every
+             desktop size -- 574 tall needs only 516 across -- so widening
+             this box does NOT change how big the picture is, or where any
+             marker sits. It widens the letterbox either side, which is
+             where the names live. At 3xl the right-hand names had a few
+             pixels of clearance before the pane clipped them, and the type
+             is now bigger. */}
+          <div className="relative mx-auto h-full w-full max-w-5xl">
             {Array.from({ length: STEPS }).map((_, i) => (
               <Image
                 key={i}
@@ -256,7 +269,7 @@ export function FloorByFloor() {
         {/* Which floor this is, and the progress rail under it. The label is
            keyed so it cross-fades in step with the drawing above it. */}
         {!reduced && (
-          <div className="shrink-0 px-6 pb-8 pt-3 md:pb-20 md:pt-4">
+          <div className="shrink-0 px-6 pb-8 pt-3 md:pb-8 md:pt-4">
             <div className="mx-auto max-w-6xl">
               {/* Fixed height, because the labels stack absolutely for the
                  cross-fade — but the longest label runs two lines on a

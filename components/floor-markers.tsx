@@ -69,14 +69,18 @@ const DOT_R = (1 * FRAME_W) / 100;
 // with room and nothing has to wrap. LABEL_BOX_H reserves one line and
 // centres on the leader's end; a foreignObject clips to its box.
 //
-// LABEL_TYPE_DESKTOP 24 is the old fixed 10px restated: the drawing paints
-// about 545 units wide on a 13" laptop, a scale of 0.43, and 24 x 0.43 is
-// 10.4px. Across the desktop range it lands between 8px and 13px, and it
-// now tracks the drawing rather than ignoring it.
-const LABEL_BOX_W = 560;
-const LABEL_BOX_H = 90;
+// LABEL_TYPE_DESKTOP is in viewBox units, so it tracks the drawing. 24 was
+// set from an estimate of how big the drawing paints; measured on a real
+// 1440x900 Air it paints 451 tall, a scale of 0.32, which put these names at
+// 7.7px -- which is what the client could not read. With the padding
+// reclaimed the same screen paints about 574 tall, and 28 units lands at
+// 11.5px there and 9.5px on a 1280x800. LABEL_BOX_W grew with it: the
+// longest name, "Konferanse- og selskapslokaler", needs about 510 units at
+// this size, and a foreignObject clips rather than overflowing.
+const LABEL_BOX_W = 680;
+const LABEL_BOX_H = 100;
 const LABEL_GAP = 20;
-const LABEL_TYPE_DESKTOP = 24;
+const LABEL_TYPE_DESKTOP = 28;
 
 const CHIP_W = 460;
 const CHIP_H = 200;
