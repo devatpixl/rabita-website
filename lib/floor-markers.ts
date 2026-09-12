@@ -41,7 +41,7 @@ export const FLOOR_MARKERS: Record<string, FloorMarker[]> = {
   ],
   first: [
     { id: 'prayerMain', x: 52, y: 50, lx: 27, ly: 15, align: 'end' },
-    { id: 'cafe', x: 21, y: 65, lx: 5, ly: 58, align: 'end', my: 73 },
+    { id: 'cafe', x: 21, y: 65, lx: 4, ly: 78, align: 'end', my: 73 },
     { id: 'residentsEntrance', x: 13, y: 63, lx: 3, ly: 45, align: 'end' },
     { id: 'foyer', x: 57, y: 83, lx: 74, ly: 95, align: 'start' },
     { id: 'library', x: 77, y: 72, lx: 97, ly: 60, align: 'start' },
