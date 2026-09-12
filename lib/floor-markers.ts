@@ -49,10 +49,10 @@ export const FLOOR_MARKERS: Record<string, FloorMarker[]> = {
   second: [
     { id: 'prayerWomen', x: 50, y: 44, lx: 30, ly: 12, align: 'end' },
     { id: 'prayerScreened', x: 65, y: 33, lx: 85, ly: 18, align: 'start' },
-    { id: 'commercial', x: 48, y: 79, lx: 12, ly: 92, align: 'end', mx: 34, my: 76 },
-    { id: 'wuduWomen', x: 76, y: 64, lx: 93, ly: 52, align: 'start' },
-    { id: 'childrensRoom', x: 68, y: 70, lx: 94, ly: 66, align: 'start' },
-    { id: 'imamOffice', x: 67, y: 81, lx: 95, ly: 92, align: 'start' },
+    { id: 'commercial', x: 40, y: 68, lx: 12, ly: 92, align: 'end', mx: 34, my: 76 },
+    { id: 'wuduWomen', x: 76, y: 61, lx: 93, ly: 48, align: 'start', my: 57 },
+    { id: 'childrensRoom', x: 68, y: 66, lx: 94, ly: 64, align: 'start' },
+    { id: 'imamOffice', x: 71, y: 77, lx: 95, ly: 92, align: 'start' },
   ],
   third: [
     { id: 'school', x: 50, y: 35, lx: 24, ly: 10, align: 'end' },
