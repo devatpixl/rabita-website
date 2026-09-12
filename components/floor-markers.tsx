@@ -215,34 +215,31 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
                   strokeOpacity={0.95}
                   vectorEffect="non-scaling-stroke"
                 />
-                {/* Hollow, not filled (client, 2026-09-12: "fjerne den
-                   svarte sirkelen bare ha gull greia"). The ring and the
-                   centre dot are the gold; the drawing shows through
-                   between them.
+                {/* Gold disc, dusk centre — an exact inversion of what
+                   stood here (client, 2026-09-12: remove the black circle
+                   and keep the gold; then, seeing a hollow ring, "try
+                   filling in with orange ... so easily shown").
 
-                   This reverses the dusk fill added on 2026-09-09, when the
-                   same client found a gold dot hard to pick out on the
-                   building — so it may well come back. Two things make the
-                   hollow version a fairer test than it was then: the figure
-                   is now a quarter bigger, so the ring is a bigger target,
-                   and the ring is 1.75px rather than 1.25px. The stroke does
-                   not scale (vectorEffect), so when the drawing grew the old
-                   hairline got proportionally thinner — it is now carrying
-                   the marker on its own instead of edging a dark disc, and
-                   1.25px was set for the latter job.
+                   Filled with the gold rather than outlined in it, because
+                   hollow disappeared exactly where the client said it would
+                   in September: the second floor's right-hand cluster, three
+                   small rooms with a lot of linework behind them. Gold is
+                   the loud half of this palette, so the fill is the version
+                   that survives a busy background.
+
+                   The centre stays, in the section's own dusk, so the marker
+                   still reads as pointing AT a spot. Solid gold with no
+                   centre was tried and is a blob — it says "something here"
+                   without saying where. A paper centre was tried too and
+                   pops slightly harder, but white centres read as a UI
+                   control rather than a plate annotation.
+
+                   No stroke: a gold ring around a gold fill draws nothing.
 
                    DISC_R and DOT_R are 3% and 1% of the frame in viewBox
                    units, so the marker keeps its proportions at any size. */}
-                <circle
-                  cx={px(m.x)}
-                  cy={py(m.y)}
-                  r={DISC_R}
-                  fill="none"
-                  stroke="#9B7F4A"
-                  strokeWidth={1.75}
-                  vectorEffect="non-scaling-stroke"
-                />
-                <circle cx={px(m.x)} cy={py(m.y)} r={DOT_R} fill="#9B7F4A" vectorEffect="non-scaling-stroke" />
+                <circle cx={px(m.x)} cy={py(m.y)} r={DISC_R} fill="#9B7F4A" />
+                <circle cx={px(m.x)} cy={py(m.y)} r={DOT_R} fill="#16242E" />
               </g>
             ))}
 
