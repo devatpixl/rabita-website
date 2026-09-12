@@ -186,24 +186,12 @@ function MegaPanel({ navKey, onNavigate }: { navKey: NavKey; onNavigate: () => v
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
     >
-      {/* "See everything in Services" is a sentence that promises a
-         destination, so it is a link — it was plain text, which is exactly the
-         kind of thing people click at and nothing happens. Goes to the
-         section's own root. */}
-      <LinkVT
-        href={`/${locale}${NAV_ROOT[navKey]}`}
-        onClick={onNavigate}
-        className="group/all inline-flex items-center gap-2 font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60 transition-colors hover:text-gold-deep"
-      >
-        {t('overview')} {t(`items.${navKey}`)}
-        <span
-          aria-hidden
-          className="transition-transform duration-200 group-hover/all:translate-x-1 rtl:rotate-180 rtl:group-hover/all:-translate-x-1"
-        >
-          &rarr;
-        </span>
-      </LinkVT>
-      <ul className="mt-3 grid gap-x-10 gap-y-0 md:grid-cols-2 lg:grid-cols-3">
+      {/* The "Se alt i Tjenester" row that sat here is gone (client,
+         2026-09-12). It pointed at NAV_ROOT[navKey] — the same destination
+         as the nav item the reader is already hovering in order to see this
+         panel — so it was a link back to the thing that opened it. His mock
+         of this menu starts straight at the first service. */}
+      <ul className="grid gap-x-10 gap-y-0 md:grid-cols-2 lg:grid-cols-3">
         {items.map((item) => (
           <li key={item.href}>
             <LinkVT
@@ -211,8 +199,18 @@ function MegaPanel({ navKey, onNavigate }: { navKey: NavKey; onNavigate: () => v
               onClick={onNavigate}
               className="group block border-t border-rule py-2 transition-colors hover:border-gold-deep"
             >
+              {/* Keyword only, and a size down (client, 2026-09-12: "det
+                 skal kun være stikkord og mindre"). The sentence under each
+                 label is gone — thirteen of them turned the Tjenester panel
+                 into a page of prose you had to read to navigate. The blurbs
+                 are still in the message files and still carry the services
+                 index; nothing was deleted to do this.
+
+                 The phone drawer has always listed labels only, so this
+                 brings the desktop panel into line with it rather than
+                 inventing a treatment. */}
               <span className="flex items-baseline justify-between gap-4">
-                <span className="font-serif text-[1.05rem] text-ink transition-colors group-hover:text-gold-deep">
+                <span className="font-serif text-[0.95rem] text-ink transition-colors group-hover:text-gold-deep">
                   {item.label}
                 </span>
                 <span
@@ -221,9 +219,6 @@ function MegaPanel({ navKey, onNavigate }: { navKey: NavKey; onNavigate: () => v
                 >
                   &rarr;
                 </span>
-              </span>
-              <span className="mt-0.5 block text-[0.85rem] leading-snug text-ink-60">
-                {item.blurb}
               </span>
             </LinkVT>
           </li>
