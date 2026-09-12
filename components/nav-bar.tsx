@@ -165,7 +165,14 @@ export function NavBar() {
 
          So the cap steps up at the same 1800 the chip does. Below that not a
          pixel moves: a 1470 laptop is byte-identical to before. */}
-      <div className="relative mx-auto flex w-full max-w-[84rem] min-[1800px]:max-w-[98rem] items-center justify-between px-4 py-2 md:px-10 md:py-4 lg:px-12">
+      <div // xl:px-8, tighter than lg's 48px, and only in the band where the bar is
+          // full. Measured at 1440: max-w-[84rem] caps the row at 1344, padding
+          // takes it to a 1248 content box, and lockup + seven nav labels +
+          // actions come to 1247 of it. The cap is the constraint, not the
+          // screen — a 13" and a 27" both get 1248 here, which is why this only
+          // bites on the smaller one. min-[1800px] goes back to 48 with the
+          // wider cap.
+          className="relative mx-auto flex w-full max-w-[84rem] min-[1800px]:max-w-[98rem] items-center justify-between px-4 py-2 md:px-10 md:py-4 lg:px-12 xl:px-8 min-[1800px]:px-12">
         {/* Wordmark — mark + two-line stacked name ("Oslo Sentralmoské"
            over "Rabita", client 2026-09-04; together they read the full
            name, Oslo Sentralmoské Rabita). No underline. Whole block links
@@ -219,7 +226,7 @@ export function NavBar() {
            justify-between sees a single item here; two siblings would each
            take a share of the free space and open a gap between them. */}
         <div className="flex shrink-0 items-center gap-2 md:gap-4">
-        <div className="hidden md:flex shrink-0 items-center gap-4">
+        <div className="hidden md:flex shrink-0 items-center gap-3 xl:gap-2.5">
           {/* Compact prayer trigger — the strip's own trigger is out of
              viewport by now, so the panel needs a handle up here.
 
@@ -283,7 +290,7 @@ export function NavBar() {
              and this is the least urgent thing in it. */}
           <LinkVT
             href={`/${locale}/bli-medlem`}
-            className="hidden lg:inline-flex items-center min-h-11 rounded-full border border-ink/25 px-4 py-2 text-[14px] font-semibold text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper whitespace-nowrap"
+            className="hidden lg:inline-flex items-center min-h-11 rounded-full border border-ink/25 px-4 xl:px-3.5 py-2 text-[14px] font-semibold text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper whitespace-nowrap"
           >
             {t('join')}
           </LinkVT>
@@ -293,7 +300,7 @@ export function NavBar() {
             type="button"
             onClick={() => openGiveSheet()}
             style={{ opacity: 1 }}
-            className="inline-flex items-center gap-2 min-h-11 rounded-full bg-gold-deep text-paper px-5 py-2 text-[14px] font-semibold transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99] whitespace-nowrap"
+            className="inline-flex items-center gap-2 min-h-11 rounded-full bg-gold-deep text-paper px-5 xl:px-4 py-2 text-[14px] font-semibold transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99] whitespace-nowrap"
           >
             {t('give')}
             <span aria-hidden className="rtl:rotate-180">
