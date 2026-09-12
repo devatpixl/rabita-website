@@ -172,7 +172,7 @@ export function NavBar() {
            to home. */}
         <LinkVT
           href={`/${locale}`}
-          className="vt-wordmark flex min-h-10 shrink-0 items-center gap-2 whitespace-nowrap md:min-h-11 md:gap-3 md:pe-6 lg:pe-10"
+          className="vt-wordmark flex min-h-10 shrink-0 items-center gap-2 whitespace-nowrap md:min-h-11 md:gap-3 md:pe-4 lg:pe-6"
           aria-label={`${t('orgName')}, ${t('wordmark')}`}
         >
           {/* Mark, then each line of the name, on the curve and duration the

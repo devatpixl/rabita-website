@@ -15,14 +15,24 @@ import { cn } from '@/lib/cn';
 // points straight at the times, which is what most visitors arrive for;
 // services takes the freed slot and education sits under it, where a
 // visitor looking for the school would actually think to look.
-export const NAV_KEYS = ['project', 'apartments', 'prayer', 'services', 'visit', 'about'] as const;
+export const NAV_KEYS = ['project', 'apartments', 'prayer', 'services', 'teaching', 'visit', 'about'] as const;
 export type NavKey = (typeof NAV_KEYS)[number];
 
-export const NAV_ROOT: Record<NavKey, string> = {
+// null means "opens a menu and goes nowhere itself".
+//
+// `teaching` is the one (client, 2026-09-12: "legge til undervisning etter
+// tjeneste"). /undervisning was retired on 2026-09-10 at the client's own
+// instruction because it duplicated four service pages, so the item has no
+// page to point at — and pointing it at /tjenester would light the active
+// rule under two items at once. It is a trigger for its own submenu
+// instead, which is all the request needs. If a landing page is wanted
+// later, give it a root here and the button becomes a link again.
+export const NAV_ROOT: Record<NavKey, string | null> = {
   project: '/moskeprosjektet',
   apartments: '/moskeprosjektet/leiligheter',
   prayer: '/bonnetider',
   services: '/tjenester',
+  teaching: null,
   visit: '/besok-oss',
   about: '/om-oss',
 };
@@ -81,9 +91,15 @@ export function DesktopNav() {
     };
   }, [openKey]);
 
-  const isCurrent = (key: NavKey) =>
-    pathname.startsWith(`/${locale}${NAV_ROOT[key]}`) &&
-    !(key === 'project' && pathname.startsWith(`/${locale}${NAV_ROOT.apartments}`));
+  const isCurrent = (key: NavKey) => {
+    const root = NAV_ROOT[key];
+    // A menu-only item is never the current page, because it is not one.
+    if (!root) return false;
+    return (
+      pathname.startsWith(`/${locale}${root}`) &&
+      !(key === 'project' && pathname.startsWith(`/${locale}${NAV_ROOT.apartments}`))
+    );
+  };
 
   return (
     <div ref={wrap} className="hidden xl:contents">
@@ -100,7 +116,12 @@ export function DesktopNav() {
       <nav
         aria-label="Primary"
         className="hidden xl:flex flex-none items-center"
-        style={{ gap: '20px' }}
+        // 16px, down from 20 (2026-09-12). The row is justify-between over
+        // three children, so a seventh nav item ate the slack: measured at
+        // 1280 through 1680 the gap between "Om oss" and the Bli medlem pill
+        // was exactly 0 — not overlapping, but touching. Six gaps at 4px
+        // less puts 24px back.
+        style={{ gap: '16px' }}
         onMouseLeave={close}
       >
         {NAV_KEYS.map((key, i) => {
@@ -114,12 +135,14 @@ export function DesktopNav() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.35 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
             >
-              <LinkVT
-                href={`/${locale}${NAV_ROOT[key]}`}
-                aria-expanded={hasMenu(key) ? active : undefined}
-                aria-current={isCurrent(key) ? 'page' : undefined}
-                onFocus={() => open(key)}
-                className={cn(
+              {/* One appearance, two elements. An item with a root is a
+                 link; `teaching` has none, so it is a button that only opens
+                 its menu. TypeScript does not catch the difference — a null
+                 interpolated into a template string becomes the text "null",
+                 so the link would have quietly pointed at /no/null. */}
+              {(() => {
+                const root = NAV_ROOT[key];
+                const shared = cn(
                   // 14px and text-ink-60, the innocents.no recipe (13px /
                   // weight 500 / opacity .82) in Rabita's palette. At full
                   // text-ink the five links carried the same weight as the
@@ -128,24 +151,48 @@ export function DesktopNav() {
                   // navigation.
                   'relative block whitespace-nowrap py-2 font-sans text-[14px] font-medium tracking-[-0.005em] transition-colors duration-200',
                   active || isCurrent(key) ? 'text-gold-deep' : 'text-ink-60 hover:text-gold-deep',
-                )}
-              >
-                {/* No 01/02/03. A number implies a sequence and these are
-                   not one — nobody reads a nav in order. It also cost the
-                   labels 20px each of horizontal room the bar did not have
-                   at 13-14 inches. */}
-                <span className="block transition-transform duration-200 group-hover:-translate-y-px">
-                  {t(`items.${key}`)}
-                </span>
-                {(active || isCurrent(key)) && (
-                  <motion.span
-                    layoutId={reduced ? undefined : 'nav-rule'}
-                    aria-hidden
-                    className="absolute inset-x-0 bottom-0 block h-[1.5px] bg-gold-deep"
-                    transition={{ type: 'spring', stiffness: 520, damping: 42 }}
-                  />
-                )}
-              </LinkVT>
+                );
+                const inner = (
+                  <>
+                    {/* No 01/02/03. A number implies a sequence and these are
+                       not one — nobody reads a nav in order. It also cost the
+                       labels 20px each of horizontal room the bar did not have
+                       at 13-14 inches. */}
+                    <span className="block transition-transform duration-200 group-hover:-translate-y-px">
+                      {t(`items.${key}`)}
+                    </span>
+                    {(active || isCurrent(key)) && (
+                      <motion.span
+                        layoutId={reduced ? undefined : 'nav-rule'}
+                        aria-hidden
+                        className="absolute inset-x-0 bottom-0 block h-[1.5px] bg-gold-deep"
+                        transition={{ type: 'spring', stiffness: 520, damping: 42 }}
+                      />
+                    )}
+                  </>
+                );
+                return root ? (
+                  <LinkVT
+                    href={`/${locale}${root}`}
+                    aria-expanded={hasMenu(key) ? active : undefined}
+                    aria-current={isCurrent(key) ? 'page' : undefined}
+                    onFocus={() => open(key)}
+                    className={shared}
+                  >
+                    {inner}
+                  </LinkVT>
+                ) : (
+                  <button
+                    type="button"
+                    aria-expanded={active}
+                    onFocus={() => open(key)}
+                    onClick={() => (active ? close() : open(key))}
+                    className={shared}
+                  >
+                    {inner}
+                  </button>
+                );
+              })()}
             </motion.div>
           );
         })}
@@ -191,7 +238,11 @@ function MegaPanel({ navKey, onNavigate }: { navKey: NavKey; onNavigate: () => v
          as the nav item the reader is already hovering in order to see this
          panel — so it was a link back to the thing that opened it. His mock
          of this menu starts straight at the first service. */}
-      <ul className="grid gap-x-10 gap-y-0 md:grid-cols-2 lg:grid-cols-3">
+      {/* One column (client's mock, 2026-09-12). Three columns were there to
+         absorb thirteen items each carrying a sentence; the longest list is
+         nine keywords now, which is a shorter panel in one column than the
+         old one was in three. */}
+      <ul className="grid gap-y-0">
         {items.map((item) => (
           <li key={item.href}>
             <LinkVT
@@ -363,13 +414,26 @@ export function MobileNav() {
                       return (
                         <div key={key} className="border-t border-paper/15 first:mt-5">
                           <div className="flex items-center">
-                            <LinkVT
-                              href={`/${locale}${NAV_ROOT[key]}`}
-                              onClick={() => setOpen(false)}
-                              className="flex min-h-14 flex-1 items-center font-serif text-[22px] leading-tight text-paper transition-colors hover:text-gold"
-                            >
-                              {t(`items.${key}`)}
-                            </LinkVT>
+                            {/* Same split as the bar: a rootless item opens
+                               its own list instead of navigating. */}
+                            {NAV_ROOT[key] ? (
+                              <LinkVT
+                                href={`/${locale}${NAV_ROOT[key]}`}
+                                onClick={() => setOpen(false)}
+                                className="flex min-h-14 flex-1 items-center font-serif text-[22px] leading-tight text-paper transition-colors hover:text-gold"
+                              >
+                                {t(`items.${key}`)}
+                              </LinkVT>
+                            ) : (
+                              <button
+                                type="button"
+                                onClick={() => setExpanded(isOpen ? null : key)}
+                                aria-expanded={isOpen}
+                                className="flex min-h-14 flex-1 items-center text-start font-serif text-[22px] leading-tight text-paper transition-colors hover:text-gold"
+                              >
+                                {t(`items.${key}`)}
+                              </button>
+                            )}
                             {items.length > 0 && (
                               <button
                                 type="button"

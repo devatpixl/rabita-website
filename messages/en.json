@@ -59,6 +59,7 @@
       "apartments": "Apartments",
       "prayer": "Prayer times",
       "services": "Services",
+      "teaching": "Teaching",
       "visit": "Visit us",
       "about": "About us"
     },
@@ -100,30 +101,52 @@
       ],
       "services": [
         {
-          "label": "Nikah: wedding ceremony",
-          "blurb": "The religious ceremony, once the marriage is registered.",
-          "href": "/tjenester/nikah"
-        },
-        {
-          "label": "Janaza: funeral",
-          "blurb": "The Janazah prayer in the mosque, and guidance for the family.",
-          "href": "/tjenester/janaza"
-        },
-        {
-          "label": "Shahada: declaration of faith",
+          "label": "Shahada",
           "blurb": "An open conversation about Islam, and guidance if you want to take shahada.",
           "href": "/tjenester/shahada"
         },
         {
-          "label": "Hajj and umrah",
+          "label": "Nikah",
+          "blurb": "The religious ceremony, once the marriage is registered.",
+          "href": "/tjenester/nikah"
+        },
+        {
+          "label": "Janaza",
+          "blurb": "The Janazah prayer in the mosque, and guidance for the family.",
+          "href": "/tjenester/janaza"
+        },
+        {
+          "label": "Hajj and umra",
           "blurb": "Organised pilgrimages to Mecca, from Rabita’s own office.",
           "href": "/tjenester/hajj-umrah"
         },
         {
-          "label": "Counselling and mediation",
+          "label": "Counselling",
           "blurb": "Confidential conversations and mediation with an imam or a female counsellor.",
           "href": "/tjenester/counselling"
         },
+        {
+          "label": "Muslim guides",
+          "blurb": "School visits where young Muslims meet pupils face to face.",
+          "href": "/tjenester/veivisere"
+        },
+        {
+          "label": "Foster care",
+          "blurb": "Information and guidance for families considering fostering.",
+          "href": "/tjenester/fosterhjem"
+        },
+        {
+          "label": "Norges Unge Muslimer",
+          "blurb": "Rabita’s youth organisation, run by and for young people.",
+          "href": "/tjenester/ungdom"
+        },
+        {
+          "label": "Children and family",
+          "blurb": "Activities and places to meet for children and families, all year round.",
+          "href": "/tjenester/barn-og-familie"
+        }
+      ],
+      "teaching": [
         {
           "label": "Rabita school",
           "blurb": "Weekend school in Arabic, the Quran and Islamic studies, for children aged 6 to 16.",
@@ -135,34 +158,14 @@
           "href": "/tjenester/koran"
         },
         {
-          "label": "Calligraphy and geometry",
+          "label": "Calligraphy",
           "blurb": "Courses in Islamic calligraphy and geometric art.",
           "href": "/tjenester/kurs"
         },
         {
-          "label": "Norwegian and taking part",
+          "label": "Norwegian",
           "blurb": "Norwegian classes for adults who fall outside the ordinary provision.",
           "href": "/tjenester/norsk"
-        },
-        {
-          "label": "Muslim guides",
-          "blurb": "School visits where young Muslims meet pupils face to face.",
-          "href": "/tjenester/veivisere"
-        },
-        {
-          "label": "Norges Unge Muslimer",
-          "blurb": "Rabita’s youth organisation, run by and for young people.",
-          "href": "/tjenester/ungdom"
-        },
-        {
-          "label": "Children and family",
-          "blurb": "Activities and places to meet for children and families, all year round.",
-          "href": "/tjenester/barn-og-familie"
-        },
-        {
-          "label": "Become a foster family",
-          "blurb": "Information and guidance for families considering fostering.",
-          "href": "/tjenester/fosterhjem"
         }
       ],
       "visit": [
