@@ -58,6 +58,45 @@ const FRAME_H = 1400;
 const px = (p: number) => (p * FRAME_W) / 100;
 const py = (p: number) => (p * FRAME_H) / 100;
 
+// The leader, as a curved arrow (client, Moskeprosjektet item 8: "endre
+// pilene i figurene"). Straight hairlines ending in a dot became curves with
+// a head, which is what the client drew on the plates in red.
+//
+// LEADER_BOW is the control point's offset from the chord, as a fraction of
+// the chord's own length, so a short leader curves as gently as a long one
+// looks. 0.11 is a bow you read as deliberate without it becoming a swoop.
+// The perpendicular is always taken the same way round, so every arrow on
+// every floor bows with the same handedness.
+//
+// The path stops short of the disc by DISC_R plus a small gap, so the head
+// sits against the marker rather than under it — otherwise the disc, which
+// is drawn after, would swallow the arrowhead whole.
+const LEADER_BOW = 0.11;
+const HEAD_L = 26;
+const HEAD_W = 19;
+const LEADER_W = 3.5;
+
+function leaderPath(m: FloorMarker) {
+  const x1 = px(m.lx);
+  const y1 = py(m.ly);
+  const x2 = px(m.x);
+  const y2 = py(m.y);
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+  const len = Math.hypot(dx, dy) || 1;
+  // control point: chord midpoint pushed out along the chord's normal
+  const cx = (x1 + x2) / 2 + (-dy / len) * len * LEADER_BOW;
+  const cy = (y1 + y2) / 2 + (dx / len) * len * LEADER_BOW;
+  // back the tip off the disc, along the curve's own tangent at the end
+  const tx = x2 - cx;
+  const ty = y2 - cy;
+  const tlen = Math.hypot(tx, ty) || 1;
+  const back = DISC_R + HEAD_L * 0.25;
+  const ex = x2 - (tx / tlen) * back;
+  const ey = y2 - (ty / tlen) * back;
+  return `M ${x1.toFixed(1)} ${y1.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)}`;
+}
+
 // The desktop marker, restated in viewBox units from the 3% and 1% of the
 // frame it used to be, so it is the same size on screen as before.
 const DISC_R = (3 * FRAME_W) / 100;
@@ -189,6 +228,33 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
           preserveAspectRatio="xMidYMax meet"
           className="absolute inset-0 h-full w-full overflow-visible"
         >
+            {/* The arrowhead. markerUnits="userSpaceOnUse" so HEAD_L and
+               HEAD_W are viewBox units and the head scales with the drawing
+               like everything else here; the default, strokeWidth, would
+               have tied its size to the line's weight instead. orient="auto"
+               turns it along the curve's tangent, which is the whole reason
+               this is a marker and not a polygon positioned by hand.
+
+               refX at the tip so the tip lands exactly on the path's end.
+
+               The id carries floorKey because this component renders once
+               per floor -- eight of these are in the document at a time, and
+               a shared id would have them all pointing at the first. */}
+            <defs>
+              <marker
+                id={`leader-head-${floorKey}`}
+                viewBox={`0 0 ${HEAD_L} ${HEAD_W}`}
+                refX={HEAD_L}
+                refY={HEAD_W / 2}
+                markerWidth={HEAD_L}
+                markerHeight={HEAD_W}
+                markerUnits="userSpaceOnUse"
+                orient="auto"
+              >
+                <path d={`M 0 0 L ${HEAD_L} ${HEAD_W / 2} L 0 ${HEAD_W} Z`} fill="#9B7F4A" />
+              </marker>
+            </defs>
+
             {markers.map((m, i) => (
               <g
                 key={m.id}
@@ -204,16 +270,21 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
                    colour has to work against both: #9B7F4A is darker than the
                    drawing and lighter than the ground, where plain gold washed
                    out on the walls and a truly dark line would have vanished
-                   on the ground instead. */}
-                <line
-                  x1={px(m.x)}
-                  y1={py(m.y)}
-                  x2={px(m.lx)}
-                  y2={py(m.ly)}
+                   on the ground instead.
+
+                   Drawn label-end to building-end, not the other way round,
+                   so markerEnd puts the head on the building. The width is
+                   in viewBox units now rather than a non-scaling 1.25px: the
+                   head scales with the drawing, and a head that grows on a
+                   hairline that does not would come apart at the extremes. */}
+                <path
+                  d={leaderPath(m)}
+                  fill="none"
                   stroke="#9B7F4A"
-                  strokeWidth={1.25}
+                  strokeWidth={LEADER_W}
                   strokeOpacity={0.95}
-                  vectorEffect="non-scaling-stroke"
+                  strokeLinecap="round"
+                  markerEnd={`url(#leader-head-${floorKey})`}
                 />
                 {/* Gold disc, dusk centre. Filled with the gold it used
                    to be outlined in, and the middle left as the section's
