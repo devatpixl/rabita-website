@@ -11,10 +11,25 @@ import { CAMPAIGN } from '@/lib/campaign';
 // "why would I follow THIS one": the mark, the handle, and one line of what
 // actually gets posted there. Three different answers, three reasons.
 //
-// The marks are drawn in the site's own line language (1.5 stroke, round caps)
-// rather than dropped in as brand-coloured logos. Four saturated logos on a
-// dusk band would be the loudest thing on the page, and they would be the only
-// place on the site where a colour arrives from outside the palette.
+// The marks stay drawn in the site's own line language (1.5 stroke, round
+// caps) rather than swapped for real brand logos, but they now carry each
+// platform's colour (client, Versjon 3: "prove a endre de ulike plattformene,
+// til de ulike fargene").
+//
+// This reverses the note that stood here, which argued that four saturated
+// logos "on a dusk band would be the loudest thing on the page". Half of that
+// objection went away on 2026-09-04 when the section moved off dusk onto the
+// pale sage below — colour at 12% on a near-white card is not the same
+// proposition as colour on a dark band. The other half is answered by how
+// little of it there is: the seal, its ring, the 24px mark and the ghosted
+// watermark. The card, the type and the FOLLOW link are untouched, so the row
+// still reads in the site's own voice and the colour only says which platform
+// you are looking at, which was the client's point — four gold cards told
+// them apart by logo silhouette alone.
+//
+// One flat colour each, not Instagram's real four-stop gradient: a gradient
+// seal beside three flat ones is inconsistent at rest, and the gradient is
+// the kind of detail that reads as a pasted-in widget.
 //
 // Sage ground, not dusk (client, 2026-09-04): on dusk this section read as
 // part of the footer below it — one undifferentiated dark mass. It now sits
@@ -34,6 +49,21 @@ const CHANNELS = [
 ] as const;
 
 type ChannelKey = (typeof CHANNELS)[number]['key'];
+
+// Each platform's own colour, as an unprefixed RGB triplet so the alphas
+// below can be written inline as rgb(... / a) rather than parsed out of a
+// hex at render time.
+//
+// TikTok's brand colour is black, which on this paper card is the site's own
+// text ink — it would have been the one card that read as uncoloured next to
+// three coloured siblings. So it takes TikTok red instead, the other half of
+// that identity.
+const CHANNEL_RGB: Record<ChannelKey, string> = {
+  instagram: '193 53 132',
+  facebook: '24 119 242',
+  tiktok: '254 44 85',
+  whatsapp: '37 211 102',
+};
 
 export async function FollowUs() {
   const t = await getTranslations('followUs');
@@ -68,7 +98,20 @@ export async function FollowUs() {
                 href={href}
                 target="_blank"
                 rel="noreferrer"
-                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-rule bg-paper p-5 transition-[border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-1 hover:border-gold-deep/60 hover:shadow-[0_18px_36px_-24px_rgba(28,25,23,0.45)] md:p-6"
+                /* One variable per card, so every coloured part below is a
+                   static class the Tailwind scanner can see — a class name
+                   built from `key` at runtime would never be generated. */
+                style={
+                  {
+                    '--ch': `rgb(${CHANNEL_RGB[key]})`,
+                    '--ch-tint': `rgb(${CHANNEL_RGB[key]} / 0.12)`,
+                    '--ch-ring': `rgb(${CHANNEL_RGB[key]} / 0.3)`,
+                    '--ch-ghost': `rgb(${CHANNEL_RGB[key]} / 0.08)`,
+                    '--ch-ghost-hi': `rgb(${CHANNEL_RGB[key]} / 0.14)`,
+                    '--ch-edge': `rgb(${CHANNEL_RGB[key]} / 0.55)`,
+                  } as React.CSSProperties
+                }
+                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-rule bg-paper p-5 transition-[border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-1 hover:border-[color:var(--ch-edge)] hover:shadow-[0_18px_36px_-24px_rgba(28,25,23,0.45)] md:p-6"
               >
                 {/* The channel's own mark again, oversized and ghosted off
                    the corner — each card carries its identity at two scales,
@@ -76,14 +119,14 @@ export async function FollowUs() {
                    missing. It leans in a touch further on hover. */}
                 <ChannelMark
                   channel={key}
-                  className="pointer-events-none absolute -end-5 -top-5 h-28 w-28 text-gold-deep/[0.08] transition-transform duration-500 ease-out group-hover:-translate-x-1 group-hover:translate-y-1 group-hover:text-gold-deep/[0.12] rtl:group-hover:translate-x-1"
+                  className="pointer-events-none absolute -end-5 -top-5 h-28 w-28 text-[color:var(--ch-ghost)] transition-[transform,color] duration-500 ease-out group-hover:-translate-x-1 group-hover:translate-y-1 group-hover:text-[color:var(--ch-ghost-hi)] rtl:group-hover:translate-x-1"
                 />
                 {/* The mark proper, in a seal. On hover the seal fills and
                    the mark flips to paper — one clear beat per card. */}
-                <span className="relative grid h-12 w-12 place-items-center rounded-full bg-gold-soft/50 ring-1 ring-gold-deep/25 transition-colors duration-300 group-hover:bg-gold-deep group-hover:ring-gold-deep">
+                <span className="relative grid h-12 w-12 place-items-center rounded-full bg-[color:var(--ch-tint)] ring-1 ring-[color:var(--ch-ring)] transition-colors duration-300 group-hover:bg-[color:var(--ch)] group-hover:ring-[color:var(--ch)]">
                   <ChannelMark
                     channel={key}
-                    className="h-6 w-6 text-gold-deep transition-colors duration-300 group-hover:text-paper"
+                    className="h-6 w-6 text-[color:var(--ch)] transition-colors duration-300 group-hover:text-paper"
                   />
                 </span>
 
