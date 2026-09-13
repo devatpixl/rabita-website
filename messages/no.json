@@ -2130,8 +2130,9 @@
     "reports": {
       "eyebrow": "Dokumenter",
       "heading": "Årsrapportene, <em>år for år</em>.",
-      "lede": "Hva vi gjorde, hva det kostet og hvor pengene kom fra. Rapportene lastes ned som PDF.",
+      "lede": "Hva vi gjorde, hva det kostet og hvor pengene kom fra. Trykk for å lese, eller last ned.",
       "year": "Årsrapport {year}",
+      "download": "Last ned årsrapport {year} (PDF)",
       "mb": "{n} MB",
       "chartEyebrow": "Organisasjonen",
       "chartHeading": "Slik er Rabita <em>organisert</em>.",

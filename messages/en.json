@@ -2130,8 +2130,9 @@
     "reports": {
       "eyebrow": "Documents",
       "heading": "The annual reports, <em>year by year</em>.",
-      "lede": "What we did, what it cost and where the money came from. The reports download as PDF.",
+      "lede": "What we did, what it cost and where the money came from. Tap to read, or download.",
       "year": "Annual report {year}",
+      "download": "Download annual report {year} (PDF)",
       "mb": "{n} MB",
       "chartEyebrow": "The organisation",
       "chartHeading": "How Rabita is <em>organised</em>.",
