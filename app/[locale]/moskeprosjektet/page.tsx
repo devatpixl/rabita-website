@@ -11,7 +11,6 @@ import { Section, SectionBody } from '@/components/primitives';
 // import { BuildingRises } from '@/components/building-rises';
 import { ApartmentsCta } from '@/components/apartments-cta';
 import { GiftBuilds } from '@/components/gift-builds';
-import { GiveCTA } from '@/components/give-cta';
 import { ProjectGallery } from '@/components/project-gallery';
 import { GivingCard } from '@/components/giving-card';
 // import { MotionRise } from '@/components/motion-rise'; // hidden sadaqa band
@@ -152,41 +151,11 @@ export default async function ProjectPage({
             <ProgressPhases locale={locale as AppLocale} compact />
           </div>
 
-          {/* The ask, under the costs (client, 2026-09-13: "add cta here").
-             This is the moment for it: the reader has just been shown what
-             each of five phases costs, and the next honest sentence is that
-             people pay for them.
-
-             No new copy. fremdrift.ctaHeading / ctaBody / ctaPrimary /
-             ctaSecondary were written for this and translated into all three
-             locales, and were rendering nowhere — not here, not even on the
-             fremdrift page itself.
-
-             Gold for the give, outline for the read-on, which is the rule
-             the link at the head of this section already follows. */}
-          <div className="mt-12 border-t border-rule pt-9">
-            <div className="mx-auto max-w-xl text-center">
-              <h3 className="font-serif text-[clamp(1.4rem,2.4vw,1.9rem)] leading-tight text-balance text-ink">
-                {tf('ctaHeading')}
-              </h3>
-              <p className="mx-auto mt-3 max-w-[46ch] text-body text-ink-60">{tf('ctaBody')}</p>
-              <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-                <GiveCTA label={tf('ctaPrimary')} />
-                <Link
-                  href={`/${locale}/hvor-pengene-gar`}
-                  className="group inline-flex min-h-12 items-center gap-2.5 rounded-full border border-ink px-6 py-3 text-[15px] font-semibold text-ink transition-colors hover:bg-ink hover:text-paper"
-                >
-                  {tf('ctaSecondary')}
-                  <span
-                    aria-hidden
-                    className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
-                  >
-                    &rarr;
-                  </span>
-                </Link>
-              </div>
-            </div>
-          </div>
+          {/* A "Build it with us" CTA stood here from earlier on
+             2026-09-13 ("add cta here") and came out the same day at his
+             request. fremdrift.ctaHeading / ctaBody / ctaPrimary /
+             ctaSecondary are back to rendering nowhere — they are still
+             written and translated in all three locales. */}
         </SectionBody>
       </Section>
 
@@ -205,10 +174,6 @@ export default async function ProjectPage({
              a credit, not a figure, so it signs the section at the foot. */}
           {(() => {
             const nf = new Intl.NumberFormat('nb-NO');
-            const cap = [
-              { key: 'women', before: CAMPAIGN.womensPrayerCapacityBefore, after: CAMPAIGN.womensPrayerCapacityAfter },
-              { key: 'men', before: CAMPAIGN.mensPrayerCapacityBefore, after: CAMPAIGN.mensPrayerCapacityAfter },
-            ] as const;
             const facts: {
               key: string;
               /** Overrides t(`facts.<key>`), for a row whose label lives in
