@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
 import { Accent } from '@/components/accent';
@@ -72,13 +73,63 @@ export default async function JoinPage({
         </p>
       </PageBand>
 
-      {/* The working part, on the ground and with the furniture every other
-         section page uses. */}
-      <Section tone="paper-2" className="relative isolate overflow-hidden">
+      {/* The working part, rebuilt to the client's reference (2026-09-13:
+         "warm ivory background, subtle Islamic geometric texture, soft
+         architectural imagery, elegant spacing, refined typography").
+         The band above is untouched, as asked.
+
+         The three files that came with the brief are REFERENCES, not
+         assets: the mosque interior is 255px wide and the texture 109px —
+         crops out of the mockup itself, which would be mush at the size
+         either is used. So the language is rebuilt from what the site
+         already owns and what is actually of this building:
+
+           the geometric texture   .star-texture, the Rabita rosette tiled
+                                   at 220px and 1.5% — already the site's
+                                   own, and already on this section
+           the mosque interior     proj-main-hall.webp, the Norconsult
+                                   render of the real prayer hall, at 2000px
+
+         The interior appears twice: once very faintly behind the whole
+         section, once properly inside the panel. */}
+      <Section tone="paper-2" className="relative isolate overflow-hidden !bg-transparent">
+        {/* The client's mosque interior, as the section's own ground
+           (2026-09-13). Full-bleed, cover, centred — so it CROPS at every
+           width rather than stretching, and never exposes an edge.
+
+           object-position is not centre but 60% across: the photograph is
+           composed with its light on the left and its architecture on the
+           right, and 60% keeps the windows and the mihrab in frame on a
+           phone, where a centre crop would show a wall.
+
+           Over it, an ivory scrim that is heaviest where the words are.
+           Left-to-right on a wide screen, because the column of type is on
+           the left and the panel — which carries its own paper — is on the
+           right. Top-to-bottom on a phone, where the two stack. Without it
+           the heading sits on a photograph of a window. */}
+        <Image
+          src="/photos/membership-bg.webp"
+          alt=""
+          aria-hidden
+          fill
+          sizes="100vw"
+          loading="eager"
+          className="-z-20 select-none object-cover object-[60%_50%]"
+        />
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-32 end-[4%] -z-10 h-[34rem] w-[34rem] rounded-full bg-gold/[0.06] blur-3xl"
+          className="pointer-events-none absolute inset-0 -z-20 md:hidden"
+          style={{ background: 'linear-gradient(180deg, rgba(247,244,238,0.93) 0%, rgba(247,244,238,0.88) 55%, rgba(247,244,238,0.95) 100%)' }}
         />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-20 hidden md:block"
+          style={{ background: 'linear-gradient(90deg, rgba(247,244,238,0.96) 0%, rgba(247,244,238,0.9) 34%, rgba(247,244,238,0.72) 62%, rgba(247,244,238,0.66) 100%)' }}
+        />
+        {/* The gold blur that used to warm this section is gone: it existed
+           because the ground was a flat paper-2, and the photograph does
+           that job now. It was also the one thing on the page wider than a
+           phone — 544px of it on a 379px screen, clipped but pointless. */}
         {/* Its own childless layer: .star-texture sets `> * { position:
            relative }` and would drop any absolutely positioned sibling into
            the flow. */}
@@ -86,33 +137,55 @@ export default async function JoinPage({
           aria-hidden
           className="star-texture star-texture--light pointer-events-none absolute inset-0 -z-10"
         />
+        {/* The seam at each end. This used to run paper -> paper-2, two
+           opaque colours, which painted a solid block over the top of the
+           photograph and left a hard horizontal edge where it stopped. Both
+           now fade to TRANSPARENT, so the picture arrives out of the section
+           above it and leaves into the one below instead of starting and
+           stopping. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-paper to-paper-2 md:h-40"
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-paper to-transparent md:h-40"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-paper to-transparent md:h-32"
         />
         <SectionBody>
           {/* The card is still first in DOM order on a phone — that was the
              fix for "joining is too difficult", and it survives the reshape.
              On desktop it moves to the right and the argument sits beside
              it. */}
-          <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
-            <div className="order-2 lg:order-1 lg:col-span-5">
-              <p className="max-w-[46ch] text-body text-ink-60">{t('lede')}</p>
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-14">
+            <div className="order-2 lg:order-1 lg:col-span-4 lg:self-center">
+              <p className="flex items-center gap-3 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
+                <span aria-hidden className="h-px w-6 shrink-0 bg-gold-deep/50" />
+                {ts('pages.membership.eyebrow')}
+              </p>
+              {/* The lede, set as the argument rather than as small print.
+                 It was one paragraph of body text; the reference gives its
+                 first two sentences the weight of a heading and leaves the
+                 vote as a note under it, which is the right order — most
+                 readers here are joining, not standing for the board. */}
+              <h2 className="mt-5 max-w-[18ch] font-serif text-[clamp(1.7rem,3.2vw,2.5rem)] leading-[1.15] text-balance text-ink">
+                {t('headline')}
+              </h2>
+              <p className="mt-5 max-w-[46ch] text-body text-ink-60">{t('voteNote')}</p>
 
-              <ul className="mt-8 grid gap-x-8 gap-y-6 border-t border-ink/10 pt-7 sm:grid-cols-3 lg:grid-cols-1">
+              <ul className="mt-10 grid gap-x-8 gap-y-7 sm:grid-cols-3 lg:grid-cols-1">
                 {POINTS.map((k, i) => (
-                  <li key={k} className="flex items-start gap-3.5">
+                  <li key={k} className="flex items-start gap-4">
                     <span
                       aria-hidden
-                      className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gold-soft/40 text-gold-deep ring-1 ring-gold-deep/20"
+                      className="mt-0.5 grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gold-deep/[0.09] text-gold-deep ring-1 ring-gold-deep/15"
                     >
-                      <FigureIcon name={POINT_ICONS[i] ?? 'check'} className="h-[18px] w-[18px]" />
+                      <FigureIcon name={POINT_ICONS[i] ?? 'check'} className="h-5 w-5" />
                     </span>
                     <span className="block min-w-0">
                       <span className="block font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60">
                         {t(`points.${k}.title`)}
                       </span>
-                      <span className="mt-1 block text-[15px] leading-snug text-ink">
+                      <span className="mt-1.5 block text-[15px] leading-snug text-ink">
                         {t(`points.${k}.body`)}
                       </span>
                     </span>
@@ -120,12 +193,13 @@ export default async function JoinPage({
                 ))}
               </ul>
 
-              <p className="mt-7 text-[13px] text-ink-60">
+              <p className="mt-10 flex items-center gap-4 text-[13px] text-ink-60">
+                <span aria-hidden className="h-px w-10 shrink-0 bg-gold-deep/40" />
                 {t('members', { count: CAMPAIGN.members.toLocaleString('nb-NO') })}
               </p>
             </div>
 
-            <div className="order-1 lg:order-2 lg:col-span-7 lg:self-center">
+            <div className="order-1 lg:order-2 lg:col-span-8 lg:self-center">
               <MembershipSignup />
             </div>
           </div>
