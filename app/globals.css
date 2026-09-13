@@ -383,6 +383,22 @@ body.sheet-open {
    .rv-zoom  the photograph, easing out of its overscale.
    .rv-up    text and links, rising.
    .rv-num   the numeral, a beat behind.                                      */
+/* The curtain, when the reveal cannot run.
+   Every .rv-* rule below lives in a no-preference media query, so a visitor
+   with "reduce motion" on matched NONE of them — and .rv-mask is an
+   `absolute inset-0 bg-paper` span whose only hidden state is the
+   `transform: scaleY(0)` inside that block. With no transform it sat at full
+   size and covered the photograph it was meant to uncover, permanently, on
+   every band of /tjenester. The comment above says "the mask sits at
+   scaleY(0) and everything renders normally", which is true with JS off —
+   the attribute never appears — but not under reduced motion, where the
+   media query itself never matches. */
+@media (prefers-reduced-motion: reduce) {
+  .rv-mask {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .rv-mask,
   .rv-zoom,
