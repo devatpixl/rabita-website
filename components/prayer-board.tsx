@@ -27,18 +27,28 @@ const ORDER = PRAYER_ORDER;
 export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
   const t = useTranslations('prayerBoard');
   const tv = useTranslations('prayerVisit');
-  // The khateeb's role and the line about him are the imams section's own
-  // copy, read rather than restated: one bio per imam, in one place, already
-  // carried in all three languages.
-  const ti = useTranslations('imams');
   const locale = useLocale();
   const { jumuah } = usePrayerData();
-  // PLACEHOLDER (client, 2026-09-02): "put image of any imam for now". There
-  // is no rota anywhere in the data, so this is simply the first imam, every
-  // week — it is a slot with a face in it, not a fact. Wire it to a real
-  // schedule before launch, or the same name will be announced for a khutba
-  // he is not giving.
-  const khateeb = IMAMS.find((i) => i.key === 'andreas') ?? IMAMS[0];
+  // Two khateebs, not one (client, 2026-09-13: "Ukas khatib kan gjøres til to
+  // personer uten tekst"), each labelled with the khutba he gives — the card
+  // beside this one lists a Norwegian and an Arabic khutba at different hours,
+  // and this says who delivers each.
+  //
+  // STILL A PLACEHOLDER (client, 2026-09-02: "put image of any imam for now").
+  // There is no rota anywhere in the data, so WHO is paired with WHICH khutba
+  // is inference, not fact: Usman teaches in Norwegian by his own bio, Osama
+  // lists Arabic first. Confirm with the client, and wire a real schedule
+  // before launch, or the card announces a khutba a man is not giving.
+  const khateebs = (
+    [
+      ['andreas', 'khutbaNo'],
+      ['aldiri', 'khutbaAr'],
+    ] as const
+  )
+    .map(([key, khutba]) => ({ imam: IMAMS.find((i) => i.key === key), khutba }))
+    .filter((k): k is { imam: (typeof IMAMS)[number]; khutba: 'khutbaNo' | 'khutbaAr' } =>
+      Boolean(k.imam),
+    );
   const [now, setNow] = useState<Date | null>(null);
 
   useEffect(() => {
@@ -265,36 +275,43 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
         {/* This card used to be a Friday timetable, which said the same three
            times the card beside it says — two thirds of it was a restatement.
            It answers a question the times cannot instead: who is speaking.
-           A photograph, because that is how a congregation recognises a
-           khateeb, and centred in the card so the pair still balances. */}
+           Photographs, because that is how a congregation recognises a
+           khateeb.
+
+           The bio paragraph that ran under the portrait is gone (client:
+           "uten tekst"). It was the imams section's own copy repeated
+           verbatim, a screen further down the same page, and with two men on
+           the card there is no room for two of them. The khutba language
+           takes that slot: it is what tells the pair apart, and it is the one
+           thing a reader needs here. */}
         <section className="flex flex-col rounded-[1.5rem] border border-rule bg-paper p-6 md:p-7">
           <h3 className="font-serif text-[1.2rem] leading-none text-ink">{t('khateebLabel')}</h3>
-          <div className="flex flex-1 items-center">
-            <div className="flex w-full items-center gap-4 py-6 md:gap-5">
-              {/* The portraits are square crops crested on the face, so a
-                 circle sits right on them. A missing photo falls back to the
-                 initial rather than to a broken frame — the rota is not wired
-                 yet and an imam without a portrait is a matter of time. */}
-              <span className="relative flex h-[5.5rem] w-[5.5rem] shrink-0 items-center justify-center overflow-hidden rounded-full bg-paper-2 ring-1 ring-rule md:h-28 md:w-28">
-                {khateeb.photo ? (
-                  <Image src={khateeb.photo} alt="" fill sizes="112px" className="object-cover" />
-                ) : (
-                  <span className="font-serif text-[1.75rem] text-gold-deep">{khateeb.name.charAt(0)}</span>
-                )}
-              </span>
-              <span className="min-w-0">
-                <span className="block font-serif text-[clamp(1.25rem,2.4vw,1.5rem)] leading-tight text-ink">
-                  {khateeb.name}
+          <ul className="flex flex-1 flex-col justify-center divide-y divide-rule">
+            {khateebs.map(({ imam, khutba }) => (
+              <li key={imam.key} className="flex items-center gap-4 py-5 md:gap-5">
+                {/* The portraits are square crops crested on the face, so a
+                   circle sits right on them. A missing photo falls back to the
+                   initial rather than to a broken frame. */}
+                <span className="relative flex h-[4.25rem] w-[4.25rem] shrink-0 items-center justify-center overflow-hidden rounded-full bg-paper-2 ring-1 ring-rule md:h-[4.75rem] md:w-[4.75rem]">
+                  {imam.photo ? (
+                    <Image src={imam.photo} alt="" fill sizes="76px" className="object-cover" />
+                  ) : (
+                    <span className="font-serif text-[1.5rem] text-gold-deep">
+                      {imam.name.charAt(0)}
+                    </span>
+                  )}
                 </span>
-                <span className="mt-1.5 block font-mono text-[0.5625rem] uppercase tracking-[0.14em] text-gold-deep">
-                  {ti(`people.${khateeb.key}.role`)}
+                <span className="min-w-0">
+                  <span className="block font-serif text-[clamp(1.1rem,2.1vw,1.35rem)] leading-tight text-ink">
+                    {imam.name}
+                  </span>
+                  <span className="mt-1.5 block font-mono text-[0.5625rem] uppercase tracking-[0.14em] text-gold-deep">
+                    {t(khutba)}
+                  </span>
                 </span>
-              </span>
-            </div>
-          </div>
-          <p className="border-t border-rule pt-5 text-[14px] leading-relaxed text-ink-60">
-            {ti(`people.${khateeb.key}.bio`)}
-          </p>
+              </li>
+            ))}
+          </ul>
         </section>
       </div>
     </div>

@@ -65,9 +65,11 @@ export default async function BonnetiderPage({
               className="absolute inset-0 bg-gradient-to-r from-dusk via-dusk/75 to-dusk/5 rtl:bg-gradient-to-l"
             />
             <div className="absolute inset-y-0 start-0 flex max-w-[36rem] flex-col justify-center ps-8 pe-6 lg:ps-10">
-              <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
-                {tp('crumb')}
-              </p>
+              {/* The kicker that stood here said "Bønn og tjenester", the label
+                 for the whole service group. Client, 2026-09-13: "Endre navn
+                 til Bønnetider" — and the h1 directly below already says
+                 exactly that, so the line is dropped rather than renamed into
+                 a stutter. */}
               <h1 className="mt-2 font-serif text-[clamp(1.65rem,3vw,2.3rem)] leading-none text-paper">
                 {tp('pages.times.eyebrow')}
               </h1>
@@ -95,7 +97,7 @@ export default async function BonnetiderPage({
              hidden md:block mean only ever one of them is in a rendered
              subtree, so only one reaches the accessibility tree. */}
           <h1 className="sr-only md:hidden">{tp('pages.times.eyebrow')}</h1>
-          <PrayerBoard eyebrow={tp('crumb')} />
+          <PrayerBoard eyebrow={tp('pages.times.eyebrow')} />
         </SectionBody>
       </Section>
 
