@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { APARTMENT_UNITS, unitFace, unitPlan, type ApartmentUnit } from '@/lib/apartment-units';
@@ -257,8 +258,19 @@ export function ApartmentUnits() {
         </div>
       </SectionBody>
 
-      {/* ── the plan sheet ─────────────────────────────────────────────── */}
-      {open && (
+      {/* ── the plan sheet ───────────────────────────────────────────────
+         PORTALLED TO document.body, and it has to be. This section carries
+         `isolate` for the background layer, which creates a stacking context
+         — and z-index resolves inside the nearest stacking context, so
+         z-[80] only ever meant "above the rest of this section". `fixed`
+         does not help: it escapes the containing block for layout, not the
+         stacking context for painting. The render gallery below is a later
+         sibling, so it painted straight over the open dialog (client,
+         2026-09-13: "the section below is interfering with pop up").
+
+         Only mounted after a click, so document exists by then. */}
+      {open &&
+        createPortal((
         <div
           role="dialog"
           aria-modal="true"
@@ -333,6 +345,8 @@ export function ApartmentUnits() {
             </div>
           </div>
         </div>
+        ),
+        document.body,
       )}
     </section>
   );
