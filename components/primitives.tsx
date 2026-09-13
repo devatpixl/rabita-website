@@ -76,7 +76,7 @@ export function Section({
   className,
 }: {
   id?: string;
-  tone?: 'paper' | 'paper-2' | 'paper-deep';
+  tone?: 'paper' | 'paper-2' | 'paper-deep' | 'sage';
   /**
    * 'tight' takes the mobile rhythm down to 36px and keeps 60 from md.
    * section-md is a DESKTOP measure: at 390px it is 60px of nothing above
@@ -89,7 +89,13 @@ export function Section({
   className?: string;
 }) {
   const toneClass =
-    tone === 'paper-2' ? 'bg-paper-2' : tone === 'paper-deep' ? 'bg-paper-deep' : 'bg-paper';
+    tone === 'paper-2'
+      ? 'bg-paper-2'
+      : tone === 'paper-deep'
+      ? 'bg-paper-deep'
+      : tone === 'sage'
+      ? 'bg-sage'
+      : 'bg-paper';
   // Mutually exclusive, never an override: cn() is clsx-only here, so a
   // later class does not beat an earlier one.
   const padClass = pad === 'tight' ? 'py-9 md:py-section-md' : 'py-section-md';

@@ -118,7 +118,11 @@ export default async function ProjectPage({
          Byggestart and Ferdigstillelse, and "when" belongs between the two.
          The totals are dropped (compact) because the campaign meter has
          already given a figure further up — the full page carries them. */}
-      <Section tone="paper">
+      {/* Sage, not paper (client, 2026-09-13: "use the light green as below
+         section, also white looks odd"). The phases sat on white between a
+         dusk band above and the sage facts below, which made one pale strip
+         in the middle of the page. */}
+      <Section tone="sage">
         <SectionBody>
           <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
             <div>
@@ -159,12 +163,16 @@ export default async function ProjectPage({
         </SectionBody>
       </Section>
 
-      {/* Sage ground for the facts (client, 2026-09-04) — the same pale
-         green the "Dette er Rabita" and follow sections own. The section
-         above is paper, so the ground arrives through a tall soft gradient
-         instead of a hard seam: the fade IS the space between the two. */}
-      <section className="bg-[#e3eae4]">
-        <div aria-hidden className="h-28 bg-gradient-to-b from-paper to-[#e3eae4] md:h-40" />
+      {/* Sage ground for the facts (client, 2026-09-04) — the same pale green
+         the "Dette er Rabita" and follow sections own.
+         A tall paper-to-sage gradient used to open this section, because the
+         phases above it were white and the fade WAS the space between the
+         two. The phases are sage now, so there is nothing left to fade from
+         and the gradient would have been a wash of one colour into itself.
+         The height stays, as plain ground: it was carrying the rhythm as well
+         as the transition, and dropping it would close the gap. */}
+      <section className="bg-sage">
+        <div aria-hidden className="h-28 md:h-40" />
         <div className="pb-section-md">
         <SectionBody>
           {/* Key figures and capacity as two registers of the same design:
