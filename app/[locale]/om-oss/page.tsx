@@ -257,7 +257,21 @@ export default async function AboutPage({
                      object (client, 2026-09-08). At 240px the arch alone
                      spent a third of that budget on a photograph that is
                      carrying two lines of quote. */}
-                  <div className="relative min-h-[11rem] md:min-h-0">
+                  {/* An ARCH, not a flush rectangle (client, 2026-09-14:
+                     "make this image design like this"), taking the silhouette
+                     the visit page's aside already uses — a tall top radius
+                     with a gold hairline on it. Only the shape changes: the
+                     photograph, its grade, the scrim and the quote on it are
+                     the same, which is the part he asked to leave alone.
+
+                     The plate is inset so the curve has paper to be a curve
+                     AGAINST; flush to the card edge there is nothing for the
+                     silhouette to read against and it just looks like a
+                     rounded corner. The radius is smaller on a phone because
+                     the cell is 11rem there — a 9rem dome on a 176px box is
+                     not an arch, it is a circle. */}
+                  <div className="relative min-h-[11rem] bg-paper p-3 sm:p-4 md:min-h-0">
+                    <div className="relative h-full overflow-hidden rounded-t-[4.5rem] border border-gold-deep/20 sm:rounded-t-[6rem] md:rounded-t-[8rem]">
                     <Image
                       src="/photos/arch-light.jpg"
                       alt=""
@@ -286,6 +300,7 @@ export default async function AboutPage({
                       <p className="mt-4 max-w-[22ch] font-serif text-[1.05rem] italic leading-relaxed text-paper drop-shadow-[0_1px_8px_rgba(22,36,46,0.5)]">
                         {`«${t('quote')}»`}
                       </p>
+                    </div>
                     </div>
                   </div>
                 </div>
