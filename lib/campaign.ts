@@ -62,15 +62,20 @@ export const CAMPAIGN = Object.freeze({
   // has been claiming all along, and 6+2 would have made eight.
   floorsBelow: 1,
   rentalApartments: 15,
-  // The person, without a firm after his name (client, Versjon 3: "fjern
-  // Norconsult pa Havard"), and still without one after 2026-09-14, when he
-  // asked for "Bytt Norconsult til HLF Arkitekter". That note names the FIRM
-  // on the renders and says nothing about this line, so the two instructions
-  // stand together: the image captions credit HLF Arkitekter, the architect
-  // is named as a person. If he wants the practice under his name too, it is
-  // this value — 'Håvard Lindgard Fagernes, HLF Arkitekter' — and the card
-  // splits on the comma and stacks the second half on its own.
-  architect: 'Håvard Lindgard Fagernes',
+  // Name, comma, practice. The architect card splits on that comma and stacks
+  // the second half under the first as a gold mono line.
+  //
+  // The history is worth keeping, because this value has been all three
+  // things. It read "…, Norconsult" until Versjon 3, when the client said
+  // "fjern Norconsult pa Havard" and it became the bare name. On 2026-09-14
+  // he said "Bytt Norconsult til HLF Arkitekter", which named the firm on the
+  // renders, and then "just add HLF below his name". So the earlier removal
+  // was about the WRONG FIRM being there, not about the man standing alone.
+  //
+  // Written out as "HLF Arkitekter", not "HLF", so the card and the three
+  // image captions say the same thing. The site naming one firm two ways
+  // would read as two firms.
+  architect: 'Håvard Lindgard Fagernes, HLF Arkitekter',
   siteClearedRamadan: 2025,
   constructionStart: '2026-Q1',
   completionDate: null as string | null, // TODO §13.1
