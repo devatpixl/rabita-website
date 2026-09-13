@@ -113,9 +113,17 @@ export default async function ProjectPage({
 
       <FloorByFloor />
 
-      {/* Fremdrift, in digest. Sits here deliberately: the renders above
-         answer "what will it look like", the key figures below open with
-         Byggestart and Ferdigstillelse, and "when" belongs between the two.
+      {/* What a gift buys, straight after the walk through the building
+         (client, 2026-09-13: "move this section above, in here"). It used to
+         close the page under the facts. Here it lands while the reader still
+         has the rooms in mind — the floors above name them, and this prices
+         them — and everything that was below it keeps its order. */}
+      <GiftBuilds />
+
+      {/* Fremdrift, in digest. Still between the picture and the figures:
+         the renders and the gift ladder above answer "what will it look like"
+         and "what does it cost", the key figures below open with Byggestart,
+         and "when" belongs between them.
          The totals are dropped (compact) because the campaign meter has
          already given a figure further up — the full page carries them. */}
       {/* Sage, not paper (client, 2026-09-13: "use the light green as below
@@ -332,7 +340,6 @@ export default async function ProjectPage({
         </div>
       </section>
 
-      <GiftBuilds />
 
       {/* The apartments band closes the page where the sadaqa section used
          to (client, 2026-09-04) — the sadaqa band itself is off:
