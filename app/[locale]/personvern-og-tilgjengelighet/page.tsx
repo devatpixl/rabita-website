@@ -34,6 +34,13 @@ export default async function PrivacyPage({
             <p>{t('privacy.dataWeCollect')}</p>
             <p>{t('privacy.fnr')}</p>
             <p>{t('privacy.hosting')}</p>
+            {/* OpenStreetMap's attribution. It used to sit on the map itself
+               as "Gangvei · OSM"; the client asked for every label but the
+               distances off the plate (2026-09-13), and the routes and the
+               street backdrop are OSM data under ODbL, which requires the
+               credit to be somewhere a reader can find. Here, with the
+               hosting notice, rather than nowhere. */}
+            <p>{t('privacy.mapData')}</p>
             <p>{t('privacy.rights')}</p>
             <p>
               {t('privacy.contact')}{' '}

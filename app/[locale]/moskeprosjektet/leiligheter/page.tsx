@@ -132,7 +132,10 @@ export default async function ApartmentsPage({
               <div className="overflow-hidden rounded-3xl bg-dusk p-4 sm:p-5">
                 <FindUs extended />
               </div>
-              <p className="mt-4 text-[13px] leading-relaxed text-ink-60">{t('about.mapCaption')}</p>
+              {/* The "walking distances are measured along real routes"
+                 caption is gone with the rest of the map's text (client,
+                 2026-09-13). The distances are still real; the sentence
+                 explaining that they are was one more thing to read. */}
             </div>
           </div>
 

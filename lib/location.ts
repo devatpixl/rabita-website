@@ -25,7 +25,8 @@ export type Landmark = {
     | 'stortinget'
     | 'oslo-city'
     | 'bussterminalen'
-    | 'operahuset';
+    | 'operahuset'
+    | 'regjeringskvartalet';
   kind: LandmarkKind;
   lat: number;
   lon: number;
@@ -43,6 +44,15 @@ export const LANDMARKS: readonly Landmark[] = [
   { key: 'oslo-city', kind: 'place', lat: 59.9123, lon: 10.7527, extended: true },
   { key: 'bussterminalen', kind: 'bus', lat: 59.9113, lon: 10.759, extended: true },
   { key: 'operahuset', kind: 'place', lat: 59.9075, lon: 10.7528, extended: true },
+  // Regjeringskvartalet (client, 2026-09-13). Routed the same way as the
+  // rest — routing.openstreetmap.de foot profile, which re-routes five of
+  // the seven above to their stored metre exactly, so this one belongs to
+  // the same set rather than being estimated beside it. 801 m on foot
+  // against 615 m straight line.
+  //
+  // It needs no change to the plate: at 59.9152/10.7426 it falls inside the
+  // bounds the existing routes already set, so nothing rescales.
+  { key: 'regjeringskvartalet', kind: 'place', lat: 59.9152, lon: 10.7426, extended: true },
 ];
 
 const R = 6_371_000;

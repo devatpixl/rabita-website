@@ -1170,8 +1170,6 @@
       "directions": "Directions",
       "visit": "Plan a visit",
       "openMaps": "Open in Google Maps",
-      "estimate": "Walking route · OSM",
-      "walk": "{min} min walk",
       "landmarks": {
         "oslo-s": "Oslo S / Jernbanetorget",
         "gronland": "Grønland metro",
@@ -1179,7 +1177,8 @@
         "stortinget": "Stortinget",
         "oslo-city": "Oslo City",
         "bussterminalen": "Oslo bus terminal",
-        "operahuset": "The Opera House"
+        "operahuset": "The Opera House",
+        "regjeringskvartalet": "The Government Quarter"
       }
     },
     "cols": {
@@ -1419,6 +1418,7 @@
       "dataWeCollect": "We store name, email, phone number and donation details to process gifts and tax deductions. Site analytics are anonymous.",
       "fnr": "National identity number is collected only where you opt in for tax deduction. It is encrypted at rest, access-restricted, and deleted after the statutory period.",
       "hosting": "The site is hosted in the EEA. We do not use third-party tracking before you consent.",
+      "mapData": "Maps, walking routes and the street backdrop come from OpenStreetMap, © OpenStreetMap contributors, used under the Open Database License (ODbL).",
       "rights": "You have the right to access, rectify and delete. Write to us and we reply within 30 days.",
       "contact": "Questions?"
     },

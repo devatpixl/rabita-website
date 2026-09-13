@@ -1170,8 +1170,6 @@
       "directions": "Veibeskrivelse",
       "visit": "Planlegg besøk",
       "openMaps": "Åpne i Google Maps",
-      "estimate": "Gangvei · OSM",
-      "walk": "{min} min til fots",
       "landmarks": {
         "oslo-s": "Oslo S / Jernbanetorget",
         "gronland": "Grønland T-bane",
@@ -1179,7 +1177,8 @@
         "stortinget": "Stortinget",
         "oslo-city": "Oslo City",
         "bussterminalen": "Oslo bussterminal",
-        "operahuset": "Operahuset"
+        "operahuset": "Operahuset",
+        "regjeringskvartalet": "Regjeringskvartalet"
       }
     },
     "cols": {
@@ -1419,6 +1418,7 @@
       "dataWeCollect": "Vi lagrer navn, e-post, telefonnummer og donasjonsdetaljer for å håndtere gaver og skattefradrag. Vi analyserer bruken av nettsiden anonymt.",
       "fnr": "Fødselsnummer samles inn kun der du velger å få skattefradrag. Det krypteres i hvile, tilgangsbegrenses og slettes etter lovpålagt tid.",
       "hosting": "Nettsiden er hostet i EØS. Vi bruker ikke tredjeparts sporing før du har samtykket.",
+      "mapData": "Kart, gangruter og gateunderlag er hentet fra OpenStreetMap, © OpenStreetMap-bidragsytere, og brukes under Open Database License (ODbL).",
       "rights": "Du har rett til innsyn, retting og sletting. Skriv til oss så svarer vi innen 30 dager.",
       "contact": "Spørsmål?"
     },

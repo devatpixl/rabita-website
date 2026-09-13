@@ -3,7 +3,7 @@
 import { useMemo, useRef } from 'react';
 import { useInView, useReducedMotion } from 'motion/react';
 import { useTranslations } from 'next-intl';
-import { LANDMARKS, MAPS_URL, MOSQUE, ROUTES, routedMinutes } from '@/lib/location';
+import { LANDMARKS, MAPS_URL, MOSQUE, ROUTES } from '@/lib/location';
 import streets from '@/lib/streets.json';
 import { cn } from '@/lib/cn';
 
@@ -45,6 +45,10 @@ const LABEL_POS: Record<string, { side: 'left' | 'right'; dy: number; dx?: numbe
   gronland: { side: 'left', dy: 18 },
   'oslo-s': { side: 'left', dy: 14, dx: -4 },
   stortinget: { side: 'right', dy: -30 },
+  // Regjeringskvartalet is the westernmost dot on the plate, so an end-anchored
+  // (side: 'left') label runs off the edge. It reads to the right, lifted clear
+  // of Stortinget's label 60px below it.
+  regjeringskvartalet: { side: 'right', dy: -26 },
   'oslo-city': { side: 'right', dy: -22, dx: 22 },
   bussterminalen: { side: 'left', dy: 18 },
   operahuset: { side: 'right', dy: -16 },
@@ -101,7 +105,7 @@ export function FindUs({ className, extended = false }: { className?: string; ex
       const pts = ROUTES[l.key].points.map(toM).map(px);
       const d = pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
       const end = pts[pts.length - 1];
-      return { key: l.key, d, end, min: routedMinutes(l.key), metres: ROUTES[l.key].metres };
+      return { key: l.key, d, end, metres: ROUTES[l.key].metres };
     });
     // Streets are stored in metres from the door, so they share the projection.
     const streetPaths = (streets.ways as { k: StreetKind; p: [number, number][] }[]).map((w) => ({
@@ -233,7 +237,7 @@ export function FindUs({ className, extended = false }: { className?: string; ex
                   strokeLinejoin="round"
                   paintOrder="stroke"
                 >
-                  {t('walk', { min: p.min })} · {p.metres} m
+                  {Math.floor(p.metres / 10) * 10} m
                 </text>
               </g>
             </g>
@@ -257,7 +261,14 @@ export function FindUs({ className, extended = false }: { className?: string; ex
       </svg>
 
       <span className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 whitespace-nowrap border-t border-paper/10 bg-dusk/70 px-4 py-3 text-[13px] text-paper/80 backdrop-blur-sm">
-        <span className="truncate font-mono text-[0.625rem] uppercase tracking-[0.14em] text-paper/50">{t('estimate')}</span>
+        {/* The "Gangvei · OSM" credit is gone from the plate (client,
+           2026-09-13: "fjern alt annet tekst"). OpenStreetMap still has to
+           be credited — the routes and the street backdrop are its data
+           under ODbL — so the attribution moved to the accessibility and
+           privacy page, which is where the site keeps that kind of notice.
+           Removing it from BOTH would have been a licence problem, not a
+           design choice. */}
+        <span aria-hidden />
         <span className="inline-flex shrink-0 items-center gap-2 font-semibold text-paper transition-colors group-hover:text-gold">
           {t('openMaps')}
           <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180">&rarr;</span>
