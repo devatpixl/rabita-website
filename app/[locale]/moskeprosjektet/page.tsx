@@ -212,8 +212,13 @@ export default async function ProjectPage({
             // and 3.75rem per row was just padding — it opened the gaps the
             // client flagged under "Completion" and under the architect.
             // Rows size to their content on a phone.
+            // Shorter rows (client, 2026-09-13: "reduce the height of this part
+            // a bit... modern and spacious but lesser vertical height"). The
+            // 4.5rem floor never actually bound — the 40px chip plus its
+            // padding already made a 64px row — so lowering the floor alone
+            // would have done nothing. The chip comes down with it.
             const row =
-              'flex items-baseline justify-between gap-4 py-3.5 md:min-h-[4.5rem] md:items-center md:gap-5 md:py-3';
+              'flex items-baseline justify-between gap-4 py-3 md:min-h-[3.5rem] md:items-center md:gap-5 md:py-2.5';
             // The card treatment the client asked for (2026-08-31), taken from
             // their mockup: a bordered plate per register, a mark beside every
             // figure, a gold rule off each register's label, and the capacity
@@ -223,9 +228,9 @@ export default async function ProjectPage({
             // ruled registers it has now — the client was explicit about that,
             // and a 40px chip beside a 13px label on a 390px screen would cost
             // the label its line anyway.
-            const card = 'md:rounded-2xl md:border md:border-rule md:bg-paper-2/50 md:p-7';
+            const card = 'md:rounded-2xl md:border md:border-rule md:bg-paper-2/50 md:p-6';
             const chip =
-              'hidden h-10 w-10 shrink-0 place-items-center rounded-lg border border-rule bg-paper text-gold-deep md:grid';
+              'hidden h-9 w-9 shrink-0 place-items-center rounded-lg border border-rule bg-paper text-gold-deep md:grid';
             const leader = 'hidden h-px flex-1 bg-rule md:block';
             return (
               <div>
