@@ -256,6 +256,11 @@ export function FloorByFloor() {
                    on a touch screen there is no tell at all. A line under the
                    counter, with an actual gold disc in front of it so it
                    points at the thing it is describing rather than naming it.
+
+                   The wording names the PHOTOS, not the place. It said "see
+                   the room" and the markers are not all rooms — hage, kuppel,
+                   beboerinngang, imam-kontor, næringslokaler. What every one
+                   of them opens is pictures, so that is what it promises.
                    Hidden below md: the phone slot underneath already carries
                    the skip control, and two lines of mono in a 14px column is
                    a stack, not a hint. */}

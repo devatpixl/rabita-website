@@ -2570,7 +2570,7 @@
   },
   "floorByFloor": {
     "eyebrow": "Floor by floor",
-    "tapHint": "Tap a dot to see the room",
+    "tapHint": "Tap a dot to see photos",
     "heading": "The building, from the ground up.",
     "stages": [
       "The building from the ground up, the site is cleared.",
