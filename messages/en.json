@@ -2291,7 +2291,7 @@
   "apartmentsPage": {
     "units": {
       "eyebrow": "The apartments",
-      "heading": "Fifteen homes, <em>one by one</em>.",
+      "heading": "Every home, <em>one by one</em>.",
       "lede": "Each apartment with its own layout. Tap an apartment to see the floor plan.",
       "openLabel": "See the floor plan",
       "closeLabel": "Close",
@@ -2317,6 +2317,46 @@
         "c2": {
           "title": "3-room apartment H502",
           "lede": "An efficient, modern three-room apartment with a good layout, its own 7 m² balcony and a high standard throughout."
+        },
+        "c3": {
+          "title": "3-room apartment H503",
+          "lede": "A practical three-room apartment with a good layout, a generous living room and a balcony facing the inner courtyard."
+        },
+        "c4": {
+          "title": "3-room apartment H504",
+          "lede": "A spacious three-room apartment with a good living and kitchen arrangement, a practical layout and its own balcony onto the green courtyard."
+        },
+        "c5": {
+          "title": "2-room apartment H505",
+          "lede": "A bright, airy two-room apartment with large windows, a generous living room and kitchen, and a charming balcony facing the open courtyard."
+        },
+        "c6": {
+          "title": "4-room apartment H507",
+          "lede": "A large dual-aspect four-room apartment with flexible room arrangements, a generous living room and kitchen, and good bedrooms. Ideal for families who want extra space and comfort."
+        },
+        "c7": {
+          "title": "1-room apartment H601",
+          "lede": "A bright, practical one-room apartment with an efficient layout, an open living and kitchen space and direct access to its own balcony. A compact, modern home, well suited to first-time buyers or as a rental."
+        },
+        "c8": {
+          "title": "3-room apartment H602",
+          "lede": "A bright, practical three-room apartment with a smart layout, two bedrooms and a sociable living and kitchen zone. With its own balcony and good storage it suits couples and small families alike."
+        },
+        "c9": {
+          "title": "3-room apartment H603",
+          "lede": "A spacious, practical three-room apartment with a 28 m² open living and kitchen space, two bedrooms and good storage. The 7 m² balcony faces the courtyard and gives a sheltered spot outdoors for much of the year."
+        },
+        "c10": {
+          "title": "3-room apartment H604",
+          "lede": "A spacious three-room apartment with a large open living and kitchen space of a full 41 m², two good bedrooms and a practical store. The west-facing 7 m² balcony catches the sun and looks onto the courtyard."
+        },
+        "c11": {
+          "title": "4-room apartment H605",
+          "lede": "A spacious dual-aspect four-room apartment with a flexible layout, three good bedrooms and a large living and kitchen space. The south-facing balcony brings fine light and a good spot outdoors for the family."
+        },
+        "c12": {
+          "title": "4-room apartment H606",
+          "lede": "A bright, spacious four-room apartment with three good bedrooms, an open living and kitchen space and a large balcony with good sun. A well-considered layout for families who want both comfort and function."
         }
       }
     },

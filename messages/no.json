@@ -2291,7 +2291,7 @@
   "apartmentsPage": {
     "units": {
       "eyebrow": "Leilighetene",
-      "heading": "Femten hjem, <em>ett for ett</em>.",
+      "heading": "Hvert hjem, <em>ett for ett</em>.",
       "lede": "Hver leilighet med sin egen planløsning. Trykk på en leilighet for å se plantegningen.",
       "openLabel": "Se plantegning",
       "closeLabel": "Lukk",
@@ -2317,6 +2317,46 @@
         "c2": {
           "title": "3-roms Leilighet H502",
           "lede": "En effektiv og moderne 3-roms leilighet med god planløsning, egen balkong på 7 m² og gjennomgående god standard."
+        },
+        "c3": {
+          "title": "3-roms Leilighet H503",
+          "lede": "En praktisk 3-roms leilighet med god planløsning, romslig stue og balkong vendt mot det indre gårdsrommet."
+        },
+        "c4": {
+          "title": "3-roms Leilighet H504",
+          "lede": "En romslig 3-roms leilighet med god stue- og kjøkkenløsning, praktisk planløsning og egen balkong mot det grønne gårdsrommet."
+        },
+        "c5": {
+          "title": "2-roms Leilighet H505",
+          "lede": "En lys og luftig 2-roms leilighet med store vindusflater, romslig stue/kjøkken og en sjarmerende balkong som vender mot det åpne gårdsrommet."
+        },
+        "c6": {
+          "title": "4-roms Leilighet H507",
+          "lede": "En stor og gjennomgående 4-roms leilighet med fleksible romløsninger, romslig stue/kjøkken og gode soverom. Perfekt for familier som ønsker ekstra plass og komfort."
+        },
+        "c7": {
+          "title": "1-roms Leilighet H601",
+          "lede": "En lys og praktisk 1-roms leilighet med effektiv planløsning, åpen stue/kjøkkenløsning og direkte tilgang til egen balkong. Et kompakt og moderne hjem som passer perfekt for førstegangskjøpere eller som utleieenhet."
+        },
+        "c8": {
+          "title": "3-roms Leilighet H602",
+          "lede": "En lys og praktisk 3-roms leilighet med smart planløsning, to soverom og en sosial stue/kjøkken-sone. Med egen balkong og gode oppbevaringsmuligheter passer denne leiligheten perfekt for både par og små familier."
+        },
+        "c9": {
+          "title": "3-roms Leilighet H603",
+          "lede": "En romslig og praktisk 3-roms leilighet med åpen stue/kjøkken-løsning på 28 m², to soverom og god bodplass. Balkongen på 7 m² vender mot det vakre gårdsrommet og gir en lun uteplass gjennom store deler av året."
+        },
+        "c10": {
+          "title": "3-roms Leilighet H604",
+          "lede": "En romslig 3-roms leilighet med en stor og åpen stue/kjøkken på hele 41 m², to fine soverom og praktisk bod. Den vestvendte balkongen på 7 m² gir gode solforhold og utsyn mot gårdsrommet."
+        },
+        "c11": {
+          "title": "4-roms Leilighet H605",
+          "lede": "En romslig og gjennomgående 4-roms leilighet med fleksibel planløsning, tre gode soverom og en stor stue/kjøkken-løsning. Den sørvendte balkongen gir flott lys og en god uteplass for familien."
+        },
+        "c12": {
+          "title": "4-roms Leilighet H606",
+          "lede": "En lys og romslig 4-roms leilighet med tre gode soverom, åpen stue/kjøkken-løsning og en stor balkong som gir gode solforhold. En gjennomtenkt planløsning som passer perfekt for familier som ønsker både komfort og funksjonalitet."
         }
       }
     },
