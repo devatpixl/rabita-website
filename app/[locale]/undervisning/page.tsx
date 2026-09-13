@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { PageBand } from '@/components/page-band';
-import { ServiceIndex } from '@/components/service-index';
+import { ServiceGrid } from '@/components/service-grid';
 import { ServicePicker } from '@/components/service-picker';
 import { SectionBody } from '@/components/primitives';
 import { SERVICE_PAGES } from '@/lib/services';
@@ -44,7 +44,7 @@ export default async function UndervisningIndex({
         <ServicePicker items={SERVICE_PAGES.undervisning} />
       </SectionBody>
 
-      <ServiceIndex items={SERVICE_PAGES.undervisning} header={false} />
+      <ServiceGrid items={SERVICE_PAGES.undervisning} locale={locale} header={false} />
     </main>
   );
 }

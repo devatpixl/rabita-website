@@ -133,8 +133,35 @@ export const SERVICE_PAGES = {
 // one portrait source (the girl at the bazaar, 1125x1500) therefore loses the
 // top and bottom of its frame, so the crop is pulled up to keep her face.
 // Anything absent from here is centred.
+// Where to hold the crop in the GRID, which is a far tighter frame than the
+// bands it replaced: ten of the thirteen sources are ~3:2 landscape and one
+// card is 4:5, so a centred crop throws away nearly half the width and can
+// behead the subject. Only `skole` was steered before, because the bands
+// barely cropped at all.
+//
+// The vertical offsets are ported from SERVICE_BAND's objectClass below —
+// they were tuned on the subject pages against the same photographs, so they
+// are measured values, not guesses.
+//
+// fosterhjem is the exception and is steered HORIZONTALLY: it is a 1616x1080
+// of the imam beside a lit projector screen, and that screen is both the
+// brightest thing in the library (mean luminance 0.46 in the text zone
+// against 0.02 for janaza) and the least interesting half of the frame.
+// Pulling the crop toward the inline start keeps the man and drops the screen.
 export const SERVICE_FOCUS: Partial<Record<ServiceKey, string>> = {
+  nikah: '50% 40%',
+  janaza: '50% 50%',
+  shahada: '50% 38%',
+  counselling: '50% 42%',
+  'hajj-umrah': '50% 45%',
   skole: '50% 32%',
+  koran: '50% 45%',
+  kurs: '50% 50%',
+  norsk: '50% 40%',
+  veivisere: '50% 42%',
+  ungdom: '50% 45%',
+  'barn-og-familie': '50% 42%',
+  fosterhjem: '38% 55%',
 };
 
 // Per-subject art direction for the band hero (components/page-band.tsx).

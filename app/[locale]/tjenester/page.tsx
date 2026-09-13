@@ -1,6 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
 import { ServicesHero } from '@/components/services-hero';
-import { ServiceIndex } from '@/components/service-index';
+import { ServiceGrid } from '@/components/service-grid';
 import { ServicePicker } from '@/components/service-picker';
 import { SectionBody } from '@/components/primitives';
 import { SERVICE_PAGES } from '@/lib/services';
@@ -27,9 +27,10 @@ export default async function ServicesIndex({
         <ServicePicker items={SERVICE_PAGES.tjenester} />
       </SectionBody>
 
-      {/* Teaching moved to its own page the same day, so this index is now the
+      {/* A grid, not the alternating bands (client, 2026-09-13: "too much to
+         scroll"). Teaching moved to its own page the same day, so this is the
          ten on his Tjenester list rather than all thirteen. */}
-      <ServiceIndex items={SERVICE_PAGES.tjenester} />
+      <ServiceGrid items={SERVICE_PAGES.tjenester} locale={locale} />
 
       {/* The "Coming in person" band (ServiceVisit) was removed on 2026-08-31:
          it repeated verbatim on this page, the services index and all eleven
