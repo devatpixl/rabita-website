@@ -90,7 +90,23 @@ export default async function ProjectPage({
          SectionBody, no paper. The CTA points at Fremdrift: "read more
          about the project" is circular on the project page, and the one
          thing these renders do not answer is when. */}
-      <ProjectGallery cta={{ href: `/${locale}/moskeprosjektet/fremdrift`, label: t('gallery.cta') }} />
+      <ProjectGallery
+        // Named explicitly, so adding a slide for another page cannot
+        // quietly appear here. The two apartment interiors went into the
+        // component's list on 2026-09-13 for /leiligheter and turned up at
+        // the end of this gallery uninvited; this page is the mosque.
+        only={[
+          'facadeEvening',
+          'foyer',
+          'garden',
+          'mainHall',
+          'minaret',
+          'youthClub',
+          'meetingRoom',
+          'roofTerrace',
+        ]}
+        cta={{ href: `/${locale}/moskeprosjektet/fremdrift`, label: t('gallery.cta') }}
+      />
 
       {/* Fremdrift, in digest. Sits here deliberately: the renders above
          answer "what will it look like", the key figures below open with

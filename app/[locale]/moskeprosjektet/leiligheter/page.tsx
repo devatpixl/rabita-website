@@ -303,7 +303,9 @@ export default async function ApartmentsPage({
          3"). The renders used to sit fourth, after the facilities thread,
          which meant the page argued for the homes twice in words before it
          showed you one. */}
-      <ProjectGallery only={['roofTerrace', 'garden', 'minaret', 'facadeEvening']} />
+      <ProjectGallery
+        only={['apartmentLiving', 'apartmentBalcony', 'roofTerrace', 'garden', 'minaret', 'facadeEvening']}
+      />
 
       {/* ── kvalitet og møteplasser ─────────────────────────────────────
          Rebuilt to the client's mock (2026-09-04): heading beside the

@@ -1313,6 +1313,18 @@
           "title": "Takterrassen over byen",
           "caption": "Bord under gule seil, planter og utsikt utover takene. Uterommet for skolen og klubben.",
           "alt": "Takterrassen med gule solseil og bord"
+        },
+        "apartmentLiving": {
+          "tag": "Leilighetene",
+          "title": "Kjøkkenet, stua og byen utenfor",
+          "caption": "Åpen plan med kjøkkenøy, plass til å spise sammen og takvindu ut mot byen.",
+          "alt": "Stue og kjøkken i en leilighet, med familie rundt spisebordet og balkong ut mot byen"
+        },
+        "apartmentBalcony": {
+          "tag": "Balkongen",
+          "title": "Ettermiddagslys og en dør ut",
+          "caption": "Stua åpner seg mot balkongen, og de skrå takvinduene slipper lyset langt inn.",
+          "alt": "Stue med spisebord og skrå takvindu, med balkongdøren åpen mot to som sitter ute"
         }
       }
     },

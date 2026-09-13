@@ -45,8 +45,15 @@ const SLIDES = [
   { key: 'youthClub', src: '/photos/proj-youth-club.webp', pos: '50% 50%' },
   { key: 'meetingRoom', src: '/photos/proj-meeting-room.webp', pos: '50% 50%' },
   { key: 'roofTerrace', src: '/photos/proj-roof-terrace.webp', pos: '50% 50%' },
+  // The two apartment interiors (client, 2026-09-13). LAST in this list on
+  // purpose: the project page renders every slide in this order and opens on
+  // the facade, so appending keeps that page exactly as it was. /leiligheter
+  // asks for them FIRST, and `only` honours the order it is given.
+  { key: 'apartmentLiving', src: '/photos/apt-living-507.webp', pos: '50% 50%' },
+  { key: 'apartmentBalcony', src: '/photos/apt-living-505.webp', pos: '50% 50%' },
 ] as const;
 export type SlideKey = (typeof SLIDES)[number]['key'];
+type Slide = (typeof SLIDES)[number];
 
 const GRADE = 'saturate(0.8) contrast(1.08) brightness(0.95)';
 
@@ -84,7 +91,13 @@ export function ProjectGallery({
   cta?: { href: string; label: string };
 } = {}) {
   const t = useTranslations('projectPage.gallery');
-  const slides = only ? SLIDES.filter((s) => only.includes(s.key)) : SLIDES;
+  // `only` picks AND orders. It used to filter SLIDES, which meant the
+  // caller could choose the slides but not their sequence — and /leiligheter
+  // needs the apartments in front of the mosque views, while this array has
+  // them at the back so the project page is unaffected.
+  const slides: readonly Slide[] = only
+    ? only.map((k) => SLIDES.find((s) => s.key === k)).filter((s): s is Slide => Boolean(s))
+    : SLIDES;
   const reduced = useReducedMotion();
   const [i, setI] = useState(0);
   const n = slides.length;

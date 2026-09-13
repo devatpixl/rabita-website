@@ -1313,6 +1313,18 @@
           "title": "The terrace above the city",
           "caption": "Tables under yellow canopies, planting, and a view out across the roofs. The outdoor room for the school and the club.",
           "alt": "The roof terrace with yellow canopies and tables"
+        },
+        "apartmentLiving": {
+          "tag": "The apartments",
+          "title": "The kitchen, the living room and the city outside",
+          "caption": "Open plan with a kitchen island, room to eat together and a roof window onto the city.",
+          "alt": "Living room and kitchen in an apartment, with a family around the dining table and a balcony facing the city"
+        },
+        "apartmentBalcony": {
+          "tag": "The balcony",
+          "title": "Afternoon light and a door out",
+          "caption": "The living room opens onto the balcony, and the sloped roof windows carry the light deep inside.",
+          "alt": "Living room with dining table and sloped roof window, the balcony door open onto two people sitting outside"
         }
       }
     },
