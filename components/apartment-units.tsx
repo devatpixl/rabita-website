@@ -164,9 +164,18 @@ export function ApartmentUnits() {
             >
               <button
                 type="button"
+                // NO onFocus={() => setActive(i)} here, however tempting it
+                // is for keeping the dots in step with keyboard focus. Focus
+                // fires on MOUSEDOWN, so it scrolled the rail out from under
+                // the pointer and the mouseup landed on a different element —
+                // which means no click event at all. Clicking any card that
+                // was not already aligned just slid the rail and never opened
+                // the plan (client, 2026-09-13: "im clicking on right side
+                // cards, it swaps right"). Browsers already scroll a focused
+                // element into view inside its own scroll container, so
+                // keyboard users lose nothing.
                 onClick={() => setOpen(u)}
                 aria-label={`${t(`items.${u.id}.title`)} — ${t('openLabel')}`}
-                onFocus={() => setActive(i)}
                 className="group/unit relative flex aspect-[4/5] w-full flex-col justify-end overflow-hidden rounded-2xl bg-ink text-start ring-1 ring-inset ring-paper/10 transition-[box-shadow] duration-300 ease-out hover:ring-gold/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
               >
                 <span aria-hidden className="absolute inset-0">
