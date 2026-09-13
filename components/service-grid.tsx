@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { SERVICE_FOCUS, SERVICE_IMAGE, type ServiceKey } from '@/lib/services';
-import { Section, SectionBody } from './primitives';
+import { SectionBody } from './primitives';
 import { Accent } from './accent';
 import { Reveal } from './reveal';
 
@@ -112,7 +112,35 @@ export async function ServiceGrid({
   const total = String(items.length).padStart(2, '0');
 
   return (
-    <Section tone="paper">
+    // The pinned backdrop (client, 2026-09-13: "i want the bg fixed but cards
+    // can move on scroll").
+    //
+    // position: sticky, NOT background-attachment: fixed. iOS Safari ignores
+    // `fixed` and paints the background as `scroll`, which would have made
+    // this work on every machine in the studio and on no phone.
+    //
+    // overflow-CLIP, not overflow-hidden. `hidden` makes the section a scroll
+    // container, and a sticky element's containing scroller is its nearest
+    // scrollable ancestor — so `hidden` here would silently pin the image to a
+    // box that never scrolls, i.e. it would not stick at all. `clip` clips
+    // without creating a scroller.
+    <section className="relative isolate overflow-clip py-section-md">
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="sticky top-0 h-screen">
+          <Image
+            src="/photos/svc-hall-bg.webp"
+            alt=""
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover object-[70%_50%]"
+          />
+          {/* A paper wash, light enough that the arcade still reads. The
+             heading is ink on this, and the plates are dark, so the ground
+             only has to stay quiet — not disappear. */}
+          <div className="absolute inset-0 bg-paper/45" />
+        </div>
+      </div>
       <SectionBody>
         {header && (
           <>
@@ -259,6 +287,6 @@ export async function ServiceGrid({
           })}
         </ol>
       </SectionBody>
-    </Section>
+    </section>
   );
 }
