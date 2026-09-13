@@ -140,7 +140,12 @@ export function RoomPhotos({
          it is a mouse shortcut for something the close button and Escape
          already do, and an unnamed control in the tree would just be one more
          thing to tab past. */}
-      <div aria-hidden onClick={onClose} className="absolute inset-0 bg-dusk/85 backdrop-blur-sm" />
+      {/* 60%, not 85 (client, 2026-09-13: "make the sides more visible").
+         At 85 the page behind was a flat dark field and the dialog read as a
+         new screen; at 60 with the blur still on you can see WHERE you are
+         and that this is laid over it. The sheet carries its own opaque dusk,
+         so nothing in it depends on the ground for contrast. */}
+      <div aria-hidden onClick={onClose} className="absolute inset-0 bg-dusk/60 backdrop-blur-[3px]" />
 
       <div
         ref={sheetRef}
