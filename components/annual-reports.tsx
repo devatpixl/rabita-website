@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import { getLocale, getTranslations } from 'next-intl/server';
-import { ANNUAL_REPORTS, reportSizeMb } from '@/lib/reports';
+import { getTranslations } from 'next-intl/server';
+import { ANNUAL_REPORTS } from '@/lib/reports';
 import { Accent } from './accent';
 import { SectionBody } from './primitives';
 
@@ -13,12 +13,11 @@ import { SectionBody } from './primitives';
 // that panel as the model, and reusing it means the two read as one system
 // rather than as two people's idea of a download list.
 //
-// Two departures from that panel, both because these are PDFs and the months
-// are pages:
-//   - every row carries its size. Handing someone a 31MB download on mobile
-//     data without saying so is not a detail, it is the whole decision.
-//   - `download` on the anchor, so a click saves the file instead of
-//     replacing the page with a PDF viewer the reader then has to back out of.
+// Rows carried "PDF · 6.4 MB" until 2026-09-14, when the client asked for it
+// off. It wrapped to two lines in the narrow column, which is what he was
+// looking at. Worth knowing what went with it: the 2022 report is 31.5MB, and
+// nothing on the page now warns anyone before they tap it on mobile data.
+// aboutPage.reports.mb stays in the message files, unreferenced.
 //
 // The chart is the client's own image. It is NOT rebuilt as markup: it names
 // twenty-eight real people with their roles, and transcribing those by eye
@@ -26,7 +25,6 @@ import { SectionBody } from './primitives';
 // website. The cost of that decision is honest and stated below.
 
 export async function AnnualReports() {
-  const locale = await getLocale();
   const t = await getTranslations('aboutPage.reports');
 
   return (
@@ -70,13 +68,8 @@ export async function AnnualReports() {
                   {/* The label pair is baseline-aligned to itself; the row is
                      centre-aligned. Mixing the two on one flex line is what
                      put the two arrows on different lines. */}
-                  <span className="flex items-baseline gap-3">
-                    <span className="font-serif text-[1.15rem] leading-none tabular-nums">
-                      {t('year', { year: r.year })}
-                    </span>
-                    <span className="font-mono text-[0.6875rem] tabular-nums text-ink-40">
-                      PDF · {t('mb', { n: reportSizeMb(r.bytes, locale) })}
-                    </span>
+                  <span className="font-serif text-[1.15rem] leading-none tabular-nums">
+                    {t('year', { year: r.year })}
                   </span>
                   <span
                     aria-hidden
