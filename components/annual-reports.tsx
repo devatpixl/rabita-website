@@ -80,13 +80,27 @@ export async function AnnualReports() {
             {t.rich('chartHeading', { em: (chunks) => <Accent surface="paper">{chunks}</Accent> })}
           </h2>
 
-          <div className="mt-8 overflow-hidden rounded-2xl border border-rule bg-paper md:mt-10">
+          {/* UNOPTIMIZED, and the width capped at the file's own 1024px.
+             Two separate reasons, both visible on this particular image:
+
+             next.config sets formats: ['image/avif', 'image/webp'], so the
+             optimizer re-encodes. The client's file is ALREADY a lossy webp,
+             so the page was serving a lossy AVIF made from a lossy webp —
+             generation loss, and this image is almost entirely 10px text,
+             which is precisely what lossy codecs smear. Opening the file
+             directly looked sharper because that is the untouched original.
+             It is 49KB; there is nothing for the optimizer to win here.
+
+             And the plate is 1104px wide while the source is 1024, so it was
+             also being stretched 8% past native. max-w caps that: better a
+             slightly narrower chart than a soft one. */}
+          <div className="mx-auto mt-8 max-w-[1024px] overflow-hidden rounded-2xl border border-rule bg-paper md:mt-10">
             <Image
               src="/photos/organisasjonskart.webp"
               alt={t('chartAlt')}
               width={1024}
               height={724}
-              sizes="(min-width: 1152px) 1104px, 100vw"
+              unoptimized
               className="h-auto w-full"
             />
           </div>
