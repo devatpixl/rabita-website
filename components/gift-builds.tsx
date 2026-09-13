@@ -122,13 +122,36 @@ export function GiftBuilds() {
   const [active, setActive] = useState(0);
   const go = useCallback((to: number) => setActive(((to % n) + n) % n), [n]);
 
-  // Bring the current card into the rail's own view. `nearest` rather than
-  // `center`, so selecting a card already fully on screen does not jolt the
-  // whole rail sideways to centre it.
+  // Bring the current card into the rail's own view — and ONLY the rail's.
+  //
+  // This was el.scrollIntoView(), which walks up and scrolls every scrollable
+  // ancestor, the document included. It ran on mount with active = 0, so
+  // opening /moskeprosjektet dropped the reader straight down the page to
+  // this section (client, 2026-09-13: "when i open moske project, i am taken
+  // here, why not stay at top"). `block: 'nearest'` does not save you: the
+  // card is nowhere near the viewport at mount, so nearest is still a scroll.
+  //
+  // So: the rail's own scrollLeft, which cannot move the page, and a guard
+  // that skips the first run because on mount there is nothing to bring into
+  // view — card 0 is already where the rail starts.
   const railRef = useRef<HTMLUListElement>(null);
+  const railMounted = useRef(false);
   useEffect(() => {
-    const el = railRef.current?.children[active] as HTMLElement | undefined;
-    el?.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest', inline: 'nearest' });
+    if (!railMounted.current) {
+      railMounted.current = true;
+      return;
+    }
+    const rail = railRef.current;
+    const el = rail?.children[active] as HTMLElement | undefined;
+    if (!rail || !el) return;
+    const left = el.offsetLeft - rail.offsetLeft;
+    const right = left + el.offsetWidth;
+    const behavior: ScrollBehavior = still ? 'auto' : 'smooth';
+    // Nudge only if the card is not already fully in the rail, and leave a
+    // little air so it does not sit flush against the edge.
+    if (left < rail.scrollLeft) rail.scrollTo({ left: Math.max(0, left - 16), behavior });
+    else if (right > rail.scrollLeft + rail.clientWidth)
+      rail.scrollTo({ left: right - rail.clientWidth + 16, behavior });
   }, [active, still]);
 
   return (
