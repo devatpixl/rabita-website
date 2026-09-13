@@ -1,8 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/cn';
 import { FLOOR_MARKERS, type FloorMarker } from '@/lib/floor-markers';
+import { photosFor } from '@/lib/floor-photos';
+import { RoomPhotos } from './room-photos';
 
 // The labels over a floor drawing.
 //
@@ -131,10 +134,59 @@ const CHIP_W = 460;
 const CHIP_H = 200;
 const LABEL_TYPE = 34;
 
+// The phone name-plate. Identical either way except for the element and a
+// small gold count when a room has more than one photograph — the affordance
+// has to live in the plate itself, since there is no hover on a phone to
+// reveal one.
+function Chip({
+  as,
+  onClick,
+  count,
+  style,
+  children,
+}: {
+  as: 'button' | 'span';
+  onClick?: () => void;
+  count: number;
+  style: React.CSSProperties;
+  children: React.ReactNode;
+}) {
+  const inner = (
+    <>
+      {children}
+      {count > 1 && (
+        <span style={{ marginInlineStart: '10px', color: '#C0A165', fontVariantNumeric: 'tabular-nums' }}>
+          {count}
+        </span>
+      )}
+    </>
+  );
+  if (as === 'span') return <span style={style}>{inner}</span>;
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      style={{ ...style, cursor: 'pointer', pointerEvents: 'auto', font: 'inherit' }}
+    >
+      {inner}
+    </button>
+  );
+}
+
 export function FloorMarkers({ floorKey, active }: { floorKey: string; active: boolean }) {
   const t = useTranslations('floorByFloor.rooms');
   const markers: FloorMarker[] = FLOOR_MARKERS[floorKey] ?? [];
+  // Which room's photographs are open, if any. Held per floor rather than on
+  // the section: only the lit floor can be clicked, so only one of these eight
+  // instances can ever have something open.
+  const [openRoom, setOpenRoom] = useState<string | null>(null);
   if (markers.length === 0) return null;
+
+  // A marker opens photographs only if it HAS photographs, and only while its
+  // own floor is the one lit. All eight floors are in the DOM at once, faded
+  // to nothing; without the `active` half, the reader would be clicking rooms
+  // on a drawing they cannot see.
+  const canOpen = (id: string) => active && photosFor(id).length > 0;
 
   return (
     <>
@@ -153,8 +205,12 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
          inside a foreignObject means viewBox units — Tailwind's rem-based
          utilities would resolve against the root font size instead and come
          out microscopic, so the chip is styled inline. */}
+      {/* aria-hidden goes when a chip becomes a button: a control the reader
+         can reach must not sit inside a subtree hidden from them. The layer
+         still takes no pointer events itself — only the chips that open
+         something do. */}
       <svg
-        aria-hidden
+        aria-hidden={!active}
         viewBox={`0 0 ${FRAME_W} ${FRAME_H}`}
         preserveAspectRatio="xMidYMax meet"
         className="pointer-events-none absolute inset-0 h-full w-full overflow-visible max-[359px]:hidden md:hidden"
@@ -176,8 +232,15 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
               {/* Dusk fill, gold hairline: the same pair the desktop point
                  uses, and for the same reason. These labels sit on pale
                  walls, roof decks and dark green prayer halls in turn, and
-                 dark-on-gold is the one combination legible on all three. */}
-              <span
+                 dark-on-gold is the one combination legible on all three.
+                 
+                 A button where the room has photographs, a span where it does
+                 not — rather than a button that does nothing, which is worse
+                 than no button. */}
+              <Chip
+                as={canOpen(m.id) ? 'button' : 'span'}
+                onClick={canOpen(m.id) ? () => setOpenRoom(m.id) : undefined}
+                count={photosFor(m.id).length}
                 style={{
                   display: 'inline-block',
                   maxWidth: '100%',
@@ -195,7 +258,7 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
                 }}
               >
                 {t(m.id)}
-              </span>
+              </Chip>
             </div>
           </foreignObject>
         ))}
@@ -258,12 +321,37 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
             {markers.map((m, i) => (
               <g
                 key={m.id}
+                role={canOpen(m.id) ? 'button' : undefined}
+                tabIndex={canOpen(m.id) ? 0 : undefined}
+                aria-label={canOpen(m.id) ? t(m.id) : undefined}
+                onClick={canOpen(m.id) ? () => setOpenRoom(m.id) : undefined}
+                onKeyDown={
+                  canOpen(m.id)
+                    ? (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setOpenRoom(m.id);
+                        }
+                      }
+                    : undefined
+                }
                 className={cn(
                   'transition-opacity duration-500 ease-out motion-reduce:transition-none',
                   active ? 'opacity-100' : 'opacity-0',
+                  // Events only where there is something to open, and only on
+                  // the lit floor. The layer above is pointer-events-none.
+                  canOpen(m.id) &&
+                    'pointer-events-auto cursor-pointer outline-none [&>circle]:transition-[r] focus-visible:[&>circle:nth-of-type(2)]:r-[46]',
                 )}
                 style={{ transitionDelay: active ? `${180 + i * 90}ms` : '0ms' }}
               >
+                {/* The hit area. The painted disc is 38 units across, which is
+                   about 15px on a laptop — too small a target for a mouse and
+                   far too small for a finger. This one is invisible, twice the
+                   radius, and drawn FIRST so it never covers the disc. */}
+                {canOpen(m.id) && (
+                  <circle cx={px(m.x)} cy={py(m.y)} r={DISC_R * 2} fill="transparent" />
+                )}
                 {/* gold-deep, not gold (client, 2026-09-09: the line was hard
                    to follow). Most of a leader runs over the dusk ground but
                    its last stretch crosses the building's white walls, so the
@@ -374,6 +462,14 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
             ))}
           </svg>
       </div>
+
+      {openRoom && (
+        <RoomPhotos
+          roomId={openRoom}
+          photos={photosFor(openRoom)}
+          onClose={() => setOpenRoom(null)}
+        />
+      )}
     </>
   );
 }

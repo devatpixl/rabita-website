@@ -2619,6 +2619,22 @@
       "dome": "Dome",
       "minaret": "Minaret"
     },
+    "roomDesc": {
+      "sportsHall": "The multi-purpose hall in the lower floor — a court, training space and room for the whole club.",
+      "foyer": "Daylight from above, the library to one side, and the stair that ties the floors together.",
+      "cafe": "The café sits just inside the street, open to the congregation and to the city. No threshold.",
+      "library": "A reading room, seminar rooms and a youth section — somewhere to study that is not home.",
+      "commercial": "The restaurant facing the street: dining room, servery and a full kitchen behind.",
+      "childrensRoom": "The playroom beside the prayer hall, so the youngest have somewhere to be while their parents pray.",
+      "imamOffice": "The imams’ offices. Where you come for a conversation, for a nikah, or for advice in a hard week.",
+      "school": "Four hundred pupils and nineteen teachers. Classrooms with their own daylight, and corridors wide enough for a whole class.",
+      "conference": "One room for a great deal: conferences, weddings, funerals and courses.",
+      "meetingRooms": "Meeting rooms for the board, for courses and for hire, with the offices behind the glass wall.",
+      "youthClub": "Somewhere to be on a Friday evening: club rooms, offices for the volunteers and a studio next door.",
+      "apartments": "Fifteen rental apartments. The rent pays for running the building, so maintenance never eats the organisation again.",
+      "roofTerrace": "Tables under yellow canopies, planting and a view out across the roofs — the outdoor room for the school and the club.",
+      "minaret": "The minaret stands in the courtyard, with the balconies and flower boxes around it."
+    },
     "floors": {
       "lower": "Lower floor · prayer hall and sports hall",
       "first": "1st floor · the main mosque",

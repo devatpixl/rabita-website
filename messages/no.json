@@ -2619,6 +2619,22 @@
       "dome": "Kuppel",
       "minaret": "Minaret"
     },
+    "roomDesc": {
+      "sportsHall": "Flerbrukshallen i underetasjen — bane, trening og plass til hele klubben.",
+      "foyer": "Dagslys ovenfra, biblioteket til siden, og trappen som binder etasjene sammen.",
+      "cafe": "Kafeen ligger rett innenfor gata, åpen for menigheten og for byen. Ingen dørstokk.",
+      "library": "Lesesal, seminarrom og en egen ungdomsavdeling — et sted å studere som ikke er hjemme.",
+      "commercial": "Restauranten mot gata: spisesal, servering og et fullt kjøkken bak.",
+      "childrensRoom": "Lekerommet ved siden av bønnesalen, så de minste har et sted mens foreldrene ber.",
+      "imamOffice": "Kontorene til imamene. Hit kommer du for en samtale, for nikah, eller for råd i en vanskelig uke.",
+      "school": "Fire hundre elever og nitten lærere. Egne klasserom med dagslys, og korridorer brede nok til en hel klasse.",
+      "conference": "Ett rom for mye: konferanse, vigsel, begravelse og kurs.",
+      "meetingRooms": "Møterom for styret, for kurs og for utleie, med kontorene innenfor glassveggen.",
+      "youthClub": "Et sted å være på fredagskvelden: klubbrom, kontorer for de frivillige og et studio ved siden av.",
+      "apartments": "Femten utleieleiligheter. Leieinntektene betaler driften, slik at vedlikehold aldri spiser opp organisasjonen.",
+      "roofTerrace": "Bord under gule seil, planter og utsikt utover takene — uterommet for skolen og klubben.",
+      "minaret": "Minareten står i gårdsrommet, med balkongene og blomsterkassene rundt."
+    },
     "floors": {
       "lower": "Underetasjen · bønnerom og flerbrukshall",
       "first": "1. etasje · hovedmoskeen",
