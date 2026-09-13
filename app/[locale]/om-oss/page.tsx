@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { AnnualReports } from '@/components/annual-reports';
 import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
@@ -300,6 +301,10 @@ export default async function AboutPage({
          exist yet with no links behind them. Their strings are still in
          messages/*.json under about.board and about.legal, so either can be
          restored once there are real names and real files. */}
+
+      {/* The reports and the chart land where the "available on request"
+         sentence used to stand for both (client, 2026-09-13). */}
+      <AnnualReports />
 
       {/* "Til protokollen" came off this page on 2026-09-13 ("Fjern til
          protokollen"), listed under his Om oss notes. It is NOT deleted from

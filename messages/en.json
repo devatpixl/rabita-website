@@ -2127,6 +2127,17 @@
     }
   },
   "aboutPage": {
+    "reports": {
+      "eyebrow": "Documents",
+      "heading": "The annual reports, <em>year by year</em>.",
+      "lede": "What we did, what it cost and where the money came from. The reports download as PDF.",
+      "year": "Annual report {year}",
+      "mb": "{n} MB",
+      "chartEyebrow": "The organisation",
+      "chartHeading": "How Rabita is <em>organised</em>.",
+      "chartAlt": "Rabita's organisation chart: the control committee, the board, the administration and the departments, with each person's name and role.",
+      "chartOpen": "Open the chart at full size"
+    },
     "eyebrow": "About us",
     "title": "Rabita since 1987.",
     "lede": "From a flat in Grønland to one of the largest and oldest mosques in Norway.",
