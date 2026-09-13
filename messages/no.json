@@ -1460,9 +1460,9 @@
     },
     "submit": "Send",
     "submitting": "Sender …",
-    "privacy": "Vi svarer innen 3 virkedager. Se personvern for hvordan vi lagrer opplysningene.",
+    "privacy": "Se personvern for hvordan vi lagrer opplysningene.",
     "doneTitle": "Vi har mottatt henvendelsen.",
-    "doneBody": "Du hører fra oss innen 3 virkedager. Sjekk gjerne søppelpost.",
+    "doneBody": "Du hører fra oss så snart vi kan. Sjekk gjerne søppelpost.",
     "bedrooms": "Antall soverom",
     "bedroomsUnit": "soverom",
     "errors": {
@@ -2037,7 +2037,7 @@
   "contactPage": {
     "eyebrow": "Kontakt",
     "title": "Skriv til oss.",
-    "lede": "Gaver, medlemskap, tjenester eller presse. Vi svarer innen 3 virkedager.",
+    "lede": "Gaver, medlemskap, tjenester eller presse.",
     "directHeading": "Direkte",
     "formHeading": "Send henvendelse",
     "note": "For hastesaker (janaza), ring resepsjonen."

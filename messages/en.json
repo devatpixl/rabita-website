@@ -1460,9 +1460,9 @@
     },
     "submit": "Send",
     "submitting": "Sending …",
-    "privacy": "We reply within 3 working days. See privacy for how we store your data.",
+    "privacy": "See privacy for how we store your data.",
     "doneTitle": "We have received your enquiry.",
-    "doneBody": "You will hear from us within 3 working days. Please check your spam folder.",
+    "doneBody": "You will hear from us as soon as we can. Please check your spam folder.",
     "bedrooms": "Bedrooms",
     "bedroomsUnit": "bedrooms",
     "errors": {
@@ -2037,7 +2037,7 @@
   "contactPage": {
     "eyebrow": "Contact",
     "title": "Write to us.",
-    "lede": "Gifts, membership, services or press. We reply within 3 working days.",
+    "lede": "Gifts, membership, services or press.",
     "directHeading": "Direct",
     "formHeading": "Send an enquiry",
     "note": "For urgent matters (janaza), please call reception."
