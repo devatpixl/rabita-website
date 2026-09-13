@@ -48,14 +48,40 @@ export function RoomPhotos({
   // teardown of each half has to happen in the same order it was set up.
   useEffect(() => {
     const opener = document.activeElement as HTMLElement | null;
-    const { overflow, paddingRight } = document.body.style;
-    const gap = window.innerWidth - document.documentElement.clientWidth;
+
+    // Lock the element that actually SCROLLS, which on this site is <html>,
+    // not <body>. globals.css puts overflow-x: clip on html, and that makes
+    // html the scroll container — so overflow:hidden on body is applied to
+    // something that was never scrolling and the page carried on moving
+    // behind the dialog (client, 2026-09-13). Worse than an ordinary leak
+    // here: this section is scroll-driven, so a scroll behind the dialog
+    // changes the floor you came from.
+    //
+    // Both are locked rather than only html: body is free either way, and it
+    // costs nothing to be right on a browser that disagrees about which one
+    // is the scroller.
+    const root = document.documentElement;
+    const prev = {
+      rootOverflow: root.style.overflow,
+      rootPad: root.style.paddingRight,
+      bodyOverflow: document.body.style.overflow,
+    };
+    const gap = window.innerWidth - root.clientWidth;
+    root.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
-    if (gap > 0) document.body.style.paddingRight = `${gap}px`;
+    // The scrollbar's width, handed back so the page does not jump sideways
+    // as it disappears.
+    if (gap > 0) root.style.paddingRight = `${gap}px`;
     closeRef.current?.focus();
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') { e.preventDefault(); onClose(); return; }
+      // Space, PageUp/Down, Home/End and the vertical arrows all scroll a
+      // page. None of them should reach one the reader cannot see.
+      if ([' ', 'PageUp', 'PageDown', 'Home', 'End', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
+        e.preventDefault();
+        return;
+      }
       if (e.key === 'ArrowRight') { e.preventDefault(); setI((p) => ((p + 1) % n + n) % n); return; }
       if (e.key === 'ArrowLeft') { e.preventDefault(); setI((p) => ((p - 1) % n + n) % n); return; }
       if (e.key !== 'Tab') return;
@@ -70,11 +96,32 @@ export function RoomPhotos({
       if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     };
+    // And stop the events, not just the overflow.
+    //
+    // overflow:hidden on the scroller is the usual lock and it is not enough
+    // on its own here — measured: a real wheel over the backdrop still moved
+    // the page 600px with html AND body both hidden. So the wheel and the
+    // touch are cancelled outright anywhere outside the sheet. passive:false
+    // because a passive listener is not allowed to preventDefault, and the
+    // default is exactly what has to go.
+    //
+    // Inside the sheet they pass through, so the description can still scroll
+    // on a short phone; overscroll-contain on that block stops the scroll
+    // chaining back out to the page when it reaches its end.
+    const stopScroll = (e: Event) => {
+      if (sheetRef.current?.contains(e.target as Node)) return;
+      e.preventDefault();
+    };
+    document.addEventListener('wheel', stopScroll, { passive: false });
+    document.addEventListener('touchmove', stopScroll, { passive: false });
     document.addEventListener('keydown', onKey);
     return () => {
+      document.removeEventListener('wheel', stopScroll);
+      document.removeEventListener('touchmove', stopScroll);
       document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = overflow;
-      document.body.style.paddingRight = paddingRight;
+      root.style.overflow = prev.rootOverflow;
+      root.style.paddingRight = prev.rootPad;
+      document.body.style.overflow = prev.bodyOverflow;
       opener?.focus?.();
     };
   }, [n, onClose]);
@@ -151,7 +198,7 @@ export function RoomPhotos({
         {/* The words. min-h-0 + overflow so a long description on a short
            phone scrolls inside the sheet instead of pushing the picture off
            the top of the screen. */}
-        <div className="min-h-0 overflow-y-auto px-5 py-5 sm:px-7 sm:py-6">
+        <div className="min-h-0 overflow-y-auto overscroll-contain px-5 py-5 sm:px-7 sm:py-6">
           <p className="flex items-center gap-3 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-gold">
             <span aria-hidden className="h-px w-6 shrink-0 bg-gold/70" />
             {t(`floors.${FLOOR_OF[roomId] ?? 'whole'}`)}
