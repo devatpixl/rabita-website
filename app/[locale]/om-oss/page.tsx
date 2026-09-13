@@ -184,124 +184,127 @@ export default async function AboutPage({
                     'calc(-1 * clamp(0px, (100vw - 72rem) / 2 - 1.5rem, 6rem))',
                 }}
               >
-                <div className="grid overflow-hidden rounded-2xl shadow-[0_1px_2px_rgba(26,26,24,0.04),0_24px_60px_-34px_rgba(26,26,24,0.28)] md:grid-cols-[1.15fr_0.85fr]">
-                  <div className="bg-paper p-6 sm:p-8">
-                    <Eyebrow tone="gold-deep">{t('factsEyebrow')}</Eyebrow>
-                    <h2 className="mt-4 font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-tight text-balance text-ink">
-                      {t('factsHeading')}
-                    </h2>
+                {/* The card IN FRONT of the arch, not wrapped around it
+                   (client, 2026-09-14: "the overall design here also, make it
+                   like this", pointing at the visit page).
 
-                    <dl className="mt-5 md:mt-7">
-                      {/* Key figures as confirmed in Årsrapport 2025, in the
-                         order the client listed them (2026-08-30). The
-                         second line under each label is theirs too, from the
-                         mockup: it turns a number into a sentence. */}
-                      {([
-                        ['calendar', 'founded', String(CAMPAIGN.foundedYear)],
-                        ['people', 'members', CAMPAIGN.members.toLocaleString('nb-NO')],
-                        ['person', 'volunteers', `${CAMPAIGN.volunteers}+`],
-                        ['book', 'pupils', `${CAMPAIGN.pupils}+`],
-                        ['globe', 'nationalities', `${CAMPAIGN.nationalities}+`],
-                        ['route', 'visits', CAMPAIGN.visitorsPerWeek.toLocaleString('nb-NO')],
-                      ] as const).map(([icon, key, value]) => (
-                        <div
-                          key={key}
-                          className="flex items-center gap-4 border-t border-ink/10 py-3 first:border-t-0 first:pt-0 md:py-3.5"
-                        >
-                          <span
-                            aria-hidden
-                            className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gold-soft/40 text-gold-deep ring-1 ring-gold-deep/20"
-                          >
-                            <FigureIcon name={icon} className="h-[18px] w-[18px]" />
-                          </span>
-                          <dt className="min-w-0 flex-1">
-                            <span className="block font-mono text-[0.625rem] uppercase leading-snug tracking-[0.16em] text-ink-60">
-                              {t(`facts.${key}`)}
-                            </span>
-                            <span className="mt-1 block font-serif text-[13px] italic leading-snug text-ink-40">
-                              {t(`factNotes.${key}`)}
-                            </span>
-                          </dt>
-                          <dd className="flex shrink-0 items-start gap-1 font-serif text-[1.5rem] leading-none tabular-nums text-ink">
-                            {value}
-                            {/* The rising mark, on every figure but the
-                               founding year — a year is not a quantity that
-                               grows. Decorative, so aria-hidden. */}
-                            {key !== 'founded' && (
-                              <svg
-                                aria-hidden
-                                viewBox="0 0 24 24"
-                                className="mt-0.5 h-3 w-3 shrink-0 text-gold-deep/70 rtl:-scale-x-100"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              >
-                                <path d="M7 17L17 7M9 7h8v8" />
-                              </svg>
-                            )}
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </div>
-
-                  {/* The arch, now a panel rather than a ghost: the quote sits
-                     ON it, so the photograph carries something instead of
-                     hiding behind text. A scrim rather than a wash — it has
-                     to hold paper-coloured type at any crop. */}
-                  {/* 11rem on a phone, not 15. The whole card has to clear
-                     783px — a 844px screen less the header — or "Rabita i
-                     dag" splits across two scrolls and stops reading as one
-                     object (client, 2026-09-08). At 240px the arch alone
-                     spent a third of that budget on a photograph that is
-                     carrying two lines of quote. */}
-                  {/* An ARCH, not a flush rectangle (client, 2026-09-14:
-                     "make this image design like this"), taking the silhouette
-                     the visit page's aside already uses — a tall top radius
-                     with a gold hairline on it. Only the shape changes: the
-                     photograph, its grade, the scrim and the quote on it are
-                     the same, which is the part he asked to leave alone.
-
-                     The plate is inset so the curve has paper to be a curve
-                     AGAINST; flush to the card edge there is nothing for the
-                     silhouette to read against and it just looks like a
-                     rounded corner. The radius is smaller on a phone because
-                     the cell is 11rem there — a 9rem dome on a 176px box is
-                     not an arch, it is a circle. */}
-                  <div className="relative min-h-[11rem] bg-paper p-3 sm:p-4 md:min-h-0">
-                    <div className="relative h-full overflow-hidden rounded-t-[4.5rem] border border-gold-deep/20 sm:rounded-t-[6rem] md:rounded-t-[8rem]">
+                   This reverses the 2026-09-08 merge, which made the ledger
+                   and the arch one object because the arch had been a ghost
+                   floating in the margin carrying nothing. What he wants back
+                   is the visit page's composition — but that one works, and
+                   this one did not, for a reason worth writing down: there
+                   the arch has the QUOTE beside it, so the photograph is
+                   holding something up. Same here now. The quote leaves the
+                   photograph and sits in ink in its own column, which is what
+                   gives the arch a job. */}
+                <div className="relative">
+                  {/* The arch: absolute, bleeding above and past the card, at
+                     -z-10 so the card sits over it. Masked away at the foot so
+                     the shape has no bottom edge to end on. Hidden below lg,
+                     where there is no margin to bleed into. */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute -top-12 end-0 -z-10 hidden h-[32rem] w-[19rem] overflow-hidden rounded-t-[9rem] border border-gold-deep/20 lg:block"
+                    style={{
+                      maskImage:
+                        'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 100%)',
+                      WebkitMaskImage:
+                        'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 100%)',
+                    }}
+                  >
                     <Image
                       src="/photos/arch-light.jpg"
                       alt=""
                       fill
-                      sizes="(min-width: 768px) 340px, 100vw"
-                      className="object-cover object-[38%_50%]"
-                      style={{ filter: 'saturate(0.55) sepia(0.18) contrast(1.05)' }}
+                      sizes="304px"
+                      loading="eager"
+                      className="object-cover opacity-[0.45]"
+                      style={{ filter: 'saturate(0.25) sepia(0.45) contrast(1.06) brightness(1.02)' }}
                     />
-                    {/* One gradient, from the foot. A flat scrim over the
-                       whole panel put the window behind a grey sheet and
-                       there was nothing left worth showing; the type only
-                       needs cover where the type actually is. */}
-                    <span
-                      aria-hidden
-                      className="absolute inset-0 bg-gradient-to-t from-dusk/85 via-dusk/35 to-dusk/5"
-                    />
-                    <div className="relative flex h-full flex-col justify-end p-6 sm:p-8">
+                    <span aria-hidden className="absolute inset-0 bg-paper-2/25" />
+                  </div>
+
+                  <div className="grid gap-8 lg:grid-cols-[1fr_13rem] lg:gap-10">
+                    <div className="rounded-2xl bg-paper p-6 shadow-[0_1px_2px_rgba(26,26,24,0.04),0_24px_60px_-34px_rgba(26,26,24,0.28)] sm:p-8">
+                        <Eyebrow tone="gold-deep">{t('factsEyebrow')}</Eyebrow>
+                        <h2 className="mt-4 font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-tight text-balance text-ink">
+                          {t('factsHeading')}
+                        </h2>
+
+                        <dl className="mt-5 md:mt-7">
+                          {/* Key figures as confirmed in Årsrapport 2025, in the
+                             order the client listed them (2026-08-30). The
+                             second line under each label is theirs too, from the
+                             mockup: it turns a number into a sentence. */}
+                          {([
+                            ['calendar', 'founded', String(CAMPAIGN.foundedYear)],
+                            ['people', 'members', CAMPAIGN.members.toLocaleString('nb-NO')],
+                            ['person', 'volunteers', `${CAMPAIGN.volunteers}+`],
+                            ['book', 'pupils', `${CAMPAIGN.pupils}+`],
+                            ['globe', 'nationalities', `${CAMPAIGN.nationalities}+`],
+                            ['route', 'visits', CAMPAIGN.visitorsPerWeek.toLocaleString('nb-NO')],
+                          ] as const).map(([icon, key, value]) => (
+                            <div
+                              key={key}
+                              className="flex items-center gap-4 border-t border-ink/10 py-3 first:border-t-0 first:pt-0 md:py-3.5"
+                            >
+                              <span
+                                aria-hidden
+                                className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gold-soft/40 text-gold-deep ring-1 ring-gold-deep/20"
+                              >
+                                <FigureIcon name={icon} className="h-[18px] w-[18px]" />
+                              </span>
+                              <dt className="min-w-0 flex-1">
+                                <span className="block font-mono text-[0.625rem] uppercase leading-snug tracking-[0.16em] text-ink-60">
+                                  {t(`facts.${key}`)}
+                                </span>
+                                <span className="mt-1 block font-serif text-[13px] italic leading-snug text-ink-40">
+                                  {t(`factNotes.${key}`)}
+                                </span>
+                              </dt>
+                              <dd className="flex shrink-0 items-start gap-1 font-serif text-[1.5rem] leading-none tabular-nums text-ink">
+                                {value}
+                                {/* The rising mark, on every figure but the
+                                   founding year — a year is not a quantity that
+                                   grows. Decorative, so aria-hidden. */}
+                                {key !== 'founded' && (
+                                  <svg
+                                    aria-hidden
+                                    viewBox="0 0 24 24"
+                                    className="mt-0.5 h-3 w-3 shrink-0 text-gold-deep/70 rtl:-scale-x-100"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  >
+                                    <path d="M7 17L17 7M9 7h8v8" />
+                                  </svg>
+                                )}
+                              </dd>
+                            </div>
+                          ))}
+                        </dl>
+                    </div>
+
+                    {/* The quote, in ink on the arch rather than paper-white
+                       on a photograph. Below lg the arch is gone, so it sits
+                       under the card as a plain pull quote — it is the line
+                       the section ends on either way. */}
+                    <aside className="relative lg:pt-8">
+                      <span aria-hidden className="block h-px w-10 bg-gold-deep/40" />
+                      <p className="mt-5 font-serif text-[1.05rem] italic leading-relaxed text-ink-60">
+                        {`«${t('quote')}»`}
+                      </p>
                       <Image
                         src="/logo/rabita-mark-256.png"
                         alt=""
                         width={30}
                         height={30}
                         aria-hidden
-                        className="h-[30px] w-[30px] opacity-85"
+                        className="mt-6 h-[30px] w-[30px] opacity-60"
                       />
-                      <p className="mt-4 max-w-[22ch] font-serif text-[1.05rem] italic leading-relaxed text-paper drop-shadow-[0_1px_8px_rgba(22,36,46,0.5)]">
-                        {`«${t('quote')}»`}
-                      </p>
-                    </div>
-                    </div>
+                    </aside>
                   </div>
                 </div>
               </div>
