@@ -298,17 +298,25 @@ export default async function ApartmentsPage({
         </SectionBody>
       </section>
 
-      {/* Full-bleed, like the project page's. No CTA here: the only place
-         it would sensibly point is /moskeprosjektet.
+      {/* Contained, in the same band as the project page's (client,
+         2026-09-13: "make the images in appartments also same, fix the
+         appartment format"). It had been left bare while that one sat in a
+         SectionBody, so this gallery ran edge to edge and the plate cropped
+         differently — two designs for one component. The wrapper IS the fix:
+         the component has no opinion about its own width.
 
          THIRD, ahead of "kvalitet og møteplasser" (client, 2026-09-13:
          "erstatte en av seksjonene med leilighetene, og plasser som nummer
          3"). The renders used to sit fourth, after the facilities thread,
          which meant the page argued for the homes twice in words before it
          showed you one. */}
-      <ProjectGallery
-        only={['apartmentLiving', 'apartmentBalcony', 'roofTerrace', 'garden', 'minaret', 'facadeEvening']}
-      />
+      <section className="bg-paper-2 pt-14 pb-section-md md:pt-20">
+        <SectionBody>
+          <ProjectGallery
+            only={['apartmentLiving', 'apartmentBalcony', 'roofTerrace', 'garden', 'minaret', 'facadeEvening']}
+          />
+        </SectionBody>
+      </section>
 
       {/* ── kvalitet og møteplasser ─────────────────────────────────────
          Rebuilt to the client's mock (2026-09-04): heading beside the
