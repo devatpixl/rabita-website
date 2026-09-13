@@ -91,6 +91,41 @@ export const SERVICE_GROUPS = [
   { key: 'community', items: ['veivisere', 'ungdom', 'barn-og-familie', 'fosterhjem'] },
 ] as const satisfies ReadonlyArray<{ key: string; items: readonly ServiceKey[] }>;
 
+// TWO INDEX PAGES (client, 2026-09-13): "Del opp i to sider" — Tjenester and
+// Undervisning, each with its own list. The order below is HIS order from that
+// message, not SERVICE_ORDER, because the list he wrote is the spec.
+//
+// Three entries on his lists have no service yet and are NOT invented here:
+//   Tjenester   — "ID FOR ALLE". Ours only knows it as one clause inside
+//                 barn-og-familie ("Id for alle og ramadanverksted"), i.e. the
+//                 EID programme, not identity documents.
+//   Undervisning— "Kurs i islam" (Usman's course; only his imam bio mentions
+//                 it) and "Kurs for konvertitter" (on rabita.no, currently
+//                 item 04 inside shahada).
+// His "Koranskole" + "Kurs i arabisk" are one service here, 'koran' ("Koran og
+// arabisk"); splitting it means writing two new ledes, so it stays whole until
+// he says how to divide it.
+//
+// 'barn-og-familie' is on NEITHER of his lists. It is kept on Tjenester rather
+// than retired: an absence is not an instruction, its copy is the only place
+// "Id for alle" is described, and the question is still open with him. One
+// line to remove once he answers.
+export const SERVICE_PAGES = {
+  tjenester: [
+    'shahada',
+    'nikah',
+    'janaza',
+    'hajj-umrah',
+    'counselling',
+    'veivisere',
+    'kurs',
+    'ungdom',
+    'fosterhjem',
+    'barn-og-familie',
+  ],
+  undervisning: ['skole', 'koran', 'norsk'],
+} as const satisfies Record<string, readonly ServiceKey[]>;
+
 // Where to hold the crop, for sources whose subject is not dead centre.
 //
 // Every frame in the index is the same landscape box — a band that is taller

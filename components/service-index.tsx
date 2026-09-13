@@ -41,26 +41,43 @@ import { cn } from '@/lib/cn';
 // SERVICE_KEYS alone lands at the end of the index rather than vanishing
 // from it.
 const ORDERED = SERVICE_ORDER as readonly ServiceKey[];
-const ITEMS = [...ORDERED, ...SERVICE_KEYS.filter((k) => !ORDERED.includes(k))].map((key) => ({
-  key,
-}));
+const ALL = [...ORDERED, ...SERVICE_KEYS.filter((k) => !ORDERED.includes(k))];
 
-export function ServiceIndex() {
+// `items` splits the index across the two pages (client, 2026-09-13). Passed
+// in, it is HIS order and is used verbatim — the numerals count 01..n within
+// the page, which is what a reader of that page sees. Omitted, the component
+// behaves exactly as before: every service, in SERVICE_ORDER.
+export function ServiceIndex({
+  items,
+  header = true,
+}: {
+  items?: readonly ServiceKey[];
+  /** The "Alle tjenester / Alt vi gjør, samlet" block. Off on a page whose
+   *  band already names it: two "Undervisning" eyebrows one above the other
+   *  stutter, and "everything we do, collected" is a lie over three of
+   *  thirteen services. */
+  header?: boolean;
+} = {}) {
   const locale = useLocale();
   const t = useTranslations('servicesIndex');
+  const ITEMS = (items ?? ALL).map((key) => ({ key }));
   const total = String(ITEMS.length).padStart(2, '0');
 
   return (
     <Section tone="paper">
       <SectionBody>
-        <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
-          {t('allEyebrow')}
-        </p>
-        <h2 className="mt-4 max-w-2xl font-serif text-section text-balance text-ink">
-          {t.rich('allHeading', { em: (chunks) => <Accent surface="paper">{chunks}</Accent> })}
-        </h2>
+        {header && (
+          <>
+            <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
+              {t('allEyebrow')}
+            </p>
+            <h2 className="mt-4 max-w-2xl font-serif text-section text-balance text-ink">
+              {t.rich('allHeading', { em: (chunks) => <Accent surface="paper">{chunks}</Accent> })}
+            </h2>
+          </>
+        )}
 
-        <ol className="mt-12 space-y-16 md:mt-20 md:space-y-32">
+        <ol className={cn('space-y-16 md:space-y-32', header ? 'mt-12 md:mt-20' : 'mt-0')}>
           {ITEMS.map(({ key }, i) => {
             const n = String(i + 1).padStart(2, '0');
             // Sides trade every other band. Below md everything stacks with the
@@ -73,7 +90,8 @@ export function ServiceIndex() {
             // art direction. Uniform frame, and the crop is steered instead
             // (SERVICE_FOCUS).
             return (
-              <Reveal as="li" key={key} delay={0}>
+              // scroll-mt clears the sticky header when the picker jumps here.
+              <Reveal as="li" key={key} id={key} delay={0} className="scroll-mt-28 md:scroll-mt-32">
                 <div className="grid items-center gap-8 md:grid-cols-2 md:gap-16 lg:gap-24">
                   {/* ── picture ─────────────────────────────────────── */}
                   <div className={cn('relative', flipped ? 'md:order-2' : 'md:order-1')}>

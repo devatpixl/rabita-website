@@ -131,6 +131,11 @@
           "href": "/tjenester/veivisere"
         },
         {
+          "label": "Kalligrafi",
+          "blurb": "Kurs i islamsk kalligrafi og geometrisk kunst.",
+          "href": "/tjenester/kurs"
+        },
+        {
           "label": "Fosterhjem",
           "blurb": "Informasjon og veiledning for familier som vurderer å bli fosterhjem.",
           "href": "/tjenester/fosterhjem"
@@ -156,11 +161,6 @@
           "label": "Koran og arabisk",
           "blurb": "Koranundervisning og arabisk for barn, unge og voksne.",
           "href": "/tjenester/koran"
-        },
-        {
-          "label": "Kalligrafi",
-          "blurb": "Kurs i islamsk kalligrafi og geometrisk kunst.",
-          "href": "/tjenester/kurs"
         },
         {
           "label": "Norsk",
@@ -1587,11 +1587,17 @@
     "groups": "Vi tar imot skoler, universiteter, presse og andre grupper. Kortere besøk trenger ikke forhåndsavtale.",
     "quote": "En åpen dør for alle som vil bli kjent med moskeen."
   },
+  "undervisningPage": {
+    "eyebrow": "Undervisning",
+    "title": "Arabisk, Koran og en skoleuke som passer rundt den norske.",
+    "lede": "Fire hundre elever og nitten lærere, hver uke i semesteret. Det nye bygget gir skolen sin egen etasje i stedet for rommene den låner i dag."
+  },
   "servicesIndex": {
     "eyebrow": "Tjenester",
     "title": "Nikah, janaza, shahada og mer.",
     "lede": "Religiøse tjenester, veiledning, undervisning og arbeid ut mot samfunnet. Alle henvendelser behandles diskret.",
     "more": "Les mer og send henvendelse",
+    "jumpTo": "Velg en tjeneste",
     "detail": {
       "what": "Hva vi tilbyr",
       "request": "Send henvendelse"

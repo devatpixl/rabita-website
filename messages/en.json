@@ -131,6 +131,11 @@
           "href": "/tjenester/veivisere"
         },
         {
+          "label": "Calligraphy",
+          "blurb": "Courses in Islamic calligraphy and geometric art.",
+          "href": "/tjenester/kurs"
+        },
+        {
           "label": "Foster care",
           "blurb": "Information and guidance for families considering fostering.",
           "href": "/tjenester/fosterhjem"
@@ -156,11 +161,6 @@
           "label": "Quran and Arabic",
           "blurb": "Quran and Arabic teaching for children, young people and adults.",
           "href": "/tjenester/koran"
-        },
-        {
-          "label": "Calligraphy",
-          "blurb": "Courses in Islamic calligraphy and geometric art.",
-          "href": "/tjenester/kurs"
         },
         {
           "label": "Norwegian",
@@ -1587,11 +1587,17 @@
     "groups": "We host schools, universities, press and other groups. Shorter visits don't need advance booking.",
     "quote": "An open door for anyone who wants to get to know the mosque."
   },
+  "undervisningPage": {
+    "eyebrow": "Teaching",
+    "title": "Arabic, Qur'an, and a school week that fits around the Norwegian one.",
+    "lede": "Four hundred pupils and nineteen teachers, running every week of term. The new building gives the school its own floor instead of the rooms it borrows now."
+  },
   "servicesIndex": {
     "eyebrow": "Services",
     "title": "Nikah, janaza, shahada and more.",
     "lede": "Religious services, guidance, teaching and work out in the community. Every enquiry is handled discreetly.",
     "more": "More and request",
+    "jumpTo": "Choose a service",
     "detail": {
       "what": "What we offer",
       "request": "Send an enquiry"

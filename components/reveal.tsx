@@ -35,12 +35,15 @@ export function Reveal({
   delay = 0,
   className,
   as: Tag = 'div',
+  id,
 }: {
   children: ReactNode;
   /** Seconds, for staggering along a row. */
   delay?: number;
   className?: string;
   as?: 'div' | 'li';
+  /** Anchor target, so a jump link can address the revealed block. */
+  id?: string;
 }) {
   const ref = useRef<HTMLElement | null>(null);
   const [hidden, setHidden] = useState(false);
@@ -86,6 +89,7 @@ export function Reveal({
   return (
     <Tag
       ref={ref as never}
+      id={id}
       // The ONLY thing this sets is the attribute. Every hidden style in
       // globals.css is keyed on [data-reveal='out'], which appears only when
       // JS has armed it — so with no JS there is no attribute and nothing is

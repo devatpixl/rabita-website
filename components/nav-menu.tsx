@@ -20,19 +20,17 @@ export type NavKey = (typeof NAV_KEYS)[number];
 
 // null means "opens a menu and goes nowhere itself".
 //
-// `teaching` is the one (client, 2026-09-12: "legge til undervisning etter
-// tjeneste"). /undervisning was retired on 2026-09-10 at the client's own
-// instruction because it duplicated four service pages, so the item has no
-// page to point at — and pointing it at /tjenester would light the active
-// rule under two items at once. It is a trigger for its own submenu
-// instead, which is all the request needs. If a landing page is wanted
-// later, give it a root here and the button becomes a link again.
+// `teaching` was the one, from 2026-09-10 to 2026-09-13, because
+// /undervisning had been retired at the client's own instruction and the item
+// had no page to point at. He asked for the page back on 2026-09-13 ("Del opp
+// i to sider"), so it has a root again and the button is a link again —
+// exactly the restoration the note here used to describe.
 export const NAV_ROOT: Record<NavKey, string | null> = {
   project: '/moskeprosjektet',
   apartments: '/moskeprosjektet/leiligheter',
   prayer: '/bonnetider',
   services: '/tjenester',
-  teaching: null,
+  teaching: '/undervisning',
   visit: '/besok-oss',
   about: '/om-oss',
 };
