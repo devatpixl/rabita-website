@@ -2293,6 +2293,8 @@
       "eyebrow": "The apartments",
       "heading": "Every home, <em>one by one</em>.",
       "lede": "Each apartment with its own layout. Tap an apartment to see the floor plan.",
+      "prev": "Previous apartment",
+      "next": "Next apartment",
       "openLabel": "See the floor plan",
       "closeLabel": "Close",
       "planAlt": "Floor plan for apartment {unit}",

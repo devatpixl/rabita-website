@@ -2293,6 +2293,8 @@
       "eyebrow": "Leilighetene",
       "heading": "Hvert hjem, <em>ett for ett</em>.",
       "lede": "Hver leilighet med sin egen planløsning. Trykk på en leilighet for å se plantegningen.",
+      "prev": "Forrige leilighet",
+      "next": "Neste leilighet",
       "openLabel": "Se plantegning",
       "closeLabel": "Lukk",
       "planAlt": "Plantegning for leilighet {unit}",

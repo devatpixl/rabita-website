@@ -1,12 +1,13 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { APARTMENT_UNITS, unitFace, unitPlan, type ApartmentUnit } from '@/lib/apartment-units';
 import { SectionBody } from './primitives';
 import { Accent } from './accent';
 import { Reveal } from './reveal';
+import { cn } from '@/lib/cn';
 
 // The apartments, one card each, opening the architect's plan sheet
 // (client, 2026-09-13). This stands where "sentral beliggenhet" stood: that
@@ -38,6 +39,43 @@ export function ApartmentUnits() {
   const t = useTranslations('apartmentsPage.units');
   const [open, setOpen] = useState<ApartmentUnit | null>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+
+  // A rail, not a grid (client, 2026-09-13), matching the gift ladder he
+  // pointed at. Twelve plates in a grid is four rows of wall; on a rail they
+  // are one gesture.
+  const n = APARTMENT_UNITS.length;
+  const [active, setActive] = useState(0);
+  const wrap = (i: number) => ((i % n) + n) % n;
+  /** Absolute — the dots. */
+  const go = useCallback((to: number) => setActive(wrap(to)), [n]); // eslint-disable-line react-hooks/exhaustive-deps
+  /** Relative — the arrows. Functional update, NOT go(active + 1): `active`
+   *  in that expression is the value captured by the render the click handler
+   *  was created in, so two clicks before React re-renders both compute the
+   *  same next index and the rail advances once. Measured: three clicks in a
+   *  row moved it one card. */
+  const step = useCallback((delta: number) => setActive((a) => wrap(a + delta)), [n]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Move the RAIL's own scrollLeft, never el.scrollIntoView(). That walks up
+  // and scrolls every scrollable ancestor including the document, and running
+  // on mount it drops the reader down the page into this section — exactly
+  // the bug the gift ladder had on 2026-09-13. The mount guard skips the
+  // first run, where card 0 is already where the rail starts.
+  const railRef = useRef<HTMLUListElement>(null);
+  const railMounted = useRef(false);
+  useEffect(() => {
+    if (!railMounted.current) {
+      railMounted.current = true;
+      return;
+    }
+    const rail = railRef.current;
+    const el = rail?.children[active] as HTMLElement | undefined;
+    if (!rail || !el) return;
+    const left = el.offsetLeft - rail.offsetLeft;
+    const right = left + el.offsetWidth;
+    if (left < rail.scrollLeft) rail.scrollTo({ left: Math.max(0, left - 16), behavior: 'smooth' });
+    else if (right > rail.scrollLeft + rail.clientWidth)
+      rail.scrollTo({ left: right - rail.clientWidth + 16, behavior: 'smooth' });
+  }, [active]);
   const nf = new Intl.NumberFormat('nb-NO');
   const num = (n: number) => nf.format(n);
   // Ceiling heights keep both decimals — the plan sheet says "ca 2,40 m", and
@@ -73,13 +111,25 @@ export function ApartmentUnits() {
   }, [open]);
 
   return (
-    <section className="relative overflow-hidden bg-dusk py-section-md text-paper">
-      {/* The same warm bloom the section it replaces carried, so the dark
-         ground has a light in it rather than reading as a flat block. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -start-24 top-1/3 h-[32rem] w-[32rem] rounded-full bg-gold/[0.07] blur-3xl"
-      />
+    <section className="relative isolate overflow-hidden bg-dusk py-section-md text-paper">
+      {/* His own interior behind the plates (client, 2026-09-13). It is dark
+         navy and almost empty through the middle, with the arch, the hanging
+         stars and the planting at the edges — so the cards sit in the quiet
+         part and the detail frames them. object-cover with the focus held
+         left of centre, because the right third is where the arch is and the
+         rail starts at the inline start. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <Image
+          src="/photos/apartments-bg.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-[35%_50%]"
+        />
+        {/* A dusk wash so the ground never competes with twelve photographs
+           stacked along it. */}
+        <div className="absolute inset-0 bg-dusk/55" />
+      </div>
       <SectionBody className="relative">
         <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
           {t('eyebrow')}
@@ -89,14 +139,32 @@ export function ApartmentUnits() {
         </h2>
         <p className="mt-4 max-w-[52ch] text-body text-paper/70">{t('lede')}</p>
 
-        <ol className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 md:mt-14 lg:grid-cols-3 lg:gap-6">
+        <div className="relative mt-10 md:mt-14">
+          {/* Arrows in the page gutter rather than over the plates — at
+             -inset-x-14 they clear the rail by 8px at 1280 and 48px at 1920.
+             Below xl there is no gutter to use and the rail swipes. */}
+          <div className="pointer-events-none absolute inset-y-0 -inset-x-14 z-20 hidden items-center justify-between xl:flex">
+            <RailArrow dir="prev" label={t('prev')} onClick={() => step(-1)} />
+            <RailArrow dir="next" label={t('next')} onClick={() => step(1)} />
+          </div>
+
+          <ul
+            ref={railRef}
+            className="no-scrollbar -mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 pb-2 pt-1 sm:gap-5"
+          >
           {APARTMENT_UNITS.map((u, i) => (
-            <Reveal as="li" key={u.id} delay={(i % 3) * 0.08}>
+            <Reveal
+              as="li"
+              key={u.id}
+              delay={Math.min(i, 3) * 0.08}
+              className="w-[76%] shrink-0 snap-center sm:w-[20rem] lg:w-[18.5rem] xl:w-[20rem]"
+            >
               <button
                 type="button"
                 onClick={() => setOpen(u)}
                 aria-label={`${t(`items.${u.id}.title`)} — ${t('openLabel')}`}
-                className="group/unit relative flex w-full flex-col justify-end overflow-hidden rounded-2xl bg-ink text-start ring-1 ring-inset ring-paper/10 transition-[box-shadow] duration-300 ease-out hover:ring-gold/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold aspect-[4/5]"
+                onFocus={() => setActive(i)}
+                className="group/unit relative flex aspect-[4/5] w-full flex-col justify-end overflow-hidden rounded-2xl bg-ink text-start ring-1 ring-inset ring-paper/10 transition-[box-shadow] duration-300 ease-out hover:ring-gold/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
               >
                 <span aria-hidden className="absolute inset-0">
                   <Image
@@ -150,7 +218,31 @@ export function ApartmentUnits() {
               </button>
             </Reveal>
           ))}
-        </ol>
+          </ul>
+
+          {/* Dots, so the rail says how long it is on a phone where the
+             arrows are not there. */}
+          <ol className="mt-5 flex items-center justify-center gap-2 xl:hidden">
+            {APARTMENT_UNITS.map((u, i) => (
+              <li key={u.id}>
+                <button
+                  type="button"
+                  onClick={() => go(i)}
+                  aria-label={u.unit}
+                  aria-current={i === active ? 'true' : undefined}
+                  className="grid h-7 w-5 place-items-center"
+                >
+                  <span
+                    className={cn(
+                      'block h-[2px] rounded-full transition-all',
+                      i === active ? 'w-5 bg-gold' : 'w-2.5 bg-paper/25',
+                    )}
+                  />
+                </button>
+              </li>
+            ))}
+          </ol>
+        </div>
       </SectionBody>
 
       {/* ── the plan sheet ─────────────────────────────────────────────── */}
@@ -231,5 +323,29 @@ export function ApartmentUnits() {
         </div>
       )}
     </section>
+  );
+}
+
+function RailArrow({ dir, label, onClick }: { dir: 'prev' | 'next'; label: string; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={label}
+      className="pointer-events-auto grid h-11 w-11 place-items-center rounded-full border border-paper/30 bg-dusk/70 text-paper backdrop-blur-sm transition-colors hover:border-gold hover:bg-gold hover:text-dusk"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={cn('h-4 w-4', dir === 'prev' ? 'rtl:rotate-180' : 'rotate-180 rtl:rotate-0')}
+        aria-hidden
+      >
+        <path d="M15 5l-7 7 7 7" />
+      </svg>
+    </button>
   );
 }
