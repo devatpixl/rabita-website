@@ -15,7 +15,7 @@
 export const FLOOR_PHOTOS: Record<string, readonly string[]> = {
   // The prayer halls and the ablutions are NOT in the client's room folder —
   // it has no bonnerom and no wudu file. They were already on the site
-  // though, in the Norconsult sets the gallery and the zoom section draw
+  // though, in the HLF Arkitekter sets the gallery and the zoom section draw
   // from, and they are the same building: the green carpet with its gold
   // prayer rows, the white columns, the curved balustrade, the rosette
   // rings. So they are pulled from /photos rather than /photos/rooms.

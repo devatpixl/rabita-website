@@ -60,7 +60,7 @@ type Img = { src: string; alt: string; width: number; height: number };
 // Centre first (index 0, scale 4, fills the screen). Then six tiles
 // arranged around it.
 //
-// All seven are Norconsult architectural renders from the
+// All seven are HLF Arkitekter architectural renders from the
 // Markedsføring set (2736–2784px native, sized down here for the web).
 // The earlier "no renders" rule was scoped to an older 1030px batch —
 // these are ~2.7× that width. At the centre's 4× on 1440 viewport,

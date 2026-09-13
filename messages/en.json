@@ -365,7 +365,7 @@
   },
   "compareSlider": {
     "beforeCaption": "The site today · photograph pending",
-    "afterCaption": "The building at dusk · Norconsult",
+    "afterCaption": "The building at dusk · HLF Arkitekter",
     "handleLabel": "Drag to compare"
   },
   "foundationWall": {
@@ -819,7 +819,7 @@
         ]
       }
     },
-    "aerial": "The block seen from above, Norconsult"
+    "aerial": "The block seen from above, HLF Arkitekter"
   },
   "servicePages": {
     "crumb": "Prayer and services",
@@ -2316,7 +2316,7 @@
         "eyebrow": "The organisation",
         "title": "Founded in 1987, and still on the same street.",
         "lede": "Det Islamske Forbundet has been in Gronland since the eighties. The congregation outgrew the building a long time ago, which is the whole reason for the build.",
-        "caption": "The new facade at night, Norconsult",
+        "caption": "The new facade at night, HLF Arkitekter",
         "captionIftar": "The street iftar on Grønland"
       },
       "news": {

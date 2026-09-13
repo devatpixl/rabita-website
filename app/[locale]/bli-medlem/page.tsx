@@ -87,7 +87,7 @@ export default async function JoinPage({
            the geometric texture   .star-texture, the Rabita rosette tiled
                                    at 220px and 1.5% — already the site's
                                    own, and already on this section
-           the mosque interior     proj-main-hall.webp, the Norconsult
+           the mosque interior     proj-main-hall.webp, the HLF Arkitekter
                                    render of the real prayer hall, at 2000px
 
          The interior appears twice: once very faintly behind the whole

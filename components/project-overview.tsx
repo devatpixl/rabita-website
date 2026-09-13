@@ -278,7 +278,7 @@ export async function ProjectOverview() {
          like a caption.
 
          Two lines, not three. This used to split CAMPAIGN.architect on its
-         comma and stack the firm under the name -- which is the "Norconsult
+         comma and stack the firm under the name -- which is the "HLF Arkitekter
          pa Havard" the client asked to remove (Versjon 3). With the firm
          gone from the value there is nothing after the comma, and the split
          would have printed a <br /> and an empty third line. */}

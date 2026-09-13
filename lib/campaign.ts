@@ -63,9 +63,13 @@ export const CAMPAIGN = Object.freeze({
   floorsBelow: 1,
   rentalApartments: 15,
   // The person, without a firm after his name (client, Versjon 3: "fjern
-  // Norconsult pa Havard"). He drew the first sketches in 2019 as the
-  // project's architect; Norconsult came later and is credited on its own
-  // renders, in three image captions that are NOT affected by this.
+  // Norconsult pa Havard"), and still without one after 2026-09-14, when he
+  // asked for "Bytt Norconsult til HLF Arkitekter". That note names the FIRM
+  // on the renders and says nothing about this line, so the two instructions
+  // stand together: the image captions credit HLF Arkitekter, the architect
+  // is named as a person. If he wants the practice under his name too, it is
+  // this value — 'Håvard Lindgard Fagernes, HLF Arkitekter' — and the card
+  // splits on the comma and stacks the second half on its own.
   architect: 'Håvard Lindgard Fagernes',
   siteClearedRamadan: 2025,
   constructionStart: '2026-Q1',

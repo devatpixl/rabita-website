@@ -1,6 +1,6 @@
 import { cn } from '@/lib/cn';
 
-// Placeholder for a rendering that has not yet arrived from Norconsult.
+// Placeholder for a rendering that has not yet arrived from the architects.
 // Fills the correct aspect ratio with the paper-2 tint and a small caption
 // noting the pixel spec we are waiting on (§1: request source above 2 560px).
 // When the real WebP/AVIF lands, swap this component for <Image />.
@@ -28,7 +28,7 @@ export function RenderingPlaceholder({ ratio = 'hero', caption, className }: Pro
       )}
     >
       <span className="m-4 text-[12px] text-ink-60">
-        {caption ?? 'Rendering 2560×1440 pending Norconsult'}
+        {caption ?? 'Rendering 2560×1440 pending'}
       </span>
     </div>
   );
