@@ -100,9 +100,16 @@ export async function ServiceGrid({
   items,
   locale,
   header = true,
+  picker,
 }: {
   items: readonly ServiceKey[];
   locale: string;
+  /** The rullegardin, rendered INSIDE this section rather than above it.
+   *  Standing on its own between the band and the grid it sat in a strip of
+   *  bare paper — three paddings deep on a laptop and worse on a phone
+   *  (client, 2026-09-13: "this space looks so bad"). On the arcade it reads
+   *  as part of the section it controls. */
+  picker?: React.ReactNode;
   /** The "Alle tjenester / Alt vi gjør, samlet" opener. Off on a page whose
    *  band already names it: two "Undervisning" eyebrows stacked stutter, and
    *  "everything we do, collected" is false over three of thirteen. */
@@ -124,7 +131,7 @@ export async function ServiceGrid({
     // scrollable ancestor — so `hidden` here would silently pin the image to a
     // box that never scrolls, i.e. it would not stick at all. `clip` clips
     // without creating a scroller.
-    <section className="relative isolate overflow-clip py-section-md">
+    <section className="relative isolate overflow-clip pb-section-md pt-10 md:pt-14">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="sticky top-0 h-screen">
           <Image
@@ -142,6 +149,7 @@ export async function ServiceGrid({
         </div>
       </div>
       <SectionBody>
+        {picker && <div className="mb-10 md:mb-14">{picker}</div>}
         {header && (
           <>
             <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">

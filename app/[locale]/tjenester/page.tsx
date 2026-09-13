@@ -2,7 +2,6 @@ import { setRequestLocale } from 'next-intl/server';
 import { ServicesHero } from '@/components/services-hero';
 import { ServiceGrid } from '@/components/service-grid';
 import { ServicePicker } from '@/components/service-picker';
-import { SectionBody } from '@/components/primitives';
 import { SERVICE_PAGES } from '@/lib/services';
 
 export default async function ServicesIndex({
@@ -22,15 +21,15 @@ export default async function ServicesIndex({
       {/* Every service as grouped boxes (client 2026-08-30: the register of
          rows read as clutter). The two "how to start" cards went with it —
          the visit block below already says where to come and how to write. */}
-      {/* The rullegardin, above the bands it jumps into (client, 2026-09-13). */}
-      <SectionBody className="pt-12 md:pt-16">
-        <ServicePicker items={SERVICE_PAGES.tjenester} />
-      </SectionBody>
 
       {/* A grid, not the alternating bands (client, 2026-09-13: "too much to
          scroll"). Teaching moved to its own page the same day, so this is the
          ten on his Tjenester list rather than all thirteen. */}
-      <ServiceGrid items={SERVICE_PAGES.tjenester} locale={locale} />
+      <ServiceGrid
+        items={SERVICE_PAGES.tjenester}
+        locale={locale}
+        picker={<ServicePicker items={SERVICE_PAGES.tjenester} />}
+      />
 
       {/* The "Coming in person" band (ServiceVisit) was removed on 2026-08-31:
          it repeated verbatim on this page, the services index and all eleven

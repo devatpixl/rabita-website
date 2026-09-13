@@ -41,6 +41,10 @@ export async function ServicesHero() {
       objectClass="object-[32%_42%]"
       layout="over"
       mark="elevation"
+      // The grid below opens on its own ground and carries the space now
+      // (client, 2026-09-13: "remove this empty space and blend the first
+      // section with this top").
+      padBottom="none"
       sizes="(min-width: 1152px) 1104px, calc(100vw - 3rem)"
     />
   );

@@ -2,7 +2,6 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { PageBand } from '@/components/page-band';
 import { ServiceGrid } from '@/components/service-grid';
 import { ServicePicker } from '@/components/service-picker';
-import { SectionBody } from '@/components/primitives';
 import { SERVICE_PAGES } from '@/lib/services';
 
 // Teaching, back as a page of its own (client, 2026-09-13: "Del opp i to
@@ -36,15 +35,17 @@ export default async function UndervisningIndex({
         objectClass="object-center"
         layout="over"
         mark="elevation"
+        padBottom="none"
         sizes="(min-width: 1152px) 1104px, calc(100vw - 3rem)"
       />
 
-      {/* The rullegardin, above the bands it jumps into. */}
-      <SectionBody className="pt-10 md:pt-14">
-        <ServicePicker items={SERVICE_PAGES.undervisning} />
-      </SectionBody>
 
-      <ServiceGrid items={SERVICE_PAGES.undervisning} locale={locale} header={false} />
+      <ServiceGrid
+        items={SERVICE_PAGES.undervisning}
+        locale={locale}
+        header={false}
+        picker={<ServicePicker items={SERVICE_PAGES.undervisning} />}
+      />
     </main>
   );
 }
