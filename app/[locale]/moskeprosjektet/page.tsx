@@ -83,30 +83,36 @@ export default async function ProjectPage({
          the hand-drawn SVG sequence is kept for reuse. Re-enable by
          restoring the element below.
       <BuildingRises /> */}
-      <FloorByFloor />
+      {/* The renders, contained again and ABOVE the floor animation
+         (client, 2026-09-13: "move this section above the mosque
+         animation"). He had asked on 2026-09-07 to try the gallery ahead of
+         the figures — "se om det er bedre" — and this settles it: you see
+         the building before you are walked through it floor by floor.
 
-      {/* The renders. Full-bleed since 2026-09-13, to the client's mockup,
-         so the component owns its own section and ground — no band, no
-         SectionBody, no paper. The CTA points at Fremdrift: "read more
-         about the project" is circular on the project page, and the one
-         thing these renders do not answer is when. */}
-      <ProjectGallery
-        // Named explicitly, so adding a slide for another page cannot
-        // quietly appear here. The two apartment interiors went into the
-        // component's list on 2026-09-13 for /leiligheter and turned up at
-        // the end of this gallery uninvited; this page is the mosque.
-        only={[
-          'facadeEvening',
-          'foyer',
-          'garden',
-          'mainHall',
-          'minaret',
-          'youthClub',
-          'meetingRoom',
-          'roofTerrace',
-        ]}
-        cta={{ href: `/${locale}/moskeprosjektet/fremdrift`, label: t('gallery.cta') }}
-      />
+         The CTA is gone with the full-bleed design that carried it;
+         projectPage.gallery.cta is now unreferenced. */}
+      <section className="bg-paper-2 pt-14 pb-section-md md:pt-20">
+        <SectionBody>
+          <ProjectGallery
+            // Named explicitly, so adding a slide for another page cannot
+            // quietly appear here. The two apartment interiors went into the
+            // component's list on 2026-09-13 for /leiligheter and turned up at
+            // the end of this gallery uninvited; this page is the mosque.
+            only={[
+              'facadeEvening',
+              'foyer',
+              'garden',
+              'mainHall',
+              'minaret',
+              'youthClub',
+              'meetingRoom',
+              'roofTerrace',
+            ]}
+          />
+        </SectionBody>
+      </section>
+
+      <FloorByFloor />
 
       {/* Fremdrift, in digest. Sits here deliberately: the renders above
          answer "what will it look like", the key figures below open with
