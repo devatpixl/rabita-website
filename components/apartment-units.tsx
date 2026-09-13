@@ -70,11 +70,14 @@ export function ApartmentUnits() {
     const rail = railRef.current;
     const el = rail?.children[active] as HTMLElement | undefined;
     if (!rail || !el) return;
-    const left = el.offsetLeft - rail.offsetLeft;
-    const right = left + el.offsetWidth;
-    if (left < rail.scrollLeft) rail.scrollTo({ left: Math.max(0, left - 16), behavior: 'smooth' });
-    else if (right > rail.scrollLeft + rail.clientWidth)
-      rail.scrollTo({ left: right - rail.clientWidth + 16, behavior: 'smooth' });
+    // ALWAYS bring the active card to the rail's start — do not "nudge only
+    // if it is out of view". Three cards are visible at desktop width, so the
+    // nudge version did nothing for the first three clicks and only began
+    // moving at card four: the arrow looked broken until you had pressed it
+    // three times (client, 2026-09-13). Aligning every time means one press
+    // is always one card.
+    const left = Math.max(0, el.offsetLeft - rail.offsetLeft - 4);
+    rail.scrollTo({ left, behavior: 'smooth' });
   }, [active]);
   const nf = new Intl.NumberFormat('nb-NO');
   const num = (n: number) => nf.format(n);
