@@ -87,7 +87,7 @@ export function RoomPhotos({
       role="dialog"
       aria-modal="true"
       aria-label={t(`rooms.${roomId}`)}
-      className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6"
+      className="fixed inset-0 z-[60] flex items-center justify-center p-5 sm:p-8 lg:p-12"
     >
       {/* The ground. Clicking off the sheet closes, but this is NOT exposed:
          it is a mouse shortcut for something the close button and Escape
@@ -97,7 +97,14 @@ export function RoomPhotos({
 
       <div
         ref={sheetRef}
-        className="relative flex max-h-full w-full max-w-4xl flex-col overflow-hidden rounded-2xl bg-dusk text-paper shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)] ring-1 ring-paper/15"
+        // max-w-3xl, not 4xl, and the picture capped against the viewport's
+        // own height. At 4xl the sheet came to 710px of the 742 a 13" Air
+        // has once the padding is off — it filled the screen and the dimmed
+        // page behind it never showed (client, 2026-09-13: "no room to
+        // breathe ... space outside the image"). At 3xl the same screen
+        // leaves about 85px of dark above and below, which is what makes it
+        // read as something laid OVER the page rather than as a new one.
+        className="relative flex max-h-full w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-dusk text-paper shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)] ring-1 ring-paper/15"
         onPointerDown={(e) => { x0.current = e.clientX; }}
         onPointerUp={(e) => {
           if (x0.current == null) return;
@@ -111,7 +118,10 @@ export function RoomPhotos({
         {/* The picture. A fixed 16:10 window rather than the file's own shape,
            so paging between a wide overview and a tall corridor does not
            resize the sheet under the reader's hands. */}
-        <div className="relative aspect-[16/10] w-full shrink-0 bg-dusk">
+        {/* max-h against the viewport as well as the aspect ratio: on a short
+           laptop the 16:10 box alone would still push the sheet past the
+           screen, and object-cover simply crops a little more instead. */}
+        <div className="relative aspect-[16/10] max-h-[54svh] w-full shrink-0 bg-dusk">
           {photos.map((src, idx) => (
             <Image
               key={src}
