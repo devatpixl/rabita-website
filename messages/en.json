@@ -2261,8 +2261,7 @@
   },
   "joinPage": {
     "lede": "Membership is how you are counted here. It brings the newsletter and invitations to what happens in the building. A voting membership adds a vote at the annual meeting that elects the board.",
-    "headline": "Membership is how you are counted here. It brings the newsletter and invitations to what happens in the building.",
-    "voteNote": "A voting membership adds a vote at the annual meeting that elects the board.",
+    "headline": "Membership is how you are counted here.",
     "formEyebrow": "Join our community",
     "formLede": "One form, and you are on the roll.",
     "imageCaption": "Together we build a stronger community.",

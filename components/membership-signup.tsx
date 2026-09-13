@@ -233,17 +233,19 @@ export function MembershipSignup() {
            as a banner nobody asked for. */}
         <div className="relative hidden lg:block">
           {/* The client's mosque interior. 255x472, so it is given a column
-             narrower than that rather than a wide one: at 12rem it is never
-             asked to cover more pixels than it has on a 1x screen. object-
-             cover with a fixed anchor, so it crops at every height instead
-             of stretching. */}
+             a TALL slice of it, 360x806, not the near-square crop that was
+             here: at 205x270 in a 192x510 column the picture had to scale
+             1.9x and lose its sides, which is why it read as a blown-up
+             window. At 0.45 against the column's 0.38 it barely crops, and
+             360 source pixels across a 192px column stays sharp on a retina
+             screen. */}
           <Image
             src="/photos/membership-interior.webp"
             alt=""
             aria-hidden
             fill
             sizes="(min-width: 1024px) 12rem, 0px"
-            className="object-cover object-[55%_45%]"
+            className="object-cover object-center"
           />
           <div
             aria-hidden

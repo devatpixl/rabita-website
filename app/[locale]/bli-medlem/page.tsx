@@ -162,17 +162,23 @@ export default async function JoinPage({
                 <span aria-hidden className="h-px w-6 shrink-0 bg-gold-deep/50" />
                 {ts('pages.membership.eyebrow')}
               </p>
-              {/* The lede, set as the argument rather than as small print.
-                 It was one paragraph of body text; the reference gives its
-                 first two sentences the weight of a heading and leaves the
-                 vote as a note under it, which is the right order — most
-                 readers here are joining, not standing for the board. */}
-              <h2 className="mt-5 max-w-[18ch] font-serif text-[clamp(1.7rem,3.2vw,2.5rem)] leading-[1.15] text-balance text-ink">
+              {/* One sentence, and nothing under it (client, 2026-09-13:
+                 "reduce some text, not so overly written" — on a phone this
+                 column ran eight lines of heading before anything else).
+                 
+                 What came out was duplication, not content. The heading's
+                 second sentence was "it brings the newsletter and
+                 invitations to what happens in the building"; the first
+                 point below it reads "the newsletter, and word of what is
+                 happening in the building". The paragraph under it said a
+                 voting membership elects the board; the second point says
+                 voting members elect the board. The column now states the
+                 claim once and lets the three points carry the detail. */}
+              <h2 className="mt-5 max-w-[16ch] font-serif text-[clamp(1.8rem,3.4vw,2.6rem)] leading-[1.12] text-balance text-ink">
                 {t('headline')}
               </h2>
-              <p className="mt-5 max-w-[46ch] text-body text-ink-60">{t('voteNote')}</p>
 
-              <ul className="mt-10 grid gap-x-8 gap-y-7 sm:grid-cols-3 lg:grid-cols-1">
+              <ul className="mt-9 grid gap-x-8 gap-y-7 sm:grid-cols-3 lg:grid-cols-1">
                 {POINTS.map((k, i) => (
                   <li key={k} className="flex items-start gap-4">
                     <span
