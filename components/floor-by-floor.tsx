@@ -251,6 +251,21 @@ export function FloorByFloor() {
                 <p className="pt-1 font-mono text-[0.6875rem] tabular-nums tracking-[0.14em] text-paper/55">
                   <span className="text-paper">{String(step + 1).padStart(2, '0')}</span> / {String(STEPS).padStart(2, '0')}
                 </p>
+                {/* Nothing on the drawing says the dots open (client,
+                   2026-09-13). They take a pointer cursor and nothing else, so
+                   on a touch screen there is no tell at all. A line under the
+                   counter, with an actual gold disc in front of it so it
+                   points at the thing it is describing rather than naming it.
+                   Hidden below md: the phone slot underneath already carries
+                   the skip control, and two lines of mono in a 14px column is
+                   a stack, not a hint. */}
+                <p
+                  aria-hidden
+                  className="mt-2.5 hidden items-center justify-end gap-2 font-mono text-[0.625rem] uppercase tracking-[0.12em] text-paper/45 md:flex"
+                >
+                  <span className="inline-block h-[7px] w-[7px] shrink-0 rounded-full bg-gold-deep" />
+                  {t('tapHint')}
+                </p>
                 {/* Phones only — the same control the left column carries
                    from md. Only ever one of the two is displayed, so the
                    other is out of the accessibility tree too. */}
