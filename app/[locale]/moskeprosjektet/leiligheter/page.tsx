@@ -295,6 +295,16 @@ export default async function ApartmentsPage({
         </SectionBody>
       </section>
 
+      {/* Full-bleed, like the project page's. No CTA here: the only place
+         it would sensibly point is /moskeprosjektet.
+
+         THIRD, ahead of "kvalitet og møteplasser" (client, 2026-09-13:
+         "erstatte en av seksjonene med leilighetene, og plasser som nummer
+         3"). The renders used to sit fourth, after the facilities thread,
+         which meant the page argued for the homes twice in words before it
+         showed you one. */}
+      <ProjectGallery only={['roofTerrace', 'garden', 'minaret', 'facadeEvening']} />
+
       {/* ── kvalitet og møteplasser ─────────────────────────────────────
          Rebuilt to the client's mock (2026-09-04): heading beside the
          courtyard render with a community chip floating on it; the five
@@ -398,11 +408,6 @@ export default async function ApartmentsPage({
           </div>
         </SectionBody>
       </section>
-
-      {/* Full-bleed, like the project page's. No CTA here: the only place
-         it would sensibly point is /moskeprosjektet, and the interest
-         section directly below is this page's actual ask. */}
-      <ProjectGallery only={['roofTerrace', 'garden', 'minaret', 'facadeEvening']} />
 
       {/* Interest. */}
       <Section tone="paper-2" id="interesse">
