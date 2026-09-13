@@ -184,7 +184,7 @@ const FLOOR_OF: Record<string, string> = {
   sportsHall: 'lower',
   foyer: 'first', cafe: 'first', library: 'first',
   commercial: 'second', childrensRoom: 'second', imamOffice: 'second',
-  school: 'third', conference: 'third',
+  school: 'third', conference: 'third', garden: 'third',
   meetingRooms: 'fourth', youthClub: 'fourth',
   apartments: 'fifth',
   roofTerrace: 'whole', minaret: 'whole',

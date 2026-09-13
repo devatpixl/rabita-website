@@ -33,6 +33,7 @@ export const FLOOR_PHOTOS: Record<string, readonly string[]> = {
     '/photos/rooms/imamOffice-3.webp',
   ],
   // third
+  garden: ['/photos/rooms/garden-1.webp'],
   school: [
     '/photos/rooms/school-1.webp',
     '/photos/rooms/school-2.webp',
