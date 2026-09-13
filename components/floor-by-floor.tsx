@@ -370,6 +370,24 @@ export function FloorByFloor() {
                   />
                 ))}
               </div>
+
+              {/* The same hint the desktop header carries, on a phone
+                 (client, 2026-09-14: "on phone there is nothing like click on
+                 label to see photos, add that also").
+
+                 It cannot go where the desktop one goes: that slot is beside
+                 the step counter, and on a phone it already holds the skip
+                 control. Here at the foot it sits under the floor name and
+                 the rail, which is the last thing read before the next floor
+                 arrives — and it is centred because the caption above it is
+                 centred until sm. */}
+              <p
+                aria-hidden
+                className="mt-4 flex items-center justify-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-paper/60 md:hidden"
+              >
+                <span className="inline-block h-[9px] w-[9px] shrink-0 rounded-full bg-gold" />
+                {t('tapHint')}
+              </p>
             </div>
           </div>
         )}

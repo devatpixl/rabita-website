@@ -42,7 +42,11 @@ export const FLOOR_MARKERS: Record<string, FloorMarker[]> = {
   first: [
     { id: 'prayerMain', x: 52, y: 50, lx: 27, ly: 15, align: 'end' },
     { id: 'cafe', x: 26, y: 69, lx: 4, ly: 78, align: 'end', my: 73 },
-    { id: 'residentsEntrance', x: 13, y: 63, lx: 3, ly: 45, align: 'end' },
+    // mx only: at x 13 the phone chip is centred 13% in and its own width
+    // carries it 16px off the left edge of the pane (measured at 389px).
+    // The desktop leader still points at the real door — mx moves the phone
+    // name-plate, not the marker.
+    { id: 'residentsEntrance', x: 13, y: 63, mx: 20, lx: 3, ly: 45, align: 'end' },
     { id: 'foyer', x: 57, y: 83, lx: 74, ly: 95, align: 'start' },
     { id: 'library', x: 77, y: 72, lx: 97, ly: 60, align: 'start' },
   ],

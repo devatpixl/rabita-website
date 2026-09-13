@@ -50,10 +50,10 @@ const FRAME_H = 1400;
 // CHIP_H reserves three lines, because a foreignObject clips to its box
 // rather than overflowing it.
 //
-// LABEL_TYPE 34 lands at about 9px on a 390px screen and 11px on a 430px
-// one. The floor with the tightest pair of rooms is the second (the
-// children's room and the imam's office, 36px apart) — they clear because
-// the separation there is mostly vertical and a one-line chip is 14px tall.
+// LABEL_TYPE is set below and the collision budget moves with it: the floor
+// with the tightest pair of rooms is the second (the children's room and the
+// imam's office, 36px apart), so every change to the type is checked against
+// all eight floors for overlap rather than eyeballed on one.
 // Percentages in, viewBox units out. The marker data is authored as
 // percentages of the drawing because that is what you can read off it with a
 // grid; both overlays draw in the frame's own 1258x1400 units because that is
@@ -131,8 +131,17 @@ const LABEL_GAP = 20;
 const LABEL_TYPE_DESKTOP = 32;
 
 const CHIP_W = 460;
-const CHIP_H = 200;
-const LABEL_TYPE = 34;
+// 240, not 200: three lines at the larger type is 180 units before padding
+// and border, and a foreignObject CLIPS to its box rather than overflowing
+// it — an under-sized box silently shaves the third line off.
+const CHIP_H = 240;
+// 46, not 34 (client, 2026-09-14: "some labels are too small... its tiny
+// now"). These are viewBox units and the layer is a meet-fit, so the rendered
+// size is LABEL_TYPE x (pane width / 1258): 34 measured 9.8px on a 389px
+// viewport, which is below anything you would set body copy at. 46 lands at
+// about 13px there and 14.6px on a 430px Pro Max — medium-small, as asked,
+// rather than merely less tiny.
+const LABEL_TYPE = 46;
 
 // The phone name-plate. Identical either way except for the element and a
 // small gold count when a room has more than one photograph — the affordance
