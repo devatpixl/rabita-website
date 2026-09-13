@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
 import { Eyebrow, SectionBody, SectionHeading } from '@/components/primitives';
-import { type ColophonLabels, StoryColophon } from '@/components/story-page';
 import { PageBand } from '@/components/page-band';
 import { FigureIcon } from '@/components/figure-icons';
 
@@ -302,12 +301,12 @@ export default async function AboutPage({
          messages/*.json under about.board and about.legal, so either can be
          restored once there are real names and real files. */}
 
-      <StoryColophon
-        heading={ts('colophon.heading')}
-        body={ts('colophon.body')}
-        hours={ts('colophon.hours')}
-        labels={ts.raw('colophon.labels') as ColophonLabels}
-      />
+      {/* "Til protokollen" came off this page on 2026-09-13 ("Fjern til
+         protokollen"), listed under his Om oss notes. It is NOT deleted from
+         the site: the same StoryColophon still closes /kontakt and
+         /personvern-og-tilgjengelighet, which is where a journalist or an
+         auditor would look for it anyway. Its strings stay under
+         storyPages.colophon, so putting it back here is these six lines. */}
     </main>
   );
 }

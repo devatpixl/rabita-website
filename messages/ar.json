@@ -207,6 +207,16 @@
           "href": "/om-oss"
         },
         {
+          "label": "زورونا",
+          "blurb": "أوقات الفتح والعنوان والجولات",
+          "href": "/besok-oss"
+        },
+        {
+          "label": "الفعاليات",
+          "blurb": "العيد والإفطار والمحاضرات وأيام العائلة",
+          "href": "/arrangementer"
+        },
+        {
           "label": "انضم إلينا",
           "blurb": "العضوية والاشتراك",
           "href": "/bli-medlem"
@@ -1188,7 +1198,7 @@
       "phone": "الهاتف",
       "email": "البريد",
       "directions": "الاتجاهات",
-      "visit": "خطّط لزيارة",
+      "visit": "زورونا",
       "openMaps": "افتح في خرائط Google",
       "landmarks": {
         "oslo-s": "أوسلو المركزية / Jernbanetorget",

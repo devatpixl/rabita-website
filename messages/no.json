@@ -207,6 +207,16 @@
           "href": "/om-oss"
         },
         {
+          "label": "Besøk oss",
+          "blurb": "Åpningstider, adresse og omvisning",
+          "href": "/besok-oss"
+        },
+        {
+          "label": "Arrangementer",
+          "blurb": "Id, iftar, foredrag og familiedager",
+          "href": "/arrangementer"
+        },
+        {
           "label": "Bli medlem",
           "blurb": "Medlemskap og kontingent",
           "href": "/bli-medlem"
@@ -1188,7 +1198,7 @@
       "phone": "Telefon",
       "email": "E-post",
       "directions": "Veibeskrivelse",
-      "visit": "Planlegg besøk",
+      "visit": "Besøk oss",
       "openMaps": "Åpne i Google Maps",
       "landmarks": {
         "oslo-s": "Oslo S / Jernbanetorget",

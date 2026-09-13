@@ -207,6 +207,16 @@
           "href": "/om-oss"
         },
         {
+          "label": "Visit us",
+          "blurb": "Hours, address and guided visits",
+          "href": "/besok-oss"
+        },
+        {
+          "label": "Events",
+          "blurb": "Eid, iftar, lectures and family days",
+          "href": "/arrangementer"
+        },
+        {
           "label": "Become a member",
           "blurb": "Membership and the fee",
           "href": "/bli-medlem"
@@ -1188,7 +1198,7 @@
       "phone": "Phone",
       "email": "E-mail",
       "directions": "Directions",
-      "visit": "Plan a visit",
+      "visit": "Visit us",
       "openMaps": "Open in Google Maps",
       "landmarks": {
         "oslo-s": "Oslo S / Jernbanetorget",

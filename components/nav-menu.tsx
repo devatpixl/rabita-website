@@ -15,7 +15,13 @@ import { cn } from '@/lib/cn';
 // points straight at the times, which is what most visitors arrive for;
 // services takes the freed slot and education sits under it, where a
 // visitor looking for the school would actually think to look.
-export const NAV_KEYS = ['project', 'apartments', 'prayer', 'services', 'teaching', 'visit', 'about'] as const;
+// `visit` came off the top level on 2026-09-13 ("Legge besøk oss under Om
+// oss"). Besøk oss and Arrangementer are entries in the about menu now, so
+// both pages are still one click from the bar — they are just not a heading
+// of their own any more. nav.items.visit and nav.menu.visit stay in the
+// message files, unreferenced, so restoring the heading is this list plus a
+// NAV_ROOT entry.
+export const NAV_KEYS = ['project', 'apartments', 'prayer', 'services', 'teaching', 'about'] as const;
 export type NavKey = (typeof NAV_KEYS)[number];
 
 // null means "opens a menu and goes nowhere itself".
@@ -31,7 +37,6 @@ export const NAV_ROOT: Record<NavKey, string | null> = {
   prayer: '/bonnetider',
   services: '/tjenester',
   teaching: '/undervisning',
-  visit: '/besok-oss',
   about: '/om-oss',
 };
 
