@@ -233,9 +233,9 @@ export function RoomPhotos({
 // Which floor caption to show above the room name. Derived here rather than
 // threaded through the marker, so the dialog can be opened from anywhere.
 const FLOOR_OF: Record<string, string> = {
-  sportsHall: 'lower',
-  foyer: 'first', cafe: 'first', library: 'first',
-  commercial: 'second', childrensRoom: 'second', imamOffice: 'second',
+  prayerMen: 'lower', wuduMen: 'lower', sportsHall: 'lower',
+  prayerMain: 'first', foyer: 'first', cafe: 'first', library: 'first',
+  prayerWomen: 'second', commercial: 'second', childrensRoom: 'second', imamOffice: 'second',
   school: 'third', conference: 'third', garden: 'third',
   meetingRooms: 'fourth', youthClub: 'fourth',
   apartments: 'fifth',

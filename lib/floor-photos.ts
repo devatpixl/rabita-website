@@ -13,13 +13,29 @@
 // Ordered as the deck ordered them: the overview first where one exists, then
 // the closer views.
 export const FLOOR_PHOTOS: Record<string, readonly string[]> = {
+  // The prayer halls and the ablutions are NOT in the client's room folder —
+  // it has no bonnerom and no wudu file. They were already on the site
+  // though, in the Norconsult sets the gallery and the zoom section draw
+  // from, and they are the same building: the green carpet with its gold
+  // prayer rows, the white columns, the curved balustrade, the rosette
+  // rings. So they are pulled from /photos rather than /photos/rooms.
+  //
+  // NOT room-main-hall.webp, which sits in the sadaqa band: that one is a
+  // different mosque entirely — marble and gold arches, no green carpet.
+  // Fine as an atmosphere plate, wrong as "this is the hall you are
+  // pointing at".
+  //
   // lower
+  prayerMen: ['/photos/room-lower-hall.webp'],
+  wuduMen: ['/photos/zoom-wudu.webp'],
   sportsHall: ['/photos/rooms/sportsHall-1.webp'],
   // first
+  prayerMain: ['/photos/proj-main-hall.webp'],
   foyer: ['/photos/rooms/foyer-1.webp'],
   cafe: ['/photos/rooms/cafe-1.webp'],
   library: ['/photos/rooms/library-1.webp'],
   // second
+  prayerWomen: ['/photos/room-womens-hall.webp'],
   commercial: [
     '/photos/rooms/commercial-1.webp',
     '/photos/rooms/commercial-2.webp',
