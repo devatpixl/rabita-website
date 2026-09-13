@@ -211,7 +211,14 @@ export function RoomPhotos({
           <h3 className="mt-3 font-serif text-[clamp(1.3rem,2.4vw,1.75rem)] leading-tight text-paper">
             {t(`rooms.${roomId}`)}
           </h3>
-          <p className="mt-2.5 max-w-[62ch] text-body text-paper/70">{t(`roomDesc.${roomId}`)}</p>
+          {/* Guarded. A room can gain photographs without anyone writing it a
+             description, and next-intl's answer to a missing key is to print
+             the key — which is what the client was shown: the words
+             "floorByFloor.roomDesc.prayerMen" where the sentence belongs.
+             Better to say nothing than to say that. */}
+          {t.has(`roomDesc.${roomId}`) && (
+            <p className="mt-2.5 max-w-[62ch] text-body text-paper/70">{t(`roomDesc.${roomId}`)}</p>
+          )}
         </div>
 
         <button
