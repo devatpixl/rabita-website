@@ -147,6 +147,34 @@ export async function ServiceGrid({
              only has to stay quiet — not disappear. */}
           <div className="absolute inset-0 bg-paper/45" />
         </div>
+
+        {/* The seam. The arcade started on a hard horizontal line against the
+           page's paper (client, 2026-09-13: "it is so sharp of transition
+           from white to this").
+
+           These live OUTSIDE the sticky child on purpose. On it they would
+           pin to the viewport and fade whatever happened to be at the top of
+           the screen; here they belong to the section box and scroll with it,
+           so they sit on its actual edges. They are painted after the sticky
+           layer, so they land over the photograph.
+
+           Explicit rgba rather than `to-transparent`: Tailwind's transparent
+           is rgba(0,0,0,0), which interpolates through grey and dirties a
+           warm ground. */}
+        <div
+          className="absolute inset-x-0 top-0 h-40 md:h-56"
+          style={{
+            background:
+              'linear-gradient(180deg, rgb(250,248,244) 0%, rgba(250,248,244,0.86) 28%, rgba(250,248,244,0) 100%)',
+          }}
+        />
+        <div
+          className="absolute inset-x-0 bottom-0 h-32 md:h-44"
+          style={{
+            background:
+              'linear-gradient(0deg, rgb(250,248,244) 0%, rgba(250,248,244,0.8) 32%, rgba(250,248,244,0) 100%)',
+          }}
+        />
       </div>
       <SectionBody>
         {picker && <div className="mb-10 md:mb-14">{picker}</div>}
