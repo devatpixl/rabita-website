@@ -174,7 +174,13 @@ export function Footer() {
              screens of scroll. At lg the three columns sit side by side and
              the natural order is right again. */}
           <div className="order-first sm:col-span-2 lg:order-none lg:col-span-5">
-            <FindUs className="mx-auto max-w-[30rem] lg:max-w-none" />
+            {/* The extended plate, matching the one on Leiligheter (client,
+               2026-09-13: "legg det samme kartet til nederst på alle sidene").
+               It trades Brugata and Grønland for the six landmarks that carry
+               the central-location argument. Taller than the compact plate it
+               replaced — near-square rather than landscape — so the column
+               grows with it. */}
+            <FindUs extended className="mx-auto max-w-[30rem] lg:max-w-none" />
           </div>
 
           {/* The lockup, at the foot — below the social links on a phone,
