@@ -121,6 +121,11 @@
           "href": "/tjenester/hajj-umrah"
         },
         {
+          "label": "Eid for everyone",
+          "blurb": "A family day at Eid, for young and old.",
+          "href": "/tjenester/id-for-alle"
+        },
+        {
           "label": "Counselling",
           "blurb": "Confidential conversations and mediation with an imam or a female counsellor.",
           "href": "/tjenester/counselling"
@@ -158,14 +163,29 @@
           "href": "/tjenester/skole"
         },
         {
-          "label": "Quran and Arabic",
-          "blurb": "Quran and Arabic teaching for children, young people and adults.",
+          "label": "The Koran school",
+          "blurb": "Koran teaching for children and adults, with tajweed.",
           "href": "/tjenester/koran"
+        },
+        {
+          "label": "A course in Islam",
+          "blurb": "Foundational knowledge for children and teenagers.",
+          "href": "/tjenester/kurs-islam"
+        },
+        {
+          "label": "A course in Arabic",
+          "blurb": "Arabic for adults over 16, at two levels.",
+          "href": "/tjenester/arabisk"
         },
         {
           "label": "Norwegian",
           "blurb": "Norwegian classes for adults who fall outside the ordinary provision.",
           "href": "/tjenester/norsk"
+        },
+        {
+          "label": "A course for converts",
+          "blurb": "An Islam course for new Muslims, every Friday.",
+          "href": "/tjenester/kurs-konvertitter"
         }
       ],
       "visit": [
@@ -1456,7 +1476,11 @@
       "norsk": "Your level of Norwegian today, and what you want to use the language for.",
       "ungdom": "The young person’s age, and which activity this is about.",
       "barn-og-familie": "The children’s ages and which activity this is about.",
-      "fosterhjem": "A little about your family, and what you are wondering."
+      "fosterhjem": "A little about your family, and what you are wondering.",
+      "id-for-alle": "How many of you are coming, and the ages of the children.",
+      "kurs-islam": "The child's age, and whether it is the girls' or boys' group.",
+      "kurs-konvertitter": "Whether you are a new Muslim, or coming to learn.",
+      "arabisk": "Your level, and whether you have read Arabic before."
     },
     "submit": "Send",
     "submitting": "Sending …",
@@ -1781,31 +1805,28 @@
         ]
       },
       "koran": {
-        "title": "Quran and <em>Arabic</em>",
-        "body": "Quran and Arabic teaching for children, young people and adults.",
-        "longBody": "Knowledge holds a central place in Islam. Through our teaching Rabita wants to make it possible for children and adults alike to come closer to the Quran, to learn Arabic, and to build knowledge in a safe and welcoming place to learn.",
-        "offerTitle": "Closer to the Quran, and to the language it came in",
-        "offerLede": "Teaching is adapted to each participant’s age and prior knowledge, so that it is possible to start whatever level you are at.",
+        "title": "The Koran <em>school</em>",
+        "body": "Koran teaching for children from 6 and for adults, with tajweed.",
+        "longBody": "Teaching in the Qur'an: learning by heart, and learning to read it correctly — tajweed. Children between 6 and 15 and adults over 16 have groups of their own.",
+        "offerTitle": "The Qur'an, read as it should be read",
+        "offerLede": "The teaching is as much about pronunciation as about the text. Arabic as a language is a course of its own.",
         "offer": [
           {
-            "title": "Quran teaching",
-            "body": "Learning the Quran is about more than being able to read a text.",
-            "detail": "It is about understanding your faith, developing your relationship with God, and carrying the Quran’s values and guidance into everyday life. Contact: kunnskap@rabita.no"
+            "title": "Tajweed",
+            "body": "Reading it correctly: pronunciation, lengths and pauses."
           },
           {
-            "title": "Every level",
-            "body": "Some meet the Arabic alphabet for the first time; others want to develop their reading, pronunciation and recitation.",
-            "detail": "Rabita offers Quran teaching for both children and adults at a range of levels."
+            "title": "Memorisation",
+            "body": "Learning by heart, at the pace the pupil can manage."
           },
           {
-            "title": "Arabic for adults",
-            "body": "For beginners, and for anyone who wants to become more confident reading, writing and understanding Arabic.",
-            "detail": "Contact: undervisning@rabita.no"
+            "title": "Children from 6",
+            "body": "Groups of their own for children between 6 and 15.",
+            "detail": "Adults over 16 have theirs."
           },
           {
-            "title": "The language and the source",
-            "body": "For some the goal is to communicate better in Arabic. For others it is fuller access to the Quran and to Islamic sources in the original.",
-            "detail": "The Quran was revealed in Arabic, and central parts of Islamic practice are bound to the language."
+            "title": "Arabic is a separate course",
+            "body": "If you want the language rather than only the reading, that is the Arabic course."
           }
         ]
       },
@@ -1976,6 +1997,112 @@
           {
             "title": "Take the first step",
             "body": "You can contact us with no obligation for information and guidance on what fostering involves."
+          }
+        ]
+      },
+      "id-for-alle": {
+        "title": "Eid for <em>everyone</em>",
+        "body": "A family day at Eid, with activities and games for young and old.",
+        "longBody": "Rabita invites the whole family to a day of activities, games and good spirits, for young and old alike. Eid for everyone has been held in several places across the city — among them Hersleb skole, Ekeberghallen and Rådhusplassen — and is announced afresh before each Eid.",
+        "offerTitle": "The feast, kept together",
+        "offerLede": "Eid is a family day. The programme is built so that children and adults both have something to do, and everyone is welcome.",
+        "offer": [
+          {
+            "title": "Open to the whole family",
+            "body": "Young and old in the same room. The day is made for both, not for one with the other in tow."
+          },
+          {
+            "title": "Activities and games",
+            "body": "A programme running through the day, with games and activities for the children."
+          },
+          {
+            "title": "Wherever there is room",
+            "body": "The day moves to whatever hall will hold it.",
+            "detail": "Previously held at Hersleb skole, Ekeberghallen and Rådhusplassen, among others."
+          },
+          {
+            "title": "The date follows the feast",
+            "body": "Eid for everyone is announced before each Eid.",
+            "detail": "Time and place come in the newsletter and on Facebook."
+          }
+        ]
+      },
+      "kurs-islam": {
+        "title": "A course in <em>Islam</em>",
+        "body": "Foundational knowledge for children and teenagers, in separate groups.",
+        "longBody": "Teaching in Islam for several groups. Jenter i Fokus and Gutter i Fokus cover the foundations — prayer, ritual washing and tawhid — across two age groups: 10 to 13, and 14 to 18.",
+        "offerTitle": "The foundations, properly",
+        "offerLede": "The courses cover what a young Muslim needs to know, in groups put together by age.",
+        "offer": [
+          {
+            "title": "Jenter i Fokus",
+            "body": "A group of their own, for girls."
+          },
+          {
+            "title": "Gutter i Fokus",
+            "body": "A group of their own, for boys."
+          },
+          {
+            "title": "Prayer, wudu and tawhid",
+            "body": "The foundations: the prayer, the ritual washing, and the oneness of God."
+          },
+          {
+            "title": "Two age groups",
+            "body": "Teaching is split by age.",
+            "detail": "10–13 and 14–18."
+          }
+        ]
+      },
+      "kurs-konvertitter": {
+        "title": "A course for <em>converts</em>",
+        "body": "An Islam course for new Muslims, every Friday. Open to anyone who wants to learn.",
+        "longBody": "A course in the foundations of Islam, made for new Muslims. We eat together, and it is open to anyone with an interest in learning — including those born Muslim, and those who are not Muslim at all.",
+        "offerTitle": "Somewhere to begin",
+        "offerLede": "The course covers the foundations and assumes nothing. You can come on your own.",
+        "offer": [
+          {
+            "title": "Every Friday",
+            "body": "The course runs weekly through the year.",
+            "detail": "Fridays, 17:00–19:00."
+          },
+          {
+            "title": "The foundations of Islam",
+            "body": "We start at the beginning. No prior knowledge is needed."
+          },
+          {
+            "title": "We eat together",
+            "body": "The course has a social half. It is a way to get to know people, not only a classroom."
+          },
+          {
+            "title": "Wider than converts",
+            "body": "Anyone with an interest in learning is welcome.",
+            "detail": "Calmeyers gate 8, 3rd floor. Questions: post@rabita.no"
+          }
+        ]
+      },
+      "arabisk": {
+        "title": "A course in <em>Arabic</em>",
+        "body": "Arabic for adults over 16, at two levels.",
+        "longBody": "Teaching in Arabic for adults over 16, at two levels. Level 1 begins with the alphabet. Level 2 builds on it with grammar, vocabulary and reading continuous text.",
+        "offerTitle": "From the alphabet to the page",
+        "offerLede": "Two levels, so you can start where you are.",
+        "offer": [
+          {
+            "title": "Level 1",
+            "body": "The alphabet and the first words, for those starting from nothing."
+          },
+          {
+            "title": "Level 2",
+            "body": "Grammar, vocabulary and reading continuous text."
+          },
+          {
+            "title": "For adults",
+            "body": "The courses are for participants over 16.",
+            "detail": "Children and teenagers belong in the Koran school."
+          },
+          {
+            "title": "The language the Qur'an came in",
+            "body": "Arabic lets you meet the text without a translation in between."
           }
         ]
       }

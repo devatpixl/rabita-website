@@ -121,6 +121,11 @@
           "href": "/tjenester/hajj-umrah"
         },
         {
+          "label": "Id for alle",
+          "blurb": "Familiedag i høytiden, for store og små.",
+          "href": "/tjenester/id-for-alle"
+        },
+        {
           "label": "Samtaler og rådgivning",
           "blurb": "Fortrolige samtaler og megling med imam eller kvinnelig rådgiver.",
           "href": "/tjenester/counselling"
@@ -158,14 +163,29 @@
           "href": "/tjenester/skole"
         },
         {
-          "label": "Koran og arabisk",
-          "blurb": "Koranundervisning og arabisk for barn, unge og voksne.",
+          "label": "Koranskolen",
+          "blurb": "Koranundervisning for barn og voksne, med tajweed.",
           "href": "/tjenester/koran"
+        },
+        {
+          "label": "Kurs i islam",
+          "blurb": "Grunnleggende islamkunnskap for barn og ungdom.",
+          "href": "/tjenester/kurs-islam"
+        },
+        {
+          "label": "Kurs i arabisk",
+          "blurb": "Arabisk for voksne over 16 år, på to nivåer.",
+          "href": "/tjenester/arabisk"
         },
         {
           "label": "Norsk",
           "blurb": "Norskundervisning for voksne som faller utenfor de ordinære tilbudene.",
           "href": "/tjenester/norsk"
+        },
+        {
+          "label": "Kurs for konvertitter",
+          "blurb": "Islamkurs for nye muslimer, hver fredag.",
+          "href": "/tjenester/kurs-konvertitter"
         }
       ],
       "visit": [
@@ -1456,7 +1476,11 @@
       "norsk": "Nivået ditt i norsk i dag, og hva du ønsker å bruke språket til.",
       "ungdom": "Alder på den unge, og hva slags aktivitet det gjelder.",
       "barn-og-familie": "Barnas alder og hvilken aktivitet det gjelder.",
-      "fosterhjem": "Kort om familien din, og hva du lurer på."
+      "fosterhjem": "Kort om familien din, og hva du lurer på.",
+      "id-for-alle": "Hvor mange dere er, og alderen på barna.",
+      "kurs-islam": "Alder på barnet, og om det gjelder jente- eller guttegruppa.",
+      "kurs-konvertitter": "Om du er ny muslim, eller kommer for å lære.",
+      "arabisk": "Nivå, og om du har lest arabisk før."
     },
     "submit": "Send",
     "submitting": "Sender …",
@@ -1781,31 +1805,28 @@
         ]
       },
       "koran": {
-        "title": "Koran og <em>arabisk</em>",
-        "body": "Koranundervisning og arabisk for barn, unge og voksne.",
-        "longBody": "Kunnskap har en sentral plass i islam. Gjennom våre undervisningstilbud ønsker Rabita å gjøre det mulig for både barn og voksne å komme nærmere Koranen, lære det arabiske språket og utvikle kunnskap i et trygt og inkluderende læringsmiljø.",
-        "offerTitle": "Nærmere Koranen, og språket den kom på",
-        "offerLede": "Undervisningen tilpasses alder og forkunnskaper, slik at det skal være mulig å begynne uansett hvilket nivå man befinner seg på.",
+        "title": "Koran<em>skolen</em>",
+        "body": "Koranundervisning for barn fra 6 år og for voksne, med tajweed.",
+        "longBody": "Undervisning i Koranen: å lære utenat, og å lære å lese på riktig måte — tajweed. Barn mellom 6 og 15 år og voksne over 16 år har egne grupper.",
+        "offerTitle": "Koranen, lest som den skal leses",
+        "offerLede": "Undervisningen handler like mye om uttalen som om teksten. Arabisk som språk er et eget kurs.",
         "offer": [
           {
-            "title": "Koranundervisning",
-            "body": "Å lære Koranen handler om mer enn å kunne lese en tekst.",
-            "detail": "Det handler om å forstå sin tro, utvikle sin relasjon til Gud og ta med seg Koranens verdier og veiledning inn i hverdagen. Kontakt: kunnskap@rabita.no"
+            "title": "Tajweed",
+            "body": "Å lese på riktig måte: uttale, lengder og pauser."
           },
           {
-            "title": "For alle nivåer",
-            "body": "Noen møter det arabiske alfabetet for første gang, mens andre ønsker å videreutvikle lesing, uttale og resitasjon.",
-            "detail": "Rabita tilbyr Koranundervisning for både barn og voksne på ulike nivåer."
+            "title": "Memorering",
+            "body": "Å lære utenat, i det tempoet eleven klarer."
           },
           {
-            "title": "Arabisk for voksne",
-            "body": "For nybegynnere og for deg som ønsker å bli tryggere på å lese, skrive og forstå arabisk.",
-            "detail": "Kontakt: undervisning@rabita.no"
+            "title": "Barn fra 6 år",
+            "body": "Egne grupper for barn mellom 6 og 15 år.",
+            "detail": "Voksne over 16 år har sine egne."
           },
           {
-            "title": "Språket og kilden",
-            "body": "For noen er målet å kunne kommunisere bedre på arabisk. For andre er ønsket større tilgang til Koranen og islamske kilder på originalspråket.",
-            "detail": "Koranen ble åpenbart på arabisk, og sentrale deler av den islamske trosutøvelsen er knyttet til språket."
+            "title": "Arabisk er et eget kurs",
+            "body": "Vil du lære språket, ikke bare lese teksten, er det Kurs i arabisk som gjelder."
           }
         ]
       },
@@ -1976,6 +1997,112 @@
           {
             "title": "Ta det første steget",
             "body": "Du kan kontakte oss helt uforpliktende for informasjon og veiledning om hva det innebærer å bli fosterfamilie."
+          }
+        ]
+      },
+      "id-for-alle": {
+        "title": "Id for <em>alle</em>",
+        "body": "Familiedag i høytiden, med aktiviteter og lek for store og små.",
+        "longBody": "Rabita inviterer hele familien til en dag fylt med aktiviteter, lek og god stemning for både store og små. Id for alle har vært holdt flere steder i byen — blant annet på Hersleb skole, i Ekeberghallen og på Rådhusplassen — og annonseres på nytt foran hver høytid.",
+        "offerTitle": "Høytiden, feiret sammen",
+        "offerLede": "Id er en familiedag. Programmet er lagt opp slik at barn og voksne har noe å gjøre samtidig, og alle er velkomne.",
+        "offer": [
+          {
+            "title": "Åpent for hele familien",
+            "body": "Store og små i samme hus. Dagen er laget for begge deler, ikke for den ene med den andre på slep."
+          },
+          {
+            "title": "Aktiviteter og lek",
+            "body": "Program gjennom hele dagen, med leker og aktiviteter for barna."
+          },
+          {
+            "title": "Der det er plass til alle",
+            "body": "Arrangementet flytter dit det får plass.",
+            "detail": "Tidligere holdt blant annet på Hersleb skole, i Ekeberghallen og på Rådhusplassen."
+          },
+          {
+            "title": "Datoen følger høytiden",
+            "body": "Id for alle annonseres foran hver høytid.",
+            "detail": "Tid og sted kommer i nyhetsbrevet og på Facebook."
+          }
+        ]
+      },
+      "kurs-islam": {
+        "title": "Kurs i <em>islam</em>",
+        "body": "Grunnleggende islamkunnskap for barn og ungdom, i egne grupper.",
+        "longBody": "Undervisning i islam for ulike målgrupper. Jenter i Fokus og Gutter i Fokus tar for seg det grunnleggende — bønn, rituell vask og tawhid — i to aldersgrupper: 10 til 13 år og 14 til 18 år.",
+        "offerTitle": "Det grunnleggende, grundig",
+        "offerLede": "Kursene tar for seg det en ung muslim trenger å kunne, i grupper satt sammen etter alder.",
+        "offer": [
+          {
+            "title": "Jenter i Fokus",
+            "body": "Egen gruppe for jenter."
+          },
+          {
+            "title": "Gutter i Fokus",
+            "body": "Egen gruppe for gutter."
+          },
+          {
+            "title": "Bønn, wudu og tawhid",
+            "body": "Grunnleggende kunnskap om bønnen, den rituelle vasken og troen på Guds enhet."
+          },
+          {
+            "title": "To aldersgrupper",
+            "body": "Undervisningen deles etter alder.",
+            "detail": "10–13 år og 14–18 år."
+          }
+        ]
+      },
+      "kurs-konvertitter": {
+        "title": "Kurs for <em>konvertitter</em>",
+        "body": "Islamkurs for nye muslimer, hver fredag. Åpent for alle som vil lære.",
+        "longBody": "Et kurs i grunnleggende islamkunnskap, laget for nye muslimer. Vi spiser sammen, og kurset er åpent for alle som har interesse av å lære — også for deg som er født muslim, og for deg som ikke er muslim.",
+        "offerTitle": "Et sted å begynne",
+        "offerLede": "Kurset tar for seg det grunnleggende uten å forutsette at du kan noe fra før. Du kan komme alene.",
+        "offer": [
+          {
+            "title": "Hver fredag",
+            "body": "Kurset går ukentlig gjennom året.",
+            "detail": "Fredager 17:00–19:00."
+          },
+          {
+            "title": "Grunnleggende islamkunnskap",
+            "body": "Vi begynner ved begynnelsen. Ingen forkunnskaper kreves."
+          },
+          {
+            "title": "Vi spiser sammen",
+            "body": "Kurset har en sosial del. Det er en måte å bli kjent på, ikke bare et klasserom."
+          },
+          {
+            "title": "Åpent for flere enn konvertitter",
+            "body": "Alle som har interesse av å lære er velkomne.",
+            "detail": "Calmeyers gate 8, 3. etasje. Spørsmål: post@rabita.no"
+          }
+        ]
+      },
+      "arabisk": {
+        "title": "Kurs i <em>arabisk</em>",
+        "body": "Arabisk for voksne over 16 år, på to nivåer.",
+        "longBody": "Undervisning i arabisk for voksne over 16 år, på to nivåer. Nivå 1 begynner med alfabetet. Nivå 2 bygger videre med grammatikk, ordforråd og lesing av sammenhengende tekst.",
+        "offerTitle": "Fra alfabetet til teksten",
+        "offerLede": "To nivåer, slik at du kan begynne der du er.",
+        "offer": [
+          {
+            "title": "Nivå 1",
+            "body": "Alfabetet og de første ordene, for deg som begynner fra null."
+          },
+          {
+            "title": "Nivå 2",
+            "body": "Grammatikk, ordforråd og lesing av sammenhengende tekst."
+          },
+          {
+            "title": "For voksne",
+            "body": "Kursene er for deltakere over 16 år.",
+            "detail": "Barn og unge hører hjemme i Koranskolen."
+          },
+          {
+            "title": "Språket Koranen kom på",
+            "body": "Arabisk lar deg møte teksten uten en oversettelse imellom."
           }
         ]
       }
