@@ -205,6 +205,9 @@ export default async function ProjectPage({
             ] as const;
             const facts: {
               key: string;
+              /** Overrides t(`facts.<key>`), for a row whose label lives in
+               *  another namespace. */
+              label?: string;
               icon: FigureIconName;
               value: string;
               unit?: string;
@@ -213,9 +216,21 @@ export default async function ProjectPage({
               { key: 'building', icon: 'building', value: nf.format(CAMPAIGN.buildingM2), unit: 'm²' },
               { key: 'floors', icon: 'floors', value: `${CAMPAIGN.floorsAbove} + U${CAMPAIGN.floorsBelow}` },
               { key: 'startConstruction', icon: 'calendar', value: CAMPAIGN.constructionStart },
-              CAMPAIGN.completionDate
-                ? { key: 'completion', icon: 'check', value: CAMPAIGN.completionDate }
-                : { key: 'completion', icon: 'check', value: t('facts.completionTbd'), muted: true },
+              // Completion came out and capacity came in, in the same slot
+              // (client, 2026-09-13). The card that carried the two prayer
+              // figures beside this register is gone, so its one number that
+              // matters sits here on a single line — derived from the very
+              // constants that card read, so the two cannot drift apart.
+              // facts.completion* stay in the message files, unreferenced.
+              {
+                key: 'capacity',
+                label: t('capacity.heading'),
+                icon: 'people',
+                value: nf.format(
+                  CAMPAIGN.womensPrayerCapacityAfter + CAMPAIGN.mensPrayerCapacityAfter,
+                ),
+                unit: t('capacity.people'),
+              },
             ];
             const label = 'font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink-60';
             // One rhythm for both registers: every row is 5rem tall with its
@@ -263,7 +278,7 @@ export default async function ProjectPage({
                           <span aria-hidden className={chip}>
                             <FigureIcon name={f.icon} className="h-[18px] w-[18px]" />
                           </span>
-                          <dt className="text-[13px] text-ink-60">{t(`facts.${f.key}`)}</dt>
+                          <dt className="text-[13px] text-ink-60">{f.label ?? t(`facts.${f.key}`)}</dt>
                           <span aria-hidden className={leader} />
                           <dd className="flex items-baseline gap-1.5 text-end">
                             {f.muted ? (
@@ -277,135 +292,6 @@ export default async function ProjectPage({
                       ))}
                     </dl>
                   </div>
-
-                  {/* Capacity, then the school as its own register */}
-                  <div className="md:space-y-6">
-                    <div className={card}>
-                    <div className="flex items-center gap-3">
-                      <FigureIcon name="people" className="hidden h-[18px] w-[18px] shrink-0 text-gold-deep md:block" />
-                      <h2 className={label}>{t('capacity.heading')}</h2>
-                      <span aria-hidden className="hidden h-px flex-1 bg-gold-deep/30 md:block" />
-                    </div>
-                    {/* Capacity as a scale, not as two stat rows.
-                       (client, 2026-09-07: "a bespoke architectural
-                       information display rather than a standard UI
-                       statistics component".)
-
-                       Two vertical areas divided by one hairline. The number
-                       that matters is the new one, so it carries the type;
-                       the old one is a measure under it. Both measures live
-                       in the SAME 1fr track with the figures in a shared
-                       end column, which is the only way the ratio is
-                       honest — a bar sized against a track that a number is
-                       also sitting in would be short by the width of the
-                       number.
-
-                       The scale is per column, deliberately. Shared across
-                       both, women's 500 would be a quarter of men's 2000 and
-                       the old 100 a 5% sliver; the story this section tells
-                       is the growth, and the figures carry the comparison
-                       between the two on their own.
-
-                       Interaction is one thing only: the new measure and its
-                       chevron reach forward on hover or keyboard focus. */}
-                    <dl className="mt-5 grid gap-6 sm:grid-cols-2 sm:gap-0 md:mt-6">
-                      {cap.map((c, i) => {
-                        const times = Math.round(c.after / c.before);
-                        return (
-                          <div
-                            key={c.key}
-                            tabIndex={0}
-                            className={cn(
-                              'group relative outline-none',
-                              i === 0 ? 'sm:pe-9' : 'sm:border-s sm:border-rule sm:ps-9',
-                            )}
-                          >
-                            {/* justify-start on a phone: at 341px
-                               justify-between put the 5x a quarter of a
-                               screen from the label it modifies, reading as a
-                               loose numeral rather than a multiplier. The
-                               desktop column is narrow enough that the two
-                               still pair, so it keeps justify-between. */}
-                            <div className="flex items-baseline justify-start gap-3 sm:justify-between sm:gap-4">
-                              <dt className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60">
-                                {t(`capacity.${c.key}`)}
-                              </dt>
-                              <span
-                                aria-hidden
-                                className="font-mono text-[0.625rem] tabular-nums tracking-[0.14em] text-gold-deep/60 transition-colors duration-500 group-hover:text-gold-deep group-focus:text-gold-deep"
-                              >
-                                {times}&times;
-                              </span>
-                            </div>
-
-                            <dd className="mt-3">
-                              {/* "personer" sits on the figure's baseline on a
-                                 phone and drops under it from sm. It is the
-                                 figure's unit, not a line of its own. */}
-                              <div className="flex items-baseline gap-2.5 sm:block">
-                                <span className="font-serif italic leading-none tabular-nums text-gold-deep text-[clamp(2.6rem,5vw,3.5rem)]">
-                                  {nf.format(c.after)}
-                                </span>
-                                <span className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60 sm:mt-2.5 sm:block">
-                                  {t('capacity.people')}
-                                </span>
-                              </div>
-
-                              {/* The scale. aria-hidden: the figures either
-                                 side of it are already read out above and in
-                                 the row below, so this is the same fact a
-                                 third time for a screen reader. */}
-                              {/* On a phone each measure is its own flex row,
-                                 so the figure sits directly after the bar it
-                                 belongs to. In the grid the numbers align in
-                                 a right-hand column, which is right at 200px
-                                 wide and wrong at 341: the 100 ended up some
-                                 250px from the end of its own bar and the two
-                                 rows read as stray lines with loose numerals
-                                 (client, 2026-09-08).
-
-                                 sm:contents flattens the wrappers back into
-                                 the grid from sm, so every width above a
-                                 phone renders exactly as before. */}
-                              <div
-                                aria-hidden
-                                className="mt-5 space-y-2.5 sm:mt-6 sm:grid sm:grid-cols-[1fr_auto] sm:items-center sm:gap-x-3 sm:gap-y-2.5 sm:space-y-0"
-                              >
-                                <span className="flex items-center gap-3 sm:contents">
-                                <span className="h-px shrink-0 bg-ink/25 sm:shrink" style={{ width: `${(c.before / c.after) * 100}%` }} />
-                                <span className="font-mono text-[10px] leading-none tabular-nums text-ink-40">
-                                  {nf.format(c.before)}
-                                </span>
-                                </span>
-                                <span className="flex items-center gap-3 sm:contents">
-                                <span className="flex flex-1 items-center">
-                                  <span className="h-[2px] flex-1 bg-gold-deep/55 transition-colors duration-500 ease-out group-hover:bg-gold-deep group-focus:bg-gold-deep" />
-                                  <svg
-                                    viewBox="0 0 8 10"
-                                    className="ms-1 h-2.5 w-2 shrink-0 text-gold-deep/55 transition-all duration-500 ease-out group-hover:translate-x-1 group-hover:text-gold-deep group-focus:translate-x-1 group-focus:text-gold-deep motion-reduce:transition-none rtl:rotate-180 rtl:group-hover:-translate-x-1"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="1.5"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  >
-                                    <path d="M2 1l4 4-4 4" />
-                                  </svg>
-                                </span>
-                                <span className="font-mono text-[10px] leading-none tabular-nums text-gold-deep">
-                                  {nf.format(c.after)}
-                                </span>
-                                </span>
-                              </div>
-                            </dd>
-                          </div>
-                        );
-                      })}
-                    </dl>
-
-                    {/* The architect, as its own register where the school
-                       block used to be; the credit line at the foot is gone. */}
-                    </div>
 
                     <div className={cn(card, 'relative md:overflow-hidden')}>
                     {/* The end panel: the photograph, bleeding off top,
@@ -452,7 +338,6 @@ export default async function ProjectPage({
                         </dd>
                       </div>
                     </dl>
-                    </div>
                   </div>
                 </div>
 
