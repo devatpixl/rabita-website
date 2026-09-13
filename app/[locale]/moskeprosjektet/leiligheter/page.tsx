@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
 import { APARTMENTS_SOURCE, apartmentStats } from '@/lib/apartments';
 import { Accent } from '@/components/accent';
+import { ApartmentUnits } from '@/components/apartment-units';
 import { FindUs } from '@/components/find-us';
 import { ProjectGallery } from '@/components/project-gallery';
 import { RequestForm } from '@/components/request-form';
@@ -184,119 +185,13 @@ export default async function ApartmentsPage({
         </SectionBody>
       </Section>
 
-      {/* ── sentral beliggenhet ─────────────────────────────────────────────
-         The four claims cm8 makes about the location, built to the client's
-         mock (2026-09-04): an arch-topped photograph with a dot grid beside
-         it, and each claim as icon medallion / oversized numeral / line —
-         a register, because bullets read as small print and these are the
-         argument. */}
-      <section className="relative overflow-hidden bg-dusk py-10 text-paper md:py-14">
-        {/* A single warm bloom behind the arch, so the dark ground has a
-           light in it rather than reading as a flat block. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -start-24 top-1/3 h-[32rem] w-[32rem] rounded-full bg-gold/[0.07] blur-3xl"
-        />
-        <SectionBody className="relative">
-          <div className="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
-            <div className="md:sticky md:top-24 md:self-start">
-              <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
-                {t('location.eyebrow')}
-              </p>
-              <SectionHeading className="mt-3 text-paper">
-                {t.rich('location.heading', { em: (chunks) => <Accent surface="dusk">{chunks}</Accent> })}
-              </SectionHeading>
-              <span aria-hidden className="mt-4 block h-0.5 w-10 bg-gold" />
-              <p className="mt-4 max-w-[42ch] text-body text-paper/70">{t('location.lede')}</p>
-
-              {/* The street itself, under an arch — the building's own
-                 doorway shape, the same one the facilities medallions use.
-                 The dot grid sits behind its shoulder, a printer's ornament
-                 rather than another picture. */}
-              <div className="relative mt-6 max-w-[22rem]">
-                <svg
-                  aria-hidden
-                  className="absolute -end-8 top-3 hidden h-20 w-20 text-gold/40 sm:block"
-                  viewBox="0 0 100 100"
-                >
-                  <defs>
-                    <pattern id="loc-dots" width="12.5" height="12.5" patternUnits="userSpaceOnUse">
-                      <circle cx="2" cy="2" r="1.6" fill="currentColor" />
-                    </pattern>
-                  </defs>
-                  <rect width="100" height="100" fill="url(#loc-dots)" />
-                </svg>
-                <div className="relative h-[clamp(13rem,30vh,19rem)] overflow-hidden rounded-b-[14px] rounded-t-[11rem] ring-1 ring-paper/15">
-                  {/* The building itself, not a street it could be any
-                     street on (client, 2026-09-09). calmeyers-street.webp was
-                     a generic Oslo block with no mosque in it — and at
-                     399x317 it was under half the pixels this arch needs.
-                     This is the architect's dusk render at 2000px: the
-                     lattice lit from within, at the pavement, with people on
-                     it — which is what a section about the location is
-                     claiming. */}
-                  <Image
-                    src="/photos/proj-facade-evening.webp"
-                    alt=""
-                    fill
-                    sizes="(min-width: 768px) 24rem, 92vw"
-                    // Low, so the arch holds the doorways and the street
-                    // rather than filling with sky.
-                    className="object-cover object-[50%_62%]"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <ol className="space-y-0 md:self-center">
-              {(t.raw('location.items') as string[]).map((item, i) => (
-                <li key={item} className="flex items-center gap-4 border-b-[0.5px] border-paper/15 py-6 first:pt-0 md:gap-6">
-                  {/* The mark, in a soft seal: what the claim is ABOUT — on
-                     foot, cafés, transport, quiet streets. */}
-                  <span
-                    aria-hidden
-                    className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-paper/[0.06] text-gold ring-1 ring-paper/10"
-                  >
-                    <LocationIcon index={i} className="h-[1.6rem] w-[1.6rem]" />
-                  </span>
-                  <span aria-hidden className="h-10 w-px shrink-0 bg-paper/15" />
-                  <span
-                    aria-hidden
-                    className="shrink-0 font-serif text-[1.7rem] leading-none tabular-nums text-gold md:text-[2.05rem]"
-                  >
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <p className="max-w-[42ch] text-body text-paper/85">{item}</p>
-                </li>
-              ))}
-              <li className="pt-7">
-                {/* The closing line, with an arch drawn faintly at its end —
-                   the building itself, as a watermark. */}
-                <div className="relative overflow-hidden rounded-[14px] bg-paper/[0.06] p-5 ring-1 ring-paper/10 md:p-6">
-                  <svg
-                    aria-hidden
-                    viewBox="0 0 100 120"
-                    className="pointer-events-none absolute -bottom-2 end-4 h-[7.5rem] w-24 text-gold/25"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                  >
-                    <path d="M12 118V52a38 38 0 0 1 76 0v66" />
-                    <path d="M30 118V56a20 20 0 0 1 40 0v62" />
-                    <path d="M50 118V36" />
-                  </svg>
-                  <span aria-hidden className="relative block font-serif text-[1.7rem] leading-none text-gold">
-                    &ldquo;
-                  </span>
-                  <p className="relative mt-0.5 max-w-[42ch] font-serif text-[1.15rem] italic leading-snug text-paper">
-                    {t('location.close')}
-                  </p>
-                </div>
-              </li>
-            </ol>
-          </div>
-        </SectionBody>
-      </section>
+      {/* ── the apartments, one card each ───────────────────────────────
+         Replaces "sentral beliggenhet" (client, 2026-09-13). That section
+         made four claims about the neighbourhood, on a page that has already
+         said where the building is twice — once in the opening copy and once
+         on the map. These are the homes themselves, which is what a buyer
+         came for. */}
+      <ApartmentUnits />
 
       {/* Contained, in the same band as the project page's (client,
          2026-09-13: "make the images in appartments also same, fix the
@@ -446,60 +341,6 @@ export default async function ApartmentsPage({
 
 /* The five marks for what the project includes. Line drawings at 20px, in the
    same weight as the site's other icon sets. */
-// The location marks: on foot, cafés, transport, quiet streets — one per
-// claim, in the order the copy makes them.
-function LocationIcon({ index, className }: { index: number; className?: string }) {
-  const common = {
-    viewBox: '0 0 24 24',
-    fill: 'none',
-    stroke: 'currentColor',
-    strokeWidth: 1.6,
-    strokeLinecap: 'round' as const,
-    strokeLinejoin: 'round' as const,
-    className,
-    'aria-hidden': true,
-  };
-  if (index === 0) {
-    // Walking.
-    return (
-      <svg {...common}>
-        <circle cx="13" cy="4.5" r="1.8" />
-        <path d="M12.5 21l-1.2-5.4 2.4-2.2-.8-4.4-3.4 1.6L8 13" />
-        <path d="M13.7 13.4l2.6 1.6 1.2 3.2" />
-      </svg>
-    );
-  }
-  if (index === 1) {
-    // A cup.
-    return (
-      <svg {...common}>
-        <path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z" />
-        <path d="M17 10.5h1.6a2.4 2.4 0 0 1 0 4.8H17" />
-        <path d="M7.5 3v2.5M11 3v2.5M14.5 3v2.5" />
-      </svg>
-    );
-  }
-  if (index === 2) {
-    // A train carriage.
-    return (
-      <svg {...common}>
-        <rect x="5" y="3" width="14" height="13" rx="3.5" />
-        <path d="M5 10h14" />
-        <circle cx="9" cy="13" r="1" fill="currentColor" stroke="none" />
-        <circle cx="15" cy="13" r="1" fill="currentColor" stroke="none" />
-        <path d="M8 16l-2.5 5M16 16l2.5 5" />
-      </svg>
-    );
-  }
-  // A tree, for the quiet side streets.
-  return (
-    <svg {...common}>
-      <path d="M12 21v-6" />
-      <path d="M12 15a5.5 5.5 0 0 0 0-11 5.5 5.5 0 0 0 0 11z" />
-      <path d="M12 12.5l3-3M12 10l-2.6-2.6" />
-    </svg>
-  );
-}
 
 function QualityIcon({ name, className }: { name: (typeof QUALITY_ITEMS)[number]; className?: string }) {
   const c = {

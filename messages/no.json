@@ -2289,6 +2289,37 @@
     "members": "Over 4 300 medlemmer står allerede oppført."
   },
   "apartmentsPage": {
+    "units": {
+      "eyebrow": "Leilighetene",
+      "heading": "Femten hjem, <em>ett for ett</em>.",
+      "lede": "Hver leilighet med sin egen planløsning. Trykk på en leilighet for å se plantegningen.",
+      "openLabel": "Se plantegning",
+      "closeLabel": "Lukk",
+      "planAlt": "Plantegning for leilighet {unit}",
+      "keyInfo": "Nøkkelinfo",
+      "price": "Pris",
+      "labels": {
+        "floor": "Etasje",
+        "bra": "BRA",
+        "prom": "P-rom",
+        "balcony": "Balkong",
+        "ceilingGeneral": "Generell himlingshøyde",
+        "ceilingBath": "Himlingshøyde bad",
+        "ceilingHall": "Himlingshøyde entré"
+      },
+      "approx": "ca. {m} m",
+      "sqm": "{n} m²",
+      "items": {
+        "c1": {
+          "title": "1-roms Leilighet H501",
+          "lede": "En arealeffektiv 1-roms leilighet med smart planløsning, egen balkong på 6 m² og gode lysforhold."
+        },
+        "c2": {
+          "title": "3-roms Leilighet H502",
+          "lede": "En effektiv og moderne 3-roms leilighet med god planløsning, egen balkong på 7 m² og gjennomgående god standard."
+        }
+      }
+    },
     "eyebrow": "Leiligheter",
     "title": "Femten leiligheter på <em>én</em> adresse.",
     "lede": "Femten leiligheter for salg i de øverste etasjene i Calmeyers gate 8, ved takhagen og med byen rett utenfor døra. Salget er med på å finansiere bygget under.",

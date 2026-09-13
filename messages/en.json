@@ -2289,6 +2289,37 @@
     "members": "Over 4,300 members are already on the roll."
   },
   "apartmentsPage": {
+    "units": {
+      "eyebrow": "The apartments",
+      "heading": "Fifteen homes, <em>one by one</em>.",
+      "lede": "Each apartment with its own layout. Tap an apartment to see the floor plan.",
+      "openLabel": "See the floor plan",
+      "closeLabel": "Close",
+      "planAlt": "Floor plan for apartment {unit}",
+      "keyInfo": "Key facts",
+      "price": "Price",
+      "labels": {
+        "floor": "Floor",
+        "bra": "Usable area",
+        "prom": "Primary rooms",
+        "balcony": "Balcony",
+        "ceilingGeneral": "Ceiling height",
+        "ceilingBath": "Ceiling height, bathroom",
+        "ceilingHall": "Ceiling height, hall"
+      },
+      "approx": "approx. {m} m",
+      "sqm": "{n} m²",
+      "items": {
+        "c1": {
+          "title": "1-room apartment H501",
+          "lede": "A space-efficient one-room apartment with a smart layout, its own 6 m² balcony and good daylight."
+        },
+        "c2": {
+          "title": "3-room apartment H502",
+          "lede": "An efficient, modern three-room apartment with a good layout, its own 7 m² balcony and a high standard throughout."
+        }
+      }
+    },
     "eyebrow": "Apartments",
     "title": "Fifteen apartments on <em>one</em> address.",
     "lede": "Fifteen apartments for sale on the upper floors of Calmeyers gate 8, beside the roof garden and with the city outside the door. The sale helps finance the building below.",
