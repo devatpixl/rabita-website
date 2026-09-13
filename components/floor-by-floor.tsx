@@ -261,9 +261,9 @@ export function FloorByFloor() {
                    a stack, not a hint. */}
                 <p
                   aria-hidden
-                  className="mt-2.5 hidden items-center justify-end gap-2 font-mono text-[0.625rem] uppercase tracking-[0.12em] text-paper/45 md:flex"
+                  className="mt-3 hidden items-center justify-end gap-2.5 font-mono text-[0.75rem] uppercase tracking-[0.12em] text-paper/60 md:flex"
                 >
-                  <span className="inline-block h-[7px] w-[7px] shrink-0 rounded-full bg-gold-deep" />
+                  <span className="inline-block h-[9px] w-[9px] shrink-0 rounded-full bg-gold" />
                   {t('tapHint')}
                 </p>
                 {/* Phones only — the same control the left column carries
