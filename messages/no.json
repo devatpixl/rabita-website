@@ -2280,28 +2280,7 @@
         "body": "Medlemskapet løper år for år, og du kan si det opp når som helst."
       }
     },
-    "members": "Over 4 300 medlemmer står allerede oppført.",
-    "explain": {
-      "heading": "De tre medlemskapene.",
-      "note": "Fødselsnummer kreves ikke for medlemskap. Personvernerklæringen gjelder."
-    },
-    "tiers": {
-      "ordinary": {
-        "name": "Ordinært",
-        "price": "0 kr",
-        "body": "Nyhetsbrev og invitasjoner. Uten stemmerett."
-      },
-      "voting": {
-        "name": "Med stemmerett",
-        "price": "1 000 kr / år",
-        "body": "Stemmerett på årsmøtet og mulighet til å stille til styret."
-      },
-      "youth": {
-        "name": "Under 15",
-        "price": "0 kr",
-        "body": "Godkjennes av foresatt. Aktiviteter tilpasset alderen."
-      }
-    }
+    "members": "Over 4 300 medlemmer står allerede oppført."
   },
   "apartmentsPage": {
     "eyebrow": "Leiligheter",

@@ -2280,28 +2280,7 @@
         "body": "Membership runs year by year, and you can end it whenever you want."
       }
     },
-    "members": "Over 4,300 members are already on the roll.",
-    "explain": {
-      "heading": "The three memberships.",
-      "note": "A national identity number is not required for membership. The privacy statement applies."
-    },
-    "tiers": {
-      "ordinary": {
-        "name": "Ordinary",
-        "price": "0 kr",
-        "body": "Newsletter and invitations. No voting rights."
-      },
-      "voting": {
-        "name": "Voting",
-        "price": "1 000 kr / year",
-        "body": "Voting rights at the AGM and eligibility to stand for the board."
-      },
-      "youth": {
-        "name": "Under 15",
-        "price": "0 kr",
-        "body": "Approved by a guardian. Age-appropriate activities."
-      }
-    }
+    "members": "Over 4,300 members are already on the roll."
   },
   "apartmentsPage": {
     "eyebrow": "Apartments",

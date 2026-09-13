@@ -211,42 +211,6 @@ export default async function JoinPage({
           </div>
         </SectionBody>
       </Section>
-
-      {/* The three memberships, unchanged. */}
-      <Section tone="paper">
-        <SectionBody>
-          <div className="grid gap-10 md:grid-cols-12 md:gap-16">
-            <h2 className="font-serif text-section text-balance text-ink md:col-span-5">
-              {t('explain.heading')}
-            </h2>
-            <div className="md:col-span-7">
-              <dl className="border-t border-rule">
-                {/* Name and price share a line on a phone, with the sentence
-                   under them. Stacked in three separate rows it took three
-                   times the height and stopped reading as a comparison, which
-                   is the only reason this table exists. */}
-                {(['ordinary', 'voting', 'youth'] as const).map((k) => (
-                  <div
-                    key={k}
-                    className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 border-b border-rule py-4 md:grid-cols-12 md:items-baseline md:gap-2 md:py-5"
-                  >
-                    <dt className="col-start-1 row-start-1 font-serif text-[1.05rem] text-ink md:col-span-3 md:text-[1.15rem]">
-                      {t(`tiers.${k}.name`)}
-                    </dt>
-                    <dd className="col-start-2 row-start-1 text-end font-serif text-[1rem] tabular-nums text-gold-deep md:col-span-3 md:col-start-10 md:text-[1.05rem]">
-                      {t(`tiers.${k}.price`)}
-                    </dd>
-                    <dd className="col-span-2 row-start-2 text-[0.9rem] leading-snug text-ink-60 md:col-span-6 md:col-start-4 md:row-start-1 md:text-body md:leading-normal">
-                      {t(`tiers.${k}.body`)}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-              <p className="mt-6 max-w-prose text-[13px] text-ink-60">{t('explain.note')}</p>
-            </div>
-          </div>
-        </SectionBody>
-      </Section>
     </main>
   );
 }
