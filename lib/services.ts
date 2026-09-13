@@ -75,7 +75,15 @@ export const SERVICE_IMAGE: Record<ServiceKey, string> = {
   // A child at the bazaar, face painted — the one genuinely festive frame in
   // the library, and Id for alle is a family day rather than a service desk.
   'id-for-alle': '/photos/community/bazaar-child.webp',
-  'kurs-islam': '/photos/learn-classroom.webp',
+  // event-talk, not learn-classroom. That photograph is three-quarters
+  // ceiling with its people in a thin strip along the very bottom — and on a
+  // 4:5 card the whole height is already visible (a 1600x1000 source covers a
+  // 352x440 box by matching HEIGHT and cropping width), so object-position
+  // could not lift them. They were not cropped out; they were sitting under
+  // the card's own text (client, 2026-09-14: "shows too much up, people not
+  // seen"). This one puts the speakers and the room in the middle band, which
+  // is the part of the card the scrim leaves alone.
+  'kurs-islam': '/photos/event-talk.webp',
   'kurs-konvertitter': '/photos/community/welcome-embrace.webp',
   // A lecture hall, not the open Qur'an that was here: Koranskolen sits one
   // card away with a Qur'an on its face, and two of those in a row read as
@@ -186,7 +194,10 @@ export const SERVICE_FOCUS: Partial<Record<ServiceKey, string>> = {
   'barn-og-familie': '50% 42%',
   fosterhjem: '38% 55%',
   'id-for-alle': '50% 40%',
-  'kurs-islam': '50% 38%',
+  // Centre. Both this source and the card crop WIDTH, not height, so the
+  // vertical value is inert here — it is kept at 50% so it stays correct if
+  // the card's aspect ever changes.
+  'kurs-islam': '50% 50%',
   'kurs-konvertitter': '50% 42%',
   arabisk: '50% 40%',
 };
@@ -236,7 +247,7 @@ export const SERVICE_BAND: Record<
   // decorate.
   fosterhjem: { objectClass: 'object-[50%_45%]', tone: 'calm', mark: 'none' },
   'id-for-alle': { objectClass: 'object-[50%_40%]', tone: 'warm', mark: 'rosette' },
-  'kurs-islam': { objectClass: 'object-[50%_38%]', tone: 'calm', mark: 'rosette' },
+  'kurs-islam': { objectClass: 'object-[50%_50%]', tone: 'calm', mark: 'rosette' },
   'kurs-konvertitter': { objectClass: 'object-[50%_42%]', tone: 'warm', mark: 'arch' },
   arabisk: { objectClass: 'object-[50%_40%]', tone: 'calm', mark: 'rosette' },
 };
@@ -333,7 +344,7 @@ export const SERVICE_STORY: Record<ServiceKey, { src: string; objectClass: strin
   // the banner's question and both faces.
   fosterhjem: { src: '/photos/svc-fosterhjem-stand.webp', objectClass: 'object-[50%_55%]' },
   'id-for-alle': { src: '/photos/community/bazaar-stand.webp', objectClass: 'object-center' },
-  'kurs-islam': { src: '/photos/event-talk.webp', objectClass: 'object-center' },
+  'kurs-islam': { src: '/photos/learn-classroom.webp', objectClass: 'object-[50%_75%]' },
   // They eat together, which is the part of the course people remember.
   'kurs-konvertitter': { src: '/photos/community/iftar-table-set.webp', objectClass: 'object-center' },
   arabisk: { src: '/photos/learn-school.webp', objectClass: 'object-center' },
