@@ -2244,6 +2244,28 @@
     "body": "The address may be old, or it may be mistyped.",
     "back": "To the front page"
   },
+    "certificate": {
+      "open": "See the gift certificate",
+      "eyebrow": "Gift certificate",
+      "heading": "Thank you for your gift.",
+      "lede": "This gift goes to Oslo Sentralmoské at Calmeyers gate 8: a building for prayer, teaching and community. This certificate is your confirmation that the gift was received.",
+      "rows": {
+        "donor": "Donor",
+        "amount": "Amount",
+        "reference": "Reference",
+        "date": "Date",
+        "purpose": "Purpose",
+        "orgNr": "Organisation number"
+      },
+      "purposeBuilding": "Building the mosque",
+      "kr": "kroner",
+      "signatory": "For Det Islamske Forbundet",
+      "specimen": "SPECIMEN",
+      "previewNote": "Specimen — no payment has been made",
+      "save": "Save as PDF",
+      "sampleName": "Ola Nordmann",
+      "foot": "Det Islamske Forbundet (Rabita), organisation number {orgNr}. Gifts to voluntary organisations may qualify for tax deduction under the Norwegian Tax Act § 6-50. This document is a specimen and is not a valid receipt."
+    },
   "thanks": {
     "eyebrow": "Thank you",
     "headline": "Thank you. Your gift is registered.",

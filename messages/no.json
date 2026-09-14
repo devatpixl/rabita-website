@@ -2244,6 +2244,28 @@
     "body": "Kanskje adressen er gammel, eller den er skrevet feil.",
     "back": "Til forsiden"
   },
+    "certificate": {
+      "open": "Se gavebeviset",
+      "eyebrow": "Gavebevis",
+      "heading": "Takk for gaven din.",
+      "lede": "Denne gaven går til Oslo Sentralmoské i Calmeyers gate 8: et bygg for bønn, undervisning og fellesskap. Beviset her er din bekreftelse på at gaven er mottatt.",
+      "rows": {
+        "donor": "Giver",
+        "amount": "Beløp",
+        "reference": "Referanse",
+        "date": "Dato",
+        "purpose": "Formål",
+        "orgNr": "Organisasjonsnummer"
+      },
+      "purposeBuilding": "Byggingen av moskeen",
+      "kr": "kroner",
+      "signatory": "For Det Islamske Forbundet",
+      "specimen": "EKSEMPEL",
+      "previewNote": "Eksempel — ingen betaling er gjennomført",
+      "save": "Lagre som PDF",
+      "sampleName": "Ola Nordmann",
+      "foot": "Det Islamske Forbundet (Rabita), organisasjonsnummer {orgNr}. Gaver til frivillige organisasjoner kan gi skattefradrag etter skatteloven § 6-50. Dette dokumentet er et eksempel og er ikke en gyldig kvittering."
+    },
   "thanks": {
     "eyebrow": "Takk",
     "headline": "Takk. Gaven din er registrert.",

@@ -16,6 +16,7 @@ export default async function ThankYouPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'thanks' });
+  const tc = await getTranslations({ locale, namespace: 'certificate' });
   const raised = formatAmount(locale as AppLocale, CAMPAIGN.raisedNok);
 
   return (
@@ -56,7 +57,30 @@ export default async function ThankYouPage({
           </div>
         </div>
 
-        <div className="mt-10">
+        {/* The gift certificate, in a new tab (client, 2026-09-14: "they can
+           see it in new page opens"). target=_blank on purpose: the reader
+           has just finished a flow, and replacing this page with a document
+           would make "back" the only way out of it.
+
+           It carries no donor data in the URL — the certificate falls back to
+           its specimen values. When payments are real this becomes a signed
+           reference the server looks up, never the name and amount in a query
+           string. */}
+        <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+          <a
+            href={`/${locale}/takk/attest`}
+            target="_blank"
+            rel="noreferrer"
+            className="group inline-flex min-h-11 items-center gap-2.5 rounded-full bg-gold-deep px-6 text-[15px] font-semibold text-paper transition-colors hover:bg-ink"
+          >
+            {tc('open')}
+            <span
+              aria-hidden
+              className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
+            >
+              &rarr;
+            </span>
+          </a>
           <Link
             href={`/${locale}`}
             className="inline-flex min-h-11 items-center text-body font-semibold text-ink underline underline-offset-4"
