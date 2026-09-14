@@ -47,31 +47,77 @@ export default async function ThankYouPage({
   return (
     <main className="bg-paper">
       {/* ── 1. the acknowledgement ──────────────────────────────────────
-         The arch behind it, the same device the visit page and the About
-         figures use: a tall top radius, masked away at the foot so the shape
-         has no bottom edge to end on. It sits behind the type at -z-10 and
-         is hidden below lg, where there is no margin to bleed into. */}
+         The arch behind it. Same device as the visit page and the About
+         figures — top radius, gold hairline, masked away at the foot so the
+         shape has no bottom edge to end on — but NOT the same photograph, and
+         the difference matters.
+
+         Those two pages sit the arch BEHIND A CARD, so only a sliver of it is
+         ever visible at the margin. arch-light.jpg is 525x350, and at that
+         size nobody can tell. Here the right half of the hero is open paper
+         with nothing in front of it, so the whole thing is exposed: Next was
+         painting a 335x223 bitmap into a 336x544 box, object-cover scaling it
+         2.44x and keeping the middle 41% of its width. That is the mush the
+         client saw and called broken.
+
+         takk-arch.webp is cut for this box — 672x880, exactly 2x, from the
+         2800px mihrab render. Cutting a portrait asset rather than pointing
+         at zoom-mihrab.webp directly is the whole fix: sizes is a WIDTH, so a
+         landscape source in a portrait box gets served on its width (640w) and
+         then cover-scales UP on its height. Same bug in a new costume. A
+         portrait file makes sizes="336px" mean what it says.
+
+         And it earns its opacity now. A thank-you page is the one moment
+         someone who has just given is looking straight at us, so the right
+         thing to show them is the room they just paid for — the mihrab, the
+         carved screen, the congregation — not a 40% stain of a corridor.
+
+         GEOMETRY IS LOAD-BEARING, both edges. It was -top-20, which put the
+         entire rounded crown UNDER the sticky header — the one feature that
+         makes an arch an arch, hidden, leaving a plain rectangle on screen.
+         inset-y-6 clears the header by 24px.
+
+         THE HEIGHT IS DERIVED, NOT SET, and that is deliberate. A fixed height
+         has to be guessed against a section whose height depends on how the
+         headline wraps — and it wraps differently per language. 27.5rem fit
+         Norwegian and English (two lines) and overran Arabic (one line, so a
+         65px shorter section) by enough that overflow-hidden cut the arch
+         mid-fade: a hard edge, in Arabic only, invisible from an English
+         screen. Pinning top and bottom instead means the fade always reaches
+         zero before the clip, in any language, at any copy length. Do not put
+         a fixed height back on this.
+
+         xl, not lg. The other two pages show their arch from lg because a card
+         covers it there; this one is exposed, so it needs real room. Measured
+         at 1024 and 1152 the headline runs into it (h1 ends at 760, arch
+         starts at 596), and at 1024 the section is short enough that the foot
+         overruns by 48px and overflow-hidden cuts it mid-fade — the same hard
+         edge, back again. 1280 is the first width where neither happens. */}
       <section className="relative isolate overflow-hidden bg-paper-2 pb-section-md pt-16 md:pt-24">
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-20 end-[8%] -z-10 hidden h-[34rem] w-[21rem] overflow-hidden rounded-t-[10rem] border border-gold-deep/20 lg:block"
+          className="pointer-events-none absolute top-6 bottom-10 end-[8%] -z-10 hidden w-[21rem] overflow-hidden rounded-t-[10rem] border border-gold-deep/25 xl:block"
           style={{
             maskImage:
-              'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 48%, rgba(0,0,0,0) 100%)',
+              'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 46%, rgba(0,0,0,0) 100%)',
             WebkitMaskImage:
-              'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 48%, rgba(0,0,0,0) 100%)',
+              'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 46%, rgba(0,0,0,0) 100%)',
           }}
         >
           <Image
-            src="/photos/arch-light.jpg"
+            src="/photos/takk-arch.webp"
             alt=""
             fill
             sizes="336px"
             loading="eager"
-            className="object-cover opacity-[0.4]"
-            style={{ filter: 'saturate(0.25) sepia(0.45) contrast(1.06) brightness(1.02)' }}
+            // object-position X only. The asset is cut to this box's ratio, so
+            // cover crops nothing on either axis — a Y value here would read
+            // as control that does not exist.
+            className="object-cover opacity-[0.85]"
+            style={{ filter: 'saturate(0.72) sepia(0.12) contrast(1.02) brightness(1.03)' }}
           />
-          <span aria-hidden className="absolute inset-0 bg-paper-2/25" />
+          {/* Seats the render in the paper palette without draining it. */}
+          <span aria-hidden className="absolute inset-0 bg-paper-2/15" />
         </div>
 
         <SectionBody className="relative">
