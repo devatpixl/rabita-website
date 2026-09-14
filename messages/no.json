@@ -2269,6 +2269,7 @@
   "thanks": {
     "eyebrow": "Takk",
     "headline": "Takk. Gaven din er registrert.",
+    "headlineRich": "Takk. Gaven din er <em>registrert</em>.",
     "receipt": "Kvittering er sendt til e-posten du oppga. Du finner den også under Min side.",
     "nextMilestone": "Neste milepæl: fundamentet støpes i Q2 2026. Vi sender deg et bilde fra tomten når det skjer.",
     "sharePrompt": "Del kampanjen med to personer du kjenner. Det er den enkleste måten å hjelpe videre på.",

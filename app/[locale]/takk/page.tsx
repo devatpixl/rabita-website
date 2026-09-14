@@ -1,13 +1,29 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
 import { formatAmount } from '@/lib/format';
+import { AnimatedProgress } from '@/components/animated-progress';
+import { SectionBody } from '@/components/primitives';
+import { Accent } from '@/components/accent';
 import type { AppLocale } from '@/i18n/routing';
 
-// The site's own thank-you page. Receipt confirmation, next milestone, share
-// prompt, tracked conversion event. Currently the thank-you belongs to the
-// payment provider, which is the cheapest place on the site to ask for a
-// share and it is being given away (§3).
+// The site's own thank-you page, rebuilt 2026-09-14 ("make this page modern
+// and better"). What it was: a left-aligned column of paragraphs, with the
+// campaign total set as a bare "26 995 179 kr / 100 000 000 kr" line and the
+// certificate reduced to a button among buttons.
+//
+// The page has one job and it is not informational — it is the only moment
+// where someone who has just given is looking straight at us. So it is built
+// as three beats rather than a stack of text:
+//
+//   1. the acknowledgement, on the arch, with the seal
+//   2. what their gift joined — the total as a real meter, not a fraction
+//   3. the certificate as an OBJECT, and the ask to share
+//
+// Everything it said before it still says. Nothing was cut to make it look
+// calmer; the same four strings are placed rather than listed.
+
 export default async function ThankYouPage({
   params,
 }: {
@@ -15,80 +31,193 @@ export default async function ThankYouPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const l = locale as AppLocale;
   const t = await getTranslations({ locale, namespace: 'thanks' });
   const tc = await getTranslations({ locale, namespace: 'certificate' });
-  const raised = formatAmount(locale as AppLocale, CAMPAIGN.raisedNok);
+  const tm = await getTranslations({ locale, namespace: 'meter' });
+
+  const raised = formatAmount(l, CAMPAIGN.raisedNok);
+  const goal = formatAmount(l, CAMPAIGN.goalNok);
+  const percent = Math.min(100, (CAMPAIGN.raisedNok / CAMPAIGN.goalNok) * 100);
+  const percentLabel = new Intl.NumberFormat(
+    l === 'ar' ? 'ar-EG' : l === 'en' ? 'en-GB' : 'nb-NO',
+    { maximumFractionDigits: 1 },
+  ).format(percent);
 
   return (
     <main className="bg-paper">
-      <div className="mx-auto max-w-3xl px-6 py-section-lg">
-        <p className="mb-4 text-[13px] text-gold">
-          {t('eyebrow')}
-        </p>
-        <h1 className="mb-8 font-serif text-display text-ink">{t('headline')}</h1>
-
-        <div className="space-y-6 text-body text-ink">
-          <p>{t('receipt')}</p>
-          <p className="border-s-2 border-rule ps-4 text-ink-60">
-            {t('nextMilestone')}
-          </p>
-          <p className="tabular-nums text-ink-60">
-            {raised} kr / {formatAmount(locale as AppLocale, CAMPAIGN.goalNok)} kr
-          </p>
+      {/* ── 1. the acknowledgement ──────────────────────────────────────
+         The arch behind it, the same device the visit page and the About
+         figures use: a tall top radius, masked away at the foot so the shape
+         has no bottom edge to end on. It sits behind the type at -z-10 and
+         is hidden below lg, where there is no margin to bleed into. */}
+      <section className="relative isolate overflow-hidden bg-paper-2 pb-section-md pt-16 md:pt-24">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-20 end-[8%] -z-10 hidden h-[34rem] w-[21rem] overflow-hidden rounded-t-[10rem] border border-gold-deep/20 lg:block"
+          style={{
+            maskImage:
+              'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 48%, rgba(0,0,0,0) 100%)',
+            WebkitMaskImage:
+              'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 48%, rgba(0,0,0,0) 100%)',
+          }}
+        >
+          <Image
+            src="/photos/arch-light.jpg"
+            alt=""
+            fill
+            sizes="336px"
+            loading="eager"
+            className="object-cover opacity-[0.4]"
+            style={{ filter: 'saturate(0.25) sepia(0.45) contrast(1.06) brightness(1.02)' }}
+          />
+          <span aria-hidden className="absolute inset-0 bg-paper-2/25" />
         </div>
 
-        <div className="mt-10 border-t border-rule pt-6">
-          <p className="mb-4 text-body text-ink">{t('sharePrompt')}</p>
-          <div className="flex flex-wrap gap-3">
-            <a
-              className="min-h-11 rounded-full border border-ink px-4 py-2 text-body font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
-              href="https://api.whatsapp.com/send?text=https%3A%2F%2Frabita.no"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {t('shareWhatsapp')}
-            </a>
-            <a
-              className="min-h-11 rounded-full border border-ink px-4 py-2 text-body font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
-              href="mailto:?subject=Rabita&body=https%3A%2F%2Frabita.no"
-            >
-              {t('shareEmail')}
-            </a>
+        <SectionBody className="relative">
+          <div className="max-w-[46rem]">
+            {/* The mark. A gift acknowledged deserves a seal on it rather
+               than a line of small text announcing itself. */}
+            <Image
+              src="/logo/rabita-mark-256.png"
+              alt=""
+              width={56}
+              height={56}
+              aria-hidden
+              className="h-14 w-14"
+            />
+            <p className="mt-7 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
+              {t('eyebrow')}
+            </p>
+            <h1 className="mt-4 font-serif text-display leading-[1.02] text-balance text-ink">
+              {t.rich('headlineRich', {
+                em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
+              })}
+            </h1>
+            <p className="mt-6 max-w-[52ch] text-body leading-relaxed text-ink-60">
+              {t('receipt')}
+            </p>
+          </div>
+        </SectionBody>
+      </section>
+
+      {/* ── 2. what the gift joined ─────────────────────────────────────
+         The total was a bare fraction on one line, which is a number a reader
+         has to do arithmetic on. As a meter it answers the only question a
+         new giver actually has: how far along is this. */}
+      <SectionBody className="py-section-md">
+        <div className="grid gap-10 md:grid-cols-12 md:gap-14">
+          <div className="md:col-span-5">
+            <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
+              {tm('label')}
+            </p>
+            <p className="mt-4 font-serif text-[clamp(2rem,4vw,2.9rem)] leading-none tabular-nums text-ink">
+              {raised}{' '}
+              <span className="font-sans text-[0.4em] uppercase tracking-[0.12em] text-ink-60">
+                kr
+              </span>
+            </p>
+            <p className="mt-3 font-mono text-[0.75rem] tabular-nums text-ink-60">
+              {percentLabel}% {tm('financed')} · {tm('of')} {goal} kr
+            </p>
+          </div>
+
+          <div className="md:col-span-7 md:self-end">
+            <AnimatedProgress
+              percent={percent}
+              className="h-[3px] w-full overflow-hidden rounded-full bg-ink/10"
+              fillClassName="h-full rounded-full bg-gold-deep"
+            />
+            {/* The milestone reads as the next thing to happen, which is what
+               it is — so it sits under the bar it is the next mark on. */}
+            <p className="mt-6 max-w-[54ch] border-s-2 border-gold-deep/40 ps-5 text-body leading-relaxed text-ink-60">
+              {t('nextMilestone')}
+            </p>
           </div>
         </div>
+      </SectionBody>
 
-        {/* The gift certificate, in a new tab (client, 2026-09-14: "they can
-           see it in new page opens"). target=_blank on purpose: the reader
-           has just finished a flow, and replacing this page with a document
-           would make "back" the only way out of it.
+      {/* ── 3. the certificate, and the ask ─────────────────────────────── */}
+      <section className="bg-paper-2 py-section-md">
+        <SectionBody>
+          <div className="grid gap-10 md:grid-cols-12 md:gap-14">
+            {/* The certificate as an object you can see the edge of, rather
+               than a button whose label you have to trust. A sheet, the gold
+               rule, and the words on it — enough that a reader knows what
+               opens before they open it.
 
-           It carries no donor data in the URL — the certificate falls back to
-           its specimen values. When payments are real this becomes a signed
-           reference the server looks up, never the name and amount in a query
-           string. */}
-        <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-          <a
-            href={`/${locale}/takk/attest`}
-            target="_blank"
-            rel="noreferrer"
-            className="group inline-flex min-h-11 items-center gap-2.5 rounded-full bg-gold-deep px-6 text-[15px] font-semibold text-paper transition-colors hover:bg-ink"
-          >
-            {tc('open')}
-            <span
-              aria-hidden
-              className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
+               target=_blank on purpose: the reader has just finished a flow,
+               and replacing this page with a document would make "back" the
+               only way out of it. It carries no donor data in the URL — the
+               certificate falls back to its specimen values. When payments
+               are real this becomes a signed reference the server looks up,
+               never the name and amount in a query string. */}
+            <a
+              href={`/${locale}/takk/attest`}
+              target="_blank"
+              rel="noreferrer"
+              className="group relative block overflow-hidden rounded-2xl border border-rule bg-paper p-7 transition-[border-color,box-shadow] duration-300 hover:border-gold-deep/50 hover:shadow-[0_1px_2px_rgba(26,26,24,0.04),0_24px_60px_-38px_rgba(26,26,24,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-deep/50 md:col-span-5"
             >
-              &rarr;
-            </span>
-          </a>
-          <Link
-            href={`/${locale}`}
-            className="inline-flex min-h-11 items-center text-body font-semibold text-ink underline underline-offset-4"
-          >
-            {t('back')}
-          </Link>
-        </div>
-      </div>
+              <span aria-hidden className="block h-px w-10 bg-gold-deep/40" />
+              <span className="mt-5 block font-mono text-[0.625rem] uppercase tracking-[0.16em] text-gold-deep">
+                {tc('eyebrow')}
+              </span>
+              <span className="mt-2 block font-serif text-[1.5rem] leading-tight text-ink">
+                {tc('heading')}
+              </span>
+              <span className="mt-5 inline-flex items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-gold-deep">
+                {tc('open')}
+                <span
+                  aria-hidden
+                  className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
+                >
+                  &rarr;
+                </span>
+              </span>
+              {/* The sheet's own corner, ghosted in — the object reads as
+                 paper rather than as a panel. */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -bottom-10 -end-8 h-28 w-28 rotate-12 rounded-lg border border-gold-deep/15 bg-paper-2/60"
+              />
+            </a>
+
+            <div className="md:col-span-7 md:self-center">
+              <p className="max-w-[46ch] text-body leading-relaxed text-ink">
+                {t('sharePrompt')}
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a
+                  className="inline-flex min-h-11 items-center rounded-full border border-ink px-5 text-body font-semibold text-ink transition-colors hover:bg-ink hover:text-paper"
+                  href="https://api.whatsapp.com/send?text=https%3A%2F%2Frabita.no"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {t('shareWhatsapp')}
+                </a>
+                <a
+                  className="inline-flex min-h-11 items-center rounded-full border border-ink px-5 text-body font-semibold text-ink transition-colors hover:bg-ink hover:text-paper"
+                  href="mailto:?subject=Rabita&body=https%3A%2F%2Frabita.no"
+                >
+                  {t('shareEmail')}
+                </a>
+              </div>
+              <Link
+                href={`/${locale}`}
+                className="group mt-8 inline-flex items-center gap-2 border-b border-ink/25 pb-1 text-body font-semibold text-ink transition-colors hover:border-ink"
+              >
+                {t('back')}
+                <span
+                  aria-hidden
+                  className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
+                >
+                  &rarr;
+                </span>
+              </Link>
+            </div>
+          </div>
+        </SectionBody>
+      </section>
 
       {/* Conversion event stub. Replaces with GA4/Meta Conversions API in phase 2. */}
       <ConversionPing />

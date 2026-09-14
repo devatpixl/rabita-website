@@ -2269,6 +2269,7 @@
   "thanks": {
     "eyebrow": "Thank you",
     "headline": "Thank you. Your gift is registered.",
+    "headlineRich": "Thank you. Your gift is <em>registered</em>.",
     "receipt": "A receipt has been sent to the email you provided. You will also find it in your account.",
     "nextMilestone": "Next milestone: the foundation is poured in Q2 2026. We will send you a photo from the site when it happens.",
     "sharePrompt": "Share the campaign with two people you know. It is the simplest way to help further.",
