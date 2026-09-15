@@ -168,28 +168,7 @@
           "href": "/arrangementer"
         }
       ],
-      "about": [
-        {
-          "label": "About us",
-          "blurb": "The story from 1987 and the board",
-          "href": "/om-oss"
-        },
-        {
-          "label": "Visit us",
-          "blurb": "Hours, address and guided visits",
-          "href": "/besok-oss"
-        },
-        {
-          "label": "Events",
-          "blurb": "Eid, iftar, lectures and family days",
-          "href": "/arrangementer"
-        },
-        {
-          "label": "Become a member",
-          "blurb": "Membership and the fee",
-          "href": "/bli-medlem"
-        }
-      ]
+      "about": []
     },
     "overview": "See everything in",
     "closeMenu": "Close the menu",

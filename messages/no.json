@@ -168,28 +168,7 @@
           "href": "/arrangementer"
         }
       ],
-      "about": [
-        {
-          "label": "Om oss",
-          "blurb": "Historien fra 1987 og styret",
-          "href": "/om-oss"
-        },
-        {
-          "label": "Besøk oss",
-          "blurb": "Åpningstider, adresse og omvisning",
-          "href": "/besok-oss"
-        },
-        {
-          "label": "Arrangementer",
-          "blurb": "Id, iftar, foredrag og familiedager",
-          "href": "/arrangementer"
-        },
-        {
-          "label": "Bli medlem",
-          "blurb": "Medlemskap og kontingent",
-          "href": "/bli-medlem"
-        }
-      ]
+      "about": []
     },
     "overview": "Se alt i",
     "closeMenu": "Lukk menyen",
