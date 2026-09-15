@@ -107,7 +107,8 @@ export async function CampaignMeter() {
 
         {/* ── tablet and up ───────────────────────────────────────────
            ONE figure on this baseline: what has come in. The goal used to
-           stand beside it in gold italic, and the client moved it down into
+           stand beside it in gold (italic until 2026-09-15), and the client
+           moved it down into
            the stats row (Versjon 3: "flytte 100 000 000,- til der det star
            73 millioner,-"), leaving nothing in its place. Two nine-figure
            numbers on one line were competing, and the goal was also being
@@ -177,13 +178,14 @@ export async function CampaignMeter() {
             </dt>
           </div>
           <div className="border-s border-rule ps-5 sm:ps-8">
-            {/* The goal, in the gold italic it has always been set in — it
-               has moved down from the headline row, not changed its nature,
-               and the contrast with the ink figure above it is still "what
-               we have" against "what we are reaching for". Gold on the
-               month's movement beside it is the same accent doing a
-               different job; the italic and the label separate them. */}
-            <dd className="font-serif italic text-[clamp(1.6rem,2.6vw,2.25rem)] leading-none tabular-nums tracking-[-0.02em] text-gold-deep">
+            {/* The goal. UPRIGHT since 2026-09-15 ("Fjerne kursiv på
+               «100 000 000»"); the gold stays, which he confirmed.
+               Worth knowing what the italic was doing, in case this ever
+               reads flat: it and the label were what separated this figure
+               from the ink one above it — "what we are reaching for" against
+               "what we have" — two nine-figure numbers a few lines apart.
+               Colour and the label carry that distinction alone now. */}
+            <dd className="font-serif text-[clamp(1.6rem,2.6vw,2.25rem)] leading-none tabular-nums tracking-[-0.02em] text-gold-deep">
               {formatAmount(locale, goal)} kr
             </dd>
             <dt className="mt-2 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">
@@ -334,7 +336,11 @@ export async function CampaignMeter() {
                   {t('goalLabel')}
                 </dt>
               </div>
-              <dd className="mt-auto whitespace-nowrap pt-3 font-serif italic text-[clamp(0.84rem,4.2vw,1.25rem)] leading-none tabular-nums tracking-[-0.02em] text-gold-deep">
+              {/* Upright here too. The same figure is set twice on this
+                 page — ledger above, phone card here — and a number that
+                 goes upright on one screen and stays italic on the other is
+                 a bug you only see on the device you were not testing on. */}
+              <dd className="mt-auto whitespace-nowrap pt-3 font-serif text-[clamp(0.84rem,4.2vw,1.25rem)] leading-none tabular-nums tracking-[-0.02em] text-gold-deep">
                 {formatAmount(locale, goal)} <span className="text-[0.8em]">kr</span>
               </dd>
             </div>

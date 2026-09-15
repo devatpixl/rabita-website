@@ -182,12 +182,21 @@ export async function ProjectOverview() {
               </div>
             ))}
           </dl>
-          {/* The architect, who on a phone was credited nowhere: the caption
-             beside the plate is md-and-up, and a plate this size deserves
-             its line. */}
-          <p className="mt-5 font-mono text-[10px] uppercase leading-relaxed tracking-[0.14em] text-paper/40">
-            {t('credit')} · {CAMPAIGN.architect}
-          </p>
+          {/* The architect credit stood here (phone) and at the foot of the
+             plate (desktop) until 2026-09-15: "Fjerne teksten «Arkitekt
+             Håvard Lindgard Fagernes, HLF Arkitekter»", listed under
+             Hjemmeside. Both are gone.
+
+             HOMEPAGE ONLY, confirmed with the client. He is still credited
+             on /moskeprosjektet — a card with his photograph — and named in
+             the 2019 sketches paragraph, and neither was touched. Note the
+             direction of travel before restoring anything: on 2026-09-14 he
+             asked for the firm added under the name, and this removes the
+             line that carried it a day later.
+
+             projectOverview.credit is unreferenced now, still written in all
+             three locales. CAMPAIGN.architect is left with one consumer,
+             floor-story.tsx, which renders nowhere. */}
         </div>
 
         {/* ── the ledger, desktop ────────────────────────────────────────
@@ -274,19 +283,6 @@ export async function ProjectOverview() {
         </div>
       </div>
 
-      {/* Architect credit, out of the ledger: bottom-right of the plate, set
-         like a caption.
-
-         Two lines, not three. This used to split CAMPAIGN.architect on its
-         comma and stack the firm under the name -- which is the "HLF Arkitekter
-         pa Havard" the client asked to remove (Versjon 3). With the firm
-         gone from the value there is nothing after the comma, and the split
-         would have printed a <br /> and an empty third line. */}
-      <p className="absolute bottom-4 end-6 hidden text-end font-mono text-[10px] uppercase leading-relaxed tracking-[0.14em] text-paper/45 md:block lg:end-12">
-        {t('credit')}
-        <br />
-        {CAMPAIGN.architect}
-      </p>
     </section>
   );
 }
