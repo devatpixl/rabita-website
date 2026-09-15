@@ -72,7 +72,7 @@ export async function PrayerVisit() {
 
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
-                  href={`/${locale}/besok-oss`}
+                  href={`/${locale}/om-oss#besok-oss`}
                   className="inline-flex min-h-11 items-center rounded-full bg-gold-deep px-4 py-2 text-[15px] font-semibold text-paper transition-colors hover:bg-ink"
                 >
                   {t('bookGroup')}

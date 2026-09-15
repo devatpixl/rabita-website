@@ -126,7 +126,7 @@ export function Footer() {
                 <span aria-hidden className="rtl:rotate-180">&rarr;</span>
               </a>
               <Link
-                href={p('/besok-oss')}
+                href={p('/om-oss#besok-oss')}
                 className="inline-flex min-h-11 items-center rounded-full border border-paper/30 px-5 py-2 text-[14px] font-semibold text-paper transition-colors hover:border-paper hover:bg-paper hover:text-dusk"
               >
                 {t('findUs.visit')}

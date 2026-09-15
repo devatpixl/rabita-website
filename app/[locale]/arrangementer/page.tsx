@@ -178,7 +178,7 @@ export default async function EventsPage({
         body={tv('pages.events.closeBody')}
         image="/photos/visit-eid.webp"
         alt={tv('pages.events.caption')}
-        primary={{ label: tv('pages.events.closePrimary'), href: `/${locale}/besok-oss` }}
+        primary={{ label: tv('pages.events.closePrimary'), href: `/${locale}/om-oss#besok-oss` }}
         secondary={{ label: tv('pages.events.closeSecondary'), href: `/${locale}/kontakt` }}
       />
     </main>

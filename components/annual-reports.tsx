@@ -27,8 +27,12 @@ import { SectionBody } from './primitives';
 export async function AnnualReports() {
   const t = await getTranslations('aboutPage.reports');
 
+  // paper, not paper-2, since 2026-09-15. Besøk oss merged into this page
+  // directly above and has to stand on paper-2 — its form card is bg-paper
+  // and stops reading as a card on any lighter ground — so two paper-2
+  // sections would have met here and read as one flat strip instead of two.
   return (
-    <section id="arsrapporter" className="scroll-mt-24 bg-paper-2 py-section-md">
+    <section id="arsrapporter" className="scroll-mt-24 bg-paper py-section-md">
       <SectionBody>
         <div className="grid gap-8 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-5">
@@ -82,7 +86,7 @@ export async function AnnualReports() {
                   href={r.file}
                   download
                   aria-label={t('download', { year: r.year })}
-                  className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-ink-60 transition-colors hover:bg-paper hover:text-gold-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-deep/50"
+                  className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-ink-60 transition-colors hover:bg-paper-2 hover:text-gold-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-deep/50"
                 >
                   <span aria-hidden className="text-[0.95rem] leading-none">&darr;</span>
                 </a>
@@ -114,7 +118,7 @@ export async function AnnualReports() {
              And the plate is 1104px wide while the source is 1024, so it was
              also being stretched 8% past native. max-w caps that: better a
              slightly narrower chart than a soft one. */}
-          <div className="mx-auto mt-8 max-w-[1024px] overflow-hidden rounded-2xl border border-rule bg-paper md:mt-10">
+          <div className="mx-auto mt-8 max-w-[1024px] overflow-hidden rounded-2xl border border-rule bg-paper-2 md:mt-10">
             <Image
               src="/photos/organisasjonskart.webp"
               alt={t('chartAlt')}

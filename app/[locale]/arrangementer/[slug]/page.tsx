@@ -256,7 +256,7 @@ export default function EventDetail({ params }: { params: Promise<Params> }) {
         body={tv('pages.events.closeBody')}
         image="/photos/event-close.webp"
         alt={tv('pages.events.caption')}
-        primary={{ label: tv('pages.events.closePrimary'), href: `/${locale}/besok-oss` }}
+        primary={{ label: tv('pages.events.closePrimary'), href: `/${locale}/om-oss#besok-oss` }}
         secondary={{ label: tv('pages.events.closeSecondary'), href: `/${locale}/kontakt` }}
       />
     </main>

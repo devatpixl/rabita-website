@@ -24,6 +24,19 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Besøk oss was merged into /om-oss on 2026-09-15 (client: "Slå sammen
+      // «Om oss» og «Besøk oss»"). The page is gone; its content is the
+      // #besok-oss section on the About page.
+      //
+      // A redirect rather than link-chasing: twelve files linked to
+      // /besok-oss, and so may anything printed, bookmarked or linked from
+      // rabita.no. One rule keeps every one of them working, including the
+      // ones we cannot see.
+      {
+        source: '/:locale(no|en|ar)/besok-oss',
+        destination: '/:locale/om-oss#besok-oss',
+        permanent: true,
+      },
       // Mediation was merged into counselling on 2026-08-31 (client): one
       // card, "Samtaler og megling", carrying both descriptions. The copy
       // for `megling` was removed with it, so the route was still building

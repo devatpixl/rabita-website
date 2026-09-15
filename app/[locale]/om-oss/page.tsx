@@ -3,9 +3,16 @@ import { AnnualReports } from '@/components/annual-reports';
 import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
-import { Eyebrow, SectionBody, SectionHeading } from '@/components/primitives';
+import { Eyebrow, Section, SectionBody, SectionHeading } from '@/components/primitives';
 import { PageBand } from '@/components/page-band';
-import { FigureIcon } from '@/components/figure-icons';
+import { FigureIcon, type FigureIconName } from '@/components/figure-icons';
+import { RequestForm } from '@/components/request-form';
+import { VisitClose } from '@/components/visit-page';
+
+// The three facts in the order the copy lists them (what happens, who may
+// come, price), each given the mark that says what kind of fact it is.
+// Moved here with the visit section from /besok-oss on 2026-09-15.
+const FACT_ICONS: FigureIconName[] = ['calendar', 'people', 'check'];
 
 export default async function AboutPage({
   params,
@@ -17,6 +24,13 @@ export default async function AboutPage({
   const t = await getTranslations({ locale, namespace: 'aboutPage' });
   const ts = await getTranslations({ locale, namespace: 'storyPages' });
   const tpo = await getTranslations({ locale, namespace: 'projectOverview' });
+  // Besøk oss folded in here on 2026-09-15 (client: "Slå sammen «Om oss» og
+  // «Besøk oss»"). Both namespaces survive the merge — visitPages is shared
+  // with /arrangementer and its event pages, so it could not have been
+  // retired with the page even if we had wanted to.
+  const tv = await getTranslations({ locale, namespace: 'visitPages' });
+  const tvp = await getTranslations({ locale, namespace: 'visitPage' });
+  const visitFacts = tv.raw('pages.visit.facts') as { term: string; detail: string }[];
 
   return (
     <main>
@@ -130,7 +144,12 @@ export default async function AboutPage({
            desktop measures: the bottom one stacked with the colophon's own
            top padding for 132px of dead ground between the card and "Til
            protokollen" at 390px (client, 2026-09-08). */}
-        <div className="pb-9 pt-9 md:pb-24 md:pt-section-lg">
+        {/* md:pb-16, down from pb-24 on 2026-09-15. That 96px used to meet
+           AnnualReports; it now meets the Besøk oss section's own 60, and 157px
+           of empty made the largest gap on the page by half — every other
+           boundary here runs 60 to 120. The phone value is untouched: pb-9 was
+           tuned against the colophon and the colophon is still where it was. */}
+        <div className="pb-9 pt-9 md:pb-16 md:pt-section-lg">
           <SectionBody>
             <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
               {/* ── the story ────────────────────────────────────────── */}
@@ -313,6 +332,162 @@ export default async function AboutPage({
         </div>
       </section>
 
+      {/* ══ Besøk oss ═══════════════════════════════════════════════════
+         Merged in from /besok-oss on 2026-09-15 (client: "Slå sammen «Om oss»
+         og «Besøk oss» ... let about us current components of same style and
+         shift besok us there").
+
+         This moved almost intact, and that is not laziness — the two pages
+         were already built from one vocabulary. The comment on the section
+         above says so in as many words: "Same bones as /besok-oss — chip,
+         headline, a card beside it, a note in the margin — on a different
+         ground." Chip over the address, marked fact rows, a photograph with a
+         floating pill, a raised form card. Rebuilding that in "About's style"
+         would have meant rebuilding it as itself.
+
+         WHERE IT SITS. After the story and the figures, before the reports.
+         The obvious order is About first and visit last, but that buries a
+         BOOKING FORM under three paragraphs of history and four annual-report
+         PDFs. The reports are reference — whoever wants them will scroll. The
+         invitation is the active thing on this page, so it goes above them,
+         and the page still ends on "Døren er åpen."
+
+         WHAT WAS DROPPED, and why. /besok-oss closed this grid with a margin
+         aside at xl: an arch, a hairline, a pull quote, the mark. It is gone.
+         The section above already has an arch behind the ledger card and a
+         pull quote in that exact treatment, and running both on one page
+         turns a device into a tic — the second arch would say nothing except
+         that we own an arch. Dropping it also re-cuts the grid from 4/6/2 to
+         5/7, which gives the form real room instead of the leftovers.
+         visitPage.quote is unreferenced now, written and translated in all
+         three locales, and restoring the aside is this paragraph plus the
+         block that used to follow it.
+
+         GROUND. paper-2, and it has to be: the form card is bg-paper, so on a
+         paper ground it would stop reading as a card at all. That forced
+         AnnualReports off paper-2 and onto paper — two paper-2 sections in a
+         row is one flat strip, not two sections. */}
+      <Section
+        id="besok-oss"
+        tone="paper-2"
+        pad="tight"
+        className="relative isolate scroll-mt-24 overflow-hidden"
+      >
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-32 end-[4%] -z-10 h-[34rem] w-[34rem] rounded-full bg-gold/[0.06] blur-3xl"
+        />
+        {/* The mosque's own mark as ground. Its own childless layer:
+           .star-texture sets `> * { position: relative }` and would drop any
+           absolutely positioned sibling into the flow. */}
+        <div
+          aria-hidden
+          className="star-texture star-texture--light pointer-events-none absolute inset-0 -z-10"
+        />
+        {/* The seam. from-sage, not from-paper as it was on /besok-oss — the
+           section above this one is the green now, and a gradient that starts
+           at paper would draw a pale band across the join it is meant to
+           hide. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-sage to-paper-2 md:h-40"
+        />
+        <SectionBody>
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
+            {/* ── the place ──────────────────────────────────────────── */}
+            <div className="lg:col-span-5">
+              {/* A chip, not a rule-and-label — the same chip the HISTORIEN
+                 column above wears, which is what ties this section to the
+                 page it has joined. The section's own name sits above the
+                 address because the ADDRESS is the headline: nobody needs a
+                 heading that says "address" over an address. */}
+              <p className="inline-flex items-center rounded-full bg-paper px-3.5 py-1.5 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60 ring-1 ring-ink/10">
+                {tvp('addressHeading')}
+              </p>
+              <SectionHeading className="mt-5">{CAMPAIGN.address}</SectionHeading>
+
+              <ul className="mt-6 grid gap-x-8 gap-y-6 border-t border-ink/10 pt-6 sm:grid-cols-2 md:mt-8 md:pt-7 lg:grid-cols-1">
+                {visitFacts.map((f, i) => (
+                  <li key={f.term} className="flex items-start gap-3.5">
+                    <span
+                      aria-hidden
+                      className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gold-soft/40 text-gold-deep ring-1 ring-gold-deep/20"
+                    >
+                      <FigureIcon name={FACT_ICONS[i] ?? 'pin'} className="h-[18px] w-[18px]" />
+                    </span>
+                    <span className="block min-w-0">
+                      <span className="block font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60">
+                        {f.term}
+                      </span>
+                      <span className="mt-1 block text-[15px] leading-snug text-ink">
+                        {f.detail}
+                      </span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <p className="mt-7 max-w-[42ch] text-body text-ink-60">{tvp('groups')}</p>
+
+              {/* The door at Calmeyers gate 8a, with the sign over it and the
+                 congregation on the pavement. The pill is the "see what's on"
+                 line and it goes to the events page — a real destination. */}
+              <div className="group relative mt-8 aspect-[4/3] overflow-hidden rounded-[1.5rem] rounded-se-[3.5rem] bg-paper-deep ring-1 ring-ink/5">
+                <Image
+                  src="/photos/visit-doorway.webp"
+                  alt={tv('pages.visit.captionDoorway')}
+                  fill
+                  sizes="(min-width: 1024px) 430px, calc(100vw - 3rem)"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
+                  style={{ filter: 'saturate(0.72) contrast(1.12) brightness(0.9)' }}
+                />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-dusk/70 to-transparent"
+                />
+                <Link
+                  href={`/${locale}/arrangementer`}
+                  className="group/pill absolute bottom-4 start-4 inline-flex min-h-11 items-center gap-3 rounded-full bg-paper/95 px-4 py-2 text-[14px] font-semibold text-ink shadow-[0_2px_10px_-2px_rgba(26,26,24,0.35)] backdrop-blur-sm transition-colors hover:bg-paper"
+                >
+                  {tv('pages.visit.closeSecondary')}
+                  <span
+                    aria-hidden
+                    className="transition-transform duration-200 group-hover/pill:translate-x-1 rtl:rotate-180 rtl:group-hover/pill:-translate-x-1"
+                  >
+                    &rarr;
+                  </span>
+                </Link>
+              </div>
+            </div>
+
+            {/* ── the booking ────────────────────────────────────────── */}
+            {/* self-center, matching the ledger card above: the place column
+               is the taller of the two — it carries the photograph — so the
+               form would otherwise sit at the top of a stretched cell with
+               the slack dumped under it. Below lg they stack and it is
+               inert. */}
+            <div className="lg:col-span-7 lg:self-center">
+              <RequestForm
+                subject="visit"
+                card
+                rule={false}
+                intro={
+                  <div className="mb-7">
+                    <Eyebrow tone="gold-deep">{tvp('formHeading')}</Eyebrow>
+                    <h2 className="mt-4 font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-tight text-balance text-ink">
+                      {tvp('formTitle')}
+                    </h2>
+                    <p className="mt-3 max-w-[44ch] text-[15px] leading-snug text-ink-60">
+                      {tvp('formLede')}
+                    </p>
+                  </div>
+                }
+              />
+            </div>
+          </div>
+        </SectionBody>
+      </Section>
+
       {/* The board and Documents sections were removed on 2026-08-31
          (client). Both were placeholders in practice: the board listed six
          roles with no names, and Documents listed three files that do not
@@ -323,6 +498,20 @@ export default async function AboutPage({
       {/* The reports and the chart land where the "available on request"
          sentence used to stand for both (client, 2026-09-13). */}
       <AnnualReports />
+
+      {/* The close came with Besøk oss, and it ends the merged page better
+         than the reports did. "Døren er åpen." is written to be the last
+         thing on a page, and after the history, the figures, the invitation
+         and the paperwork it is the right last word — an About page that
+         ends on an open door rather than on a list of PDFs. */}
+      <VisitClose
+        heading={tv('pages.visit.closeHeading')}
+        body={tv('pages.visit.closeBody')}
+        image="/photos/visit-foyer.webp"
+        alt={tv('pages.visit.caption')}
+        primary={{ label: tv('pages.visit.closePrimary'), href: `/${locale}/kontakt` }}
+        secondary={{ label: tv('pages.visit.closeSecondary'), href: `/${locale}/arrangementer` }}
+      />
 
       {/* "Til protokollen" came off this page on 2026-09-13 ("Fjern til
          protokollen"), listed under his Om oss notes. It is NOT deleted from
