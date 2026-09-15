@@ -1195,9 +1195,11 @@
     "facts": {
       "heading": "Nøkkeltall",
       "building": "Bygg",
-      "floors": "Etasjer (over/under)",
+      "floors": "Etasjer",
       "architect": "Arkitekt",
       "startConstruction": "Byggestart",
+      "buildTime": "Byggetid",
+      "buildTimeValue": "{years} år",
       "completion": "Ferdigstillelse",
       "completionNote": "Endelig ferdigstillelsesdato oppdateres i takt med byggefasene.",
       "completionTbd": "settes av byggefase",

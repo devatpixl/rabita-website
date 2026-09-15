@@ -29,7 +29,14 @@ export async function ProjectOverview() {
   // off-white: the one gold accent in this section is "one" in the headline.
   const figures = [
     { icon: 'building' as const, value: nf.format(CAMPAIGN.buildingM2), unit: 'm²', label: t('figures.area') },
-    { icon: 'floors' as const, value: `${CAMPAIGN.floorsAbove} + U${CAMPAIGN.floorsBelow}`, label: t('figures.floors') },
+    // SEVEN here too (client, 2026-09-15). This is the second of the two
+    // places that printed "6 + U1"; the key-figures register on
+    // /moskeprosjektet is the other. Changing one and not the other would
+    // have left the homepage contradicting the project page about how many
+    // floors the building has — which is the contradiction he is closing,
+    // not a new one to open. Derived from the same constants, so it cannot
+    // drift from the drawings.
+    { icon: 'floors' as const, value: String(CAMPAIGN.floorsAbove + CAMPAIGN.floorsBelow), label: t('figures.floors') },
     {
       icon: 'people' as const,
       value: nf.format(CAMPAIGN.mensPrayerCapacityAfter + CAMPAIGN.womensPrayerCapacityAfter),

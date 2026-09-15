@@ -191,8 +191,20 @@ export default async function ProjectPage({
               muted?: boolean;
             }[] = [
               { key: 'building', icon: 'building', value: nf.format(CAMPAIGN.buildingM2), unit: 'm²' },
-              { key: 'floors', icon: 'floors', value: `${CAMPAIGN.floorsAbove} + U${CAMPAIGN.floorsBelow}` },
-              { key: 'startConstruction', icon: 'calendar', value: CAMPAIGN.constructionStart },
+              // SEVEN, not "6 + U1" (client, 2026-09-15). Derived, not typed:
+              // it is the same two constants added up, so the figure cannot
+              // drift from the drawings. This also ENDS A CONTRADICTION the
+              // site was carrying — "Sju etasjer" is the project page's own
+              // headline, the zoom band's heading and the completion note,
+              // while this register alone said 6 + U1. The label loses its
+              // "(over/under)" with the split.
+              { key: 'floors', icon: 'floors', value: String(CAMPAIGN.floorsAbove + CAMPAIGN.floorsBelow) },
+              // Build TIME, not build start (client, 2026-09-15: "Endre til
+              // «2 års byggetid» i stedet for byggestart"). A duration answers
+              // "when can we use it", which is what a reader of this register
+              // is asking; a start quarter answers a question only the client
+              // already knows the answer to.
+              { key: 'buildTime', icon: 'calendar', value: t('facts.buildTimeValue', { years: CAMPAIGN.constructionYears }) },
               // Completion came out and capacity came in, in the same slot
               // (client, 2026-09-13). The card that carried the two prayer
               // figures beside this register is gone, so its one number that

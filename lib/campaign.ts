@@ -77,7 +77,13 @@ export const CAMPAIGN = Object.freeze({
   // would read as two firms.
   architect: 'Håvard Lindgard Fagernes, HLF Arkitekter',
   siteClearedRamadan: 2025,
+  // constructionStart is UNREFERENCED since 2026-09-15: the key-figures row
+  // that printed it was changed to the build DURATION at the client's request
+  // ("Endre til «2 års byggetid» i stedet for byggestart"). Kept because the
+  // date itself is still true and cheap to show again.
   constructionStart: '2026-Q1',
+  /** Years of construction. Client, 2026-09-15: "2 års byggetid". */
+  constructionYears: 2,
   completionDate: null as string | null, // TODO §13.1
 
   // Legal — §10

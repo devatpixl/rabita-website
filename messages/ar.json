@@ -1195,9 +1195,11 @@
     "facts": {
       "heading": "أرقام رئيسية",
       "building": "المبنى",
-      "floors": "الطوابق (فوق/تحت)",
+      "floors": "الطوابق",
       "architect": "المعماري",
       "startConstruction": "بدء البناء",
+      "buildTime": "مدة البناء",
+      "buildTimeValue": "{years, plural, =1 {سنة} =2 {سنتان} other {# سنوات}}",
       "completion": "الإنجاز",
       "completionNote": "يُحدَّث تاريخ الإنجاز النهائي مع تقدّم مراحل البناء.",
       "completionTbd": "يُحدَّد حسب مرحلة البناء",

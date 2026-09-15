@@ -1195,9 +1195,11 @@
     "facts": {
       "heading": "Key figures",
       "building": "Building",
-      "floors": "Floors (above/below)",
+      "floors": "Floors",
       "architect": "Architect",
       "startConstruction": "Construction start",
+      "buildTime": "Construction time",
+      "buildTimeValue": "{years, plural, one {# year} other {# years}}",
       "completion": "Completion",
       "completionNote": "The final completion date is updated in step with the build phases.",
       "completionTbd": "set by build phase",
