@@ -9,9 +9,17 @@
  * "Languages · Norsk · Arabisk". Survivable at two words; not at eight, which
  * is what the client just gave Usman.
  *
- * `arabicSimple` and `persianSome` keep his own qualifiers — "enkel arabisk",
- * "litt persisk". Flattening them to Arabic and Persian would claim more on
- * an imam's behalf than he claims for himself.
+ * `arabicSimple` and `persianSome` carry his own qualifiers — "enkel arabisk",
+ * "litt persisk". Flattening them to Arabic and Persian would claim more on an
+ * imam's behalf than he claims for himself.
+ *
+ * They render as "Arabic (basic)" / "Persian (basic)", not "Simple Arabic" /
+ * "Some Persian" (client, 2026-09-15: "a formal one, wtf is little and some?").
+ * He was right: the direct translations read casually on a page where
+ * everything around them is formal, and "Some Persian" is poor English. The
+ * parenthetical is what a staff page or a CV uses — it keeps the language
+ * itself level with French and Latin beside it, and leaves the qualifier to
+ * do its work quietly.
  */
 export type LangKey =
   | 'norwegian'
