@@ -55,6 +55,24 @@ const SLIDES = [
   { key: 'apartmentAttic', src: '/photos/apt-attic-605.webp', pos: '50% 50%' },
   { key: 'apartmentFamily', src: '/photos/apt-family-604.webp', pos: '50% 50%' },
   { key: 'apartmentGreen', src: '/photos/apt-green-506.webp', pos: '50% 50%' },
+  // Seven more from the same delivery (client, 2026-09-15: "use more images,
+  // i gave you 17, add more unique ones from that"). Twelve of his fifteen
+  // uniques are now on the page — the folder holds 17 files but two are
+  // byte-identical duplicates (13. Leilighet 505 = 505 2, 13. Leilighet 507 =
+  // 507 1), checked by md5.
+  //
+  // The three left out are near-duplicates of slides already here rather than
+  // anything withheld: 606 is the same attic as 605, and 501 1 and 504 1 are
+  // the same open-plan kitchen-and-living as 507 and 505. A carousel of
+  // twelve almost-identical interiors is worse than one of twelve varied
+  // ones. 501 1 is still on the H501 unit card.
+  { key: 'apartmentCalligraphy', src: '/photos/apt-calligraphy-502.webp', pos: '50% 50%' },
+  { key: 'apartmentArt', src: '/photos/apt-art-508.webp', pos: '50% 50%' },
+  { key: 'apartmentKitchen', src: '/photos/apt-kitchen-503.webp', pos: '50% 50%' },
+  { key: 'apartmentDusk', src: '/photos/apt-dusk-502.webp', pos: '50% 50%' },
+  { key: 'apartmentFacade', src: '/photos/apt-facade-501.webp', pos: '50% 50%' },
+  { key: 'apartmentRoof', src: '/photos/apt-roof-507.webp', pos: '50% 50%' },
+  { key: 'apartmentCourtyard', src: '/photos/apt-courtyard-504.webp', pos: '50% 50%' },
 ] as const;
 export type SlideKey = (typeof SLIDES)[number]['key'];
 type Slide = (typeof SLIDES)[number];

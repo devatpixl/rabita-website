@@ -187,13 +187,27 @@ export default async function ApartmentsPage({
             // sit in is still in the reel. The project page is untouched — it
             // passes no `only` and renders SLIDES in its own order.
             only={[
+              // Twelve slides, every one of them the client's own render of
+              // these flats. minaret and garden dropped from THIS page on
+              // 2026-09-15: his folder carries the same subjects shot from
+              // the apartments themselves — apartmentRoof, apartmentCourtyard
+              // and apartmentDusk, which has the lit minaret in frame. The
+              // project page still renders both; it passes no `only`.
+              //
+              // Ordered inside-out: the flats, then the balcony at dusk, then
+              // the building they sit in.
               'apartmentLiving',
               'apartmentAttic',
               'apartmentFamily',
-              'apartmentBalcony',
               'apartmentGreen',
-              'minaret',
-              'garden',
+              'apartmentBalcony',
+              'apartmentCalligraphy',
+              'apartmentArt',
+              'apartmentKitchen',
+              'apartmentDusk',
+              'apartmentFacade',
+              'apartmentRoof',
+              'apartmentCourtyard',
             ]}
           />
         </SectionBody>

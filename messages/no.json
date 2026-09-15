@@ -1271,6 +1271,48 @@
       "goto": "Gå til bilde {n}",
       "cta": "Se fremdriften",
       "items": {
+        "apartmentCalligraphy": {
+          "tag": "Spisekroken",
+          "title": "Grønne vegger og kalligrafi",
+          "caption": "Kjøkkenet og spisebordet i ett rom, med kalligrafi på veggen og balkongdøren i enden.",
+          "alt": "Spisekrok med grønne vegger, kalligrafi og balkongdør"
+        },
+        "apartmentArt": {
+          "tag": "Stua",
+          "title": "Veggen du henger opp livet på",
+          "caption": "Plass til en billedvegg over sofaen, og vindu ut mot gårdsrommet fra kjøkkenbenken.",
+          "alt": "Stue med billedvegg over sofaen og vindu mot gårdsrommet"
+        },
+        "apartmentKitchen": {
+          "tag": "Kjøkkenet",
+          "title": "Langs veggen, ut mot lyset",
+          "caption": "Kjøkkenet på én vegg gir plass til spisebord og sofa i samme rom, med dagslys fra balkongen.",
+          "alt": "Kjøkken langs veggen med spisebord og balkong bak"
+        },
+        "apartmentDusk": {
+          "tag": "Balkongen",
+          "title": "Kvelden på balkongen",
+          "caption": "Utsikt rett bort på minareten når lysene slås på, og plass til å sitte ute.",
+          "alt": "Balkong i skumringen med minareten opplyst bak"
+        },
+        "apartmentFacade": {
+          "tag": "Fasaden",
+          "title": "Balkongene mot gata",
+          "caption": "Leilighetene ligger i toppetasjene, med balkonger og blomsterkasser ut mot kvartalet.",
+          "alt": "Fasaden med balkongrekker og minareten bak"
+        },
+        "apartmentRoof": {
+          "tag": "Taket",
+          "title": "Takfallet og teglgitteret",
+          "caption": "Skråvinduene følger takfallet over leilighetene, og teglgitteret går ned langs fasaden.",
+          "alt": "Taket sett ovenfra, med skråvinduer og teglgitter"
+        },
+        "apartmentCourtyard": {
+          "tag": "Gårdsrommet",
+          "title": "Fontenen mellom husene",
+          "caption": "Et skjermet uterom nede i kvartalet, med benker, trær og fontenen i midten.",
+          "alt": "Gårdsrommet med fontene, benker og trær"
+        },
         "apartmentAttic": {
           "tag": "Toppetasjen",
           "title": "Under skråvinduene",

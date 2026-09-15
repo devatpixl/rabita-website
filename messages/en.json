@@ -1271,6 +1271,48 @@
       "goto": "Go to picture {n}",
       "cta": "See the progress",
       "items": {
+        "apartmentCalligraphy": {
+          "tag": "The dining corner",
+          "title": "Green walls and calligraphy",
+          "caption": "Kitchen and dining table in one room, with calligraphy on the wall and the balcony door at the end.",
+          "alt": "Dining corner with green walls, calligraphy and a balcony door"
+        },
+        "apartmentArt": {
+          "tag": "The living room",
+          "title": "A wall to hang your life on",
+          "caption": "Room for a picture wall above the sofa, and a window onto the courtyard from the kitchen counter.",
+          "alt": "Living room with a picture wall above the sofa and a window onto the courtyard"
+        },
+        "apartmentKitchen": {
+          "tag": "The kitchen",
+          "title": "Along the wall, towards the light",
+          "caption": "A kitchen on one wall leaves room for a dining table and a sofa in the same space, with daylight from the balcony.",
+          "alt": "Kitchen along the wall with a dining table and the balcony behind"
+        },
+        "apartmentDusk": {
+          "tag": "The balcony",
+          "title": "Evening on the balcony",
+          "caption": "A view straight across to the minaret as the lights come on, and room to sit outside.",
+          "alt": "Balcony at dusk with the minaret lit behind"
+        },
+        "apartmentFacade": {
+          "tag": "The facade",
+          "title": "Balconies onto the street",
+          "caption": "The apartments sit in the top floors, with balconies and planters facing out over the block.",
+          "alt": "The facade with rows of balconies and the minaret behind"
+        },
+        "apartmentRoof": {
+          "tag": "The roof",
+          "title": "The roofline and the brick screen",
+          "caption": "Sloping windows follow the roofline above the flats, and the brick screen runs down the facade.",
+          "alt": "The roof seen from above, with sloping windows and the brick screen"
+        },
+        "apartmentCourtyard": {
+          "tag": "The courtyard",
+          "title": "The fountain between the buildings",
+          "caption": "A sheltered outdoor room down in the block, with benches, trees and the fountain at its centre.",
+          "alt": "The courtyard with its fountain, benches and trees"
+        },
         "apartmentAttic": {
           "tag": "The top floor",
           "title": "Under the sloping windows",
