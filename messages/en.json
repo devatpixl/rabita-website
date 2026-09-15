@@ -55,6 +55,7 @@
     "prayerTimes": "Prayer times",
     "openDaily": "OPEN DAILY",
     "items": {
+      "news": "News",
       "project": "The mosque project",
       "apartments": "Apartments",
       "prayer": "Prayer times",
@@ -64,6 +65,7 @@
       "about": "About us"
     },
     "menu": {
+      "news": [],
       "project": [],
       "apartments": [],
       "prayer": [],

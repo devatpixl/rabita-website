@@ -55,6 +55,7 @@
     "prayerTimes": "أوقات الصلاة",
     "openDaily": "مفتوح يومياً",
     "items": {
+      "news": "أخبار",
       "project": "مشروع المسجد",
       "apartments": "الشقق",
       "prayer": "مواقيت الصلاة",
@@ -64,6 +65,7 @@
       "about": "من نحن"
     },
     "menu": {
+      "news": [],
       "project": [],
       "apartments": [],
       "prayer": [],

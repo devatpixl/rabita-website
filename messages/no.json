@@ -55,6 +55,7 @@
     "prayerTimes": "Bønnetider",
     "openDaily": "ÅPENT DAGLIG",
     "items": {
+      "news": "Aktuelt",
       "project": "Moskeprosjektet",
       "apartments": "Leiligheter",
       "prayer": "Bønnetider",
@@ -64,6 +65,7 @@
       "about": "Om oss"
     },
     "menu": {
+      "news": [],
       "project": [],
       "apartments": [],
       "prayer": [],

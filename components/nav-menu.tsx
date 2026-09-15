@@ -21,7 +21,11 @@ import { cn } from '@/lib/cn';
 // of their own any more. nav.items.visit and nav.menu.visit stay in the
 // message files, unreferenced, so restoring the heading is this list plus a
 // NAV_ROOT entry.
-export const NAV_KEYS = ['project', 'apartments', 'prayer', 'services', 'teaching', 'about'] as const;
+// `news` joined the bar first on 2026-09-15 ("Legge «Aktuelt» helt først i
+// navigasjonen"). It is not a new page — /aktuelt has existed all along and
+// had ZERO inbound links anywhere on the site, which is almost certainly why
+// he asked: the news page was invisible, not missing.
+export const NAV_KEYS = ['news', 'project', 'apartments', 'prayer', 'services', 'teaching', 'about'] as const;
 export type NavKey = (typeof NAV_KEYS)[number];
 
 // null means "opens a menu and goes nowhere itself".
@@ -32,6 +36,7 @@ export type NavKey = (typeof NAV_KEYS)[number];
 // i to sider"), so it has a root again and the button is a link again —
 // exactly the restoration the note here used to describe.
 export const NAV_ROOT: Record<NavKey, string | null> = {
+  news: '/aktuelt',
   project: '/moskeprosjektet',
   apartments: '/moskeprosjektet/leiligheter',
   prayer: '/bonnetider',
@@ -118,13 +123,21 @@ export function DesktopNav() {
          measure. */}
       <nav
         aria-label="Primary"
-        className="hidden xl:flex flex-none items-center"
-        // 16px, down from 20 (2026-09-12). The row is justify-between over
-        // three children, so a seventh nav item ate the slack: measured at
-        // 1280 through 1680 the gap between "Om oss" and the Bli medlem pill
-        // was exactly 0 — not overlapping, but touching. Six gaps at 4px
-        // less puts 24px back.
-        style={{ gap: '16px' }}
+        // 12px at xl, 16px from 2xl. The note this replaces was written on
+        // 2026-09-12, the last time this bar carried seven items: "the row is
+        // justify-between over three children, so a seventh nav item ate the
+        // slack — measured at 1280 through 1680 the gap between Om oss and
+        // the Bli medlem pill was exactly 0." It went to 16px, then `visit`
+        // came off the top level the next day and it was six again.
+        //
+        // Aktuelt made it seven again on 2026-09-15, and 16px measured 12px
+        // of clearance in Norwegian and 4px in English at 1280 — the width
+        // where this bar first appears at all. Not overlapping; touching,
+        // which is the same thing to look at. Six gaps at 4px less puts 24px
+        // back, and 2xl keeps the roomier measure where there is room for it.
+        // If an eighth item is ever added, measure ENGLISH at 1280 first: its
+        // labels are the long ones ("The mosque project", "Become a member").
+        className="hidden xl:flex flex-none items-center gap-3 2xl:gap-4"
         onMouseLeave={close}
       >
         {NAV_KEYS.map((key, i) => {
