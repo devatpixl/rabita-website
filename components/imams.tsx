@@ -53,7 +53,7 @@ export async function Imams() {
                 </div>
                 <p className="mt-4 text-[15px] leading-relaxed text-ink-60">{t(`people.${im.key}.bio`)}</p>
                 <p className="mt-auto pt-4 font-mono text-[0.625rem] uppercase leading-relaxed tracking-[0.14em] text-ink-60">
-                  {t('languages')} · <span className="text-ink">{im.languages.join(' · ')}</span>
+                  {t('languages')} · <span className="text-ink">{im.languages.map((k) => t(`lang.${k}`)).join(' · ')}</span>
                 </p>
               </li>
             );

@@ -2700,6 +2700,17 @@
     "eyebrow": "Imamene",
     "heading": "De som leder <em>bønnen</em>.",
     "lede": "Én teologisk leder og to imamer. Du møter dem i fredagsbønnen, i undervisningen og i samtalen etterpå.",
+    "lang": {
+      "norwegian": "Norsk",
+      "english": "Engelsk",
+      "arabic": "Arabisk",
+      "arabicSimple": "Enkel arabisk",
+      "urdu": "Urdu",
+      "persianSome": "Litt persisk",
+      "italian": "Italiensk",
+      "french": "Fransk",
+      "latin": "Latin"
+    },
     "languages": "Språk",
     "people": {
       "amara": {

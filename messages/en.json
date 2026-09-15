@@ -2700,6 +2700,17 @@
     "eyebrow": "The imams",
     "heading": "The people who lead the <em>prayer</em>.",
     "lede": "One theological leader and two imams. You meet them at Friday prayer, in the classes, and in the conversation afterwards.",
+    "lang": {
+      "norwegian": "Norwegian",
+      "english": "English",
+      "arabic": "Arabic",
+      "arabicSimple": "Simple Arabic",
+      "urdu": "Urdu",
+      "persianSome": "Some Persian",
+      "italian": "Italian",
+      "french": "French",
+      "latin": "Latin"
+    },
     "languages": "Languages",
     "people": {
       "amara": {
