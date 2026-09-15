@@ -151,11 +151,6 @@
           "label": "Norwegian",
           "blurb": "Norwegian classes for adults who fall outside the ordinary provision.",
           "href": "/tjenester/norsk"
-        },
-        {
-          "label": "A course for converts",
-          "blurb": "An Islam course for new Muslims, every Friday.",
-          "href": "/tjenester/kurs-konvertitter"
         }
       ],
       "visit": [
@@ -1102,9 +1097,9 @@
     "countdown": "{n} days away",
     "eyebrow": "NOTICE · ANNUAL MEETING 2027",
     "headline": "The building isn't decided by us. It's decided by the <em>members</em>.",
-    "body": "The annual meeting elects the board. The board decides what the seven floors are used for. A voting membership is one voice in that room.",
+    "body": "The annual meeting elects the board. The board decides what the seven floors are used for. Every membership is one voice in that room.",
     "priceNote": "kr a year · one vote",
-    "ctaPrimary": "Get a vote",
+    "ctaPrimary": "Become a member",
     "ctaSecondary": "Free membership",
     "venueLabel": "THE MEETING IS HELD",
     "venueLine": "{venue} · {time}",
@@ -1112,7 +1107,7 @@
     "captionAfterN": "of {total} members hold a vote today.",
     "gridAria": "{n} of {total} members hold a vote.",
     "heading": "Become a member. Vote at the AGM. Volunteer.",
-    "lede": "Membership keeps the organisation's democracy alive. Membership for children and youth is free.",
+    "lede": "Membership keeps the organisation's democracy alive, and it is free for everyone.",
     "join": "Become a member",
     "tiers": {
       "ordinary": {
@@ -1133,7 +1128,9 @@
         "b1": "Under 15 years old",
         "b2": "Approved by a guardian"
       }
-    }
+    },
+    "freeWord": "Free",
+    "freeNote": "membership · one vote for every member"
   },
   "footer": {
     "give": {
@@ -1570,8 +1567,8 @@
   "medlemskapPage": {
     "eyebrow": "Membership",
     "title": "Become a member of Rabita.",
-    "lede": "Children and youth membership is free. Voting membership is 1 000 kr per year and renews annually.",
-    "choose": "Choose membership",
+    "lede": "Membership at Rabita is free. Every member has one vote at the annual meeting.",
+    "choose": "Become a member",
     "tiers": {
       "ordinary": {
         "name": "Ordinary",
@@ -1598,7 +1595,8 @@
       "guardianPhone": "Guardian's phone",
       "submitFree": "Join",
       "submitPay": "Join and pay 1 000 kr",
-      "note": "National identity number is not required for membership. Privacy applies."
+      "note": "National identity number is not required for membership. Privacy applies.",
+      "under15": "I am registering a child under 15"
     },
     "done": {
       "title": "You are registered.",
@@ -1620,7 +1618,8 @@
       "agm": {
         "title": "AGM 2026: calendar and agenda"
       }
-    }
+    },
+    "bandAlt": "People gathered outside the entrance to Rabita"
   },
   "eventsPage": {
     "eyebrow": "Events",
@@ -1661,6 +1660,7 @@
   "undervisningPage": {
     "eyebrow": "Teaching",
     "title": "Arabic, Qur'an, and a school week that fits around the Norwegian one.",
+    "titleShort": "Everything we <em>teach</em>.",
     "lede": "Four hundred pupils and nineteen teachers, running every week of term. The new building gives the school its own floor instead of the rooms it borrows now."
   },
   "servicesIndex": {
@@ -1671,7 +1671,8 @@
     "jumpTo": "Choose a service",
     "detail": {
       "what": "What we offer",
-      "request": "Send an enquiry"
+      "request": "Send an enquiry",
+      "photos": "Photographs from Rabita"
     },
     "items": {
       "nikah": {
@@ -2152,6 +2153,13 @@
             "body": "Arabic lets you meet the text without a translation in between."
           }
         ]
+      },
+      "kvinnetreff": {
+        "title": "Kvinnetreff: <em>a meeting place for women</em>",
+        "body": "A meeting place for women in the congregation — conversation, teaching and community.",
+        "longBody": "Kvinnetreff is a meeting place of its own for the women of Rabita, with room for conversation, teaching and time together. The gatherings are held at the mosque. Get in touch to hear when the next one takes place, or to say you would like to come.",
+        "offerTitle": "A room of our own",
+        "offerLede": "Kvinnetreff brings together women of every age for conversation, teaching and community. Get in touch and we will let you know when the next gathering is arranged."
       }
     },
     "allEyebrow": "All services",
@@ -2164,6 +2172,38 @@
     }
   },
   "aboutPage": {
+    "partners": {
+      "heading": "Partners"
+    },
+    "org": {
+      "tiers": {
+        "oversight": "Oversight committee",
+        "board": "Board",
+        "admin": "Administration",
+        "departments": "Departments"
+      },
+      "roles": {
+        "oversight": "Oversight committee",
+        "director": "Managing director",
+        "seniorAdviser": "Senior adviser",
+        "media": "Head of media",
+        "facilities": "Caretaker",
+        "it": "Head of IT",
+        "theologyLead": "Head of theology",
+        "imam": "Imam",
+        "imamTheologian": "Imam and theologian",
+        "education": "Education",
+        "knowledge": "Knowledge",
+        "women": "Women",
+        "artsCulture": "Arts and culture",
+        "buildingProject": "The building project",
+        "safety": "Order and safety",
+        "num": "NUM",
+        "strategy": "Strategy",
+        "dialogue": "Dialogue",
+        "childrenFamily": "Children and family"
+      }
+    },
     "reports": {
       "eyebrow": "Documents",
       "heading": "The annual reports, <em>year by year</em>.",
@@ -2257,29 +2297,29 @@
       "body": "We'll be in touch for a short conversation when we have something concrete to offer."
     }
   },
-    "contactFab": {
-      "open": "Questions?",
-      "eyebrow": "Contact",
-      "heading": "Ask us anything.",
-      "lede": "Write your question and leave your email address, and we will answer you there.",
-      "question": "Question",
-      "questionPlaceholder": "What would you like to know?",
-      "email": "Email",
-      "emailPlaceholder": "name@example.com",
-      "name": "Name",
-      "namePlaceholder": "Optional",
-      "send": "Send the question",
-      "sending": "Sending …",
-      "close": "Close",
-      "doneTitle": "Thank you. We have your question.",
-      "doneBody": "We will reply to the email address you gave us, as soon as we can.",
-      "mailSubject": "Question from the website",
-      "error": {
-        "empty": "Write a question and an email address.",
-        "email": "Check the email address.",
-        "network": "Something went wrong. Try again, or email post@rabita.no."
-      }
-    },
+  "contactFab": {
+    "open": "Questions?",
+    "eyebrow": "Contact",
+    "heading": "Ask us anything.",
+    "lede": "Write your question and leave your email address, and we will answer you there.",
+    "question": "Question",
+    "questionPlaceholder": "What would you like to know?",
+    "email": "Email",
+    "emailPlaceholder": "name@example.com",
+    "name": "Name",
+    "namePlaceholder": "Optional",
+    "send": "Send the question",
+    "sending": "Sending …",
+    "close": "Close",
+    "doneTitle": "Thank you. We have your question.",
+    "doneBody": "We will reply to the email address you gave us, as soon as we can.",
+    "mailSubject": "Question from the website",
+    "error": {
+      "empty": "Write a question and an email address.",
+      "email": "Check the email address.",
+      "network": "Something went wrong. Try again, or email post@rabita.no."
+    }
+  },
   "consent": {
     "title": "We use cookies.",
     "body": "The site works without tracking. With your consent we turn on anonymous measurement that helps us see if the site works.",
@@ -2304,28 +2344,28 @@
     "body": "The address may be old, or it may be mistyped.",
     "back": "To the front page"
   },
-    "certificate": {
-      "open": "See the gift certificate",
-      "eyebrow": "Gift certificate",
-      "heading": "Thank you for your gift.",
-      "lede": "This gift goes to Oslo Sentralmoské at Calmeyers gate 8: a building for prayer, teaching and community. This certificate is your confirmation that the gift was received.",
-      "rows": {
-        "donor": "Donor",
-        "amount": "Amount",
-        "reference": "Reference",
-        "date": "Date",
-        "purpose": "Purpose",
-        "orgNr": "Organisation number"
-      },
-      "purposeBuilding": "Building the mosque",
-      "kr": "kroner",
-      "signatory": "For Det Islamske Forbundet",
-      "specimen": "SPECIMEN",
-      "previewNote": "Specimen — no payment has been made",
-      "save": "Save as PDF",
-      "sampleName": "Ola Nordmann",
-      "foot": "Det Islamske Forbundet (Rabita), organisation number {orgNr}. Gifts to voluntary organisations may qualify for tax deduction under the Norwegian Tax Act § 6-50. This document is a specimen and is not a valid receipt."
+  "certificate": {
+    "open": "See the gift certificate",
+    "eyebrow": "Gift certificate",
+    "heading": "Thank you for your gift.",
+    "lede": "This gift goes to Oslo Sentralmoské at Calmeyers gate 8: a building for prayer, teaching and community. This certificate is your confirmation that the gift was received.",
+    "rows": {
+      "donor": "Donor",
+      "amount": "Amount",
+      "reference": "Reference",
+      "date": "Date",
+      "purpose": "Purpose",
+      "orgNr": "Organisation number"
     },
+    "purposeBuilding": "Building the mosque",
+    "kr": "kroner",
+    "signatory": "For Det Islamske Forbundet",
+    "specimen": "SPECIMEN",
+    "previewNote": "Specimen — no payment has been made",
+    "save": "Save as PDF",
+    "sampleName": "Ola Nordmann",
+    "foot": "Det Islamske Forbundet (Rabita), organisation number {orgNr}. Gifts to voluntary organisations may qualify for tax deduction under the Norwegian Tax Act § 6-50. This document is a specimen and is not a valid receipt."
+  },
   "thanks": {
     "eyebrow": "Thank you",
     "headline": "Thank you. Your gift is registered.",
@@ -2349,7 +2389,7 @@
         "facts": [
           {
             "term": "Address",
-            "detail": "Calmeyers gate 8, Oslo"
+            "detail": "Sørligata 8a, Oslo"
           },
           {
             "term": "Open",
@@ -2510,15 +2550,42 @@
         "body": "The newsletter, and word of what is happening in the building."
       },
       "vote": {
-        "title": "A vote, if you want one",
-        "body": "Voting members elect the board at the annual meeting, and can stand for it themselves."
+        "title": "A vote for every member",
+        "body": "Every member has one vote at the annual meeting, and can stand for the board."
       },
       "renewal": {
         "title": "Renews yearly",
         "body": "Membership runs year by year, and you can end it whenever you want."
+      },
+      "free": {
+        "title": "Free for everyone",
+        "body": "No fee. Membership at Rabita costs nothing."
+      },
+      "support": {
+        "title": "Supports the mosque project",
+        "body": "You can only be a member of one religious community. Your membership decides where the state support goes — and here it goes to the building in Calmeyers gate."
       }
     },
-    "members": "Over 4,300 members are already on the roll."
+    "members": "Over 4,300 members are already on the roll.",
+    "freeNote": "Membership at Rabita is free, and every member has a vote at the annual meeting.",
+    "recognition": {
+      "eyebrow": "Does this sound like you?",
+      "headline": "A place to pray. And a place to <em>grow</em>.",
+      "lede": "Rabita is more than prayer times. It is teaching, counselling and community — and people who want the same things you do.",
+      "points": {
+        "quiet": "Do you want more quiet for prayer and reflection in a busy week?",
+        "children": "Do you want your children to grow up with somewhere to belong?",
+        "community": "Do you miss a community that makes you a better person?",
+        "learn": "Do you want to learn more about your faith, alongside people who know it?"
+      },
+      "closing": "This is what Rabita is for. Membership is <em>free</em>, and it takes a minute.",
+      "cta": "Join",
+      "alt": [
+        "Someone being welcomed at the door at Rabita",
+        "Children around a Qur'an on the carpet in the mosque",
+        "Long tables laid for iftar"
+      ]
+    }
   },
   "apartmentsPage": {
     "units": {
@@ -2964,5 +3031,30 @@
     "line1": "THIS IS",
     "line2": "RABITA",
     "sig": "Since 1987."
+  },
+  "eventsCalendar": {
+    "eyebrow": "Calendar",
+    "heading": "Month by month, in both calendars.",
+    "lede": "Events at Rabita, alongside the Islamic dates. Tap a date to see what is on.",
+    "prev": "Previous month",
+    "next": "Next month",
+    "gridLabel": "Calendar for {month}",
+    "today": "Today",
+    "selected": "Selected date",
+    "pickPrompt": "Choose a date in the calendar to see what is on.",
+    "emptyDay": "Nothing listed on this day.",
+    "legendEvent": "Event",
+    "legendIslamic": "Islamic date",
+    "legendToday": "Today",
+    "observanceNote": "The date follows Umm al-Qura. Rabita announces the final date itself after the moon sighting.",
+    "islamic": {
+      "newYear": "Islamic New Year",
+      "ashura": "Ashura",
+      "mawlid": "Mawlid an-Nabi",
+      "ramadan": "First day of Ramadan",
+      "laylatAlQadr": "Laylat al-Qadr",
+      "eidFitr": "Eid al-Fitr",
+      "eidAdha": "Eid al-Adha"
+    }
   }
 }

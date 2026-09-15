@@ -1,14 +1,15 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Eyebrow, Section, SectionBody, SectionHeading } from '@/components/primitives';
 import { RequestForm, type RequestSubject } from '@/components/request-form';
 import { PageBand } from '@/components/page-band';
-import { ServiceOffer, type OfferItem } from '@/components/service-offer';
 import { Accent } from '@/components/accent';
-import { CAMPAIGN } from '@/lib/campaign';
 import { cn } from '@/lib/cn';
+import { HALL_HOST, HallBackdrop } from '@/components/hall-backdrop';
 import {
+  galleryOrientation,
   SERVICE_BAND,
   SERVICE_GROUP_OF,
   SERVICE_IMAGE,
@@ -40,7 +41,11 @@ export default async function ServiceDetail({
   const tp = await getTranslations({ locale, namespace: 'servicePages' });
   // Address / Phone / E-mail, already translated for the footer's own
   // find-us block. Three labels for no new strings.
-  const tf = await getTranslations({ locale, namespace: 'footer.findUs' });
+  const tm = await getTranslations({ locale, namespace: 'membership' });
+  // /bli-medlem's own copy — the benefits of joining, already written in all
+  // three locales. The aside beside the enquiry form previews the page it links to.
+  const tj = await getTranslations({ locale, namespace: 'joinPage' });
+  const tmp = await getTranslations({ locale, namespace: 'medlemskapPage' });
 
   // The service titles carry <em> for the gold-italic accent. next-intl's
   // plain t() cannot render markup — it bails and prints the key itself, which
@@ -48,6 +53,20 @@ export default async function ServiceDetail({
   // as its headline. The heading goes through t.rich; anything that needs a
   // real string (alt text, and any future <title>) gets the tags stripped.
   const plainTitle = (t.raw(`items.${s}.title`) as string).replace(/<\/?em>/g, '');
+
+  // Measured from the actual file, not assumed — SERVICE_STORY runs 1125x1500
+  // portrait on some services and 1312x736 landscape on others, and a single
+  // locked frame would crop about half of one group away.
+  const story = SERVICE_STORY[s];
+  const storyOrientation = story ? galleryOrientation([story.src]) : 'landscape';
+
+  // The one-screen ServiceSpread prototype that lived here was retired on
+  // 2026-09-16: the client kept this three-section layout ("we keep like this
+  // i like it") and dropped the "fit on one screen" point that the spread
+  // existed to answer. components/service-spread.tsx is left in the tree,
+  // unused, the same way components/service-page.tsx keeps ServiceVisit — it
+  // is a working component and comes back with one branch if the one-screen
+  // idea returns.
 
   return (
     <main>
@@ -100,33 +119,51 @@ export default async function ServiceDetail({
          SERVICE_STORY, the second photograph, moves down to section 3. The
          mockup has no picture here, and the enquiry rail had ~150px of
          empty green under the address for it to fill. */}
-      <Section tone="paper-2" className="relative isolate overflow-hidden">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -top-32 end-[6%] -z-10 h-[34rem] w-[34rem] rounded-full bg-gold/[0.06] blur-3xl"
-        />
-        {/* The mosque's own mark as ground. On its own childless layer:
-           .star-texture sets `> * { position: relative }` and would drop any
-           absolutely positioned sibling into the flow. */}
-        <div
-          aria-hidden
-          className="star-texture star-texture--light pointer-events-none absolute inset-0 -z-10"
-        />
-        {/* The seam. The band's plate ends flush with the section boundary
-           (padBottom="none"), so the ground changed colour on the exact line
-           the photograph ended and the two read as a cut rather than as a
-           step. This is a background layer INSIDE the section, not a spacer
-           between the two, so it costs no height — and it is painted last of
-           the three so the texture and the bloom fade in with it. It ends on
-           the section's own tone, which is what stops the gradient having a
-           visible bottom edge of its own. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-paper to-paper-2 md:h-40"
-        />
+      {/* ── THE ARCADE BEHIND BOTH SECTIONS ────────────────────────────
+         Client, 2026-09-16: "also use this image in bg and make it still but
+         let section move for these 2 sections ... as it looks so basic now".
+
+         The same still photograph the two index pages stand on, so a subject
+         page is visibly part of the set it was reached from rather than a
+         plain white page at the end of a click. Sections 2 and 3 each host
+         their own, which keeps the tone step between them — paper-2 for the
+         offer, paper for the enquiry — doing the work of separating them.
+
+         WHAT WENT: a gold radial bloom and a .star-texture tile. Both were
+         standing in for a photograph, and with a real one behind them they
+         were three decorations competing on one ground.
+
+         HALL_HOST, not the old `overflow-hidden`. `hidden` makes the section
+         a scroll container and a sticky child pins to it instead of the page,
+         so the image would simply not move. See components/hall-backdrop.tsx.
+
+         wash 62, against the index pages' 45: those sit under dark photo
+         plates that read over anything, while this is ink on paper at body
+         size, and an arcade behind a paragraph is a legibility problem
+         rather than a mood. */}
+      <div className={HALL_HOST}>
+        {/* ONE backdrop for BOTH sections, not one each.
+           Measured: section 2 is 600px and section 3 is 833px, against a
+           902px viewport — and a `sticky` child taller than its container has
+           ZERO travel, so per-section backdrops could never stick. They
+           scrolled 1:1 with the page, which is the opposite of what was
+           asked. Spanning both gives the container 1433px and the image about
+           530px of travel, which is a real parallax.
+
+           The cost is the tone step between the two sections: they are
+           `tone="none"` now so the one photograph shows through both. The
+           separation comes from the enquiry's own faint wash below instead,
+           and the form card is opaque bg-paper, so it still reads as a card
+           standing on something. */}
+        <HallBackdrop wash={62} />
+      <Section tone="none">
         <SectionBody>
           <div className="grid gap-10 md:grid-cols-12 md:gap-12 lg:gap-16">
-            <div className="md:col-span-5">
+            {/* self-center, the same call section 3 used to make and for the
+               same reason: the photo column is taller than the type, so the
+               text sat at the top of a stretched cell with ~160px of slack
+               dumped underneath it. */}
+            <div className={cn(story ? 'md:col-span-5' : 'md:col-span-8', 'md:self-center')}>
               {/* Eyebrow draws its own 28px rule before the text
                  (.eyebrow-bar::before, globals.css) — the mockup's eyebrow,
                  already in the design system. `detail.what` is reused rather
@@ -152,9 +189,102 @@ export default async function ServiceDetail({
               </div>
             </div>
 
-            <div className="md:col-span-7">
-              <ServiceOffer items={t.raw(`items.${s}.offer`) as OfferItem[]} />
+            {/* ── THE PHOTOGRAPH, WHERE THE 01-04 LIST USED TO BE ────────
+               Client, 2026-09-15: "in this section we remove the bullts and
+               add image there, very modern".
+
+               The photograph is SERVICE_STORY — the same frame that used to
+               sit at the foot of section 3's rail, which this same round of
+               changes removes. So the page loses a column and gains a plate
+               without needing a single new asset.
+
+               PLATE, NOT A FULL-WIDTH BLEED. The full-bleed version of this
+               treatment shipped on the spread prototype earlier today and
+               the client's verdict was "very cheap its looking". Two reasons
+               it fails, both measured: this site frames every other
+               photograph it has (rounded-3xl on a tinted ground, no shadow),
+               so a bleed reads as foreign; and these are phone photographs,
+               which at full width run near 1:1 and show every defect.
+
+               The ratio is MEASURED, not assumed. SERVICE_STORY is mixed —
+               bazaar-stand is 1125x1500 portrait while prayer-congregation
+               is 1312x736 landscape — so a single locked frame would crop
+               roughly half of one group away. galleryOrientation reads the
+               real file dimensions. */}
+            {/* Centred on a phone, pushed to the OUTER edge from md up.
+               Start-aligned, a portrait plate sat hard against the text and
+               read as crowding the middle of the page (client, 2026-09-15:
+               "image too much in centre on desktop, move it a bit to right
+               when vertical"). End-aligned, the portrait and the landscape
+               plates share one right edge with the band above them, so the
+               page keeps a single outer margin instead of two.
+
+               justify, not auto margins: `mx-auto` is a physical property and
+               `me-0`/`ms-auto` are logical ones, so mixing them leaves the
+               winner to stylesheet order rather than intent. justify-end also
+               mirrors correctly in Arabic for free. */}
+            {story && (
+            <div className="flex justify-center md:col-span-7 md:justify-end">
+              <figure
+                className={cn(
+                  'relative w-full',
+                  storyOrientation === 'portrait' ? 'max-w-[24rem]' : 'max-w-none',
+                )}
+              >
+                {/* The ghost card — this site's own way of giving a flat
+                   photograph depth WITHOUT a drop shadow (service-index.tsx
+                   says exactly that). Only 2 of the 32 shadows in this
+                   codebase touch a photograph. */}
+                {/* Wrapped around the PLATE only. inset-0 on the figure made
+                   the outline enclose the caption too, which read as a box
+                   drawn round a picture and its label rather than as a
+                   second plate behind the first. */}
+                <div className="relative">
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 translate-x-2 translate-y-2 rounded-3xl border border-gold-deep/25 md:translate-x-3 md:translate-y-3"
+                />
+                <div
+                  className={cn(
+                    'relative w-full overflow-hidden rounded-3xl bg-paper-deep ring-1 ring-inset ring-ink/10',
+                    storyOrientation === 'portrait' ? 'aspect-[4/5]' : 'aspect-[4/3]',
+                  )}
+                >
+                  <Image
+                    src={story.src}
+                    alt={plainTitle}
+                    fill
+                    sizes="(min-width: 768px) 58vw, 100vw"
+                    className="object-cover"
+                    // The site's grade with a touch of grayscale, matching
+                    // the spread: these are phone photographs shot on
+                    // different days, and a little desaturation pulls them
+                    // into one set. No brightness cut — the client had that
+                    // taken off the gift photos on 2026-09-15 for reading
+                    // too dark.
+                    style={{ filter: 'grayscale(0.15) saturate(0.9) contrast(1.06)' }}
+                  />
+                </div>
+                </div>
+                {/* NO CAPTION HERE, deliberately.
+                   It said "Fotografier fra Rabita", which is false on this
+                   page: SERVICE_STORY is a mixed bag, and several entries
+                   are CGI renders of the planned building rather than
+                   photographs — svc-prayer, used by nikah, is a render of
+                   the mihrab (synthetic light, texture-mapped marble, no
+                   camera noise). Captioning a render as a photograph is a
+                   claim the site should not make.
+
+                   Crediting them as renders is also out: the client had the
+                   architect credit removed on 2026-09-15. So the plate
+                   stands uncaptioned, which costs nothing — the ghost
+                   outline and the frame already say "considered".
+
+                   The caption DOES stay on the id-for-alle spread, where all
+                   four frames are genuinely Rabita's own event photographs. */}
+              </figure>
             </div>
+            )}
           </div>
         </SectionBody>
       </Section>
@@ -175,82 +305,146 @@ export default async function ServiceDetail({
          language: the three ways to reach us are rows with a mono label, a
          serif value and the section-2 seal, so the two halves of the page
          read as one design. */}
+      {/* bg-paper/45 rather than an opaque tone: the arcade still shows, but
+         this half sits a shade lighter than the offer above it, which is the
+         step the two solid tones used to make. */}
       <Section
         id="enquiry"
-        tone="paper"
-        className="relative isolate scroll-mt-24 pb-20 md:pb-28"
+        tone="none"
+        className="scroll-mt-24 bg-paper/45 pb-20 md:pb-28"
       >
-        {/* The same fade the other way up. The step to white is the whole
-           point of this section, so the gradient only softens the LINE — a
-           28-unit run out of the 8 that separate the two tones. Everything
-           below it is still plainly lighter than the section above. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-paper-2 to-paper md:h-40"
-        />
         <SectionBody>
-          <div className="grid gap-10 md:grid-cols-12 md:gap-12 lg:gap-16">
-            <div className="md:col-span-5">
-              {/* The eyebrow is the SERVICE here, not the section name.
-                 Section 2 can print "What we offer" over the service's own
-                 headline because the two say different things; printing
-                 "Send an enquiry" over "Send an enquiry" is the echo that
-                 got the old ruled eyebrow removed in the first place. The
-                 service name in that slot earns its place — it says what
-                 the enquiry is about. */}
-              <Eyebrow tone="gold-deep">{plainTitle}</Eyebrow>
-              <SectionHeading className="mt-5">{t('detail.request')}</SectionHeading>
-              <p className="mt-6 max-w-[34ch] text-body text-ink-60">{tp('pages.services.note')}</p>
+          {/* ── THE ENQUIRY, CENTRED, WITH NO RAIL BESIDE IT ───────────────
+             Client, 2026-09-15: "we keep the form here, centre it and then
+             remove this from left".
 
-              <ul className="mt-8 divide-y divide-ink/10 border-y border-ink/10">
-                <ContactRow label={tf('email')} href={`mailto:${CAMPAIGN.contactEmail}`}>
-                  {CAMPAIGN.contactEmail}
-                </ContactRow>
-                <ContactRow
-                  label={tf('phone')}
-                  href={`tel:${CAMPAIGN.contactPhone.replace(/\s/g, '')}`}
-                >
-                  {/* In an RTL paragraph the spaces inside a phone number
-                     are neutral, so the groups get reordered: +47 22 20 80
-                     88 renders as 88 80 20 22 47+, which is a different
-                     number. bdi isolates it and dir pins it LTR. */}
-                  <bdi dir="ltr">{CAMPAIGN.contactPhone}</bdi>
-                </ContactRow>
-                <ContactRow label={tf('address')}>{CAMPAIGN.address}</ContactRow>
-              </ul>
+             What went: the service eyebrow, the note, the three contact rows
+             (e-post / telefon / adresse) and the second photograph. The
+             photograph was not thrown away — it is now the plate in section
+             2 above.
 
-              {/* The second photograph, moved down from section 2. It fills
-                 the tail of the rail, which was ~150px of empty green. */}
-              <div className="relative mt-8 hidden aspect-[3/2] overflow-hidden rounded-[1.25rem] rounded-se-[3rem] bg-paper-deep ring-1 ring-ink/5 md:block">
-                <Image
-                  src={SERVICE_STORY[s].src}
-                  alt=""
-                  fill
-                  sizes="(min-width: 1152px) 430px, 40vw"
-                  className={cn('object-cover', SERVICE_STORY[s].objectClass)}
-                  // The site's own grade, so a second photograph on the
-                  // page sits in the same light as the band above it.
-                  style={{ filter: 'saturate(0.72) contrast(1.12) brightness(0.9)' }}
-                />
-              </div>
-            </div>
-            {/* self-center, as on /om-oss, /besok-oss and the event pages:
-               the contact column is taller — it carries a photograph — so
-               the card sat at the top of a stretched cell with the slack
-               dumped underneath (client, 2026-09-08). md, not lg: this grid
-               splits at md. Below that the columns stack and it is inert. */}
-            <div className="md:col-span-7 md:self-center">
-              {/* The card is the same tone as the ground it stands on, so
-                 what reads is its radius and its long soft shadow rather
-                 than a fill — which is the point of a white section. `card`
-                 also switches the wells to sage, and that is what carries
-                 the form: fields tinted with the section's own green,
-                 sunken into white. */}
+             WHAT THIS COSTS, so it is on the record: the phone number and
+             the address are no longer on this page. Someone who would rather
+             ring than fill in a form now has to reach the footer to find the
+             number. That is a real loss of utility, and reversible — the
+             ContactRow markup is in this file's history.
+
+             The heading STAYS, centred above the card. Removing the rail is
+             an instruction about the column, not about the section's title:
+             a form card floating with no line above it has nothing telling
+             you what it is for. */}
+          {/* ── THE ENQUIRY, AND THE ARGUMENT FOR JOINING, SIDE BY SIDE ──
+             Client, Tjenester list point 5: "Forenkle til kun kontaktskjema +
+             CTA «Bli medlem», med begrunnelse for fordelene ved medlemskap".
+
+             The CTA sat in a centred band UNDER the form until 2026-09-16,
+             which is where a second thought goes — past the Send button, at
+             the very bottom of the page, read by nobody who has just
+             submitted. Beside the form it becomes an aside rather than an
+             afterthought: the reader meets the argument while they are still
+             deciding, not after they have finished.
+
+             A hairline on the aside's start edge and nothing else — no card,
+             no fill, no shadow. The form is already a raised card on this
+             white ground, and a second card beside it would make the section
+             read as two competing offers instead of one request with a note
+             in the margin. The rule is the site's own device for exactly
+             this, and it is logical (border-s / ps) so Arabic mirrors it. */}
+          {/* The opener sits ABOVE the grid, not inside the form column.
+             Inside it, `self-center` on the aside centred against the whole
+             column — eyebrow, heading AND form — which put the aside's middle
+             well above the form card's. Lifted out, the heading introduces
+             the section and the two columns below it are the form and the
+             aside alone, so centring means what it says. */}
+          <Eyebrow tone="gold-deep">{plainTitle}</Eyebrow>
+          <SectionHeading className="mt-5">{t('detail.request')}</SectionHeading>
+
+          <div className="mt-10 md:grid md:grid-cols-12 md:items-center md:gap-12 lg:gap-16">
+            <div className="md:col-span-7">
               <RequestForm subject={s as RequestSubject} card rule={false} />
             </div>
+
+            {/* self-center: the aside is far shorter than the form, and left
+               to stretch it sat at the top of the cell with all the slack
+               dumped beneath it. Centred, it reads as deliberately placed
+               against the middle of the form — which is what was asked for. */}
+            {/* ── WHY JOIN ─────────────────────────────────────────────
+               Client, Tjenester list point 5: the CTA wants "begrunnelse for
+               fordelene ved medlemskap" — the BENEFITS.
+
+               This first shipped with membership.headline and membership.body,
+               and the client was right to reject it (2026-09-16: "this text
+               isnt right"). That copy is the HOMEPAGE argument — the annual
+               meeting elects the board, the board decides what the seven
+               floors are used for — which is governance, not benefits, and
+               is a strange thing to read when you have come to ask about a
+               funeral. It also misses what was asked for.
+
+               What is here instead is /bli-medlem's own copy, which was
+               already written in all three locales and is about exactly this:
+               being counted, the newsletter, invitations, a vote if you want
+               one, and that it renews yearly. The aside now previews the page
+               its button leads to, which is what an aside beside a form
+               should do.
+
+               ── TWO THINGS DELIBERATELY LEFT OUT ────────────────────────
+               The PRICE. "1 000 kr i året" is only true of the voting tier —
+               medlemskapPage says children's and youth membership is free —
+               so a single figure here would be a half-truth on eighteen
+               pages. The linked page sets out the tiers properly.
+
+               The MEMBER COUNT. joinPage.members says "over 4 300" while
+               lib/membership.ts says totalMembers: 4200, and that figure is
+               what the rest of the site prints. The site contradicts itself
+               by a hundred members; printing either number on every service
+               page would spread the contradiction rather than settle it.
+               Raised with the client 2026-09-16. */}
+            <aside className="mt-12 md:col-span-5 md:mt-0 md:border-s md:border-rule md:ps-10 lg:ps-14">
+              <Eyebrow tone="gold-deep">{tmp('eyebrow')}</Eyebrow>
+
+              <h2 className="mt-5 max-w-[24ch] font-serif text-[clamp(1.3rem,1.9vw,1.55rem)] leading-[1.18] text-balance text-ink">
+                {tj('headline')}
+              </h2>
+
+              {/* The benefits, ruled — TITLES ONLY (client, 2026-09-16:
+                 "keep this very short for CTA text"). Each point's body ran
+                 two more lines underneath and took the aside to 477px beside
+                 a 518px form, which is not an aside any more, it is a second
+                 column of prose competing with the enquiry. The three titles
+                 already name the three benefits; the page the button leads to
+                 carries the detail. joinPage.points.*.body is untouched in the
+                 message files and still renders on /bli-medlem. */}
+              <ul className="mt-6 border-t border-rule">
+                {(['updates', 'vote', 'renewal'] as const).map((k) => (
+                  <li
+                    key={k}
+                    className="border-b border-rule py-3 text-[14px] leading-snug text-ink"
+                  >
+                    {tj(`points.${k}.title`)}
+                  </li>
+                ))}
+              </ul>
+
+              {/* "Bli medlem", which is the label the client actually asked
+                 for. It said "Få stemmerett" until 2026-09-16 — the voting
+                 tier's own CTA, narrower than this block now is. */}
+              <Link
+                href={`/${locale}/bli-medlem`}
+                className="group mt-7 inline-flex min-h-11 items-center gap-2 rounded-full border border-ink px-6 text-[14px] font-semibold text-ink transition-colors hover:bg-ink hover:text-paper"
+              >
+                {tm('join')}
+                <span
+                  aria-hidden
+                  className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
+                >
+                  &rarr;
+                </span>
+              </Link>
+            </aside>
           </div>
         </SectionBody>
       </Section>
+      </div>
       {/* The "Coming in person" band (ServiceVisit) was removed on 2026-08-31:
          it repeated verbatim on this page, the services index and all eleven
          subject pages, so the address stopped registering as information and
@@ -258,68 +452,5 @@ export default async function ServiceDetail({
          page that exists to answer it. The component is left in
          components/service-page.tsx, unused, so it can go back with one line. */}
     </main>
-  );
-}
-
-/* One way to reach us, in the same row language section 2 uses: a mono
-   label, a serif value and the seal. A row with an href is a link and takes
-   the whole row; the address is not a link, so it is a plain row and carries
-   the same diamond a non-expandable offer row does. */
-function ContactRow({
-  label,
-  href,
-  children,
-}: {
-  label: string;
-  href?: string;
-  children: React.ReactNode;
-}) {
-  const body = (
-    <>
-      <span className="block min-w-0">
-        <span className="block font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60">
-          {label}
-        </span>
-        <span className="mt-1.5 block font-serif text-[1.15rem] leading-snug text-ink">
-          {children}
-        </span>
-      </span>
-      {href ? (
-        <span
-          aria-hidden
-          className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gold-soft/40 text-gold-deep ring-1 ring-gold-deep/25 transition-colors duration-300 group-hover:bg-gold-deep group-hover:text-paper group-hover:ring-gold-deep"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-4 w-4 rtl:rotate-180"
-          >
-            <path d="M5 12h14M13 5l7 7-7 7" />
-          </svg>
-        </span>
-      ) : (
-        <span aria-hidden className="grid h-10 w-10 shrink-0 place-items-center">
-          <span className="h-1.5 w-1.5 rotate-45 bg-gold-deep/35" />
-        </span>
-      )}
-    </>
-  );
-
-  const shape = 'grid grid-cols-[1fr_auto] items-center gap-5 py-4';
-
-  return (
-    <li className="group">
-      {href ? (
-        <a href={href} className={`${shape} transition-colors hover:text-gold-deep`}>
-          {body}
-        </a>
-      ) : (
-        <div className={shape}>{body}</div>
-      )}
-    </li>
   );
 }

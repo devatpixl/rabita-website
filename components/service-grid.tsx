@@ -4,6 +4,8 @@ import { getTranslations } from 'next-intl/server';
 import { SERVICE_FOCUS, SERVICE_IMAGE, type ServiceKey } from '@/lib/services';
 import { SectionBody } from './primitives';
 import { Accent } from './accent';
+import { cn } from '@/lib/cn';
+import { HALL_HOST, HallBackdrop } from './hall-backdrop';
 import { Reveal } from './reveal';
 
 // The services as a grid of plates, replacing the alternating full-width
@@ -100,6 +102,7 @@ export async function ServiceGrid({
   items,
   locale,
   header = true,
+  featured = 0,
   picker,
 }: {
   items: readonly ServiceKey[];
@@ -114,6 +117,19 @@ export async function ServiceGrid({
    *  band already names it: two "Undervisning" eyebrows stacked stutter, and
    *  "everything we do, collected" is false over three of thirteen. */
   header?: boolean;
+  /**
+   * How many of the leading items get the big top row.
+   *
+   * 2 on /undervisning (client, 2026-09-16: Rabita skole and Koranskolen
+   * "vises øverst og større, de 3 øvrige under"). 0 everywhere else, which
+   * keeps /tjenester's twelve cards on the even three-column contact sheet
+   * they already have.
+   *
+   * The count is not hard-coded to two: the grid is six columns, so 2 (3+3)
+   * and 3 (2+2+2) both divide it cleanly, and the rest flow beneath at three
+   * across.
+   */
+  featured?: number;
 }) {
   const t = await getTranslations({ locale, namespace: 'servicesIndex' });
   const total = String(items.length).padStart(2, '0');
@@ -131,53 +147,11 @@ export async function ServiceGrid({
     // scrollable ancestor — so `hidden` here would silently pin the image to a
     // box that never scrolls, i.e. it would not stick at all. `clip` clips
     // without creating a scroller.
-    <section className="relative isolate overflow-clip pb-section-md pt-10 md:pt-14">
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="sticky top-0 h-screen">
-          <Image
-            src="/photos/svc-hall-bg.webp"
-            alt=""
-            fill
-            sizes="100vw"
-            priority
-            className="object-cover object-[70%_50%]"
-          />
-          {/* A paper wash, light enough that the arcade still reads. The
-             heading is ink on this, and the plates are dark, so the ground
-             only has to stay quiet — not disappear. */}
-          <div className="absolute inset-0 bg-paper/45" />
-        </div>
+    <section className={cn(HALL_HOST, "pb-section-md pt-8 md:pt-10")}>
+      <HallBackdrop />
 
-        {/* The seam. The arcade started on a hard horizontal line against the
-           page's paper (client, 2026-09-13: "it is so sharp of transition
-           from white to this").
-
-           These live OUTSIDE the sticky child on purpose. On it they would
-           pin to the viewport and fade whatever happened to be at the top of
-           the screen; here they belong to the section box and scroll with it,
-           so they sit on its actual edges. They are painted after the sticky
-           layer, so they land over the photograph.
-
-           Explicit rgba rather than `to-transparent`: Tailwind's transparent
-           is rgba(0,0,0,0), which interpolates through grey and dirties a
-           warm ground. */}
-        <div
-          className="absolute inset-x-0 top-0 h-40 md:h-56"
-          style={{
-            background:
-              'linear-gradient(180deg, rgb(250,248,244) 0%, rgba(250,248,244,0.86) 28%, rgba(250,248,244,0) 100%)',
-          }}
-        />
-        <div
-          className="absolute inset-x-0 bottom-0 h-32 md:h-44"
-          style={{
-            background:
-              'linear-gradient(0deg, rgb(250,248,244) 0%, rgba(250,248,244,0.8) 32%, rgba(250,248,244,0) 100%)',
-          }}
-        />
-      </div>
       <SectionBody>
-        {picker && <div className="mb-10 md:mb-14">{picker}</div>}
+        {picker && <div className="mb-7 md:mb-9">{picker}</div>}
         {header && (
           <>
             <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
@@ -192,11 +166,19 @@ export async function ServiceGrid({
         {/* Tight gutters on purpose. A wide gutter on photo cards makes ten
            postcards; a tight one makes a contact sheet, which is the register
            this site is in. */}
-        <ol className={header
-          ? 'mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:mt-14 lg:grid-cols-3 lg:gap-6'
-          : 'grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6'}>
+        {/* SIX columns when there is a featured row, three otherwise.
+           Six divides both ways: the two big cards take three columns each,
+           the three beneath take two each, and both rows end flush on the
+           same outer edges. A 3-column grid cannot do that — two cards in it
+           would leave a hole in the top row. */}
+        <ol className={cn(
+          'grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:gap-6',
+          header && 'mt-10 md:mt-14',
+          featured > 0 ? 'lg:grid-cols-6' : 'lg:grid-cols-3',
+        )}>
           {items.map((key, i) => {
             const n = String(i + 1).padStart(2, '0');
+            const isFeatured = i < featured;
             return (
               <Reveal
                 as="li"
@@ -204,7 +186,9 @@ export async function ServiceGrid({
                 id={key}
                 // Repeating 0 / .08 / .16 reads as a diagonal at three
                 // columns, an alternation at two, and is harmless at one.
-                delay={(i % 3) * 0.08}
+                // Across the row it is actually in: the featured row is two
+                // wide, the rows beneath are three.
+                delay={(isFeatured ? i % 2 : (i - featured) % 3) * 0.08}
                 // group + relative + isolate + the aspect box, all on the
                 // card root. justify-end seats the only in-flow child — the
                 // words — at the foot, so the text is not absolutely placed
@@ -213,7 +197,21 @@ export async function ServiceGrid({
                 // 4:3 on a phone, 4:5 from lg. Ten of the thirteen sources
                 // are ~3:2 landscape and three are 3:4 portrait, so there is
                 // no ratio that crops nothing; SERVICE_FOCUS steers each one.
-                className="group/card relative isolate flex aspect-[4/3] scroll-mt-28 flex-col justify-end overflow-hidden rounded-2xl bg-ink md:scroll-mt-32 lg:aspect-[4/5]"
+                className={cn(
+                  'group/card relative isolate flex aspect-[4/3] scroll-mt-28 flex-col justify-end overflow-hidden rounded-2xl bg-ink md:scroll-mt-32',
+                  featured === 0
+                    // The original contact sheet: portrait from lg.
+                    ? 'lg:aspect-[4/5]'
+                    : isFeatured
+                      // 540px wide at the 1104 container, so 3:2 lands at
+                      // 360 tall.
+                      ? 'lg:col-span-3 lg:aspect-[3/2]'
+                      // 352px wide, so 4:3 lands at 264 — a third shorter
+                      // than the row above, which is what makes the top row
+                      // read as larger. 4:5 here would have come out TALLER
+                      // than the cards it sits under.
+                      : 'lg:col-span-2 lg:aspect-[4/3]',
+                )}
               >
                 {/* The photograph. The hover scale is on THIS wrapper, never
                    on the .rv-zoom image below it — see trap 1 in the header. */}
@@ -225,7 +223,13 @@ export async function ServiceGrid({
                     src={SERVICE_IMAGE[key]}
                     alt=""
                     fill
-                    sizes="(min-width: 1024px) 31vw, (min-width: 640px) 46vw, 92vw"
+                    sizes={
+                      featured === 0
+                        ? '(min-width: 1024px) 31vw, (min-width: 640px) 46vw, 92vw'
+                        : isFeatured
+                          ? '(min-width: 1024px) 49vw, (min-width: 640px) 46vw, 92vw'
+                          : '(min-width: 1024px) 32vw, (min-width: 640px) 46vw, 92vw'
+                    }
                     style={{ filter: GRADE, objectPosition: SERVICE_FOCUS[key] ?? '50% 50%' }}
                     className="rv-zoom object-cover"
                   />

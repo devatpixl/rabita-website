@@ -76,7 +76,13 @@ export function Section({
   className,
 }: {
   id?: string;
-  tone?: 'paper' | 'paper-2' | 'paper-deep' | 'sage';
+  /**
+   * 'none' emits no background at all, so whatever is painted behind the
+   * section shows through. Added 2026-09-16 for the subject pages, where two
+   * sections share ONE sticky photograph: each section owning an opaque tone
+   * would have hidden it.
+   */
+  tone?: 'paper' | 'paper-2' | 'paper-deep' | 'sage' | 'none';
   /**
    * 'tight' takes the mobile rhythm down to 36px and keeps 60 from md.
    * section-md is a DESKTOP measure: at 390px it is 60px of nothing above
@@ -95,6 +101,8 @@ export function Section({
       ? 'bg-paper-deep'
       : tone === 'sage'
       ? 'bg-sage'
+      : tone === 'none'
+      ? ''
       : 'bg-paper';
   // Mutually exclusive, never an override: cn() is clsx-only here, so a
   // later class does not beat an earlier one.

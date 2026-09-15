@@ -178,6 +178,7 @@ export function RequestForm({
   subject,
   heading,
   card = false,
+  compact = false,
   tone = 'paper',
   rule = true,
   intro,
@@ -185,6 +186,13 @@ export function RequestForm({
   subject: RequestSubject;
   /** Serif title set inside the form, above the first rule. */
   heading?: string;
+  /**
+   * Drops the optional "preferred time" field. For layouts that must fit a
+   * screen — the service spread — where an optional field is the first thing
+   * worth ~80px. The field still posts as an empty string, so the API
+   * contract is unchanged.
+   */
+  compact?: boolean;
   /** Raised paper card, for when the form sits on a tinted ground.
    *  Ignored under tone="dusk" — a paper card on a dusk plate is a different
    *  design, and this is not it. */
@@ -399,8 +407,9 @@ export function RequestForm({
         </div>
       )}
 
-      {/* "Preferred time" is for bookings; an apartment enquiry has none. */}
-      {subject !== 'apartments' && (
+      {/* "Preferred time" is for bookings; an apartment enquiry has none, and
+         a one-screen layout has no room for an optional one. */}
+      {subject !== 'apartments' && !compact && (
         <div className="mt-4">
           <Field id={`${uid}-preferred`} label={t('preferred')} icon="calendar" tone={tone} card={card}>
             <input
@@ -429,11 +438,16 @@ export function RequestForm({
         >
           <textarea
             id={`${uid}-notes`}
-            rows={3}
+            rows={compact ? 2 : 3}
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             aria-describedby={`${uid}-notes-hint`}
-            className={cn(VALUE, c.value, 'min-h-[5.5rem] resize-none')}
+            className={cn(
+              VALUE,
+              c.value,
+              'resize-none',
+              compact ? 'min-h-[4rem]' : 'min-h-[5.5rem]',
+            )}
           />
         </Field>
       </div>
@@ -459,8 +473,17 @@ export function RequestForm({
          about 30 characters, and a 10px tracked-out mono line broke to four
          ragged right-aligned lines. Stacked, it reads as one line of small
          print under the control it belongs to, at any width. */}
-      <div className="mt-7">
-        <div className="flex items-center gap-5">
+      <div className={compact ? 'mt-5' : 'mt-7'}>
+        <div
+          className={cn(
+            'flex items-center gap-5',
+            // Compact puts the privacy line beside the button, which only
+            // works once there is width for it. On a phone the row wraps and
+            // the line takes its own full-width line underneath — measured at
+            // 390, inline left it 142px wide and three lines deep.
+            compact && 'flex-wrap gap-y-3 lg:flex-nowrap',
+          )}
+        >
           {/* A rule running into the button, so Send reads as the end of the
              form rather than as a control parked under it. Hidden on a phone,
              where there is no width to spend on a line. */}
@@ -486,17 +509,38 @@ export function RequestForm({
               &rarr;
             </span>
           </button>
-          <span aria-hidden className={cn('hidden h-px flex-1 sm:block', tone === 'dusk' ? 'bg-gold/20' : 'bg-gold-deep/20')} />
-        </div>
-        <p
-          className={cn(
-            'mt-5 flex max-w-[52ch] items-start gap-2.5 font-mono text-[0.625rem] uppercase leading-relaxed tracking-[0.12em]',
-            c.meta,
+          {/* COMPACT PUTS THE PRIVACY LINE IN THE TRAILING RULE'S SLOT.
+             Normally a hairline runs from the button to the edge and the
+             lock line sits under it, which costs ~53px of stacked height.
+             In a one-screen layout that is the difference between the Send
+             button being reachable and being clipped, and the rule is
+             decoration while the line is a disclosure — so the line takes
+             the space and the decoration goes. */}
+          {compact ? (
+            <p
+              className={cn(
+                'flex w-full items-start gap-2 font-mono text-[0.625rem] uppercase leading-relaxed tracking-[0.1em] lg:w-auto lg:max-w-[34ch] lg:flex-1',
+                c.meta,
+              )}
+            >
+              <FieldIcon name="lock" className={cn('mt-px h-[13px] w-[13px] shrink-0', c.icon)} />
+              <span>{t('privacy')}</span>
+            </p>
+          ) : (
+            <span aria-hidden className={cn('hidden h-px flex-1 sm:block', tone === 'dusk' ? 'bg-gold/20' : 'bg-gold-deep/20')} />
           )}
-        >
-          <FieldIcon name="lock" className={cn('mt-px h-[15px] w-[15px] shrink-0', c.icon)} />
-          <span>{t('privacy')}</span>
-        </p>
+        </div>
+        {!compact && (
+          <p
+            className={cn(
+              'mt-5 flex max-w-[52ch] items-start gap-2.5 font-mono text-[0.625rem] uppercase leading-relaxed tracking-[0.12em]',
+              c.meta,
+            )}
+          >
+            <FieldIcon name="lock" className={cn('mt-px h-[15px] w-[15px] shrink-0', c.icon)} />
+            <span>{t('privacy')}</span>
+          </p>
+        )}
       </div>
     </form>
   );

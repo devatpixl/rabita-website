@@ -151,11 +151,6 @@
           "label": "Norsk",
           "blurb": "Norskundervisning for voksne som faller utenfor de ordinære tilbudene.",
           "href": "/tjenester/norsk"
-        },
-        {
-          "label": "Kurs for konvertitter",
-          "blurb": "Islamkurs for nye muslimer, hver fredag.",
-          "href": "/tjenester/kurs-konvertitter"
         }
       ],
       "visit": [
@@ -1102,9 +1097,9 @@
     "countdown": "om {n} dager",
     "eyebrow": "INNKALLING · ÅRSMØTET 2027",
     "headline": "Bygget bestemmes ikke av oss. Det bestemmes av <em>medlemmene</em>.",
-    "body": "Årsmøtet velger styret. Styret bestemmer hva de sju etasjene brukes til. Ett medlemskap med stemmerett er én stemme i det rommet.",
+    "body": "Årsmøtet velger styret. Styret bestemmer hva de sju etasjene brukes til. Hvert medlemskap er én stemme i det rommet.",
     "priceNote": "kr i året · én stemme",
-    "ctaPrimary": "Få stemmerett",
+    "ctaPrimary": "Bli medlem",
     "ctaSecondary": "Gratis medlemskap",
     "venueLabel": "MØTET HOLDES",
     "venueLine": "{venue} · {time}",
@@ -1112,7 +1107,7 @@
     "captionAfterN": "av {total} medlemmer har stemmerett i dag.",
     "gridAria": "{n} av {total} medlemmer har stemmerett.",
     "heading": "Bli medlem. Delta i årsmøtet. Meld deg som frivillig.",
-    "lede": "Medlemskap holder demokratiet i organisasjonen levende. Barne- og ungdomsmedlemskap er gratis.",
+    "lede": "Medlemskap holder demokratiet i organisasjonen levende, og er gratis for alle.",
     "join": "Bli medlem",
     "tiers": {
       "ordinary": {
@@ -1133,7 +1128,9 @@
         "b1": "Under 15 år",
         "b2": "Godkjennes av foresatt"
       }
-    }
+    },
+    "freeWord": "Gratis",
+    "freeNote": "medlemskap · én stemme for hvert medlem"
   },
   "footer": {
     "give": {
@@ -1570,8 +1567,8 @@
   "medlemskapPage": {
     "eyebrow": "Medlemskap",
     "title": "Bli medlem i Rabita.",
-    "lede": "Barne- og ungdomsmedlemskap er gratis. Medlemskap med stemmerett koster 1 000 kr per år og fornyes hvert år.",
-    "choose": "Velg medlemskap",
+    "lede": "Medlemskap i Rabita er gratis. Hvert medlem har én stemme på årsmøtet.",
+    "choose": "Bli medlem",
     "tiers": {
       "ordinary": {
         "name": "Ordinært",
@@ -1596,9 +1593,10 @@
       "phone": "Telefon (valgfritt)",
       "guardianName": "Navn på foresatt",
       "guardianPhone": "Telefon til foresatt",
-      "submitFree": "Meld inn",
+      "submitFree": "Meld meg inn",
       "submitPay": "Meld inn og betal 1 000 kr",
-      "note": "Fødselsnummer trengs ikke for å bli medlem. Personvern gjelder."
+      "note": "Fødselsnummer trengs ikke for å bli medlem. Personvern gjelder.",
+      "under15": "Jeg melder inn et barn under 15 år"
     },
     "done": {
       "title": "Vi har registrert deg.",
@@ -1620,7 +1618,8 @@
       "agm": {
         "title": "Årsmøte 2026: kalender og saksliste"
       }
-    }
+    },
+    "bandAlt": "Folk samlet utenfor inngangen til Rabita"
   },
   "eventsPage": {
     "eyebrow": "Arrangementer",
@@ -1661,6 +1660,7 @@
   "undervisningPage": {
     "eyebrow": "Undervisning",
     "title": "Arabisk, Koran og en skoleuke som passer rundt den norske.",
+    "titleShort": "Alt vi <em>underviser</em>.",
     "lede": "Fire hundre elever og nitten lærere, hver uke i semesteret. Det nye bygget gir skolen sin egen etasje i stedet for rommene den låner i dag."
   },
   "servicesIndex": {
@@ -1671,7 +1671,8 @@
     "jumpTo": "Velg en tjeneste",
     "detail": {
       "what": "Hva vi tilbyr",
-      "request": "Send henvendelse"
+      "request": "Send henvendelse",
+      "photos": "Fotografier fra Rabita"
     },
     "items": {
       "nikah": {
@@ -2152,6 +2153,13 @@
             "body": "Arabisk lar deg møte teksten uten en oversettelse imellom."
           }
         ]
+      },
+      "kvinnetreff": {
+        "title": "Kvinnetreff: <em>møteplass for kvinner</em>",
+        "body": "En møteplass for kvinner i menigheten — samtale, undervisning og fellesskap.",
+        "longBody": "Kvinnetreff er en egen møteplass for kvinner i Rabita, med rom for samtale, undervisning og sosialt fellesskap. Treffene arrangeres i moskeen. Ta kontakt for å høre når det neste finner sted, eller for å si fra at du vil være med.",
+        "offerTitle": "Et rom som er vårt eget",
+        "offerLede": "Kvinnetreff samler kvinner i alle aldre til samtale, undervisning og fellesskap. Ta kontakt, så sier vi fra når det neste treffet settes opp."
       }
     },
     "allEyebrow": "Alle tjenester",
@@ -2164,6 +2172,38 @@
     }
   },
   "aboutPage": {
+    "partners": {
+      "heading": "Samarbeidspartnere"
+    },
+    "org": {
+      "tiers": {
+        "oversight": "Kontrollutvalg",
+        "board": "Styre",
+        "admin": "Administrasjon",
+        "departments": "Avdelinger"
+      },
+      "roles": {
+        "oversight": "Kontrollutvalg",
+        "director": "Daglig leder",
+        "seniorAdviser": "Senior rådgiver",
+        "media": "Medieansvarlig",
+        "facilities": "Renholder",
+        "it": "IT-ansvarlig",
+        "theologyLead": "Teologisk leder",
+        "imam": "Imam",
+        "imamTheologian": "Imam og teolog",
+        "education": "Utdanning",
+        "knowledge": "Kunnskap",
+        "women": "Kvinner",
+        "artsCulture": "Kunst og kultur",
+        "buildingProject": "Byggeprosjektet",
+        "safety": "Orden og sikkerhet",
+        "num": "NUM",
+        "strategy": "Strategi",
+        "dialogue": "Dialog",
+        "childrenFamily": "Barn- og familie"
+      }
+    },
     "reports": {
       "eyebrow": "Dokumenter",
       "heading": "Årsrapportene, <em>år for år</em>.",
@@ -2257,29 +2297,29 @@
       "body": "Vi tar kontakt for en kort samtale når vi har noe konkret å tilby."
     }
   },
-    "contactFab": {
-      "open": "Spørsmål?",
-      "eyebrow": "Kontakt",
-      "heading": "Spør oss om hva som helst.",
-      "lede": "Skriv spørsmålet ditt og legg igjen e-postadressen din, så svarer vi deg der.",
-      "question": "Spørsmål",
-      "questionPlaceholder": "Hva lurer du på?",
-      "email": "E-post",
-      "emailPlaceholder": "navn@eksempel.no",
-      "name": "Navn",
-      "namePlaceholder": "Valgfritt",
-      "send": "Send spørsmålet",
-      "sending": "Sender …",
-      "close": "Lukk",
-      "doneTitle": "Takk. Vi har fått spørsmålet ditt.",
-      "doneBody": "Vi svarer på e-posten du oppga, så snart vi kan.",
-      "mailSubject": "Spørsmål fra nettsiden",
-      "error": {
-        "empty": "Skriv et spørsmål og en e-postadresse.",
-        "email": "Sjekk e-postadressen.",
-        "network": "Noe gikk galt. Prøv igjen, eller send en e-post til post@rabita.no."
-      }
-    },
+  "contactFab": {
+    "open": "Spørsmål?",
+    "eyebrow": "Kontakt",
+    "heading": "Spør oss om hva som helst.",
+    "lede": "Skriv spørsmålet ditt og legg igjen e-postadressen din, så svarer vi deg der.",
+    "question": "Spørsmål",
+    "questionPlaceholder": "Hva lurer du på?",
+    "email": "E-post",
+    "emailPlaceholder": "navn@eksempel.no",
+    "name": "Navn",
+    "namePlaceholder": "Valgfritt",
+    "send": "Send spørsmålet",
+    "sending": "Sender …",
+    "close": "Lukk",
+    "doneTitle": "Takk. Vi har fått spørsmålet ditt.",
+    "doneBody": "Vi svarer på e-posten du oppga, så snart vi kan.",
+    "mailSubject": "Spørsmål fra nettsiden",
+    "error": {
+      "empty": "Skriv et spørsmål og en e-postadresse.",
+      "email": "Sjekk e-postadressen.",
+      "network": "Noe gikk galt. Prøv igjen, eller send en e-post til post@rabita.no."
+    }
+  },
   "consent": {
     "title": "Vi bruker informasjonskapsler.",
     "body": "Nettsiden fungerer uten sporing. Med samtykke slår vi på anonym målsporing som hjelper oss å måle om nettsiden fungerer.",
@@ -2304,28 +2344,28 @@
     "body": "Kanskje adressen er gammel, eller den er skrevet feil.",
     "back": "Til forsiden"
   },
-    "certificate": {
-      "open": "Se gavebeviset",
-      "eyebrow": "Gavebevis",
-      "heading": "Takk for gaven din.",
-      "lede": "Denne gaven går til Oslo Sentralmoské i Calmeyers gate 8: et bygg for bønn, undervisning og fellesskap. Beviset her er din bekreftelse på at gaven er mottatt.",
-      "rows": {
-        "donor": "Giver",
-        "amount": "Beløp",
-        "reference": "Referanse",
-        "date": "Dato",
-        "purpose": "Formål",
-        "orgNr": "Organisasjonsnummer"
-      },
-      "purposeBuilding": "Byggingen av moskeen",
-      "kr": "kroner",
-      "signatory": "For Det Islamske Forbundet",
-      "specimen": "EKSEMPEL",
-      "previewNote": "Eksempel — ingen betaling er gjennomført",
-      "save": "Lagre som PDF",
-      "sampleName": "Ola Nordmann",
-      "foot": "Det Islamske Forbundet (Rabita), organisasjonsnummer {orgNr}. Gaver til frivillige organisasjoner kan gi skattefradrag etter skatteloven § 6-50. Dette dokumentet er et eksempel og er ikke en gyldig kvittering."
+  "certificate": {
+    "open": "Se gavebeviset",
+    "eyebrow": "Gavebevis",
+    "heading": "Takk for gaven din.",
+    "lede": "Denne gaven går til Oslo Sentralmoské i Calmeyers gate 8: et bygg for bønn, undervisning og fellesskap. Beviset her er din bekreftelse på at gaven er mottatt.",
+    "rows": {
+      "donor": "Giver",
+      "amount": "Beløp",
+      "reference": "Referanse",
+      "date": "Dato",
+      "purpose": "Formål",
+      "orgNr": "Organisasjonsnummer"
     },
+    "purposeBuilding": "Byggingen av moskeen",
+    "kr": "kroner",
+    "signatory": "For Det Islamske Forbundet",
+    "specimen": "EKSEMPEL",
+    "previewNote": "Eksempel — ingen betaling er gjennomført",
+    "save": "Lagre som PDF",
+    "sampleName": "Ola Nordmann",
+    "foot": "Det Islamske Forbundet (Rabita), organisasjonsnummer {orgNr}. Gaver til frivillige organisasjoner kan gi skattefradrag etter skatteloven § 6-50. Dette dokumentet er et eksempel og er ikke en gyldig kvittering."
+  },
   "thanks": {
     "eyebrow": "Takk",
     "headline": "Takk. Gaven din er registrert.",
@@ -2349,7 +2389,7 @@
         "facts": [
           {
             "term": "Adresse",
-            "detail": "Calmeyers gate 8, Oslo"
+            "detail": "Sørligata 8a, Oslo"
           },
           {
             "term": "Åpent",
@@ -2510,15 +2550,42 @@
         "body": "Nyhetsbrevet, og beskjed om det som skjer i bygget."
       },
       "vote": {
-        "title": "En stemme, om du vil ha en",
-        "body": "Medlemmer med stemmerett velger styret på årsmøtet, og kan selv stille til valg."
+        "title": "Stemmerett for alle",
+        "body": "Hvert medlem har én stemme på årsmøtet, og kan selv stille til valg til styret."
       },
       "renewal": {
         "title": "Fornyes årlig",
         "body": "Medlemskapet løper år for år, og du kan si det opp når som helst."
+      },
+      "free": {
+        "title": "Gratis for alle",
+        "body": "Ingen kontingent. Medlemskap i Rabita koster ingenting."
+      },
+      "support": {
+        "title": "Støtter mosképrosjektet",
+        "body": "Du kan bare være medlem i ett trossamfunn. Medlemskapet ditt avgjør hvor statsstøtten går — og her går den til bygget i Calmeyers gate."
       }
     },
-    "members": "Over 4 300 medlemmer står allerede oppført."
+    "members": "Over 4 300 medlemmer står allerede oppført.",
+    "freeNote": "Medlemskap i Rabita er gratis, og hvert medlem har stemmerett på årsmøtet.",
+    "recognition": {
+      "eyebrow": "Kjenner du deg igjen?",
+      "headline": "Et sted å be. Og et sted å <em>vokse</em>.",
+      "lede": "Rabita er mer enn bønnetider. Det er undervisning, samtaler og fellesskap — og folk som vil det samme som deg.",
+      "points": {
+        "quiet": "Ønsker du mer ro til bønn og ettertanke i en travel hverdag?",
+        "children": "Vil du at barna dine skal vokse opp med noe å høre til?",
+        "community": "Savner du et fellesskap som gjør deg til et bedre menneske?",
+        "learn": "Vil du lære mer om troen din, sammen med noen som kan den?"
+      },
+      "closing": "Det er dette Rabita er for. Medlemskap er <em>gratis</em>, og det tar ett minutt.",
+      "cta": "Meld meg inn",
+      "alt": [
+        "En som tas imot i døra på Rabita",
+        "Barn rundt en koran på teppet i moskeen",
+        "Lange bord dekket til iftar"
+      ]
+    }
   },
   "apartmentsPage": {
     "units": {
@@ -2964,5 +3031,30 @@
     "line1": "DETTE ER",
     "line2": "RABITA",
     "sig": "Siden 1987."
+  },
+  "eventsCalendar": {
+    "eyebrow": "Kalender",
+    "heading": "Måned for måned, i begge kalendere.",
+    "lede": "Arrangementer på Rabita, sammen med de islamske merkedagene. Trykk på en dato for å se hva som skjer.",
+    "prev": "Forrige måned",
+    "next": "Neste måned",
+    "gridLabel": "Kalender for {month}",
+    "today": "I dag",
+    "selected": "Valgt dato",
+    "pickPrompt": "Velg en dato i kalenderen for å se hva som skjer.",
+    "emptyDay": "Ingenting oppført denne dagen.",
+    "legendEvent": "Arrangement",
+    "legendIslamic": "Islamsk merkedag",
+    "legendToday": "I dag",
+    "observanceNote": "Datoen følger Umm al-Qura. Rabita kunngjør selv den endelige datoen etter månesikting.",
+    "islamic": {
+      "newYear": "Islamsk nyttår",
+      "ashura": "Ashura",
+      "mawlid": "Mawlid an-Nabi",
+      "ramadan": "Første ramadandag",
+      "laylatAlQadr": "Laylat al-Qadr",
+      "eidFitr": "Eid al-fitr",
+      "eidAdha": "Eid al-adha"
+    }
   }
 }

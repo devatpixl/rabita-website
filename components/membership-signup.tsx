@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/cn';
 import Image from 'next/image';
 import { Field, VALUE } from './request-form';
-import { FigureIcon, type FigureIconName } from './figure-icons';
+import { FigureIcon } from './figure-icons';
 
 // The signup card. Same shape as the giving card in the hero — a bordered
 // panel on the right of a dark split — because that pairing is the site's
@@ -13,19 +13,18 @@ import { FigureIcon, type FigureIconName } from './figure-icons';
 // kind of commitment as a donor.
 //
 // One screen, no wizard. The strategy meeting's complaint about membership
-// was that joining is too difficult; a tier, four fields and a button is
-// the whole flow.
-
-type Tier = 'ordinary' | 'voting' | 'youth';
-const TIERS: Tier[] = ['ordinary', 'voting', 'youth'];
-
-// A mark per tier, so the three read as three kinds of thing rather than
-// three prices. check for the vote, because that is what the vote IS.
-const TIER_ICONS: Record<Tier, FigureIconName> = {
-  ordinary: 'person',
-  voting: 'check',
-  youth: 'people',
-};
+// was that joining is too difficult; four fields and a button is the whole
+// flow.
+//
+// NO TIERS SINCE 2026-09-16 (client: "make all memberships free, remove
+// categories, all can vote"). Three tiles stood here — Ordinary 0 kr,
+// Voting 1 000 kr, Under 15 0 kr — with the PAID one pre-selected, so the
+// first thing anyone met on the join page was a 1 000 kr price tag on the
+// default option. There is one membership now, it is free, and it carries a
+// vote, so there is nothing to choose and the choice is gone.
+//
+// The panel, the plate and the field grid are untouched: the client asked
+// for the shell to stay and the contents to change.
 
 export function MembershipSignup() {
   // Ids for the shared Field wells: the label is a <label for>, so every
@@ -33,7 +32,9 @@ export function MembershipSignup() {
   const uid = useId();
   const t = useTranslations('medlemskapPage');
   const tj = useTranslations('joinPage');
-  const [tier, setTier] = useState<Tier>('voting');
+  // Not a tier — a legal flag. Guardian consent for a minor is required
+  // whatever the membership costs, so it outlived the tiers as a checkbox.
+  const [under15, setUnder15] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -50,7 +51,7 @@ export function MembershipSignup() {
       await fetch('/api/memberships', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ tier, name, email, phone, guardianName, guardianPhone }),
+        body: JSON.stringify({ under15, name, email, phone, guardianName, guardianPhone }),
       });
       setDone(true);
     } finally {
@@ -102,69 +103,20 @@ export function MembershipSignup() {
           </h2>
           <p className="mt-1.5 text-[15px] text-ink-60">{tj('formLede')}</p>
 
-          <fieldset className="mt-6 border-0 p-0">
-            <legend className="sr-only">{t('choose')}</legend>
-            {/* Three across from sm, stacked below. Each is a whole tile the
-               reader can hit, not a radio with a label beside it. */}
-            <div className="grid gap-2.5 sm:grid-cols-3">
-              {TIERS.map((k) => {
-                const on = tier === k;
-                return (
-                  <button
-                    key={k}
-                    type="button"
-                    onClick={() => setTier(k)}
-                    aria-pressed={on}
-                    className={cn(
-                      'group relative rounded-2xl border px-3.5 py-3.5 text-start transition-all duration-200',
-                      // Both branches name a text colour. Keeping them
-                      // symmetric is what stops the inherited-paper-on-paper
-                      // bug returning.
-                      on
-                        ? 'border-gold-deep bg-gold-deep/[0.07] text-ink shadow-[0_1px_0_rgba(155,127,74,0.25)]'
-                        : 'border-ink/10 bg-paper/70 text-ink hover:border-gold-deep/40 hover:bg-paper',
-                    )}
-                  >
-                    {/* pe-7 reserves the badge's corner. Without it the
-                       longest name runs under the tick. */}
-                    <span className="flex items-center gap-2 pe-6">
-                      <span
-                        aria-hidden
-                        className={cn(
-                          'grid h-6 w-6 shrink-0 place-items-center rounded-full transition-colors',
-                          on ? 'bg-gold-deep/15 text-gold-deep' : 'bg-ink/[0.05] text-ink-60 group-hover:text-gold-deep',
-                        )}
-                      >
-                        <FigureIcon name={TIER_ICONS[k]} className="h-[14px] w-[14px]" />
-                      </span>
-                      <span className="block min-w-0 text-[13.5px] font-semibold leading-tight">
-                        {t(`tiers.${k}.name`)}
-                      </span>
-                    </span>
-                    <span className="mt-2.5 block font-serif text-[1.05rem] tabular-nums text-ink">
-                      {t(`tiers.${k}.price`)}
-                    </span>
-                    <span className="mt-1 block text-[12px] leading-snug text-ink-60">
-                      {t(`tiers.${k}.body`)}
-                    </span>
-                    {/* The tick, only on the chosen one. aria-pressed already
-                       says it; this is the visual half. */}
-                    <span
-                      aria-hidden
-                      className={cn(
-                        'absolute end-3 top-3 grid h-[18px] w-[18px] place-items-center rounded-full bg-gold-deep text-paper transition-all duration-200',
-                        on ? 'scale-100 opacity-100' : 'scale-75 opacity-0',
-                      )}
-                    >
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" className="h-2.5 w-2.5">
-                        <path d="M20 6L9 17l-5-5" />
-                      </svg>
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </fieldset>
+          {/* What the three tiles used to occupy: one sentence saying the
+             thing they were there to let you choose between. Ruled top and
+             bottom so it reads as a statement of terms rather than a caption,
+             and set in the panel's own voice — no badge, no box, nothing that
+             looks like a control, because there is nothing here to pick. */}
+          <p className="mt-6 flex items-start gap-3 border-y border-gold-deep/15 py-4 text-[14px] leading-snug text-ink">
+            <span
+              aria-hidden
+              className="mt-px grid h-6 w-6 shrink-0 place-items-center rounded-full bg-gold-deep/15 text-gold-deep"
+            >
+              <FigureIcon name="check" className="h-[14px] w-[14px]" />
+            </span>
+            {tj('freeNote')}
+          </p>
 
           <h3 className="mt-8 font-serif text-[1.15rem] text-ink">{t('form.heading')}</h3>
           {/* Two up from sm, which is the reference's grid and also the
@@ -186,7 +138,7 @@ export function MembershipSignup() {
                to be unpicked by hand at the other end. For a member under 15
                the guardian's phone is the only number that is any use, so
                both are required rather than optional. */}
-            {tier === 'youth' && (
+            {under15 && (
               <>
                 <Field id={`${uid}-guardianName`} label={t('form.guardianName')} icon="person" tone="paper" card>
                   <input
@@ -213,12 +165,24 @@ export function MembershipSignup() {
             )}
           </div>
 
+          {/* The one thing left that changes the form. A checkbox, not a
+             tile: it is a fact about the member, not a product. */}
+          <label className="mt-4 flex cursor-pointer items-center gap-3 text-[13.5px] text-ink">
+            <input
+              type="checkbox"
+              checked={under15}
+              onChange={(e) => setUnder15(e.target.checked)}
+              className="h-4 w-4 shrink-0 rounded-[3px] border-ink/25 accent-gold-deep"
+            />
+            {t('form.under15')}
+          </label>
+
           <button
             type="submit"
             disabled={submitting}
             className="group mt-6 inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-full bg-gold-deep px-5 text-[15px] font-semibold text-paper transition-colors hover:bg-ink active:scale-[0.99] disabled:opacity-50"
           >
-            {tier === 'voting' ? t('form.submitPay') : t('form.submitFree')}
+            {t('form.submitFree')}
             <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">
               &rarr;
             </span>

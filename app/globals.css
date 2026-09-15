@@ -791,3 +791,53 @@ body.sheet-open {
     display: none;
   }
 }
+
+/* ── Partner logo strip ──────────────────────────────────────────────────
+   Lifted from sherko.vercel.app, which is the reference the client sent
+   (2026-09-16: "use that 100% same code"). Read off the live site: the
+   keyframe and the single .marquee rule below are Sherko's, unchanged.
+
+   The track holds the list TWICE and travels exactly -50%, so the second
+   copy lands where the first began and the loop has no seam.
+
+   Reduced motion stops it dead. globals.css already collapses every
+   duration to 0.001ms under that query, which would otherwise leave the
+   strip frozen mid-travel with half the partners off-screen. */
+@keyframes marquee {
+  0% { transform: translate(0px); }
+  100% { transform: translate(-50%); }
+}
+
+/* LONGHANDS, not the `animation` shorthand Sherko uses.
+   Same result, one difference that matters here: the shorthand resets every
+   animation-* property it does not name, including animation-direction — and
+   this rule is appended AFTER Tailwind's utilities, so it was overwriting
+   the [animation-direction:reverse] utility on the second row and both rows
+   travelled the same way. Sherko gets away with the shorthand because its
+   utility layer lands after its own CSS; ours does not. */
+.marquee {
+  animation-name: marquee;
+  animation-duration: var(--marquee-duration, 40s);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* FASTER ON A PHONE (client, 2026-09-16: "in mobiles only, make a little
+   more fast, not too much").
+
+   Not a taste tweak — it corrects a real mismatch. The lap time is worked out
+   server-side from the desktop item width (~282px: a logo plus px-24 either
+   side). Below md the padding drops to px-12 and the logos step down a size,
+   so an item is only ~174px and the whole group ~1740px — but it still gets
+   the desktop's lap time, which drags it from ~26px/s down to ~16px/s. The
+   phone was the slowest place to watch it, not the fastest.
+
+   0.62 puts a phone back at roughly the same 26px/s the desktop runs at. The
+   breakpoint is md's 768px, matching where the padding actually changes. */
+@media (max-width: 767.98px) {
+  .marquee { animation-duration: calc(var(--marquee-duration, 40s) * 0.62); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee { animation-name: none; }
+}

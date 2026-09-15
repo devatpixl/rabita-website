@@ -31,8 +31,8 @@ export default async function ContactPage({
               <SectionHeading>{t('directHeading')}</SectionHeading>
               <address className="not-italic text-body text-ink">
                 <p>Rabita</p>
-                <p>{CAMPAIGN.address}</p>
-                <p className="text-ink-60">{CAMPAIGN.postalCity}</p>
+                <p>{CAMPAIGN.visitAddress}</p>
+                <p className="text-ink-60">{CAMPAIGN.visitPostal}</p>
                 <p className="mt-3">
                   <a href={`tel:${CAMPAIGN.contactPhone.replace(/\s/g, '')}`} className="inline-flex min-h-11 items-center hover:underline">
                     {CAMPAIGN.contactPhone}

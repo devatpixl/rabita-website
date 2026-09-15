@@ -98,12 +98,47 @@ export const CAMPAIGN = Object.freeze({
   swift: 'DNBANOKK',
 
   // Location — §10
+  //
+  // TWO ADDRESSES, AND THEY ARE NOT INTERCHANGEABLE. Collapsing them back
+  // into one is what put a building site in the footer.
+  //
+  //   visitAddress  where the congregation IS, today. The footer register,
+  //                 /kontakt, the prayer calendar, prayer-visit and the
+  //                 Besøk oss section on /om-oss. Somebody reads this and
+  //                 walks there.
+  //   address       what the campaign is BUILDING. The hero eyebrow, the
+  //                 project pages, and 27 copy keys in each of three
+  //                 locales. Somebody reads this and gives money to it.
+  //
+  // The plot at Calmeyers gate 8 was cleared in Ramadan 2025 (see
+  // siteClearedRamadan below) and the mosque now rents premises at
+  // Sørligata 8a in the meantime — Årsrapport 2024, in its own words:
+  // "Vi endte til slutt [med en avtale] med Islamske Senter om å leie deres
+  // lokale i Sørligata 8 til bruk som moské."
+  //
+  // Source for the value itself: the back cover of BOTH
+  // public/dokumenter/rabita-arsrapport-2024.pdf and -2025.pdf, which print
+  // "Det Islamske Forbundet - Rabita / Sørligata 8a, 0577 Oslo". The site
+  // serves those PDFs from /givere, so a visitor could already read the
+  // right address in a document the wrong address was sitting next to.
+  //
+  // NOT THE REGISTERED ADDRESS. The donation certificate (takk/attest) and
+  // the data-controller clause in the privacy copy want whatever
+  // Brønnøysund holds, which may be a third value again — both still print
+  // `address` and are deliberately left alone pending the client's answer.
+  visitAddress: 'Sørligata 8a, Oslo',
+  visitPostal: '0577 Oslo',
   address: 'Calmeyers gate 8, Oslo',
   postalCity: '0183 Oslo',
   openingHours: 'Man til søn, 06:00 til 22:00', // TODO confirm; placeholder
   newsletterEmail: 'nyhetsbrev@rabita.no', // TODO confirm; placeholder
   contactEmail: 'post@rabita.no', // TODO confirm; placeholder
-  contactPhone: '+47 22 20 80 88', // TODO confirm; placeholder
+  // TODO CONFIRM — CONFLICT. Årsrapport 2024 and 2025 both print
+  // "Tlf: 22 99 36 62" on the back cover, beside the Sørligata address.
+  // This value is the one that was here, unsourced. One of the two is
+  // stale and only the client knows which, so nothing is changed yet.
+  // It is also what the footer's WhatsApp link dials (social-marks.tsx).
+  contactPhone: '+47 22 20 80 88',
 });
 
 // Prayer times: live from IRN's API via lib/irn.ts, with lib/prayer-times.ts

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
+import { VISIT_MAPS_URL } from '@/lib/location';
 import { ParallaxMedia } from './parallax-media';
 import { PrayerToday } from './prayer-today';
 import { Section, SectionBody, SectionHeading } from './primitives';
@@ -55,8 +56,8 @@ export async function PrayerVisit() {
                   <dt className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
                     {t('addressLabel')}
                   </dt>
-                  <dd className="mt-2 font-serif text-card text-ink">{CAMPAIGN.address}</dd>
-                  <dd className="text-body text-ink-60">{CAMPAIGN.postalCity}</dd>
+                  <dd className="mt-2 font-serif text-card text-ink">{CAMPAIGN.visitAddress}</dd>
+                  <dd className="text-body text-ink-60">{CAMPAIGN.visitPostal}</dd>
                 </div>
                 <div>
                   <dt className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
@@ -78,7 +79,7 @@ export async function PrayerVisit() {
                   {t('bookGroup')}
                 </Link>
                 <a
-                  href={`https://maps.google.com/?q=${encodeURIComponent(CAMPAIGN.address)}`}
+                  href={VISIT_MAPS_URL}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex min-h-11 items-center rounded-full border border-ink px-4 py-2 text-body font-semibold text-ink transition-colors hover:bg-ink hover:text-paper"

@@ -3,9 +3,11 @@ import { AnnualReports } from '@/components/annual-reports';
 import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
-import { Eyebrow, Section, SectionBody, SectionHeading } from '@/components/primitives';
+import { cn } from '@/lib/cn';
+import { Section, SectionBody, SectionHeading } from '@/components/primitives';
 import { PageBand } from '@/components/page-band';
 import { FigureIcon, type FigureIconName } from '@/components/figure-icons';
+import { PartnerLogos } from '@/components/partner-logos';
 import { RequestForm } from '@/components/request-form';
 import { VisitClose } from '@/components/visit-page';
 
@@ -245,62 +247,73 @@ export default async function AboutPage({
 
                   <div className="grid gap-8 lg:grid-cols-[1fr_13rem] lg:gap-10">
                     <div className="rounded-2xl bg-paper p-6 shadow-[0_1px_2px_rgba(26,26,24,0.04),0_24px_60px_-34px_rgba(26,26,24,0.28)] sm:p-8">
-                        <Eyebrow tone="gold-deep">{t('factsEyebrow')}</Eyebrow>
-                        <h2 className="mt-4 font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-tight text-balance text-ink">
+                        {/* The "I tall" eyebrow came off on 2026-09-16
+                           (client: "remove these smallest headings, doesnt
+                           look good"). It was labelling a card whose contents
+                           are four large numerals — the block says "in
+                           numbers" by being numbers. The string stays in the
+                           message files. */}
+                        <h2 className="font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-tight text-balance text-ink">
                           {t('factsHeading')}
                         </h2>
 
-                        <dl className="mt-5 md:mt-7">
-                          {/* Key figures as confirmed in Årsrapport 2025, in the
-                             order the client listed them (2026-08-30). The
-                             second line under each label is theirs too, from the
-                             mockup: it turns a number into a sentence. */}
+                        {/* ── FOUR FIGURES, NOT SIX ────────────────────
+                           Client, 2026-09-16: "maybe make it less figures and
+                           how to make this card itself more modern".
+
+                           It was six rows, each carrying an icon chip, a
+                           label, an italic note, the number and a rising
+                           arrow — thirty elements in a block whose whole job
+                           is to show numbers, and the numbers ended up the
+                           smallest-feeling thing in it, parked at the end of
+                           a busy line. This inverts that: the figure IS the
+                           element, at 2-2.75rem, with the label under it.
+
+                           WHAT WENT, and it is one line to bring back:
+                           volunteers (300+) and pupils (400+). Both true,
+                           both already told better elsewhere — /frivillig is
+                           a page about volunteering and the school has its
+                           own under Undervisning. What is left is the four
+                           that only this section says: how old Rabita is, how
+                           many belong to it, how many backgrounds it holds,
+                           and how many people come through in a week.
+
+                           No icons and no arrows. A globe for
+                           "nationalities" and a footprint for "visitors" were
+                           decoration standing in for meaning, and the arrow
+                           on five of six rows implied a link that was not
+                           there. */}
+                        <dl className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:mt-8">
                           {([
-                            ['calendar', 'founded', String(CAMPAIGN.foundedYear)],
-                            ['people', 'members', CAMPAIGN.members.toLocaleString('nb-NO')],
-                            ['person', 'volunteers', `${CAMPAIGN.volunteers}+`],
-                            ['book', 'pupils', `${CAMPAIGN.pupils}+`],
-                            ['globe', 'nationalities', `${CAMPAIGN.nationalities}+`],
-                            ['route', 'visits', CAMPAIGN.visitorsPerWeek.toLocaleString('nb-NO')],
-                          ] as const).map(([icon, key, value]) => (
+                            ['founded', String(CAMPAIGN.foundedYear)],
+                            ['members', CAMPAIGN.members.toLocaleString('nb-NO')],
+                            ['nationalities', `${CAMPAIGN.nationalities}+`],
+                            ['visits', CAMPAIGN.visitorsPerWeek.toLocaleString('nb-NO')],
+                          ] as const).map(([key, value], i) => (
                             <div
                               key={key}
-                              className="flex items-center gap-4 border-t border-ink/10 py-3 first:border-t-0 first:pt-0 md:py-3.5"
+                              className={cn(
+                                'border-rule py-5 sm:py-6',
+                                // Stacked on a phone, a 2x2 with hairlines
+                                // between the cells from sm. Logical
+                                // properties, so Arabic gets the divider on
+                                // the correct side.
+                                i > 0 && 'border-t',
+                                i === 1 && 'sm:border-t-0',
+                                i % 2 === 1 ? 'sm:border-s sm:ps-6 lg:ps-8' : 'sm:pe-6 lg:pe-8',
+                              )}
                             >
-                              <span
-                                aria-hidden
-                                className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gold-soft/40 text-gold-deep ring-1 ring-gold-deep/20"
-                              >
-                                <FigureIcon name={icon} className="h-[18px] w-[18px]" />
-                              </span>
-                              <dt className="min-w-0 flex-1">
-                                <span className="block font-mono text-[0.625rem] uppercase leading-snug tracking-[0.16em] text-ink-60">
+                              <dd className="font-serif text-[clamp(2rem,4.2vw,2.75rem)] leading-none tabular-nums text-ink">
+                                {value}
+                              </dd>
+                              <dt className="mt-3">
+                                <span className="block font-mono text-[0.625rem] uppercase leading-snug tracking-[0.16em] text-gold-deep">
                                   {t(`facts.${key}`)}
                                 </span>
-                                <span className="mt-1 block font-serif text-[13px] italic leading-snug text-ink-40">
+                                <span className="mt-1.5 block max-w-[24ch] font-serif text-[13px] italic leading-snug text-ink-40">
                                   {t(`factNotes.${key}`)}
                                 </span>
                               </dt>
-                              <dd className="flex shrink-0 items-start gap-1 font-serif text-[1.5rem] leading-none tabular-nums text-ink">
-                                {value}
-                                {/* The rising mark, on every figure but the
-                                   founding year — a year is not a quantity that
-                                   grows. Decorative, so aria-hidden. */}
-                                {key !== 'founded' && (
-                                  <svg
-                                    aria-hidden
-                                    viewBox="0 0 24 24"
-                                    className="mt-0.5 h-3 w-3 shrink-0 text-gold-deep/70 rtl:-scale-x-100"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  >
-                                    <path d="M7 17L17 7M9 7h8v8" />
-                                  </svg>
-                                )}
-                              </dd>
                             </div>
                           ))}
                         </dl>
@@ -331,6 +344,22 @@ export default async function AboutPage({
           </SectionBody>
         </div>
       </section>
+
+      {/* The partner strip. Renders NOTHING until logo files exist in
+         public/partners — see components/partner-logos.tsx. It is wired in
+         now so that adding the twelve files is the whole of finishing it.
+
+         Position, settled 2026-09-16: between the history/figures section
+         and Besøk oss. It went above AnnualReports first — the org chart sits
+         at the foot of that component, so anywhere after it put the partners
+         below the chart — and then up one more, to here.
+
+         It earns the spot: "who Rabita is" (the story and the four figures)
+         reads straight into "who Rabita works with", and the practical half
+         of the page — the address, the visit form, the reports and the chart
+         — all still follows in one run instead of being split by a logo
+         strip. */}
+      <PartnerLogos locale={locale} />
 
       {/* ══ Besøk oss ═══════════════════════════════════════════════════
          Merged in from /besok-oss on 2026-09-15 (client: "Slå sammen «Om oss»
@@ -404,7 +433,7 @@ export default async function AboutPage({
               <p className="inline-flex items-center rounded-full bg-paper px-3.5 py-1.5 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60 ring-1 ring-ink/10">
                 {tvp('addressHeading')}
               </p>
-              <SectionHeading className="mt-5">{CAMPAIGN.address}</SectionHeading>
+              <SectionHeading className="mt-5">{CAMPAIGN.visitAddress}</SectionHeading>
 
               <ul className="mt-6 grid gap-x-8 gap-y-6 border-t border-ink/10 pt-6 sm:grid-cols-2 md:mt-8 md:pt-7 lg:grid-cols-1">
                 {visitFacts.map((f, i) => (
@@ -473,8 +502,11 @@ export default async function AboutPage({
                 rule={false}
                 intro={
                   <div className="mb-7">
-                    <Eyebrow tone="gold-deep">{tvp('formHeading')}</Eyebrow>
-                    <h2 className="mt-4 font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-tight text-balance text-ink">
+                    {/* Same removal. This one also read oddly: a "Bestill
+                       gruppebesøk" label sitting on top of a "Bli med på
+                       besøk" headline is the same instruction twice, in two
+                       registers. */}
+                    <h2 className="font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-tight text-balance text-ink">
                       {tvp('formTitle')}
                     </h2>
                     <p className="mt-3 max-w-[44ch] text-[15px] leading-snug text-ink-60">
@@ -497,19 +529,32 @@ export default async function AboutPage({
 
       {/* The reports and the chart land where the "available on request"
          sentence used to stand for both (client, 2026-09-13). */}
-      <AnnualReports />
+
+      <AnnualReports locale={locale} />
 
       {/* The close came with Besøk oss, and it ends the merged page better
          than the reports did. "Døren er åpen." is written to be the last
          thing on a page, and after the history, the figures, the invitation
          and the paperwork it is the right last word — an About page that
          ends on an open door rather than on a list of PDFs. */}
+
+      {/* «Bli med på besøk» (client, 2026-09-16, Om oss list: "Legge til boks
+         nederst på siden"). The box itself was already here — it has closed
+         this page since the Besøk oss merge — but its button said "Kontakt
+         oss" and went to the contact page, which is the long way round: the
+         visit form is on THIS page, in the Besøk oss section above. So the
+         label is now his, and it goes straight to the form.
+
+         visitPage.formTitle is that form's own title, already translated in
+         all three locales, so the button and the thing it scrolls to say the
+         same words. /arrangementer already points its own close box at this
+         same anchor. */}
       <VisitClose
         heading={tv('pages.visit.closeHeading')}
         body={tv('pages.visit.closeBody')}
         image="/photos/visit-foyer.webp"
         alt={tv('pages.visit.caption')}
-        primary={{ label: tv('pages.visit.closePrimary'), href: `/${locale}/kontakt` }}
+        primary={{ label: tvp('formTitle'), href: `/${locale}/om-oss#besok-oss` }}
         secondary={{ label: tv('pages.visit.closeSecondary'), href: `/${locale}/arrangementer` }}
       />
 

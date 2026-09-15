@@ -327,9 +327,20 @@ export function ContactFab() {
           // the register the rest of the site speaks in. The shadow is the
           // one already used for the play control, so it sits ON the paper
           // as an object rather than floating as a flat colour.
-          className="pointer-events-auto inline-flex min-h-[3.25rem] items-center gap-2.5 rounded-full bg-gold-deep ps-5 pe-6 text-paper shadow-[0_8px_28px_-8px_rgba(26,26,24,0.6)] transition-[background-color,transform] duration-200 hover:bg-ink hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-deep/60 focus-visible:ring-offset-2 focus-visible:ring-offset-paper motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+          //
+          // SMALLER ON A PHONE ONLY (client, 2026-09-16: "try to make it
+          // smaller ... so it takes less space"). 52px tall and a 15px word
+          // is right beside a desktop footer and heavy over a 390px one,
+          // where it sat on the credit line. Everything from sm: up is
+          // untouched.
+          //
+          // The floor is min-h-11 — 44px, the tap-target minimum — and the
+          // word stays. Dropping to an icon-only disc would take less room
+          // again, but the word IS the design here (see above), and a bare
+          // speech bubble is the stock-widget look this was drawn to avoid.
+          className="pointer-events-auto inline-flex min-h-11 items-center gap-2 rounded-full bg-gold-deep ps-4 pe-5 text-paper sm:min-h-[3.25rem] sm:gap-2.5 sm:ps-5 sm:pe-6 shadow-[0_8px_28px_-8px_rgba(26,26,24,0.6)] transition-[background-color,transform] duration-200 hover:bg-ink hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-deep/60 focus-visible:ring-offset-2 focus-visible:ring-offset-paper motion-reduce:transition-none motion-reduce:hover:translate-y-0"
         >
-          <svg viewBox="0 0 20 20" className="h-[18px] w-[18px] shrink-0" aria-hidden>
+          <svg viewBox="0 0 20 20" className="h-4 w-4 shrink-0 sm:h-[18px] sm:w-[18px]" aria-hidden>
             <path
               d="M17 11.5a2.5 2.5 0 01-2.5 2.5H7l-4 3v-3H4.5A2.5 2.5 0 012 11.5v-6A2.5 2.5 0 014.5 3h10A2.5 2.5 0 0117 5.5z"
               fill="none"
@@ -338,7 +349,7 @@ export function ContactFab() {
               strokeLinejoin="round"
             />
           </svg>
-          <span className="text-[15px] font-semibold">{t('open')}</span>
+          <span className="text-[13.5px] font-semibold sm:text-[15px]">{t('open')}</span>
         </motion.button>
       )}
     </div>

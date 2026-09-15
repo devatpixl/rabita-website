@@ -8,8 +8,19 @@ import { SeatGrid } from './seat-grid';
 
 // §4.10 (rebuilt). Membership as an AGM convening notice, not a pricing
 // tier grid. Dusk plane, second and final dark section on the page
-// (mirrors "Where the money goes"). Argument shape: one voting seat costs
-// 1 000 kr, and roughly three-quarters of members don't have one.
+// (mirrors "Where the money goes").
+//
+// THE ARGUMENT CHANGED ON 2026-09-16. It used to be "one voting seat costs
+// 1 000 kr, and roughly three-quarters of members don't have one" — the fee
+// set at display size, a seat grid showing 1 040 of 4 200 filled, and a "Get
+// a vote" button. The client removed the tiers, made membership free and
+// gave every member a vote, which deletes that argument entirely: there is
+// no seat to buy and no minority to join.
+//
+// What replaces it is the same shape making the true claim — the word FREE
+// where the price stood, one vote per member beside it, one button. The seat
+// grid switches itself off through votingMembers: null in lib/membership.ts,
+// which the component already supported.
 
 const NBSP = / | /g;
 
@@ -44,11 +55,10 @@ export async function Membership() {
   const t = await getTranslations('membership');
   const locale = (await getLocale()) as AppLocale;
 
-  const { totalMembers, votingMembers, votingFeeNok, agm } = membership;
+  const { totalMembers, votingMembers, agm } = membership;
   const showGrid = votingMembers !== null;
 
   const { dayMonth, year } = formatAgmDateParts(locale, agm.date);
-  const fee = formatCount(locale, votingFeeNok);
   const nStr = showGrid ? formatCount(locale, votingMembers as number) : '';
   const totalStr = formatCount(locale, totalMembers);
   const ariaLabel = showGrid
@@ -84,27 +94,33 @@ export async function Membership() {
 
             <div className="mt-8 h-px w-full bg-[#2A3A44]" />
 
+            {/* Where "1 000" stood. Same slot, same scale — the number was
+               the loudest thing in this column and the word that replaces it
+               should be too, because "free" is now the offer. No
+               tabular-nums: it is a word. */}
             <div className="mt-6 flex items-baseline gap-3">
-              <span className="font-serif text-[34px] leading-none text-paper tabular-nums md:text-[40px]">
-                {fee}
+              <span className="font-serif text-[34px] leading-none text-paper md:text-[40px]">
+                {t('freeWord')}
               </span>
               <span className="text-[13.5px] text-dusk-60">
-                {t('priceNote')}
+                {t('freeNote')}
               </span>
             </div>
 
             <div className="mt-7 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6 md:mt-8">
+              {/* ONE button now, to /bli-medlem. The pair it replaces was
+                 "Get a vote" (the paid tier, via ?tier=voting) beside "Free
+                 membership" (the unpaid one) — two buttons that existed only
+                 to split a choice that no longer exists. Both pointed at
+                 /medlemskap, the tier picker; the join flow is the right
+                 destination. membership.ctaSecondary is left in the message
+                 files, unused, rather than deleted from three locales for a
+                 button that may come back. */}
               <Link
-                href={`/${locale}/medlemskap?tier=voting`}
+                href={`/${locale}/bli-medlem`}
                 className="inline-flex min-h-11 items-center rounded-full bg-gold px-5 text-[14px] font-semibold text-dusk hover:bg-gold-deep hover:text-paper transition-colors"
               >
                 {t('ctaPrimary')}
-              </Link>
-              <Link
-                href={`/${locale}/medlemskap`}
-                className="inline-flex min-h-11 items-center text-[14px] text-paper underline decoration-gold decoration-1 underline-offset-4"
-              >
-                {t('ctaSecondary')}
               </Link>
             </div>
           </div>

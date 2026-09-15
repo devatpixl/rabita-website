@@ -1,12 +1,13 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { CAMPAIGN } from '@/lib/campaign';
-import { DIRECTIONS_URL } from '@/lib/location';
+import { VISIT_DIRECTIONS_URL } from '@/lib/location';
 
+import { CHANNELS, CHANNEL_RGB, ChannelMark } from './social-marks';
 import { LanguageSwitcher } from './language-switcher';
 import { QiblaCompass } from './qibla-compass';
 
@@ -17,12 +18,6 @@ import { QiblaCompass } from './qibla-compass';
 //             there" — so it comes first and gets the room.
 //   COLUMNS   Rabita · Tjenester · Følg oss · Nyhetsbrev, on one rule.
 //   BAR       lockup, © + org.nr, privacy, language, qibla.
-
-const SOCIAL = [
-  { key: 'facebook', href: 'https://facebook.com/detislamskeforbundet/' },
-  { key: 'instagram', href: 'https://instagram.com/detislamskeforbundet/' },
-  { key: 'tiktok', href: 'https://tiktok.com/@oslomosque' },
-] as const;
 
 export function Footer({ map }: { map?: ReactNode }) {
   const t = useTranslations('footer');
@@ -65,7 +60,7 @@ export function Footer({ map }: { map?: ReactNode }) {
               <div className="flex items-baseline gap-3 py-2.5 sm:block sm:py-0">
                 <dt className="w-[4.25rem] shrink-0 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-paper/45 sm:w-auto">{t('findUs.address')}</dt>
                 <dd className="min-w-0 flex-1 text-[14px] leading-snug text-paper sm:mt-1 sm:text-body">
-                  {CAMPAIGN.address} <span className="text-paper/60">· {CAMPAIGN.postalCity}</span>
+                  {CAMPAIGN.visitAddress} <span className="text-paper/60">· {CAMPAIGN.visitPostal}</span>
                 </dd>
               </div>
               <div className="flex items-baseline gap-3 py-2.5 sm:block sm:py-0">
@@ -118,7 +113,7 @@ export function Footer({ map }: { map?: ReactNode }) {
                map sits in a different column and the repetition is not one. */}
             <div className="hidden flex-wrap gap-3 sm:mt-6 sm:flex">
               <a
-                href={DIRECTIONS_URL}
+                href={VISIT_DIRECTIONS_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gold px-5 py-2 text-[14px] font-semibold text-dusk transition-colors hover:bg-paper"
@@ -157,12 +152,42 @@ export function Footer({ map }: { map?: ReactNode }) {
             </form>
 
             <h3 className="mt-5 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-paper/50 sm:mt-8">{t('cols.follow')}</h3>
-            <ul className="mt-2 flex flex-wrap gap-x-6 gap-y-1 sm:mt-3">
-              {SOCIAL.map((s) => (
-                <li key={s.key}>
-                  <a href={s.href} target="_blank" rel="noreferrer" className="inline-flex min-h-9 items-center gap-1.5 text-[15px] text-paper/80 transition-colors hover:text-gold">
-                    {t(`social.${s.key}`)}
-                    <span aria-hidden className="text-[11px] text-paper/40">↗</span>
+            {/* Real logos, real colours (client, 2026-09-16: "Legg inn logo
+               til alle sosiale medier nederst"), from the same glyphs the
+               home-page cards use — see social-marks.tsx.
+
+               EACH SITS ON A PAPER DISC, and that is not decoration. Two of
+               the four cannot be painted straight onto dusk #16242E and stay
+               themselves: TikTok is black with a cyan and a magenta offset,
+               and the black layer — the one carrying the note's shape —
+               disappears on a dark ground, leaving a cyan-and-magenta ghost.
+               Facebook's #1877F2 on #16242E is blue on blue. The disc is what
+               every brand guideline prescribes for a dark background: put the
+               full-colour mark on a light field rather than recolour it.
+
+               44px discs, so the tap target is the whole mark and the row
+               still clears Apple's minimum with a 20px glyph inside it.
+
+               The hover beat is the ring, in that platform's own colour, and
+               a half-step rise. The logo itself never moves or recolours —
+               a recoloured brand mark is not that brand's mark. Same rule the
+               cards follow. */}
+            {/* Centred on a phone (client, 2026-09-16), left from sm.
+               Below sm this column is the full page width, so four 44px
+               discs left-aligned left ~60% of the row empty; from sm the
+               column narrows and left is right again. */}
+            <ul className="mt-3 flex flex-wrap justify-center gap-2.5 sm:mt-4 sm:justify-start">
+              {CHANNELS.map(({ key, href }) => (
+                <li key={key}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={t(`social.${key}`)}
+                    style={{ '--ch-ring': `rgb(${CHANNEL_RGB[key]} / 0.65)` } as CSSProperties}
+                    className="grid h-11 w-11 place-items-center rounded-full bg-paper transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:ring-2 hover:ring-[color:var(--ch-ring)]"
+                  >
+                    <ChannelMark channel={key} instance={`footer-${key}`} className="h-5 w-5" />
                   </a>
                 </li>
               ))}

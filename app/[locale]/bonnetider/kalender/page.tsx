@@ -122,7 +122,7 @@ export default async function CalendarPage({
             </div>
             <div className="text-end">
               <p className="font-serif text-[1.15rem] text-ink">{tc('title')}</p>
-              <p className="mt-1 text-[0.8rem] text-ink-60">{CAMPAIGN.address}</p>
+              <p className="mt-1 text-[0.8rem] text-ink-60">{CAMPAIGN.visitAddress}</p>
             </div>
           </header>
 
@@ -199,7 +199,7 @@ export default async function CalendarPage({
           <footer className="mt-7 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 border-t border-rule pt-4 text-[0.72rem] text-ink-60">
             <p>{tc('source')}</p>
             <p className="tabular-nums">
-              {CAMPAIGN.address} · Org.nr. {CAMPAIGN.orgNr} · Vipps {CAMPAIGN.vippsNumber}
+              {CAMPAIGN.visitAddress} · Org.nr. {CAMPAIGN.orgNr} · Vipps {CAMPAIGN.vippsNumber}
             </p>
           </footer>
         </article>

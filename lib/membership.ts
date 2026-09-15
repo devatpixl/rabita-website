@@ -7,8 +7,16 @@
 
 export type Membership = {
   totalMembers: number;
+  /**
+   * How many members hold a vote — or null to hide the seat grid entirely.
+   *
+   * NULL SINCE 2026-09-16, and not as a placeholder: the client made every
+   * membership free and gave every member a vote, so "voting members" is no
+   * longer a subset of anything. A grid showing 4 200 of 4 200 filled seats
+   * states nothing. The component already treats null as "hide the grid",
+   * which is exactly the right behaviour now.
+   */
   votingMembers: number | null;
-  votingFeeNok: number;
   agm: {
     date: string; // ISO YYYY-MM-DD, formatted per locale at render time
     time: string; // HH:mm, 24h
@@ -17,10 +25,11 @@ export type Membership = {
 };
 
 export const membership: Membership = {
+  // TODO: still disagrees with CAMPAIGN.members (4 344) and with
+  // joinPage.members ("over 4 300"). Three totals, one organisation —
+  // raised with the client 2026-09-16, unresolved.
   totalMembers: 4200,
-  // TODO: confirm with Rabita before launch — this is a placeholder.
-  votingMembers: 1040,
-  votingFeeNok: 1000,
+  votingMembers: null,
   agm: {
     // TODO: confirm with Rabita before launch — this is a placeholder.
     date: '2027-03-14',

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
 import { Accent } from '@/components/accent';
+import { MembershipRecognition } from '@/components/membership-recognition';
 import { MembershipSignup } from '@/components/membership-signup';
 import { Section, SectionBody } from '@/components/primitives';
 import { PageBand } from '@/components/page-band';
@@ -22,11 +23,27 @@ import { FigureIcon, type FigureIconName } from '@/components/figure-icons';
 // working part below it on its own ground (client, 2026-09-08). The content
 // is unchanged; only the shape is.
 //
-// updates first, vote second. Two of the three memberships on this page
-// carry no vote at all, so leading on the ballot mis-sold the free tiers to
-// every reader who is here to join rather than to govern.
-const POINTS = ['updates', 'vote', 'renewal'] as const;
-const POINT_ICONS: FigureIconName[] = ['book', 'check', 'calendar'];
+// The three points, rewritten 2026-09-16 to the client's four asks: say it
+// is free, say everyone can vote, say it supports the mosque project.
+//
+// They used to read updates / vote / renewal, which described a membership
+// that had three prices and two kinds of vote. With one free membership that
+// everyone votes in, the honest order is: what it costs (nothing), what it
+// gives you (a vote), what it does (funds the building).
+//
+// `support` carries the argument the client's own reference makes — iman.no:
+// "Du kan kun være medlem i ett trossamfunn … Gjør et bevisst valg i hvor du
+// vil at statsstøtten skal gå." Norwegian trossamfunn draw state and
+// municipal tilskudd per registered member and a person counts in exactly
+// one, so a free membership still funds the building — per head, from the
+// public purse rather than from the member. That is what makes "free" and
+// "supports the project" one argument instead of two.
+// FLAGGED: it is a claim about Rabita's funding. Confirm the wording.
+//
+// updates/renewal stay in the message files untouched — the service-page
+// aside renders updates/vote/renewal and would break if they went.
+const POINTS = ['free', 'vote', 'support'] as const;
+const POINT_ICONS: FigureIconName[] = ['check', 'people', 'building'];
 
 export default async function JoinPage({
   params,
@@ -92,7 +109,7 @@ export default async function JoinPage({
 
          The interior appears twice: once very faintly behind the whole
          section, once properly inside the panel. */}
-      <Section tone="paper-2" className="relative isolate overflow-hidden !bg-transparent">
+      <Section id="meld-inn" tone="paper-2" className="relative isolate overflow-hidden !bg-transparent">
         {/* The client's mosque interior, as the section's own ground
            (2026-09-13). Full-bleed, cover, centred — so it CROPS at every
            width rather than stretching, and never exposes an edge.
@@ -211,6 +228,11 @@ export default async function JoinPage({
           </div>
         </SectionBody>
       </Section>
+
+      {/* Last, deliberately — see the note at the top of the component. The
+         form comes first for the reader who arrived ready to join; this is
+         for the one who reached the bottom without signing. */}
+      <MembershipRecognition locale={locale} />
     </main>
   );
 }

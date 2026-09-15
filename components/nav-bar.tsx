@@ -133,7 +133,13 @@ export function NavBar() {
         // symmetric, so the two are equivalent here and the physical form
         // reads plainer. Logical properties still matter for anything
         // asymmetric — the padding inside the bar, for instance.
-        className="pointer-events-none absolute inset-y-1.5 inset-x-0 flex justify-center px-3 md:px-6"
+        // inset-y-1, not 1.5, since 2026-09-16: the lockup mark went to 56px
+        // and a 64px capsule left it 3px of bottom clearance — a rosette
+        // very nearly kissing the edge of a floating pill. 4px of inset
+        // makes the capsule 68px and gives the mark room to sit in it.
+        // The pill is still well inside the 76px row, so the header does
+        // not move.
+        className="pointer-events-none absolute inset-y-1 inset-x-0 flex justify-center px-3 md:px-6"
       >
         <div
           className={cn(
@@ -172,14 +178,14 @@ export function NavBar() {
           // screen — a 13" and a 27" both get 1248 here, which is why this only
           // bites on the smaller one. min-[1800px] goes back to 48 with the
           // wider cap.
-          className="relative mx-auto flex w-full max-w-[84rem] min-[1800px]:max-w-[98rem] items-center justify-between px-4 py-2 md:px-10 md:py-4 lg:px-12 xl:px-8 min-[1800px]:px-12">
+          className="relative mx-auto flex h-[60px] w-full max-w-[84rem] min-[1800px]:max-w-[98rem] items-center justify-between px-4 md:h-[76px] md:px-10 lg:px-12 xl:px-8 min-[1800px]:px-12">
         {/* Wordmark — mark + two-line stacked name ("Oslo Sentralmoské"
            over "Rabita", client 2026-09-04; together they read the full
            name, Oslo Sentralmoské Rabita). No underline. Whole block links
            to home. */}
         <LinkVT
           href={`/${locale}`}
-          className="vt-wordmark flex min-h-10 shrink-0 items-center gap-2 whitespace-nowrap md:min-h-11 md:gap-3 md:pe-4 lg:pe-6"
+          className="vt-wordmark flex h-full shrink-0 items-center gap-2.5 whitespace-nowrap md:gap-3 md:pe-4 lg:pe-6"
           aria-label={`${t('orgName')}, ${t('wordmark')}`}
         >
           {/* Mark, then each line of the name, on the curve and duration the
@@ -191,13 +197,38 @@ export function NavBar() {
             transition={{ duration: 0.4, delay: 0.06, ease: WORDMARK_EASE }}
             className="flex"
           >
+            {/* THE TIGHT CROP, not the shared 256 asset (client, 2026-09-16:
+               "gjøre den geometriske figuren litt større"). Its glyph sits in
+               a 214x216 box inside a 256x256 canvas — 20px of transparent
+               padding on every side — so in this 44px slot the rosette was
+               drawing at 36.8px and a fifth of the logo was air.
+               rabita-mark-tight-216.png is the same artwork cropped square to
+               its own alpha bounding box: same box here, figure 20% larger,
+               not one pixel added to the header. (It is also 12KB smaller.)
+
+               A SEPARATE FILE rather than a crop of the shared one, because
+               /logo/rabita-mark-256.png is read in eleven other places — the
+               certificate seal, the prayer calendar, the campaign meter, the
+               .star-texture tile in globals.css — where that padding is doing
+               real work as breathing room. Rolling the crop out there is a
+               per-case judgement, not a find-and-replace.
+
+               TODO: ask the client for the VECTOR original. A geometric
+               rosette should be an SVG — it would crop exactly, stay sharp at
+               any size, and take the gold from CSS instead of baking it in.
+
+               h-10 on a phone, up from h-8. The lockup already reserves
+               min-h-10 and the burger beside it is h-10, so the row is 40px
+               whatever this does — the mark was simply 8px short of the space
+               it already had. Phone figure goes 26.8px -> 40px, +49%, and the
+               bar measures exactly what it did before. */}
             <Image
-              src="/logo/rabita-mark-256.png"
+              src="/logo/rabita-mark-tight-216.png"
               alt=""
-              width={40}
-              height={40}
+              width={44}
+              height={44}
               priority
-              className="h-8 w-8 md:h-11 md:w-11"
+              className="h-12 w-12 md:h-14 md:w-14"
             />
           </motion.span>
           <span className="flex flex-col font-serif text-ink leading-tight">
@@ -205,7 +236,20 @@ export function NavBar() {
               initial={reduced ? false : { opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.14, ease: WORDMARK_EASE }}
-              className="font-serif text-[13px] font-medium leading-[1.15] md:text-[17px] lg:text-[19px]"
+              /* display-opsz + tracking (client, 2026-09-16: "vurdere en
+                 finere skrifttype"). Nothing here changed face: this is the
+                 same Fraunces, on the optical-size axis the rest of the site
+                 already rides. globals.css has carried `.display-opsz`
+                 (opsz 144) since the hero was built, and every headline and
+                 section opener uses it — but the wordmark never did, so the
+                 one piece of type that signs the site was rendering at
+                 Fraunces' DEFAULT low optical size: the chunky, low-contrast
+                 text grade. That is why it read coarser than the page under
+                 it. At opsz 144 the hairlines thin and the contrast opens.
+                 A wordmark also wants air between its letters; at default
+                 tracking 19px Fraunces reads as a sentence rather than a
+                 mark. Both cost zero height. */
+              className="display-opsz font-serif text-[15px] font-medium leading-[1.12] tracking-[0.015em] md:text-[19px] lg:text-[22px]"
             >
               {t('orgName')}
             </motion.span>
@@ -213,7 +257,16 @@ export function NavBar() {
               initial={reduced ? false : { opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2, ease: WORDMARK_EASE }}
-              className="font-serif text-[11px] italic leading-[1.15] text-ink-60 md:text-[14px]"
+              /* Up a step again (client, 2026-09-16: "make Rabita text a bit
+                 bigger"). 13.5/17 against the name's 15/22 — a 1.29 ratio,
+                 close but still clearly the subordinate line.
+
+                 NO display-opsz here, unlike the name above it. globals.css
+                 is explicit that Fraunces at opsz 144 "would read too thin"
+                 below display sizes, and 17px italic is well below. The two
+                 lines carrying different optical cuts is deliberate: the one
+                 that is large enough to hold the fine cut gets it. */
+              className="font-serif text-[13.5px] italic leading-[1.15] text-ink-60 md:text-[17px]"
             >
               {t('wordmark')}
             </motion.span>

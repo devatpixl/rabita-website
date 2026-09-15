@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
+import { OrgChart } from './org-chart';
 import { ANNUAL_REPORTS } from '@/lib/reports';
 import { Accent } from './accent';
 import { SectionBody } from './primitives';
@@ -24,14 +24,15 @@ import { SectionBody } from './primitives';
 // into HTML is a way to misspell somebody's name on their own mosque's
 // website. The cost of that decision is honest and stated below.
 
-export async function AnnualReports() {
-  const t = await getTranslations('aboutPage.reports');
+export async function AnnualReports({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale, namespace: 'aboutPage.reports' });
 
   // paper, not paper-2, since 2026-09-15. Besøk oss merged into this page
   // directly above and has to stand on paper-2 — its form card is bg-paper
   // and stops reading as a card on any lighter ground — so two paper-2
   // sections would have met here and read as one flat strip instead of two.
   return (
+    <>
     <section id="arsrapporter" className="scroll-mt-24 bg-paper py-section-md">
       <SectionBody>
         <div className="grid gap-8 md:grid-cols-12 md:gap-12">
@@ -95,8 +96,24 @@ export async function AnnualReports() {
           </ul>
         </div>
 
-        {/* ── organisasjonskart ──────────────────────────────────────────── */}
-        <div className="mt-16 md:mt-24">
+      </SectionBody>
+    </section>
+
+    {/* ── ORGANISASJONSKART, ON THE SAGE GROUND ──────────────────────────
+       Client, 2026-09-16: "for this organisation part, use light green in
+       background as colour which comes in our theme and used other places
+       also". That is `sage` (#E3EAE4) — the site's own green, already the
+       ground under the campaign meter, the membership recognition block and
+       every form well.
+
+       It is a section of its own now rather than the tail of Årsrapportene.
+       The two were one block on paper, so the chart read as an appendix to
+       the reports; on its own ground it is a thing in its own right, and the
+       paper/sage step does the separating that a 6rem margin was doing
+       before. */}
+    <section id="organisasjonskart" className="scroll-mt-24 bg-sage py-section-md">
+      <SectionBody>
+        <div>
           <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
             {t('chartEyebrow')}
           </p>
@@ -104,35 +121,24 @@ export async function AnnualReports() {
             {t.rich('chartHeading', { em: (chunks) => <Accent surface="paper">{chunks}</Accent> })}
           </h2>
 
-          {/* UNOPTIMIZED, and the width capped at the file's own 1024px.
-             Two separate reasons, both visible on this particular image:
+          {/* THE CHART ITSELF, as markup (client, 2026-09-16: "Gjøre
+             organisasjonskart til en integrert del av nettsiden").
 
-             next.config sets formats: ['image/avif', 'image/webp'], so the
-             optimizer re-encodes. The client's file is ALREADY a lossy webp,
-             so the page was serving a lossy AVIF made from a lossy webp —
-             generation loss, and this image is almost entirely 10px text,
-             which is precisely what lossy codecs smear. Opening the file
-             directly looked sharper because that is the untouched original.
-             It is 49KB; there is nothing for the optimizer to win here.
+             It was a single 1024x724 webp until today. The names in it are
+             about 10px of baked-in pixels, so on a phone they could not be
+             read, and to a screen reader, a translator or a search engine
+             they did not exist at all. OrgChart renders the same 28 people as
+             text that reflows, translates and can be selected.
 
-             And the plate is 1104px wide while the source is 1024, so it was
-             also being stretched 8% past native. max-w caps that: better a
-             slightly narrower chart than a soft one. */}
-          <div className="mx-auto mt-8 max-w-[1024px] overflow-hidden rounded-2xl border border-rule bg-paper-2 md:mt-10">
-            <Image
-              src="/photos/organisasjonskart.webp"
-              alt={t('chartAlt')}
-              width={1024}
-              height={724}
-              unoptimized
-              className="h-auto w-full"
-            />
-          </div>
+             The image is still linked below, because it carries a portrait of
+             each person and this does not — they live inside that one file at
+             ~51px across, too small to crop out and reuse honestly. */}
+          <OrgChart locale={locale} />
 
-          {/* The chart is an image, so its names are ~10px on a phone. This
-             opens the file itself, where the reader can pinch to zoom — which
-             is a better answer on a touch screen than any zoom control we
-             could build over it. */}
+          {/* Still here, but doing a different job now. It used to be the
+             only way to read the chart on a phone; the markup above has taken
+             that over. What the file still has that the markup does not is a
+             photograph of each person. */}
           <a
             href="/photos/organisasjonskart.webp"
             target="_blank"
@@ -150,5 +156,6 @@ export async function AnnualReports() {
         </div>
       </SectionBody>
     </section>
+    </>
   );
 }

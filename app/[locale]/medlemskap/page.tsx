@@ -5,14 +5,25 @@ import { useTranslations } from 'next-intl';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
 import { type ColophonLabels, StoryColophon, StoryHero, StoryPlate } from '@/components/story-page';
 
-type Tier = 'ordinary' | 'voting' | 'youth';
-
-// §4.10 real module — 3 tiers, signup + payment + renewal + voting-eligibility.
-// Payment is stubbed in phase 2; the flow is complete end-to-end otherwise.
+// §4.10 real module — signup + renewal. Payment is stubbed in phase 2; the
+// flow is complete end-to-end otherwise.
+//
+// THE TIERS ARE GONE (client, 2026-09-16: "make all memberships free, remove
+// categories, all can vote"). This page carried the same three-tile picker
+// as the join card — Ordinary 0 kr / Voting 1 000 kr / Under 15 0 kr — and
+// left standing it would have contradicted every other membership surface on
+// the site the moment they changed.
+//
+// NOTE: this page and /bli-medlem are two explanations of one thing, and
+// nothing in the nav links here any more — the AGM section's buttons were
+// the last references and they now point at /bli-medlem. Recommended
+// follow-up is a redirect to /bli-medlem, the way /besok-oss and
+// /tjenester/megling were retired in next.config.ts. Not done unasked: it
+// deletes a page, which is the client's call, not ours.
 export default function MembershipPage() {
   const t = useTranslations('medlemskapPage');
   const ts = useTranslations('storyPages');
-  const [tier, setTier] = useState<Tier>('voting');
+  const [under15, setUnder15] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -28,7 +39,7 @@ export default function MembershipPage() {
       await fetch('/api/memberships', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ tier, name, email, phone, guardian }),
+        body: JSON.stringify({ under15, name, email, phone, guardian }),
       });
       setDone(true);
     } finally {
@@ -49,23 +60,7 @@ export default function MembershipPage() {
       <Section tone="paper">
         <SectionBody>
           <SectionHeading>{t('choose')}</SectionHeading>
-          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
-            {(['ordinary', 'voting', 'youth'] as Tier[]).map((k) => (
-              <button
-                key={k}
-                type="button"
-                onClick={() => setTier(k)}
-                aria-pressed={tier === k}
-                className={`text-start border p-6 transition-colors ${
-                  tier === k ? 'border-ink bg-paper-2' : 'border-rule bg-paper hover:border-ink'
-                }`}
-              >
-                <h3 className="font-serif text-card text-ink">{t(`tiers.${k}.name`)}</h3>
-                <p className="mt-2 font-serif text-display leading-none tabular-nums text-ink">{t(`tiers.${k}.price`)}</p>
-                <p className="mt-4 text-body text-ink-60">{t(`tiers.${k}.body`)}</p>
-              </button>
-            ))}
-          </div>
+          <p className="mt-4 max-w-prose text-body text-ink-60">{t('lede')}</p>
         </SectionBody>
       </Section>
 
@@ -94,16 +89,21 @@ export default function MembershipPage() {
                 <input value={phone} onChange={(e) => setPhone(e.target.value)}
                   className="min-h-11 w-full border border-rule bg-paper px-3 py-2 text-body outline-none focus:border-ink" />
               </label>
-              {tier === 'youth' && (
+              <label className="flex cursor-pointer items-center gap-3 text-body text-ink">
+                <input type="checkbox" checked={under15} onChange={(e) => setUnder15(e.target.checked)}
+                  className="h-4 w-4 shrink-0 rounded-[3px] border-ink/25 accent-gold-deep" />
+                {t('form.under15')}
+              </label>
+              {under15 && (
                 <label className="block">
-                  <span className="mb-1 block text-[13px] text-ink-60">{t('form.guardian')}</span>
+                  <span className="mb-1 block text-[13px] text-ink-60">{t('form.guardianName')}</span>
                   <input required value={guardian} onChange={(e) => setGuardian(e.target.value)}
                     className="min-h-11 w-full border border-rule bg-paper px-3 py-2 text-body outline-none focus:border-ink" />
                 </label>
               )}
               <button type="submit" disabled={submitting}
                 className="min-h-12 rounded-full bg-gold-deep px-5 py-3 text-[15px] font-semibold text-paper hover:bg-ink transition-colors disabled:opacity-50">
-                {tier === 'voting' ? t('form.submitPay') : t('form.submitFree')}
+                {t('form.submitFree')}
               </button>
               <p className="text-[13px] text-ink-60">{t('form.note')}</p>
             </form>

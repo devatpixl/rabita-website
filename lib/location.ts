@@ -8,11 +8,36 @@
 // river within the plate, simplified, stored in metres from the door.
 // To refresh either file: re-run the fetch scripts and replace the JSON.
 
+// THE PLOT. Origin for streets.json and walking-routes.json, and the subject
+// of the six-pin map on /leiligheter — a buyer there is weighing THIS
+// location, because this is where the flat will stand. Do not move it to the
+// temporary premises: every stored route is measured in metres from this
+// point, and the landmark distances would silently become fiction.
 export const MOSQUE = {
   name: 'Rabita – Det Islamske Forbundet',
   address: 'Calmeyers gate 8, 0183 Oslo',
   lat: 59.916,
   lon: 10.7535,
+} as const;
+
+// THE DOOR, while the plot above is a building site. Where a visitor actually
+// goes: the footer's Veibeskrivelse and the directions link on the visit
+// panel both point here, not at the hole in the ground.
+//
+// Address from the back cover of Årsrapport 2024 and 2025; see the note on
+// CAMPAIGN.visitAddress for the full provenance. Coordinates geocoded from it
+// via OSM Nominatim on 2026-09-16 — Enerhaugen, Gamle Oslo, about 900 m east
+// of the plot.
+//
+// It gets no entry in walking-routes.json on purpose. Those routes feed the
+// distance list, the distance list renders only in FindUsGoogle
+// variant="full", and the only page using that variant is /leiligheter,
+// which is measuring from MOSQUE. Nothing here needs re-fetching.
+export const VISIT = {
+  name: 'Rabita – Det Islamske Forbundet',
+  address: 'Sørligata 8a, 0577 Oslo',
+  lat: 59.913929,
+  lon: 10.768639,
 } as const;
 
 export type LandmarkKind = 'metro' | 'rail' | 'tram' | 'bus' | 'place';
@@ -97,5 +122,12 @@ export function routedMinutes(key: Landmark['key']): number {
   return Math.max(1, Math.ceil(ROUTES[key].seconds / 60));
 }
 
+// The plot — /leiligheter only.
 export const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MOSQUE.address)}`;
 export const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(MOSQUE.address)}&travelmode=walking`;
+
+// The door — everywhere a reader is being sent somewhere. Walking, because
+// the premises are four minutes from Grønland T-bane and the old pair said
+// walking too.
+export const VISIT_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(VISIT.address)}`;
+export const VISIT_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(VISIT.address)}&travelmode=walking`;

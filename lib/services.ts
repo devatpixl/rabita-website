@@ -33,12 +33,31 @@ export const SERVICE_KEYS = [
   'kurs-islam',
   'kurs-konvertitter',
   'arabisk',
+  // Added 2026-09-16 (client, Tjenester list point 1: "Legge til ny tjeneste:
+  // Kvinnetreff").
+  //
+  // THE COPY IS PROVISIONAL AND DELIBERATELY UNSPECIFIC. Rabita has not sent
+  // anything about this group yet — no schedule, no room, no contact, no
+  // photograph — so the text describes the kind of thing a kvinnetreff is
+  // and stops there. It names no day, no time and no place on purpose: an
+  // invented "every Tuesday at 18:00" is the one kind of placeholder that
+  // does real damage, because a reader would turn up. Replace wholesale when
+  // the real details arrive.
+  'kvinnetreff',
 ] as const;
 
 export type ServiceKey = (typeof SERVICE_KEYS)[number];
 
 // One render per subject, so the pages are not the same picture repeated.
 export const SERVICE_IMAGE: Record<ServiceKey, string> = {
+  // A RENDER, on purpose. There is no photograph of a kvinnetreff, and every
+  // candidate in /photos misrepresents it: womens-circle is already
+  // counselling's, mother-child is a woman and child at a political
+  // demonstration (the same street set family-together comes from), and
+  // svc-services is a mixed-gender hall. An architectural render of the
+  // lattice claims nothing about who attends. Swap it the day a real
+  // photograph arrives.
+  kvinnetreff: '/photos/svc-wudu.webp',
   nikah: '/photos/subj-nikah.webp',
   janaza: '/photos/subj-janaza.webp',
   shahada: '/photos/subj-shahada.webp',
@@ -153,8 +172,21 @@ export const SERVICE_PAGES = {
     // On neither of his lists, kept at the client's own instruction
     // (2026-09-13: "keep barn og familie also, let it stay").
     'barn-og-familie',
+    // New 2026-09-16 (client). Last in the list rather than placed by theme,
+    // because until Rabita sends real details this is the thinnest entry on
+    // the page and should not open the grid.
+    'kvinnetreff',
   ],
-  undervisning: ['skole', 'koran', 'kurs-islam', 'arabisk', 'norsk', 'kurs-konvertitter'],
+  // Client, 2026-09-16 (Undervisning list): "Fjerne «Kurs for konvertitter»",
+  // and Rabita skole + Koranskolen shown first and larger with the other
+  // three beneath. The order here IS that layout — ServiceGrid takes the
+  // first two as the featured row — so skole and koran must stay in front.
+  //
+  // kurs-konvertitter is removed from the list, NOT deleted: its page, its
+  // photographs and its copy in all three locales are untouched and
+  // /tjenester/kurs-konvertitter still renders. Putting the key back in this
+  // array is the whole of restoring it.
+  undervisning: ['skole', 'koran', 'kurs-islam', 'arabisk', 'norsk'],
 } as const satisfies Record<string, readonly ServiceKey[]>;
 
 // Where to hold the crop, for sources whose subject is not dead centre.
@@ -221,6 +253,7 @@ export const SERVICE_BAND: Record<
   ServiceKey,
   { objectClass: string; tone: BandTone; mark: BandMark }
 > = {
+  kvinnetreff: { objectClass: 'object-center', tone: 'warm', mark: 'arch' },
   nikah: { objectClass: 'object-[50%_40%]', tone: 'warm', mark: 'elevation' },
   janaza: { objectClass: 'object-[50%_50%]', tone: 'solemn', mark: 'arch' },
   shahada: { objectClass: 'object-[50%_38%]', tone: 'warm', mark: 'arch' },
@@ -288,7 +321,50 @@ export const SERVICE_BAND: Record<
 //                teaches — until the client supplied two calligraphy
 //                photographs on 2026-09-10 and the page could stop
 //                borrowing the architecture
-export const SERVICE_STORY: Record<ServiceKey, { src: string; objectClass: string }> = {
+/**
+ * Extra frames for the one-screen spread, beyond the band and story images.
+ *
+ * PARTIAL ON PURPOSE. A photo audit on 2026-09-15 found the library cannot
+ * support a gallery for most services, and the gaps are not fixable in code:
+ *
+ *   • janaza has ONE photograph. subj-janaza and svc-janaza-prayer are the
+ *     same frame at two crops, so a gallery there shows the same picture
+ *     twice.
+ *   • nikah, shahada and hajj-umrah each pair a real photograph with a CGI
+ *     render or a synthetic image. Eight hundred pixels apart on a scroll
+ *     that passes; side by side at the same size it does not.
+ *   • norsk, veivisere, arabisk, kurs, kurs-islam and kurs-konvertitter have
+ *     no on-subject unused frames at all — and norsk and veivisere are
+ *     already running stand-ins.
+ *
+ * So services listed here get a gallery and the rest get a single
+ * photograph, which the spread renders as a full-height plate rather than as
+ * a gallery of one. Add a key here the day real photographs arrive; nothing
+ * else has to change.
+ *
+ * id-for-alle is the first because it is the one service whose extra frames
+ * are real, unused and plainly the same event — the bazaar and the iftar.
+ */
+export const SERVICE_GALLERY: Partial<Record<ServiceKey, readonly string[]>> = {
+  'id-for-alle': [
+    '/photos/community/bazaar-child.webp',
+    '/photos/community/bazaar-stand.webp',
+    '/photos/community/bazaar-cakes.webp',
+    '/photos/community/iftar-serving.webp',
+  ],
+};
+
+/**
+ * The second photograph, shown as the plate in section 2 of a subject page.
+ *
+ * PARTIAL since 2026-09-16: kvinnetreff has no photograph of its own, and the
+ * page would rather show nothing than show the wrong people. A service with no
+ * entry here renders section 2 as type across the full measure, and the plate
+ * returns on its own the moment a real frame is added.
+ */
+export const SERVICE_STORY: Partial<
+  Record<ServiceKey, { src: string; objectClass: string }>
+> = {
   nikah: { src: '/photos/svc-prayer.webp', objectClass: 'object-center' },
   // The janaza prayer itself (client, 2026-09-10). The embrace that stood
   // here is a fine photograph, but a reader who lands on this page is
@@ -298,7 +374,18 @@ export const SERVICE_STORY: Record<ServiceKey, { src: string; objectClass: strin
   // heads and the top of the timber wall.
   janaza: { src: '/photos/svc-janaza-prayer.webp', objectClass: 'object-[50%_45%]' },
   shahada: { src: '/photos/svc-gathering.webp', objectClass: 'object-[50%_45%]' },
-  counselling: { src: '/photos/community/womens-circle.webp', objectClass: 'object-[50%_45%]' },
+  // Was womens-circle until 2026-09-16. That frame is six women together in a
+  // room at the mosque — it is a kvinnetreff photograph in everything but
+  // name, and kvinnetreff had none, so it moved there. subj-counselling has
+  // been sitting unused in /photos since the start and is named for this
+  // page: a welcome on the square, which is the front door of the service
+  // rather than the confidential conversation itself. Nothing is duplicated.
+  counselling: { src: '/photos/subj-counselling.webp', objectClass: 'object-center' },
+  // The real photograph the client asked for (2026-09-16: "use some photo
+  // here man of women gathering"). Portrait, 1125x1500, so it renders as a
+  // portrait plate. The BAND above it keeps the neutral lattice render —
+  // running this frame twice on one page would be worse than either.
+  kvinnetreff: { src: '/photos/community/womens-circle.webp', objectClass: 'object-[50%_45%]' },
   'hajj-umrah': { src: '/photos/prayer-congregation.webp', objectClass: 'object-[50%_55%]' },
   // The source was saved on its side and rendered on its side (client,
   // 2026-09-10: "why is this image rotated?"). The turn is baked into the
@@ -402,6 +489,7 @@ export const SERVICE_GROUP_OF: Record<
   'barn-og-familie': 'community',
   fosterhjem: 'community',
   'id-for-alle': 'community',
+  kvinnetreff: 'community',
   'kurs-islam': 'teaching',
   'kurs-konvertitter': 'teaching',
   arabisk: 'teaching',
@@ -450,3 +538,39 @@ export const SERVICE_GROUP_OF: Record<
 // and 'barn-og-familie', not one. The old /tjenester/barn-og-ungdom
 // redirect can point at whichever of the two is turned on.
 // ─────────────────────────────────────────────────────────────────────────
+
+/**
+ * Every photograph in this file that is TALLER than it is wide, measured from
+ * the actual files with sips on 2026-09-15 — not assumed.
+ *
+ * This matters because the service photo set is mixed: 13 portrait to 23
+ * landscape. There is no single frame that fits them all, so ServiceSpread
+ * picks its plate ratio per service instead of locking one globally. Getting
+ * this wrong is expensive rather than cosmetic — the full-bleed version of
+ * that page cover-fitted 3:4 sources into a 1.43:1 box and discarded 48% of
+ * every frame.
+ *
+ * If you add a photograph, measure it and put it here if it is portrait:
+ *   sips -g pixelWidth -g pixelHeight public/photos/whatever.webp
+ */
+const PORTRAIT_PHOTOS: ReadonlySet<string> = new Set([
+  '/photos/community/bazaar-cakes.webp',
+  '/photos/community/bazaar-child.webp',
+  '/photos/community/bazaar-stand.webp',
+  '/photos/community/iftar-serving.webp',
+  '/photos/community/speaker-mic.webp',
+  '/photos/community/welcome-embrace.webp',
+  '/photos/community/womens-circle.webp',
+  '/photos/community/youth-table.webp',
+  '/photos/learning-class.webp',
+  '/photos/learning-lecture.webp',
+  '/photos/svc-fosterhjem-stand.webp',
+  '/photos/svc-gathering.webp',
+  '/photos/svc-janaza-prayer.webp',
+]);
+
+/** Portrait only when EVERY frame in the set is portrait — one landscape
+ *  frame in a portrait plate is a worse crop than the reverse. */
+export function galleryOrientation(srcs: readonly string[]): 'portrait' | 'landscape' {
+  return srcs.length > 0 && srcs.every((s) => PORTRAIT_PHOTOS.has(s)) ? 'portrait' : 'landscape';
+}

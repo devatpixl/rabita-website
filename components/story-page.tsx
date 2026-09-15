@@ -113,9 +113,11 @@ export function StoryColophon({
   hours: string;
   labels: ColophonLabels;
 }) {
-  // CAMPAIGN.address already ends in the city ("Calmeyers gate 8, Oslo"), so
-  // appending postalCity printed the city twice. Split rather than retype.
-  const street = CAMPAIGN.address.split(',')[0].trim();
+  // visitAddress already ends in the city ("Sørligata 8a, Oslo"), so
+  // appending visitPostal printed the city twice. Split rather than retype.
+  // The VISITING address, not the plot: this colophon sits at the foot of six
+  // pages telling a reader where Rabita is.
+  const street = CAMPAIGN.visitAddress.split(',')[0].trim();
 
   // Derived from the org number in the cell above it, so the link and the
   // figure can never disagree.
@@ -131,7 +133,7 @@ export function StoryColophon({
     { icon: 'people', term: labels.members, detail: CAMPAIGN.members.toLocaleString('nb-NO'), ltr: true },
     { icon: 'building', term: labels.orgNr, detail: CAMPAIGN.orgNr, copy: true, wide: true },
     { icon: 'book', term: labels.bank, detail: CAMPAIGN.bankAccount, copy: true, wide: true },
-    { icon: 'pin', term: labels.address, detail: street, note: CAMPAIGN.postalCity, ltr: true },
+    { icon: 'pin', term: labels.address, detail: street, note: CAMPAIGN.visitPostal, ltr: true },
     // The only value here that is translated prose, so the only one that
     // must follow the page's own direction.
     { icon: 'clock', term: labels.hours, detail: hours },

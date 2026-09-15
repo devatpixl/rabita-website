@@ -1,3 +1,12 @@
+// ── UNUSED SINCE 2026-09-16 ───────────────────────────────────────────────
+// Nothing imports this. The client asked for the photograph at the top of
+// /tjenester to go ("Fjerne bildet øverst på hovedsiden"), so the page opens
+// on components/page-heading.tsx instead — the same kicker, title and lede
+// with no picture behind them.
+//
+// Left in the tree rather than deleted, as ServiceVisit is in
+// components/service-page.tsx: restoring the band is one import and one tag.
+
 import { getTranslations } from 'next-intl/server';
 import { PageBand } from './page-band';
 import { Accent } from './accent';
