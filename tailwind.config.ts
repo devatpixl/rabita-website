@@ -27,6 +27,12 @@ const config: Config = {
         sage: '#E3EAE4',
         'sage-soft': '#EFF4F0', // a well on a paper card
         'sage-line': '#CBDCD1', // hairline on that well
+        // The CTA weight of the sage family, added 2026-09-16 (client: "use
+        // green cta as its theme"). The three sages above are grounds and
+        // hairlines — all of them far too pale to fill a button — and `dusk`
+        // only looks green: #16242E is blue-dominant (R22 G36 B46), a slate.
+        // So the palette had no green a button could be made of.
+        //
         // Dusk — deep Oslo-winter blue. Punctuation mark, not a theme.
         // Used only where a section earns gravity.
         dusk: '#16242E',

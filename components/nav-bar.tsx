@@ -343,7 +343,7 @@ export function NavBar() {
              and this is the least urgent thing in it. */}
           <LinkVT
             href={`/${locale}/bli-medlem`}
-            className="hidden lg:inline-flex items-center min-h-11 rounded-full border border-ink/25 px-4 xl:px-3.5 py-2 text-[14px] font-semibold text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper whitespace-nowrap"
+            className="hidden lg:inline-flex items-center min-h-11 rounded-full border border-ink/25 px-4 xl:px-3.5 py-2 text-[14px] font-semibold text-ink transition-colors hover:border-ink hover:border-gold-deep hover:bg-gold-deep hover:text-paper whitespace-nowrap"
           >
             {t('join')}
           </LinkVT>

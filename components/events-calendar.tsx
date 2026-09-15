@@ -442,7 +442,7 @@ function NavButton({
       type="button"
       onClick={onClick}
       aria-label={label}
-      className="grid h-11 w-11 shrink-0 place-items-center rounded-full ring-1 ring-ink/12 text-ink transition-colors hover:bg-ink hover:text-paper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-deep"
+      className="grid h-11 w-11 shrink-0 place-items-center rounded-full ring-1 ring-ink/12 text-ink transition-colors hover:border-gold-deep hover:bg-gold-deep hover:text-paper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-deep"
     >
       <span aria-hidden className={cn('text-[1.1rem] leading-none', 'rtl:rotate-180')}>
         {dirIcon === 'prev' ? '‹' : '›'}

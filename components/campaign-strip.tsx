@@ -52,7 +52,7 @@ export function CampaignStrip() {
         <button
           type="button"
           onClick={() => openGiveSheet()}
-          className="min-h-9 rounded-full border border-ink px-3 py-1 text-body font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
+          className="min-h-9 rounded-full border border-ink px-3 py-1 text-body font-semibold text-ink hover:border-gold-deep hover:bg-gold-deep hover:text-paper transition-colors"
         >
           {/* Uses ink not action — the 4-slot rule already spent the Give button */}
           Gi

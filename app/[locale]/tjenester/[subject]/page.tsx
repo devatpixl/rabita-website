@@ -430,7 +430,12 @@ export default async function ServiceDetail({
                  tier's own CTA, narrower than this block now is. */}
               <Link
                 href={`/${locale}/bli-medlem`}
-                className="group mt-7 inline-flex min-h-11 items-center gap-2 rounded-full border border-ink px-6 text-[14px] font-semibold text-ink transition-colors hover:bg-ink hover:text-paper"
+                // Fills GOLD on hover, the same accent the Send button opposite
+                // it is filled with (client, 2026-09-16). The resting state
+                // keeps its ink hairline: an outline button already wearing
+                // the accent would compete with the filled one for primacy,
+                // and the enquiry is what this section is for.
+                className="group mt-7 inline-flex min-h-11 items-center gap-2 rounded-full border border-ink px-6 text-[14px] font-semibold text-ink transition-colors hover:border-gold-deep hover:bg-gold-deep hover:text-paper"
               >
                 {tm('join')}
                 <span

@@ -49,7 +49,7 @@ export function Copyable({
       <button
         type="button"
         onClick={copy}
-        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-ink/40 px-3 text-[13px] text-ink hover:border-ink hover:bg-ink hover:text-paper transition-colors"
+        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-ink/40 px-3 text-[13px] text-ink hover:border-ink hover:border-gold-deep hover:bg-gold-deep hover:text-paper transition-colors"
         aria-label={`Kopier ${label}`}
       >
         {copied ? '✓' : '⧉'}

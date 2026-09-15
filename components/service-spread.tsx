@@ -346,7 +346,7 @@ export function ServiceSpread({
             </p>
             <Link
               href={membership.href}
-              className="group inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full border border-ink px-5 text-[14px] font-semibold text-ink transition-colors hover:bg-ink hover:text-paper"
+              className="group inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full border border-ink px-5 text-[14px] font-semibold text-ink transition-colors hover:border-gold-deep hover:bg-gold-deep hover:text-paper"
             >
               {membership.cta}
               <span

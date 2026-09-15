@@ -145,7 +145,7 @@ export function RsvpSheet() {
             <button
               type="button"
               onClick={close}
-              className="mt-6 min-h-11 rounded-full border border-ink px-5 py-2 text-body font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
+              className="mt-6 min-h-11 rounded-full border border-ink px-5 py-2 text-body font-semibold text-ink hover:border-gold-deep hover:bg-gold-deep hover:text-paper transition-colors"
             >
               {t('confirmationClose')}
             </button>

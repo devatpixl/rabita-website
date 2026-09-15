@@ -64,7 +64,15 @@ const TONE = {
     value: 'text-ink caret-gold-deep placeholder:text-ink-40',
     icon: 'text-gold-deep',
     rule: 'border-rule',
-    button: 'bg-ink text-paper hover:bg-gold-deep',
+    // GOLD, and specifically the nav's "Gi en gave" treatment, which is what
+    // the client pointed at: bg-gold-deep, paper label, hovering to ink.
+    //
+    // It went green first on a misread of "green cta" — my error, twice over:
+    // too dark at #2C4433, then the right weight but still the wrong hue.
+    // Gold is also the correct call on the merits. This site has exactly one
+    // accent, and a second one earns nothing: two different filled buttons
+    // would have the reader working out whether they mean different things.
+    button: 'bg-gold-deep text-paper hover:bg-ink',
     meta: 'text-ink-60',
     error: 'border-alert/45 bg-alert-soft text-alert',
     // A COMPLETE well, not an override. Adding `!border-alert` on top of the

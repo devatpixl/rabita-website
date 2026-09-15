@@ -82,7 +82,7 @@ export async function PrayerVisit() {
                   href={VISIT_MAPS_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex min-h-11 items-center rounded-full border border-ink px-4 py-2 text-body font-semibold text-ink transition-colors hover:bg-ink hover:text-paper"
+                  className="inline-flex min-h-11 items-center rounded-full border border-ink px-4 py-2 text-body font-semibold text-ink transition-colors hover:border-gold-deep hover:bg-gold-deep hover:text-paper"
                 >
                   {t('directions')}
                 </a>

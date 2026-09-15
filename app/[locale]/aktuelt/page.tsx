@@ -177,7 +177,7 @@ export default async function NewsPage({
                outline pill. events.all is already written in all three. */}
             <Link
               href={`/${locale}/arrangementer`}
-              className="group inline-flex min-h-12 shrink-0 items-center gap-2.5 rounded-full border border-ink px-6 py-3 text-[15px] font-semibold text-ink transition-colors hover:bg-ink hover:text-paper"
+              className="group inline-flex min-h-12 shrink-0 items-center gap-2.5 rounded-full border border-ink px-6 py-3 text-[15px] font-semibold text-ink transition-colors hover:border-gold-deep hover:bg-gold-deep hover:text-paper"
             >
               {tev('all')}
               <span

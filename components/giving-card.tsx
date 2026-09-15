@@ -510,7 +510,7 @@ const TOTAL_STEPS = 3;
           <button
             type="button"
             onClick={goBack}
-            className="min-h-12 rounded-full border border-ink px-4 py-2 text-[14px] font-medium text-ink hover:bg-ink hover:text-paper transition-colors"
+            className="min-h-12 rounded-full border border-ink px-4 py-2 text-[14px] font-medium text-ink hover:border-gold-deep hover:bg-gold-deep hover:text-paper transition-colors"
           >
             ← {t('wizard.back')}
           </button>

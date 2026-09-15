@@ -56,7 +56,7 @@ export async function EventsSchedule() {
         <div className="mt-8">
           <Link
             href={`/${locale}/arrangementer`}
-            className="inline-flex min-h-12 items-center rounded-full border border-ink px-5 py-3 text-body font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
+            className="inline-flex min-h-12 items-center rounded-full border border-ink px-5 py-3 text-body font-semibold text-ink hover:border-gold-deep hover:bg-gold-deep hover:text-paper transition-colors"
           >
             {t('all')}
           </Link>

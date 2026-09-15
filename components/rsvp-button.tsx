@@ -21,7 +21,7 @@ export function RsvpButton({
     variant === 'primary'
       ? 'min-h-12 rounded-full bg-gold-deep px-5 py-3 text-body font-semibold text-paper hover:bg-ink transition-colors'
       : variant === 'ghost'
-      ? 'min-h-12 rounded-full border border-ink px-5 py-3 text-body font-semibold text-ink hover:bg-ink hover:text-paper transition-colors'
+      ? 'min-h-12 rounded-full border border-ink px-5 py-3 text-body font-semibold text-ink hover:border-gold-deep hover:bg-gold-deep hover:text-paper transition-colors'
       : 'inline-flex min-h-11 min-w-11 items-center justify-center text-[14px] font-semibold text-ink underline decoration-gold decoration-1 underline-offset-4 hover:decoration-2';
 
   return (
