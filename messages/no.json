@@ -2569,7 +2569,7 @@
         },
         "central": {
           "title": "Sentralt område",
-          "body": "Gangavstand til Oslo City, Stortinget og andre viktige kollektivknutepunkter."
+          "body": "Gangavstand til Oslo S, Stortinget og andre viktige kollektivknutepunkter."
         }
       },
       "mapCaption": "Gangavstander er målt langs faktiske gangruter, ikke i luftlinje."
@@ -2579,7 +2579,7 @@
       "heading": "Nær alt <em>som betyr noe</em>.",
       "lede": "Calmeyers gate ligger i et attraktivt og veletablert område i Oslo, med gangavstand til byens viktigste funksjoner.",
       "items": [
-        "5–10 minutters gange til Oslo City, Stortinget og sentrale deler av sentrum",
+        "5–10 minutters gange til Oslo S, Stortinget og sentrale deler av sentrum",
         "Kort vei til Grünerløkka, med et bredt utvalg av kafeer, restauranter og butikker",
         "Nær viktige kollektivknutepunkter som Jernbanetorget, Stortinget og Tøyen"
       ],

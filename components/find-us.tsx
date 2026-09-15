@@ -38,8 +38,9 @@ const PAD_X_EXT = 86;
 const PAD_Y_EXT = 58;
 const FOOT = 52; // the link bar covers the bottom of the plate
 // Where each label sits, chosen so no label crosses a route or a
-// neighbouring label. Oslo City and Oslo S sit close on the extended map,
-// so one reads upward and the other down.
+// neighbouring label. Oslo City used to sit close to Oslo S here and the two
+// were pitched apart for it; Oslo City came off the map on 2026-09-15, so
+// Oslo S now has that space to itself.
 const LABEL_POS: Record<string, { side: 'left' | 'right'; dy: number; dx?: number }> = {
   brugata: { side: 'right', dy: -24 },
   gronland: { side: 'left', dy: 18 },
@@ -49,7 +50,6 @@ const LABEL_POS: Record<string, { side: 'left' | 'right'; dy: number; dx?: numbe
   // (side: 'left') label runs off the edge. It reads to the right, lifted clear
   // of Stortinget's label 60px below it.
   regjeringskvartalet: { side: 'right', dy: -26 },
-  'oslo-city': { side: 'right', dy: -22, dx: 22 },
   bussterminalen: { side: 'left', dy: 18 },
   operahuset: { side: 'right', dy: -16 },
 };

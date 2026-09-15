@@ -23,7 +23,6 @@ export type Landmark = {
     | 'gronland'
     | 'brugata'
     | 'stortinget'
-    | 'oslo-city'
     | 'bussterminalen'
     | 'operahuset'
     | 'regjeringskvartalet';
@@ -34,6 +33,15 @@ export type Landmark = {
   extended?: boolean;
 };
 
+// Oslo City came off on 2026-09-15 ("Fjerne Oslo City"). His list for this
+// map is Regjeringen, Stortinget, Oslo S, Bussterminalen and Operaen — which
+// is exactly what is left here, so the removal was the whole of that request.
+// Its route came out of walking-routes.json with it — not for tidiness but
+// because ROUTES is cast to Record<Landmark['key'], WalkingRoute>, and with
+// the key gone from the union TypeScript stopped seeing enough overlap to
+// allow the cast at all. The labels stay under footer.findUs.landmarks and
+// apartmentsPage.facts.stations in all three locales. Putting it back means
+// the key, the row, a LABEL_POS entry, and re-fetching the route.
 export const LANDMARKS: readonly Landmark[] = [
   { key: 'gronland', kind: 'metro', lat: 59.9127, lon: 10.762 },
   { key: 'oslo-s', kind: 'rail', lat: 59.9117, lon: 10.7508 },
@@ -41,7 +49,6 @@ export const LANDMARKS: readonly Landmark[] = [
   // The client's landmark set (2026-09-04). Routed like the stations —
   // real pedestrian paths, fetched once and stored, never straight lines.
   { key: 'stortinget', kind: 'place', lat: 59.9132, lon: 10.7403, extended: true },
-  { key: 'oslo-city', kind: 'place', lat: 59.9123, lon: 10.7527, extended: true },
   { key: 'bussterminalen', kind: 'bus', lat: 59.9113, lon: 10.759, extended: true },
   { key: 'operahuset', kind: 'place', lat: 59.9075, lon: 10.7528, extended: true },
   // Regjeringskvartalet (client, 2026-09-13). Routed the same way as the

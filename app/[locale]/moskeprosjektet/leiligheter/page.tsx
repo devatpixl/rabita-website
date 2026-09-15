@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
-import { APARTMENTS_SOURCE, apartmentStats } from '@/lib/apartments';
+import { apartmentStats } from '@/lib/apartments';
 import { Accent } from '@/components/accent';
 import { ApartmentUnits } from '@/components/apartment-units';
 import { FindUs } from '@/components/find-us';
@@ -140,48 +140,21 @@ export default async function ApartmentsPage({
             </div>
           </div>
 
-          {/* Across to the developer.
-             Placed at the foot of this section rather than at the foot of the
-             page, because it answers the question the price directly above it
-             raises — "from 6 million" is the start of a list, and the list
-             lives on cm8.no. It spans both columns so it reads as this
-             section's closing line rather than as a stray button under the
-             left-hand text.
+          {/* The link across to cm8.no stood here until 2026-09-15
+             ("Fjerne lenken til CM8"). It was a gold CTA carrying
+             APARTMENTS_SOURCE, placed to answer the question the price above
+             it raises — "from 6 million" is the start of a list, and the list
+             lived there.
 
-             The URL is APARTMENTS_SOURCE, the same constant the snapshot in
-             lib/apartments.ts cites as its origin, so the link and the data
-             can never point at two different places. */}
-          <div className="mt-14 flex flex-col gap-6 rounded-[1.5rem] border border-rule bg-paper-2/70 p-6 sm:flex-row sm:items-center sm:justify-between sm:gap-10 sm:p-7 md:mt-16">
-            <div>
-              <p className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-gold-deep">
-                {t('sales.eyebrow')}
-              </p>
-              <p className="mt-2.5 max-w-[54ch] text-body text-ink-60">{t('sales.line')}</p>
-            </div>
-            <a
-              href={APARTMENTS_SOURCE}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex min-h-12 shrink-0 items-center gap-3 self-start rounded-full bg-gold-deep px-7 text-[15px] font-semibold text-paper transition-colors hover:bg-ink sm:self-auto"
-            >
-              {t('sales.cta')}
-              {/* A diagonal, not a right arrow: everything else on this page
-                 that carries an arrow keeps you here. */}
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden
-                className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              >
-                <path d="M7 17 17 7M9 7h8v8" />
-              </svg>
-              <span className="sr-only">{t('sales.newTab')}</span>
-            </a>
-          </div>
+             WORTH KNOWING WHAT WENT WITH IT. lib/apartments.ts is a SNAPSHOT,
+             read on 2026-09-02, and its own header names cm8.no as the source
+             that governs. That link was the only route from this page to live
+             prices and availability; without it our figures are the only ones
+             a visitor sees and there is nowhere to check them. Flagged to the
+             client. Restoring it is this block plus the import.
+
+             apartments.sales.eyebrow / .line / .cta / .newTab stay in the
+             message files, unreferenced and translated in all three. */}
         </SectionBody>
       </Section>
 
