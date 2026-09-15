@@ -6,6 +6,23 @@ import { ProgressTimeline } from '@/components/progress-timeline';
 import { Section, SectionBody } from '@/components/primitives';
 import type { AppLocale } from '@/i18n/routing';
 
+// HIDDEN, NOT DELETED (client, 2026-09-15: "remove the submenu of progress,
+// dont delete the page, hide it for now, i think its not needed").
+//
+// The page is whole and still builds. What changed is that nothing links to
+// it any more: the nav submenu, the "see all" pill on /moskeprosjektet and
+// the phase card in the campaign meter were all its ways in, and all three
+// are gone. The noindex below is the rest of "hidden" — unlinked is not the
+// same as unlisted, and a page that is reachable by URL will still be crawled
+// and can still turn up in a search result for the mosque.
+//
+// TO RESTORE: put the two links back, drop the robots block, and refill
+// nav.menu.project in the three message files (it is [] now). The copy,
+// photographs and translations were never touched.
+export const metadata = {
+  robots: { index: false, follow: false },
+};
+
 // Fremdrift — where the project has got to, and what is still to come.
 //
 // The nav has promised this page for months: the /moskeprosjektet blurb reads

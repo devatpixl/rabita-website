@@ -64,41 +64,9 @@
       "about": "من نحن"
     },
     "menu": {
-      "project": [
-        {
-          "label": "المبنى",
-          "blurb": "سبعة طوابق والرسوم والجدول الزمني",
-          "href": "/moskeprosjektet"
-        },
-        {
-          "label": "سير المشروع",
-          "blurb": "الجدول الزمني والمراحل وتكلفة كل مرحلة",
-          "href": "/moskeprosjektet/fremdrift"
-        }
-      ],
+      "project": [],
       "apartments": [],
-      "prayer": [
-        {
-          "label": "أوقات الصلاة",
-          "blurb": "اليوم، محدّثة من IRN",
-          "href": "/bonnetider"
-        },
-        {
-          "label": "صلاة الجمعة",
-          "blurb": "14:00 و15:00 كل جمعة",
-          "href": "/bonnetider#fredagsbonn"
-        },
-        {
-          "label": "الأئمة",
-          "blurb": "قائد ديني وإمامان",
-          "href": "/bonnetider#imamene"
-        },
-        {
-          "label": "التقويم",
-          "blurb": "الشهر كاملاً، جاهز للطباعة",
-          "href": "/bonnetider/kalender"
-        }
-      ],
+      "prayer": [],
       "services": [
         {
           "label": "الشهادة",

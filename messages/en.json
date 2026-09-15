@@ -64,41 +64,9 @@
       "about": "About us"
     },
     "menu": {
-      "project": [
-        {
-          "label": "The building",
-          "blurb": "Seven floors, drawings and timeline",
-          "href": "/moskeprosjektet"
-        },
-        {
-          "label": "Progress",
-          "blurb": "Timeline, phases and what each phase costs",
-          "href": "/moskeprosjektet/fremdrift"
-        }
-      ],
+      "project": [],
       "apartments": [],
-      "prayer": [
-        {
-          "label": "Prayer times",
-          "blurb": "Today, updated from IRN",
-          "href": "/bonnetider"
-        },
-        {
-          "label": "Friday prayer",
-          "blurb": "14:00 and 15:00, every Friday",
-          "href": "/bonnetider#fredagsbonn"
-        },
-        {
-          "label": "The imams",
-          "blurb": "A theological leader and two imams",
-          "href": "/bonnetider#imamene"
-        },
-        {
-          "label": "Calendar",
-          "blurb": "The whole month, ready to print",
-          "href": "/bonnetider/kalender"
-        }
-      ],
+      "prayer": [],
       "services": [
         {
           "label": "Shahada",

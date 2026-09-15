@@ -64,41 +64,9 @@
       "about": "Om oss"
     },
     "menu": {
-      "project": [
-        {
-          "label": "Bygget",
-          "blurb": "Sju etasjer, tegninger og tidslinje",
-          "href": "/moskeprosjektet"
-        },
-        {
-          "label": "Fremdrift",
-          "blurb": "Tidslinje, faser og hva hver fase koster",
-          "href": "/moskeprosjektet/fremdrift"
-        }
-      ],
+      "project": [],
       "apartments": [],
-      "prayer": [
-        {
-          "label": "Bønnetider",
-          "blurb": "Dagens tider, oppdatert fra IRN",
-          "href": "/bonnetider"
-        },
-        {
-          "label": "Fredagsbønn",
-          "blurb": "14:00 og 15:00, hver fredag",
-          "href": "/bonnetider#fredagsbonn"
-        },
-        {
-          "label": "Imamene",
-          "blurb": "Teologisk leder og to imamer",
-          "href": "/bonnetider#imamene"
-        },
-        {
-          "label": "Kalender",
-          "blurb": "Hele måneden, klar til utskrift",
-          "href": "/bonnetider/kalender"
-        }
-      ],
+      "prayer": [],
       "services": [
         {
           "label": "Shahada",

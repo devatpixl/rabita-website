@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { CAMPAIGN, PHASES, currentPhaseKey } from '@/lib/campaign';
 import { formatAmount, formatDate } from '@/lib/format';
@@ -341,14 +340,15 @@ export async function CampaignMeter() {
             </div>
           </dl>
 
-          {/* The phase, full width, with somewhere to go. PhasePopover is
-             switched off below 640px by design — it is a hover affordance —
-             so on a phone the arrow leads to the page that holds the whole
-             roadmap instead of floating a card that cannot be dismissed. */}
-          <Link
-            href={`/${locale}/moskeprosjektet/fremdrift`}
-            className="mt-3 flex items-center gap-3 rounded-2xl bg-sage-soft p-4 ring-1 ring-sage-line transition-colors hover:bg-sage"
-          >
+          {/* The phase, full width. This was a link to the fremdrift page
+             until 2026-09-15, when the client hid it. It is a plain card now
+             — and the arrow went with the link, because an arrow that leads
+             nowhere promises a page that no longer answers.
+             What that costs, stated plainly: PhasePopover is switched off
+             below 640px by design (it is a hover affordance), so a phone
+             reader now gets the current phase as a statement with no way to
+             read the whole roadmap. Restoring the link restores it. */}
+          <div className="mt-3 flex items-center gap-3 rounded-2xl bg-sage-soft p-4 ring-1 ring-sage-line">
             <Tile>
               <IconFoundation />
             </Tile>
@@ -361,12 +361,7 @@ export async function CampaignMeter() {
                 {t('updated', { date: formatDate(locale, CAMPAIGN.raisedAsOf) })}
               </span>
             </span>
-            <span aria-hidden className="shrink-0 text-gold-deep rtl:rotate-180">
-              <svg viewBox="0 0 24 24" className="h-4 w-4" {...stroke} strokeWidth={1.8}>
-                <path d="M5 12h14M13 5l7 7-7 7" />
-              </svg>
-            </span>
-          </Link>
+          </div>
         </div>
       </div>
     </section>

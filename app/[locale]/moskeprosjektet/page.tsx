@@ -1,5 +1,4 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import Link from 'next/link';
 import Image from 'next/image';
 import { CAMPAIGN } from '@/lib/campaign';
 import { ProgressPhases } from '@/components/progress-phases';
@@ -141,23 +140,14 @@ export default async function ProjectPage({
                 {tf('phasesHeading')}
               </h2>
             </div>
-            {/* The site's own outline pill, the one used for every secondary
-               action on paper (events, prayer visit) — not a third button
-               shape invented for this one link. Outline rather than filled:
-               it sits on a page whose filled gold buttons all mean "give",
-               and this one only means "read on". */}
-            <Link
-              href={`/${locale}/moskeprosjektet/fremdrift`}
-              className="group inline-flex min-h-12 shrink-0 items-center gap-2.5 rounded-full border border-ink px-6 py-3 text-[15px] font-semibold text-ink transition-colors hover:bg-ink hover:text-paper"
-            >
-              {tf('seeAll')}
-              <span
-                aria-hidden
-                className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
-              >
-                &rarr;
-              </span>
-            </Link>
+            {/* The "see all" pill stood here until 2026-09-15, when the
+               client hid /moskeprosjektet/fremdrift ("remove the submenu of
+               progress, dont delete the page, hide it for now"). The page is
+               intact and still builds; it simply has no way in.
+               The digest below it stays — ProgressPhases is what actually
+               tells a reader where the build has got to, and it reads the
+               same PROJECT_PHASES the hidden page does. fremdrift.seeAll is
+               still written and translated in all three locales. */}
           </div>
           <div className="mt-12 md:mt-16">
             <ProgressPhases locale={locale as AppLocale} compact />
