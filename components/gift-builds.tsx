@@ -47,13 +47,21 @@ const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
 
 // A tier with no photograph renders a plain tinted plate instead — the card
 // is a full-bleed image with type over a gradient, so a missing file would
-// otherwise be an empty dark rectangle. Three of the levels added on
-// 2026-09-15 are waiting on pictures from the client; they read correctly
-// meanwhile, just without a photograph. Fill these in and nothing else has
-// to change:
-//    family  (2 000 kr, "For familien din")
-//    block   (5 000 kr, "Byggesteinen")
-//    friends (50 000 kr, "Venner av Rabita")
+// otherwise be an empty dark rectangle.
+//
+// ONE LEVEL IS STILL WAITING FOR A PICTURE: block (5 000 kr, "Byggesteinen").
+// The library has nothing honest for it. The only structural image is
+// fremdrift/construction.webp, which is an isometric CAD cutaway rather than
+// a photograph — it would be the one drawing among eight photographs, and
+// this card applies a photographic grade to whatever it is given. A real
+// construction or masonry shot is the fix. Drop the file in below and
+// nothing else has to change.
+//
+// NOT family-together.webp, whatever the filename suggests: it is a picture
+// of a political demonstration — children at a rally with a placard and
+// flags — and putting it on a donation level would attach a political
+// statement to a fundraising tier. Checked 2026-09-15. Nor
+// give-dedication.webp, which is a macaw sitting on somebody's head.
 const SHOTS: Record<string, string | undefined> = {
   // Both of these were already in /public and rendering nowhere, and each
   // happens to be exactly the subject its new tier names. gift-prayer is a
@@ -64,9 +72,16 @@ const SHOTS: Record<string, string | undefined> = {
   // rather than a library, and exactly what a level called "Koran" wants.
   self: '/photos/gift-prayer.webp',
   quran: '/photos/gift-library.webp',
-  family: undefined,
+  // A couple at an outdoor table with dates and water — a household breaking
+  // fast together, which is what this level is named for. Also closes
+  // /arrangementer, so it is not exclusive to this card; different page, far
+  // apart, and the alternative was no picture at all.
+  family: '/photos/visit-eid.webp',
   block: undefined,
-  friends: undefined,
+  // The street iftar under the Grønland overpass: long tables, bunting, the
+  // congregation eating together. 1920x1280 and referenced nowhere else on
+  // the site — it is the friends of Rabita, at Rabita's own event.
+  friends: '/photos/brand-gateiftar.webp',
   // Client-supplied, 2026-09-13. The shot it replaces was a single red
   // prayer rug, which reads as one mat; this tier buys a square metre of
   // the HALL floor, and a carpeted hall running away between the columns
