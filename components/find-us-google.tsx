@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { cn } from '@/lib/cn';
 import { DIRECTIONS_URL, LANDMARKS, ROUTES } from '@/lib/location';
 
 // The apartments map, as a real Google map (client, 2026-09-15: "Real google
@@ -48,7 +49,24 @@ const HEADER_PX = 56;
 /** The five he listed, in his order. Rabita itself is the sixth pin. */
 const SHOWN = ['regjeringskvartalet', 'stortinget', 'oslo-s', 'bussterminalen', 'operahuset'] as const;
 
-export async function FindUsGoogle({ locale }: { locale: string }) {
+export async function FindUsGoogle({
+  locale,
+  /**
+   * 'full'  — map, the routed metres, and a directions link (the apartments
+   *           page, where a buyer is weighing the location).
+   * 'map'   — the map alone (the footer, client 2026-09-15: "dont show the
+   *           distance, rather only show the map in footer"). The footer
+   *           column already prints the address, opening hours and a
+   *           Veibeskrivelse link a few centimetres above, so the list would
+   *           have been the second answer to a question already answered.
+   */
+  variant = 'full',
+  className,
+}: {
+  locale: string;
+  variant?: 'full' | 'map';
+  className?: string;
+}) {
   const t = await getTranslations({ locale, namespace: 'footer.findUs' });
   const nf = new Intl.NumberFormat(locale === 'ar' ? 'ar-EG' : locale === 'en' ? 'en-GB' : 'nb-NO');
 
@@ -57,8 +75,16 @@ export async function FindUsGoogle({ locale }: { locale: string }) {
     return { key, metres: ROUTES[key].metres, kind: mark?.kind };
   }).sort((a, b) => a.metres - b.metres);
 
+  const mapOnly = variant === 'map';
+
   return (
-    <div className="overflow-hidden rounded-3xl bg-dusk p-4 sm:p-5">
+    <div
+      className={cn(
+        'overflow-hidden rounded-3xl bg-dusk',
+        mapOnly ? 'p-2.5' : 'p-4 sm:p-5',
+        className,
+      )}
+    >
       {/* THE TITLE BAR IS CROPPED OFF, deliberately (client, 2026-09-15:
          "dont show my name here").
          
@@ -85,7 +111,19 @@ export async function FindUsGoogle({ locale }: { locale: string }) {
          rather than a personal one — then the line would read "Rabita" and
          could stay. Raised with the client. */}
       <div className="relative overflow-hidden rounded-2xl bg-paper-deep">
-        <div className="h-[22rem] overflow-hidden sm:h-[26rem]">
+        <div
+          className={cn(
+            'overflow-hidden',
+            // Shorter than the 26rem it shipped at this morning (client,
+            // 2026-09-15: "make this map small"). The WIDTH is untouched at
+            // ~626px, deliberately: below about 600 Google's two attribution
+            // groups overlap, so height is the only dimension that can give.
+            //
+            // In the footer it fills the slot the drawn plate had — measured
+            // 437x398 — so the footer does not grow, which he asked for.
+            mapOnly ? 'h-[23rem] sm:h-[23.5rem]' : 'h-[18rem] sm:h-[21rem]',
+          )}
+        >
           <iframe
             src={`https://www.google.com/maps/d/embed?mid=${MAP_MID}&ehbc=2E312F`}
             title={t('mapTitle')}
@@ -97,6 +135,8 @@ export async function FindUsGoogle({ locale }: { locale: string }) {
         </div>
       </div>
 
+      {!mapOnly && (
+      <>
       {/* The metres, beside the map rather than on it. Google prints no
          distances, and these are routed walks rather than straight lines —
          801 m on foot against 615 as the crow flies, for Regjeringskvartalet.
@@ -129,6 +169,8 @@ export async function FindUsGoogle({ locale }: { locale: string }) {
           &rarr;
         </span>
       </a>
+      </>
+      )}
     </div>
   );
 }

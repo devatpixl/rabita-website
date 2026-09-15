@@ -7,6 +7,7 @@ import { cairo, fraunces, inter, jetbrainsMono, notoSansArabic } from '../fonts'
 import { ConsentBanner } from '@/components/consent-banner';
 import { ContactFab } from '@/components/contact-fab';
 import { Footer } from '@/components/footer';
+import { FindUsGoogle } from '@/components/find-us-google';
 import { GivingSheet } from '@/components/giving-sheet';
 import { NavBar } from '@/components/nav-bar';
 import { PrayerDataProvider } from '@/components/prayer-data-provider';
@@ -73,7 +74,19 @@ export default async function LocaleLayout({
             <NavBar />
           </PrayerPanelProvider>
           <div id="main" className="pb-16 md:pb-0">{children}</div>
-          <Footer />
+          {/* The footer map is rendered HERE, on the server, and passed in.
+             Footer is 'use client' and FindUsGoogle is an async server
+             component, so the footer cannot import it — see the note beside
+             the slot in footer.tsx. */}
+          <Footer
+            map={
+              <FindUsGoogle
+                locale={locale}
+                variant="map"
+                className="mx-auto max-w-[30rem] lg:max-w-none"
+              />
+            }
+          />
           <GivingSheet />
           <RsvpSheet />
           <ConsentBanner />

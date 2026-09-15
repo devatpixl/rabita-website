@@ -1,11 +1,12 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { CAMPAIGN } from '@/lib/campaign';
 import { DIRECTIONS_URL } from '@/lib/location';
-import { FindUs } from './find-us';
+
 import { LanguageSwitcher } from './language-switcher';
 import { QiblaCompass } from './qibla-compass';
 
@@ -23,7 +24,7 @@ const SOCIAL = [
   { key: 'tiktok', href: 'https://tiktok.com/@oslomosque' },
 ] as const;
 
-export function Footer() {
+export function Footer({ map }: { map?: ReactNode }) {
   const t = useTranslations('footer');
   const tNav = useTranslations('nav');
   const locale = useLocale();
@@ -174,13 +175,37 @@ export function Footer() {
              screens of scroll. At lg the three columns sit side by side and
              the natural order is right again. */}
           <div className="order-first sm:col-span-2 lg:order-none lg:col-span-5">
-            {/* The extended plate, matching the one on Leiligheter (client,
-               2026-09-13: "legg det samme kartet til nederst på alle sidene").
-               It trades Brugata and Grønland for the six landmarks that carry
-               the central-location argument. Taller than the compact plate it
-               replaced — near-square rather than landscape — so the column
-               grows with it. */}
-            <FindUs extended className="mx-auto max-w-[30rem] lg:max-w-none" />
+            {/* The same Google map as Leiligheter, since 2026-09-15 ("also
+               show here in the footer without increating size of footer, it
+               can fit and make it fit"). It replaces the site's own drawn SVG
+               plate, which had carried "legg det samme kartet til nederst på
+               alle sidene" from 2026-09-13 — the instruction still holds, the
+               map behind it simply changed.
+
+               variant="map": no distance list. The column directly above this
+               already prints the address, the opening hours and a
+               Veibeskrivelse link, so the metres would have answered a
+               question this footer answers twice already. His words: "dont
+               show the distance, rather only show the map in footer".
+
+               SIZED TO THE SLOT THE PLATE HAD — measured 437x398 — so the
+               footer does not grow, which is the part he was explicit about.
+
+               Known and accepted: at 437px the embed is under the ~600px
+               where Google's two attribution groups stop overlapping, so they
+               collide down here. That is Google's own chrome and the only
+               cure is a wider column, which is exactly what he ruled out.
+
+               PASSED IN AS A SLOT, not imported. This file is 'use client'
+               (it calls useLocale), and FindUsGoogle is an async server
+               component — a client component cannot render one. The layout is
+               a server component, so it renders the map there and hands it
+               down as a prop. The alternative was making FindUsGoogle a
+               client component, which would have shipped
+               lib/walking-routes.json — 13.5KB of polyline geometry — to
+               every visitor to print five numbers the footer does not even
+               show. */}
+            {map}
           </div>
 
           {/* The lockup, at the foot — below the social links on a phone,
