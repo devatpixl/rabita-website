@@ -181,7 +181,20 @@ export default async function ApartmentsPage({
       <section className="bg-paper-2 pt-14 pb-section-md md:pt-20">
         <SectionBody>
           <ProjectGallery
-            only={['apartmentLiving', 'apartmentBalcony', 'roofTerrace', 'garden', 'minaret', 'facadeEvening']}
+            // Apartment-led since 2026-09-15. Five of the seven are now the
+            // inside of the flats, which is what a buyer on this page is
+            // deciding on; minaret and garden stay so the building the flats
+            // sit in is still in the reel. The project page is untouched — it
+            // passes no `only` and renders SLIDES in its own order.
+            only={[
+              'apartmentLiving',
+              'apartmentAttic',
+              'apartmentFamily',
+              'apartmentBalcony',
+              'apartmentGreen',
+              'minaret',
+              'garden',
+            ]}
           />
         </SectionBody>
       </section>

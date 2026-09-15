@@ -15,7 +15,25 @@ import { cn } from '@/lib/cn';
 // guarantee NO player UI is for no player UI to exist: a native <video>
 // with no controls attribute has none, ever, in any browser mode.
 //
-// public/video/cm8-film.mp4 is the project's own promotional film
+// public/video/leiligheter-film.mp4 is the project's own promotional film.
+//
+// Replaced 2026-09-15 with the client's own 4K master ("Leilighet 1.mp4",
+// 3840x2160, 112s, 1.02GB). It is the SAME FILM that was running here as
+// cm8-film.mp4 at 1024x576 — frame-for-frame identical at the same
+// timestamps — so this closes the "ask for a better original" note that file
+// carried. Transcoded to 1280x720 at 1.72 Mbps, 22.9MB, audio stripped.
+//
+// 1080p was encoded first and rejected at 60.7MB: this runs as muted
+// wallpaper behind a scrim and a headline, and tripling the page weight for
+// detail nobody reads is a bad trade. 720p against the old 1024x576 is still
+// 1.25x the width and 1.9x the bitrate.
+//
+// NOTE FOR WHOEVER REPLACES IT NEXT: the film carries a "CM8" watermark
+// burned into its top-left corner, which sits oddly beside the client's
+// 2026-09-15 instruction to take the CM8 link off this page. Flagged to him;
+// only a new export from the studio can remove it.
+//
+// The old file said:
 // (cm8.no / youtu.be/ZZHfHvw7AGs), 1024px, silent (audio track stripped —
 // wallpaper needs no sound and it saves a third of the bytes), ~12 MB.
 //
@@ -83,7 +101,7 @@ export function VideoHero({
         {started && (
           <video
             ref={videoRef}
-            src="/video/cm8-film.mp4"
+            src="/video/leiligheter-film.mp4"
             muted
             loop
             autoPlay

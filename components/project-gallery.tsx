@@ -41,6 +41,20 @@ const SLIDES = [
   // asks for them FIRST, and `only` honours the order it is given.
   { key: 'apartmentLiving', src: '/photos/apt-living-507.webp', pos: '50% 50%' },
   { key: 'apartmentBalcony', src: '/photos/apt-living-505.webp', pos: '50% 50%' },
+  // Three more apartment interiors (client, 2026-09-15: "use images in the
+  // gallery, not in per apartment card"), from the same OneDrive set the two
+  // above came from — Bilder → Moskeprosjektet → 3D bilder → Leiligheter.
+  //
+  // Interiors only. His folder also holds exteriors — a courtyard with the
+  // fountain, the roof, the facade — but those duplicate `garden`,
+  // `roofTerrace` and `facadeEvening`, which are already in this list. What
+  // the gallery genuinely lacked was the inside of the flats: it had two.
+  //
+  // apt-living-505 was re-encoded from the same delivery at the same time: it
+  // was a 1999px downscale of a 2752px original.
+  { key: 'apartmentAttic', src: '/photos/apt-attic-605.webp', pos: '50% 50%' },
+  { key: 'apartmentFamily', src: '/photos/apt-family-604.webp', pos: '50% 50%' },
+  { key: 'apartmentGreen', src: '/photos/apt-green-506.webp', pos: '50% 50%' },
 ] as const;
 export type SlideKey = (typeof SLIDES)[number]['key'];
 type Slide = (typeof SLIDES)[number];

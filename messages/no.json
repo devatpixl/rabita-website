@@ -1271,6 +1271,24 @@
       "goto": "Gå til bilde {n}",
       "cta": "Se fremdriften",
       "items": {
+        "apartmentAttic": {
+          "tag": "Toppetasjen",
+          "title": "Under skråvinduene",
+          "caption": "Øverst følger leiligheten takfallet: skråvinduer på rekke, lyset inn fra to sider og byen liggende under.",
+          "alt": "Stue i toppetasjen med skråvinduer og utsikt over byen"
+        },
+        "apartmentFamily": {
+          "tag": "Stua",
+          "title": "Plass til å sitte sammen",
+          "caption": "Åpen stue med kjøkkenet i enden, plass til sofa, spisebord og folk på gulvet.",
+          "alt": "Stue med sofagruppe, spisebord og kjøkken i bakgrunnen"
+        },
+        "apartmentGreen": {
+          "tag": "Mot balkongen",
+          "title": "Dagslys fra gulv til tak",
+          "caption": "Skyvedøren i full høyde tar inn lyset og gjør balkongen til en forlengelse av stua.",
+          "alt": "Stue med høye balkongdører og grønn vegg"
+        },
         "facadeEvening": {
           "tag": "Fasaden om kvelden",
           "title": "Når lyset kommer innenfra",

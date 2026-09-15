@@ -1271,6 +1271,24 @@
       "goto": "Go to picture {n}",
       "cta": "See the progress",
       "items": {
+        "apartmentAttic": {
+          "tag": "The top floor",
+          "title": "Under the sloping windows",
+          "caption": "At the top the flat follows the roofline: a row of sloping windows, light from two sides and the city lying below.",
+          "alt": "Top-floor living room with sloping windows and a view over the city"
+        },
+        "apartmentFamily": {
+          "tag": "The living room",
+          "title": "Room to sit together",
+          "caption": "An open living room with the kitchen at one end, space for a sofa, a dining table and people on the floor.",
+          "alt": "Living room with sofa, dining table and kitchen behind"
+        },
+        "apartmentGreen": {
+          "tag": "Towards the balcony",
+          "title": "Daylight floor to ceiling",
+          "caption": "The full-height sliding door takes in the light and makes the balcony an extension of the room.",
+          "alt": "Living room with tall balcony doors and a green wall"
+        },
         "facadeEvening": {
           "tag": "The facade at dusk",
           "title": "When the light comes from inside",
