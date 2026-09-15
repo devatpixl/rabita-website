@@ -69,20 +69,6 @@ const GRADE = 'saturate(0.82) contrast(1.06)';
 // flags — and putting it on a donation level would attach a political
 // statement to a fundraising tier. Checked 2026-09-15. Nor
 // give-dedication.webp, which is a macaw sitting on somebody's head.
-// Levels whose photograph is shown WHOLE rather than cropped to fill.
-//
-// Client, 2026-09-15: "can we zoom out a little without breaking the photo? so
-// quran shown proper". With object-cover you cannot: the image has to fill the
-// card, and gift-library.webp is 1200x900 landscape in a 304x408 portrait
-// frame, so it can only ever show 56% of its width. An open book is the one
-// subject that suffers most from that — both page edges fall outside the crop.
-//
-// So this card contains the picture instead of covering it, and fills the rest
-// with a blurred, enlarged copy of the same photograph. The card still bleeds
-// edge to edge, nothing is fabricated, and the book is whole. Anchored to the
-// top because the type owns the lower half.
-const CONTAIN = new Set(['quran']);
-
 const SHOTS: Record<string, string | undefined> = {
   // One figure in sujud, alone in the hall under the chandelier. Client,
   // 2026-09-15: "doesnt maek sense the image here" — this level had
@@ -112,6 +98,18 @@ const SHOTS: Record<string, string | undefined> = {
   self: '/photos/daily-prayer-sujud.webp',
   // An open Qur'an on a rug — dropped from `shelf` on 2026-09-13 for reading
   // as a prayer hall rather than a library, and exactly what "Koran" wants.
+  //
+  // IT IS COVERED, LIKE EVERY OTHER CARD, AND THAT IS SETTLED. The client
+  // asked on 2026-09-15 whether it could zoom out so the whole book shows;
+  // this file is 1200x900 landscape in a 304x408 frame, so cover can only
+  // ever show 56% of its width and the page edges fall outside. I tried
+  // object-contain over a blurred, enlarged copy of the same file. It looked
+  // bad — a visible seam where the sharp image met the blur, the rug pattern
+  // repeating behind itself, the whole thing reading as a mistake rather than
+  // as a decision — and he was right to reject it: "loooks so bad, before was
+  // beeter". The cropped edges are a small loss. That was a visible defect.
+  // Do not reach for contain-over-blur here again; the fix is a portrait
+  // photograph of a Qur'an, or nothing.
   quran: '/photos/gift-library.webp',
   // A couple at an outdoor table with dates and water — a household breaking
   // fast together, which is what this level is named for. Also closes
@@ -361,45 +359,23 @@ export function GiftBuilds() {
                       )}
                     >
                       {SHOTS[g.key] ? (
-                        <>
-                          {/* The ground for a contained photograph: the same
-                             file, enlarged and blurred out of legibility, so
-                             the card keeps its full bleed without inventing
-                             anything that is not in the picture. */}
-                          {CONTAIN.has(g.key) && (
-                            <Image
-                              src={SHOTS[g.key] as string}
-                              alt=""
-                              aria-hidden
-                              fill
-                              sizes="(min-width: 640px) 20rem, 80vw"
-                              className="scale-125 object-cover blur-2xl"
-                              style={{ filter: GRADE, opacity: 0.55 }}
-                            />
+                        <Image
+                          src={SHOTS[g.key] as string}
+                          alt={t(`alt.${g.key}`)}
+                          fill
+                          sizes="(min-width: 640px) 20rem, 80vw"
+                          loading="eager"
+                          className={cn(
+                            'object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]',
+                            // Y position is INERT on every card but this one:
+                            // the rest are wider than 0.745, so cover crops
+                            // their width. daily-prayer-sujud is 800x1200 and
+                            // shows 89% of its frame, so bottom is the 11%
+                            // that lifts its figure as high as it goes.
+                            g.key === 'self' ? 'object-bottom' : 'object-center',
                           )}
-                          <Image
-                            src={SHOTS[g.key] as string}
-                            alt={t(`alt.${g.key}`)}
-                            fill
-                            sizes="(min-width: 640px) 20rem, 80vw"
-                            loading="eager"
-                            className={cn(
-                              'transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]',
-                              CONTAIN.has(g.key)
-                                ? 'object-contain object-top'
-                                : 'object-cover',
-                              // Y position is INERT on every covered card but
-                              // this one: the rest are wider than 0.745, so
-                              // cover crops their width. daily-prayer-sujud is
-                              // 800x1200 and shows 89% of its frame, so bottom
-                              // is the 11% that lifts its figure as high as it
-                              // goes.
-                              !CONTAIN.has(g.key) &&
-                                (g.key === 'self' ? 'object-bottom' : 'object-center'),
-                            )}
-                            style={{ filter: GRADE }}
-                          />
-                        </>
+                          style={{ filter: GRADE }}
+                        />
                       ) : (
                         <span
                           aria-hidden
