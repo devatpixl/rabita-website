@@ -70,14 +70,34 @@ const GRADE = 'saturate(0.82) contrast(1.06)';
 // statement to a fundraising tier. Checked 2026-09-15. Nor
 // give-dedication.webp, which is a macaw sitting on somebody's head.
 const SHOTS: Record<string, string | undefined> = {
-  // Both of these were already in /public and rendering nowhere, and each
-  // happens to be exactly the subject its new tier names. gift-prayer is a
-  // single ornate prayer mat — the shot dropped from the `prayer` tier on
-  // 2026-09-13 for reading as one mat rather than a hall floor, which is
-  // precisely right for a level called "For deg selv". gift-library is an
-  // open Qur'an on a rug — dropped from `shelf` for reading as a prayer hall
-  // rather than a library, and exactly what a level called "Koran" wants.
-  self: '/photos/gift-prayer.webp',
+  // One figure in sujud, alone in the hall under the chandelier. Client,
+  // 2026-09-15: "doesnt maek sense the image here" — this level had
+  // gift-prayer.webp, a single ornate prayer rug, and he was right twice
+  // over. A rug does not say "for yourself", and a flat textile pattern was
+  // the one graphic among eight photographs of people and places, which is
+  // why it read as an outlier even before you asked what it meant.
+  //
+  // It says the thing the level is named for: one person, taking part.
+  //
+  // BUT ITS FIGURE IS TOO LOW, and this is the honest state of it. The man in
+  // sujud sits at 74% of the frame, and this card is near-opaque below 60%
+  // because that is where the type lives — measured text positions are in the
+  // gradient note below. object-position cannot rescue it: the source is
+  // 800x1200 against a 304x408 card, so cover trims only 48px and the best a
+  // bottom position reaches is 71%, still under a 0.93 veil. What you see on
+  // the card is the chandelier and the stone; the man is a smudge.
+  //
+  // It stays for now because a warm mosque interior beats a rug that meant
+  // nothing, which is what he objected to. The real fix is one photograph.
+  //
+  // THE RULE THIS CARD IMPLIES, for whoever picks the next one: the subject
+  // must be in the TOP THIRD. Anything below 60% is under the text panel. The
+  // library was searched on 2026-09-15 — a dozen files opened, not trusted by
+  // filename — and nothing in it shows a single person taking part, framed
+  // high. gift-prayer.webp is unused again.
+  self: '/photos/daily-prayer-sujud.webp',
+  // An open Qur'an on a rug — dropped from `shelf` on 2026-09-13 for reading
+  // as a prayer hall rather than a library, and exactly what "Koran" wants.
   quran: '/photos/gift-library.webp',
   // A couple at an outdoor table with dates and water — a household breaking
   // fast together, which is what this level is named for. Also closes
