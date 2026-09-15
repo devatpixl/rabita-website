@@ -80,7 +80,16 @@ export default async function ApartmentsPage({
          this page is mostly read. */}
       <Section tone="paper" id="om">
         <SectionBody>
-          <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
+          {/* 0.8 / 1.2 rather than 50/50 since 2026-09-15, and the reason is
+             measured rather than aesthetic. The Google embed renders TWO
+             attribution groups — My Maps' own on the left, the underlying
+             Maps chrome ("Keyboard shortcuts…") on the right — and below
+             about 600px of iframe they overlap into unreadable mush. At the
+             even split the iframe was 480. This gives it ~620 and they clear
+             each other, with the text column still a workable ~350 for a
+             four-line paragraph. Verified at 600: no collision.
+             Re-check if this section's gap or measure ever changes. */}
+          <div className="grid items-center gap-12 md:grid-cols-[0.72fr_1.28fr] md:gap-16">
             <div>
               <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
                 {t('about.eyebrow')}

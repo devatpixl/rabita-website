@@ -41,6 +41,10 @@ import { DIRECTIONS_URL, LANDMARKS, ROUTES } from '@/lib/location';
 
 const MAP_MID = '1IE-Lk2r5dkb-hqk8RV0oV8So1UIsPKg';
 
+/** Height of the My Maps title bar, which is cropped away. Measured on the
+ *  rendered embed; it is a fixed chrome height, not a content-dependent one. */
+const HEADER_PX = 56;
+
 /** The five he listed, in his order. Rabita itself is the sixth pin. */
 const SHOWN = ['regjeringskvartalet', 'stortinget', 'oslo-s', 'bussterminalen', 'operahuset'] as const;
 
@@ -55,14 +59,42 @@ export async function FindUsGoogle({ locale }: { locale: string }) {
 
   return (
     <div className="overflow-hidden rounded-3xl bg-dusk p-4 sm:p-5">
-      <div className="overflow-hidden rounded-2xl bg-paper-deep">
-        <iframe
-          src={`https://www.google.com/maps/d/embed?mid=${MAP_MID}&ehbc=2E312F`}
-          title={t('mapTitle')}
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          className="block h-[22rem] w-full border-0 sm:h-[26rem]"
-        />
+      {/* THE TITLE BAR IS CROPPED OFF, deliberately (client, 2026-09-15:
+         "dont show my name here").
+         
+         A My Maps embed prints the map's name and its OWNER'S Google account
+         name across the top — here, a person's name, on a mosque's public
+         website. There is no parameter to suppress it: the embed accepts mid,
+         ll, z and ehbc, and nothing else.
+         
+         So the iframe is HEADER_PX taller than its frame and pulled up by
+         exactly that much inside an overflow-hidden box. The bar is scrolled
+         out of view and the map still fills the frame.
+         
+         WHAT IS NOT CROPPED, and must never be: Google's attribution. The
+         "Google My Maps" logo and the "Map data ©2026 Google / Terms" line sit
+         at the FOOT of the embed and are untouched — removing those would
+         breach Google's terms. This hides a My Maps title bar, not an
+         attribution.
+         
+         The cost is the expand-to-fullscreen button, which lived in that bar.
+         The map is still pannable and zoomable, and Veibeskrivelse below opens
+         the real thing.
+         
+         The proper fix is for the map to live in a RABITA Google account
+         rather than a personal one — then the line would read "Rabita" and
+         could stay. Raised with the client. */}
+      <div className="relative overflow-hidden rounded-2xl bg-paper-deep">
+        <div className="h-[22rem] overflow-hidden sm:h-[26rem]">
+          <iframe
+            src={`https://www.google.com/maps/d/embed?mid=${MAP_MID}&ehbc=2E312F`}
+            title={t('mapTitle')}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            style={{ marginTop: `-${HEADER_PX}px`, height: `calc(100% + ${HEADER_PX}px)` }}
+            className="block w-full border-0"
+          />
+        </div>
       </div>
 
       {/* The metres, beside the map rather than on it. Google prints no
