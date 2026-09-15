@@ -118,7 +118,20 @@ const SHOTS: Record<string, string | undefined> = {
   // /arrangementer, so it is not exclusive to this card; different page, far
   // apart, and the alternative was no picture at all.
   family: '/photos/visit-eid.webp',
-  block: undefined,
+  // The cleared site: someone in a hard hat and hi-vis before the rubble of
+  // the old building, with the half-demolished facade behind. Client's own
+  // photograph, 2026-09-15, 4240x2832 down to 1600.
+  //
+  // READ THE CAVEAT BEFORE REUSING THIS ELSEWHERE. It is a picture of
+  // DEMOLITION on a level that promises "a building block in the new mosque",
+  // and the two do not say the same thing. It is here because there is no
+  // third option: construction has not started — the site was cleared in
+  // Ramadan 2025 and byggetid runs two years from 2026-Q1 — so the only
+  // alternatives were a render, which would duplicate the facade already on
+  // the 100 000 level, or the empty plate. A real photograph of Rabita's own
+  // site beats both. Swap it the moment there is a picture of something
+  // going UP.
+  block: '/photos/gift-block-site.webp',
   // The street iftar under the Grønland overpass: long tables, bunting, the
   // congregation eating together. 1920x1280 and referenced nowhere else on
   // the site — it is the friends of Rabita, at Rabita's own event.
