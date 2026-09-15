@@ -32,9 +32,21 @@ export type FloorMarker = {
   my?: number;
 };
 
+// REMOVED 2026-09-15 (client: "Fjerne garderobe og beboerinngang på
+// figurene"): `garderober` from `lower` and `residentsEntrance` from `first`.
+//
+// Both were in the group that had no photographs and no description — only a
+// name — so a reader who found them got nothing for the click. Taking them out
+// cuts that empty group from nine markers to seven.
+//
+// Note the direction of travel before restoring either: residentsEntrance
+// carried an `mx: 20` added the day before, on 2026-09-14, to pull its phone
+// chip back into frame at his request. That nudge goes with it.
+//
+// Their names stay in messages under floorByFloor.rooms.garderober and
+// .residentsEntrance, unreferenced and translated in all three.
 export const FLOOR_MARKERS: Record<string, FloorMarker[]> = {
   lower: [
-    { id: 'garderober', x: 41, y: 78, lx: 14, ly: 91, align: 'end' },
     { id: 'prayerMen', x: 52, y: 61, lx: 24, ly: 33, align: 'end' },
     { id: 'wuduMen', x: 73, y: 74, lx: 90, ly: 62, align: 'start' },
     { id: 'sportsHall', x: 66, y: 86, lx: 86, ly: 93, align: 'start' },
@@ -42,11 +54,6 @@ export const FLOOR_MARKERS: Record<string, FloorMarker[]> = {
   first: [
     { id: 'prayerMain', x: 52, y: 50, lx: 27, ly: 15, align: 'end' },
     { id: 'cafe', x: 26, y: 69, lx: 4, ly: 78, align: 'end', my: 73 },
-    // mx only: at x 13 the phone chip is centred 13% in and its own width
-    // carries it 16px off the left edge of the pane (measured at 389px).
-    // The desktop leader still points at the real door — mx moves the phone
-    // name-plate, not the marker.
-    { id: 'residentsEntrance', x: 13, y: 63, mx: 20, lx: 3, ly: 45, align: 'end' },
     { id: 'foyer', x: 57, y: 83, lx: 74, ly: 95, align: 'start' },
     { id: 'library', x: 77, y: 72, lx: 97, ly: 60, align: 'start' },
   ],

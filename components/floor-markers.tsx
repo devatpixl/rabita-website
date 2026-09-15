@@ -100,10 +100,27 @@ function leaderPath(m: FloorMarker) {
   return `M ${x1.toFixed(1)} ${y1.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)}`;
 }
 
-// The desktop marker, restated in viewBox units from the 3% and 1% of the
-// frame it used to be, so it is the same size on screen as before.
-const DISC_R = (3 * FRAME_W) / 100;
-const DOT_R = (1 * FRAME_W) / 100;
+// The desktop marker. 1.75% and 0.65% of the frame since 2026-09-15
+// ("Gjøre punktene mer proporsjonale og mindre"); it was 3% and 1%.
+//
+// Measured before changing it rather than guessed: on the 1024px-wide figure
+// the gold disc was drawing at 61.4px across — 6% of the whole drawing — for
+// an annotation dot on an architect's elevation. It now draws at about 36px,
+// with the dark centre at 13px.
+//
+// He also wrote "kan kanskje fjernes helt". They are NOT removed: the dot is
+// what you click, and his very next point asks for a pop-up on click.
+// Shrinking answers "mindre" without answering away the thing that makes the
+// next request possible.
+const DISC_R = (1.75 * FRAME_W) / 100;
+const DOT_R = (0.65 * FRAME_W) / 100;
+
+// THE TARGET DOES NOT FOLLOW THE DISC. It stays at the radius it had when the
+// disc was drawn at 3% — a marker that looks smaller should not be a harder
+// one to hit, and tying the two together is how a visual tweak quietly
+// becomes an accessibility regression. 6% of the frame is the old DISC_R * 2
+// exactly, so the target is unchanged by this commit.
+const HIT_R = (6 * FRAME_W) / 100;
 
 // The desktop label. LABEL_BOX_W is the measure the text is aligned inside,
 // not a drawn width — the longest name here, "Konferanse- og
@@ -356,10 +373,11 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
               >
                 {/* The hit area. The painted disc is 38 units across, which is
                    about 15px on a laptop — too small a target for a mouse and
-                   far too small for a finger. This one is invisible, twice the
-                   radius, and drawn FIRST so it never covers the disc. */}
+                   far too small for a finger. This one is invisible, HIT_R
+                   across, drawn FIRST so it never covers the disc, and
+                   deliberately not derived from DISC_R — see HIT_R. */}
                 {canOpen(m.id) && (
-                  <circle cx={px(m.x)} cy={py(m.y)} r={DISC_R * 2} fill="transparent" />
+                  <circle cx={px(m.x)} cy={py(m.y)} r={HIT_R} fill="transparent" />
                 )}
                 {/* gold-deep, not gold (client, 2026-09-09: the line was hard
                    to follow). Most of a leader runs over the dusk ground but
@@ -411,7 +429,7 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
 
                    No stroke — a gold ring around a gold fill draws nothing.
 
-                   DISC_R and DOT_R are 3% and 1% of the frame in viewBox
+                   DISC_R and DOT_R are percentages of the frame in viewBox
                    units, so the marker keeps its proportions at any size. */}
                 <circle cx={px(m.x)} cy={py(m.y)} r={DISC_R} fill="#9B7F4A" />
                 <circle cx={px(m.x)} cy={py(m.y)} r={DOT_R} fill="#16242E" />
