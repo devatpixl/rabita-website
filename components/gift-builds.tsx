@@ -43,7 +43,14 @@ import { openGiveSheet } from './giving-sheet';
 // numbers on a mosque fundraising page is not acceptable. So the design is
 // copied and the content is ours.
 
-const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
+// No brightness cut since 2026-09-15 ("can barely see anything bro, why soo
+// much tint on photos?"). Three layers were darkening these cards at once —
+// this filter, the gradient veil over it, and opacity-70 on the whole
+// inactive card compositing against a dark section ground. Multiplied out, an
+// inactive card was showing its photograph at about 47% of true brightness at
+// the TOP and roughly 10% further down. Saturation and contrast stay: they
+// are what keeps nine different photographs looking like one set.
+const GRADE = 'saturate(0.82) contrast(1.06)';
 
 // A tier with no photograph renders a plain tinted plate instead — the card
 // is a full-bleed image with type over a gradient, so a missing file would
@@ -298,7 +305,7 @@ export function GiftBuilds() {
                         // scaled card blurs its own photograph and its text.
                         on
                           ? 'h-[27rem] opacity-100 ring-1 ring-gold/70 sm:h-[29rem]'
-                          : 'h-[24rem] opacity-70 ring-1 ring-paper/10 hover:opacity-95 sm:h-[25.5rem]',
+                          : 'h-[24rem] opacity-[0.92] ring-1 ring-paper/10 hover:opacity-100 sm:h-[25.5rem]',
                       )}
                     >
                       {SHOTS[g.key] ? (
@@ -322,16 +329,24 @@ export function GiftBuilds() {
                         />
                       )}
 
-                      {/* Deep enough to carry four lines of type at the foot.
-                         The current card's is stronger: it carries a button
-                         as well, and it is the one being read. */}
+                      {/* Dark ONLY where the type is, and the stops are set
+                         off MEASURED text positions rather than by eye. The
+                         text block begins at 38% of card height; within it the
+                         eyebrow sits at 43%, the amount at 50%, the title at
+                         61% and the meta line at 70%. That last one is the
+                         fragile one — 13.5px at 65% alpha — so the curve is
+                         at 0.94 by 72%, DARKER under the type than the
+                         original 0.84, while staying clear to 34% where the
+                         original already sat at 0.25.
+                         Both ends improved: more photograph, more contrast.
+                         Re-measure if the text block ever grows a line. */}
                       <span
                         aria-hidden
                         className="absolute inset-0 transition-opacity duration-500"
                         style={{
                           background: on
-                            ? 'linear-gradient(180deg, rgba(22,36,46,0.1) 0%, rgba(22,36,46,0.55) 38%, rgba(22,36,46,0.95) 78%, rgba(22,36,46,0.98) 100%)'
-                            : 'linear-gradient(180deg, rgba(22,36,46,0.25) 0%, rgba(22,36,46,0.6) 40%, rgba(22,36,46,0.93) 80%, rgba(22,36,46,0.97) 100%)',
+                            ? 'linear-gradient(180deg, rgba(22,36,46,0) 0%, rgba(22,36,46,0) 34%, rgba(22,36,46,0.55) 46%, rgba(22,36,46,0.82) 60%, rgba(22,36,46,0.93) 72%, rgba(22,36,46,0.97) 100%)'
+                            : 'linear-gradient(180deg, rgba(22,36,46,0.05) 0%, rgba(22,36,46,0.08) 34%, rgba(22,36,46,0.58) 46%, rgba(22,36,46,0.84) 60%, rgba(22,36,46,0.94) 72%, rgba(22,36,46,0.97) 100%)',
                         }}
                       />
 
