@@ -15,6 +15,11 @@
  *
  * They render as "Arabic (basic)" / "Persian (basic)", not "Simple Arabic" /
  * "Some Persian" (client, 2026-09-15: "a formal one, wtf is little and some?").
+ * Norwegian uses "(basis)" rather than "(grunnleggende)": the line is set in
+ * uppercase mono, where GRUNNLEGGENDE is 14 characters and pushed Usman's
+ * eight languages to five lines while English sat at three. "Basis" is the
+ * term Norwegian CVs use for the same level — basis / god / flytende — so it
+ * is shorter without being less formal.
  * He was right: the direct translations read casually on a page where
  * everything around them is formal, and "Some Persian" is poor English. The
  * parenthetical is what a staff page or a CV uses — it keeps the language
