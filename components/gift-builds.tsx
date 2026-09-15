@@ -45,7 +45,28 @@ import { openGiveSheet } from './giving-sheet';
 
 const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
 
-const SHOTS: Record<string, string> = {
+// A tier with no photograph renders a plain tinted plate instead — the card
+// is a full-bleed image with type over a gradient, so a missing file would
+// otherwise be an empty dark rectangle. Three of the levels added on
+// 2026-09-15 are waiting on pictures from the client; they read correctly
+// meanwhile, just without a photograph. Fill these in and nothing else has
+// to change:
+//    family  (2 000 kr, "For familien din")
+//    block   (5 000 kr, "Byggesteinen")
+//    friends (50 000 kr, "Venner av Rabita")
+const SHOTS: Record<string, string | undefined> = {
+  // Both of these were already in /public and rendering nowhere, and each
+  // happens to be exactly the subject its new tier names. gift-prayer is a
+  // single ornate prayer mat — the shot dropped from the `prayer` tier on
+  // 2026-09-13 for reading as one mat rather than a hall floor, which is
+  // precisely right for a level called "For deg selv". gift-library is an
+  // open Qur'an on a rug — dropped from `shelf` for reading as a prayer hall
+  // rather than a library, and exactly what a level called "Koran" wants.
+  self: '/photos/gift-prayer.webp',
+  quran: '/photos/gift-library.webp',
+  family: undefined,
+  block: undefined,
+  friends: undefined,
   // Client-supplied, 2026-09-13. The shot it replaces was a single red
   // prayer rug, which reads as one mat; this tier buys a square metre of
   // the HALL floor, and a carpeted hall running away between the columns
@@ -265,15 +286,26 @@ export function GiftBuilds() {
                           : 'h-[24rem] opacity-70 ring-1 ring-paper/10 hover:opacity-95 sm:h-[25.5rem]',
                       )}
                     >
-                      <Image
-                        src={SHOTS[g.key]}
-                        alt={t(`alt.${g.key}`)}
-                        fill
-                        sizes="(min-width: 640px) 20rem, 80vw"
-                        loading="eager"
-                        className="object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
-                        style={{ filter: GRADE }}
-                      />
+                      {SHOTS[g.key] ? (
+                        <Image
+                          src={SHOTS[g.key] as string}
+                          alt={t(`alt.${g.key}`)}
+                          fill
+                          sizes="(min-width: 640px) 20rem, 80vw"
+                          loading="eager"
+                          className="object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
+                          style={{ filter: GRADE }}
+                        />
+                      ) : (
+                        <span
+                          aria-hidden
+                          className="absolute inset-0"
+                          style={{
+                            background:
+                              'linear-gradient(155deg, #1f3440 0%, #16242e 55%, #101c24 100%)',
+                          }}
+                        />
+                      )}
 
                       {/* Deep enough to carry four lines of type at the foot.
                          The current card's is stronger: it carries a button

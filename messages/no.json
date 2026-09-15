@@ -456,6 +456,26 @@
     "cta": "Velg et beløp",
     "footnote": "Fradragsberettiget opp til 25 000 kr i året.",
     "items": {
+      "self": {
+        "title": "For deg selv",
+        "meta": "Den enkleste måten å bli med på byggingen."
+      },
+      "family": {
+        "title": "For familien din",
+        "meta": "En gave på vegne av hele husstanden."
+      },
+      "block": {
+        "title": "Byggesteinen",
+        "meta": "En byggestein i det nye bygget."
+      },
+      "quran": {
+        "title": "Koran",
+        "meta": "Koraner til moskeen, skolen og biblioteket."
+      },
+      "friends": {
+        "title": "Venner av Rabita",
+        "meta": "Et større bidrag til byggingen av moskeen."
+      },
       "prayer": {
         "title": "Én kvadratmeter gulv i bønnesalen",
         "meta": "500 kr/mnd i tre år finansierer én plass"
@@ -481,6 +501,11 @@
     },
     "totalSuffix": "totalt",
     "alt": {
+      "self": "En bønnematte",
+      "family": "",
+      "block": "",
+      "quran": "En åpen koran",
+      "friends": "",
       "prayer": "Gulvet i bønnesalen",
       "shelf": "Hyller i biblioteket",
       "desk": "Pult i klasserommet",

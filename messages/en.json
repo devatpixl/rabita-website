@@ -456,6 +456,26 @@
     "cta": "Choose an amount",
     "footnote": "Tax deductible up to 25 000 kr per year.",
     "items": {
+      "self": {
+        "title": "For yourself",
+        "meta": "The simplest way to take part in the building."
+      },
+      "family": {
+        "title": "For your family",
+        "meta": "A gift on behalf of the whole household."
+      },
+      "block": {
+        "title": "The building block",
+        "meta": "One building block in the new mosque."
+      },
+      "quran": {
+        "title": "Quran",
+        "meta": "Qur'ans for the mosque, the school and the library."
+      },
+      "friends": {
+        "title": "Friends of Rabita",
+        "meta": "A larger contribution towards the building."
+      },
       "prayer": {
         "title": "One square metre of prayer hall floor",
         "meta": "500 kr a month for three years funds one place"
@@ -481,6 +501,11 @@
     },
     "totalSuffix": "total",
     "alt": {
+      "self": "A prayer mat",
+      "family": "",
+      "block": "",
+      "quran": "An open Qur’an",
+      "friends": "",
       "prayer": "Prayer hall floor",
       "shelf": "Library shelving",
       "desk": "Classroom desk",

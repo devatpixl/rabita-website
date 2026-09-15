@@ -66,7 +66,9 @@ export function InventoryBar({
     return () => io.disconnect();
   }, [staggerDelay]);
 
-  const totalStr = formatAmount(locale, gift.unitTotal);
+  // A bar needs a denominator. The levels added on 2026-09-15 have none —
+  // they are sums, not counts — so there is nothing here to draw.
+  const totalStr = gift.unitTotal === null ? null : formatAmount(locale, gift.unitTotal);
 
   return (
     <div ref={barRef} className="w-full flex flex-col gap-[7px]">
