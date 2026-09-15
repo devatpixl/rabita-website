@@ -116,22 +116,46 @@ export function VideoHero({
           />
         )}
 
-        {/* The grade, in three passes, each doing one job:
-           1. a warm wash, so the film sits in the site's palette rather than
-              beside it;
-           2. an even veil, so no frame of a moving picture can wash out the
-              type over it;
-           3. a foot-up gradient, because the words sit at the bottom.
-           Lightened on 2026-09-02 (client): the film was legible but dim. The
-           saving is taken from the top — where there is nothing to protect —
-           rather than evenly, so the flats read clearly while the headline
-           keeps the same ground under it. */}
-        <div className="absolute inset-0 bg-gold-deep/20 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-dusk/25" />
-        <div className="absolute inset-0 bg-gradient-to-t from-dusk via-dusk/55 to-transparent" />
+        {/* The grade. Lightened again on 2026-09-15 ("maybe use lesser tint at
+           video so it looks cleaner"), and the saving comes from the TOP
+           because that is where it was being wasted.
+           
+           Measured before touching it: the type occupies 49% to 89% of the
+           hero's height — eyebrow at 49, headline 53-70, lede 73-80, buttons
+           84-89. Above 49% there is nothing to protect at all, and the even
+           bg-dusk/25 veil was darkening that half as hard as the half under
+           the words. It is /10 now, and the foot-up gradient does the real
+           work with stops placed off those measurements rather than by eye:
+           clear to about 22% down, and full dusk by the time it reaches the
+           headline.
+           
+           The gold multiply stays — at /14 rather than /20 — because it is
+           what keeps a stock-looking render in this site's palette rather
+           than beside it. It is a wash, not a veil.
+           
+           Local contrast moved onto the type itself (see the shadow on the
+           content block below), which is what lets the film be this clean:
+           a scrim dark enough for a lede is dark enough to flatten a
+           photograph, and the shadow buys the same legibility over a few
+           hundred pixels instead of the whole frame. */}
+        <div className="absolute inset-0 bg-gold-deep/14 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-dusk/10" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(to top, rgba(22,36,46,0.97) 0%, rgba(22,36,46,0.93) 12%, rgba(22,36,46,0.82) 26%, rgba(22,36,46,0.58) 42%, rgba(22,36,46,0.28) 56%, rgba(22,36,46,0.06) 70%, rgba(22,36,46,0) 80%)',
+          }}
+        />
       </div>
 
-      <div className="relative mx-auto w-full max-w-6xl px-6 pb-16 pt-28 md:pb-24 md:pt-36">
+      <div
+        className="relative mx-auto w-full max-w-6xl px-6 pb-16 pt-28 md:pb-24 md:pt-36"
+        // Two shadows: a tight one pinning the glyph edges, a wide soft one
+        // darkening the pixels around them. This is what pays for the lighter
+        // scrim above — contrast where the words are, not across the film.
+        style={{ textShadow: '0 1px 2px rgba(22,36,46,0.75), 0 2px 16px rgba(22,36,46,0.55)' }}
+      >
         <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">{eyebrow}</p>
         <h1 className="mt-5 max-w-[18ch] font-serif text-display text-balance text-paper">{title}</h1>
         <p className="mt-6 max-w-[52ch] text-body text-paper/80">{lede}</p>
