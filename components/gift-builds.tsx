@@ -123,7 +123,12 @@ const SHOTS: Record<string, string | undefined> = {
   // asking for. Kept at native size rather than upscaled: upscaling adds
   // bytes without adding detail.
   shelf: '/photos/gift-quran.webp',
-  desk: '/photos/gift-school.webp',
+  // Client, 2026-09-15: "instead of this photo, use this one ... its much
+  // better". The shot it replaces was a packed hall of adults, which is a
+  // lecture, not a school. This is a classroom with desks and children at
+  // them — the thing the level actually buys. 900x1200, and its 0.75 is
+  // almost exactly this card's own 0.745, so cover barely crops it.
+  desk: '/photos/community/youth-table.webp',
   panel: '/photos/gift-facade.webp',
 };
 
@@ -335,7 +340,15 @@ export function GiftBuilds() {
                           fill
                           sizes="(min-width: 640px) 20rem, 80vw"
                           loading="eager"
-                          className="object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
+                          className={cn(
+                            'object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]',
+                            // Y position is INERT on every card but this one:
+                            // the rest are wider than 0.745 so cover crops
+                            // their width. daily-prayer-sujud is 800x1200 and
+                            // shows 89% of its frame, so bottom is the 11%
+                            // that lifts its figure as high as it can go.
+                            g.key === 'self' ? 'object-bottom' : 'object-center',
+                          )}
                           style={{ filter: GRADE }}
                         />
                       ) : (
@@ -349,28 +362,46 @@ export function GiftBuilds() {
                         />
                       )}
 
-                      {/* Dark ONLY where the type is, and the stops are set
-                         off MEASURED text positions rather than by eye. The
-                         text block begins at 38% of card height; within it the
-                         eyebrow sits at 43%, the amount at 50%, the title at
-                         61% and the meta line at 70%. That last one is the
-                         fragile one — 13.5px at 65% alpha — so the curve is
-                         at 0.94 by 72%, DARKER under the type than the
-                         original 0.84, while staying clear to 34% where the
-                         original already sat at 0.25.
-                         Both ends improved: more photograph, more contrast.
-                         Re-measure if the text block ever grows a line. */}
+                      {/* LIGHTER AT THE FOOT since 2026-09-15 ("the person is
+                         behind the text", "maybe lighten the tint at bottom
+                         also so clearly shows the image"). It tops out at 0.78
+                         now instead of 0.97.
+                         
+                         He also asked to move the images down so the bottom
+                         shows, and that turned out to be the same complaint
+                         rather than a second one: on SEVEN of the eight cards
+                         nothing is cropped off the bottom at all. Those photos
+                         are wider than the card's 0.745, so cover crops their
+                         WIDTH and the full height is already on screen —
+                         object-position Y is inert on them. The bottom of each
+                         picture was never missing, it was under this veil.
+                         
+                         Contrast moves to the type instead. A blanket dark
+                         enough for 13.5px text is dark enough to hide a
+                         photograph; a shadow on the glyphs buys the same
+                         legibility over the few hundred pixels that need it
+                         and leaves the rest of the frame alone. Text positions
+                         measured: eyebrow 43%, amount 50%, title 61%, meta
+                         70%. Re-measure if the block grows a line. */}
                       <span
                         aria-hidden
                         className="absolute inset-0 transition-opacity duration-500"
                         style={{
                           background: on
-                            ? 'linear-gradient(180deg, rgba(22,36,46,0) 0%, rgba(22,36,46,0) 34%, rgba(22,36,46,0.55) 46%, rgba(22,36,46,0.82) 60%, rgba(22,36,46,0.93) 72%, rgba(22,36,46,0.97) 100%)'
-                            : 'linear-gradient(180deg, rgba(22,36,46,0.05) 0%, rgba(22,36,46,0.08) 34%, rgba(22,36,46,0.58) 46%, rgba(22,36,46,0.84) 60%, rgba(22,36,46,0.94) 72%, rgba(22,36,46,0.97) 100%)',
+                            ? 'linear-gradient(180deg, rgba(22,36,46,0) 0%, rgba(22,36,46,0) 34%, rgba(22,36,46,0.30) 48%, rgba(22,36,46,0.58) 64%, rgba(22,36,46,0.74) 84%, rgba(22,36,46,0.78) 100%)'
+                            : 'linear-gradient(180deg, rgba(22,36,46,0.04) 0%, rgba(22,36,46,0.06) 34%, rgba(22,36,46,0.34) 48%, rgba(22,36,46,0.62) 64%, rgba(22,36,46,0.76) 84%, rgba(22,36,46,0.80) 100%)',
                         }}
                       />
 
-                      <span className="absolute inset-x-0 bottom-0 block p-5">
+                      <span
+                        className="absolute inset-x-0 bottom-0 block p-5"
+                        // Local contrast, so the veil above does not have to
+                        // be a blanket. Two shadows: a tight one that pins the
+                        // glyph edges and a wide soft one that darkens the few
+                        // pixels around them. Costs nothing on a dark photo
+                        // and rescues the type on a bright one.
+                        style={{ textShadow: '0 1px 2px rgba(22,36,46,0.95), 0 2px 12px rgba(22,36,46,0.8)' }}
+                      >
                         <span className="mb-3 flex items-center gap-2.5">
                           <span
                             className={cn(
@@ -397,7 +428,7 @@ export function GiftBuilds() {
                         <span className="mt-3 block font-serif text-card text-paper">
                           {t(`items.${g.key}.title`)}
                         </span>
-                        <span className="mt-2 block text-[13.5px] leading-relaxed text-paper/65">
+                        <span className="mt-2 block text-[13.5px] leading-relaxed text-paper/80">
                           {t(`items.${g.key}.meta`)}
                         </span>
 
