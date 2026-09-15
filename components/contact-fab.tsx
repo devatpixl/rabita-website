@@ -51,22 +51,34 @@ export function ContactFab() {
   const [error, setError] = useState<Err>(null);
 
   const pillRef = useRef<HTMLButtonElement>(null);
-  const firstRef = useRef<HTMLTextAreaElement>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
   const wasOpen = useRef(false);
 
-  // Focus in on open, and back to the pill on close. The pill unmounts while
-  // the panel is up (they share one corner and would otherwise overlap), so
-  // the return focus has to wait for it to come back — hence the effect
-  // rather than a call inside the close handler.
+  // Focus THE PANEL on open, not the first field. Focusing the textarea put
+  // the site's focus ring (globals.css: 2px solid #b4381f) around it the
+  // instant the panel appeared — a rust-red box on a field nobody had chosen
+  // to type in, which is what the client saw and asked to remove. It is not a
+  // stray style: text fields always match :focus-visible, mouse or keyboard,
+  // so programmatic focus on one always draws it.
+  //
+  // The answer is not to suppress the ring — keyboard users need it, and this
+  // panel is a form. It is to move focus where a dialog should put it: on the
+  // dialog. Tab then reaches the controls and each lights up properly when
+  // the reader actually gets to it.
   useEffect(() => {
-    if (open) {
-      firstRef.current?.focus();
-    } else if (wasOpen.current) {
-      pillRef.current?.focus();
-    }
+    if (!open && wasOpen.current) pillRef.current?.focus();
     wasOpen.current = open;
   }, [open]);
+
+  // A CALLBACK REF, not a focus() in the effect above. AnimatePresence
+  // populates the ref after the parent's effects have run, so focusing from
+  // there hit a null ref every time and left focus on <body> — measured at 0,
+  // 30, 120, 400 and 900ms, never landing. Focusing as the node attaches has
+  // no timing to get wrong.
+  const attachPanel = useCallback((node: HTMLDivElement | null) => {
+    panelRef.current = node;
+    node?.focus();
+  }, []);
 
   // Escape closes, and so does a click outside. Both only while open, so the
   // page carries no listeners for a panel nobody has opened.
@@ -164,17 +176,21 @@ export function ContactFab() {
       className="pointer-events-none fixed bottom-5 end-4 z-40 flex flex-col items-end gap-3 print:hidden sm:end-6"
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
-      <AnimatePresence mode="popLayout" initial={false}>
+      <AnimatePresence initial={false}>
         {open && (
           <motion.div
             key="panel"
-            ref={panelRef}
+            ref={attachPanel}
             role="dialog"
             aria-modal="false"
             aria-labelledby={`${uid}-title`}
+            // -1: a programmatic focus target, never a tab stop. outline-none
+            // is safe HERE and only here — it is not an interactive control,
+            // and everything inside it keeps its own ring.
+            tabIndex={-1}
             {...anim}
             transition={{ duration: reduce ? 0.15 : 0.26, ease }}
-            className="pointer-events-auto w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-rule bg-paper shadow-[0_1px_2px_rgba(26,26,24,0.04),0_30px_70px_-34px_rgba(26,26,24,0.5)]"
+            className="pointer-events-auto w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-rule bg-paper outline-none shadow-[0_1px_2px_rgba(26,26,24,0.04),0_30px_70px_-34px_rgba(26,26,24,0.5)]"
           >
             {status === 'done' ? (
               // The panel itself becomes the acknowledgement, the way
@@ -230,7 +246,6 @@ export function ContactFab() {
                 <div className="mt-5 space-y-2.5">
                   <Field id={`${uid}-q`} label={t('question')} icon="message" tone="paper">
                     <textarea
-                      ref={firstRef}
                       id={`${uid}-q`}
                       rows={3}
                       value={question}
