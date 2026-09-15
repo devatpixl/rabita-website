@@ -2220,6 +2220,29 @@
       "body": "We'll be in touch for a short conversation when we have something concrete to offer."
     }
   },
+    "contactFab": {
+      "open": "Questions?",
+      "eyebrow": "Contact",
+      "heading": "Ask us anything.",
+      "lede": "Write your question and leave your email address, and we will answer you there.",
+      "question": "Question",
+      "questionPlaceholder": "What would you like to know?",
+      "email": "Email",
+      "emailPlaceholder": "name@example.com",
+      "name": "Name",
+      "namePlaceholder": "Optional",
+      "send": "Send the question",
+      "sending": "Sending …",
+      "close": "Close",
+      "doneTitle": "Thank you. We have your question.",
+      "doneBody": "We will reply to the email address you gave us, as soon as we can.",
+      "mailSubject": "Question from the website",
+      "error": {
+        "empty": "Write a question and an email address.",
+        "email": "Check the email address.",
+        "network": "Something went wrong. Try again, or email post@rabita.no."
+      }
+    },
   "consent": {
     "title": "We use cookies.",
     "body": "The site works without tracking. With your consent we turn on anonymous measurement that helps us see if the site works.",

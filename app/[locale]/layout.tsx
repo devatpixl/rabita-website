@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { cairo, fraunces, inter, jetbrainsMono, notoSansArabic } from '../fonts';
 import { ConsentBanner } from '@/components/consent-banner';
+import { ContactFab } from '@/components/contact-fab';
 import { Footer } from '@/components/footer';
 import { GivingSheet } from '@/components/giving-sheet';
 import { NavBar } from '@/components/nav-bar';
@@ -76,6 +77,7 @@ export default async function LocaleLayout({
           <GivingSheet />
           <RsvpSheet />
           <ConsentBanner />
+          <ContactFab />
           </PrayerDataProvider>
         </NextIntlClientProvider>
       </body>

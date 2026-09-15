@@ -43,6 +43,21 @@ export function ConsentBanner() {
     else setMeasurement(c.measurement);
   }, []);
 
+  // Announce ourselves on <html> while we are up, so anything else anchored
+  // to the foot of the screen can get out of the way. On a phone this banner
+  // is full-width at 3.5rem, and the contact button's 1.25rem offset puts its
+  // top edge straight through it — see globals.css, html[data-consent='open'].
+  // An attribute rather than a context: the two components share a corner,
+  // not state, and a provider between them would be a lie about the coupling.
+  useEffect(() => {
+    const root = document.documentElement;
+    if (visible) root.dataset.consent = 'open';
+    else delete root.dataset.consent;
+    return () => {
+      delete root.dataset.consent;
+    };
+  }, [visible]);
+
   const acceptAll = () => {
     write({ measurement: true, ts: Date.now() });
     setVisible(false);

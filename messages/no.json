@@ -2220,6 +2220,29 @@
       "body": "Vi tar kontakt for en kort samtale når vi har noe konkret å tilby."
     }
   },
+    "contactFab": {
+      "open": "Spørsmål?",
+      "eyebrow": "Kontakt",
+      "heading": "Spør oss om hva som helst.",
+      "lede": "Skriv spørsmålet ditt og legg igjen e-postadressen din, så svarer vi deg der.",
+      "question": "Spørsmål",
+      "questionPlaceholder": "Hva lurer du på?",
+      "email": "E-post",
+      "emailPlaceholder": "navn@eksempel.no",
+      "name": "Navn",
+      "namePlaceholder": "Valgfritt",
+      "send": "Send spørsmålet",
+      "sending": "Sender …",
+      "close": "Lukk",
+      "doneTitle": "Takk. Vi har fått spørsmålet ditt.",
+      "doneBody": "Vi svarer på e-posten du oppga, så snart vi kan.",
+      "mailSubject": "Spørsmål fra nettsiden",
+      "error": {
+        "empty": "Skriv et spørsmål og en e-postadresse.",
+        "email": "Sjekk e-postadressen.",
+        "network": "Noe gikk galt. Prøv igjen, eller send en e-post til post@rabita.no."
+      }
+    },
   "consent": {
     "title": "Vi bruker informasjonskapsler.",
     "body": "Nettsiden fungerer uten sporing. Med samtykke slår vi på anonym målsporing som hjelper oss å måle om nettsiden fungerer.",

@@ -776,3 +776,18 @@ body.sheet-open {
   caret-color: #c0a165;
   transition: background-color 9999s ease-in-out 0s;
 }
+
+/* The contact button yields the corner to the consent banner, on phones only.
+   There the banner is full-width and ~139px tall, so the two cannot share the
+   foot of the screen; from sm up the banner is bottom-start and the button is
+   bottom-end, and nothing has to move. Hiding rather than lifting is
+   deliberate: the lift needs a magic number tall enough to clear the banner,
+   and that number is wrong again as soon as the banner's details are expanded
+   or a translation wraps it to another line. ConsentBanner sets
+   data-consent="open" on <html> while it is showing, and the banner is a
+   one-time decision — the button is back the moment it is answered. */
+@media (max-width: 639px) {
+  html[data-consent='open'] [data-contact-fab] {
+    display: none;
+  }
+}
