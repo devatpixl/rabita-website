@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { apartmentStats } from '@/lib/apartments';
 import { Accent } from '@/components/accent';
 import { ApartmentUnits } from '@/components/apartment-units';
-import { FindUs } from '@/components/find-us';
+import { FindUsGoogle } from '@/components/find-us-google';
 import { ProjectGallery } from '@/components/project-gallery';
 import { RequestForm } from '@/components/request-form';
 import { VideoHero } from '@/components/video-hero';
@@ -130,13 +130,14 @@ export default async function ApartmentsPage({
             </div>
 
             <div>
-              <div className="overflow-hidden rounded-3xl bg-dusk p-4 sm:p-5">
-                <FindUs extended />
-              </div>
-              {/* The "walking distances are measured along real routes"
-                 caption is gone with the rest of the map's text (client,
-                 2026-09-13). The distances are still real; the sentence
-                 explaining that they are was one more thing to read. */}
+              {/* A real Google map since 2026-09-15 ("Real google maps /
+                 Remove the lines / Just put in the point"), replacing the
+                 site's own drawn SVG plate on THIS page only.
+                 The footer still renders FindUs on every page — deliberately.
+                 A Google iframe on every page load is a weight and a privacy
+                 cost the client did not ask for, and his note said "maps in
+                 appartment". See components/find-us-google.tsx. */}
+              <FindUsGoogle locale={locale} />
             </div>
           </div>
 
