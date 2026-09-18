@@ -11,10 +11,16 @@ import { SplitReveal } from './split-reveal';
 export function Eyebrow({
   children,
   tone = 'gold',
+  bar = true,
   className,
 }: {
   children: ReactNode;
   tone?: 'gold' | 'gold-deep' | 'paper' | 'ink';
+  // The hairline is opt-out (client, 2026-09-18, on the apartments eyebrow:
+  // "remove ---- from here"). It stays the default because seven other call
+  // sites across Tjenester, Arrangementer and Aktuelt are drawn with it and
+  // nobody asked about those.
+  bar?: boolean;
   className?: string;
 }) {
   const colour =
@@ -28,7 +34,8 @@ export function Eyebrow({
   return (
     <p
       className={cn(
-        'eyebrow-bar font-mono text-[0.75rem] uppercase tracking-[0.16em]',
+        'font-mono text-[0.75rem] uppercase tracking-[0.16em]',
+        bar && 'eyebrow-bar',
         colour,
         className,
       )}

@@ -4,21 +4,19 @@ import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Eyebrow, Section, SectionBody, SectionHeading } from '@/components/primitives';
 import { RequestForm, type RequestSubject } from '@/components/request-form';
-import { PageBand } from '@/components/page-band';
 import { Accent } from '@/components/accent';
 import { cn } from '@/lib/cn';
 import { HALL_HOST, HallBackdrop } from '@/components/hall-backdrop';
 import {
   galleryOrientation,
-  SERVICE_BAND,
-  SERVICE_GROUP_OF,
-  SERVICE_IMAGE,
   SERVICE_KEYS,
+  SERVICE_PAGES,
   SERVICE_STORY,
   type ServiceKey,
 } from '@/lib/services';
 
 const VALID = SERVICE_KEYS;
+
 
 type Subject = ServiceKey;
 
@@ -37,8 +35,17 @@ export default async function ServiceDetail({
   if (!(VALID as readonly string[]).includes(subject)) notFound();
   setRequestLocale(locale);
   const s = subject as Subject;
+  // Which index actually lists this subject. Read from SERVICE_PAGES rather
+  // than hardcoded, so moving a subject between Tjenester and Undervisning —
+  // as `kurs` moved on 2026-09-17 — carries the crumb with it.
+  const isTeaching = (SERVICE_PAGES.undervisning as readonly string[]).includes(s);
   const t = await getTranslations({ locale, namespace: 'servicesIndex' });
-  const tp = await getTranslations({ locale, namespace: 'servicePages' });
+  // nav.items.* — the words the menu itself uses for these sections, already
+  // translated in all three locales, so the crumb cannot drift from the bar.
+  // The `servicePages` namespace is no longer read here (its `crumb` was the
+  // old two-part label); the strings stay in the message files, still used by
+  // the other *Pages crumbs.
+  const tnav = await getTranslations({ locale, namespace: 'nav' });
   // Address / Phone / E-mail, already translated for the footer's own
   // find-us block. Three labels for no new strings.
   const tm = await getTranslations({ locale, namespace: 'membership' });
@@ -83,23 +90,98 @@ export default async function ServiceDetail({
          servicesIndex.groups — copy that already exists in all three
          locales, so ten pages get four distinct kickers for no new
          strings. */}
-      <PageBand
-        kicker={tp('crumb')}
-        kickerNote={t(`groups.${SERVICE_GROUP_OF[s]}`)}
-        title={t.rich(`items.${s}.title`, {
-          em: (chunks) => <Accent surface="dusk">{chunks}</Accent>,
-        })}
-        lede={t(`items.${s}.body`)}
-        image={SERVICE_IMAGE[s]}
-        alt={plainTitle}
-        layout="split"
-        // The section below opens on its own ground and brings its own top
-        // padding. Left at the default, the band's bottom rhythm plus that
-        // padding put ~190px of empty cream under the plate and the page
-        // read as having ended there — the client's "this empty part".
-        padBottom="none"
-        {...SERVICE_BAND[s]}
-      />
+      {/* ── THE TEXT-ONLY HEADER ──────────────────────────────────────
+         No photograph, per the client. What replaces it is the header
+         language from /om-oss, which he approved there: a short gold
+         rule, the gold mono label under it, then the title at display size
+         and the lede at reading size.
+
+         THE GROUND CHANGES FROM DUSK TO PAPER, and that is the point.
+         PageBand's plate is dark because it has to hold a photograph and
+         keep white type legible over it. With the picture gone, a dark
+         slab carrying three lines of text is a heavy object with nothing
+         in it — the same fault as an empty column. On paper the type is
+         the object.
+
+         WHICH MEANS THE ACCENT SWAPS TOO: accent.tsx maps paper to #9B7F4A
+         and dusk to #C0A165, and the note on the band below says the paper
+         gold is far too dim on a dusk plate. The reverse is just as true —
+         the dusk gold on paper is washed out. surface="paper" here is not
+         interchangeable with the band's surface="dusk".
+
+         The kicker keeps both halves the band had — the crumb and the
+         service's own family from servicesIndex.groups — joined by a
+         hairline rather than stacked, so the label stays one line.
+
+       <h1>, matching PageBand, so the page keeps exactly one.
+
+         ── SHORT-LAPTOP COMPACTION ──────────────────────────────────────
+         Client, 2026-09-18: "looked good in desktop, but on macbook 13 and
+         14 inches its too big ... too much empty space at top".
+
+         Targeted by VIEWPORT HEIGHT, not width, because that is the actual
+         variable: a 13" Air and a 27" monitor are both "desktop" by width and
+         differ by ~400px of height. min-width:768px keeps phones out of it
+         (a phone is short too, and its pt-10 is already right).
+
+         Above 900px tall nothing below changes, so the desktop view he
+         approved is untouched. Under it: 64 -> 28px above the kicker, the
+         gaps above the title and lede roughly halve, the title's own cap
+         comes down 68 -> 52px, and section 2 rises by the same 28px so the
+         whole opening moves up together rather than just spreading out.
+
+         Same instrument giving-card.tsx already uses for the hero card. */}
+      <section className="bg-paper pt-10 md:pt-16 [@media(min-width:768px)_and_(max-height:900px)]:pt-7">
+        <SectionBody>
+            {/* NO LEADING RULE (client, 2026-09-18: "dont like this the too
+             much -------, remove it").
+
+             On /om-oss the same rule sits ABOVE its label, where it reads
+             as a section mark. Inline, ahead of the words, it reads as a
+             dash — and this kicker already has a divider in it, so the line
+             carried two horizontal marks before it carried any meaning.
+             The label alone is enough. The divider between the two halves
+             stays: it is separating two real things. */}
+          {/* ONE WORD: the section this page belongs to, named exactly as the
+             nav names it (client, 2026-09-18: "only 1 word like services").
+             
+             It used to be two halves joined by a hairline — the hardcoded
+             servicePages.crumb plus the service's own family from
+             servicesIndex.groups. Three things were wrong with that:
+             
+               1. servicePages.crumb is ONE string, "Bønn og tjenester", so
+                  it was printed on all eighteen subjects including the five
+                  teaching ones, naming a section the visitor had not come
+                  from.
+               2. The two halves restated each other. "PRAYER AND SERVICES |
+                  RELIGIOUS SERVICES" says "services" twice and adds nothing
+                  the headline underneath does not already say, and on a
+                  teaching subject it read "PRAYER AND SERVICES | TEACHING",
+                  which contradicts itself inside one line.
+               3. It did not match the nav. The bar says "Tjenester" and
+                  "Undervisning"; the crumb said neither.
+             
+             So the label is nav.items.* — the same word the visitor just
+             clicked, already translated in all three locales. Nothing new to
+             write, and the crumb can no longer drift from the menu.
+             
+             servicesIndex.groups is untouched in the message files; the
+             services index still uses it to head its groups. */}
+          <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
+            {tnav(isTeaching ? 'items.teaching' : 'items.services')}
+          </p>
+
+          <h1 className="mt-7 max-w-[18ch] font-serif text-[clamp(2.25rem,5.5vw,4.25rem)] leading-[1.02] tracking-[-0.02em] text-balance text-ink [@media(min-width:768px)_and_(max-height:900px)]:mt-4 [@media(min-width:768px)_and_(max-height:900px)]:text-[clamp(2rem,4.4vw,3.25rem)]">
+            {t.rich(`items.${s}.title`, {
+              em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
+            })}
+          </h1>
+
+          <p className="mt-8 max-w-[56ch] text-[clamp(1rem,1.15vw,1.125rem)] leading-relaxed text-ink-60 [@media(min-width:768px)_and_(max-height:900px)]:mt-4">
+            {t(`items.${s}.body`)}
+          </p>
+        </SectionBody>
+      </section>
 
       {/* ── 2. What we offer ───────────────────────────────────────────────
          The client's mockup (2026-09-06): eyebrow, headline and a short
@@ -156,7 +238,25 @@ export default async function ServiceDetail({
            and the form card is opaque bg-paper, so it still reads as a card
            standing on something. */}
         <HallBackdrop wash={62} />
-      <Section tone="none">
+      {/* ── SPACING AFTER A HEADER WITH NO PICTURE ────────────────────
+         Client, 2026-09-18: "move the bottom sections a bit up with modern
+         spacing, since when image gone, there would be too much space."
+
+         He is right, and it is not simply that the header got shorter. The
+         PageBand ends on a hard dusk edge, so the 60px under it reads as the
+         gap BETWEEN two objects. The pilot header is type on paper and this
+         section is type on paper, so the same 60px, stacked on the header's
+         own bottom rhythm, reads as a hole in one continuous page. Same
+         measurement, different job.
+
+         36/56 instead of 60/60, on every service since the header rollout
+         (client approved the pilot 2026-09-18).
+
+         `!pt-*` because lib/cn is plain clsx with no tailwind-merge: the
+         Section's own `py-section-md` stays in the class list either way, and
+         without the important flag which one wins is down to stylesheet
+         order. */}
+      <Section tone="none" className="!pt-9 md:!pt-14 [@media(min-width:768px)_and_(max-height:900px)]:!pt-7">
         <SectionBody>
           <div className="grid gap-10 md:grid-cols-12 md:gap-12 lg:gap-16">
             {/* self-center, the same call section 3 used to make and for the

@@ -1,13 +1,16 @@
 import { setRequestLocale } from 'next-intl/server';
 import { CampaignMeter } from '@/components/campaign-meter';
 import { FollowUs } from '@/components/follow-us';
-import { CongregationToday } from '@/components/congregation-today';
+import { CoreActivities } from '@/components/core-activities';
+// Kept, not deleted — see the note where CoreActivities renders.
+// import { CongregationToday } from '@/components/congregation-today';
 import { ImpactStory } from '@/components/impact-story';
 import { Hero } from '@/components/hero';
 import { HeroGive } from '@/components/hero-give';
 import { BrandType } from '@/components/brand-type';
 import { MotionRise } from '@/components/motion-rise';
 import { ProjectOverview } from '@/components/project-overview';
+import { ApartmentsSold } from '@/components/apartments-sold';
 // Hidden for now, not deleted — see the note where it rendered.
 // import { ZoomParallax } from '@/components/zoom-parallax';
 
@@ -60,7 +63,18 @@ export default async function HomePage({
          introduce the organisation. */}
       <BrandType />
       <ImpactStory />
-      <MotionRise><CongregationToday /></MotionRise>
+      {/* The seven core activities (client, 2026-09-17: "Endre til våre
+         kjerneaktiviteter", ISNA.net's services grid as the reference).
+         
+         This REPLACES the thirteen-card "Våre tjenester" carousel that stood
+         here. congregation-today.tsx is untouched on disk — 759 lines and
+         three rounds of the client's own card ordering — so putting the
+         slider back is this line and its import, nothing more.
+         
+         No MotionRise wrapper: the plates already reveal themselves in two
+         staggered rows, and running a section-level rise underneath that gave
+         the grid two entrances for one arrival. */}
+      <CoreActivities locale={locale} />
       {/* The building before the money. The meter's heading is "Raised for
          the new mosque", and until this section runs the page has never
          said what the new mosque IS — the zoom parallax shows it, wordlessly,
@@ -69,6 +83,16 @@ export default async function HomePage({
          on whether you know it buys 5 745 m² and 2 500 prayer places.
          Each section now supplies what the next one needs. */}
       <ProjectOverview />
+      {/* The sold flats (client, 2026-09-18: "legge til noen av de solgte
+         leilighetene på forsiden for å vise salg").
+         
+         HERE, and not at the foot of the page: ProjectOverview directly above
+         describes a seven-floor building, and the apartments ARE floors five
+         and six of it. So this is not a new subject dropped onto the page, it
+         is the top two storeys of the thing the paragraph above just named —
+         and the meter below then shows what has been raised. The page reads
+         building -> the part of it that is selling -> the money. */}
+      <ApartmentsSold locale={locale} />
       <MotionRise><CampaignMeter /></MotionRise>
       {/* Follow us — the social section the client asked for on 2026-08-31.
          Closes the page on dusk, running into the footer. */}

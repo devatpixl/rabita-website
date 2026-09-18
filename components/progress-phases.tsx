@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import { PROJECT_PHASES, TOTAL_BUILD_COST_EUR, CAMPAIGN, projectPhaseState } from '@/lib/campaign';
+import { PROJECT_PHASES, TOTAL_BUILD_COST_NOK, CAMPAIGN, projectPhaseState } from '@/lib/campaign';
 import { formatAmount } from '@/lib/format';
 import type { AppLocale } from '@/i18n/routing';
 import { cn } from '@/lib/cn';
@@ -13,11 +13,13 @@ import { PhaseTasks } from './phase-tasks';
 //
 // Two rules it follows, both of them about honesty with money:
 //
-//   1. The phase sums are EUR and the campaign meter is NOK, and the two are
-//      never mixed or converted. They measure different things — the cost of
-//      the building versus the donated share of it — and a conversion rate
-//      printed once would start ageing the moment it shipped. See the §13.2
-//      note in lib/campaign.ts.
+//   1. BOTH figures are kroner since 2026-09-18 (client: "Faser: Legge inn
+//      riktig valuta så kroner"). They still measure different things — the
+//      cost of putting the building up versus the donated share of it — and
+//      the labels say so, but they are no longer in different currencies.
+//      The conversion rate lives in ONE constant in lib/campaign.ts; see the
+//      note above PROJECT_PHASES for why, and for what to do if Rabita can
+//      supply the budget in kroner directly.
 //   2. The total is summed from the phases, never typed out, so it cannot
 //      disagree with the figures directly above it.
 //
@@ -36,7 +38,13 @@ export async function ProgressPhases({
 
   return (
     <div>
-      <ol className="grid items-stretch gap-x-5 gap-y-5 sm:grid-cols-2 sm:gap-y-8 lg:grid-cols-5 lg:gap-x-4">
+      {/* lg:gap-x-3, down from 4. See the note on the amount below: the
+         kroner figures need horizontal room and the client asked for them
+         bigger "without increasing height of this section", so the width
+         comes from the gutters and the side padding rather than from a
+         taller card. Only at lg, where the row is five across; the phone and
+         tablet stacks are untouched. */}
+      <ol className="grid items-stretch gap-x-5 gap-y-5 sm:grid-cols-2 sm:gap-y-8 lg:grid-cols-5 lg:gap-x-3">
         {PROJECT_PHASES.map((phase) => {
           const state = projectPhaseState(phase, now);
           const years =
@@ -80,7 +88,10 @@ export async function ProgressPhases({
                  stays legible when four cards sit either side of it. */}
               <div
                 className={cn(
-                  'flex flex-1 flex-col rounded-[1.25rem] border p-4 sm:p-5 md:p-6',
+                  // md:px-4 md:py-6, not md:p-6. The vertical padding is
+                  // exactly what it was, so the card's height and rhythm do
+                  // not move; the eight pixels a side go to the amount.
+                  'flex flex-1 flex-col rounded-[1.25rem] border p-4 sm:p-5 md:px-4 md:py-6',
                   state === 'current'
                     ? 'border-gold-deep/40 bg-paper-2 shadow-[0_18px_40px_-32px_rgba(28,25,23,0.55)]'
                     : 'border-rule bg-paper',
@@ -104,16 +115,52 @@ export async function ProgressPhases({
                   {/* Every sum in gold, and the current one a size larger.
                      Dimming the phases still ahead would be the wrong signal
                      on a page asking people to pay for them. */}
+                  {/* ── SIZED TO THE LONGEST FIGURE, AND IT MAY NOT WRAP ──
+                     Client, 2026-09-18: "make sure doesnt gom in next line".
+
+                     The euro figures were seven digits; the kroner ones are
+                     nine, and at the old 30px "113 700 000 kr" needed 190px
+                     inside a card that offers 158. Three of the five cards
+                     were breaking, and two of those dropped the bare "kr"
+                     onto a line of its own, which reads as a mistake.
+
+                     MEASURED, not guessed, and re-measured on 2026-09-18
+                     when the client asked for them bigger "without increasing
+                     height of this section":
+
+                     The widest figure is 113 700 000 kr, and all three
+                     locales render it in Latin digits at the same width — so
+                     Norwegian, English and Arabic all size the same. It needs
+                     168px at 26px type and 174px at 27px.
+
+                     The card offered 158px. Rather than shrink the type to
+                     fit, the width was taken from places that do not affect
+                     height: the column gap (lg:gap-x-4 → 3) and the card's
+                     SIDE padding (md:p-6 → md:px-4 md:py-6). That puts about
+                     179px inside the card, so 26px fits with ~11px of slack
+                     — real margin, not the 3px that a slightly longer number
+                     would have eaten.
+
+                     Hence 1.625rem current / 1.5rem the rest. Below lg the
+                     grid is two-up or stacked, the cards are far wider than
+                     any figure needs, and nothing here applies.
+
+                     whitespace-nowrap is the belt to that braces: the space
+                     between the number and its unit is a legal break point,
+                     so without it a slightly wider translation or a bigger
+                     sum orphans the "kr" again. It cannot now — it will
+                     overflow visibly instead, which is a bug you can see
+                     rather than one you cannot. */}
                   <p
                     className={cn(
-                      'shrink-0 font-serif leading-none tabular-nums text-gold-deep sm:mt-3',
+                      'shrink-0 whitespace-nowrap font-serif leading-none tabular-nums text-gold-deep sm:mt-3',
                       state === 'current'
-                        ? 'text-[clamp(1.5rem,2.5vw,1.9rem)]'
-                        : 'text-[clamp(1.35rem,2.2vw,1.65rem)]',
+                        ? 'text-[clamp(1.3rem,2.1vw,1.625rem)]'
+                        : 'text-[clamp(1.2rem,1.9vw,1.5rem)]',
                     )}
                   >
-                    {formatAmount(locale, phase.eur)}{' '}
-                    <span className="font-mono text-[0.75rem] tracking-[0.06em]">&euro;</span>
+                    {formatAmount(locale, phase.nok)}{' '}
+                    <span className="font-mono text-[0.75rem] tracking-[0.06em]">kr</span>
                   </p>
                 </div>
 
@@ -166,8 +213,8 @@ export async function ProgressPhases({
                 {t('totalLabel')}
               </dt>
               <dd className="mt-3 font-serif text-[clamp(1.75rem,3vw,2.4rem)] leading-none tabular-nums text-ink">
-                {formatAmount(locale, TOTAL_BUILD_COST_EUR)}{' '}
-                <span className="font-mono text-[0.8125rem] tracking-[0.06em] text-ink-60">&euro;</span>
+                {formatAmount(locale, TOTAL_BUILD_COST_NOK)}{' '}
+                <span className="font-mono text-[0.8125rem] tracking-[0.06em] text-ink-60">kr</span>
               </dd>
             </div>
             <div>

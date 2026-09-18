@@ -14,6 +14,7 @@ import { ProjectGallery } from '@/components/project-gallery';
 import { GivingCard } from '@/components/giving-card';
 // import { MotionRise } from '@/components/motion-rise'; // hidden sadaqa band
 import { FloorByFloor } from '@/components/floor-by-floor';
+import { FacilitiesCard } from '@/components/facilities-card';
 // import { SadaqaBand } from '@/components/sadaqa-band'; // hidden, not deleted
 
 import { Accent } from '@/components/accent';
@@ -129,7 +130,7 @@ export default async function ProjectPage({
          section, also white looks odd"). The phases sat on white between a
          dusk band above and the sage facts below, which made one pale strip
          in the middle of the page. */}
-      <Section tone="sage">
+      <Section tone="sage" className="!pb-10 md:!pb-12 [@media(min-width:768px)_and_(max-height:900px)]:!pb-7">
         <SectionBody>
           <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
             <div>
@@ -165,12 +166,32 @@ export default async function ProjectPage({
          the "Dette er Rabita" and follow sections own.
          A tall paper-to-sage gradient used to open this section, because the
          phases above it were white and the fade WAS the space between the
-         two. The phases are sage now, so there is nothing left to fade from
-         and the gradient would have been a wash of one colour into itself.
-         The height stays, as plain ground: it was carrying the rhythm as well
-         as the transition, and dropping it would close the gap. */}
+         two. The phases went sage, the gradient became a wash of one colour
+         into itself and was removed — but its HEIGHT was kept, "as plain
+         ground".
+         
+         That was the bug. Measured 2026-09-18: 298px of dead sage between the
+         last phase card and "THE NEW BUILDING" — 78 inside the phases, 60 of
+         section padding and a bare 160px spacer holding the place of a
+         gradient that no longer exists. On a 13" laptop that is a third of
+         the viewport showing nothing, and the client saw exactly that:
+         "too much empty space ... modern space, not make it look like its
+         empty".
+         
+         The space is not deleted, it is given a job. Two sections sharing one
+         ground need SOMETHING to say where one ends — that is what the
+         gradient used to do. A hairline rule does it in a single pixel, and
+         is the device this site already uses everywhere else to divide. So
+         the gap halves AND stops reading as a void. */}
       <section className="bg-sage">
-        <div aria-hidden className="h-28 md:h-40" />
+        <SectionBody>
+          {/* gold-deep at 30%, not ink/12 — measured on sage #E3EAE4, an ink
+             hairline at 12% is invisible, and `sage-line` #CBDCD1 is only a
+             shade off the ground it sits on. Gold is also what this site
+             already rules with: every eyebrow draws a gold bar before it. */}
+          <div aria-hidden className="h-px w-full bg-gold-deep/30" />
+        </SectionBody>
+        <div aria-hidden className="h-12 md:h-16 [@media(min-width:768px)_and_(max-height:900px)]:!h-8" />
         <div className="pb-section-md">
         <SectionBody>
           {/* Key figures and capacity as two registers of the same design:
@@ -235,8 +256,19 @@ export default async function ProjectPage({
             // 4.5rem floor never actually bound — the 40px chip plus its
             // padding already made a 64px row — so lowering the floor alone
             // would have done nothing. The chip comes down with it.
+            // Client, 2026-09-18: "remove these lines ... keep it without the
+            // lines and align as per modern way the texts and figures". The
+            // hairline between registers and the leader dash from each label
+            // are both gone from md up. Losing the leader cost the figures
+            // their anchor — flush right, "5 745 m²" and "2 500 people" put
+            // their numerals 80px apart — and the card is only ~229px of
+            // content wide, too narrow to give the figures their own column
+            // beside a label as long as "Construction time". So the pair
+            // stacks instead: label over figure, one left edge for all four,
+            // chip spanning both rows. Nothing is ragged and nothing needs a
+            // rule to hold it together.
             const row =
-              'flex items-baseline justify-between gap-4 py-3 md:min-h-[3.5rem] md:items-center md:gap-5 md:py-2.5';
+              'flex items-baseline justify-between gap-4 py-3 md:grid md:min-h-[3.5rem] md:flex-1 md:grid-cols-[2.25rem_1fr] md:content-center md:items-center md:gap-x-4 md:gap-y-2 md:py-2.5';
             // The card treatment the client asked for (2026-08-31), taken from
             // their mockup: a bordered plate per register, a mark beside every
             // figure, a gold rule off each register's label, and the capacity
@@ -246,10 +278,9 @@ export default async function ProjectPage({
             // ruled registers it has now — the client was explicit about that,
             // and a 40px chip beside a 13px label on a 390px screen would cost
             // the label its line anyway.
-            const card = 'md:rounded-2xl md:border md:border-rule md:bg-paper-2/50 md:p-6';
+            const card = 'md:flex md:flex-col md:rounded-[1.25rem] md:border md:border-rule md:bg-gradient-to-b md:from-paper md:to-paper-2 md:shadow-[0_1px_2px_rgba(26,26,24,0.04),0_16px_36px_-26px_rgba(26,26,24,0.28)] md:p-6';
             const chip =
-              'hidden h-9 w-9 shrink-0 place-items-center rounded-lg border border-rule bg-paper text-gold-deep md:grid';
-            const leader = 'hidden h-px flex-1 bg-rule md:block';
+              'hidden h-9 w-9 shrink-0 place-items-center rounded-lg border border-rule bg-paper text-gold-deep md:row-span-2 md:grid';
             return (
               <div>
                 {/* A heading, so the registers have something to answer to:
@@ -258,7 +289,13 @@ export default async function ProjectPage({
                 <h2 className="mt-3 max-w-2xl font-serif text-section text-balance text-ink sm:mt-4">
                   {t.rich('facts.title', { em: (chunks) => <Accent surface="paper">{chunks}</Accent> })}
                 </h2>
-                <div className="mt-8 grid gap-9 md:mt-12 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
+                {/* Two up to md, THREE from lg (2026-09-18). The md pair keeps
+                   its old [0.85fr 1.15fr] proportions because the architect
+                   card carries a bleeding photograph and wants the wider
+                   half; at lg all three are equal and the photo re-crops to
+                   suit. gap-10 at lg rather than 16: three cards across the
+                   same measure have less room to give away. */}
+                <div className="mt-8 grid gap-9 md:mt-12 md:grid-cols-[0.85fr_1.15fr] md:gap-16 lg:grid-cols-3 lg:gap-10">
                   {/* Key figures */}
                   <div className={card}>
                     <div className="flex items-center gap-3">
@@ -266,19 +303,18 @@ export default async function ProjectPage({
                       <h2 className={label}>{t('facts.heading')}</h2>
                       <span aria-hidden className="hidden h-px flex-1 bg-gold-deep/30 md:block" />
                     </div>
-                    <dl className="mt-3 divide-y-[0.5px] divide-rule border-t border-ink md:mt-2 md:border-t-0">
+                    <dl className="mt-3 divide-y-[0.5px] divide-rule border-t border-ink md:mt-2 md:flex md:flex-1 md:flex-col md:divide-y-0 md:border-t-0">
                       {facts.map((f) => (
                         <div key={f.key} className={row}>
                           <span aria-hidden className={chip}>
                             <FigureIcon name={f.icon} className="h-[18px] w-[18px]" />
                           </span>
-                          <dt className="text-[13px] text-ink-60">{f.label ?? t(`facts.${f.key}`)}</dt>
-                          <span aria-hidden className={leader} />
+                          <dt className="text-[13px] text-ink-60 md:font-mono md:text-[0.625rem] md:uppercase md:leading-none md:tracking-[0.16em] md:text-ink-40">{f.label ?? t(`facts.${f.key}`)}</dt>
                           <dd className="flex items-baseline gap-1.5 text-end">
                             {f.muted ? (
                               <span className="text-[13px] italic text-ink-60">{f.value}</span>
                             ) : (
-                              <span className="font-serif text-[1.35rem] leading-none tabular-nums text-ink md:text-[1.5rem]">{f.value}</span>
+                              <span className="font-serif text-[1.35rem] leading-none tabular-nums text-ink md:text-[1.75rem]">{f.value}</span>
                             )}
                             {f.unit && <span className="font-mono text-[11px] tracking-[0.08em] text-ink-60">{f.unit}</span>}
                           </dd>
@@ -287,52 +323,214 @@ export default async function ProjectPage({
                     </dl>
                   </div>
 
-                    <div className={cn(card, 'relative md:overflow-hidden')}>
-                    {/* The end panel: the photograph, bleeding off top,
-                       bottom and end, with paper fading over its start edge.
-                       Desktop only — on phones this register is a plain row
-                       and a bleed has no card to bleed from. */}
-                    <span aria-hidden className="pointer-events-none absolute inset-y-0 end-0 hidden w-[42%] md:block">
-                      <Image
-                        src="/photos/architect-fagernes.webp"
-                        alt=""
-                        fill
-                        sizes="20rem"
-                        className="object-cover object-[50%_22%]"
-                      />
-                      {/* The fade dies at 55% of the panel — past that the
-                         photograph stands at full strength, so the face is
-                         never behind a wash. */}
-                      <span className="absolute inset-0 bg-gradient-to-r from-paper-2 to-transparent to-55% rtl:bg-gradient-to-l" />
-                    </span>
+                    {/* ══ ARKITEKT — built to the client's mock ═══════════
+                       Client, 2026-09-18: "for the arhitect card, also follow
+                       this style and design, the fade as we have now doesnt
+                       looks good, make it exactly like the image i gave you".
 
-                    <div className="relative flex items-center gap-3 mt-8 md:mt-0 md:max-w-[60%]">
-                      <FigureIcon name="building" className="hidden h-[18px] w-[18px] shrink-0 text-gold-deep md:block" />
-                      <h2 className={label}>{t('facts.architect')}</h2>
-                      <span aria-hidden className="hidden h-px flex-1 bg-gold-deep/30 md:block" />
-                    </div>
-                    <dl className="relative mt-3 border-t border-ink md:mt-2 md:max-w-[55%] md:border-t-0">
-                      <div className={cn(row, 'md:min-h-0')}>
-                        <dd className="flex items-center gap-4 leading-none md:py-14">
-                          {/* Phones keep the round portrait; the bleed panel
-                             replaces it from md. */}
-                          <span className="relative block h-16 w-16 shrink-0 overflow-hidden rounded-full ring-1 ring-rule md:hidden">
-                            <Image
-                              src="/photos/architect-fagernes.webp"
-                              alt=""
-                              fill
-                              sizes="64px"
-                              className="object-cover"
-                            />
-                          </span>
-                          <span className="flex min-w-0 flex-col gap-1.5">
-                            <span className="font-serif text-[1.35rem] text-ink md:text-[1.5rem]">{CAMPAIGN.architect.split(',')[0]}</span>
-                            <span className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">{CAMPAIGN.architect.split(',').slice(1).join(',').trim()}</span>
-                          </span>
-                        </dd>
+                       So it matches the FASILITETER card's construction: its
+                       own ground, radius and border rather than the section's
+                       `card` class, a gold mark beside a DARK label, and the
+                       photograph meeting the card's own edges.
+
+                       ── NO FADE. A HARD EDGE. ──────────────────────────────
+                       Every version before this softened the seam with a wash
+                       — down the side, then across the top, then across the
+                       bottom — and each one put a gradient somewhere on his
+                       face. The mock does not soften it at all: type above,
+                       a clean horizontal line, photograph below. That is both
+                       what was asked for and the only version where nothing
+                       is laid over the man.
+
+                       ── THE CROP, FROM THE FACE ────────────────────────────
+                       The source is 800x800 and his head runs y=100→600, 62%
+                       of it. object-cover on a 339px-wide band scales that
+                       square to 339 tall, so the head is 212px on screen.
+                       At 16rem (256px) and object-position 0% — as much room
+                       above his head as the photograph physically holds — the
+                       hair lands at 42px and the chin at 254px. 16rem is the
+                       FLOOR, not a preference: the chin sits at 254 and a
+                       shorter band cuts it. The client asked for the card
+                       compacted (2026-09-18) and this is as far as it goes
+                       without losing his jaw again.
+
+                       Below lg this card still shares a two-up row and keeps
+                       the side panel the client approved; the phone keeps its
+                       round thumbnail. */}
+                    <div className="relative hidden flex-col overflow-hidden rounded-[1.25rem] border border-rule bg-gradient-to-b from-paper to-paper-2 shadow-[0_1px_2px_rgba(26,26,24,0.04),0_16px_36px_-26px_rgba(26,26,24,0.28)] p-6 lg:flex">
+                      <div className="flex items-center gap-2.5">
+                        {/* A pair of dividers — the mock's mark, and the one
+                           tool that means "architect" without a caption. */}
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={1.5}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          aria-hidden
+                          className="h-[17px] w-[17px] shrink-0 text-gold-deep"
+                        >
+                          <circle cx="12" cy="4.8" r="1.7" />
+                          <path d="m11.1 6.3-4.6 14.2M12.9 6.3l4.6 14.2" />
+                          <path d="M7.9 16.6a8.6 8.6 0 0 1 8.2 0" />
+                        </svg>
+                        <h2 className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink">
+                          {t('facts.architect')}
+                        </h2>
+                        <span aria-hidden className="h-px flex-1 bg-rule" />
                       </div>
-                    </dl>
-                  </div>
+
+                      <p className="mt-4 font-serif text-[1.5rem] leading-[1.15] text-ink">
+                        {CAMPAIGN.architect.split(',')[0]}
+                      </p>
+                      <p className="mt-2 font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-ink-60">
+                        {CAMPAIGN.architect.split(',').slice(1).join(',').trim()}
+                      </p>
+
+                      {/* Client, 2026-09-18: "his chin cut off, why soo zoomed in? zoom
+                       out his image so shoiulderns and hair, both ends visible".
+                       The band is 339x256 and the source is square, so cover
+                       scaled it to 339x339 and threw away 83px — the shoulders
+                       entirely, leaving the chin 2px off the bottom edge.
+                       Squaring the band would show all of it but push the card
+                       415 -> 498 and drag the other two up with it, which is the
+                       stretching they asked me to undo an hour ago. So the photo
+                       contains instead: the whole 800x800 frame at 256, centred,
+                       with 41px to either side. That gap is invisible because the
+                       portrait sits on a near-black ground (sampled #0d0d0d at
+                       every edge) and the band is painted the same value, so the
+                       black still bleeds to the card edges. */}
+                      <span className="relative -mx-6 -mb-6 mt-5 block h-[16rem] overflow-hidden bg-[#0d0d0d]">
+                        {/* The fill behind the contained portrait. A flat black
+                           left a seam: the photo is vignetted, so its own edge
+                           runs from 4 to 18 depending on height, and no single
+                           value matches all of it. This is the same file,
+                           cover-scaled past the band and blurred, so whatever
+                           sits beside the portrait is that portrait's own tone
+                           at that height. Same URL, so no second request.
+                           brightness .35 because the blur averages in the lit
+                           face: ungraded it sat at 23-37 against a 13 edge, a
+                           halo round the portrait. Graded it lands 2-5 BELOW
+                           the edge at every height, which reads as the vignette
+                           carrying on outward rather than as a box. */}
+                        <Image
+                          aria-hidden
+                          src="/photos/architect-fagernes.webp"
+                          alt=""
+                          fill
+                          sizes="24rem"
+                          loading="eager"
+                          className="scale-125 object-cover object-center blur-2xl brightness-[0.35]"
+                        />
+                        <Image
+                          src="/photos/architect-fagernes.webp"
+                          alt=""
+                          fill
+                          sizes="24rem"
+            // loading="eager". These never loaded otherwise: the browser
+            // issued ZERO requests for them, while every other image on the
+            // page loaded normally — verified from resource timings, and
+            // flipping one to eager in the console made it arrive instantly.
+            // Native lazy-loading does not fire for them here, most likely
+            // because the card is display:none until lg and sits below a
+            // 640vh sticky scroll track, which is enough to confuse the
+            // proximity heuristic. They are small and they are the card's
+            // resting state, so there is nothing to defer anyway.
+            loading="eager"
+                          className="object-contain object-center"
+                        />
+                      </span>
+                    </div>
+
+                    {/* The md two-up version, unchanged: the side panel the
+                       client approved before the row went to three. */}
+                    <div className={cn(card, 'relative md:overflow-hidden lg:hidden')}>
+                      <span
+                        aria-hidden
+                        className="pointer-events-none absolute inset-y-0 end-0 hidden w-[42%] md:block"
+                      >
+                        <Image
+                          src="/photos/architect-fagernes.webp"
+                          alt=""
+                          fill
+                          sizes="20rem"
+                          className="object-cover object-[50%_22%]"
+                        />
+                        <span className="absolute inset-0 bg-gradient-to-r from-paper-2 to-transparent to-55% rtl:bg-gradient-to-l" />
+                      </span>
+
+                      <div className="relative flex items-center gap-3 mt-8 md:mt-0 md:max-w-[60%]">
+                        <FigureIcon name="building" className="hidden h-[18px] w-[18px] shrink-0 text-gold-deep md:block" />
+                        <h2 className={label}>{t('facts.architect')}</h2>
+                        <span aria-hidden className="hidden h-px flex-1 bg-gold-deep/30 md:block" />
+                      </div>
+                      <dl className="relative mt-3 border-t border-ink md:mt-2 md:max-w-[55%] md:border-t-0">
+                        <div className={cn(row, 'md:min-h-0')}>
+                          <dd className="flex items-center gap-4 leading-none md:py-14">
+                            {/* Client, 2026-09-18: "for phone only, why his photo
+                               so small? make it more bigger, but not so much".
+                               64 -> 88px. 88 is the ceiling: the name measures
+                               267px in Fraunces at 1.35rem, and a 430px phone
+                               leaves 382 - 88 - 16 = 278 for it, so it holds its
+                               single line with 11px to spare. 96 would leave 3.
+                               scale-125 as well, because the source is square
+                               and so is the circle: cover fits the whole frame,
+                               which put his head at 63% of the plate with black
+                               over it. At 125% the window is the middle 80% and
+                               the head reads at 79%, which is what an avatar
+                               wants. */}
+                            <span className="relative block h-[5.5rem] w-[5.5rem] shrink-0 overflow-hidden rounded-full ring-1 ring-rule md:hidden">
+                              <Image
+                                src="/photos/architect-fagernes.webp"
+                                alt=""
+                                fill
+                                sizes="88px"
+                                className="scale-125 object-cover"
+                              />
+                            </span>
+                            <span className="flex min-w-0 flex-col gap-1.5">
+                              <span className="font-serif text-[1.35rem] text-ink md:text-[1.5rem]">{CAMPAIGN.architect.split(',')[0]}</span>
+                              <span className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">{CAMPAIGN.architect.split(',').slice(1).join(',').trim()}</span>
+                            </span>
+                          </dd>
+                        </div>
+                      </dl>
+                    </div>
+
+                  {/* ══ FASILITETER — the third card ═══════════════════════
+                     Client, 2026-09-18: "Kanskje legge inn boks med
+                     fasiliteter slik at det blir tre bokser i en rad."
+
+                     ── IT SUMMARISES, IT DOES NOT RE-LIST ─────────────────
+                     This page already answers "what does the building
+                     contain" twice, and both times ABOVE this section: the
+                     photo gallery names seven rooms, and FloorByFloor walks
+                     all 26 across seven floors. A third plain list would be
+                     the third time the page reads the same inventory out.
+
+                     So it is six rooms and a count, and then it SENDS you to
+                     the walkthrough — a table of contents, not a second
+                     table. It also gives the page something it did not have:
+                     a way back up to the floors from down here.
+
+                     Why these six: the first three are the home page's own
+                     promise — "Moské, skole, bibliotek. Én adresse." — shown
+                     to be literally true. The last three are what nobody
+                     expects a mosque to contain.
+
+                     The card itself lives in components/facilities-card.tsx
+                     because pointing at a room reveals a photograph of it,
+                     and knowing which row is under the pointer is state. The
+                     card's own file carries the rest of the reasoning.
+
+                     It no longer takes the section's `card` and `label`
+                     classes: the client supplied a mock on 2026-09-18 and
+                     asked for it copied exactly, so the card now carries its
+                     own ground, radius, chips and label colour. Where the
+                     mock and this section's language disagree, the mock
+                     wins — see the note at the head of the component. */}
+                  <FacilitiesCard />
                 </div>
 
               </div>

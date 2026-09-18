@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { getPrayerData } from '@/lib/irn';
+import { calendarMonths } from '@/lib/prayer-times';
 import type { AppLocale } from '@/i18n/routing';
 import { Accent } from './accent';
 import { SectionBody } from './primitives';
@@ -19,7 +20,7 @@ export async function CalendarDownload() {
   const l = (await getLocale()) as AppLocale;
   const tc = await getTranslations('calendar');
   const { days } = await getPrayerData();
-  const months = [...new Set(days.map((d) => d.date.slice(0, 7)))].sort();
+  const months = calendarMonths(days);
   const fmt = new Intl.DateTimeFormat(localeTag(l), { month: 'long', year: 'numeric' });
 
   return (

@@ -303,7 +303,7 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
                 </span>
                 <span className="min-w-0">
                   <span className="block font-serif text-[clamp(1.1rem,2.1vw,1.35rem)] leading-tight text-ink">
-                    {imam.name}
+                    <span className="opacity-70">{imam.title}</span> {imam.name}
                   </span>
                   <span className="mt-1.5 block font-mono text-[0.5625rem] uppercase tracking-[0.14em] text-gold-deep">
                     {t(khutba)}

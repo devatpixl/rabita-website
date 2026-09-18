@@ -7,6 +7,7 @@ import { Accent } from './accent';
 import { cn } from '@/lib/cn';
 import { HALL_HOST, HallBackdrop } from './hall-backdrop';
 import { Reveal } from './reveal';
+import { CEILING, GRADE, LIGHT, SEAT_HOVER, SEAT_REST } from './photo-plate';
 
 // The services as a grid of plates, replacing the alternating full-width
 // bands (client, 2026-09-13: "too much to scroll... show like this in grids,
@@ -47,56 +48,10 @@ import { Reveal } from './reveal';
 //    `isolate` on the card root the ceiling would blend against the page and
 //    produce garbage. `isolate` here is load-bearing, not decoration.
 
-// Unifies thirteen white balances into one register. Same family as
-// project-gallery's GRADE, plus a warm swing: sepia pulls to flat amber and
-// the negative hue-rotate swings it back off yellow toward the brand gold.
-const GRADE =
-  'saturate(0.82) contrast(1.07) brightness(0.94) sepia(0.14) hue-rotate(-6deg)';
-
-// Light falling into the frame. soft-light, so it is photograph-ADAPTIVE:
-// it lifts janaza's black coats slightly and deepens a whiteboard, rather
-// than doing the same thing to both. The radial's peak sits off the top edge
-// at -14% so its hottest point never lands on the picture, and it is centred
-// rather than cornered, which makes it RTL-neutral.
-const LIGHT: React.CSSProperties = {
-  background:
-    'radial-gradient(115% 78% at 50% -14%, rgba(192,161,101,0.50) 0%, rgba(192,161,101,0.18) 38%, rgba(192,161,101,0) 66%),' +
-    'linear-gradient(180deg, rgba(22,36,46,0) 40%, rgba(22,36,46,0.45) 72%, rgba(22,36,46,0.75) 100%)',
-  mixBlendMode: 'soft-light',
-};
-
-// The ceiling. #2B2A26 is a warm charcoal one step off `ink`, NOT dusk: a
-// cool clamp takes R down hard and leaves B alone, which turns warm shadows
-// cyan. Neutral-warm clamps all three channels together, so there is no cast.
-// The ramp reaches 0.86 by 55%, which is where the words begin.
-const CEILING: React.CSSProperties = {
-  background:
-    'linear-gradient(180deg,' +
-    'rgba(43,42,38,0) 0%,' +
-    'rgba(43,42,38,0.06) 20%,' +
-    'rgba(43,42,38,0.40) 40%,' +
-    'rgba(43,42,38,0.86) 55%,' +
-    'rgba(43,42,38,0.96) 74%,' +
-    'rgba(43,42,38,0.98) 100%)',
-  mixBlendMode: 'darken',
-};
-
-// The seat under the words, as a two-state cross-fade rather than an alpha
-// bump — background-image is not interpolable, so one gradient cannot
-// transition its own stops. Normal blend on dusk: it can only ever lower
-// luminance, which keeps the ceiling's guarantee intact.
-const SEAT_REST: React.CSSProperties = {
-  background:
-    'linear-gradient(180deg, rgba(22,36,46,0) 44%, rgba(22,36,46,0.18) 70%, rgba(22,36,46,0.34) 100%)',
-};
-// On approach a gold glow rises from below the foot: the light warms when
-// you reach for it. This is the only layer that can raise luminance, and
-// 0.30 is the alpha at which the worst-case title still holds ~9:1.
-const SEAT_HOVER: React.CSSProperties = {
-  background:
-    'radial-gradient(120% 72% at 50% 114%, rgba(155,127,74,0.30) 0%, rgba(155,127,74,0) 68%),' +
-    'linear-gradient(180deg, rgba(22,36,46,0.05) 20%, rgba(22,36,46,0.30) 62%, rgba(22,36,46,0.52) 100%)',
-};
+// The scrim stack moved to components/photo-plate.ts on 2026-09-17, so this
+// grid and core-activities.tsx share ONE tuned copy. The reasoning — why a
+// luminance ceiling rather than a flat wash, and the two cascade traps — went
+// with it; read that file before touching any of these values.
 
 export async function ServiceGrid({
   items,

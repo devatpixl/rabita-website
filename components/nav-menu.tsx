@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 import { LanguageSwitcher } from './language-switcher';
 import { LinkVT } from './link-vt';
 import { cn } from '@/lib/cn';
+import { SERVICE_PAGES } from '@/lib/services';
 
 // Five items, unchanged in count. What changed is the split: prayer used to
 // share a heading with services ("Bønn og tjenester") and education held a
@@ -99,10 +100,28 @@ export function DesktopNav() {
     };
   }, [openKey]);
 
+  // The teaching subjects are ROUTED under /tjenester/<slug> but they belong
+  // to Undervisning: SERVICE_PAGES.undervisning is what /undervisning lists,
+  // and the Undervisning menu links straight at them. So a plain prefix test
+  // underlined "Tjenester" for a page the visitor reached from "Undervisning"
+  // (client, 2026-09-18: "in nav bar, services selected, although i used
+  // teaching to come to this page").
+  //
+  // Derived from SERVICE_PAGES rather than written out again here, so moving
+  // a subject between the two lists — which happened to `kurs` on
+  // 2026-09-17 — cannot leave this behind.
+  const onTeachingSubject = (SERVICE_PAGES.undervisning as readonly string[]).some(
+    (k) => pathname.startsWith(`/${locale}/tjenester/${k}`),
+  );
+
   const isCurrent = (key: NavKey) => {
     const root = NAV_ROOT[key];
     // A menu-only item is never the current page, because it is not one.
     if (!root) return false;
+    // Both halves are needed: Teaching has to light up on a URL its own root
+    // does not prefix, and Services has to stand down on one that its root
+    // does. The same shape as the project/apartments exception below.
+    if (onTeachingSubject) return key === 'teaching';
     return (
       pathname.startsWith(`/${locale}${root}`) &&
       !(key === 'project' && pathname.startsWith(`/${locale}${NAV_ROOT.apartments}`))

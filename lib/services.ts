@@ -166,7 +166,9 @@ export const SERVICE_PAGES = {
     'id-for-alle',
     'counselling',
     'veivisere',
-    'kurs',
+    // 'kurs' (Kalligrafi og geometri) moved to `undervisning` below on
+    // 2026-09-17 (client: "Kalligrafi og geometri under undervisning"). It is
+    // a course, and it was the only course sitting outside the teaching list.
     'ungdom',
     'fosterhjem',
     // On neither of his lists, kept at the client's own instruction
@@ -186,7 +188,11 @@ export const SERVICE_PAGES = {
   // photographs and its copy in all three locales are untouched and
   // /tjenester/kurs-konvertitter still renders. Putting the key back in this
   // array is the whole of restoring it.
-  undervisning: ['skole', 'koran', 'kurs-islam', 'arabisk', 'norsk'],
+  //
+  // 'kurs' appended 2026-09-17 (client: "Kalligrafi og geometri under
+  // undervisning"). A sixth entry is why /undervisning no longer runs a
+  // featured row — see the note at its ServiceGrid call.
+  undervisning: ['skole', 'koran', 'kurs-islam', 'arabisk', 'norsk', 'kurs'],
 } as const satisfies Record<string, readonly ServiceKey[]>;
 
 // Where to hold the crop, for sources whose subject is not dead centre.

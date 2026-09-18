@@ -1,98 +1,104 @@
 // The organisation chart, as data.
 //
-// Client, 2026-09-16 (Om oss list): "Gjøre organisasjonskart til en integrert
-// del av nettsiden" — make the org chart an integrated part of the site.
-// Until now /om-oss carried it as a single 1024x724 webp: the names were
-// ~10px of baked-in pixels, unreadable on a phone, unselectable, invisible to
-// a screen reader and untranslatable. This is the same chart as real markup.
+// ── RESTRUCTURED 2026-09-17 (CLIENT) ──────────────────────────────────────
+// "Endre organisasjonskart til:
+//    Ledelse: Styreleder, nestleder, daglig leder (med navn og bilde)
+//    Imamer: Med navn og bilde
+//    Avdelinger: Uten navn og bilde, kun avdelingsnavn"
 //
-// ── TRANSCRIBED FROM THE CLIENT'S OWN FILE ────────────────────────────────
-// Every name and role below is read off public/photos/organisasjonskart.webp,
-// tier by tier, at 1.5x magnification. Nothing here is inferred and nothing is
-// filled in: 3 + 7 + 8 + 10 = 28 people, which is what the image shows.
+// That takes the chart from four tiers of twenty-eight people to three groups
+// of six named people and ten department labels. It answers his own preceding
+// question — "vurdere om man skal ha navn på organisasjonskartet eller ikke"
+// — by keeping names at the top and dropping them at the bottom.
 //
-// NAMES ARE COPIED EXACTLY, including "Iman sayyah", whose surname is
-// lowercase in the source. That looks like a typo in the client's file, but a
-// person's name is not something to silently correct — flagged for Rabita
-// rather than fixed here.
+// WHAT CAME OFF, so it can be put back in one commit if he changes his mind:
+// the Kontrollutvalg tier (Lena Larsen, Brahim Belkilani, Mohamed Melioui),
+// the five ordinary styremedlemmer (Iman El Morabit, Sarah Selhi, Issa Mihesh,
+// Nour Kanout, Sihem Atrous) and five of the administration (Djamel Selhi —
+// senior rådgiver, Mariem Jeng — medieansvarlig, El Hosain ElMontasir —
+// renholder, Nour Kanout — IT, and the department heads below). The separate
+// board section came off this page on 2026-08-31, so the chart was the last
+// place these thirteen appeared; they are now off the site. Flagged to him.
+// Every one of them is still in git, and their role keys are all still
+// translated in the three locales, so restoring is data, not work.
 //
-// ── NO PORTRAITS ──────────────────────────────────────────────────────────
-// The image has a face for each person, but they live inside that one file at
-// roughly 51px across. Cropping 28 of those out would give thumbnails too
-// small to use at any honest size, so this renders as type. The original
-// image stays linked underneath for anyone who wants the version with faces;
-// individual portrait files would be needed to put them back.
-//
-// ── ROLE KEYS, NOT ROLE TEXT ──────────────────────────────────────────────
-// `role` is a message key, so the chart translates with the rest of the site.
-// chair / vice / member already existed under aboutPage.board.roles in all
-// three locales and are reused; the rest are new under aboutPage.org.roles.
+// ── THE IMAMS ARE NOT DUPLICATED HERE ─────────────────────────────────────
+// They already exist, with photographs and in the client's own order, in
+// lib/imams.ts, which /bonnetider renders in full with biographies and
+// languages. Re-listing the same three men here would be two sources of truth
+// for one fact — so the chart reads IMAMS and only adds what it needs that
+// the imams file does not carry: which role key each man is titled with in
+// the chart. If a fourth imam is appointed, he is added in one place.
+
+import { IMAMS, type Imam } from './imams';
 
 export type OrgPerson = {
-  /** Message key under aboutPage.org.roles, or aboutPage.board.roles for the
-   *  three that already existed. */
+  /** Message key under aboutPage.org.roles, or aboutPage.board.roles when
+   *  `boardRole` is set. */
   role: string;
-  /** From aboutPage.board.roles rather than the new set. */
   boardRole?: boolean;
   name: string;
+  /**
+   * Path under /public. The file does NOT have to exist: OrgChart checks disk
+   * at build time and falls back to a set monogram plate, exactly as
+   * PartnerLogos does for a logo that has not arrived. The client, 2026-09-17:
+   * "i can get photos if i find any" — so the page must be finished without
+   * them and better with them, and dropping a file at the path below is the
+   * whole of adding one. No code change, no deploy note.
+   */
+  photo: string;
 };
 
-export type OrgTier = {
-  /** Message key under aboutPage.org.tiers. */
-  key: string;
-  people: readonly OrgPerson[];
+/** Styreleder, nestleder, daglig leder — the three he named, in his order. */
+export const LEADERSHIP: readonly OrgPerson[] = [
+  { role: 'chair', boardRole: true, name: 'Hossam Belkilani', photo: '/photos/leadership/hossam-belkilani.webp' },
+  { role: 'vice', boardRole: true, name: 'Basim Ghozlan', photo: '/photos/leadership/basim-ghozlan.webp' },
+  { role: 'director', name: 'Imen Hasnaoui', photo: '/photos/leadership/imen-hasnaoui.webp' },
+];
+
+/**
+ * The chart's title for each imam, keyed by the imam's own id in lib/imams.ts.
+ * Same three role keys the old four-tier chart used for these men, so nothing
+ * new had to be translated.
+ */
+export const IMAM_ROLES: Record<Imam['key'], string> = {
+  amara: 'theologyLead',
+  andreas: 'imam',
+  aldiri: 'imamTheologian',
 };
 
-export const ORG_CHART: readonly OrgTier[] = [
-  {
-    key: 'oversight',
-    people: [
-      { role: 'oversight', name: 'Lena Larsen' },
-      { role: 'oversight', name: 'Brahim Belkilani' },
-      { role: 'oversight', name: 'Mohamed Melioui' },
-    ],
-  },
-  {
-    key: 'board',
-    people: [
-      { role: 'chair', boardRole: true, name: 'Hossam Belkilani' },
-      { role: 'vice', boardRole: true, name: 'Basim Ghozlan' },
-      { role: 'member', boardRole: true, name: 'Iman El Morabit' },
-      { role: 'member', boardRole: true, name: 'Sarah Selhi' },
-      { role: 'member', boardRole: true, name: 'Issa Mihesh' },
-      { role: 'member', boardRole: true, name: 'Nour Kanout' },
-      { role: 'member', boardRole: true, name: 'Sihem Atrous' },
-    ],
-  },
-  {
-    key: 'admin',
-    people: [
-      { role: 'director', name: 'Imen Hasnaoui' },
-      { role: 'seniorAdviser', name: 'Djamel Selhi' },
-      { role: 'media', name: 'Mariem Jeng' },
-      { role: 'facilities', name: 'El Hosain ElMontasir' },
-      { role: 'it', name: 'Nour Kanout' },
-      { role: 'theologyLead', name: 'Kamel Amara' },
-      { role: 'imam', name: 'Usman Andreas' },
-      { role: 'imamTheologian', name: 'Osama Aldiri' },
-    ],
-  },
-  {
-    key: 'departments',
-    people: [
-      { role: 'education', name: 'Sihem Atrous' },
-      { role: 'knowledge', name: 'Abdel Rahman Ashraf' },
-      { role: 'women', name: 'Mona Said' },
-      { role: 'artsCulture', name: 'Lena Larsen' },
-      { role: 'buildingProject', name: 'Kamel Amara' },
-      { role: 'safety', name: 'Khalid Banouni' },
-      // NUM is Norges Unge Muslimer, an organisation name rather than a
-      // Norwegian word, so it stays NUM in all three locales. "Yasmin" is a
-      // first name only in the source — not shortened here.
-      { role: 'num', name: 'Yasmin' },
-      { role: 'strategy', name: 'Jonas Selhi' },
-      { role: 'dialogue', name: 'Basim Ghozlan' },
-      { role: 'childrenFamily', name: 'Iman sayyah' },
-    ],
-  },
+/** The imams as the chart wants them: the client's order, their photographs,
+ *  and the role each is titled with here. */
+export const IMAM_LEADERS = IMAMS.map((im) => ({
+  key: im.key,
+  // The honorific travels with the name so the chart addresses these three
+  // exactly as /bonnetider does. Dropping it here was caught by the compiler
+  // rather than by eye, which is the argument for mapping explicitly.
+  title: im.title,
+  name: im.name,
+  photo: im.photo,
+  role: IMAM_ROLES[im.key],
+}));
+
+/**
+ * "Uten navn og bilde, kun avdelingsnavn." Message keys under
+ * aboutPage.org.roles — the same keys the old chart used to title each
+ * department head, which is why ten department names cost no new translation
+ * in any of the three locales. The heads themselves are gone; the departments
+ * are not.
+ *
+ * Order is the client's, off his own chart, and must not be sorted: it is not
+ * alphabetical in any of the three languages and was not meant to be.
+ */
+export const DEPARTMENTS: readonly string[] = [
+  'education',
+  'knowledge',
+  'women',
+  'artsCulture',
+  'buildingProject',
+  'safety',
+  'num',
+  'strategy',
+  'dialogue',
+  'childrenFamily',
 ];

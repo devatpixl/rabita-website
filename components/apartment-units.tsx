@@ -185,7 +185,14 @@ export function ApartmentUnits() {
                     alt=""
                     fill
                     sizes="(min-width: 1024px) 31vw, (min-width: 640px) 46vw, 92vw"
-                    className="object-cover transition-transform duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover/unit:scale-[1.04]"
+                    className={cn(
+                      'object-cover transition-transform duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover/unit:scale-[1.04]',
+                      // Sold: the render steps back rather than going grey.
+                      // Full grayscale among twelve warm renders reads as a
+                      // broken image, not as a status; 0.5 saturation reads
+                      // as "past tense" and keeps the card in the family.
+                      u.sold && 'saturate-[0.5]',
+                    )}
                   />
                 </span>
                 {/* Two stacked scrims rather than one that changes: a
@@ -206,6 +213,53 @@ export function ApartmentUnits() {
                       'linear-gradient(180deg, rgba(22,36,46,0.1) 20%, rgba(22,36,46,0.68) 55%, rgba(22,36,46,0.97) 88%, rgba(22,36,46,0.99) 100%)',
                   }}
                 />
+
+                {/* SOLGT — a STAMP, not a label.
+                   
+                   The first version was a filled gold pill and it was wrong:
+                   a solid block of #C0A165 sitting on a warm interior render
+                   reads as a sticker someone slapped on the photograph, and
+                   it fought every frame it landed on.
+                   
+                   What it is now: outlined, not filled. A gold hairline and
+                   gold type over a frosted panel, tilted a few degrees off
+                   true. Three reasons that works better —
+                   
+                     GLASS, not paint. bg-dusk/85 + backdrop-blur means the
+                     mark makes its own ground out of whatever is behind it,
+                     so it is legible on the dark H607 hallway AND the bright
+                     H506 living room without a per-photo value. 85 and not
+                     45: at 45 the panel went light grey over a white ceiling
+                     and the gold type washed out into it — measured on H506,
+                     whose render opens on a lit ceiling. The rail's
+                     own arrows already use this idiom (bg-dusk/70 +
+                     backdrop-blur-sm), so it is the site's vocabulary.
+                     
+                     OUTLINE, not fill. The photograph stays visible through
+                     it. A sold flat is still worth looking at — it is the
+                     proof that these sell — and a solid chip hides the very
+                     thing it is bragging about.
+                     
+                     TILT. -8deg is the one thing here that is not systematic,
+                     and that is the point: everything else on this site sits
+                     exactly on its grid, so a few degrees off reads as
+                     something pressed onto the card after the fact. Which is
+                     what a sold stamp is.
+                   
+                   Still gold and not red. `alert` is the site's ONE red and
+                   it is reserved for things that have gone wrong; a sale is
+                   the opposite of a failure.
+                   
+                   `start-4` and `rtl:rotate-[6deg]`: the mark mirrors to the
+                   other corner in Arabic, and the tilt mirrors with it, so it
+                   leans INTO the card in both directions rather than off it. */}
+                {u.sold && (
+                  <span
+                    className="absolute start-4 top-4 z-10 -rotate-[8deg] rounded-[2px] border border-gold/70 bg-dusk/85 px-3 py-1.5 font-mono text-[0.625rem] font-medium uppercase leading-none tracking-[0.32em] text-gold-soft shadow-[0_4px_16px_-6px_rgba(22,36,46,0.85)] backdrop-blur-[8px] rtl:rotate-[8deg]"
+                  >
+                    {t('sold')}
+                  </span>
+                )}
 
                 <span className="relative z-10 p-5 sm:p-6">
                   <span className="flex items-center gap-3">
@@ -274,7 +328,7 @@ export function ApartmentUnits() {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label={t(`items.${open.id}.title`)}
+          aria-label={open.sold ? `${t(`items.${open.id}.title`)} — ${t('sold')}` : t(`items.${open.id}.title`)}
           className="fixed inset-0 z-[80] flex items-start justify-center overflow-y-auto overscroll-contain bg-dusk/70 p-4 backdrop-blur-[3px] sm:p-8"
           onClick={(e) => {
             if (e.target === e.currentTarget) setOpen(null);
@@ -282,8 +336,25 @@ export function ApartmentUnits() {
         >
           <div className="my-auto w-full max-w-3xl overflow-hidden rounded-2xl bg-dusk ring-1 ring-inset ring-paper/12">
             <div className="flex items-center justify-between gap-4 border-b border-paper/10 px-5 py-3.5 sm:px-7">
-              <p className="font-serif text-[1.05rem] text-paper">
-                {t(`items.${open.id}.title`)}
+              {/* Title and status together. The plan sheet fills the frame
+                 below, so on a phone this bar is the whole of what is on
+                 screen when the dialog opens — which makes it the only place
+                 the sold state is guaranteed to be read (client, 2026-09-18:
+                 "also mention here that sold when we open them"). The price
+                 further down would be below the fold.
+                 
+                 Same materials as the stamp on the card — gold hairline, dusk
+                 fill, letterspaced mono — but NOT tilted. The tilt works on a
+                 photograph, where it reads as something pressed onto the
+                 image; in a ruled UI bar next to aligned type it would read
+                 as a rendering fault. Same mark, right register. */}
+              <p className="flex min-w-0 items-center gap-3 font-serif text-[1.05rem] text-paper">
+                <span className="truncate">{t(`items.${open.id}.title`)}</span>
+                {open.sold && (
+                  <span className="shrink-0 rounded-[2px] border border-gold/70 bg-dusk px-2 py-1 font-mono text-[0.5625rem] font-medium uppercase leading-none tracking-[0.28em] text-gold-soft">
+                    {t('sold')}
+                  </span>
+                )}
               </p>
               <button
                 ref={closeRef}
@@ -328,7 +399,12 @@ export function ApartmentUnits() {
                 <Row label={t('labels.floor')} value={String(open.floor)} />
                 <Row label={t('labels.bra')} value={t('sqm', { n: num(open.braM2) })} />
                 <Row label={t('labels.prom')} value={t('sqm', { n: num(open.pRomM2) })} />
-                <Row label={t('labels.balcony')} value={t('sqm', { n: num(open.balconyM2) })} />
+                {/* Only when the flat HAS one. H607 has no balcony, and a
+                   rendered "0 m²" states a balcony of zero square metres
+                   rather than the absence of a balcony. */}
+                {open.balconyM2 !== null && (
+                  <Row label={t('labels.balcony')} value={t('sqm', { n: num(open.balconyM2) })} />
+                )}
                 <Row
                   label={t('labels.ceilingGeneral')}
                   value={t('approx', { m: metres(open.ceilingGeneralM) })}

@@ -33,13 +33,37 @@ export type ApartmentUnit = {
   braM2: number;
   /** Primærrom. */
   pRomM2: number;
-  balconyM2: number;
+  /** Null where the unit has none — H607 has no balcony, and a rendered
+   *  "0 m²" row reads as a balcony of zero square metres rather than as no
+   *  balcony at all. The component skips the row on null. */
+  balconyM2: number | null;
   /** Ceiling heights, as the sheet gives them — approximate, in metres. */
   ceilingGeneralM: number;
   ceilingBathM: number;
   ceilingHallM: number;
+  /**
+   * Sold. Added 2026-09-18 with H506/H508/H607, which the client confirmed as
+   * the three sold units and which is why they were missing from his original
+   * c1..c12: he sent cards for what is FOR SALE. lib/apartments.ts carries the
+   * same fact as `sold` on its own fifteen-row table; both are set, because
+   * that table is the snapshot of cm8.no and this one is the card list, and
+   * neither is derived from the other.
+   */
+  sold?: true;
 };
 
+  // ── ORDER: the sold flats are INTERLEAVED, not parked at the end ────────
+  // Client, 2026-09-18: "mix the sold ones, like after first some show this
+  // and then gap then 2nd sold and another at end".
+  //
+  // Four for sale, then one sold, three times over — so SOLGT lands at
+  // positions 5, 10 and 15 of the rail. Clustered at the end they read as an
+  // afterthought and a visitor who never scrolls that far never learns
+  // anything is selling; spread out, the stamp recurs at a steady beat and
+  // the rail reads as a live list rather than an inventory with a footnote.
+  //
+  // The twelve for-sale keep the client's own c1..c12 sequence between the
+  // stamps — only the three sold are placed.
 export const APARTMENT_UNITS: readonly ApartmentUnit[] = [
   {
     id: 'c1',
@@ -64,6 +88,34 @@ export const APARTMENT_UNITS: readonly ApartmentUnit[] = [
     ceilingGeneralM: 2.55,
     ceilingBathM: 2.4,
     ceilingHallM: 2.4,
+  },
+  // ── The three SOLD units ────────────────────────────────────────────────
+  // Client, 2026-09-18, with full spec sheets for each. They were never
+  // missing: his c1..c12 were the ones still for sale.
+  //
+  // IDs are unit-named, not c13..c15. The note at the top of this file
+  // rejected unit naming because HE supplied the images as c1..c12 and a
+  // unit-named file would have been a guess. That reasoning does not apply
+  // here — he supplied these BY UNIT, so h506.webp is the honest name and it
+  // documents itself.
+  //
+  // Both images come out of the one A4 sheet he sent per flat: the sheet IS
+  // the plan at 1024x724, the exact size c1-plan.webp already uses, and the
+  // face is the interior render lifted from its top-right corner. That render
+  // exists at 436x245 and nowhere larger — ASK HIM FOR THE FULL-SIZE RENDERS
+  // if these read soft beside the other twelve.
+  {
+    id: 'h506',
+    unit: 'H506',
+    priceNok: 9_500_000,
+    floor: 5,
+    braM2: 86,
+    pRomM2: 86,
+    balconyM2: 6,
+    ceilingGeneralM: 2.55,
+    ceilingBathM: 2.4,
+    ceilingHallM: 2.4,
+    sold: true,
   },
 
   {
@@ -128,6 +180,19 @@ export const APARTMENT_UNITS: readonly ApartmentUnit[] = [
     ceilingBathM: 2.5,
     ceilingHallM: 2.5,
   },
+  {
+    id: 'h508',
+    unit: 'H508',
+    priceNok: 5_000_000,
+    floor: 5,
+    braM2: 37,
+    pRomM2: 37,
+    balconyM2: 6,
+    ceilingGeneralM: 2.55,
+    ceilingBathM: 2.4,
+    ceilingHallM: 2.4,
+    sold: true,
+  },
   // His text reads "7 200 00 kr" - six digits, i.e. 720 000, which would be a
   // tenth of the price of the identical 55 m2 unit one floor down. Read as
   // 7 200 000 and FLAGGED to him; correct here if he says otherwise.
@@ -190,6 +255,21 @@ export const APARTMENT_UNITS: readonly ApartmentUnit[] = [
     ceilingGeneralM: 2.65,
     ceilingBathM: 2.5,
     ceilingHallM: 2.5,
+  },
+  {
+    id: 'h607',
+    unit: 'H607',
+    priceNok: 2_800_000,
+    floor: 6,
+    braM2: 17,
+    pRomM2: 17,
+    // No balcony on this one — the sheet lists none, and floor 6 runs the
+    // taller ceilings throughout.
+    balconyM2: null,
+    ceilingGeneralM: 2.65,
+    ceilingBathM: 2.5,
+    ceilingHallM: 2.5,
+    sold: true,
   },
 ];
 

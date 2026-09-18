@@ -48,7 +48,12 @@ export async function Imams() {
                   </span>
                   <div className="min-w-0">
                     <p className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-gold-deep">{t(`people.${im.key}.role`)}</p>
-                    <h3 className="mt-1.5 font-serif text-[1.35rem] leading-tight text-ink">{im.name}</h3>
+                    {/* Title then name (client, 2026-09-18). The honorific is
+                       a shade quieter than the name — it is how he is
+                       addressed, not what he is called. */}
+                    <h3 className="mt-1.5 font-serif text-[1.35rem] leading-tight text-ink">
+                      <span className="text-ink-60">{im.title}</span> {im.name}
+                    </h3>
                   </div>
                 </div>
                 <p className="mt-4 text-[15px] leading-relaxed text-ink-60">{t(`people.${im.key}.bio`)}</p>

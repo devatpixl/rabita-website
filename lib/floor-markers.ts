@@ -86,3 +86,35 @@ export const FLOOR_MARKERS: Record<string, FloorMarker[]> = {
     { id: 'minaret', x: 55, y: 35, lx: 90, ly: 40, align: 'start' },
   ],
 };
+
+// ── WHAT THE BUILDING CONTAINS, COUNTED FROM THE MARKERS ──────────────────
+// The FASILITETER card on /moskeprosjektet prints "N rom · M etasjer". Both
+// numbers are derived here rather than typed into the copy, so adding a room
+// to a floor above updates the card and the walkthrough together. A count in
+// a sentence that disagrees with the thing it counts is the classic way a
+// figure like this goes quietly wrong.
+//
+// `whole` is excluded from the floor tally: the roof terrace, dome and
+// minaret are the building seen from outside, not a storey you stand on.
+// Rooms are counted UNIQUE — apartments carry a marker on both the fifth and
+// the sixth floor and are one facility, not two.
+
+const FLOOR_KEYS = ['lower', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth'] as const;
+
+export const FLOOR_COUNT = FLOOR_KEYS.length;
+
+export const FLOOR_ROOM_COUNT = new Set(
+  Object.entries(FLOOR_MARKERS)
+    .flatMap(([, markers]) => markers.map((m) => m.id)),
+).size;
+
+/** The six the card shows, in the order it shows them: the home page's own
+ *  promise first — moské, skole, bibliotek — then the three nobody expects. */
+export const FACILITIES = [
+  'prayerMain',
+  'school',
+  'library',
+  'sportsHall',
+  'cafe',
+  'roofTerrace',
+] as const;

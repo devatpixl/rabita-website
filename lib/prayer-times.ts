@@ -220,3 +220,43 @@ export function prayerDaysInMonth(d: Date, days: readonly PrayerDay[] = PRAYER_D
   const prefix = `${d.getFullYear()}-${`${d.getMonth() + 1}`.padStart(2, '0')}`;
   return days.filter((row) => row.date.startsWith(prefix));
 }
+
+/**
+ * The months the calendar should offer, newest-first-of-list order, with any
+ * month that has already ENDED removed.
+ *
+ * ── WHY THIS EXISTS ───────────────────────────────────────────────────────
+ * Client, 2026-09-18: "Kalender: Bør det være konkrete måneder siden det da
+ * må oppdateres månedlig." — he saw named months on the page and assumed
+ * somebody has to add the next one by hand every month.
+ *
+ * He is wrong about that and right about what he saw. lib/irn.ts asks the
+ * feed for `monthsFrom(now, 3)` — this month and the two after it — so the
+ * live half rolls forward on its own, New Year included, with nobody
+ * touching it. But those live days are MERGED over the static PRAYER_DAYS
+ * table above, which is a fixed block of 2026-08-01 to 2026-12-31, and
+ * nothing ever takes a month out of that merge. So on 18 September the page
+ * was still offering "august 2026", and a dead month sitting on the page is
+ * exactly what makes a calendar look hand-maintained.
+ *
+ * ── THE GUARD IS NOT DECORATION ───────────────────────────────────────────
+ * If the filter would empty the list it returns the unfiltered one. That
+ * happens for real: IRN unreachable plus a static table that has fallen
+ * entirely into the past leaves nothing in the future, and a calendar page
+ * with no months at all is worse than one showing a stale month — the reader
+ * gets a broken page instead of an old answer.
+ *
+ * Compared as YYYY-MM strings, which sort and compare correctly as text and
+ * sidestep the timezone question entirely: a month is "past" only once the
+ * whole of it is behind the current one, so the month you are standing in
+ * always survives.
+ */
+export function calendarMonths(
+  days: readonly PrayerDay[],
+  now: Date = new Date(),
+): string[] {
+  const all = [...new Set(days.map((d) => d.date.slice(0, 7)))].sort();
+  const current = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+  const upcoming = all.filter((m) => m >= current);
+  return upcoming.length > 0 ? upcoming : all;
+}

@@ -11,8 +11,9 @@
 // §13.2 — budget figures, RESOLVED 2026-09-01. There are two numbers and they
 // were never meant to reconcile:
 //
-//   • TOTAL_BUILD_COST_EUR — what the building costs to put up, in euro,
-//     as broken down per phase in the client's fremdrift brochure.
+//   • TOTAL_BUILD_COST_NOK — what the building costs to put up, converted
+//     from the euro per-phase breakdown in the client's fremdrift brochure
+//     on 2026-09-18 at the client's instruction. See PROJECT_PHASES below.
 //   • goalNok — the donation-funded SHARE of that, in kroner. This is what
 //     the meter tracks. It is not the project budget.
 //
@@ -154,8 +155,31 @@ export const SUB_CAMPAIGN = Object.freeze({
 // The project in five funded phases, from the client's fremdrift brochure
 // (2026-09-01). Two are already paid for and delivered; three are ahead.
 //
-// `eur` is that phase's share of the total build cost — see the §13.2 note at
-// the top of this file for why this is euro while the meter is kroner.
+// `nok` is that phase's share of the total build cost.
+//
+// ── CONVERTED FROM EURO 2026-09-18, ON THE CLIENT'S INSTRUCTION ──────────
+// "Faser: Legge inn riktig valuta så kroner." The brochure figures are, and
+// always were, genuine EURO — not kroner that had been mislabelled. The
+// arithmetic settles it: 24.53M € over the building's 5 745 m² is about
+// 50 000 NOK/m² at any plausible rate, which is ordinary Oslo commercial
+// construction. Read as kroner the same figures give 4 270 NOK/m², roughly a
+// tenth of what it costs to build anything here. So this is a conversion, not
+// a correction of a labelling mistake.
+//
+// RATE: EUR_NOK below. A rate printed once starts ageing the moment it ships
+// — which is exactly why the §13.2 note kept the two currencies apart until
+// now — so it is ONE named constant with the date it was set, and the phase
+// figures are derived from it rather than typed out. Changing the rate
+// changes every figure on /moskeprosjektet, in one line.
+//
+// ROUNDED to the nearest 100 000 kr (client: "convert and use rounded"). At
+// this scale a figure like 7 103 600 claims a precision a converted budget
+// does not have; 7 100 000 is honest about being an approximation.
+//
+// IF RABITA HAS THE BUDGET IN KRONER — and a Norwegian building project
+// almost certainly does, with the euro figures being the converted ones for
+// the brochure — replace EUR_NOK and this derivation with their real numbers
+// and the ageing problem disappears entirely. Worth asking.
 //
 // The last three keys are deliberately the SAME keys the campaign meter has
 // always used, so this is one vocabulary rather than a second one: PHASES
@@ -163,18 +187,24 @@ export const SUB_CAMPAIGN = Object.freeze({
 // components/phase-popover.tsx keep working untouched. (There is already a
 // third, unrelated set in lib/donor-wall.ts; a fourth would be the real
 // mistake here.)
+/** EUR→NOK, set 2026-09-18. The one number to change if the rate moves. */
+const EUR_NOK = 11.8;
+
+/** To the nearest 100 000 kr — see the rounding note above. */
+const toNok = (eur: number) => Math.round((eur * EUR_NOK) / 100_000) * 100_000;
+
 export const PROJECT_PHASES = Object.freeze([
-  { n: 1, from: 2019, to: 2024, key: 'planning' as const, eur: 602_000 },
-  { n: 2, from: 2025, to: 2025, key: 'demolition' as const, eur: 946_000 },
-  { n: 3, from: 2026, to: 2026, key: 'fundament' as const, eur: 9_632_000 },
-  { n: 4, from: 2027, to: 2027, key: 'interior' as const, eur: 6_450_000 },
-  { n: 5, from: 2028, to: 2028, key: 'ferdigstillelse' as const, eur: 6_900_000 },
+  { n: 1, from: 2019, to: 2024, key: 'planning' as const, nok: toNok(602_000) },
+  { n: 2, from: 2025, to: 2025, key: 'demolition' as const, nok: toNok(946_000) },
+  { n: 3, from: 2026, to: 2026, key: 'fundament' as const, nok: toNok(9_632_000) },
+  { n: 4, from: 2027, to: 2027, key: 'interior' as const, nok: toNok(6_450_000) },
+  { n: 5, from: 2028, to: 2028, key: 'ferdigstillelse' as const, nok: toNok(6_900_000) },
 ]);
 export type ProjectPhaseKey = (typeof PROJECT_PHASES)[number]['key'];
 
 // Summed, never typed twice: a total that can disagree with its own parts is
 // the classic way a figure like this goes stale.
-export const TOTAL_BUILD_COST_EUR = PROJECT_PHASES.reduce((sum, p) => sum + p.eur, 0);
+export const TOTAL_BUILD_COST_NOK = PROJECT_PHASES.reduce((sum, p) => sum + p.nok, 0);
 
 // Where each phase stands relative to a given date. The brochure's own
 // framing — "the first two phases have been completed" — falls out of the
@@ -213,7 +243,18 @@ export const FOUNDATION_WALL_THRESHOLD_NOK = 10_000;
 // Preset amount ladder, laid out 2×2 with a recommended box and an
 // always-open "other amount" row — the innocents.no pattern the client
 // asked for (2026-08-30).
-export const AMOUNT_PRESETS = [200, 500, 1_000, 2_500] as const;
+//
+// Lowered 2026-09-17 (client: "Vurdere om summene bør være lavere som
+// innocents"). innocents.no runs [150, 300, 500, 1000]; this takes its floor
+// and not its ceiling. The entry rung is what decides whether a first-time
+// giver clicks at all, so 200 → 150 matches him there — but Rabita is asking
+// for 100 000 000 kr, and a 1 000 kr top rung caps the average gift with
+// nothing gained, so the fourth box is 1 500 rather than his 1 000.
+//
+// 500 stays RECOMMENDED and DEFAULT: it is the third rung in the new ladder
+// instead of the second, which makes the highlighted box an upsell from the
+// two beneath it rather than the midpoint. That is deliberate.
+export const AMOUNT_PRESETS = [150, 300, 500, 1_500] as const;
 export const RECOMMENDED_AMOUNT: (typeof AMOUNT_PRESETS)[number] = 500;
 export const DEFAULT_AMOUNT: (typeof AMOUNT_PRESETS)[number] = 500;
 export const DEFAULT_FREQUENCY: 'monthly' | 'once' = 'monthly';

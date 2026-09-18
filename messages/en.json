@@ -106,11 +106,6 @@
           "href": "/tjenester/veivisere"
         },
         {
-          "label": "Calligraphy",
-          "blurb": "Courses in Islamic calligraphy and geometric art.",
-          "href": "/tjenester/kurs"
-        },
-        {
           "label": "Foster care",
           "blurb": "Information and guidance for families considering fostering.",
           "href": "/tjenester/fosterhjem"
@@ -151,6 +146,11 @@
           "label": "Norwegian",
           "blurb": "Norwegian classes for adults who fall outside the ordinary provision.",
           "href": "/tjenester/norsk"
+        },
+        {
+          "label": "Calligraphy and geometry",
+          "blurb": "Courses in Islamic calligraphy and geometric art.",
+          "href": "/tjenester/kurs"
         }
       ],
       "visit": [
@@ -442,7 +442,7 @@
   },
   "giftLadder": {
     "eyebrow": "WHAT YOUR GIFT BUILDS",
-    "heading": "The budget is costed room by <em>room</em>.",
+    "heading": "Every amount builds something <em>real</em>.",
     "lede": "Every contribution, whatever its size, becomes part of the building and helps raise a lasting home for prayer, learning and community in Norway.",
     "anchorLabel": "FULL TAX DEDUCTION",
     "ctaAll": "See all ways to give",
@@ -452,40 +452,31 @@
     "footnote": "Tax deductible up to 25 000 kr per year.",
     "items": {
       "self": {
-        "title": "For yourself",
-        "meta": "The simplest way to take part in the building."
+        "title": "For yourself"
       },
       "family": {
-        "title": "For your family",
-        "meta": "A gift on behalf of the whole household."
+        "title": "For your family"
       },
       "block": {
-        "title": "The building block",
-        "meta": "One building block in the new mosque."
+        "title": "The building block"
       },
       "quran": {
-        "title": "Quran",
-        "meta": "Qur'ans for the mosque, the school and the library."
+        "title": "Quran"
       },
       "friends": {
-        "title": "Friends of Rabita",
-        "meta": "A larger contribution towards the building."
+        "title": "Friends of Rabita"
       },
       "prayer": {
-        "title": "One square metre of prayer hall floor",
-        "meta": "500 kr a month for three years funds one place"
+        "title": "One square metre of prayer hall floor"
       },
       "shelf": {
-        "title": "A shelf section in the library",
-        "meta": "Around 120 volumes · floor 02"
+        "title": "A shelf section in the library"
       },
       "desk": {
-        "title": "A desk in the school",
-        "meta": "Where 400 children are taught every year · maximum yearly deduction"
+        "title": "A desk in the school"
       },
       "panel": {
-        "title": "A panel in the facade",
-        "meta": "The geometry that gives the building its identity · your name recorded"
+        "title": "A panel in the facade"
       }
     },
     "units": {
@@ -713,7 +704,7 @@
         "items": [
           {
             "title": "Give any amount",
-            "body": "Anything from 200 kroner. The wall records gifts from 10 000 upward."
+            "body": "Anything from 150 kroner. The wall records gifts from 10 000 upward."
           },
           {
             "title": "Write the entry",
@@ -1001,6 +992,38 @@
     },
     "readMore": "Read more"
   },
+  "coreActivities": {
+    "eyebrow": "Core activities",
+    "heading": "Our <em>core activities</em>.",
+    "all": "See everything we do",
+    "pending": "Content to come",
+    "items": {
+      "religious": {
+        "title": "Religious <em>services</em>",
+        "body": "Nikah, janaza, shahada, hajj and umra — and a conversation with an imam when life calls for one."
+      },
+      "teaching": {
+        "title": "<em>Teaching</em>",
+        "body": "Rabita school, the Quran school, Arabic, Islamic studies, Norwegian and calligraphy."
+      },
+      "youth": {
+        "title": "Children and <em>youth</em>",
+        "body": "Norway's Young Muslims, family activities, camps and safe places to meet through the year."
+      },
+      "eid": {
+        "title": "Eid <em>for everyone</em>"
+      },
+      "guides": {
+        "title": "Muslim <em>guides</em>"
+      },
+      "humanitarian": {
+        "title": "Humanitarian <em>work</em>"
+      },
+      "foster": {
+        "title": "Become a <em>foster family</em>"
+      }
+    }
+  },
   "prayerVisit": {
     "addressLabel": "Address",
     "hoursLabel": "Open",
@@ -1220,6 +1243,9 @@
       "building": "Building",
       "floors": "Floors",
       "architect": "Architect",
+      "facilitiesLabel": "Facilities",
+      "facilitiesCount": "{rooms} rooms · {floors} floors",
+      "facilitiesLink": "See it floor by floor",
       "startConstruction": "Construction start",
       "buildTime": "Construction time",
       "buildTimeValue": "{years, plural, one {# year} other {# years}}",
@@ -1227,7 +1253,7 @@
       "completionNote": "The final completion date is updated in step with the build phases.",
       "completionTbd": "set by build phase",
       "eyebrow": "The new building",
-      "title": "Bigger, taller, and room for <em>more</em>."
+      "title": "What does the <em>new</em> building contain?"
     },
     "capacity": {
       "heading": "Capacity",
@@ -2177,11 +2203,14 @@
     },
     "org": {
       "tiers": {
+        "leadership": "Leadership",
+        "imams": "Imams",
         "oversight": "Oversight committee",
         "board": "Board",
         "admin": "Administration",
         "departments": "Departments"
       },
+      "imamsLink": "Meet the imams",
       "roles": {
         "oversight": "Oversight committee",
         "director": "Managing director",
@@ -2658,8 +2687,21 @@
         "c12": {
           "title": "4-room apartment H606",
           "lede": "A bright, spacious four-room apartment with three good bedrooms, an open living and kitchen space and a large balcony with good sun. A well-considered layout for families who want both comfort and function."
+        },
+        "h506": {
+          "title": "4-room apartment H506",
+          "lede": "A spacious four-room top-floor apartment with generous living areas, well-planned bedrooms and a balcony looking out over the green courtyard and the roof terrace."
+        },
+        "h508": {
+          "title": "2-room apartment H508",
+          "lede": "An efficient two-room apartment with a smart layout, an open living room and kitchen, and a bright bedroom. A good choice if you want a low-maintenance home with everything you need."
+        },
+        "h607": {
+          "title": "1-room apartment H607",
+          "lede": "A smart, space-efficient one-room apartment with good daylight and a practical layout. Ideal for students, commuters, or anyone wanting a compact home close to everything Oslo has to offer."
         }
-      }
+      },
+      "sold": "Sold"
     },
     "eyebrow": "Apartments",
     "title": "Fifteen apartments on <em>one</em> address.",
@@ -2762,6 +2804,14 @@
       "countLabel": "Apartments",
       "sizeLabel": "Sizes"
     }
+  },
+  "apartmentsSold": {
+    "eyebrow": "The apartments",
+    "heading": "{sold} of {total} are <em>sold</em>.",
+    "stamp": "Sold",
+    "cta": "See the {n} available",
+    "meta": "{rooms}-room · {m2} m² · Floor {floor}",
+    "rooms": "{n}-room"
   },
   "imams": {
     "eyebrow": "The imams",
@@ -2978,7 +3028,7 @@
       "wuduWomen": "Women's ablutions",
       "childrensRoom": "Playroom",
       "imamOffice": "Imam's office",
-      "school": "School, years 1–7",
+      "school": "School",
       "amphi": "Amphitheatre",
       "garden": "Garden",
       "conference": "Conference and function rooms",

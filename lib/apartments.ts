@@ -27,16 +27,16 @@ export const APARTMENTS: readonly Apartment[] = [
   { unit: 'H503', floor: 5, rooms: 3, m2: 62, balconyM2: 7, priceNok: 7_600_000, sold: false },
   { unit: 'H504', floor: 5, rooms: 3, m2: 74, balconyM2: 7, priceNok: 8_600_000, sold: false },
   { unit: 'H505', floor: 5, rooms: 2, m2: 61, balconyM2: 6, priceNok: 7_500_000, sold: false },
-  { unit: 'H506', floor: 5, rooms: 4, m2: 86, balconyM2: 6, priceNok: 9_500_000, sold: false },
+  { unit: 'H506', floor: 5, rooms: 4, m2: 86, balconyM2: 6, priceNok: 9_500_000, sold: true },
   { unit: 'H507', floor: 5, rooms: 4, m2: 98, balconyM2: 6, priceNok: 11_000_000, sold: false },
-  { unit: 'H508', floor: 5, rooms: 2, m2: 37, balconyM2: 6, priceNok: 5_000_000, sold: false },
+  { unit: 'H508', floor: 5, rooms: 2, m2: 37, balconyM2: 6, priceNok: 5_000_000, sold: true },
   { unit: 'H601', floor: 6, rooms: 1, m2: 47, balconyM2: 6, priceNok: 6_200_000, sold: false },
   { unit: 'H602', floor: 6, rooms: 3, m2: 55, balconyM2: 6, priceNok: 7_200_000, sold: false },
   { unit: 'H603', floor: 6, rooms: 3, m2: 62, balconyM2: 7, priceNok: 7_800_000, sold: false },
   { unit: 'H604', floor: 6, rooms: 3, m2: 74, balconyM2: 7, priceNok: 8_800_000, sold: false },
   { unit: 'H605', floor: 6, rooms: 4, m2: 82, balconyM2: 10, priceNok: 9_400_000, sold: false },
   { unit: 'H606', floor: 6, rooms: 4, m2: 77, balconyM2: 9, priceNok: 9_200_000, sold: false },
-  { unit: 'H607', floor: 6, rooms: 1, m2: 17, balconyM2: null, priceNok: 2_800_000, sold: false },
+  { unit: 'H607', floor: 6, rooms: 1, m2: 17, balconyM2: null, priceNok: 2_800_000, sold: true },
 ];
 
 const available = () => APARTMENTS.filter((a) => !a.sold);

@@ -177,8 +177,13 @@ export function FloorByFloor() {
   return (
     <section
       ref={track}
+      // Anchored so the FASILITETER card in the facts section further down
+      // can send a reader back up here (added 2026-09-18). scroll-mt clears
+      // the sticky header; without it the walkthrough's first floor lands
+      // under it.
+      id="etasjene"
       aria-labelledby="floor-by-floor-heading"
-      className={cn('relative bg-dusk', reduced ? '' : 'h-[480vh] md:h-[640vh]')}
+      className={cn('scroll-mt-24 relative bg-dusk', reduced ? '' : 'h-[480vh] md:h-[640vh]')}
     >
       <div
         className={cn(

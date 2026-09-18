@@ -61,4 +61,46 @@ export const PARTNERS: readonly Partner[] = [
   { name: 'Sparebankstiftelsen', logo: '/partners/sparebankstiftelsen.jpg', shape: 'square' },
   { name: 'Studieforbundet', logo: '/partners/studieforbundet.png', shape: 'wide' },
   { name: 'Bydel St. Hanshaugen', logo: '/partners/bydel-st-hanshaugen.svg', shape: 'mid' },
+  // Client, 2026-09-17: "Få med innocents og kanskje NUM som
+  // samarbeidspartnere". He gave no position for it, and the eleven above are
+  // in HIS order from 2026-09-16, so this appends rather than guessing a rank
+  // for him. Moving it is one line if he wants it higher.
+  //
+  //
+  // The file was supplied as a 538x371 JPEG with the logo floating in a white
+  // margin. Two things were done to it and neither touches the artwork: the
+  // margin was trimmed to the ink (352x295), and the background — which JPEG
+  // had left at 252-254, not 255 — was lifted to pure white on NEUTRAL pixels
+  // only, so `multiply` maps it exactly onto the paper instead of printing a
+  // faint grey rectangle. Neutral-only matters: the heart fades through light
+  // pink, and pink has a wide channel spread, so the gradient is untouched.
+  // Saved as PNG so nothing re-compresses. The white is NOT keyed to
+  // transparency — that would punch a hole straight through the inside of the
+  // heart, which is white by design.
+  { name: 'Innocents', logo: '/partners/innocents.png', shape: 'square' },
+  // NUM — Norges Unge Muslimer. Added 2026-09-18.
+  //
+  // It was held back for a round on the grounds that NUM already appears on
+  // this page as one of the ten Avdelinger in the organisation chart, so
+  // listing it here too puts one organisation on /om-oss twice. That was
+  // overthought and the user said so. NUM is a separate national youth
+  // organisation; a liaison for it inside Rabita's structure and a partner
+  // logo in the strip are not the same claim, and plenty of organisations
+  // carry both. The client's "kanskje" is mild hesitation, not a veto.
+  //
+  // The file arrived 2026-09-18 as a 957x957 JPEG — and 65% of that canvas
+  // was empty white: 312px of margin above the mark and 310 below. Dropped in
+  // untrimmed it would have rendered as a tiny wordmark floating in a tall
+  // box, because the strip normalises on HEIGHT and most of that height was
+  // air. Trimmed to the ink it is 673x344.
+  //
+  // `mid`, MEASURED at 1.96 — not the 'square' guessed before the artwork
+  // existed. That guess would have given a 2:1 wordmark the height of a
+  // roundel and made it tower over Bufdir and Salto beside it.
+  //
+  // The ground was already pure 255 in the corners, but the neutral lift ran
+  // anyway and cleaned 103k JPEG-softened pixels back to white, so multiply
+  // maps it exactly onto the paper with no grey rectangle. Green ink has a
+  // wide channel spread and cannot be touched by a neutral-only lift.
+  { name: 'Norges Unge Muslimer', logo: '/partners/num.png', shape: 'mid' },
 ];

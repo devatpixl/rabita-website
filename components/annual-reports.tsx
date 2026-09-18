@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { OrgChart } from './org-chart';
+import { ArchMark } from './marks';
 import { ANNUAL_REPORTS } from '@/lib/reports';
 import { Accent } from './accent';
 import { SectionBody } from './primitives';
@@ -111,7 +112,37 @@ export async function AnnualReports({ locale }: { locale: string }) {
        the reports; on its own ground it is a thing in its own right, and the
        paper/sage step does the separating that a 6rem margin was doing
        before. */}
-    <section id="organisasjonskart" className="scroll-mt-24 bg-sage py-section-md">
+    <section id="organisasjonskart" className="relative isolate scroll-mt-24 overflow-hidden bg-sage py-section-md">
+      {/* ── THE MIHRAB, TOP RIGHT ─────────────────────────────────────────
+         Client, 2026-09-18: "no mosque type shit in bg made from outline in
+         top right in bg?" — his reference carries a faint arch outline behind
+         the heading of the block, and he is right that ours was flat without.
+
+         NOT A NEW DRAWING. components/marks.tsx already holds four line
+         watermarks in one language, and ArchMark is the mihrab: the niche a
+         prayer hall faces, on two columns, with a lamp hung in it. It is the
+         mark this site already uses to mean "inside the mosque", so it
+         belongs behind the organisation more than an arch drawn for the
+         occasion would.
+
+         IT BELONGS UP HERE, NOT BEHIND THE CARDS. It went behind the
+         departments first and read as a glitch: those cards run the full
+         width in two columns and the drawing came out in the gaps between
+         them, half-covered. Up here it has the empty half of the heading row
+         to stand in, which is exactly where the reference puts it.
+
+         7% ink and no negative z-index. `isolate` on the section makes this
+         a stacking context of its own so the mark cannot escape behind the
+         green; the content after it is opaque or unpositioned and paints over
+         it in flow order. Hidden below md, where the heading takes the full
+         measure and there is no margin for it to sit in. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-14 hidden w-[34rem] text-ink opacity-[0.07] end-[-6rem] md:block"
+      >
+        <ArchMark className="h-auto w-full" />
+      </div>
+
       <SectionBody>
         <div>
           <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
@@ -124,35 +155,26 @@ export async function AnnualReports({ locale }: { locale: string }) {
           {/* THE CHART ITSELF, as markup (client, 2026-09-16: "Gjøre
              organisasjonskart til en integrert del av nettsiden").
 
-             It was a single 1024x724 webp until today. The names in it are
-             about 10px of baked-in pixels, so on a phone they could not be
-             read, and to a screen reader, a translator or a search engine
-             they did not exist at all. OrgChart renders the same 28 people as
-             text that reflows, translates and can be selected.
+             It was a single 1024x724 webp until 2026-09-16. The names in it
+             are about 10px of baked-in pixels, so on a phone they could not be
+             read, and to a screen reader, a translator or a search engine they
+             did not exist at all. OrgChart renders it as text that reflows,
+             translates and can be selected.
 
-             The image is still linked below, because it carries a portrait of
-             each person and this does not — they live inside that one file at
-             ~51px across, too small to crop out and reuse honestly. */}
+             Restructured 2026-09-17 to Ledelse / Imamer / Avdelinger — six
+             named people and ten department names. See lib/org-chart.ts. */}
           <OrgChart locale={locale} />
 
-          {/* Still here, but doing a different job now. It used to be the
-             only way to read the chart on a phone; the markup above has taken
-             that over. What the file still has that the markup does not is a
-             photograph of each person. */}
-          <a
-            href="/photos/organisasjonskart.webp"
-            target="_blank"
-            rel="noreferrer"
-            className="group mt-4 inline-flex items-center gap-2 border-b border-gold-deep/40 pb-1 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-gold-deep hover:border-gold-deep"
-          >
-            {t('chartOpen')}
-            <span
-              aria-hidden
-              className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
-            >
-              &rarr;
-            </span>
-          </a>
+          {/* «Åpne kartet i full størrelse» came off on 2026-09-17, with the
+             restructure above. It opened /photos/organisasjonskart.webp — the
+             old chart, which shows all twenty-eight people WITH photographs,
+             including every department head by name. That is precisely what
+             the client asked to stop showing ("Avdelinger: Uten navn og bilde,
+             kun avdelingsnavn"), so leaving a one-click path to it would have
+             undone the instruction in the line below the chart that follows
+             it. The file is untouched in /public and the string is untouched
+             at aboutPage.reports.chartOpen, so this is a revert of these
+             fifteen lines if he wants the archive link back. */}
         </div>
       </SectionBody>
     </section>

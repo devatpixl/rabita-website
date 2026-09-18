@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
 import { getPrayerData } from '@/lib/irn';
-import type { PrayerDay } from '@/lib/prayer-times';
+import { calendarMonths, type PrayerDay } from '@/lib/prayer-times';
 import { PrintButton } from '@/components/print-button';
 import type { AppLocale } from '@/i18n/routing';
 
@@ -49,7 +49,7 @@ export default async function CalendarPage({
   const tc = await getTranslations('calendar');
 
   const { days, jumuah } = await getPrayerData();
-  const months = [...new Set(days.map((d) => d.date.slice(0, 7)))].sort();
+  const months = calendarMonths(days);
   const month = m && months.includes(m) ? m : months[0];
   const rows: PrayerDay[] = days.filter((d) => d.date.startsWith(month));
 

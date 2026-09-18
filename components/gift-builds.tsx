@@ -285,29 +285,43 @@ export function GiftBuilds() {
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
           background:
-            'linear-gradient(180deg, rgba(22,36,46,0.86) 0%, rgba(22,36,46,0.62) 20%, rgba(22,36,46,0.5) 52%, rgba(22,36,46,0.72) 84%, rgba(22,36,46,0.88) 100%)',
+            'linear-gradient(180deg, rgba(22,36,46,0.96) 0%, rgba(22,36,46,0.90) 20%, rgba(22,36,46,0.87) 52%, rgba(22,36,46,0.92) 84%, rgba(22,36,46,0.97) 100%)',
         }}
       />
       <SectionBody>
-        {/* The head, as a spread: heading left, lede right behind a rule. */}
-        <div className="grid gap-6 lg:grid-cols-12 lg:items-start lg:gap-12">
-          <div className="lg:col-span-7">
-            <p className="flex items-center gap-3 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
-              <span aria-hidden className="h-px w-7 shrink-0 bg-gold/70" />
-              {t('eyebrow')}
-            </p>
-            <h2
-              id="gift-builds-heading"
-              className="mt-5 font-serif text-section text-balance text-paper"
-            >
-              {t.rich('heading', {
-                em: (chunks) => <Accent surface="dusk">{chunks}</Accent>,
-              })}
-            </h2>
-          </div>
-          <div className="lg:col-span-5 lg:border-s lg:border-gold/30 lg:ps-8 lg:pt-3">
-            <p className="max-w-[42ch] text-body text-paper/70">{t('lede')}</p>
-          </div>
+        {/* ── THE HEAD IS AN EYEBROW AND A HEADING. NO LEDE. ──────────────
+           It was a two-column spread with a 24-word paragraph behind a gold
+           rule on the right (client, 2026-09-18: "what to change here to make
+           it simple?").
+
+           That paragraph made three claims and the reader learned nothing
+           from any of them. "Every contribution, whatever its size" is
+           reassurance. "becomes part of the building" is what the eyebrow
+           four centimetres to its left already says — WHAT YOUR GIFT BUILDS.
+           "helps raise a lasting home for prayer, learning and community in
+           Norway" is the mission statement, which the hero and /om-oss both
+           carry. Same fault as the card sub-lines, one level up.
+
+           What is left is the strongest line in the section — "Budsjettet er
+           kostet rom for rom" — and the nine cards underneath are literally
+           the proof of it. A claim followed by its evidence needs no
+           paragraph in between.
+
+           giftLadder.lede stays in the three message files, unreferenced,
+           beside ctaAll and footnote which came off the same way. */}
+        <div>
+          <p className="flex items-center gap-3 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
+            <span aria-hidden className="h-px w-7 shrink-0 bg-gold/70" />
+            {t('eyebrow')}
+          </p>
+          <h2
+            id="gift-builds-heading"
+            className="mt-5 max-w-[20ch] font-serif text-section text-balance text-paper"
+          >
+            {t.rich('heading', {
+              em: (chunks) => <Accent surface="dusk">{chunks}</Accent>,
+            })}
+          </h2>
         </div>
 
         <div ref={root} className="relative mt-10">
@@ -343,7 +357,27 @@ export function GiftBuilds() {
                   delay={i * 0.09}
                   className="w-[76%] shrink-0 snap-center sm:w-[19rem] lg:w-[17.5rem] xl:w-[19rem]"
                 >
-                  <div className="rv-up">
+                  {/* rv-ghost, NOT rv-up (client, 2026-09-18: "there is a
+                     little scroll ... it move up down very little, but it
+                     does, so make it fixed").
+
+                     What he was seeing is the reveal entrance: globals.css
+                     hides a .rv-up at `translateY(18px)` and eases it to zero
+                     over 0.95s as the card enters view, staggered 0.09s per
+                     card. Nine cards each sliding up 18px at slightly
+                     different moments reads as the row drifting rather than
+                     as an entrance.
+
+                     .rv-ghost is the same reveal with opacity only and no
+                     transform — it already exists in the same block, so this
+                     is a swap rather than a new rule, and the section keeps
+                     the fade every other section on the site has. The cards
+                     no longer move a pixel.
+
+                     If even the fade should go, drop the class entirely:
+                     Reveal starts visible and only hides what carries an
+                     .rv-* class, so a bare div is simply always there. */}
+                  <div className="rv-ghost">
                     <button
                       type="button"
                       onClick={() => (on ? openGiveSheet(g.amountNok) : go(i))}
@@ -427,24 +461,13 @@ export function GiftBuilds() {
                         // and rescues the type on a bright one.
                         style={{ textShadow: '0 1px 2px rgba(22,36,46,0.95), 0 2px 12px rgba(22,36,46,0.8)' }}
                       >
-                        <span className="mb-3 flex items-center gap-2.5">
-                          <span
-                            className={cn(
-                              'font-mono text-[0.6875rem] uppercase tracking-[0.16em] transition-colors',
-                              on ? 'text-gold' : 'text-paper/55',
-                            )}
-                          >
-                            {String(i + 1).padStart(2, '0')}
-                          </span>
-                          <span
-                            aria-hidden
-                            className={cn(
-                              'h-px w-6 transition-colors',
-                              on ? 'bg-gold/70' : 'bg-paper/25',
-                            )}
-                          />
-                        </span>
-
+                        {/* NO 01/02/03 NUMERAL (client, 2026-09-18: "remove
+                           this 1,2,3, also from the cards"). It was a gold
+                           index and a 24px rule above every amount — a
+                           position marker for a carousel that already shows
+                           position by being a carousel, with arrows either
+                           side of it. Two elements per card, on eight cards,
+                           carrying nothing the reader needed. */}
                         <span className="block font-serif text-[clamp(1.6rem,2.4vw,2.1rem)] leading-none tabular-nums text-gold">
                           <Amount to={g.amountNok} live={live} still={still} delay={i * 90} locale={locale} />{' '}
                           <span className="text-[0.55em] text-paper/70">kr</span>
@@ -453,9 +476,19 @@ export function GiftBuilds() {
                         <span className="mt-3 block font-serif text-card text-paper">
                           {t(`items.${g.key}.title`)}
                         </span>
-                        <span className="mt-2 block text-[13.5px] leading-relaxed text-paper/80">
-                          {t(`items.${g.key}.meta`)}
-                        </span>
+                        {/* NO SUB-LINE ON ANY CARD (client, 2026-09-18).
+                           He asked for the sub-text gone; the first pass cut
+                           five and kept four on the grounds that those four
+                           added a fact the title did not — "Rundt 120 bind ·
+                           etasje 02" and so on. Scrolled through, that gave a
+                           carousel where some cards carry a line and some do
+                           not, which reads as a bug rather than as editing.
+                           "are you stupid? some cards tetx removed someones
+                           didnt" — fair. Consistency across nine cards beats
+                           the marginal fact any one line carried.
+
+                           All nine `meta` keys are gone from the three locale
+                           files. A card is an amount and a title. */}
 
                         {/* The ask, on the current card only — the reference
                            puts it there, and it is also the honest place: on

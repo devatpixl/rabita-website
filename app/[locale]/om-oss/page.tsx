@@ -1,20 +1,67 @@
 import Image from 'next/image';
-import { AnnualReports } from '@/components/annual-reports';
 import Link from 'next/link';
+import { AnnualReports } from '@/components/annual-reports';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
-import { cn } from '@/lib/cn';
-import { Section, SectionBody, SectionHeading } from '@/components/primitives';
+import { VISIT_DIRECTIONS_URL } from '@/lib/location';
+import { Section, SectionBody } from '@/components/primitives';
 import { PageBand } from '@/components/page-band';
 import { FigureIcon, type FigureIconName } from '@/components/figure-icons';
 import { PartnerLogos } from '@/components/partner-logos';
 import { RequestForm } from '@/components/request-form';
-import { VisitClose } from '@/components/visit-page';
 
-// The three facts in the order the copy lists them (what happens, who may
-// come, price), each given the mark that says what kind of fact it is.
-// Moved here with the visit section from /besok-oss on 2026-09-15.
-const FACT_ICONS: FigureIconName[] = ['calendar', 'people', 'check'];
+// ─────────────────────────────────────────────────────────────────────────────
+// /om-oss — THE ABOUT PAGE.
+//
+// This file WAS /om-oss-2, a sandbox built on 2026-09-17 so the client's
+// simplification could be judged beside the page it replaced. He chose it on
+// 2026-09-18 ("use omm os 2. remove om oss"), so it is the About page now and
+// the sandbox route is gone.
+//
+// THE PAGE IT REPLACED is at git HEAD — `git show HEAD:'app/[locale]/om-oss/
+// page.tsx'` — 569 lines, if any of it is ever wanted back.
+//
+// ── WHAT THE CLIENT ASKED FOR ────────────────────────────────────────────
+// "Se på Islamic.no som har litt enklere og ryddigere om oss side" — look at
+// islamic.no, their About page is simpler and tidier.
+//
+// Their page was read on 2026-09-17. What is good about it is the PACING, not
+// the styling: four sections, each doing one thing, two or three sentences
+// apiece. What is NOT good, and was not copied: no photography anywhere, a
+// generic geometric sans, a centred 2x2 of rounded white cards for "Vision
+// and values" — and "Placeholder Name" three times, live in production.
+//
+// ── REFERENCES LOOKED AT FIRST (21st.dev, 2026-09-17) ────────────────────
+// - "Editorial Image Hero" — a full-width photograph that FADES at its lower
+//   edge instead of ending on a hard rectangle.
+// - "Bold Stats" — one headline figure huge, a hairline, the rest small.
+// - "Team Showcase" — staggered photo grid plus a hoverable name list. Noted
+//   and NOT used: it needs a portrait of every person, and we have none of
+//   the three leaders.
+//
+// ── HOW THIS DIFFERS FROM THE PAGE IT REPLACED ───────────────────────────
+// 1. THE STORY BLOCK WAS DOING FOUR THINGS AT ONCE — three paragraphs of
+//    history, a four-figure ledger card, an arch photograph bleeding into the
+//    margin AND a pull-quote, 911px of four elements competing. Split: the
+//    history stands alone on the left, the arch and its quote hold the right.
+// 2. THE QUOTE WAS PRINTED TWICE ON ONE SCREEN. «Et sted hvor tro og
+//    medborgerskap går sammen» sat in the margin beside a paragraph that ENDS
+//    with the same sentence. It now appears once, on the arch.
+// 3. THE HISTORY IS TWO PARAGRAPHS, NOT THREE. p3 is the royal visit — a fine
+//    fact, not the point of an About page. aboutPage.history.p3 is untouched
+//    in all three locales.
+// 4. BESØK OSS LOST ITS PHOTOGRAPH AND ITS PILL, and its facts became cards
+//    with a Directions button. Client: "forenkle besøk oss som er lenger opp".
+// 5. THE FIGURES BAND AND A FULL-BLEED PHOTOGRAPH were built here and cut on
+//    the client's verdict the same day. See the note where they stood.
+// 6. THE STORY IS TWO COLUMNS, not one. The first attempt ran it in a single
+//    column and left the right half of the sage ground empty — "looks very
+//    old school", and he was right: a big empty half does not read as air, it
+//    reads as a layout that failed to load. Air needs something anchoring the
+//    other side of it.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const FACT_ICONS: FigureIconName[] = ['pin', 'clock', 'route'];
 
 export default async function AboutPage({
   params,
@@ -26,55 +73,18 @@ export default async function AboutPage({
   const t = await getTranslations({ locale, namespace: 'aboutPage' });
   const ts = await getTranslations({ locale, namespace: 'storyPages' });
   const tpo = await getTranslations({ locale, namespace: 'projectOverview' });
-  // Besøk oss folded in here on 2026-09-15 (client: "Slå sammen «Om oss» og
-  // «Besøk oss»"). Both namespaces survive the merge — visitPages is shared
-  // with /arrangementer and its event pages, so it could not have been
-  // retired with the page even if we had wanted to.
   const tv = await getTranslations({ locale, namespace: 'visitPages' });
   const tvp = await getTranslations({ locale, namespace: 'visitPage' });
+  // Only for findUs.directions — the footer's own label for the same link, so
+  // the button says the same word in all three locales for no new strings.
+  const tf = await getTranslations({ locale, namespace: 'footer' });
   const visitFacts = tv.raw('pages.visit.facts') as { term: string; detail: string }[];
 
   return (
     <main>
-      {/* The band, in the family every other section page opens on (client,
-         2026-09-07). It replaces StoryHero and StoryPlate, which between them
-         were a headline block and then a separate full-width plate — two
-         objects doing the job the band does in one, and the reason this page
-         opened differently from /besok-oss and /tjenester.
-
-         The photograph is the street iftar, not the facade render it opened
-         on (client, 2026-09-08: "use a better image here"). This page is
-         about a congregation that grew from a flat to one of the largest
-         mosques in Norway; a render of the building that has not been built
-         yet answers a different question, and it was a dark diagonal slab at
-         band crop. Long tables of people read across a 4.6:1 letterbox in a
-         way a facade does not.
-
-         Same subject, brighter frame (client, 2026-09-08: "a lighter
-         image"). Measured mean luminance over the actual band crop:
-         hero-iftar 49.2, zoom-gateiftar 100.7 — twice the light for the same
-         Grønland street iftar, so captionIftar stays literally true. It was
-         not the grade: `warm` is already the lightest of the three tones
-         (brightness 0.94), so the dark came from the photograph.
-
-         The cost is resolution. zoom-gateiftar.webp is 1600x1069, which is
-         1.45 source pixels per CSS pixel across a 1104px plate, under the
-         1.81 the prayer band was calibrated against and well under the 2.32
-         hero-iftar gave. It holds at 1x and softens on a 2x display. Every
-         2000px+ frame in the library was checked and none of them is this
-         page's subject — they are food trays, Quran pages, the unbuilt
-         facade, or a posed group portrait that loses its heads at 4.6:1. A
-         higher-resolution original of THIS frame is the real fix; until
-         there is one, light beats sharp on a band that carries a scrim.
-
-         The headline pair swaps namespaces on purpose. aboutPage.title and
-         .lede are short and declarative, which is the register the other
-         bands are written in; storyPages' pair is longer and belongs in the
-         prose column below, where it now is. Both had been written and only
-         one was ever rendered.
-
-         StoryHero and StoryPlate are untouched — /kontakt, /medlemskap,
-         /frivillig, /aktuelt and /personvern all still use them. */}
+      {/* ══ 1. THE BAND ═══════════════════════════════════════════════════
+         Unchanged from /om-oss. It is the one part of the page nobody has
+         complained about, and it is the site's standard page opening. */}
       <PageBand
         kicker={ts('crumb')}
         kickerNote={ts('pages.about.eyebrow')}
@@ -84,97 +94,99 @@ export default async function AboutPage({
         alt={ts('pages.about.captionIftar')}
         layout="over"
         mark="elevation"
-        // warm, not the default calm: this is a dusk photograph lit by
-        // Ramadan lights, and the site's standard grade pulls exactly the
-        // warmth out of it that makes it worth using.
         tone="warm"
-        // The picture changed on 2026-09-10 (client) from zoom-gateiftar,
-        // which was the canopies from above, to the conversation under them:
-        // three people talking, the marquees and the gold stars behind. Same
-        // evening, same event, so "Gateiftar på Grønland" still captions it —
-        // and "Rabita siden 1987" over people talking says more about the
-        // organisation than a picture of tents does.
-        //
-        // 45% re-measured for the new source. It is 2000x1100 rather than
-        // 1600x1069, so the band keeps 40% of the height instead of 33%, and
-        // the faces sit between 33% and 55% of the frame. 45 puts them
-        // through the middle with the canopies still above them.
         objectClass="object-[50%_45%]"
         padBottom="none"
-      >
-        {/* The caption rides with the picture, as StoryPlate's did. */}
-        <p className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">
-          {ts('pages.about.captionIftar')}
-        </p>
-      </PageBand>
+      />
+      {/* NO CAPTION UNDER THE BAND (client, 2026-09-17: "remove this shit").
+         It read «Gateiftar på Grønland» in small mono under the photograph.
+         PageBand only renders the children wrapper when there are children,
+         so dropping it takes its mt-6/mt-8 with it and the story now follows
+         the picture directly. The string is untouched at
+         storyPages.pages.about.captionIftar and still does the band's alt
+         text above, where it is doing real work. /om-oss still prints it. */}
 
-      {/* The story and the figures. Same bones as /besok-oss — chip, headline,
-         a card beside it, a note in the margin — on a different ground.
+      {/* ══ 2. THE STORY, AND NOTHING ELSE ════════════════════════════════
+         One column, one subject, set at a reading measure and centred in the
+         page rather than pushed into a 4-of-12 gutter beside a card.
 
-         Visit runs on paper-2; this runs on the pale green the "Dette er
-         Rabita" section, the follow band and the project facts already stand
-         on. Two pages built from one set of parts should not be the same
-         colour, and green is the tone this site keeps for the places that are
-         about the congregation rather than about a service. */}
-      <section className="relative isolate overflow-hidden bg-[#e3eae4]">
+         The measure is deliberate: the prose sits at 56ch. The old column
+         was ~34ch, narrow enough that three paragraphs became a tall grey
+         ribbon — part of why the block read as busy. At 56ch the same words
+         take half the vertical space and look like an article.
+
+         The ledger card is NOT here (client, 2026-09-17: "remove these
+         cards"). The four figures it held get their own band below, where
+         they can be a hierarchy instead of a 2x2 table. */}
+      <section className="relative isolate overflow-hidden bg-sage">
         <div
           aria-hidden
           className="pointer-events-none absolute -top-24 end-[4%] -z-10 h-[34rem] w-[34rem] rounded-full bg-gold/[0.07] blur-3xl"
         />
-        {/* The ground arrives rather than cutting in, the way it does
-           everywhere else the green is used — but as a BACKGROUND, which is
-           how /besok-oss draws the same seam.
-
-           This was an in-flow div, so its 144px of fade was also 144px of
-           empty layout, and the content below it had no top padding of its
-           own: every pixel between the band's caption and the HISTORIEN chip
-           was the gradient (client, 2026-09-08: "too much space"). One
-           element was doing two jobs and neither was tunable without
-           breaking the other.
-
-           Absolute and -z-10, it now costs nothing, so it can be LONGER than
-           before — a 160px fade instead of 144 — while the breathing room
-           below it is set on its own terms. Painted after the bloom so the
-           bloom fades in with it rather than sitting on top of the seam. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-paper to-[#e3eae4] md:h-40"
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-paper to-sage md:h-40"
         />
-        {/* 60/72 off the section scale, against 96/144 of pure gradient
-           before. Still spacious, half the hole. */}
-        {/* 36px top and bottom on a phone, against 60/72 before. Those are
-           desktop measures: the bottom one stacked with the colophon's own
-           top padding for 132px of dead ground between the card and "Til
-           protokollen" at 390px (client, 2026-09-08). */}
-        {/* md:pb-16, down from pb-24 on 2026-09-15. That 96px used to meet
-           AnnualReports; it now meets the Besøk oss section's own 60, and 157px
-           of empty made the largest gap on the page by half — every other
-           boundary here runs 60 to 120. The phone value is untouched: pb-9 was
-           tuned against the colophon and the colophon is still where it was. */}
-        <div className="pb-9 pt-9 md:pb-16 md:pt-section-lg">
+        <div className="pb-14 pt-9 md:pb-24 md:pt-section-lg">
           <SectionBody>
-            <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
-              {/* ── the story ────────────────────────────────────────── */}
-              <div className="lg:col-span-4">
-                <div className="flex items-center gap-4">
-                  <p className="inline-flex shrink-0 items-center rounded-full bg-paper px-3.5 py-1.5 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60 ring-1 ring-ink/10">
-                    {t('historyChip')}
-                  </p>
-                  <span aria-hidden className="h-px flex-1 bg-gold-deep/30" />
-                </div>
-                <SectionHeading className="mt-5">{t('historyHeading')}</SectionHeading>
-                <div className="mt-7 space-y-5 text-body text-ink-60">
+            {/* ── TWO COLUMNS, 7 AND 5 ─────────────────────────────────
+               First attempt ran the story in one column and left the right
+               two thirds of the sage ground empty. The client, 2026-09-17:
+               "i dont like it at all, looks very old school ... although this
+               text and font looks good, but something should be on right".
+
+               He is right, and the diagnosis is worth keeping: a big empty
+               half does NOT read as air, it reads as a layout that failed to
+               load. Air works when something anchors the other side of it.
+
+               So the typography here stays exactly as it was — that is the
+               part he approved — and the arch comes back beside it, carrying
+               the quote, which is the composition /om-oss already had and he
+               asked to keep: "maybe remove these cards in about us 1 and
+               then keep this to keep it aesthetic". The cards are what went;
+               the arch is what stayed. */}
+            <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-14">
+              {/* ── the story ──────────────────────────────────────── */}
+              <div className="lg:col-span-7">
+                {/* THE SECTION MARKER (client, 2026-09-17: "can we have
+                   another proper heading here ... this line looks bad").
+
+                   It was a pill chip followed by a hairline stretching five
+                   hundred pixels to nowhere — two devices doing one job, and
+                   the rule in particular had nothing to join. A rule that
+                   ends in empty space is a rule that is only there to fill
+                   it, which is the same fault as the empty column was.
+
+                   What replaces it is two things this site already owns: a
+                   short gold rule, exactly the one set above the quote in the
+                   arch beside this, and the gold mono label used as the
+                   eyebrow on every other section of the site
+                   (annual-reports, the partner strip, the imams on
+                   /bonnetider). Stacked, they are also precisely how
+                   islamic.no marks its sections — the one detail of theirs
+                   worth taking.
+
+                   His text is unchanged: still aboutPage.historyChip. */}
+                <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
+                  <span aria-hidden className="mb-5 block h-px w-10 bg-gold-deep/50" />
+                  {t('historyChip')}
+                </p>
+
+                {/* Unchanged from the version he approved: the headline runs
+                   at display size on its own measure, the prose keeps a
+                   reading measure under it. */}
+                <h2 className="mt-7 max-w-[17ch] font-serif text-[clamp(2.25rem,5vw,4rem)] leading-[1.02] tracking-[-0.02em] text-balance text-ink">
+                  {t('historyHeading')}
+                </h2>
+
+                <div className="mt-9 max-w-[56ch] space-y-6 text-[clamp(1rem,1.15vw,1.125rem)] leading-relaxed text-ink-60">
                   <p>{t('history.p1')}</p>
                   <p>{t('history.p2')}</p>
-                  <p>{t('history.p3', { year: 2009 })}</p>
                 </div>
 
-                {/* A foot for the column, and the one link this page owes:
-                   the whole of the last paragraph is about outgrowing the
-                   building, which is what the project page answers. */}
                 <Link
                   href={`/${locale}/moskeprosjektet`}
-                  className="group mt-9 inline-flex min-h-11 items-center gap-3 border-t border-ink/15 pt-6 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink transition-colors hover:text-gold-deep"
+                  className="group mt-10 inline-flex min-h-11 items-center gap-3 border-t border-ink/15 pt-6 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink transition-colors hover:text-gold-deep"
                 >
                   {tpo('cta')}
                   <span
@@ -186,46 +198,29 @@ export default async function AboutPage({
                 </Link>
               </div>
 
-              {/* ── the figures ──────────────────────────────────────── */}
-              {/* The ledger and the arch are ONE object now (client mockup,
-                 2026-09-08), not a card with a ghost floating behind it in
-                 the margin. The quote moves onto the photograph, where it
-                 has something to sit on, and the whole panel breaks a little
-                 way into the margin at xl the way the project hero's card
-                 does — the room outside SectionBody, capped, so it reaches
-                 zero on its own before the grid stacks. */}
-              {/* self-center, not items-center on the grid: the story column
-                 is the taller of the two, so centring the row would be a
-                 no-op on it and a claim about both. Only the card moves
-                 (client, 2026-09-08). Below lg they stack and it is inert. */}
-              <div
-                className="lg:col-span-8 lg:self-center xl:me-[var(--about-panel-pull)]"
-                style={{
-                  ['--about-panel-pull' as string]:
-                    'calc(-1 * clamp(0px, (100vw - 72rem) / 2 - 1.5rem, 6rem))',
-                }}
-              >
-                {/* The card IN FRONT of the arch, not wrapped around it
-                   (client, 2026-09-14: "the overall design here also, make it
-                   like this", pointing at the visit page).
+              {/* ── the arch, carrying the quote ───────────────────────
+                 Lifted from /om-oss with its treatment intact — same source,
+                 same 45% opacity, same sepia grade, same paper veil over it,
+                 same masked foot so the shape dissolves instead of ending on
+                 an edge. It is faint by design: it is a ground for the quote,
+                 not a photograph competing with one.
 
-                   This reverses the 2026-09-08 merge, which made the ledger
-                   and the arch one object because the arch had been a ghost
-                   floating in the margin carrying nothing. What he wants back
-                   is the visit page's composition — but that one works, and
-                   this one did not, for a reason worth writing down: there
-                   the arch has the QUOTE beside it, so the photograph is
-                   holding something up. Same here now. The quote leaves the
-                   photograph and sits in ink in its own column, which is what
-                   gives the arch a job. */}
-                <div className="relative">
-                  {/* The arch: absolute, bleeding above and past the card, at
-                     -z-10 so the card sits over it. Masked away at the foot so
-                     the shape has no bottom edge to end on. Hidden below lg,
-                     where there is no margin to bleed into. */}
+                 WHAT IS DIFFERENT HERE: on /om-oss the arch is absolutely
+                 positioned at -z-10 behind a stats card, with the quote in a
+                 13rem column beside it — machinery that exists because it has
+                 to dodge the card. With the card gone the arch can simply BE
+                 the column, and the quote can sit on it where it belongs.
+                 Fewer parts, same picture.
+
+                 Hidden below lg: at phone width a 19rem arch under the prose
+                 is a tall pale rectangle doing nothing, and the quote reads
+                 perfectly well as a plain pull quote — which is what it
+                 becomes there. */}
+              <aside className="lg:col-span-5">
+                <div className="relative ms-auto hidden w-full max-w-[23rem] lg:block">
                   <div
                     aria-hidden
-                    className="pointer-events-none absolute -top-12 end-0 -z-10 hidden h-[32rem] w-[19rem] overflow-hidden rounded-t-[9rem] border border-gold-deep/20 lg:block"
+                    className="relative h-[34rem] w-full overflow-hidden rounded-t-[11rem] border border-gold-deep/20"
                     style={{
                       maskImage:
                         'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 100%)',
@@ -238,164 +233,84 @@ export default async function AboutPage({
                       alt=""
                       fill
                       sizes="304px"
-                      loading="eager"
-                      className="object-cover opacity-[0.45]"
-                      style={{ filter: 'saturate(0.25) sepia(0.45) contrast(1.06) brightness(1.02)' }}
+                      className="object-cover opacity-[0.78]"
+                      style={{ filter: 'saturate(0.38) sepia(0.32) contrast(1.08) brightness(1.0)' }}
                     />
-                    <span aria-hidden className="absolute inset-0 bg-paper-2/25" />
+                    <span aria-hidden className="absolute inset-0 bg-paper-2/10" />
                   </div>
 
-                  <div className="grid gap-8 lg:grid-cols-[1fr_13rem] lg:gap-10">
-                    <div className="rounded-2xl bg-paper p-6 shadow-[0_1px_2px_rgba(26,26,24,0.04),0_24px_60px_-34px_rgba(26,26,24,0.28)] sm:p-8">
-                        {/* The "I tall" eyebrow came off on 2026-09-16
-                           (client: "remove these smallest headings, doesnt
-                           look good"). It was labelling a card whose contents
-                           are four large numerals — the block says "in
-                           numbers" by being numbers. The string stays in the
-                           message files. */}
-                        <h2 className="font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-tight text-balance text-ink">
-                          {t('factsHeading')}
-                        </h2>
-
-                        {/* ── FOUR FIGURES, NOT SIX ────────────────────
-                           Client, 2026-09-16: "maybe make it less figures and
-                           how to make this card itself more modern".
-
-                           It was six rows, each carrying an icon chip, a
-                           label, an italic note, the number and a rising
-                           arrow — thirty elements in a block whose whole job
-                           is to show numbers, and the numbers ended up the
-                           smallest-feeling thing in it, parked at the end of
-                           a busy line. This inverts that: the figure IS the
-                           element, at 2-2.75rem, with the label under it.
-
-                           WHAT WENT, and it is one line to bring back:
-                           volunteers (300+) and pupils (400+). Both true,
-                           both already told better elsewhere — /frivillig is
-                           a page about volunteering and the school has its
-                           own under Undervisning. What is left is the four
-                           that only this section says: how old Rabita is, how
-                           many belong to it, how many backgrounds it holds,
-                           and how many people come through in a week.
-
-                           No icons and no arrows. A globe for
-                           "nationalities" and a footprint for "visitors" were
-                           decoration standing in for meaning, and the arrow
-                           on five of six rows implied a link that was not
-                           there. */}
-                        <dl className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:mt-8">
-                          {([
-                            ['founded', String(CAMPAIGN.foundedYear)],
-                            ['members', CAMPAIGN.members.toLocaleString('nb-NO')],
-                            ['nationalities', `${CAMPAIGN.nationalities}+`],
-                            ['visits', CAMPAIGN.visitorsPerWeek.toLocaleString('nb-NO')],
-                          ] as const).map(([key, value], i) => (
-                            <div
-                              key={key}
-                              className={cn(
-                                'border-rule py-5 sm:py-6',
-                                // Stacked on a phone, a 2x2 with hairlines
-                                // between the cells from sm. Logical
-                                // properties, so Arabic gets the divider on
-                                // the correct side.
-                                i > 0 && 'border-t',
-                                i === 1 && 'sm:border-t-0',
-                                i % 2 === 1 ? 'sm:border-s sm:ps-6 lg:ps-8' : 'sm:pe-6 lg:pe-8',
-                              )}
-                            >
-                              <dd className="font-serif text-[clamp(2rem,4.2vw,2.75rem)] leading-none tabular-nums text-ink">
-                                {value}
-                              </dd>
-                              <dt className="mt-3">
-                                <span className="block font-mono text-[0.625rem] uppercase leading-snug tracking-[0.16em] text-gold-deep">
-                                  {t(`facts.${key}`)}
-                                </span>
-                                <span className="mt-1.5 block max-w-[24ch] font-serif text-[13px] italic leading-snug text-ink-40">
-                                  {t(`factNotes.${key}`)}
-                                </span>
-                              </dt>
-                            </div>
-                          ))}
-                        </dl>
-                    </div>
-
-                    {/* The quote, in ink on the arch rather than paper-white
-                       on a photograph. Below lg the arch is gone, so it sits
-                       under the card as a plain pull quote — it is the line
-                       the section ends on either way. */}
-                    <aside className="relative lg:pt-8">
-                      <span aria-hidden className="block h-px w-10 bg-gold-deep/40" />
-                      <p className="mt-5 font-serif text-[1.05rem] italic leading-relaxed text-ink-60">
-                        {`«${t('quote')}»`}
-                      </p>
-                      <Image
-                        src="/logo/rabita-mark-256.png"
-                        alt=""
-                        width={30}
-                        height={30}
-                        aria-hidden
-                        className="mt-6 h-[30px] w-[30px] opacity-60"
-                      />
-                    </aside>
-                  </div>
+                  {/* On the arch, in its upper third — where the photograph
+                     is brightest and before the mask starts taking it away. */}
+                  <figure className="absolute inset-x-0 top-[6.5rem] m-0 px-11">
+                    <span aria-hidden className="block h-px w-10 bg-gold-deep/40" />
+                    <blockquote className="mt-5 font-serif text-[1.15rem] italic leading-relaxed text-ink">
+                      {`«${t('quote')}»`}
+                    </blockquote>
+                  </figure>
                 </div>
-              </div>
+
+                {/* Phone and tablet: the quote alone, as a pull quote. */}
+                <figure className="m-0 lg:hidden">
+                  <span aria-hidden className="block h-px w-10 bg-gold-deep/40" />
+                  <blockquote className="mt-5 font-serif text-[1.05rem] italic leading-relaxed text-ink-60">
+                    {`«${t('quote')}»`}
+                  </blockquote>
+                </figure>
+              </aside>
             </div>
           </SectionBody>
         </div>
       </section>
 
-      {/* The partner strip. Renders NOTHING until logo files exist in
-         public/partners — see components/partner-logos.tsx. It is wired in
-         now so that adding the twelve files is the whole of finishing it.
+      {/* ══ THE FIGURES AND THE CONGREGATION PHOTOGRAPH — BOTH CUT ══════
+         Client, 2026-09-17, of all three redesigned blocks: "i dont like it
+         at all, looks very old school", then removed both outright.
 
-         Position, settled 2026-09-16: between the history/figures section
-         and Besøk oss. It went above AnnualReports first — the org chart sits
-         at the foot of that component, so anywhere after it put the partners
-         below the chart — and then up one more, to here.
+         WHAT WENT AND WHERE IT LIVES IF IT COMES BACK:
 
-         It earns the spot: "who Rabita is" (the story and the four figures)
-         reads straight into "who Rabita works with", and the practical half
-         of the page — the address, the visit form, the reports and the chart
-         — all still follows in one run instead of being split by a logo
-         strip. */}
+         1. THE FIGURES BAND — 4 344 at display size with founded /
+            nationalities / visitors small on a rule under it, built off
+            21st.dev's "Bold Stats". The four numbers are all still in
+            lib/campaign.ts (foundedYear, members, nationalities,
+            visitorsPerWeek) and their labels in aboutPage.facts.* /
+            factNotes.* in all three locales, untouched. /om-oss still renders
+            them in its own 2x2 ledger card, so nothing is lost from the site
+            — only from this page.
+
+            One consequence worth knowing: this page now states no numbers at
+            all. The membership contradiction (CAMPAIGN.members 4 344 vs
+            lib/membership.ts 4 200 vs joinPage.members "over 4 300") stops
+            being urgent for /om-oss-2 — but it is still wrong elsewhere.
+
+         2. THE FULL-BLEED PHOTOGRAPH — cong-hall.webp at 3:1 with a masked
+            lower edge. public/photos/cong-hall.webp is untouched and still
+            used as the story image for the 'veivisere' service.
+
+         The page is five sections now: band, story, partners, visit,
+         reports + chart. That is one fewer than /om-oss and one more than
+         islamic.no, and every one of them does a single thing. */}
+
+      {/* ══ 5. PARTNERS ═══════════════════════════════════════════════════
+         Unchanged and shared with /om-oss. Innocents joined it 2026-09-17. */}
       <PartnerLogos locale={locale} />
 
-      {/* ══ Besøk oss ═══════════════════════════════════════════════════
-         Merged in from /besok-oss on 2026-09-15 (client: "Slå sammen «Om oss»
-         og «Besøk oss» ... let about us current components of same style and
-         shift besok us there").
-
-         This moved almost intact, and that is not laziness — the two pages
-         were already built from one vocabulary. The comment on the section
-         above says so in as many words: "Same bones as /besok-oss — chip,
-         headline, a card beside it, a note in the margin — on a different
-         ground." Chip over the address, marked fact rows, a photograph with a
-         floating pill, a raised form card. Rebuilding that in "About's style"
-         would have meant rebuilding it as itself.
-
-         WHERE IT SITS. After the story and the figures, before the reports.
-         The obvious order is About first and visit last, but that buries a
-         BOOKING FORM under three paragraphs of history and four annual-report
-         PDFs. The reports are reference — whoever wants them will scroll. The
-         invitation is the active thing on this page, so it goes above them,
-         and the page still ends on "Døren er åpen."
-
-         WHAT WAS DROPPED, and why. /besok-oss closed this grid with a margin
-         aside at xl: an arch, a hairline, a pull quote, the mark. It is gone.
-         The section above already has an arch behind the ledger card and a
-         pull quote in that exact treatment, and running both on one page
-         turns a device into a tic — the second arch would say nothing except
-         that we own an arch. Dropping it also re-cuts the grid from 4/6/2 to
-         5/7, which gives the form real room instead of the leftovers.
-         visitPage.quote is unreferenced now, written and translated in all
-         three locales, and restoring the aside is this paragraph plus the
-         block that used to follow it.
-
-         GROUND. paper-2, and it has to be: the form card is bg-paper, so on a
-         paper ground it would stop reading as a card at all. That forced
-         AnnualReports off paper-2 and onto paper — two paper-2 sections in a
-         row is one flat strip, not two sections. */}
+      {/* ══ 6. BESØK OSS, SIMPLIFIED ══════════════════════════════════════
+         Client: "forenkle besøk oss som er lenger opp."
+         
+         WHAT WENT: the doorway photograph and the «Se hva som skjer» pill
+         riding on it. That block was 4:3 of image plus an overlay gradient
+         plus a floating button — the busiest single object in the section,
+         sitting next to a form. The form is what the section is FOR; the
+         photograph was competing with it for the same attention, and the pill
+         pointed at /arrangementer, which the main navigation already does.
+         
+         WHAT STAYED: the address as the headline (nobody needs a heading that
+         says "address" over an address), the three facts, the groups line,
+         and the form. That is the whole job of the section.
+         
+         The columns rebalance 5/7 → 4/7-with-a-gap: with the photograph gone
+         the left column is text only, and at 5 wide the facts list stretched
+         into a short, wide shape that read as a leftover. Nothing else moved. */}
       <Section
         id="besok-oss"
         tone="paper-2"
@@ -406,49 +321,86 @@ export default async function AboutPage({
           aria-hidden
           className="pointer-events-none absolute -top-32 end-[4%] -z-10 h-[34rem] w-[34rem] rounded-full bg-gold/[0.06] blur-3xl"
         />
-        {/* The mosque's own mark as ground. Its own childless layer:
-           .star-texture sets `> * { position: relative }` and would drop any
-           absolutely positioned sibling into the flow. */}
         <div
           aria-hidden
           className="star-texture star-texture--light pointer-events-none absolute inset-0 -z-10"
         />
-        {/* The seam. from-sage, not from-paper as it was on /besok-oss — the
-           section above this one is the green now, and a gradient that starts
-           at paper would draw a pale band across the join it is meant to
-           hide. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-sage to-paper-2 md:h-40"
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-paper to-paper-2 md:h-40"
         />
         <SectionBody>
-          <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
-            {/* ── the place ──────────────────────────────────────────── */}
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
+            {/* 5/7, up from 4/8: the headline is 2.75rem now and an address
+               is a run of short words that breaks badly in a narrow column. */}
             <div className="lg:col-span-5">
-              {/* A chip, not a rule-and-label — the same chip the HISTORIEN
-                 column above wears, which is what ties this section to the
-                 page it has joined. The section's own name sits above the
-                 address because the ADDRESS is the headline: nobody needs a
-                 heading that says "address" over an address. */}
-              <p className="inline-flex items-center rounded-full bg-paper px-3.5 py-1.5 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60 ring-1 ring-ink/10">
+              {/* The same marker and the same headline face as the story
+                 section above (client, 2026-09-18: "the same way font and
+                 style in the above section"). The pill chip goes for the same
+                 reason it went up there.
+
+                 ONE STEP DOWN IN SIZE, deliberately: 2.75rem against the
+                 story's 4rem. Same serif, same -0.02em tracking, same tight
+                 leading — but a second headline set at the page headline's
+                 size is not consistency, it is two pages fighting. The story
+                 is what this page is about; this is where to find it. */}
+              <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
+                <span aria-hidden className="mb-5 block h-px w-10 bg-gold-deep/50" />
                 {tvp('addressHeading')}
               </p>
-              <SectionHeading className="mt-5">{CAMPAIGN.visitAddress}</SectionHeading>
+              <h2 className="mt-6 font-serif text-[clamp(1.875rem,3.2vw,2.75rem)] leading-[1.05] tracking-[-0.02em] text-balance text-ink">
+                {CAMPAIGN.visitAddress}
+              </h2>
+              {/* The welcome line sits BETWEEN the headline and the cards
+                 (client reference, 2026-09-18: "keep the text place like
+                 here"), not after them.
 
-              <ul className="mt-6 grid gap-x-8 gap-y-6 border-t border-ink/10 pt-6 sm:grid-cols-2 md:mt-8 md:pt-7 lg:grid-cols-1">
+                 It reads better there and it is the conventional order: the
+                 headline says where, the sentence says who is welcome, and
+                 the cards are the practical detail you scan afterwards. Left
+                 at the foot it was a paragraph arriving after a button, which
+                 reads as an afterthought — and a button is a thing a column
+                 ends on. */}
+              <p className="mt-6 max-w-[48ch] text-[clamp(1rem,1.15vw,1.125rem)] leading-relaxed text-ink-60">
+                {tvp('groups')}
+              </p>
+
+              {/* ── THE FACTS AS CARDS ────────────────────────────────
+                 Client reference, 2026-09-18: each fact in its own bordered
+                 card, icon in a circle on the left, label over value.
+
+                 They were three bare rows on a shared hairline, which made
+                 the block read as one list rather than three separate things
+                 you might want one of. As cards they are scannable.
+
+                 NO ARROW ON THE CARDS, unlike the reference. An arrow says
+                 "this goes somewhere" and none of these do — the address is
+                 not a link, the opening hours are not a page. The reference's
+                 arrows belong to cards that navigate; ours would be pointing
+                 at nothing. The one thing here that DOES go somewhere is the
+                 directions button below, and it has the arrow.
+
+                 The reference also carries a third, smaller line per card
+                 ("Norway", "Prayers & community activities"). Our facts are
+                 {term, detail} — two lines, no third. Inventing a sub-line
+                 per card would be writing copy nobody approved. */}
+              <ul className="mt-7 space-y-3">
                 {visitFacts.map((f, i) => (
-                  <li key={f.term} className="flex items-start gap-3.5">
+                  <li
+                    key={f.term}
+                    className="flex items-center gap-4 rounded-2xl bg-paper p-4 ring-1 ring-ink/[0.08] transition-shadow duration-300 hover:ring-gold-deep/30 sm:p-5"
+                  >
                     <span
                       aria-hidden
-                      className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gold-soft/40 text-gold-deep ring-1 ring-gold-deep/20"
+                      className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gold-soft/40 text-gold-deep ring-1 ring-gold-deep/20"
                     >
-                      <FigureIcon name={FACT_ICONS[i] ?? 'pin'} className="h-[18px] w-[18px]" />
+                      <FigureIcon name={FACT_ICONS[i] ?? 'pin'} className="h-[19px] w-[19px]" />
                     </span>
                     <span className="block min-w-0">
-                      <span className="block font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60">
+                      <span className="block font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-40">
                         {f.term}
                       </span>
-                      <span className="mt-1 block text-[15px] leading-snug text-ink">
+                      <span className="mt-1.5 block font-serif text-[1.0625rem] leading-snug text-ink">
                         {f.detail}
                       </span>
                     </span>
@@ -456,56 +408,73 @@ export default async function AboutPage({
                 ))}
               </ul>
 
-              <p className="mt-7 max-w-[42ch] text-body text-ink-60">{tvp('groups')}</p>
+              {/* ── GET DIRECTIONS ────────────────────────────────────────
+                 Client: "add one cta of get direction and make that of what
+                 we have in footer, should be correct url".
 
-              {/* The door at Calmeyers gate 8a, with the sign over it and the
-                 congregation on the pavement. The pill is the "see what's on"
-                 line and it goes to the events page — a real destination. */}
-              <div className="group relative mt-8 aspect-[4/3] overflow-hidden rounded-[1.5rem] rounded-se-[3.5rem] bg-paper-deep ring-1 ring-ink/5">
-                <Image
-                  src="/photos/visit-doorway.webp"
-                  alt={tv('pages.visit.captionDoorway')}
-                  fill
-                  sizes="(min-width: 1024px) 430px, calc(100vw - 3rem)"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
-                  style={{ filter: 'saturate(0.72) contrast(1.12) brightness(0.9)' }}
-                />
-                <div
+                 Same href the footer uses — VISIT_DIRECTIONS_URL from
+                 lib/location.ts, which builds a Google Maps directions link
+                 to VISIT.address (Sørligata 8a, 0577 Oslo, where the
+                 congregation actually is) and NOT to MOSQUE.address, which is
+                 the Calmeyers gate building site. That distinction is the
+                 whole reason the two constants exist; see the note in
+                 lib/campaign.ts. Same label too — footer.findUs.directions,
+                 already translated three ways.
+
+                 bg-gold-deep/text-paper is the primary button on a light
+                 ground in this system (request-form's paper tone). The
+                 footer's own is bg-gold/text-dusk because it sits on dusk. */}
+              <a
+                href={VISIT_DIRECTIONS_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="group mt-7 inline-flex min-h-11 items-center gap-2.5 rounded-full bg-gold-deep px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:bg-ink"
+              >
+                {tf('findUs.directions')}
+                <span
                   aria-hidden
-                  className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-dusk/70 to-transparent"
-                />
-                <Link
-                  href={`/${locale}/arrangementer`}
-                  className="group/pill absolute bottom-4 start-4 inline-flex min-h-11 items-center gap-3 rounded-full bg-paper/95 px-4 py-2 text-[14px] font-semibold text-ink shadow-[0_2px_10px_-2px_rgba(26,26,24,0.35)] backdrop-blur-sm transition-colors hover:bg-paper"
+                  className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
                 >
-                  {tv('pages.visit.closeSecondary')}
-                  <span
-                    aria-hidden
-                    className="transition-transform duration-200 group-hover/pill:translate-x-1 rtl:rotate-180 rtl:group-hover/pill:-translate-x-1"
-                  >
-                    &rarr;
-                  </span>
-                </Link>
-              </div>
+                  &rarr;
+                </span>
+              </a>
+
             </div>
 
-            {/* ── the booking ────────────────────────────────────────── */}
-            {/* self-center, matching the ledger card above: the place column
-               is the taller of the two — it carries the photograph — so the
-               form would otherwise sit at the top of a stretched cell with
-               the slack dumped under it. Below lg they stack and it is
-               inert. */}
-            <div className="lg:col-span-7 lg:self-center">
+            {/* ── THE FORM SHRINKS ON A SHORT SCREEN ────────────────────
+               Client, 2026-09-18: "for desktops ok, but for macbook 13/14
+               inches, make form smaller so fits, this is too big."
+
+               KEYED TO VIEWPORT HEIGHT, NOT WIDTH. A 13" MacBook Air is
+               1280x800 and a desktop monitor is 2560x1440 — they are miles
+               apart in HEIGHT and can be identical in width once a browser
+               window is resized. A `lg:` breakpoint would have shrunk the
+               form on a wide-but-short window and left it tall on a narrow
+               one, which is backwards. `@media (max-height: 900px)` asks the
+               only question that matters: is there room?
+
+               NOT RequestForm's own `compact` — that prop exists and it was
+               the obvious reach, but it DELETES the optional "preferred time"
+               field. Saving 80px by removing a field a visitor might want to
+               fill in is not making the form smaller, it is making the form
+               do less. Everything below is spacing.
+
+               Roughly 100px back: card padding 32→20, the textarea's floor
+               88→56, and the intro's own margin.
+
+               These are descendant utilities on purpose — the sizes live
+               inside RequestForm and this page should not reach in and edit a
+               component five other pages share. `[&>form]` and `[&_textarea]`
+               both out-specify the plain utility they override, so no
+               `!important` is needed: lib/cn is clsx, which merges nothing,
+               and a two-part descendant selector beats a one-class one. */}
+            <div className="lg:col-span-7 lg:self-center [@media(max-height:900px)]:[&>form]:p-5 [@media(max-height:900px)]:[&_textarea]:min-h-[3.5rem]">
               <RequestForm
                 subject="visit"
                 card
                 rule={false}
                 intro={
-                  <div className="mb-7">
-                    {/* Same removal. This one also read oddly: a "Bestill
-                       gruppebesøk" label sitting on top of a "Bli med på
-                       besøk" headline is the same instruction twice, in two
-                       registers. */}
+                  <div className="mb-7 [@media(max-height:900px)]:mb-4">
                     <h2 className="font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-tight text-balance text-ink">
                       {tvp('formTitle')}
                     </h2>
@@ -520,50 +489,12 @@ export default async function AboutPage({
         </SectionBody>
       </Section>
 
-      {/* The board and Documents sections were removed on 2026-08-31
-         (client). Both were placeholders in practice: the board listed six
-         roles with no names, and Documents listed three files that do not
-         exist yet with no links behind them. Their strings are still in
-         messages/*.json under about.board and about.legal, so either can be
-         restored once there are real names and real files. */}
-
-      {/* The reports and the chart land where the "available on request"
-         sentence used to stand for both (client, 2026-09-13). */}
-
+      {/* ══ 7. ÅRSRAPPORTER + ORGANISASJONSKART ═══════════════════════════
+         Unchanged and shared with /om-oss — the chart was already rebuilt to
+         the client's three groups on 2026-09-17. It closes the page: the
+         paperwork and the people belong after the invitation, not before it,
+         if this page wins, the two files merge and only one survives. */}
       <AnnualReports locale={locale} />
-
-      {/* The close came with Besøk oss, and it ends the merged page better
-         than the reports did. "Døren er åpen." is written to be the last
-         thing on a page, and after the history, the figures, the invitation
-         and the paperwork it is the right last word — an About page that
-         ends on an open door rather than on a list of PDFs. */}
-
-      {/* «Bli med på besøk» (client, 2026-09-16, Om oss list: "Legge til boks
-         nederst på siden"). The box itself was already here — it has closed
-         this page since the Besøk oss merge — but its button said "Kontakt
-         oss" and went to the contact page, which is the long way round: the
-         visit form is on THIS page, in the Besøk oss section above. So the
-         label is now his, and it goes straight to the form.
-
-         visitPage.formTitle is that form's own title, already translated in
-         all three locales, so the button and the thing it scrolls to say the
-         same words. /arrangementer already points its own close box at this
-         same anchor. */}
-      <VisitClose
-        heading={tv('pages.visit.closeHeading')}
-        body={tv('pages.visit.closeBody')}
-        image="/photos/visit-foyer.webp"
-        alt={tv('pages.visit.caption')}
-        primary={{ label: tvp('formTitle'), href: `/${locale}/om-oss#besok-oss` }}
-        secondary={{ label: tv('pages.visit.closeSecondary'), href: `/${locale}/arrangementer` }}
-      />
-
-      {/* "Til protokollen" came off this page on 2026-09-13 ("Fjern til
-         protokollen"), listed under his Om oss notes. It is NOT deleted from
-         the site: the same StoryColophon still closes /kontakt and
-         /personvern-og-tilgjengelighet, which is where a journalist or an
-         auditor would look for it anyway. Its strings stay under
-         storyPages.colophon, so putting it back here is these six lines. */}
     </main>
   );
 }

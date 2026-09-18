@@ -43,16 +43,25 @@ export default async function UndervisningIndex({
       <PageHeading kicker={t('eyebrow')} title={t.rich('titleShort', { em: (c) => <Accent surface="paper">{c}</Accent> })} lede={t('lede')} />
 
 
-      {/* featured={2}: Rabita skole and Koranskolen across the top at half
-         the page each, the other three beneath at a third (client,
-         2026-09-16). They are the first two entries of
-         SERVICE_PAGES.undervisning, so the order in lib/services.ts is what
-         decides this — not a second list here that could drift from it. */}
+      {/* No featured row any more, as of 2026-09-17.
+         
+         It was featured={2} — Rabita skole and Koranskolen across the top at
+         half the page each, the other three beneath at a third (client,
+         2026-09-16). That arrangement only works at FIVE items: the grid is
+         six columns, a featured card spans three and the rest span two, so
+         2 + 3 fills two rows flush.
+         
+         Kalligrafi og geometri arrived on 2026-09-17 at the client's own
+         request and made it six, which lays out as 2 + 3 + 1 — a single
+         third-width card hanging alone on the left of a third row. Six equal
+         cards are three-and-three, flush, and that is the lesser loss.
+         
+         If a seventh and eighth course are ever added, featured={2} becomes
+         correct again (2 + 3 + 3) and this should go back. */}
       <ServiceGrid
         items={SERVICE_PAGES.undervisning}
         locale={locale}
         header={false}
-        featured={2}
         picker={<ServicePicker items={SERVICE_PAGES.undervisning} />}
       />
     </main>
