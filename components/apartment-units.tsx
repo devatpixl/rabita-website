@@ -177,7 +177,7 @@ export function ApartmentUnits() {
                 // keyboard users lose nothing.
                 onClick={() => setOpen(u)}
                 aria-label={`${t(`items.${u.id}.title`)} — ${t('openLabel')}`}
-                className="group/unit relative flex aspect-[4/5] w-full flex-col justify-end overflow-hidden rounded-2xl bg-ink text-start ring-1 ring-inset ring-paper/10 transition-[box-shadow] duration-300 ease-out hover:ring-gold/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="group/unit relative flex aspect-[4/5] w-full flex-col justify-end overflow-hidden rounded-2xl bg-ink [transform:translateZ(0)] text-start ring-1 ring-inset ring-paper/10 transition-[box-shadow] duration-300 ease-out hover:ring-gold/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
               >
                 <span aria-hidden className="absolute inset-0">
                   <Image

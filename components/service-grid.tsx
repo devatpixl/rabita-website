@@ -153,7 +153,13 @@ export async function ServiceGrid({
                 // are ~3:2 landscape and three are 3:4 portrait, so there is
                 // no ratio that crops nothing; SERVICE_FOCUS steers each one.
                 className={cn(
-                  'group/card relative isolate flex aspect-[4/3] scroll-mt-28 flex-col justify-end overflow-hidden rounded-2xl bg-ink md:scroll-mt-32',
+                  // [transform:translateZ(0)] keeps the rounded corners through the reveal.
+                // A child with .rv-zoom (or a hover scale) is composited while it
+                // transforms, and an ancestor's radius + overflow:hidden is not
+                // rasterised onto a composited child — so the card flashes SQUARE
+                // for the length of the animation. Promoting the clipping element
+                // bakes the radius into its own layer. See core-activities.tsx.
+                  'group/card relative isolate flex aspect-[4/3] scroll-mt-28 flex-col justify-end overflow-hidden rounded-2xl bg-ink [transform:translateZ(0)] md:scroll-mt-32',
                   featured === 0
                     // The original contact sheet: portrait from lg.
                     ? 'lg:aspect-[4/5]'

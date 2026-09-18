@@ -264,12 +264,9 @@ export default async function ServiceDetail({
                text sat at the top of a stretched cell with ~160px of slack
                dumped underneath it. */}
             <div className={cn(story ? 'md:col-span-5' : 'md:col-span-8', 'md:self-center')}>
-              {/* Eyebrow draws its own 28px rule before the text
-                 (.eyebrow-bar::before, globals.css) — the mockup's eyebrow,
-                 already in the design system. `detail.what` is reused rather
-                 than a new per-service string, and it no longer echoes the
-                 heading below it, because the heading is now the service's
-                 own offerTitle. */}
+              {/* `detail.what` is reused rather than a new per-service
+                 string, and it no longer echoes the heading below it, because
+                 the heading is now the service's own offerTitle. */}
               <Eyebrow tone="gold-deep">{t('detail.what')}</Eyebrow>
               <SectionHeading className="mt-5">{t(`items.${s}.offerTitle`)}</SectionHeading>
               <p className="mt-6 max-w-[38ch] text-body text-ink-60">{t(`items.${s}.offerLede`)}</p>

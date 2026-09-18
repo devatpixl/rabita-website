@@ -229,7 +229,7 @@ export async function Hero() {
          headline no longer starts exactly under the wordmark; a hero running
          wider than the grid beneath it is a normal editorial device, but it
          is a deliberate break rather than an accident. */}
-      <div className="relative z-10 mx-auto flex min-h-[var(--hero-min-sm)] w-full max-w-[92rem] flex-col justify-end px-6 pt-8 pb-10 md:min-h-[var(--hero-min)] md:justify-center md:px-10 md:pt-10 md:pb-12 lg:px-12">
+      <div className="relative z-10 mx-auto flex min-h-[var(--hero-min-sm)] w-full max-w-[92rem] flex-col justify-end px-6 pt-8 pb-10 md:min-h-[var(--hero-min)] md:justify-center md:px-10 md:pt-10 md:pb-12 lg:px-12 2xl:max-w-[110rem]">
         <div className="grid w-full items-center gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:gap-20">
           <div>
             <h1
@@ -339,10 +339,24 @@ export async function Hero() {
              as badly zoomed in. On a phone the card is its own section under
              the hero instead (HeroGive, in the homepage), which leaves this
              image at its intended crop. */}
+          {/* max-w-[27.5rem] = 440px, and that number is measured, not chosen:
+             innocents.no's hero card renders 440 x 567 at a 1920 viewport and
+             the client holds it up as the right size (2026-09-18: "see how the
+             donation card of innocents is perfect size ... for rabita make
+             card placement and size like innocents").
+             
+             The inline maxWidth:640px never bound anything — the 3fr/2fr grid
+             column is narrower than 640 at every width, so the COLUMN was
+             silently deciding the card: 518px at 1920 AND at 1470, because the
+             container is capped at 92rem and a 13" laptop is already past it.
+             That is why it looked oversized on both screens at once. A real
+             cap is what makes the two agree.
+             
+             Below md the card is not rendered here at all (see below), so this
+             is desktop-only by construction. */}
           <aside
             aria-label="Give"
-            className="hidden md:block md:sticky md:top-24 self-center w-full md:ml-auto md:max-h-[var(--hero-card-cap)]"
-            style={{ maxWidth: '640px' }}
+            className="hidden md:block md:sticky md:top-24 self-center w-full md:ml-auto md:max-w-[27.5rem] md:max-h-[var(--hero-card-cap)]"
           >
             {/* One card. The offset paper-deep layer that used to sit behind
                it read as a second, stacked card; removed 2026-08-30. */}

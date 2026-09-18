@@ -125,7 +125,25 @@ function Plate({
   return (
     <div
       className={cn(
-        'group/plate relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-ink',
+        // [transform:translateZ(0)] is NOT decoration and changes nothing
+        // visually — it fixes the square corners the client saw flash on a
+        // fast scroll (2026-09-18: "it first shows like this then shows
+        // rounded").
+        //
+        // The photograph inside carries .rv-zoom, which eases scale(1.05) ->
+        // scale(1) over 1.5s. A transforming element gets its own compositing
+        // layer, and while it is composited the browser does not rasterise an
+        // ANCESTOR's border-radius + overflow:hidden onto it — so for the
+        // length of the reveal the picture paints past the rounded corners and
+        // the card reads square. It snaps round the moment the transform ends,
+        // which is exactly the two frames he caught.
+        //
+        // Promoting the CLIPPING element to its own layer bakes the radius
+        // into that layer, so the clip holds for the whole animation. Safe
+        // beside the mix-blend-mode scrims: `isolate` already made this a
+        // stacking context, so a transform here does not change which
+        // elements blend together.
+        'group/plate relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-ink [transform:translateZ(0)]',
         className,
       )}
     >

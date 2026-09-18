@@ -119,19 +119,37 @@ function isValidFnr(v: string) {
 //
 // Written as arbitrary variants rather than named ones in tailwind.config
 // because a config-level variant only compiles after a dev-server restart.
+//
+// ── The first tier is 1100px, not 880 ────────────────────────────────────
+// Client, 2026-09-18: the hero card is "too big on desktops and macbook
+// 12-14 inches also ... make it shorter, compact without removing anything".
+//
+// It was 727px tall against innocents.no's 567 at the same viewport, and the
+// ladder below was the fix all along — it just never fired. A desktop browser
+// at 1920x1080 has about 900px of VIEWPORT once chrome is taken off, and a
+// 13" MacBook about 866. Both sat above the old 880 threshold by a hair, so
+// every screen the client actually uses got the roomiest possible card.
+//
+// 1100 catches both, and every laptop and 1080p monitor with them, while a
+// genuinely tall display (1440-class) still gets the generous version it has
+// the room for. The 760 and 720 tiers are untouched and still stack under it.
+//
+// NOTHING IS REMOVED. The payment strip and the anonymous checkbox both stay;
+// this is padding, gaps, tile heights and one type step, which is what the
+// tier was tuned to give up in the first place.
 const FIT = {
-  header: '[@media(max-height:880px)]:pt-3 [@media(max-height:880px)]:pb-2 [@media(max-height:760px)]:pt-2.5 [@media(max-height:720px)]:pt-2 [@media(max-height:720px)]:pb-1.5',
-  stepRow: '[@media(max-height:880px)]:mt-3 [@media(max-height:760px)]:mt-2 [@media(max-height:720px)]:mt-1.5',
-  title: '[@media(max-height:880px)]:mt-2 [@media(max-height:880px)]:text-xl',
+  header: '[@media(max-height:1100px)]:pt-3 [@media(max-height:1100px)]:pb-2 [@media(max-height:760px)]:pt-2.5 [@media(max-height:720px)]:pt-2 [@media(max-height:720px)]:pb-1.5',
+  stepRow: '[@media(max-height:1100px)]:mt-3 [@media(max-height:760px)]:mt-2 [@media(max-height:720px)]:mt-1.5',
+  title: '[@media(max-height:1100px)]:mt-2 [@media(max-height:1100px)]:text-xl',
   lede: '[@media(max-height:760px)]:mt-1 [@media(max-height:720px)]:hidden',
-  body: '[@media(max-height:880px)]:py-3.5 [@media(max-height:760px)]:py-2.5 [@media(max-height:720px)]:py-2',
-  toggle: '[@media(max-height:880px)]:mb-3 [@media(max-height:760px)]:mb-2 [@media(max-height:720px)]:mb-1.5',
-  presetGrid: '[@media(max-height:880px)]:gap-2 [@media(max-height:760px)]:gap-1.5 [@media(max-height:720px)]:mb-1',
-  presetCell: '[@media(max-height:880px)]:min-h-[3.5rem] [@media(max-height:880px)]:py-2 [@media(max-height:760px)]:min-h-[3.1rem] [@media(max-height:720px)]:min-h-[2.8rem] [@media(max-height:720px)]:py-1.5',
-  other: '[@media(max-height:880px)]:mb-3 [@media(max-height:880px)]:min-h-[3rem] [@media(max-height:760px)]:mb-2 [@media(max-height:760px)]:min-h-[2.75rem] [@media(max-height:720px)]:mb-1.5 [@media(max-height:720px)]:min-h-[2.5rem]',
-  anon: '[@media(max-height:880px)]:py-2 [@media(max-height:760px)]:py-1.5 [@media(max-height:720px)]:py-1',
-  actions: '[@media(max-height:880px)]:pb-3 [@media(max-height:760px)]:pb-2 [@media(max-height:720px)]:pb-1.5',
-  footer: '[@media(max-height:880px)]:py-1.5 [@media(max-height:760px)]:py-1 [@media(max-height:720px)]:py-0.5',
+  body: '[@media(max-height:1100px)]:py-3.5 [@media(max-height:760px)]:py-2.5 [@media(max-height:720px)]:py-2',
+  toggle: '[@media(max-height:1100px)]:mb-3 [@media(max-height:760px)]:mb-2 [@media(max-height:720px)]:mb-1.5',
+  presetGrid: '[@media(max-height:1100px)]:gap-2 [@media(max-height:760px)]:gap-1.5 [@media(max-height:720px)]:mb-1',
+  presetCell: '[@media(max-height:1100px)]:min-h-[3.5rem] [@media(max-height:1100px)]:py-2 [@media(max-height:760px)]:min-h-[3.1rem] [@media(max-height:720px)]:min-h-[2.8rem] [@media(max-height:720px)]:py-1.5',
+  other: '[@media(max-height:1100px)]:mb-3 [@media(max-height:1100px)]:min-h-[3rem] [@media(max-height:760px)]:mb-2 [@media(max-height:760px)]:min-h-[2.75rem] [@media(max-height:720px)]:mb-1.5 [@media(max-height:720px)]:min-h-[2.5rem]',
+  anon: '[@media(max-height:1100px)]:py-2 [@media(max-height:760px)]:py-1.5 [@media(max-height:720px)]:py-1',
+  actions: '[@media(max-height:1100px)]:pb-3 [@media(max-height:760px)]:pb-2 [@media(max-height:720px)]:pb-1.5',
+  footer: '[@media(max-height:1100px)]:py-1.5 [@media(max-height:760px)]:py-1 [@media(max-height:720px)]:py-0.5',
 } as const;
 
 export function GivingCard({

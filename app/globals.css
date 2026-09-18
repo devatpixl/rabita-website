@@ -133,20 +133,6 @@ html {
   transform: scaleX(1);
 }
 
-/* Editorial eyebrow with hairline bar. Adapted from the Innocents
-   pattern, but calibrated for our register — bar in gold, mono type,
-   tighter tracking. Reusable via the Eyebrow primitive. */
-.eyebrow-bar::before {
-  content: '';
-  display: inline-block;
-  inline-size: 28px;
-  block-size: 1px;
-  margin-inline-end: 12px;
-  vertical-align: middle;
-  background: currentColor;
-  opacity: 0.55;
-}
-
 /* On-view fade + rise. Once, never on re-scroll. Respected by the
    prefers-reduced-motion rule below. */
 /* The hidden state is keyed on data-visible="false", which JS sets only after

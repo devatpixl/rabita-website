@@ -5,22 +5,22 @@ import { SplitReveal } from './split-reveal';
 // Small typography primitives so every section reads at the same rhythm
 // without repeating the same wrappers everywhere.
 
-// Editorial eyebrow with hairline bar. Mono type for newsroom register.
-// Colour is inherited so the same primitive works on cream and dusk
-// surfaces without a new variant.
+// Editorial eyebrow. Mono type for newsroom register. Colour is inherited
+// so the same primitive works on cream and dusk surfaces without a new
+// variant.
+//
+// It drew a 28px hairline before the text until 2026-09-18, when the client
+// asked for it off ("remove ---- from here", on the apartments eyebrow, then
+// "remove from them dash also"). Removed outright rather than made opt-out:
+// all eight call sites wanted it gone, and the other 128 eyebrows on the site
+// were already plain, so the rule was the outlier, not the house style.
 export function Eyebrow({
   children,
   tone = 'gold',
-  bar = true,
   className,
 }: {
   children: ReactNode;
   tone?: 'gold' | 'gold-deep' | 'paper' | 'ink';
-  // The hairline is opt-out (client, 2026-09-18, on the apartments eyebrow:
-  // "remove ---- from here"). It stays the default because seven other call
-  // sites across Tjenester, Arrangementer and Aktuelt are drawn with it and
-  // nobody asked about those.
-  bar?: boolean;
   className?: string;
 }) {
   const colour =
@@ -35,7 +35,6 @@ export function Eyebrow({
     <p
       className={cn(
         'font-mono text-[0.75rem] uppercase tracking-[0.16em]',
-        bar && 'eyebrow-bar',
         colour,
         className,
       )}

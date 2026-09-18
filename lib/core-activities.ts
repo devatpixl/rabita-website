@@ -48,13 +48,29 @@ export type Activity = {
 export const ACTIVITIES: readonly Activity[] = [
   // ── Lead row ───────────────────────────────────────────────────────────
   {
-    // "Religiøse aktiviteter (finn et bedre navn)" — he asked us for the
-    // name. Rendered as "Religiøse tjenester", because the things in this
-    // bucket (a nikah, a janaza, a shahada) are SERVICES you request, not
-    // activities that happen on a timetable, and that mismatch is almost
-    // certainly why the name bothered him. It is also the site's own existing
-    // phrase: servicesIndex.lede already opens "Religiøse tjenester,
-    // veiledning, undervisning...". PROVISIONAL until he picks.
+    // "Religiøse aktiviteter (finn et bedre navn)" — he asked us for the name.
+    //
+    // It is "Tro". One word, and the only one that covers all five things in
+    // this bucket: a nikah, a janaza, a shahada, a hajj and a conversation
+    // with an imam are every one of them faith. "Seremonier" drops the
+    // conversations, "Livsriter" drops hajj, and his own "aktiviteter" would
+    // repeat the section heading — "Våre kjerneaktiviteter", two lines above
+    // it — as well as being the mismatch that bothered him in the first
+    // place: these are requested at need, not attended on a timetable.
+    //
+    // It also pairs with card 02, "Undervisning". Those are the two
+    // single-word cards, both fully accented, sitting together at the front
+    // of the lead row.
+    //
+    // Nothing is lost to the brevity. The body underneath still reads
+    // "Nikah, janaza, shahada, hajj og umra — og samtaler med imam når livet
+    // krever det." The title names the category; the sentence does the
+    // telling.
+    //
+    // Two longer attempts were pulled the same day: "Seremonier og
+    // veiledning" drifted too far from what he wrote, and "Religiøse
+    // tjenester" was accurate but spent `tjenester`, which is already the nav
+    // label for a different page.
     key: 'religious',
     row: 'lead',
     // The portrait crop, not SERVICE_IMAGE.nikah (subj-nikah.webp, 1086x724).

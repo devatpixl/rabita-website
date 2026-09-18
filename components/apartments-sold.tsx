@@ -112,7 +112,7 @@ export function ApartmentsSold({ locale }: { locale: string }) {
            sentence rewrites itself. */}
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <Eyebrow tone="gold" bar={false} className="mb-4">{t('eyebrow')}</Eyebrow>
+            <Eyebrow tone="gold" className="mb-4">{t('eyebrow')}</Eyebrow>
             <h2
               className="display-opsz max-w-[20ch] font-serif text-balance text-paper"
               style={{
