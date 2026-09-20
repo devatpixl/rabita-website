@@ -26,7 +26,13 @@ import { SERVICE_PAGES } from '@/lib/services';
 // navigasjonen"). It is not a new page — /aktuelt has existed all along and
 // had ZERO inbound links anywhere on the site, which is almost certainly why
 // he asked: the news page was invisible, not missing.
-export const NAV_KEYS = ['news', 'project', 'apartments', 'prayer', 'services', 'teaching', 'about'] as const;
+// `apartments` is NOT a top-level item (client, Tekst (endelig) Sept 2026:
+// "Fjern «Leiligheter» som egen lenke i toppmenyen på alle sider ... skal
+// kun nås via lenker fra Moskeprosjektet-siden"). The page is unchanged at
+// /moskeprosjektet/leiligheter and now has three ways in: the Moskeprosjektet
+// menu below it, the "Se leilighetene" button on that page — the one he
+// names — and "Se de N ledige" on the home page's sold-apartments band.
+export const NAV_KEYS = ['news', 'project', 'prayer', 'services', 'teaching', 'about'] as const;
 export type NavKey = (typeof NAV_KEYS)[number];
 
 // null means "opens a menu and goes nowhere itself".
@@ -39,7 +45,6 @@ export type NavKey = (typeof NAV_KEYS)[number];
 export const NAV_ROOT: Record<NavKey, string | null> = {
   news: '/aktuelt',
   project: '/moskeprosjektet',
-  apartments: '/moskeprosjektet/leiligheter',
   prayer: '/bonnetider',
   services: '/tjenester',
   teaching: '/undervisning',
@@ -122,10 +127,10 @@ export function DesktopNav() {
     // does not prefix, and Services has to stand down on one that its root
     // does. The same shape as the project/apartments exception below.
     if (onTeachingSubject) return key === 'teaching';
-    return (
-      pathname.startsWith(`/${locale}${root}`) &&
-      !(key === 'project' && pathname.startsWith(`/${locale}${NAV_ROOT.apartments}`))
-    );
+    // The project/apartments exception is gone with the apartments item:
+    // /moskeprosjektet/leiligheter now lives UNDER Moskeprosjektet, so the
+    // parent lighting up on it is correct rather than a collision.
+    return pathname.startsWith(`/${locale}${root}`);
   };
 
   return (

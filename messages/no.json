@@ -66,7 +66,23 @@
     },
     "menu": {
       "news": [],
-      "project": [],
+      "project": [
+        {
+          "label": "Fremdrift",
+          "blurb": "Fem faser, og hva hver av dem koster",
+          "href": "/moskeprosjektet/fremdrift"
+        },
+        {
+          "label": "Leiligheter",
+          "blurb": "Femten boliger i toppetasjene, til salgs",
+          "href": "/moskeprosjektet/leiligheter"
+        },
+        {
+          "label": "Hvor pengene går",
+          "blurb": "Regnskap, kontoer og skattefradrag",
+          "href": "/hvor-pengene-gar"
+        }
+      ],
       "apartments": [],
       "prayer": [],
       "services": [
@@ -3034,5 +3050,12 @@
       "eidFitr": "Eid al-fitr",
       "eidAdha": "Eid al-adha"
     }
+  },
+  "newsletterBand": {
+    "eyebrow": "Nyhetsbrev",
+    "heading": "Hold deg <em>oppdatert</em>.",
+    "body": "Få siste nytt om byggingen og arrangementene rett i innboksen.",
+    "note": "Du kan melde deg av når som helst.",
+    "done": "Takk. Vi har registrert adressen din."
   }
 }

@@ -66,7 +66,23 @@
     },
     "menu": {
       "news": [],
-      "project": [],
+      "project": [
+        {
+          "label": "Progress",
+          "blurb": "Five phases, and what each one costs",
+          "href": "/moskeprosjektet/fremdrift"
+        },
+        {
+          "label": "Apartments",
+          "blurb": "Fifteen homes on the top floors, for sale",
+          "href": "/moskeprosjektet/leiligheter"
+        },
+        {
+          "label": "Where the money goes",
+          "blurb": "Accounts, bank details and tax relief",
+          "href": "/hvor-pengene-gar"
+        }
+      ],
       "apartments": [],
       "prayer": [],
       "services": [
@@ -3190,5 +3206,12 @@
       "eidFitr": "Eid al-Fitr",
       "eidAdha": "Eid al-Adha"
     }
+  },
+  "newsletterBand": {
+    "eyebrow": "Newsletter",
+    "heading": "Stay <em>up to date</em>.",
+    "body": "Get the latest on the building and the events straight to your inbox.",
+    "note": "You can unsubscribe at any time.",
+    "done": "Thank you. Your address is registered."
   }
 }

@@ -66,7 +66,23 @@
     },
     "menu": {
       "news": [],
-      "project": [],
+      "project": [
+        {
+          "label": "سير العمل",
+          "blurb": "خمس مراحل، وتكلفة كل منها",
+          "href": "/moskeprosjektet/fremdrift"
+        },
+        {
+          "label": "الشقق",
+          "blurb": "خمس عشرة شقة في الطوابق العليا، للبيع",
+          "href": "/moskeprosjektet/leiligheter"
+        },
+        {
+          "label": "أين تذهب الأموال",
+          "blurb": "الحسابات والتفاصيل المصرفية والإعفاء الضريبي",
+          "href": "/hvor-pengene-gar"
+        }
+      ],
       "apartments": [],
       "prayer": [],
       "services": [
@@ -3190,5 +3206,12 @@
       "eidFitr": "عيد الفطر",
       "eidAdha": "عيد الأضحى"
     }
+  },
+  "newsletterBand": {
+    "eyebrow": "النشرة البريدية",
+    "heading": "ابقَ <em>على اطلاع</em>.",
+    "body": "احصل على آخر أخبار البناء والفعاليات مباشرة في بريدك.",
+    "note": "يمكنك إلغاء الاشتراك في أي وقت.",
+    "done": "شكراً لك. سجّلنا عنوانك."
   }
 }

@@ -60,7 +60,20 @@ export default async function ProjectPage({
               <span aria-hidden className="inline-block h-1.5 w-1.5 rotate-45 bg-gold-deep" />
               {t('giveBox.eyebrow')}
             </p>
-            <GivingCard purpose="building" fit />
+            {/* NO purpose (client, Tekst (endelig) Sept 2026): "Bruk
+               akkurat samme donasjonswidget som på hovedsiden — IKKE en
+               øremerket variant spesifikt for moskeprosjektet." It ran
+               purpose="building", which changed the sheet's title AND
+               tagged the gift as a building donation in the API. Both go:
+               he asked for the same widget, and a widget that records
+               something different is not the same widget.
+
+               CONSEQUENCE, flagged to the client: gifts made from this
+               page are no longer distinguishable from any other. The
+               enum still accepts 'building' (app/api/donations/route.ts)
+               and giving.sheetTitleBuilding is still written in all three
+               locales, so restoring it is this one prop. */}
+            <GivingCard fit />
           </div>
         }
       />

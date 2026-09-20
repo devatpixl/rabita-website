@@ -203,7 +203,9 @@ export function EventsCalendar() {
     <section id="kalender" className="star-texture star-texture--light relative isolate scroll-mt-24 overflow-hidden bg-paper-2 py-14 text-ink md:py-20">
       <div className="mx-auto max-w-6xl px-6">
         {/* ── header ──────────────────────────────────────────────────── */}
-        <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-6">
+        {/* One block, not a two-up: the month control that used to sit
+           opposite the heading has moved down onto the calendar box. */}
+        <div>
           <div>
             <p className="flex items-center gap-3 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
               <span aria-hidden className="h-px w-6 shrink-0 bg-gold-deep/50" />
@@ -216,27 +218,37 @@ export function EventsCalendar() {
               {t('lede')}
             </p>
           </div>
-
-          {/* Month control. Arrows either side of the label, and the label
-             carries the Hijri range under it — which is the whole reason a
-             mosque's calendar is not just a browser date picker. */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            <NavButton label={t('prev')} onClick={() => move(-1)} dirIcon="prev" />
-            <div className="min-w-[10.5rem] text-center sm:min-w-[12rem]">
-              <p className="font-serif text-[1.15rem] leading-tight text-ink first-letter:uppercase sm:text-[1.3rem]">
-                {monthLabel || ' '}
-              </p>
-              <p className="mt-0.5 font-mono text-[0.625rem] uppercase tracking-[0.12em] text-gold-deep">
-                {hijriLabel || ' '}
-              </p>
-            </div>
-            <NavButton label={t('next')} onClick={() => move(1)} dirIcon="next" />
-          </div>
         </div>
 
         {/* ── the grid ────────────────────────────────────────────────── */}
         <div className="mt-10 grid gap-8 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-7">
+            {/* ── Month control, directly over the box it drives ─────────
+               Client, Tekst (endelig) Sept 2026: "Månedsnavnet skal
+               plasseres rett over selve kalenderboksen — gir mer mening der
+               enn der det står i dag."
+
+               It used to sit in the section header, opposite the heading —
+               full width, while the box it belongs to is seven of twelve
+               columns and starts lower down. The label and the grid it
+               names were in two different places on the page.
+
+               justify-between rather than the old centred huddle: on the
+               column's own width the arrows belong on its edges, which is
+               also where a thumb expects them. The Hijri range stays under
+               the month, which is the point of this calendar. */}
+            <div className="mb-4 flex items-center justify-between gap-3 sm:mb-5">
+              <NavButton label={t('prev')} onClick={() => move(-1)} dirIcon="prev" />
+              <div className="min-w-0 text-center">
+                <p className="font-serif text-[1.15rem] leading-tight text-ink first-letter:uppercase sm:text-[1.3rem]">
+                  {monthLabel || ' '}
+                </p>
+                <p className="mt-0.5 font-mono text-[0.625rem] uppercase tracking-[0.12em] text-gold-deep">
+                  {hijriLabel || ' '}
+                </p>
+              </div>
+              <NavButton label={t('next')} onClick={() => move(1)} dirIcon="next" />
+            </div>
             <div
               className="overflow-hidden rounded-[1.5rem] bg-paper p-3 ring-1 ring-ink/8 sm:p-5"
               onTouchStart={onTouchStart}

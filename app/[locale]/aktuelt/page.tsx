@@ -1,6 +1,7 @@
 import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
+import { NewsletterBand } from '@/components/newsletter-band';
 import { EventsCalendar } from '@/components/events-calendar';
 import { PageBand } from '@/components/page-band';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
@@ -247,6 +248,10 @@ export default async function NewsPage({
          — and it is where the Islamic dates live, which the cards have no
          room for. Client-side: it needs a real "today" and these pages are
          statically generated. */}
+      {/* Between the events and the calendar — see the note in the
+         component for why here and not at the foot of the page. */}
+      <NewsletterBand />
+
       <EventsCalendar />
 
       {/* ── THE NUMBERED NEWS LIST CAME OFF HERE, 2026-09-16 ──────────
