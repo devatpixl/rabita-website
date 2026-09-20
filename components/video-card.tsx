@@ -19,6 +19,7 @@ export function VideoCard({
   label,
   className,
   frameClassName,
+  hideLabel,
   placeholder = false,
   autoPlay = false,
 }: {
@@ -32,6 +33,13 @@ export function VideoCard({
    * the bottom of a laptop. Replaces the default 16:9 full-width box.
    */
   frameClassName?: string;
+  /**
+   * Keep `label` for the play button's aria-label but do not draw it.
+   * The popup uses this: the caption above the film was 29px of gold
+   * mono saying what the film plainly shows, and the client wanted the
+   * height for the picture (2026-09-20).
+   */
+  hideLabel?: boolean;
   /**
    * Nothing to play yet. Shows the frame, the poster and the play button so
    * the slot is visibly reserved, but the button is inert and carries a
@@ -84,8 +92,8 @@ export function VideoCard({
 
   return (
     <figure className={cn('m-0', className)}>
-      {label && (
-        <figcaption className="mb-3 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-gold-deep">
+      {label && !hideLabel && (
+        <figcaption className="mb-2 font-mono text-[0.5625rem] uppercase tracking-[0.18em] text-gold-deep">
           {label}
         </figcaption>
       )}
@@ -94,7 +102,19 @@ export function VideoCard({
           'relative overflow-hidden rounded-2xl bg-dusk',
           frameClassName ?? 'aspect-video w-full',
         )}
-        style={video.aspect && !frameClassName ? { aspectRatio: video.aspect } : undefined}
+        // THE FRAME TAKES THE FILM'S OWN SHAPE unless the caller has typed an
+        // aspect into frameClassName. It used to apply only when there was no
+        // frameClassName at all, which meant any caller that wanted to size
+        // the frame lost the film's ratio and silently letterboxed it: the
+        // popup asked for a 4:5 box, the films are 9:16, and <video> is
+        // object-contain — so 30% of the frame's width was dusk-coloured bar
+        // on either side of the picture. Measured 2026-09-20: a 273px frame
+        // carrying 192px of actual film.
+        style={
+          video.aspect && !/(^|\s)aspect-/.test(frameClassName ?? '')
+            ? { aspectRatio: video.aspect }
+            : undefined
+        }
       >
         {playing ? (
           <>

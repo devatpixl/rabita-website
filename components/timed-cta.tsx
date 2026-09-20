@@ -270,7 +270,7 @@ export function TimedCta({
       )}
     >
       {bodyMounted && (
-      <div className="no-scrollbar relative max-h-[calc(100svh-2rem)] overflow-y-auto rounded-[1.75rem] border border-rule bg-paper px-8 py-8 text-center md:px-12 md:py-10 [@media(max-height:730px)]:py-6">
+      <div className="no-scrollbar relative max-h-[calc(100svh-2rem)] overflow-y-auto rounded-[1.75rem] border border-rule bg-paper px-6 py-7 text-center sm:px-8 md:px-12 md:py-8 [@media(max-height:730px)]:py-5">
         <button
           type="button"
           onClick={() => close()}
@@ -289,11 +289,20 @@ export function TimedCta({
           width={48}
           height={48}
           className={cn(
-            'mx-auto h-12 w-12',
+            'mx-auto',
             // 72px of pure decoration. With the film in the card there is not
             // room for it on a laptop, and a card the reader has to scroll
-            // costs more than a mark.
-            showVideoInAsk && '[@media(max-height:900px)]:hidden',
+            // costs more than a mark. Where it does survive it is smaller
+            // when the film is present — the film is the thing being looked
+            // at, and the mark is the signature under it.
+            // HIDDEN OUTRIGHT when the film is in the card, at every
+            // height — not just on a laptop as before. It is pure
+            // decoration, the caption under it already says "a word from
+            // the imam", and its 48px is the single cheapest thing on the
+            // card to convert into picture. The mark still signs the
+            // filmless variant, where there is nothing competing for the
+            // space.
+            showVideoInAsk ? 'hidden' : 'h-12 w-12',
           )}
         />
 
@@ -312,10 +321,11 @@ export function TimedCta({
             <VideoCard
               video={film}
               label={tVideo('imamWelcome')}
+              hideLabel
               placeholder={filmIsPlaceholder}
               autoPlay
-              className="mt-6"
-              frameClassName="mx-auto aspect-[4/5] h-[min(36svh,20rem)] max-w-full [@media(max-height:730px)]:h-[33svh]"
+              className="mt-5"
+              frameClassName="mx-auto h-[min(56svh,32rem,calc(100svh-20rem))] max-w-full"
             />
             <button
               type="button"
@@ -327,38 +337,70 @@ export function TimedCta({
           </>
         ) : (
           <>
-            {/* The film leads (client, 2026-08-31), with the hadith beneath it
-               and set smaller. It is a portrait film, so the frame is driven
-               from HEIGHT rather than width: at 4:5 a width-led box on a 13"
-               laptop pushes the Give button off the bottom of the dialog. The
-               svh cap keeps the whole card on one screen, and the rem cap
-               stops it ballooning on a tall monitor. */}
+            {/* The film leads (client, 2026-08-31), with the hadith beneath
+               it and set smaller. It is a portrait film, so the frame is
+               driven from HEIGHT rather than width: a width-led box on a 13"
+               laptop pushes the Give button off the bottom of the dialog.
+               The svh term keeps the whole card on one screen, the rem cap
+               stops it ballooning on a tall monitor.
+
+               ── Sept 2026: the film got its space back ──────────────────
+               NO aspect class here any more. This used to type aspect-[4/5]
+               while every popup film is 9:16, so <video>'s object-contain
+               letterboxed it — a 273px frame with 192px of picture in it and
+               40px of dusk bar down each side. The frame now takes the
+               film's own ratio (see video-card.tsx), so the box IS the
+               picture.
+
+               THREE TERMS, and the third is the one that matters:
+                 58svh            the share of the screen the film gets
+                 34rem            stops it ballooning on a tall monitor
+                 calc(100svh-20rem)  never taller than the space left once
+                                  the rest of the card has been paid for
+               20rem is measured, not guessed: with the caption and "Ikke nå"
+               gone the card's non-film content is ~254px, and short screens
+               drop the padding again — plus the 2rem the dialog keeps clear
+               of the viewport edge. It leaves ~18px of slack at every height
+               from 600px up. Without this term the
+               13" laptop overflowed by a few pixels and the card scrolled —
+               which is the exact complaint that sized this thing in the
+               first place.
+
+               The height went 38svh/22rem -> 52svh/30rem, paid for entirely
+               out of the type and spacing below: the card's own height is
+               within a few pixels of what it was, which is what the client
+               asked for — "make video bigger and make hadith and the other
+               text more smaller", not a bigger card. */}
             {showVideoInAsk && (
               <VideoCard
                 video={film}
                 label={tVideo('imamWelcome')}
+                hideLabel
                 placeholder={filmIsPlaceholder}
-              autoPlay
-                className="mt-6"
-                frameClassName="mx-auto aspect-[4/5] h-[min(38svh,22rem)] max-w-full [@media(max-height:730px)]:h-[35svh]"
+                autoPlay
+                className="mt-5"
+                frameClassName="mx-auto h-[min(58svh,34rem,calc(100svh-20rem))] max-w-full"
               />
             )}
 
             <p
               className={cn(
-                'font-mono uppercase tracking-[0.16em] text-gold-deep',
-                showVideoInAsk ? 'mt-7 text-[0.625rem]' : 'mt-6 text-[0.6875rem]',
+                'font-mono uppercase tracking-[0.18em] text-gold-deep',
+                showVideoInAsk ? 'mt-4 text-[0.5625rem]' : 'mt-6 text-[0.6875rem]',
               )}
             >
               {t('eyebrow')}
             </p>
 
-            <blockquote className={showVideoInAsk ? 'mt-3' : 'mt-5'}>
+            <blockquote className={showVideoInAsk ? 'mt-2' : 'mt-5'}>
               <p
                 className={cn(
                   'text-balance font-serif text-ink',
                   showVideoInAsk
-                    ? 'text-[clamp(1.05rem,2vw,1.3rem)] leading-[1.4]'
+                    // A step down from clamp(1.05,2vw,1.3). The hadith is
+                    // the caption to the film now, not the headline of the
+                    // card, and every pixel it gives back goes to the film.
+                    ? 'text-[clamp(0.95rem,1.6vw,1.1rem)] leading-[1.42]'
                     : 'text-[clamp(1.35rem,2.6vw,1.75rem)] leading-[1.38]',
                 )}
               >
@@ -367,11 +409,11 @@ export function TimedCta({
               <footer
                 className={cn(
                   'flex items-center justify-center',
-                  showVideoInAsk ? 'mt-4 gap-3' : 'mt-6 gap-4',
+                  showVideoInAsk ? 'mt-3 gap-2.5' : 'mt-6 gap-4',
                 )}
               >
                 <span aria-hidden className={cn('h-px bg-gold-deep/40', showVideoInAsk ? 'w-6' : 'w-8')} />
-                <cite className="not-italic font-mono text-[0.625rem] uppercase tracking-[0.12em] text-ink-60">
+                <cite className={cn('not-italic font-mono uppercase tracking-[0.12em] text-ink-60', showVideoInAsk ? 'text-[0.5625rem]' : 'text-[0.625rem]')}>
                   {quote!.source}
                 </cite>
                 <span aria-hidden className={cn('h-px bg-gold-deep/40', showVideoInAsk ? 'w-6' : 'w-8')} />
@@ -390,19 +432,28 @@ export function TimedCta({
               }
               className={cn(
                 'min-h-[3.25rem] w-full rounded-full bg-gold-deep px-6 text-[15px] font-semibold text-paper transition-colors hover:bg-ink active:scale-[0.99]',
-                showVideoInAsk ? 'mt-6' : 'mt-7',
+                showVideoInAsk ? 'mt-5' : 'mt-7',
               )}
             >
               {t('give', { amount: amountNok })}
             </button>
 
-            <button
-              type="button"
-              onClick={() => close()}
-              className="mt-4 min-h-11 text-[14px] text-ink-60 underline underline-offset-4 transition-colors hover:text-ink"
-            >
-              {t('dismiss')}
-            </button>
+            {/* "Ikke nå" removed when the film is in the card (client,
+               2026-09-20): 55px of link under the Give button, spent on the
+               picture instead. The way out is the × at the top right, which
+               is a 36px control with a hover state and an aria-label, plus
+               Escape and a click on the backdrop — so the ask still has
+               three exits, not none. It stays on the filmless variant,
+               which has the room. */}
+            {!showVideoInAsk && (
+              <button
+                type="button"
+                onClick={() => close()}
+                className="mt-4 min-h-11 text-[14px] text-ink-60 underline underline-offset-4 transition-colors hover:text-ink"
+              >
+                {t('dismiss')}
+              </button>
+            )}
           </>
         )}
       </div>
