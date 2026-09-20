@@ -39,7 +39,9 @@ export function RoomPhotos({
   const tClose = useTranslations('giving');
   const [i, setI] = useState(0);
   const n = photos.length;
-  const go = useCallback((to: number) => setI(((to % n) + n) % n), [n]);
+  // Guarded against n === 0: a room can now open on its description alone
+  // (see the gate in floor-markers.tsx), and `to % 0` is NaN.
+  const go = useCallback((to: number) => { if (n > 0) setI(((to % n) + n) % n); }, [n]);
 
   const sheetRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -159,7 +161,7 @@ export function RoomPhotos({
         className="relative flex max-h-full w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-dusk text-paper shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)] ring-1 ring-paper/15"
         onPointerDown={(e) => { x0.current = e.clientX; }}
         onPointerUp={(e) => {
-          if (x0.current == null) return;
+          if (x0.current == null || n < 2) return;
           const dx = e.clientX - x0.current;
           x0.current = null;
           if (Math.abs(dx) < 40) return;
@@ -173,6 +175,7 @@ export function RoomPhotos({
         {/* max-h against the viewport as well as the aspect ratio: on a short
            laptop the 16:10 box alone would still push the sheet past the
            screen, and object-cover simply crops a little more instead. */}
+        {n > 0 && (
         <div className="relative aspect-[16/10] max-h-[54svh] w-full shrink-0 bg-dusk">
           {photos.map((src, idx) => (
             <Image
@@ -199,6 +202,7 @@ export function RoomPhotos({
             </>
           )}
         </div>
+        )}
 
         {/* The words. min-h-0 + overflow so a long description on a short
            phone scrolls inside the sheet instead of pushing the picture off

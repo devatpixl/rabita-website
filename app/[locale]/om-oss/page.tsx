@@ -180,8 +180,16 @@ export default async function AboutPage({
                 </h2>
 
                 <div className="mt-9 max-w-[56ch] space-y-6 text-[clamp(1rem,1.15vw,1.125rem)] leading-relaxed text-ink-60">
+                  {/* FOUR paragraphs again. p3 (the royal visit) was cut
+                     here on 2026-09-17 as "a fine fact, not the point of an
+                     About page" — OUR editorial call, not the client's — and
+                     Tekst (endelig) Sept 2026 prints the section with the
+                     royal visit in it and a fourth paragraph after it. His
+                     text is the text. */}
                   <p>{t('history.p1')}</p>
                   <p>{t('history.p2')}</p>
+                  <p>{t('history.p3')}</p>
+                  <p>{t('history.p4')}</p>
                 </div>
 
                 <Link
@@ -315,7 +323,33 @@ export default async function AboutPage({
         id="besok-oss"
         tone="paper-2"
         pad="tight"
-        className="relative isolate scroll-mt-24 overflow-hidden"
+        /* ── ONE SCREEN ON A MACBOOK AIR ──────────────────────────
+           Client, 2026-09-20: "vertically reduce it so it fits in one
+           screen on mac air 12-15 inches also".
+
+           The section was 935px. A 13" Air is 1440x900, which leaves
+           about 813px of viewport once Chrome takes its chrome, and
+           the header floats over the first ~90 of that — so the
+           directions button fell off the bottom, which is what he
+           photographed.
+
+           MEASURED, not guessed: the left column is 815px and the
+           form only 655, so the column drives the height, and 493 of
+           those 815 are the five cards. The text PDF grew them from
+           three to five — Kontor, E-post and Slik finner du fram are
+           new — which is why a section that used to fit no longer
+           does.
+
+           Everything here trims padding and rhythm, never type size,
+           and only under max-height:900 — the same query the form on
+           this page already uses. Above that nothing changes.
+           Verified in the browser: 935 -> 735, clearing a 13" Air
+           with 78px spare for the floating header.
+
+           !important throughout because lib/cn is plain clsx: it
+           merges nothing, so both classes ship and the later-defined
+           one does not reliably win. */
+        className={"relative isolate scroll-mt-24 overflow-hidden [@media(min-width:768px)_and_(max-height:900px)]:!py-8"}
       >
         <div
           aria-hidden
@@ -348,7 +382,7 @@ export default async function AboutPage({
                 <span aria-hidden className="mb-5 block h-px w-10 bg-gold-deep/50" />
                 {tvp('addressHeading')}
               </p>
-              <h2 className="mt-6 font-serif text-[clamp(1.875rem,3.2vw,2.75rem)] leading-[1.05] tracking-[-0.02em] text-balance text-ink">
+              <h2 className="mt-6 font-serif text-[clamp(1.875rem,3.2vw,2.75rem)] leading-[1.05] tracking-[-0.02em] text-balance text-ink [@media(min-width:768px)_and_(max-height:900px)]:!mt-3">
                 {CAMPAIGN.visitAddress}
               </h2>
               {/* The welcome line sits BETWEEN the headline and the cards
@@ -361,7 +395,7 @@ export default async function AboutPage({
                  at the foot it was a paragraph arriving after a button, which
                  reads as an afterthought — and a button is a thing a column
                  ends on. */}
-              <p className="mt-6 max-w-[48ch] text-[clamp(1rem,1.15vw,1.125rem)] leading-relaxed text-ink-60">
+              <p className="mt-6 max-w-[48ch] text-[clamp(1rem,1.15vw,1.125rem)] leading-relaxed text-ink-60 [@media(min-width:768px)_and_(max-height:900px)]:!mt-3">
                 {tvp('groups')}
               </p>
 
@@ -384,15 +418,15 @@ export default async function AboutPage({
                  ("Norway", "Prayers & community activities"). Our facts are
                  {term, detail} — two lines, no third. Inventing a sub-line
                  per card would be writing copy nobody approved. */}
-              <ul className="mt-7 space-y-3">
+              <ul className="mt-7 space-y-3 [@media(min-width:768px)_and_(max-height:900px)]:!mt-4 [@media(min-width:768px)_and_(max-height:900px)]:[&>li+li]:!mt-2">
                 {visitFacts.map((f, i) => (
                   <li
                     key={f.term}
-                    className="flex items-center gap-4 rounded-2xl bg-paper p-4 ring-1 ring-ink/[0.08] transition-shadow duration-300 hover:ring-gold-deep/30 sm:p-5"
+                    className="flex items-center gap-4 rounded-2xl bg-paper p-4 ring-1 ring-ink/[0.08] transition-shadow duration-300 hover:ring-gold-deep/30 sm:p-5 [@media(min-width:768px)_and_(max-height:900px)]:!px-4 [@media(min-width:768px)_and_(max-height:900px)]:!py-3"
                   >
                     <span
                       aria-hidden
-                      className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gold-soft/40 text-gold-deep ring-1 ring-gold-deep/20"
+                      className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gold-soft/40 text-gold-deep ring-1 ring-gold-deep/20 [@media(min-width:768px)_and_(max-height:900px)]:!h-[38px] [@media(min-width:768px)_and_(max-height:900px)]:!w-[38px]"
                     >
                       <FigureIcon name={FACT_ICONS[i] ?? 'pin'} className="h-[19px] w-[19px]" />
                     </span>
@@ -428,7 +462,7 @@ export default async function AboutPage({
                 href={VISIT_DIRECTIONS_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="group mt-7 inline-flex min-h-11 items-center gap-2.5 rounded-full bg-gold-deep px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:bg-ink"
+                className="group mt-7 inline-flex min-h-11 items-center gap-2.5 rounded-full bg-gold-deep px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:bg-ink [@media(min-width:768px)_and_(max-height:900px)]:!mt-4"
               >
                 {tf('findUs.directions')}
                 <span

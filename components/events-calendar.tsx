@@ -196,8 +196,11 @@ export function EventsCalendar() {
     ?? cells.find((c) => c.inMonth && (c.events.length || c.observance))?.iso
     ?? cells.find((c) => c.inMonth)?.iso;
 
+  // id: the "Kalender →" button in the events section above this one on
+  // /aktuelt scrolls here. scroll-mt clears the sticky header, or the
+  // heading lands underneath it.
   return (
-    <section className="star-texture star-texture--light relative isolate overflow-hidden bg-paper-2 py-14 text-ink md:py-20">
+    <section id="kalender" className="star-texture star-texture--light relative isolate scroll-mt-24 overflow-hidden bg-paper-2 py-14 text-ink md:py-20">
       <div className="mx-auto max-w-6xl px-6">
         {/* ── header ──────────────────────────────────────────────────── */}
         <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-6">

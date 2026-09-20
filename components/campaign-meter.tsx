@@ -142,9 +142,18 @@ export async function CampaignMeter() {
            100% point with the minaret at its top, because what stands at
            this finish is the building. The phrase names the moment. */}
         <div className="mt-7 md:mt-10">
-          <div className="mb-2 flex items-baseline justify-between pe-8 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">
+          {/* THE YEAR IS GONE (client, Tekst (endelig) Sept 2026): "Fjern
+             teksten «2028 – dørene åpnes» som i dag står ved siden av
+             prosentandelen (59 %). Byggestart er ikke fastsatt, så et fast
+             årstall skal ikke loves." It sat at both ends of this row, here
+             and in the compact variant below. meter.goalMark stays written
+             in all three locales, unreferenced.
+
+             The percentage keeps the row to itself rather than being
+             re-centred: it is what the bar under it measures, and it reads
+             as a label on the track's start. */}
+          <div className="mb-2 flex items-baseline pe-8 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">
             <span className="tabular-nums text-gold-deep">{pctInt} %</span>
-            <span className="text-gold-deep">{t('goalMark')}</span>
           </div>
           <div className="relative">
             <span aria-hidden className="absolute -top-6 end-0 flex w-5 flex-col items-center text-gold-deep">
@@ -275,9 +284,8 @@ export async function CampaignMeter() {
               className="mt-7 h-3 rounded-full bg-paper ring-1 ring-rule"
               fillClassName="rounded-full bg-gradient-to-r from-gold to-gold-deep"
             />
-            <div className="mt-2.5 flex items-baseline justify-between font-mono text-[0.625rem] uppercase tracking-[0.14em]">
+            <div className="mt-2.5 flex items-baseline font-mono text-[0.625rem] uppercase tracking-[0.14em]">
               <span className="tabular-nums text-gold-deep">{pctInt} %</span>
-              <span className="text-ink-60">{t('goalMark')}</span>
             </div>
 
             <GiveCTA

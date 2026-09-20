@@ -47,8 +47,20 @@ export async function ProgressPhases({
       <ol className="grid items-stretch gap-x-5 gap-y-5 sm:grid-cols-2 sm:gap-y-8 lg:grid-cols-5 lg:gap-x-3">
         {PROJECT_PHASES.map((phase) => {
           const state = projectPhaseState(phase, now);
+          // Phases 3-5 carry no dates since Sept 2026 (client: no year may be
+          // promised), so this slot is simply empty for them. NOT filled with
+          // the status: the card already prints its status as a badge lower
+          // down, and putting it here too made "Fase 3 · Pågår … Pågår".
+          //
+          // An empty slot is safe because the row it sits on is flex-wrap
+          // with a gap — no separator to leave dangling, and the phase
+          // number holds the line on its own.
           const years =
-            phase.from === phase.to ? String(phase.from) : `${phase.from}\u2013${phase.to}`;
+            phase.from == null || phase.to == null
+              ? null
+              : phase.from === phase.to
+                ? String(phase.from)
+                : `${phase.from}\u2013${phase.to}`;
           const items = t.raw(`phases.${phase.key}.items`) as string[];
           return (
             <li key={phase.key} className="flex flex-col">
@@ -99,7 +111,7 @@ export async function ProgressPhases({
               >
                 <p className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1 font-mono text-[0.625rem] uppercase tracking-[0.16em]">
                   <span className="text-gold-deep">{t('phaseLabel', { n: phase.n })}</span>
-                  <span className="tabular-nums text-ink-60">{years}</span>
+                  {years && <span className="tabular-nums text-ink-60">{years}</span>}
                 </p>
 
                 {/* Name and sum share a line on a phone. At 341px the two

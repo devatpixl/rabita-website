@@ -5,7 +5,7 @@
   },
   "hero": {
     "eyebrow": "Calmeyers gate 8, Oslo",
-    "credLine": "FOUNDED 1987 · OSLO'S FIRST MOSQUE ACROSS NATIONALITIES",
+    "credLine": "Central to the city and central to the faith, since 1987",
     "headline": "The site is ready. Now we raise the building.",
     "headlineBefore": "Mosque, school, library. ",
     "headlineAccent": "One address.",
@@ -53,7 +53,7 @@
     "skipToContent": "Skip to content",
     "give": "Give",
     "prayerTimes": "Prayer times",
-    "openDaily": "OPEN DAILY",
+    "openDaily": "OPEN FOR PRAYER",
     "items": {
       "news": "News",
       "project": "The mosque project",
@@ -170,7 +170,7 @@
     "overview": "See everything in",
     "closeMenu": "Close the menu",
     "openMenu": "Open the menu",
-    "openHours": "06:00 to 22:00",
+    "openHours": "Fajr, Dhuhr to Isha",
     "join": "Become a member"
   },
   "giving": {
@@ -285,7 +285,7 @@
     "latticeCount": "{lit} of 100",
     "goalLabel": "Goal",
     "lastMonthLabel": "last month",
-    "roadmap": "The road to 2028",
+    "roadmap": "The road ahead",
     "now": "Now",
     "phaseNotes": {
       "fundament": "The site is cleared. Foundations are poured and the shell goes up.",
@@ -634,8 +634,8 @@
     "pages": {
       "building": {
         "eyebrow": "The building",
-        "title": "Seven floors on <em>one</em> address.",
-        "lede": "Rabita is building anew at Calmeyers gate 8: Europe's largest mosque, with room for {places} prayer places, a school, a library, a café and restaurant facing the street, a youth club, a studio and a roof terrace. The old building is down, the permissions are granted, the contractor is ready. All that is missing is your support.",
+        "title": "The dream of one of <em>Europe’s largest</em> new mosques",
+        "lede": "In Calmeyers gate 8 we are building more than a mosque. We are building an Islamic centre with a school, a library, a café, a restaurant, a youth club, a multi-purpose hall and a roof terrace across close to 6,000 square metres and seven floors. The old building has been demolished, the permits are in place and the contractor has been chosen. What remains is the last and most important part: funding the project. This is where you can help make the dream real.",
         "primary": "Give to the building",
         "secondary": "Where the money goes",
         "briefLabel": "In short",
@@ -660,7 +660,7 @@
             "body": "A ground floor open to the whole city, with no threshold between the street and the building."
           }
         ],
-        "ledeShort": "Europe's largest mosque, with room for {places} prayer places, a school, a library and a roof terrace at Calmeyers gate 8. All that is missing is your support."
+        "ledeShort": "In Calmeyers gate 8 we are building more than a mosque: an Islamic centre with a school, a library, a café, a youth club and a roof terrace across seven floors. What remains is the funding."
       },
       "money": {
         "eyebrow": "Where the money goes",
@@ -1094,7 +1094,8 @@
       "confirmationTitle": "Thanks, you're on the list.",
       "confirmationBody": "We'll send a confirmation to your email and a reminder the day before the event.",
       "confirmationClose": "Close"
-    }
+    },
+    "calendar": "Calendar"
   },
   "newsEvents": {
     "eyebrow": "News and events",
@@ -1172,7 +1173,7 @@
     },
     "newsletter": {
       "heading": "Newsletter",
-      "body": "One email a month, a photo from the site and what's happening next.",
+      "body": "Monthly updates on activities at the mosque, current information and progress on the building project.",
       "placeholder": "you@example.com",
       "submit": "Subscribe"
     },
@@ -1189,7 +1190,7 @@
       "eyebrow": "Find us",
       "heading": "In the middle of Oslo, minutes from Oslo S.",
       "address": "Address",
-      "hours": "Open",
+      "hours": "Open for prayer",
       "phone": "Phone",
       "email": "E-mail",
       "directions": "Directions",
@@ -1204,7 +1205,11 @@
         "bussterminalen": "Oslo bus terminal",
         "operahuset": "The Opera House",
         "regjeringskvartalet": "The Government Quarter"
-      }
+      },
+      "prayerWindow": "Fajr, Dhuhr to Isha",
+      "prayerLink": "see prayer times",
+      "office": "Office",
+      "officeHours": "Weekdays 10:00–14:00"
     },
     "cols": {
       "rabita": "Rabita",
@@ -1253,7 +1258,8 @@
       "completionNote": "The final completion date is updated in step with the build phases.",
       "completionTbd": "set by build phase",
       "eyebrow": "The new building",
-      "title": "What does the <em>new</em> building contain?"
+      "title": "One mosque, <em>everything under one roof</em>.",
+      "apartments": "Apartments"
     },
     "capacity": {
       "heading": "Capacity",
@@ -1550,7 +1556,8 @@
       "id-for-alle": "How many of you are coming, and the ages of the children.",
       "kurs-islam": "The child's age, and whether it is the girls' or boys' group.",
       "kurs-konvertitter": "Whether you are a new Muslim, or coming to learn.",
-      "arabisk": "Your level, and whether you have read Arabic before."
+      "arabisk": "Your level, and whether you have read Arabic before.",
+      "kvinnetreff": "What kind of gathering interests you, and your age if you wish."
     },
     "submit": "Send",
     "submitting": "Sending …",
@@ -1676,7 +1683,7 @@
     "eyebrow": "Visit us",
     "title": "Drop in. We're happy to show you around.",
     "lede": "Open every day. Groups arrange in advance; short visits are free.",
-    "addressHeading": "Address and hours",
+    "addressHeading": "Contact us",
     "formHeading": "Book a group visit",
     "formTitle": "Come and visit",
     "formLede": "Fill in the form below and we will get in touch to arrange a time and the details.",
@@ -1698,7 +1705,8 @@
     "detail": {
       "what": "What we offer",
       "request": "Send an enquiry",
-      "photos": "Photographs from Rabita"
+      "photos": "Photographs from Rabita",
+      "requestLede": "Tell us a little about yourself and we will get in touch for a conversation."
     },
     "items": {
       "nikah": {
@@ -2249,7 +2257,7 @@
     "title": "Rabita since 1987.",
     "lede": "From a flat in Grønland to one of the largest and oldest mosques in Norway.",
     "historyChip": "The history",
-    "historyHeading": "A congregation that outgrew its building.",
+    "historyHeading": "From mosque to civic institution",
     "factsEyebrow": "In numbers",
     "factsHeading": "Rabita today",
     "quote": "A place where faith and citizenship go together.",
@@ -2270,9 +2278,10 @@
       "visits": "From across Oslo and beyond"
     },
     "history": {
-      "p1": "Rabita was founded in 1987 as the first mosque in Oslo not tied to a single nationality. The idea was simple: a place for Muslims in Norway, regardless of where they came from.",
-      "p2": "The congregation grew, the school was established, and the cultural centre became part of civil society in Oslo. The old building ran out of space long ago.",
-      "p3": "In October {year} King Harald V and Crown Prince Haakon visited the mosque, the first royal visit to a mosque in Norway. We continue to work with the same aim: a place where faith and civic life belong together."
+      "p1": "Rabita was founded in 1987 as the first mosque in Oslo not tied to one particular nationality. The vision was simple but ambitious: to be a gathering place for Muslims in Norway, whatever their background, language or country of origin.",
+      "p2": "Over the years Rabita has grown into more than a mosque. The school was established, the cultural and civic work took shape, and the organisation became an active contributor to interfaith dialogue, volunteering and local community development. Today Rabita is an important part of Oslo’s civil society and a gathering point for people of all ages.",
+      "p3": "In October 2009 Rabita was visited by King Harald V and Crown Prince Haakon, the first royal visit to a mosque in Norway. Today we still work toward the same goal we set out with: to be an open community where faith, knowledge and active citizenship go hand in hand.",
+      "p4": "As our activities have grown, the premises we have are no longer big enough to meet the need. Support the work of realising the new building, which will make room for further growth, strengthen what we offer and meet the needs of today’s generation and tomorrow’s."
     },
     "board": {
       "heading": "The board",
@@ -2421,12 +2430,20 @@
             "detail": "Sørligata 8a, Oslo"
           },
           {
-            "term": "Open",
-            "detail": "Every day, 06:00 to 22:00"
+            "term": "Open for prayer",
+            "detail": "Fajr, Dhuhr to Isha"
+          },
+          {
+            "term": "Office",
+            "detail": "Weekdays 10:00–14:00"
+          },
+          {
+            "term": "Email",
+            "detail": "post@rabita.no"
           },
           {
             "term": "Getting here",
-            "detail": "Gronland, a few minutes from the station"
+            "detail": "3 min from Tøyen metro · 5 min from Grønland metro"
           }
         ],
         "closeHeading": "The door is open.",
@@ -2553,18 +2570,66 @@
       "thanksTitle": "May Allah accept your gift.",
       "thanksBody": "Your contribution goes straight into building the mosque at Calmeyers gate 8.",
       "thanksClose": "Close"
+    },
+    "services": {
+      "eyebrow": "From the sunnah",
+      "give": "Give {amount} kr",
+      "dismiss": "Not now",
+      "quotes": [
+        {
+          "text": "The believers, in their mutual mercy, love and compassion, are like one body.",
+          "source": "Sahih al-Bukhari 6011 · Sahih Muslim 2586"
+        },
+        {
+          "text": "Every act of kindness is charity.",
+          "source": "Sahih al-Bukhari 6021 · Sahih Muslim 1005"
+        },
+        {
+          "text": "Whoever relieves a believer of a hardship, Allah will relieve him of a hardship on the Day of Resurrection.",
+          "source": "Sahih Muslim 2699"
+        }
+      ],
+      "thanksEyebrow": "Thank you",
+      "thanksTitle": "May Allah accept your gift.",
+      "thanksBody": "The services on this page are kept going by the congregation itself. Your contribution goes straight into building the mosque at Calmeyers gate 8.",
+      "thanksClose": "Close"
+    },
+    "teaching": {
+      "eyebrow": "From the sunnah",
+      "give": "Give {amount} kr",
+      "dismiss": "Not now",
+      "quotes": [
+        {
+          "text": "Whoever treads a path in search of knowledge, Allah will make easy for him a path to Paradise.",
+          "source": "Sahih Muslim 2699"
+        },
+        {
+          "text": "The best of you are those who learn the Qur’an and teach it.",
+          "source": "Sahih al-Bukhari 5027"
+        },
+        {
+          "text": "When a person dies, his deeds come to an end except three: a continuing charity, knowledge benefited from, and a righteous child who prays for him.",
+          "source": "Sahih Muslim 1631"
+        }
+      ],
+      "thanksEyebrow": "Thank you",
+      "thanksTitle": "May Allah accept your gift.",
+      "thanksBody": "The third floor of the new building is classrooms. Your contribution goes straight into building the mosque at Calmeyers gate 8.",
+      "thanksClose": "Close"
     }
   },
   "projectOverview": {
-    "briefShort": "Rabita is taking down the old building and building anew on the same plot: a mosque with room for {places} prayer places, a school, a library and a cultural hall, across seven floors at Calmeyers gate 8. Read more by clicking the button below.",
+    "briefShort": "The old building has been demolished, and construction of our new mosque is under way. In Calmeyers gate 8 we are raising one of Europe’s largest new mosques, with a prayer hall across three floors, a school, a library, a café, a restaurant, a youth club, a multi-purpose hall and a roof terrace over close to 6,000 square metres and seven floors. It will be a gathering place for faith, learning and community for generations to come.",
     "cta": "See the mosque project",
     "figures": {
       "area": "Floor area",
       "floors": "Floors",
-      "places": "Prayer places",
-      "done": "Planned completion"
+      "apartments": "Apartments",
+      "buildTime": "Build time",
+      "yearsUnit": "yrs"
     },
-    "credit": "Architect"
+    "credit": "Architect",
+    "heading": "The <em>dream mosque</em> in the heart of Oslo."
   },
   "joinPage": {
     "lede": "Membership is how you are counted here. It brings the newsletter and invitations to what happens in the building. A voting membership adds a vote at the annual meeting that elects the board.",
@@ -2593,6 +2658,10 @@
       "support": {
         "title": "Supports the mosque project",
         "body": "You can only be a member of one religious community. Your membership decides where the state support goes — and here it goes to the building in Calmeyers gate."
+      },
+      "access": {
+        "title": "Access to activities and services",
+        "body": "Become part of an active community with teaching, family activities, events and a range of offerings through the year."
       }
     },
     "members": "Over 4,300 members are already on the roll.",
@@ -2614,7 +2683,9 @@
         "Children around a Qur'an on the carpet in the mosque",
         "Long tables laid for iftar"
       ]
-    }
+    },
+    "formBody": "Registering takes a minute. Fill in the form below and become part of the community.",
+    "boxBody": "As a member you get priority access to our services and activities."
   },
   "apartmentsPage": {
     "units": {
@@ -2701,7 +2772,8 @@
           "lede": "A smart, space-efficient one-room apartment with good daylight and a practical layout. Ideal for students, commuters, or anyone wanting a compact home close to everything Oslo has to offer."
         }
       },
-      "sold": "Sold"
+      "sold": "Sold",
+      "more": "More apartments"
     },
     "eyebrow": "Apartments",
     "title": "Fifteen apartments on <em>one</em> address.",
@@ -2761,21 +2833,21 @@
       "lede": "The homes are designed around functional layouts, good daylight and a modern standard. Large windows, comfortable living rooms and airy balconies make them easy to settle into.",
       "listLabel": "The project will also include",
       "items": {
-        "outdoor": {
-          "title": "Green outdoor space and courtyard",
-          "body": "Planted, with places to sit."
-        },
-        "hall": {
-          "title": "Multi-purpose hall and activity rooms",
-          "body": "For events and for the neighbourhood."
-        },
-        "teaching": {
-          "title": "Teaching facilities",
-          "body": "Flexible rooms for courses, gatherings and lectures on the lower floors."
+        "mosque": {
+          "title": "Mosque and prayer rooms",
+          "body": "Space for faith and worship."
         },
         "library": {
-          "title": "Library and social areas",
-          "body": "Places that bring life and bring people together."
+          "title": "Library, café and restaurant",
+          "body": "A place to read, eat and meet."
+        },
+        "school": {
+          "title": "School",
+          "body": "Classrooms for children and young people, years 1–7."
+        },
+        "outdoor": {
+          "title": "Green outdoor spaces",
+          "body": "With planting and seating areas."
         },
         "terrace": {
           "title": "Roof terraces",
@@ -2923,17 +2995,17 @@
         "body": "After several years of ideas, sketches and careful planning, the first major milestone was reached in 2025. During Ramadan that year, demolition began on the 19th-century building that had served as our mosque for generations. We carried with us the memories and stories shaped within its walls, while knowing in our hearts that this was the beginning of something new."
       },
       "construction": {
-        "label": "2026",
+        "label": "In progress",
         "name": "Construction",
         "body": "In the first quarter of 2026, the goal is to begin construction of the foundation, main structure and external facade. This is the most critical phase of the project, a defining milestone that brings us closer to the vision of a new, modern mosque in the heart of Oslo."
       },
       "interior": {
-        "label": "2027",
+        "label": "Upcoming",
         "name": "Interior",
         "body": "By the end of 2027, our goal is to complete the interior work in the basement, first floor and second floor. These levels will form the heart of the building, with prayer areas spread across three floors, including wudu facilities and changing rooms."
       },
       "completion": {
-        "label": "2028",
+        "label": "Upcoming",
         "name": "Completion",
         "body": "In the final phase, the aim is to complete the upper floors. The third floor will be dedicated to education, with modern classrooms and flexible spaces for weekend school, courses and lectures. The fourth floor will house offices, meeting rooms, a studio and a large youth club. The fifth and sixth floors will contain residential apartments, providing stable income to help sustain the mosque's upkeep and community activities for years to come."
       }
@@ -2999,17 +3071,22 @@
     "scrollHint": "Scroll to explore",
     "heroEyebrow": "Progress",
     "heroTitle": "How it <em>rises</em>.",
-    "heroLede": "Six years, from the first sketch to a finished building in Calmeyers gate. Where the project stands, and what comes next."
+    "heroLede": "Six years, from the first sketch to a finished building in Calmeyers gate. Where the project stands, and what comes next.",
+    "status": {
+      "done": "Completed",
+      "current": "In progress",
+      "next": "Upcoming"
+    }
   },
   "floorByFloor": {
     "eyebrow": "Floor by floor",
     "tapHint": "Tap a dot to see photos",
     "heading": "The building, from the ground up.",
     "stages": [
-      "The building from the ground up, the site is cleared.",
+      "The building rises, floor by floor.",
       "All permissions are granted.",
       "The contractor is chosen.",
-      "The doors open in 2028."
+      "What remains is the funding."
     ],
     "altFinal": "Architect's cutaway of the finished building, with the roof terrace, dome and minaret",
     "rooms": {
@@ -3061,7 +3138,14 @@
       "youthClub": "Somewhere to be on a Friday evening: club rooms, offices for the volunteers and a studio next door.",
       "apartments": "Fifteen rental apartments. The rent pays for running the building, so maintenance never eats the organisation again.",
       "roofTerrace": "Tables under yellow canopies, planting and a view out across the roofs — the outdoor room for the school and the club.",
-      "minaret": "The minaret stands in the courtyard, with the balconies and flower boxes around it."
+      "minaret": "The minaret stands in the courtyard, with the balconies and flower boxes around it.",
+      "prayerScreened": "A prayer room of its own for adults with small children.",
+      "wuduWomen": "Separate facilities for ritual washing, designed for comfort and accessibility before prayer.",
+      "amphi": "Steps that become seating. A place for gatherings, presentations and fresh air.",
+      "administration": "The offices of the staff who plan, organise and keep the mosque running.",
+      "studio": "A studio for recording and streaming lectures, Friday sermons and digital content.",
+      "guestArea": "A room for visitors and guests, right by the staircase that ties the floors together.",
+      "dome": "The dome is a central element of mosque architecture and stands for community, faith and belonging."
     },
     "floors": {
       "lower": "Lower floor · prayer hall and sports hall",
@@ -3084,8 +3168,8 @@
   },
   "eventsCalendar": {
     "eyebrow": "Calendar",
-    "heading": "Month by month, in both calendars.",
-    "lede": "Events at Rabita, alongside the Islamic dates. Tap a date to see what is on.",
+    "heading": "Events and holy days, gathered in one place.",
+    "lede": "Tap a date to see what is on.",
     "prev": "Previous month",
     "next": "Next month",
     "gridLabel": "Calendar for {month}",

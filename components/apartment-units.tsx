@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { APARTMENT_UNITS, unitFace, unitPlan, type ApartmentUnit } from '@/lib/apartment-units';
+import { APARTMENTS_SOURCE } from '@/lib/apartments';
 import { SectionBody } from './primitives';
 import { Accent } from './accent';
 import { Reveal } from './reveal';
@@ -38,6 +39,9 @@ function Row({ label, value }: { label: string; value: string }) {
 
 export function ApartmentUnits() {
   const t = useTranslations('apartmentsPage.units');
+  // apartmentsPage.sales.newTab — already written in all three locales,
+  // left over from the link that used to live further up this page.
+  const tSales = useTranslations('apartmentsPage.sales');
   const [open, setOpen] = useState<ApartmentUnit | null>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
 
@@ -142,6 +146,32 @@ export function ApartmentUnits() {
           {t.rich('heading', { em: (chunks) => <Accent surface="dusk">{chunks}</Accent> })}
         </h2>
         <p className="mt-4 max-w-[52ch] text-body text-paper/70">{t('lede')}</p>
+
+        {/* ── "Flere leiligheter →" ──────────────────────────────────────
+           Back by request, and it is a REVERSAL: the link to cm8.no was
+           pulled from this page on 2026-09-15 ("Fjerne lenken til CM8"), and
+           Tekst (endelig) Sept 2026 asks for it again — "skal være en
+           fungerende lenke til resten av leilighetene som ikke vises i denne
+           12-listen (til cm8.no, den offisielle salgssiden for prosjektet)".
+
+           Placed on the list rather than where it used to sit, because that
+           is the question it now answers: this rail shows twelve of fifteen,
+           and the rest are on the developer's own page.
+
+           rel="noopener": target=_blank without it hands the opened page a
+           live handle on this one. */}
+        <a
+          href={APARTMENTS_SOURCE}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group mt-6 inline-flex min-h-11 items-center gap-2.5 text-[15px] font-semibold text-paper transition-colors hover:text-gold"
+        >
+          <span className="border-b border-gold pb-0.5">{t('more')}</span>
+          <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">
+            &rarr;
+          </span>
+          <span className="sr-only">{tSales('newTab')}</span>
+        </a>
 
         <div className="relative mt-10 md:mt-14">
           {/* Arrows in the page gutter rather than over the plates — at

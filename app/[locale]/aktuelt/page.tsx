@@ -92,10 +92,13 @@ export default async function NewsPage({
 
          padBottom="none" for the reason the services index used it: the
          section below opens on its own ground and carries the space. */}
+      {/* No lede. Client, Tekst (endelig) Sept 2026: "Undertekst
+         («Byggingen, arrangementene og saker som gjelder menigheten.») er
+         fjernet — skal IKKE vises lenger." newsPage.lede is still written in
+         all three locales; only the prop is gone. */}
       <PageBand
         kicker={t('eyebrow')}
         title={t('title')}
-        lede={t('lede')}
         image="/photos/visit-doorway-crowd.webp"
         alt={t('bandAlt')}
         objectClass="object-[50%_58%]"
@@ -173,13 +176,17 @@ export default async function NewsPage({
               <Eyebrow tone="gold-deep">{te('eyebrow')}</Eyebrow>
               <SectionHeading className="mt-4">{te('title')}</SectionHeading>
             </div>
-            {/* The way through to the full page, in the site's own secondary
-               outline pill. events.all is already written in all three. */}
+            {/* "Kalender →" (client, Sept 2026), replacing "Alle
+               arrangementer". The destination moved with the label: it
+               pointed at /arrangementer, which has no calendar on it — the
+               calendar is the next section down this same page, so the
+               button now scrolls there. A button that names a thing should
+               land on that thing. */}
             <Link
-              href={`/${locale}/arrangementer`}
+              href="#kalender"
               className="group inline-flex min-h-12 shrink-0 items-center gap-2.5 rounded-full border border-ink px-6 py-3 text-[15px] font-semibold text-ink transition-colors hover:border-gold-deep hover:bg-gold-deep hover:text-paper"
             >
-              {tev('all')}
+              {tev('calendar')}
               <span
                 aria-hidden
                 className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"

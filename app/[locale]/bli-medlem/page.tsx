@@ -42,7 +42,12 @@ import { FigureIcon, type FigureIconName } from '@/components/figure-icons';
 //
 // updates/renewal stay in the message files untouched — the service-page
 // aside renders updates/vote/renewal and would break if they went.
-const POINTS = ['free', 'vote', 'support'] as const;
+// The client's four (Tekst (endelig) Sept 2026, «Hvorfor bli medlem?»):
+// Gratis medlemskap, Din stemme teller, Du bidrar til fellesskapet,
+// Tilgang til aktiviteter og tjenester. The old `updates` and `renewal`
+// points are not on his list and were dropped from the message files with
+// it — his four replace the set, they do not extend it.
+const POINTS = ['free', 'vote', 'support', 'access'] as const;
 const POINT_ICONS: FigureIconName[] = ['check', 'people', 'building'];
 
 export default async function JoinPage({

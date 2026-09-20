@@ -29,7 +29,12 @@ import { Section, SectionBody, SectionHeading } from '@/components/primitives';
 // whole table. See lib/apartments.ts — the rule is what keeps this figure
 // honest in both directions.
 
-const QUALITY_ITEMS = ['outdoor', 'hall', 'teaching', 'library', 'terrace'] as const;
+// The final five (client, Tekst (endelig) Sept 2026): "Erstatter tidligere
+// liste (som blant annet inneholdt «Flerbrukshall og aktivitetsrom» og
+// «Undervisningsfasiliteter») — dette er den nye, endelige listen med 5
+// punkter." Still five, so the grid is unchanged; `hall` and `teaching`
+// are out, `mosque` and `school` are in, and the order is his.
+const QUALITY_ITEMS = ['mosque', 'library', 'school', 'outdoor', 'terrace'] as const;
 
 export default async function ApartmentsPage({
   params,
@@ -254,21 +259,15 @@ export default async function ApartmentsPage({
                   className="object-cover"
                 />
               </div>
-              {/* The chip, floating on the picture: what the picture is FOR. */}
-              <div className="absolute bottom-4 start-4 flex items-center gap-3 rounded-2xl bg-dusk/85 p-3.5 pe-5 text-paper backdrop-blur-sm">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-paper text-gold-deep">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden className="h-5 w-5">
-                    <circle cx="9" cy="8" r="3" />
-                    <path d="M3.5 19a5.5 5.5 0 0 1 11 0" />
-                    <circle cx="17" cy="9.5" r="2.3" />
-                    <path d="M14.5 19a4.6 4.6 0 0 1 6-4.3" />
-                  </svg>
-                </span>
-                <span>
-                  <span className="block font-serif text-[1.05rem] leading-tight">{t('quality.chip.title')}</span>
-                  <span className="mt-0.5 block text-[12.5px] leading-snug text-paper/70">{t('quality.chip.body')}</span>
-                </span>
-              </div>
+              {/* THE CHIP IS GONE (client, Tekst (endelig) Sept 2026):
+                 "Fjern det gamle avsluttende elementet «Bygget for
+                 fellesskap — Rom som samler folk, hver dag.» helt — skal
+                 ikke lenger vises."
+
+                 The photograph keeps its full frame, which it was always
+                 strong enough for; the chip was captioning a picture that
+                 did not need one. apartmentsPage.quality.chip.* stay in all
+                 three message files, unreferenced. */}
             </div>
           </div>
 
@@ -372,7 +371,7 @@ function QualityIcon({ name, className }: { name: (typeof QUALITY_ITEMS)[number]
       </svg>
     );
   }
-  if (name === 'hall') {
+  if (name === 'mosque') {
     return (
       <svg {...c}>
         <path d="M3 20V9l9-5 9 5v11" />
@@ -381,7 +380,7 @@ function QualityIcon({ name, className }: { name: (typeof QUALITY_ITEMS)[number]
       </svg>
     );
   }
-  if (name === 'teaching') {
+  if (name === 'school') {
     return (
       <svg {...c}>
         <path d="M12 4 2.5 8.5 12 13l9.5-4.5Z" />

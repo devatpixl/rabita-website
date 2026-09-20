@@ -98,10 +98,15 @@ export function MembershipSignup() {
             <span aria-hidden className="h-px w-5 shrink-0 bg-gold-deep/50" />
             {tj('formEyebrow')}
           </p>
+          {/* Client, Tekst (endelig) Sept 2026 — the signup section reads
+             eyebrow "Bli medlem" / heading "Ett skjema. Ett minutt." / a
+             sentence. The heading was medlemskapPage.choose, which is also
+             the SUBMIT BUTTON's label, so the panel said "Bli medlem" twice
+             under an eyebrow that said it a third time. */}
           <h2 className="mt-3 font-serif text-[clamp(1.35rem,2.4vw,1.75rem)] leading-tight text-ink">
-            {t('choose')}
+            {tj('formLede')}
           </h2>
-          <p className="mt-1.5 text-[15px] text-ink-60">{tj('formLede')}</p>
+          <p className="mt-1.5 text-[15px] text-ink-60">{tj('formBody')}</p>
 
           {/* What the three tiles used to occupy: one sentence saying the
              thing they were there to let you choose between. Ruled top and

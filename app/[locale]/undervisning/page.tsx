@@ -1,3 +1,5 @@
+import { TimedCta } from '@/components/timed-cta';
+import { TEACHING_POPUP_FILM } from '@/lib/media';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Accent } from '@/components/accent';
 import { PageHeading } from '@/components/page-heading';
@@ -63,6 +65,29 @@ export default async function UndervisningIndex({
         locale={locale}
         header={false}
         picker={<ServicePicker items={SERVICE_PAGES.undervisning} />}
+      />
+    
+      {/* Client, Bildeplassering (2026-09-19): a video pop-up on this page.
+         
+         The film is the customisation people notice; the QUOTES are the one
+         that matters. `cta.teaching` carries hadith chosen for this page — seeking knowledge, teaching the Qur’an, sadaqa jariya
+         — rather than the prayer popup's charity narrations, which is why it
+         is a namespace of its own and not a reuse of cta.prayer.
+         
+         Every narration is cited to Bukhari/Muslim by number. NOTHING here is
+         paraphrased into scripture: if a citation cannot be verified it does
+         not go on a mosque's website. Worth an imam's eye before launch.
+         
+         Delayed longer than the prayer popup's 6s. Someone checking a prayer
+         time has finished in seconds; someone reading about a service or a
+         course is still reading at six. */}
+      <TimedCta
+        ns="cta.teaching"
+        storageKey="rabita:cta:teaching:v1"
+        delayMs={11000}
+        amountNok={20}
+        showVideoInAsk
+        video={TEACHING_POPUP_FILM}
       />
     </main>
   );

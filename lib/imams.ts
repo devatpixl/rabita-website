@@ -80,7 +80,15 @@ export const IMAMS: readonly Imam[] = [
     key: 'amara',
     title: 'Sh.',
     name: 'Kamel Amara',
-    photo: '/photos/imams/amara.webp',
+    // Client, Bildeplassering (2026-09-19), IMG_0947. Cut square and tight
+    // from a 5376x3809 — these render as CIRCLES, so the face has to fill the
+    // middle or it floats in a ring of background. Also drops the
+    // "© Muslimsk Dialognettverk" mark in the original's bottom-right.
+    //
+    // 800px, not the 400 these used to be: the /om-oss chart now draws them
+    // at 160px, which needs 320 on a retina screen and left 400 with almost
+    // nothing spare.
+    photo: '/photos/imams/amara-dialog.webp',
     languages: ['norwegian', 'arabic', 'french', 'english'],
   },
   {
@@ -98,7 +106,9 @@ export const IMAMS: readonly Imam[] = [
     key: 'andreas',
     title: 'Ust.',
     name: 'Usman Andreas',
-    photo: '/photos/imams/usman.webp',
+    // Client, Bildeplassering (2026-09-19), Usman.png. Same treatment: a
+    // tight head-and-shoulders square at 800px.
+    photo: '/photos/imams/usman-minbar.webp',
     languages: [
       'norwegian',
       'english',

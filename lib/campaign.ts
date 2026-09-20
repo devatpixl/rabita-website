@@ -34,7 +34,13 @@ export const CAMPAIGN = Object.freeze({
   // Community — figures confirmed in Rabita Årsrapport 2025 (p. 1 & 9)
   members: 4_344, // ordinære medlemmer
   volunteers: 300, // "over 300 frivillige per år"
-  visitorsPerWeek: 10_000, // "10.000 besøkende i uken"
+  // 1 000, not 10 000. Client, Tekst (endelig) Sept 2026: "Besøkstallet er
+  // endret fra «10 000 besøkende i uken» til «1 000+ besøkende i uken» —
+  // det gamle tallet var fra et større, tidligere lokale og stemmer ikke
+  // lenger." The congregation is in Sørligata while Calmeyers gate is a
+  // building site, so the old figure described a building that no longer
+  // exists. Rendered with a trailing "+" by the copy, not by this number.
+  visitorsPerWeek: 1_000,
   nationalities: 50, // "mer enn 50 nasjonaliteter"
   pupils: 400, // "over 400 studenter/elever på Rabita"
   // Two separate counts, and they are not interchangeable. `pupils` is who
@@ -76,7 +82,10 @@ export const CAMPAIGN = Object.freeze({
   // Written out as "HLF Arkitekter", not "HLF", so the card and the three
   // image captions say the same thing. The site naming one firm two ways
   // would read as two firms.
-  architect: 'Håvard Lindgard Fagernes, HLF Arkitekter',
+  // "Lindgard" here since the first import; Tekst (endelig) Sept 2026
+  // prints it "Håvard Lindgård Fagernes — HLF Arkitekter". It is a
+  // person's name, so the client's spelling wins.
+  architect: 'Håvard Lindgård Fagernes, HLF Arkitekter',
   siteClearedRamadan: 2025,
   // constructionStart is UNREFERENCED since 2026-09-15: the key-figures row
   // that printed it was changed to the build DURATION at the client's request
@@ -193,12 +202,22 @@ const EUR_NOK = 11.8;
 /** To the nearest 100 000 kr — see the rounding note above. */
 const toNok = (eur: number) => Math.round((eur * EUR_NOK) / 100_000) * 100_000;
 
+// YEARS ONLY ON WHAT HAS HAPPENED (client, Tekst (endelig) Sept 2026).
+// Phases 1 and 2 are finished and keep their dates; 3, 4 and 5 carry `null`,
+// because construction has no fixed start and the document is explicit that
+// no year may be promised: "Årstall på fase 4 og 5 er fjernet (sto tidligere
+// som «2027» og «2028») siden byggestart for disse fasene ikke er fastsatt",
+// and phase 3 is listed with a status and no year at all.
+//
+// null rather than deleting the fields: projectPhaseState() reads them to
+// decide done / current / next, and a phase with no dates is simply one that
+// has not been scheduled. Restoring a year is one value per row.
 export const PROJECT_PHASES = Object.freeze([
   { n: 1, from: 2019, to: 2024, key: 'planning' as const, nok: toNok(602_000) },
   { n: 2, from: 2025, to: 2025, key: 'demolition' as const, nok: toNok(946_000) },
-  { n: 3, from: 2026, to: 2026, key: 'fundament' as const, nok: toNok(9_632_000) },
-  { n: 4, from: 2027, to: 2027, key: 'interior' as const, nok: toNok(6_450_000) },
-  { n: 5, from: 2028, to: 2028, key: 'ferdigstillelse' as const, nok: toNok(6_900_000) },
+  { n: 3, from: null, to: null, key: 'fundament' as const, nok: toNok(9_632_000) },
+  { n: 4, from: null, to: null, key: 'interior' as const, nok: toNok(6_450_000) },
+  { n: 5, from: null, to: null, key: 'ferdigstillelse' as const, nok: toNok(6_900_000) },
 ]);
 export type ProjectPhaseKey = (typeof PROJECT_PHASES)[number]['key'];
 
@@ -214,17 +233,31 @@ export function projectPhaseState(
   now: Date = new Date(),
 ): 'done' | 'current' | 'next' {
   const y = now.getFullYear();
+  // Phases 3-5 carry no dates since Sept 2026 (see PROJECT_PHASES). An
+  // undated phase is one nobody has scheduled, so it is what comes NEXT —
+  // never 'done', and never 'current', which would claim a start date the
+  // client says does not exist. The one exception is the phase the campaign
+  // itself says it is in: CAMPAIGN.phase is the single source for that, and
+  // it is set by hand rather than inferred from a calendar.
+  if (phase.from == null || phase.to == null) {
+    return CAMPAIGN.phase === 'foundations' && phase.key === 'fundament' ? 'current' : 'next';
+  }
   if (y > phase.to) return 'done';
   if (y >= phase.from) return 'current';
   return 'next';
 }
 
-// Segmented phase timeline for the CampaignMeter — three equal segments
-// (the three build years). Derived from PROJECT_PHASES so the meter and the
-// fremdrift page can never drift apart. `key` is the i18n slot; the current
-// phase is the one whose year matches "now" (or the last one past 2028).
+// Segmented phase timeline for the CampaignMeter — the three BUILD phases.
+// Derived from PROJECT_PHASES so the meter and the fremdrift page can never
+// drift apart. `key` is the i18n slot.
+//
+// Selected by having NO dates rather than by `from >= 2026`: since Sept 2026
+// the undated phases ARE the ones still ahead (see PROJECT_PHASES), and the
+// year test could not survive their years being removed. `year` is kept on
+// the shape, null where there is none, so a consumer that wants to print one
+// can — and none does today, which is the point.
 export const PHASES = Object.freeze(
-  PROJECT_PHASES.filter((p) => p.from >= 2026).map((p) => ({ year: p.from, key: p.key })),
+  PROJECT_PHASES.filter((p) => p.from == null).map((p) => ({ year: p.from, key: p.key })),
 );
 export type PhaseKey = 'fundament' | 'interior' | 'ferdigstillelse';
 

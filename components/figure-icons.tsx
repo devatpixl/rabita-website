@@ -23,7 +23,12 @@ export type FigureIconName =
   // Added for the about page's figures (2026-09-07): pupils, and the
   // fifty-odd nationalities in the congregation.
   | 'book'
-  | 'globe';
+  | 'globe'
+  // Added for the home page's key figures (Sept 2026): the fifteen
+  // apartments that replaced the prayer-capacity figure. A PITCHED roof, so
+  // it reads as dwellings against 'building', which is the flat-topped
+  // institutional block one figure to its left.
+  | 'home';
 
 export function FigureIcon({
   name,
@@ -49,6 +54,16 @@ export function FigureIcon({
         <path d="M4 21V7l7-4 7 4v14" />
         <path d="M2 21h20" />
         <path d="M8 21v-4h6v4M8 10h.01M12 10h.01M8 13.5h.01M12 13.5h.01" />
+      </svg>
+    );
+  }
+
+  if (name === 'home') {
+    return (
+      <svg {...common}>
+        <path d="M3 10.5 12 3l9 7.5" />
+        <path d="M5.5 9.5V21h13V9.5" />
+        <path d="M9.75 21v-5.5h4.5V21" />
       </svg>
     );
   }

@@ -5,6 +5,7 @@ import { PrayerBoard } from '@/components/prayer-board';
 import { CalendarDownload } from '@/components/calendar-download';
 import { Imams } from '@/components/imams';
 import { TimedCta } from '@/components/timed-cta';
+import { PRAYER_POPUP_FILM } from '@/lib/media';
 
 // The times come first. Everything else on this page is preamble.
 //
@@ -48,14 +49,25 @@ export default async function BonnetiderPage({
              (It had none: the ServiceHero that used to supply one was dropped
              when the times moved above the fold.) */}
           <div className="relative mt-5 aspect-[5/2] max-h-[15rem] w-full overflow-hidden rounded-3xl bg-dusk">
+            {/* Client, Bildeplassering (2026-09-19), iftar_-62 — his Hovedbilde
+               for Bønnetider. Cut 900px down from a 5218x3479 to 5:2.
+               
+               objectPosition is 50% 50% and NOT the old 62%. That number was
+               steering a different photograph; this file is already framed so
+               the row in rukuʿ sits centred in it, and the band's own height
+               crop (the box renders ~4.6:1 at 1104px against a 5:2 file, so
+               nearly half the height goes) therefore keeps them. A 62% here
+               would push that window down onto the floor and the shoes.
+               
+               prayer-band.webp is NOT deleted — page-band.tsx still uses it. */}
             <Image
-              src="/photos/prayer-band.webp"
+              src="/photos/prayer-band-iftar.webp"
               alt=""
               fill
               priority
               sizes="100vw"
               className="object-cover"
-              style={{ objectPosition: '50% 62%', filter: GRADE }}
+              style={{ objectPosition: '50% 50%', filter: GRADE }}
             />
             {/* Reading-side scrim. Two utilities rather than one, because a
                gradient direction is physical: in Arabic the words sit at the
@@ -125,7 +137,7 @@ export default async function BonnetiderPage({
          so it can be dropped back in with one line if that changes. */}
 
       {/* The page's ask. Six seconds, once, then quiet for a month. */}
-      <TimedCta ns="cta.prayer" storageKey="rabita:cta:prayer:v1" delayMs={6000} amountNok={10} showVideoInAsk />
+      <TimedCta ns="cta.prayer" storageKey="rabita:cta:prayer:v1" delayMs={6000} amountNok={10} showVideoInAsk video={PRAYER_POPUP_FILM} />
     </main>
   );
 }

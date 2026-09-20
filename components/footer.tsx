@@ -4,6 +4,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
+import { cn } from '@/lib/cn';
 import { CAMPAIGN } from '@/lib/campaign';
 import { VISIT_DIRECTIONS_URL } from '@/lib/location';
 
@@ -18,6 +19,11 @@ import { QiblaCompass } from './qibla-compass';
 //             there" — so it comes first and gets the room.
 //   COLUMNS   Rabita · Tjenester · Følg oss · Nyhetsbrev, on one rule.
 //   BAR       lockup, © + org.nr, privacy, language, qibla.
+
+// The register's label: mono, uppercase, and now allowed to wrap — "ÅPENT
+// FOR BØNN" does not fit the 68px the phone column gives it, and a clipped
+// label is worse than a two-line one.
+const DT = 'font-mono text-[0.625rem] uppercase leading-[1.45] tracking-[0.16em] text-paper/45';
 
 export function Footer({ map }: { map?: ReactNode }) {
   const t = useTranslations('footer');
@@ -56,47 +62,62 @@ export function Footer({ map }: { map?: ReactNode }) {
                register on /moskeprosjektet, so the footer reads as part of
                the same site. From sm it returns to the stacked form, which
                is what the narrow desktop column wants. */}
+            {/* ── Sept 2026, Tekst (endelig) — the register changed ──────────
+               TELEPHONE IS OUT, everywhere in this block: "Telefonnummer er
+               fjernet fra footeren inntil videre — det står et avvikende
+               nummer flere steder på siden." Two numbers are in circulation
+               (+47 22 20 80 88 here and on WhatsApp, 22 99 36 62 in all
+               three annual reports) and nobody has said which is answered.
+               A wrong number on every page of a mosque site is worse than
+               no number, so it comes down until they tell us. CAMPAIGN
+               .contactPhone is untouched — restoring this is re-adding a
+               row, not re-finding a fact.
+
+               OPENING HOURS SPLIT IN TWO. One row claimed "ÅPENT DAGLIG ·
+               06:00 til 22:00", which is not true of either thing it could
+               mean: the doors follow the prayer times, which move through
+               the year, and the office keeps its own hours. So the prayer
+               window says what it is and links to the table that has the
+               actual minutes, and the office gets its own row. */}
             <dl className="divide-y divide-paper/10 border-y border-paper/10 lg:mt-8 sm:space-y-4 sm:divide-y-0 sm:border-0">
               <div className="flex items-baseline gap-3 py-2.5 sm:block sm:py-0">
-                <dt className="w-[4.25rem] shrink-0 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-paper/45 sm:w-auto">{t('findUs.address')}</dt>
+                <dt className={cn(DT, 'w-20 shrink-0 sm:w-auto')}>{t('findUs.address')}</dt>
                 <dd className="min-w-0 flex-1 text-[14px] leading-snug text-paper sm:mt-1 sm:text-body">
                   {CAMPAIGN.visitAddress} <span className="text-paper/60">· {CAMPAIGN.visitPostal}</span>
                 </dd>
               </div>
               <div className="flex items-baseline gap-3 py-2.5 sm:block sm:py-0">
-                <dt className="w-[4.25rem] shrink-0 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-paper/45 sm:w-auto">{t('findUs.hours')}</dt>
+                <dt className={cn(DT, 'w-20 shrink-0 sm:w-auto')}>{t('findUs.hours')}</dt>
                 <dd className="min-w-0 flex-1 text-[14px] leading-snug text-paper sm:mt-1 sm:text-body">
-                  {tNav('openDaily')} <span className="tabular-nums text-paper/60">· {tNav('openHours')}</span>
+                  {t('findUs.prayerWindow')}{' '}
+                  <Link href={p('/bonnetider')} className="whitespace-nowrap text-paper/60 underline decoration-paper/25 underline-offset-2 transition-colors hover:text-gold hover:decoration-gold">
+                    {t('findUs.prayerLink')} &rarr;
+                  </Link>
                 </dd>
               </div>
               <div className="flex items-baseline gap-3 py-2.5 sm:hidden">
-                <dt className="w-[4.25rem] shrink-0 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-paper/45">{t('findUs.phone')}</dt>
-                <dd className="min-w-0 flex-1 text-[14px] text-paper">
-                  <a href={`tel:${CAMPAIGN.contactPhone.replace(/\s/g, '')}`} className="transition-colors hover:text-gold">
-                    {CAMPAIGN.contactPhone}
-                  </a>
+                <dt className={cn(DT, 'w-20 shrink-0')}>{t('findUs.office')}</dt>
+                <dd className="min-w-0 flex-1 text-[14px] leading-snug text-paper">
+                  {t('findUs.officeHours')}
                 </dd>
               </div>
               <div className="flex items-baseline gap-3 py-2.5 sm:hidden">
-                <dt className="w-[4.25rem] shrink-0 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-paper/45">{t('findUs.email')}</dt>
+                <dt className={cn(DT, 'w-20 shrink-0')}>{t('findUs.email')}</dt>
                 <dd className="min-w-0 flex-1 break-all text-[14px] text-paper">
                   <a href={`mailto:${CAMPAIGN.contactEmail}`} className="transition-colors hover:text-gold">
                     {CAMPAIGN.contactEmail}
                   </a>
                 </dd>
               </div>
-              {/* sm and up keep the original two-up pair. */}
+              {/* sm and up keep the two-up pair — office where the telephone
+                 used to sit, so the column count is unchanged. */}
               <div className="hidden grid-cols-2 gap-4 sm:grid">
                 <div>
-                  <dt className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-paper/45">{t('findUs.phone')}</dt>
-                  <dd className="mt-1">
-                    <a href={`tel:${CAMPAIGN.contactPhone.replace(/\s/g, '')}`} className="text-body text-paper transition-colors hover:text-gold">
-                      {CAMPAIGN.contactPhone}
-                    </a>
-                  </dd>
+                  <dt className={DT}>{t('findUs.office')}</dt>
+                  <dd className="mt-1 text-body text-paper">{t('findUs.officeHours')}</dd>
                 </div>
                 <div>
-                  <dt className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-paper/45">{t('findUs.email')}</dt>
+                  <dt className={DT}>{t('findUs.email')}</dt>
                   <dd className="mt-1">
                     <a href={`mailto:${CAMPAIGN.contactEmail}`} className="break-all text-body text-paper transition-colors hover:text-gold">
                       {CAMPAIGN.contactEmail}

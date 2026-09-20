@@ -455,6 +455,9 @@ export default async function ServiceDetail({
              aside alone, so centring means what it says. */}
           <Eyebrow tone="gold-deep">{plainTitle}</Eyebrow>
           <SectionHeading className="mt-5">{t('detail.request')}</SectionHeading>
+          {/* Client, Tekst (endelig) Sept 2026 — the «Send henvendelse»-boks
+             is headline + this line + the three fields. */}
+          <p className="mt-4 max-w-[42ch] text-body text-ink-60">{t('detail.requestLede')}</p>
 
           <div className="mt-10 md:grid md:grid-cols-12 md:items-center md:gap-12 lg:gap-16">
             <div className="md:col-span-7">
@@ -502,6 +505,13 @@ export default async function ServiceDetail({
               <h2 className="mt-5 max-w-[24ch] font-serif text-[clamp(1.3rem,1.9vw,1.55rem)] leading-[1.18] text-balance text-ink">
                 {tj('headline')}
               </h2>
+              {/* One line under the headline (client, Tekst (endelig) Sept
+                 2026). The box is headline → this → three benefit titles →
+                 button; the sentence says what membership BUYS, which the
+                 titles below only name. */}
+              <p className="mt-3 max-w-[32ch] text-[14px] leading-snug text-ink-60">
+                {tj('boxBody')}
+              </p>
 
               {/* The benefits, ruled — TITLES ONLY (client, 2026-09-16:
                  "keep this very short for CTA text"). Each point's body ran
@@ -512,7 +522,11 @@ export default async function ServiceDetail({
                  carries the detail. joinPage.points.*.body is untouched in the
                  message files and still renders on /bli-medlem. */}
               <ul className="mt-6 border-t border-rule">
-                {(['updates', 'vote', 'renewal'] as const).map((k) => (
+                {/* `updates` and `renewal` left the client's list in Sept
+                   2026. Three of his four, in his order; `access` is the
+                   one left out, because it is the least specific of the
+                   four and this box has room for three. */}
+                {(['free', 'vote', 'support'] as const).map((k) => (
                   <li
                     key={k}
                     className="border-b border-rule py-3 text-[14px] leading-snug text-ink"

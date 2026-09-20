@@ -456,7 +456,11 @@ export function MobileNav() {
                       <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
                         {t('openDaily')}
                       </p>
-                      <p className="mt-1 font-mono text-[14px] tracking-[0.06em] text-paper/80">
+                      {/* Sans, not mono. This line was a clock — "06:00 til
+                         22:00" — and mono is what sets a clock. Sept 2026 it
+                         became the names of the prayers, and mono spacing on
+                         words reads as a typo. */}
+                      <p className="mt-1 text-[14px] text-paper/80">
                         {t('openHours')}
                       </p>
                     </div>

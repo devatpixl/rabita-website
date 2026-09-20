@@ -5,12 +5,12 @@
   },
   "hero": {
     "eyebrow": "Calmeyers gate 8, Oslo",
-    "credLine": "STIFTET 1987 · OSLOS FØRSTE MOSKÉ PÅ TVERS AV NASJONALITETER",
+    "credLine": "Sentral i byen og sentral i troen, siden 1987",
     "headline": "Tomten er klar. Nå reiser vi bygget.",
-    "headlineBefore": "Moské, skole, bibliotek. ",
-    "headlineAccent": "Én adresse.",
+    "headlineBefore": "Åpenhet, kunnskap og ",
+    "headlineAccent": "fellesskap",
     "headlineAfter": "",
-    "subhead": "Oslos sentralmoské på tvers av nasjonaliteter siden 1987. Oslos sentralmoské er åpen for alle, store og små, kvinner og menn. Vi tilbyr felles bønn, undervisning og kurs, feiring av høytider, familieleirer og mye mer. Vår visjon er åpenhet, kunnskap og fellesskap.",
+    "subhead": "Oslo Sentralmoské er åpen for alle – store og små, kvinner og menn. Vi tilbyr felles bønn, undervisning, kurs, aktiviteter for barn og familier, feiring av høytider og mye mer. Sammen bygger vi et inkluderende fellesskap på tvers av generasjoner og bakgrunner, og fungerer som en bro mellom norske muslimer og storsamfunnet.",
     "phaseLine": "Fase 1 · Fundamentering pågår",
     "cta": {
       "primary": "Se moskeprosjektet",
@@ -53,7 +53,7 @@
     "skipToContent": "Hopp til innhold",
     "give": "Gi en gave",
     "prayerTimes": "Bønnetider",
-    "openDaily": "ÅPENT DAGLIG",
+    "openDaily": "ÅPENT FOR BØNN",
     "items": {
       "news": "Aktuelt",
       "project": "Moskeprosjektet",
@@ -170,7 +170,7 @@
     "overview": "Se alt i",
     "closeMenu": "Lukk menyen",
     "openMenu": "Åpne menyen",
-    "openHours": "06:00 til 22:00",
+    "openHours": "Fajr, Dhuhr til Isha",
     "join": "Bli medlem"
   },
   "giving": {
@@ -198,7 +198,7 @@
     "openSheet": "Åpne givergiver",
     "closeSheet": "Lukk",
     "sheetTitle": "Gi til Rabita",
-    "question": "Bidra med å bygge Europas største moské",
+    "question": "Vær med på å bygge fremtidens moské i Oslo",
     "questionLede": "Faste månedlige gaver gjør byggingen forutsigbar. Engangsgaver hjelper like fullt.",
     "wizard": {
       "back": "Tilbake",
@@ -285,7 +285,7 @@
     "latticeCount": "{lit} av 100",
     "goalLabel": "Mål",
     "lastMonthLabel": "siste måned",
-    "roadmap": "Veien til 2028",
+    "roadmap": "Veien videre",
     "now": "Nå",
     "phaseNotes": {
       "fundament": "Tomten er ryddet. Fundamentet støpes og råbygget reiser seg.",
@@ -344,22 +344,22 @@
       "history": {
         "name": "Historie",
         "title": "Grunnlagt i <em>{year}</em>.",
-        "body": "Den første moskeen i Oslo som ikke var knyttet til én nasjonalitet: et sted for muslimer i Norge, uavhengig av hvor de kommer fra. Fortsatt den eneste som fungerer sånn, og du blir møtt med varme før spørsmål."
+        "body": "Den første norske moskéen som ikke var knyttet til én nasjonalitet. Midt i hjertet av hovedstaden har vi i snart 40 år vært et samlingspunkt for et stort mangfold av norske muslimer med ulike bakgrunner."
       },
       "family": {
-        "name": "Fellesskap",
+        "name": "Medlemmer",
         "title": "<em>{members}</em> medlemmer. Ett fellesskap.",
-        "body": "Fra mer enn {nationalities} nasjonaliteter, {newMembers} nye bare i fjor. Vi står sammen i bønn og i lære, i glede og i sorg, og vi har for lengst vokst ut av veggene våre."
+        "body": "Fra mer enn {nationalities} nasjonaliteter har vi bygd et fellesskap som bæres av {volunteers} faste frivillige og 30 ledere på tvers av styret og avdelingene, støttet av en administrasjon med 6 ansatte, 3 imamer og en daglig leder."
       },
       "learning": {
-        "name": "Undervisning",
-        "title": "Over <em>{students}</em> elever i året.",
-        "body": "Hver helg fylles klasserommene av barn som lærer Quran og arabisk. På kveldene tar de voksne over: foredrag, kalligrafi, filosofi."
+        "name": "Elever",
+        "title": "Over <em>{students}</em> elever. Kunnskap som bygger.",
+        "body": "Fra helgeskole for de yngste med fokus på morsmål og tro, til fordypningskurs for de eldre i språk, islam og kunst — Rabita tilbyr læring for alle. Gjennom faglig undervisning bygger vi kunnskapsrike mennesker med en trygg norsk-muslimsk identitet."
       },
       "volunteer": {
-        "name": "Frivillighet",
-        "title": "<em>{volunteers}</em> frivillige, hele året.",
-        "body": "Rundt {visitors} besøkende i uken. Frivillige i gule vester deler ut mat, koordinerer med bydelen og står med naboer i medgang og motgang. Én vest er ledig til deg."
+        "name": "Besøkende",
+        "title": "<em>{visitors}+</em> besøkende i uken. Et møtested for alle.",
+        "body": "Rabita er mer enn en moské — det er et sted folk kommer til for bønn, undervisning og aktiviteter, uke etter uke. Vi tar også jevnlig imot barnehager, skoleklasser, forskere, journalister og samarbeidspartnere som ønsker å lære mer om oss. Vårt kjennetegn er «Et møtested for alle»."
       }
     }
   },
@@ -634,8 +634,8 @@
     "pages": {
       "building": {
         "eyebrow": "Bygget",
-        "title": "Sju etasjer på <em>én</em> adresse.",
-        "lede": "Rabita bygger nytt i Calmeyers gate 8: Europas største moské med plass til {places} bønneplasser, skole, bibliotek, café og restaurant mot gata, ungdomsklubb, studio og takterrasse. Det gamle bygget er revet, tillatelsene er gitt, entreprenøren er klar. Vi mangler bare din støtte.",
+        "title": "Drømmen om en av <em>Europas største</em> nye moskéer",
+        "lede": "I Calmeyers gate 8 bygger vi mer enn en moské. Vi bygger et islamsk senter med skole, bibliotek, kafé, restaurant, ungdomsklubb, flerbrukshall og takterrasse fordelt på nær 6 000 kvadratmeter og sju etasjer. Det gamle bygget er revet, tillatelsene er på plass og entreprenøren er valgt. Nå gjenstår den siste og viktigste delen: å finansiere prosjektet. Her kan du være med og gjøre drømmen til virkelighet.",
         "primary": "Gi til bygget",
         "secondary": "Hvor pengene går",
         "briefLabel": "Kort sagt",
@@ -660,7 +660,7 @@
             "body": "En første etasje åpen for hele byen, uten terskel mellom gata og bygget."
           }
         ],
-        "ledeShort": "Europas største moské med plass til {places} bønneplasser, skole, bibliotek og takterrasse i Calmeyers gate 8. Vi mangler bare din støtte."
+        "ledeShort": "I Calmeyers gate 8 bygger vi mer enn en moské: et islamsk senter med skole, bibliotek, kafé, ungdomsklubb og takterrasse over sju etasjer. Nå gjenstår finansieringen."
       },
       "money": {
         "eyebrow": "Hvor pengene går",
@@ -847,7 +847,7 @@
       "services": {
         "eyebrow": "Her for deg",
         "title": "For de største dagene, <em>og de tyngste</em>.",
-        "lede": "Uansett hva som bringer deg hit, finnes det noen her som kan hjelpe. Alle henvendelser behandles diskret.",
+        "lede": "Fra livets store øyeblikk til hverdagens fellesskap — her finner du en oversikt over det Rabita tilbyr deg og din familie. Trykk på tjenesten og ta kontakt om du trenger hjelp eller bistand.",
         "note": "Spør i resepsjonen eller send en e-post",
         "regEyebrow": "Hva vi tilbyr",
         "regHeading": "Spør om hva som helst av dette.",
@@ -999,28 +999,32 @@
     "pending": "Innhold kommer",
     "items": {
       "religious": {
-        "title": "<em>Tro</em>",
-        "body": "Nikah, janaza, shahada, hajj og umra — og samtaler med imam når livet krever det."
+        "title": "Tro og <em>bønn</em>",
+        "body": "Vi holder åpent for daglige bønner, fredagsbønn og aktiviteter i Ramadan, og tilbyr et sted for refleksjon, fellesskap og tilbedelse gjennom hele året."
       },
       "teaching": {
         "title": "<em>Undervisning</em>",
-        "body": "Rabita skole, Koranskolen, arabisk, islamkunnskap, norsk og kalligrafi."
+        "body": "Vi tilbyr helgeskole, Koranundervisning og kurs i språk, religion og kunst. Undervisningen er tilpasset ulike aldersgrupper og bidrar til personlig utvikling, økt forståelse og trygg identitet hos både barn, ungdom og voksne."
       },
       "youth": {
         "title": "Barn og <em>ungdom</em>",
-        "body": "Norges Unge Muslimer, familieaktiviteter, leirer og trygge møteplasser gjennom året."
+        "body": "Vi tilbyr trygge møteplasser, meningsfulle aktiviteter og forebyggende arbeid der barn og unge kan vokse, høre til og bli sett."
       },
       "eid": {
-        "title": "Id <em>for alle</em>"
+        "title": "Id <em>for alle</em>",
+        "body": "Vi har arrangert Norges største Id-feiring hvert år siden 2004, med mat fra hele verden, aktiviteter for barn og en unik fellesskapsopplevelse. Feiringen er åpen for alle, uavhengig av tro og bakgrunn."
       },
       "guides": {
-        "title": "Muslimske <em>veivisere</em>"
+        "title": "Muslimske <em>veivisere</em>",
+        "body": "Vi besøker skoler over hele landet og skaper dialog om tro, identitet og mangfold. Tiltaket har nådd over 10 000 elever ved mer enn 200 skoler og er nasjonalt anerkjent for sitt arbeid mot fordommer og utenforskap."
       },
       "humanitarian": {
-        "title": "Humanitært <em>arbeid</em>"
+        "title": "Humanitært <em>arbeid</em>",
+        "body": "Siden 2002 har vi, i samarbeid med Innocents Norge, bidratt til nødhjelp for over 10 millioner barn og støttet mennesker i nød i Norge og 13 andre land."
       },
       "foster": {
-        "title": "Bli <em>fosterhjem</em>"
+        "title": "<em>Fosterhjem</em>",
+        "body": "Gjennom prosjektet Bro til omsorg arbeider vi for at flere barn skal få et trygt og kjærlig hjem. I samarbeid med Barne- og familieetaten informerer, støtter og veileder vi familier som ønsker å bli fosterhjem."
       }
     }
   },
@@ -1094,7 +1098,8 @@
       "confirmationTitle": "Takk, du er meldt på.",
       "confirmationBody": "Vi sender en bekreftelse til e-posten din og en påminnelse dagen før arrangementet.",
       "confirmationClose": "Lukk"
-    }
+    },
+    "calendar": "Kalender"
   },
   "newsEvents": {
     "eyebrow": "Aktuelt og arrangementer",
@@ -1119,7 +1124,7 @@
   "membership": {
     "countdown": "om {n} dager",
     "eyebrow": "INNKALLING · ÅRSMØTET 2027",
-    "headline": "Bygget bestemmes ikke av oss. Det bestemmes av <em>medlemmene</em>.",
+    "headline": "Din stemme former <em>fremtiden vår</em>.",
     "body": "Årsmøtet velger styret. Styret bestemmer hva de sju etasjene brukes til. Hvert medlemskap er én stemme i det rommet.",
     "priceNote": "kr i året · én stemme",
     "ctaPrimary": "Bli medlem",
@@ -1172,7 +1177,7 @@
     },
     "newsletter": {
       "heading": "Nyhetsbrev",
-      "body": "Ett brev i måneden, et bilde fra tomten og hva som skjer neste steg.",
+      "body": "Få månedlige oppdateringer om aktiviteter i moskeen, aktuell informasjon og status på byggeprosjektet.",
       "placeholder": "din@epost.no",
       "submit": "Meld på"
     },
@@ -1189,7 +1194,7 @@
       "eyebrow": "Finn oss",
       "heading": "Midt i Oslo, et par minutter fra Oslo S.",
       "address": "Adresse",
-      "hours": "Åpent",
+      "hours": "Åpent for bønn",
       "phone": "Telefon",
       "email": "E-post",
       "directions": "Veibeskrivelse",
@@ -1204,7 +1209,11 @@
         "bussterminalen": "Oslo bussterminal",
         "operahuset": "Operahuset",
         "regjeringskvartalet": "Regjeringskvartalet"
-      }
+      },
+      "prayerWindow": "Fajr, Dhuhr til Isha",
+      "prayerLink": "se bønnetider",
+      "office": "Kontor",
+      "officeHours": "Hverdager 10:00–14:00"
     },
     "cols": {
       "rabita": "Rabita",
@@ -1253,7 +1262,8 @@
       "completionNote": "Endelig ferdigstillelsesdato oppdateres i takt med byggefasene.",
       "completionTbd": "settes av byggefase",
       "eyebrow": "Det nye bygget",
-      "title": "Hva inneholder det <em>nye</em> bygget?"
+      "title": "En moské med <em>alt under ett tak</em>.",
+      "apartments": "Leiligheter"
     },
     "capacity": {
       "heading": "Kapasitet",
@@ -1376,7 +1386,7 @@
         "mainHall": {
           "tag": "Hovedmoskeen",
           "title": "Bønnesalen",
-          "caption": "Rader i grønt under galleriet, med lysringene i taket. Salen alle samles i på fredager.",
+          "caption": "Rader i grønt under galleriet, med lysringene i taket. Salen der alle samles på fredager.",
           "alt": "Hovedbønnesalen med grønt teppe og galleriet over"
         },
         "minaret": {
@@ -1550,7 +1560,8 @@
       "id-for-alle": "Hvor mange dere er, og alderen på barna.",
       "kurs-islam": "Alder på barnet, og om det gjelder jente- eller guttegruppa.",
       "kurs-konvertitter": "Om du er ny muslim, eller kommer for å lære.",
-      "arabisk": "Nivå, og om du har lest arabisk før."
+      "arabisk": "Nivå, og om du har lest arabisk før.",
+      "kvinnetreff": "Hva slags treff du er interessert i, og gjerne alderen din."
     },
     "submit": "Send",
     "submitting": "Sender …",
@@ -1676,7 +1687,7 @@
     "eyebrow": "Besøk oss",
     "title": "Kom innom. Vi guider gjerne.",
     "lede": "Åpent alle dager. Grupper avtaler i forkant, korte besøk er gratis.",
-    "addressHeading": "Adresse og åpningstider",
+    "addressHeading": "Kontakt oss",
     "formHeading": "Bestill gruppebesøk",
     "formTitle": "Bli med på besøk",
     "formLede": "Fyll ut skjemaet nedenfor, så tar vi kontakt med deg for å avtale tid og detaljer.",
@@ -1687,7 +1698,7 @@
     "eyebrow": "Undervisning",
     "title": "Arabisk, Koran og en skoleuke som passer rundt den norske.",
     "titleShort": "Alt vi <em>underviser</em>.",
-    "lede": "Fire hundre elever og nitten lærere, hver uke i semesteret. Det nye bygget gir skolen sin egen etasje i stedet for rommene den låner i dag."
+    "lede": "Hver uke samler vi over 400 elever og 30 lærere til læring, vekst og fellesskap. Med det nye bygget får skolen endelig egne lokaler, skapt for undervisning og utvikling, i stedet for å være avhengig av lånte rom."
   },
   "servicesIndex": {
     "eyebrow": "Tjenester",
@@ -1698,432 +1709,277 @@
     "detail": {
       "what": "Hva vi tilbyr",
       "request": "Send henvendelse",
-      "photos": "Fotografier fra Rabita"
+      "photos": "Fotografier fra Rabita",
+      "requestLede": "Fortell oss litt om deg selv, så tar vi kontakt for en samtale."
     },
     "items": {
       "nikah": {
-        "title": "Nikah: <em>ekteskapsseremoni</em>",
-        "body": "Den religiøse seremonien, etter at ekteskapet er registrert.",
+        "title": "<em>Nikah</em> (islamsk vielse)",
+        "body": "Hjelp med planlegging og gjennomføring av ekteskapsseremoni.",
         "longBody": "Nikah er den islamske ekteskapsinngåelsen, der brudeparet inngår ekteskap med hverandre i tråd med islamske prinsipper. Rabita tilbyr gjennomføring av religiøs nikah i moskeen ved imam. Paret må allerede være juridisk gift og fremlegge gyldig vigselsattest.",
-        "offerTitle": "En enkel og høytidelig seremoni",
-        "offerLede": "Nikah hos Rabita ledes av imam og holdes i moskeen. Ta kontakt i god tid, så finner vi et tidspunkt sammen.",
+        "offerTitle": "En seremoni dere vil huske",
+        "offerLede": "Vi bistår med planlegging og gjennomføring av selve den religiøse seremonien, etter at ekteskapet er registrert. Ta kontakt tidlig, så finner vi en dato som passer.",
         "offer": [
           {
-            "title": "Før nikah",
-            "body": "Paret må allerede være juridisk gift og fremlegge gyldig vigselsattest.",
-            "detail": "Rabita gjennomfører ikke religiøs nikah uten at det sivile ekteskapet først er registrert."
+            "title": "Veiledning før ekteskap"
           },
           {
-            "title": "Slik foregår seremonien",
-            "body": "Brudeparet møter sammen med nødvendige vitner, og imamen leder seremonien. Partene bekrefter at de ønsker å inngå ekteskapet av fri vilje.",
-            "detail": "Ekteskapsavtalen inngås i nærvær av vitner, og mahr avtales mellom partene som en del av den islamske ekteskapsinngåelsen."
+            "title": "Gjennomføring av nikah"
           },
           {
-            "title": "Imamens veiledning",
-            "body": "Imamen gir råd og påminnelser om ekteskapet og ektefellenes ansvar overfor hverandre.",
-            "detail": "Om betydningen av å bygge et hjem preget av respekt, omsorg og barmhjertighet."
-          },
-          {
-            "title": "En seremoni, ikke et bryllup",
-            "body": "Familie og noen få nærstående kan være til stede.",
-            "detail": "Nikah hos Rabita er en religiøs seremoni. Det legges ikke til rette for større selskaper, servering eller omfattende feiring i moskeens lokaler. Bestilling og spørsmål: post@rabita.no"
+            "title": "Tilgang til seremonilokaler"
           }
         ]
       },
       "janaza": {
-        "title": "Janaza: <em>begravelse</em>",
-        "body": "Janazah-bønn i moskeen, og veiledning for familien.",
+        "title": "<em>Janaza</em> (begravelse)",
+        "body": "Støtte og veiledning ved dødsfall og islamsk gravferd.",
         "longBody": "I islamsk tro har også livets avslutning en verdig og viktig ramme. Når et menneske går bort, samles familie og fellesskap til Janazah-bønnen — muslimenes siste bønn for den avdøde og en siste avskjed før gravleggingen. Rabita tilbyr gjennomføring av Janazah-bønn i moskeen, ledet av en imam.",
-        "offerTitle": "Den siste avskjeden",
-        "offerLede": "I en tid preget av sorg ønsker vi å gjøre den religiøse avskjeden så enkel og verdig som mulig for familien.",
+        "offerTitle": "Vi er her i den vanskeligste tiden",
+        "offerLede": "Ved dødsfall bistår vi familien med janazah-bønn i moskeen og veiledning gjennom hele prosessen. Ta kontakt så snart som mulig, så hjelper vi dere videre.",
         "offer": [
           {
-            "title": "Janazah-bønnen",
-            "body": "Bønnen holdes i moskeen og ledes av en imam, med familie, venner og andre fra fellesskapet til stede.",
-            "detail": "Janazah er muslimenes siste bønn for den avdøde, og en siste avskjed før gravleggingen."
+            "title": "Veiledning ved dødsfall"
           },
           {
-            "title": "Den rituelle vasken",
-            "body": "Rabita kan bistå familien med veiledning og kontakt med personer som kan utføre vasken av den avdøde.",
-            "detail": "Vasken utføres i tråd med islamsk tradisjon."
+            "title": "Janazah-bønn i moskeen"
           },
           {
-            "title": "Det begravelsesbyrået gjør",
-            "body": "Håndtering av den avdøde, transport, kiste og koordinering med gravlund utføres ikke av Rabita.",
-            "detail": "Dette ivaretas av begravelsesbyråene, som vi samarbeider med ved behov. Familien tar kontakt med byrået for de praktiske sidene ved gravferden."
-          },
-          {
-            "title": "Ta kontakt",
-            "body": "Rabita bistår med det som gjelder den religiøse delen og Janazah-bønnen.",
-            "detail": "For spørsmål eller avtale: post@rabita.no"
+            "title": "Støtte til pårørende"
           }
         ]
       },
       "shahada": {
-        "title": "Shahada: <em>bekjennelse</em>",
-        "body": "En åpen samtale om islam, og veiledning for deg som vil ta shahada.",
+        "title": "<em>Shahada</em> (bli muslim)",
+        "body": "Veiledning og gjennomføring for dem som ønsker å bli muslim.",
         "longBody": "Er du nysgjerrig på islam, ønsker å lære mer om troen eller har spørsmål du gjerne vil snakke med noen om? Hos Rabita er du velkommen til en åpen og uforpliktende samtale. Uansett hvor du befinner deg i denne prosessen, møter vi deg med respekt og på dine egne premisser.",
         "offerTitle": "Interessert i islam?",
         "offerLede": "Du trenger ikke å ha bestemt deg for noe for å ta kontakt. Noen ønsker mer kunnskap, andre ønsker veiledning, og noen har kommet frem til at de vil avlegge shahada.",
         "offer": [
           {
-            "title": "En uforpliktende samtale",
-            "body": "Du er velkommen til en åpen samtale, uansett hvor du befinner deg i prosessen.",
-            "detail": "Vi møter deg med respekt og på dine egne premisser. Du trenger ikke å ha bestemt deg for noe."
+            "title": "Samtale og veiledning om islam"
           },
           {
-            "title": "Spørsmål og veiledning",
-            "body": "Imamene våre svarer på spørsmål, forklarer grunnleggende sider ved islam og gir religiøs veiledning.",
-            "detail": "Noen tar kontakt fordi de ønsker mer kunnskap om islam. Andre har utforsket troen over tid og ønsker veiledning."
+            "title": "Gjennomføring av shahada"
           },
           {
-            "title": "Shahada",
-            "body": "For deg som selv har besluttet å bli muslim, tilbyr Rabita veiledning rundt shahada — den islamske trosbekjennelsen."
-          },
-          {
-            "title": "Tiden etterpå",
-            "body": "Det kan være mange nye spørsmål når man er ny i troen.",
-            "detail": "Vi ønsker at Rabita skal være et sted hvor man også finner kunnskap, fellesskap og støtte videre."
+            "title": "Oppfølging og fellesskap etterpå"
           }
         ]
       },
       "counselling": {
         "title": "Samtaler og <em>megling</em>",
-        "body": "Fortrolige samtaler og megling med imam eller kvinnelig rådgiver.",
+        "body": "Rådgivning, konfliktløsning og støtte i krevende situasjoner.",
         "longBody": "Livet kan by på perioder der konflikter, samlivsutfordringer eller andre livskriser blir vanskelige å håndtere alene. Rabita tilbyr fortrolige samtaler og megling med imam eller kvinnelig rådgiver. Samtalene bygger på tillit og behandles konfidensielt.",
-        "offerTitle": "Noen som lytter, og som kjenner rammene",
-        "offerLede": "Vi møter mennesker i ulike livssituasjoner — utfordringer mellom ektefeller, konflikter i familien, generasjonskonflikter eller andre vanskelige situasjoner.",
+        "offerTitle": "Et fortrolig rom for vanskelige samtaler",
+        "offerLede": "Enten det gjelder familie, ekteskap eller andre utfordringer, tilbyr vi samtaler med imam eller kvinnelig rådgiver. Alle henvendelser behandles diskret.",
         "offer": [
           {
-            "title": "Fortrolige samtaler",
-            "body": "Samtaler med imam eller kvinnelig rådgiver, for deg som trenger noen som lytter og kan bidra med råd og veiledning.",
-            "detail": "Innholdet i samtalene behandles konfidensielt og med respekt og diskresjon, innenfor de rammene og pliktene som følger av norsk lov."
+            "title": "Individuelle samtaler"
           },
           {
-            "title": "Megling",
-            "body": "Ved megling forsøker vi å skape et trygt og nøytralt rom der partene får snakke sammen, bli hørt og arbeide mot løsninger.",
-            "detail": "Målet er ikke å ta parti, men å bidra til dialog, forståelse og, der det er mulig, forsoning."
+            "title": "Familie- og ekteskapsrådgivning"
           },
           {
-            "title": "Vi kjenner miljøene",
-            "body": "Noen opplever at de trenger veiledning som også tar hensyn til deres tro, kultur eller familiesituasjon.",
-            "detail": "Her kan moskeen ha en særlig rolle. Vi kjenner miljøene, språkene og de religiøse og kulturelle rammene mange av våre brukere lever innenfor."
-          },
-          {
-            "title": "Når saken krever mer",
-            "body": "Tilbudet erstatter ikke profesjonell helsehjelp, familievern, juridisk bistand eller andre offentlige tjenester.",
-            "detail": "Når en sak krever annen eller mer spesialisert hjelp, vil vi oppfordre til kontakt med riktig instans. Kontakt: post@rabita.no"
+            "title": "Konfliktmegling"
           }
         ]
       },
       "hajj-umrah": {
         "title": "Hajj og <em>umrah</em>",
-        "body": "Organiserte pilegrimsreiser til Mekka, fra Rabitas eget kontor.",
+        "body": "Informasjon, forberedelse og veiledning før pilegrimsreisen.",
         "longBody": "Hajj, pilegrimsreisen til Mekka, er islams femte søyle og en plikt for enhver muslim som har fysisk og økonomisk mulighet til å gjennomføre reisen. Umrah er den mindre pilegrimsreisen og kan gjennomføres gjennom store deler av året. Hajj- og umrah-kontoret holder til i Rabitas lokaler og drives av et engasjert team av frivillige med lang erfaring.",
-        "offerTitle": "Reisen til Mekka, godt organisert",
-        "offerLede": "For mange er hajj og umrah blant de største reisene de foretar i livet. Målet vårt er å gjøre reisen så trygg og oversiktlig som mulig, slik at tiden går til det som er selve formålet.",
+        "offerTitle": "Trygg forberedelse til pilegrimsreisen",
+        "offerLede": "Våre samarbeidspartnere i Hajj og umrah-kontoret gir informasjon og veiledning før både hajj og umrah, og organiserer egne umrah-reiser flere ganger i året. Ta kontakt for å høre mer om neste reise.",
         "offer": [
           {
-            "title": "Organiserte pakkereiser",
-            "body": "Hajj- og umrah-kontoret holder til i Rabitas lokaler og drives av frivillige med lang erfaring.",
-            "detail": "Kontoret har gjennom årene vokst til å bli en av de største aktørene i Norge på organiserte pilegrimsreiser til Mekka."
+            "title": "Informasjonsmøter"
           },
           {
-            "title": "Vi ordner det praktiske",
-            "body": "Visumprosess, reisedokumentasjon, flyreise, opphold og annen nødvendig koordinering.",
-            "detail": "Vi legger vekt på å tilby gode og helhetlige reisepakker til gunstige priser."
+            "title": "Forberedelseskurs"
           },
           {
-            "title": "Forberedelse før avreise",
-            "body": "Deltakerne får informasjon og veiledning om gjennomføringen av hajj og umrah.",
-            "detail": "Det gir både førstegangsreisende og mer erfarne deltakere mulighet til å forberede seg på de religiøse så vel som de praktiske sidene ved reisen."
-          },
-          {
-            "title": "Når reisene går",
-            "body": "Hajj arrangeres hvert år i måneden Dhul Hijjah. Umrah normalt to til tre ganger i året.",
-            "detail": "Umrah legges stort sett til skoleferiene, slik at det blir enklere for familier med barn og unge å delta. Telefon 40 29 20 20 · hajjogumrah@gmail.com"
+            "title": "Reiseguide"
           }
         ]
       },
       "skole": {
-        "title": "Rabita <em>skole</em>",
-        "body": "Helgeskole i arabisk, Koran og islamsk lære for barn fra 6 til 16 år.",
+        "title": "<em>Rabita skole</em>",
+        "body": "Helgeskole for barn og ungdom med undervisning i arabisk og islam.",
         "longBody": "Rabitas arabiske skole er et helgeundervisningstilbud for barn og unge i alderen 6–16 år, og et av våre største og mest etablerte tilbud til barn og familier. I 2025 hadde skolen 225 elever fordelt på 13 klasser.",
         "offerTitle": "Mer enn undervisning",
-        "offerLede": "Hos oss skal barna få et sted hvor språk, tro, identitet og fellesskap hører naturlig sammen.",
+        "offerLede": "Hos oss skal barna få et sted hvor språk, tro, identitet og fellesskap hører naturlig sammen. Vi legger stor vekt på kvalitet i undervisningen og på lærere som er faglig sterke og gode rollemodeller.",
         "offer": [
           {
-            "title": "Helgeskole for 6 til 16 år",
-            "body": "Et av våre største og mest etablerte tilbud til barn og familier.",
-            "detail": "I 2025 hadde skolen 225 elever fordelt på 13 klasser."
+            "title": "Arabiskundervisning"
           },
           {
-            "title": "Arabisk, Koran og islamsk lære",
-            "body": "Undervisningen følger en tydelig pedagogisk struktur.",
-            "detail": "Målet er at barna skal utvikle gode språkferdigheter, bli kjent med sin religiøse og kulturelle arv, bygge vennskap og vokse opp med en trygg identitet som norske muslimer."
+            "title": "Islamsk undervisning"
           },
           {
-            "title": "Lærerne",
-            "body": "Våre faste lærere har pedagogisk kompetanse og arbeider til daglig innenfor norske utdanningsinstitusjoner."
-          },
-          {
-            "title": "Påmelding og kontakt",
-            "body": "Informasjon om registrering og ledige plasser annonseres gjennom Rabitas kanaler.",
-            "detail": "Spørsmål om undervisningen, klassetrinn, registrering eller ledige plasser: undervisning@arabiskald.no"
-          },
-          {
-            "title": "Å melde på et barn",
-            "body": "Plassene deles etter nivå og ikke etter alder, slik at et barn som aldri har lest arabisk sitter med andre som begynner på samme sted.",
-            "detail": "Semester: Høst og vår, etter Oslo sin skolerute. Alder: Fra seks år, i grupper etter lesenivå. Pris: Fastsatt per semester, og ingen avvises på grunn av den."
+            "title": "Trygt læringsmiljø"
           }
         ]
       },
       "koran": {
-        "title": "Koran<em>skolen</em>",
-        "body": "Koranundervisning for barn fra 6 år og for voksne, med tajweed.",
+        "title": "<em>Koranskolen</em>",
+        "body": "Koranundervisning for barn, ungdom og voksne med vekt på korrekt resitasjon, memorering og forståelse.",
         "longBody": "Undervisning i Koranen: å lære utenat, og å lære å lese på riktig måte — tajweed. Barn mellom 6 og 15 år og voksne over 16 år har egne grupper.",
-        "offerTitle": "Koranen, lest som den skal leses",
-        "offerLede": "Undervisningen handler like mye om uttalen som om teksten. Arabisk som språk er et eget kurs.",
+        "offerTitle": "Å lære Koranen, riktig og med forståelse",
+        "offerLede": "Vi legger vekt på korrekt resitasjon (tajweed), memorering og forståelse, for både barn og voksne.",
         "offer": [
           {
-            "title": "Tajweed",
-            "body": "Å lese på riktig måte: uttale, lengder og pauser."
+            "title": "Tajweed og resitasjon"
           },
           {
-            "title": "Memorering",
-            "body": "Å lære utenat, i det tempoet eleven klarer."
+            "title": "Memorering av Koranen"
           },
           {
-            "title": "Barn fra 6 år",
-            "body": "Egne grupper for barn mellom 6 og 15 år.",
-            "detail": "Voksne over 16 år har sine egne."
-          },
-          {
-            "title": "Arabisk er et eget kurs",
-            "body": "Vil du lære språket, ikke bare lese teksten, er det Kurs i arabisk som gjelder."
+            "title": "Koranforståelse"
           }
         ]
       },
       "kurs": {
-        "title": "Kalligrafi og <em>geometri</em>",
-        "body": "Kurs i islamsk kalligrafi og geometrisk kunst.",
+        "title": "Kalligrafi- og <em>geometriskolen</em>",
+        "body": "Utforsk islamsk kunst og geometri gjennom kurs, workshops og kreative aktiviteter.",
         "longBody": "Kunst og skjønnhet har gjennom århundrer hatt en viktig plass i den islamske tradisjonen. I Rabita ønsker vi å holde denne rike kunsttradisjonen levende og gjøre den tilgjengelig for nye generasjoner, gjennom kurs der tradisjonelt håndverk, historie, presisjon og kreativ utfoldelse møtes.",
-        "offerTitle": "En levende kunsttradisjon",
-        "offerLede": "Kalligrafien er nært knyttet til Koranen og ønsket om å gi det skrevne ordet et vakkert og verdig uttrykk. Sammen med geometrien er den blant de mest karakteristiske uttrykkene for islamsk kunst.",
+        "offerTitle": "Utforsk islamsk kunst",
+        "offerLede": "Vi tilbyr kurs i arabisk kalligrafi og islamsk geometri, ledet av erfarne kunstnere. Åpent for både nybegynnere og viderekomne.",
         "offer": [
           {
-            "title": "Kalligrafi med Ustadh Khalid Casado",
-            "body": "Deltakerne arbeider med klassiske bokstavproporsjoner, teknikk og komposisjon under individuell veiledning.",
-            "detail": "Han har diplom fra mesterkalligrafene Hasan Celebi, Ferhat Kurlu og Nuria Garcia Masip innen den osmanske kalligrafitradisjonen."
+            "title": "Arabisk kalligrafi"
           },
           {
-            "title": "Geometri med Samira Mian",
-            "body": "Med passer og linjal lærer deltakerne å konstruere de presise og komplekse mønstrene som gjennom århundrer har preget islamsk kunst og arkitektur.",
-            "detail": "Undervisningen gir også innblikk i kunstformens historiske utvikling fra Spania i vest til India i øst, og deltakerne arbeider med farger og akvarell for å skape egne uttrykk."
+            "title": "Islamsk geometri"
           },
           {
-            "title": "Deltakere fra flere land",
-            "body": "Kursene våre har tiltrukket deltakere fra blant annet Tyskland, Spania og England."
-          },
-          {
-            "title": "Datoer og påmelding",
-            "body": "Kursene arrangeres gjennom året og annonseres på rabita.no og i våre sosiale medier.",
-            "detail": "For spørsmål eller mer informasjon: post@rabita.no"
+            "title": "Kurs og workshops"
           }
         ]
       },
       "veivisere": {
         "title": "Muslimske <em>veivisere</em>",
-        "body": "Skolebesøk der unge muslimer møter elever ansikt til ansikt.",
+        "body": "Brobygging, dialogarbeid og kunnskapsformidling om islam og muslimer.",
         "longBody": "Muslimske veivisere er et dialog- og kunnskapstiltak som skal forebygge fordommer og diskriminering mot norske muslimer. Gjennom skolebesøk møter unge muslimske veivisere elever ansikt til ansikt og snakker åpent om tro, identitet, tilhørighet og hvordan det er å vokse opp og leve som muslim i Norge.",
-        "offerTitle": "Hva skjer med fordommer når mennesker faktisk får møte hverandre?",
-        "offerLede": "Målet er enkelt, men viktig: mer kunnskap, mindre avstand og færre fordommer.",
+        "offerTitle": "Møter som bygger forståelse",
+        "offerLede": "Våre veivisere besøker skoler over hele landet for å svare på spørsmål om tro og identitet, og bidra til mindre fordommer og mer forståelse. Vi tar også imot besøk i moskéen.",
         "offer": [
           {
-            "title": "Skolebesøk",
-            "body": "Unge veivisere snakker åpent om tro, identitet og tilhørighet, og om hvordan det er å vokse opp som muslim i Norge.",
-            "detail": "Elevene får stille spørsmål — også de vanskelige spørsmålene det ikke alltid finnes naturlige arenaer for å stille."
+            "title": "Skolebesøk"
           },
           {
-            "title": "Over 200 skoler",
-            "body": "Siden 2025 har Muslimske veivisere besøkt over 200 skoler og møtt mer enn 10 000 elever.",
-            "detail": "Skoler kan også besøke moskeen, få omvisning og møte veiviserne i deres eget miljø."
+            "title": "Dialogmøter og foredrag"
           },
           {
-            "title": "Bakgrunnen for ordningen",
-            "body": "Utviklet av Det Islamske Forbundet – Rabita og Minotenk, inspirert av de samiske og jødiske veiviserordningene.",
-            "detail": "Etableringen ble senere løftet inn som et eget tiltak i regjeringens Handlingsplan mot muslimfiendtlighet 2025–2030, lagt frem i desember 2024."
-          },
-          {
-            "title": "Hvem som driver den",
-            "body": "Ordningen eies i dag av Muslimsk Dialognettverk og driftes av Det Islamske Forbundet – Rabita.",
-            "detail": "Arbeidet skjer i samarbeid med Minotenk og Det teologiske fakultet ved Universitetet i Oslo."
+            "title": "Omvisninger i moskeen"
           }
         ]
       },
       "norsk": {
-        "title": "Norsk og <em>samfunnsdeltakelse</em>",
-        "body": "Norskundervisning for voksne som faller utenfor de ordinære tilbudene.",
+        "title": "Kurs i <em>norsk</em>",
+        "body": "Gratis norskundervisning og veiledning for voksne som ønsker å styrke sine språkferdigheter og samfunnskunnskap.",
         "longBody": "Å kunne språket i landet man bor i handler om langt mer enn å kunne gjøre seg forstått. Det handler om å kunne snakke med barnas skole, forstå et brev fra det offentlige, søke arbeid, ta utdanning, følge samfunnsdebatten og delta i samfunnet på egne premisser.",
-        "offerTitle": "Språk gir mennesker muligheten til å delta",
-        "offerLede": "Vi tilbyr norskundervisning for voksne som trenger et tilgjengelig sted å lære og praktisere norsk.",
+        "offerTitle": "Et springbrett inn i samfunnet",
+        "offerLede": "Vi tilbyr gratis norskundervisning for voksne som faller utenfor de ordinære tilbudene, med fokus på hverdagsspråk og samfunnsdeltakelse.",
         "offer": [
           {
-            "title": "For dem som faller utenfor",
-            "body": "Noen har ikke rett til gratis norskundervisning. Andre har bodd i Norge i mange år, men har aldri fått muligheten til å lære språket godt nok.",
-            "detail": "Tilbudet er særlig rettet mot mennesker som ikke får dekket norskopplæring gjennom det offentlige."
+            "title": "Norskundervisning"
           },
           {
-            "title": "Mer enn grammatikk",
-            "body": "Målet er at deltakerne skal bli tryggere og mer selvstendige i møte med arbeidslivet, offentlige tjenester, skole og utdanning.",
-            "detail": "Og få større mulighet til å delta aktivt i samfunnet."
+            "title": "Samtaletrening"
           },
           {
-            "title": "En naturlig del av å være moské",
-            "body": "Vi møter mennesker i ulike livsfaser, også mennesker som offentlige tjenester ikke alltid når frem til.",
-            "detail": "Den tilliten og nærheten ønsker vi å bruke til å åpne flere dører inn i det norske samfunnet."
-          },
-          {
-            "title": "Påmelding",
-            "body": "For informasjon om norskundervisning, kurs og påmelding.",
-            "detail": "Ta kontakt med Rabita på post@rabita.no"
+            "title": "Samfunnskunnskap"
           }
         ]
       },
       "ungdom": {
-        "title": "Norges Unge <em>Muslimer</em>",
-        "body": "Rabitas ungdomsorganisasjon, drevet av og for ungdom.",
+        "title": "<em>Norges Unge Muslimer</em> (NUM)",
+        "body": "Aktiviteter og fellesskap for ungdom.",
         "longBody": "Unge mennesker trenger mer enn et sted å være. De trenger fellesskap, gode rollemodeller, kunnskap og arenaer hvor de kan utvikle seg, ta ansvar og kjenne at de hører til. Norges Unge Muslimer er Rabitas ungdomsorganisasjon og har et selvstendig styre.",
-        "offerTitle": "Plass til å skape, lede og påvirke",
-        "offerLede": "Vi ønsker ikke bare å arrangere aktiviteter for ungdom. Vi ønsker å gi ungdom reell plass til å skape, lede og påvirke.",
+        "offerTitle": "Fellesskap for ungdom",
+        "offerLede": "NUM er Rabitas egen ungdomsorganisasjon, drevet av og for ungdom. Her møtes unge til sosiale kvelder, leirer og faglige arrangementer.",
         "offer": [
           {
-            "title": "Drevet av ungdom",
-            "body": "Organisasjonen drives av og for ungdom, med et selvstendig styre.",
-            "detail": "Gjennom planlegging og gjennomføring av aktiviteter får unge erfaring med samarbeid, organisasjonsarbeid, ansvar og ledelse."
+            "title": "Ungdomskvelder"
           },
           {
-            "title": "Leirer, kurs og turer",
-            "body": "Gjennom året arrangerer NUM leirer, kurs og temakvelder, konferanser, sosiale aktiviteter, turer og større arrangementer.",
-            "detail": "Like viktig som selve aktivitetene er nettverkene som skapes rundt dem."
+            "title": "Leirer og turer"
           },
           {
-            "title": "Jenter i fokus og Gutter i fokus",
-            "body": "To målrettede tilbud for unge i alderen 11–15 år, der islamsk undervisning kombineres med veiledning, aktiviteter og sosialt fellesskap.",
-            "detail": "I en alder hvor mange begynner å utforske spørsmål om tro, identitet, vennskap og forventninger, ønsker vi å tilby stabile møteplasser med trygge voksne og gode rollemodeller."
-          },
-          {
-            "title": "Forebygging og samarbeid",
-            "body": "Forebygging av utenforskap og kriminalitet, psykososial trygghet, identitet og samfunnsdeltakelse er viktige deler av arbeidet.",
-            "detail": "Vi samarbeider med blant annet Kriminalomsorgen, SALTO og Bydel Gamle Oslo."
+            "title": "Foredrag og workshops"
           }
         ]
       },
       "barn-og-familie": {
-        "title": "Barn og <em>familie</em>",
-        "body": "Aktiviteter og møteplasser for barn og familier gjennom hele året.",
+        "title": "Barn og <em>familier</em>",
+        "body": "Tilbud og aktiviteter som styrker familieliv, oppvekst og fellesskap.",
         "longBody": "Rabita skal være et sted hvor også barna får gode minner, bygger vennskap og opplever gleden ved å være en del av et større fellesskap. Derfor arrangerer vi gjennom året en rekke aktiviteter og møteplasser for barn og familier.",
-        "offerTitle": "Et sted barna også kan kalle sitt",
-        "offerLede": "For oss handler barn- og familiearbeidet om tilhørighet — for barna, og for familiene rundt dem.",
+        "offerTitle": "Gode opplevelser, sammen",
+        "offerLede": "Gjennom året arrangerer vi turer, verksteder og samlinger som gir barn og foreldre gode opplevelser sammen, og styrker båndene i familien.",
         "offer": [
           {
-            "title": "Høytidene",
-            "body": "Gjennom blant annet Id for alle og ramadanverksted ønsker vi å skape gode rammer rundt høytidene våre.",
-            "detail": "Tro og tradisjon formidles ikke bare gjennom undervisning, men også gjennom opplevelser, fellesskap og gode minner."
+            "title": "Familieaktiviteter"
           },
           {
-            "title": "Leirer og turer",
-            "body": "Gjennom året arrangerer vi leirer, utflukter, turer og ulike sosiale aktiviteter for barn og familier."
+            "title": "Turer og arrangementer"
           },
           {
-            "title": "Å møtes",
-            "body": "Noen aktiviteter er knyttet til bestemte anledninger, mens andre først og fremst handler om å møtes og bli kjent på tvers av familier og generasjoner."
-          },
-          {
-            "title": "Når det skjer",
-            "body": "Informasjon om kommende familieaktiviteter, arrangementer og påmelding publiseres fortløpende.",
-            "detail": "På Rabitas nettside og i våre sosiale medier."
+            "title": "Samlinger for foreldre og barn"
           }
         ]
       },
       "fosterhjem": {
-        "title": "Bli <em>fosterfamilie</em>",
-        "body": "Informasjon og veiledning for familier som vurderer å bli fosterhjem.",
+        "title": "<em>Fosterfamilie</em>",
+        "body": "Informasjon og veiledning for familier som vurderer fosterhjem.",
         "longBody": "Det finnes barn og unge i Oslo som av ulike grunner ikke kan bo sammen med sine foreldre, og som trenger et trygt og stabilt hjem. Blant dem finnes også barn med muslimsk bakgrunn som venter på en familie som kan gi dem omsorg, trygghet og tilhørighet.",
-        "offerTitle": "Kanskje begynner det bare med en samtale",
-        "offerLede": "Du trenger ikke å ha bestemt deg før du tar kontakt. Hos Rabita kan du ta det første steget helt uforpliktende.",
+        "offerTitle": "Et trygt hjem gjør en forskjell",
+        "offerLede": "Gjennom prosjektet Bro til omsorg informerer og veileder vi familier som ønsker å bli fosterhjem for barn med muslimsk bakgrunn.",
         "offer": [
           {
-            "title": "Hvorfor det betyr noe",
-            "body": "Når et barn må flytte fra sin egen familie, er det allerede en stor omveltning i barnets liv.",
-            "detail": "For noen barn kan det ha stor betydning å komme til en familie som også har forståelse for barnets religiøse og kulturelle bakgrunn — samtidig som det aller viktigste alltid er at barnet får et trygt og godt hjem."
+            "title": "Informasjon om fosterhjem"
           },
           {
-            "title": "Bro til omsorg",
-            "body": "Gjennom prosjektet Bro til omsorg samarbeider Rabita med Barne- og familieetaten i Oslo om å informere og rekruttere muslimske fosterfamilier.",
-            "detail": "Prosjektet er finansiert av Bufdir."
+            "title": "Hjelp med å bli en fosterfamilie"
           },
           {
-            "title": "Spørsmålene du sitter med",
-            "body": "Hvem kan bli fosterforeldre? Hvilke krav stilles? Hvordan foregår prosessen? Og hva vil det bety for familien og hverdagen?",
-            "detail": "Vår rolle er å svare på spørsmål, gi informasjon og være en bro mellom familier som vurderer å åpne hjemmet sitt for et barn og Barne- og familieetaten i Oslo."
-          },
-          {
-            "title": "Ta det første steget",
-            "body": "Du kan kontakte oss helt uforpliktende for informasjon og veiledning om hva det innebærer å bli fosterfamilie."
+            "title": "Veiledning for familier"
           }
         ]
       },
       "id-for-alle": {
-        "title": "Id for <em>alle</em>",
-        "body": "Familiedag i høytiden, med aktiviteter og lek for store og små.",
+        "title": "Id <em>for alle</em>",
+        "body": "Åpne og inkluderende id-arrangementer for hele familien.",
         "longBody": "Rabita inviterer hele familien til en dag fylt med aktiviteter, lek og god stemning for både store og små. Id for alle har vært holdt flere steder i byen — blant annet på Hersleb skole, i Ekeberghallen og på Rådhusplassen — og annonseres på nytt foran hver høytid.",
-        "offerTitle": "Høytiden, feiret sammen",
-        "offerLede": "Id er en familiedag. Programmet er lagt opp slik at barn og voksne har noe å gjøre samtidig, og alle er velkomne.",
+        "offerTitle": "En dag for hele familien",
+        "offerLede": "Våre id-feiringer samler tusenvis av mennesker fra ulike bakgrunner til en trygg og festlig dag med fellesbønn, aktiviteter og god mat.",
         "offer": [
           {
-            "title": "Åpent for hele familien",
-            "body": "Store og små i samme hus. Dagen er laget for begge deler, ikke for den ene med den andre på slep."
+            "title": "Felles id-bønn"
           },
           {
-            "title": "Aktiviteter og lek",
-            "body": "Program gjennom hele dagen, med leker og aktiviteter for barna."
+            "title": "Aktiviteter for barn og familier"
           },
           {
-            "title": "Der det er plass til alle",
-            "body": "Arrangementet flytter dit det får plass.",
-            "detail": "Tidligere holdt blant annet på Hersleb skole, i Ekeberghallen og på Rådhusplassen."
-          },
-          {
-            "title": "Datoen følger høytiden",
-            "body": "Id for alle annonseres foran hver høytid.",
-            "detail": "Tid og sted kommer i nyhetsbrevet og på Facebook."
+            "title": "Mat og fellesskap"
           }
         ]
       },
       "kurs-islam": {
         "title": "Kurs i <em>islam</em>",
-        "body": "Grunnleggende islamkunnskap for barn og ungdom, i egne grupper.",
+        "body": "Grunnleggende undervisning i islamsk tro og praksis.",
         "longBody": "Undervisning i islam for ulike målgrupper. Jenter i Fokus og Gutter i Fokus tar for seg det grunnleggende — bønn, rituell vask og tawhid — i to aldersgrupper: 10 til 13 år og 14 til 18 år.",
-        "offerTitle": "Det grunnleggende, grundig",
-        "offerLede": "Kursene tar for seg det en ung muslim trenger å kunne, i grupper satt sammen etter alder.",
+        "offerTitle": "Grunnleggende kunnskap i trygge rammer",
+        "offerLede": "Kurset gir barn og ungdom en solid innføring i islamsk tro og praksis, tilpasset egne aldersgrupper.",
         "offer": [
           {
-            "title": "Jenter i Fokus",
-            "body": "Egen gruppe for jenter."
+            "title": "Islamsk troslære"
           },
           {
-            "title": "Gutter i Fokus",
-            "body": "Egen gruppe for gutter."
+            "title": "Islamsk praksis"
           },
           {
-            "title": "Bønn, wudu og tawhid",
-            "body": "Grunnleggende kunnskap om bønnen, den rituelle vasken og troen på Guds enhet."
-          },
-          {
-            "title": "To aldersgrupper",
-            "body": "Undervisningen deles etter alder.",
-            "detail": "10–13 år og 14–18 år."
+            "title": "Spørsmål og svar"
           }
         ]
       },
@@ -2156,36 +2012,39 @@
       },
       "arabisk": {
         "title": "Kurs i <em>arabisk</em>",
-        "body": "Arabisk for voksne over 16 år, på to nivåer.",
+        "body": "Arabiskopplæring for voksne på ulike nivåer, fra nybegynner til viderekommende.",
         "longBody": "Undervisning i arabisk for voksne over 16 år, på to nivåer. Nivå 1 begynner med alfabetet. Nivå 2 bygger videre med grammatikk, ordforråd og lesing av sammenhengende tekst.",
-        "offerTitle": "Fra alfabetet til teksten",
-        "offerLede": "To nivåer, slik at du kan begynne der du er.",
+        "offerTitle": "Fra første ord til flyt",
+        "offerLede": "Vi tilbyr arabiskopplæring på to nivåer, for voksne som ønsker å lære eller styrke språket.",
         "offer": [
           {
-            "title": "Nivå 1",
-            "body": "Alfabetet og de første ordene, for deg som begynner fra null."
+            "title": "Nybegynnernivå"
           },
           {
-            "title": "Nivå 2",
-            "body": "Grammatikk, ordforråd og lesing av sammenhengende tekst."
+            "title": "Videregående nivå"
           },
           {
-            "title": "For voksne",
-            "body": "Kursene er for deltakere over 16 år.",
-            "detail": "Barn og unge hører hjemme i Koranskolen."
-          },
-          {
-            "title": "Språket Koranen kom på",
-            "body": "Arabisk lar deg møte teksten uten en oversettelse imellom."
+            "title": "Lesing, skriving og samtale"
           }
         ]
       },
       "kvinnetreff": {
-        "title": "Kvinnetreff: <em>møteplass for kvinner</em>",
-        "body": "En møteplass for kvinner i menigheten — samtale, undervisning og fellesskap.",
+        "title": "<em>Kvinnetreff</em>",
+        "body": "Faglige, sosiale og åndelige tilbud for kvinner i alle aldre.",
         "longBody": "Kvinnetreff er en egen møteplass for kvinner i Rabita, med rom for samtale, undervisning og sosialt fellesskap. Treffene arrangeres i moskeen. Ta kontakt for å høre når det neste finner sted, eller for å si fra at du vil være med.",
-        "offerTitle": "Et rom som er vårt eget",
-        "offerLede": "Kvinnetreff samler kvinner i alle aldre til samtale, undervisning og fellesskap. Ta kontakt, så sier vi fra når det neste treffet settes opp."
+        "offerTitle": "Et fellesskap for kvinner i alle aldre",
+        "offerLede": "Hos oss møtes kvinner til foredrag, sosiale samlinger og faglige tilbud i et trygt og inkluderende miljø.",
+        "offer": [
+          {
+            "title": "Foredrag og kurs"
+          },
+          {
+            "title": "Sosiale samlinger"
+          },
+          {
+            "title": "Åndelig fellesskap"
+          }
+        ]
       }
     },
     "allEyebrow": "Alle tjenester",
@@ -2249,7 +2108,7 @@
     "title": "Rabita siden 1987.",
     "lede": "Fra en leilighet i Grønland til en av Norges største og eldste moskeer.",
     "historyChip": "Historien",
-    "historyHeading": "Menigheten som vokste ut av bygget sitt.",
+    "historyHeading": "Fra moské til samfunnsinstitusjon",
     "factsEyebrow": "I tall",
     "factsHeading": "Rabita i dag",
     "quote": "Et sted hvor tro og medborgerskap går sammen.",
@@ -2270,9 +2129,10 @@
       "visits": "Fra hele Oslo og omegn"
     },
     "history": {
-      "p1": "Rabita ble stiftet i 1987 som den første moskeen i Oslo ikke tilknyttet én nasjonalitet. Det ideelle var enkelt: et sted for muslimer i Norge, uavhengig av hvor de kom fra.",
-      "p2": "Menigheten vokste, skolen ble etablert, og kultursenteret ble en del av Oslos sivilsamfunn. Den gamle bygningen tok slutt på plassen for lenge siden.",
-      "p3": "I oktober {year} besøkte kong Harald V og kronprins Haakon moskeen, det første kongelige besøket til en moské i Norge. Vi arbeider fortsatt med samme mål: å være et sted hvor tro og medborgerskap går sammen."
+      "p1": "Rabita ble stiftet i 1987 som den første moskeen i Oslo som ikke var knyttet til én bestemt nasjonalitet. Visjonen var enkel, men ambisiøs: å være et samlingssted for muslimer i Norge, uavhengig av bakgrunn, språk eller opprinnelsesland.",
+      "p2": "Gjennom årene har Rabita utviklet seg til mer enn en moské. Skolen ble etablert, kultur- og samfunnsarbeidet vokste frem, og organisasjonen ble en aktiv bidragsyter i dialogarbeid, frivillighet og lokalsamfunnsutvikling. I dag er Rabita en viktig del av Oslos sivilsamfunn og et samlingspunkt for mennesker i alle aldre.",
+      "p3": "I oktober 2009 fikk Rabita besøk av kong Harald V og kronprins Haakon, det første kongelige besøket til en moské i Norge. I dag arbeider vi fortsatt med det samme målet som ved oppstarten: å være et åpent fellesskap der tro, kunnskap og aktivt medborgerskap går hånd i hånd.",
+      "p4": "Etter hvert som aktivitetene har vokst, har de eksisterende lokalene blitt for små til å møte behovene. Støtt arbeidet med å realisere det nye bygget, som vil gi rom for videre vekst, styrke våre tilbud og møte behovene til dagens og morgendagens generasjoner."
     },
     "board": {
       "heading": "Styret",
@@ -2421,12 +2281,20 @@
             "detail": "Sørligata 8a, Oslo"
           },
           {
-            "term": "Åpent",
-            "detail": "Hver dag, 06:00 til 22:00"
+            "term": "Åpent for bønn",
+            "detail": "Fajr, Dhuhr til Isha"
+          },
+          {
+            "term": "Kontor",
+            "detail": "Hverdager 10:00–14:00"
+          },
+          {
+            "term": "E-post",
+            "detail": "post@rabita.no"
           },
           {
             "term": "Slik finner du fram",
-            "detail": "Grønland, noen minutter fra stasjonen"
+            "detail": "3 min fra Tøyen T-bane · 5 min fra Grønland T-bane"
           }
         ],
         "closeHeading": "Døren er åpen.",
@@ -2553,74 +2421,120 @@
       "thanksTitle": "Måtte Allah ta imot gaven din.",
       "thanksBody": "Bidraget ditt går rett inn i byggingen av moskeen i Calmeyers gate 8.",
       "thanksClose": "Lukk"
+    },
+    "services": {
+      "eyebrow": "Fra sunnaen",
+      "give": "Gi {amount} kr",
+      "dismiss": "Ikke nå",
+      "quotes": [
+        {
+          "text": "De troende er i sin gjensidige barmhjertighet, kjærlighet og medfølelse som én kropp.",
+          "source": "Sahih al-Bukhari 6011 · Sahih Muslim 2586"
+        },
+        {
+          "text": "Enhver god gjerning er en almisse.",
+          "source": "Sahih al-Bukhari 6021 · Sahih Muslim 1005"
+        },
+        {
+          "text": "Den som letter en nød for en troende, letter Allah en nød for ham på oppstandelsens dag.",
+          "source": "Sahih Muslim 2699"
+        }
+      ],
+      "thanksEyebrow": "Takk",
+      "thanksTitle": "Måtte Allah ta imot gaven din.",
+      "thanksBody": "Tjenestene på denne siden holdes i live av menigheten selv. Bidraget ditt går rett inn i byggingen av moskeen i Calmeyers gate 8.",
+      "thanksClose": "Lukk"
+    },
+    "teaching": {
+      "eyebrow": "Fra sunnaen",
+      "give": "Gi {amount} kr",
+      "dismiss": "Ikke nå",
+      "quotes": [
+        {
+          "text": "Den som går en vei for å søke kunnskap, gjør Allah veien til paradiset lett for ham.",
+          "source": "Sahih Muslim 2699"
+        },
+        {
+          "text": "De beste blant dere er de som lærer Koranen og underviser den.",
+          "source": "Sahih al-Bukhari 5027"
+        },
+        {
+          "text": "Når et menneske dør, opphører gjerningene hans, unntatt tre: en vedvarende almisse, kunnskap som andre har nytte av, og et rettskaffent barn som ber for ham.",
+          "source": "Sahih Muslim 1631"
+        }
+      ],
+      "thanksEyebrow": "Takk",
+      "thanksTitle": "Måtte Allah ta imot gaven din.",
+      "thanksBody": "Tredje etasje i det nye bygget er klasserom. Bidraget ditt går rett inn i byggingen av moskeen i Calmeyers gate 8.",
+      "thanksClose": "Lukk"
     }
   },
   "projectOverview": {
-    "briefShort": "Rabita river det gamle og bygger nytt på samme tomt: en moské med plass til {places} bønneplasser, skole, bibliotek og kultursal, fordelt på sju etasjer i Calmeyers gate 8. Les mer ved å klikke knappen nedenfor.",
-    "cta": "Se mosképrosjektet",
+    "briefShort": "Det gamle bygget er revet, og byggingen av vår nye moské er i gang. I Calmeyers gate 8 reiser vi en av Europas største nye moskéer, med bønnesal over tre etasjer, skole, bibliotek, kafé, restaurant, ungdomsklubb, flerbrukshall og takterrasse fordelt på nær 6 000 kvadratmeter og sju etasjer. Dette blir et samlingspunkt for tro, læring og fellesskap i generasjoner fremover.",
+    "cta": "Se moskeprosjektet",
     "figures": {
       "area": "Bruksareal",
       "floors": "Etasjer",
-      "places": "Bønneplasser",
-      "done": "Planlagt ferdig"
+      "apartments": "Leiligheter",
+      "buildTime": "Byggetid",
+      "yearsUnit": "år"
     },
-    "credit": "Arkitekt"
+    "credit": "Arkitekt",
+    "heading": "<em>Drømmemoskéen</em> i hjertet av Oslo."
   },
   "joinPage": {
-    "lede": "Medlemskap er slik du blir talt med hos Rabita. Det gir deg nyhetsbrevet og invitasjoner til det som skjer i bygget. Med stemmerett følger også en stemme på årsmøtet som velger styret.",
-    "headline": "Medlemskap er slik du blir talt med hos Rabita.",
-    "formEyebrow": "Bli med i fellesskapet",
-    "formLede": "Ett skjema, og du står oppført.",
+    "lede": "Som medlem er du med på å forme fremtiden til Rabita. Du får stemmerett på årsmøtet, kan påvirke viktige beslutninger og bidra til utviklingen av både menigheten og det nye moskébygget. Det er gratis å bli medlem, og det tar bare ett minutt.",
+    "headline": "Bli medlem, og få mer ut av det vi tilbyr.",
+    "formEyebrow": "Bli medlem",
+    "formLede": "Ett skjema. Ett minutt.",
     "imageCaption": "Sammen bygger vi et sterkere fellesskap.",
-    "ledeShort": "Bli talt med hos Rabita. Nyhetsbrev, invitasjoner, og stemmerett om du vil ha det.",
+    "ledeShort": "Du får stemmerett på årsmøtet og bidrar til menigheten og det nye moskébygget. Gratis, og det tar ett minutt.",
     "points": {
-      "updates": {
-        "title": "Nyheter og invitasjoner",
-        "body": "Nyhetsbrevet, og beskjed om det som skjer i bygget."
+      "free": {
+        "title": "Gratis medlemskap",
+        "body": "Ingen kontingent, ingen skjulte kostnader. Medlemskap i Rabita er helt gratis."
       },
       "vote": {
-        "title": "Stemmerett for alle",
-        "body": "Hvert medlem har én stemme på årsmøtet, og kan selv stille til valg til styret."
-      },
-      "renewal": {
-        "title": "Fornyes årlig",
-        "body": "Medlemskapet løper år for år, og du kan si det opp når som helst."
-      },
-      "free": {
-        "title": "Gratis for alle",
-        "body": "Ingen kontingent. Medlemskap i Rabita koster ingenting."
+        "title": "Din stemme teller",
+        "body": "Som medlem har du stemmerett på årsmøtet og kan være med på å velge styret og påvirke viktige beslutninger."
       },
       "support": {
-        "title": "Støtter mosképrosjektet",
-        "body": "Du kan bare være medlem i ett trossamfunn. Medlemskapet ditt avgjør hvor statsstøtten går — og her går den til bygget i Calmeyers gate."
+        "title": "Du bidrar til fellesskapet",
+        "body": "Medlemskapet ditt styrker Rabita og bidrar til å utvikle tilbudene våre og realisere det nye moskébygget."
+      },
+      "access": {
+        "title": "Tilgang til aktiviteter og tjenester",
+        "body": "Bli en del av et aktivt fellesskap med undervisning, familieaktiviteter, arrangementer og ulike tilbud gjennom året."
       }
     },
     "members": "Over 4 300 medlemmer står allerede oppført.",
     "freeNote": "Medlemskap i Rabita er gratis, og hvert medlem har stemmerett på årsmøtet.",
     "recognition": {
       "eyebrow": "Kjenner du deg igjen?",
-      "headline": "Et sted å be. Og et sted å <em>vokse</em>.",
-      "lede": "Rabita er mer enn bønnetider. Det er undervisning, samtaler og fellesskap — og folk som vil det samme som deg.",
+      "headline": "Et sted å be. Et sted å <em>høre til</em>.",
+      "lede": "Rabita er mer enn bønnetider. Det er kunnskap, fellesskap og mennesker som ønsker å vokse i tro og bidra positivt til samfunnet.",
       "points": {
         "quiet": "Ønsker du mer ro til bønn og ettertanke i en travel hverdag?",
-        "children": "Vil du at barna dine skal vokse opp med noe å høre til?",
-        "community": "Savner du et fellesskap som gjør deg til et bedre menneske?",
-        "learn": "Vil du lære mer om troen din, sammen med noen som kan den?"
+        "children": "Vil du at barna dine skal vokse opp med en sterk tilhørighet og gode verdier?",
+        "community": "Savner du et fellesskap som inspirerer deg til å bli en bedre versjon av deg selv?",
+        "learn": "Vil du lære mer om troen din sammen med mennesker som kan veilede og støtte deg?"
       },
-      "closing": "Det er dette Rabita er for. Medlemskap er <em>gratis</em>, og det tar ett minutt.",
+      "closing": "Kjenner du deg igjen i noe av dette? Da er <em>Rabita</em> et sted for deg.",
       "cta": "Meld meg inn",
       "alt": [
         "En som tas imot i døra på Rabita",
         "Barn rundt en koran på teppet i moskeen",
         "Lange bord dekket til iftar"
       ]
-    }
+    },
+    "formBody": "Det tar bare ett minutt å registrere seg. Fyll ut skjemaet nedenfor og bli en del av fellesskapet.",
+    "boxBody": "Som medlem får du prioritert tilgang til våre tjenester og aktiviteter."
   },
   "apartmentsPage": {
     "units": {
       "eyebrow": "Leilighetene",
-      "heading": "Hvert hjem, <em>ett for ett</em>.",
-      "lede": "Hver leilighet med sin egen planløsning. Trykk på en leilighet for å se plantegningen.",
+      "heading": "Pris og størrelse på <em>leilighetene</em>.",
+      "lede": "Trykk på en leilighet for å se plantegningen.",
       "prev": "Forrige leilighet",
       "next": "Neste leilighet",
       "openLabel": "Se plantegning",
@@ -2701,12 +2615,13 @@
           "lede": "En smart og arealeffektiv 1-roms leilighet med gode lysforhold og en praktisk planløsning. Passer perfekt for studenter, pendlere eller deg som ønsker en kompakt bolig med nærhet til alt Oslo har å tilby."
         }
       },
-      "sold": "Solgt"
+      "sold": "Solgt",
+      "more": "Flere leiligheter"
     },
     "eyebrow": "Leiligheter",
-    "title": "Femten leiligheter på <em>én</em> adresse.",
-    "lede": "Femten leiligheter for salg i de øverste etasjene i Calmeyers gate 8, ved takhagen og med byen rett utenfor døra. Salget er med på å finansiere bygget under.",
-    "ledeShort": "Femten leiligheter for salg i toppetasjene i Calmeyers gate 8, ved takhagen.",
+    "title": "Hjem i toppetasjen, <em>midt i Oslo</em>.",
+    "lede": "Et hjem med utsikt over byen, og et fellesskap rett nedenfor. Femten leiligheter til salgs i Calmeyers gate 8.",
+    "ledeShort": "Femten leiligheter til salgs i toppetasjene i Calmeyers gate 8.",
     "primary": "Meld interesse",
     "secondary": "Se hele prosjektet",
     "facts": {
@@ -2758,24 +2673,24 @@
     "quality": {
       "eyebrow": "Kvalitet og møteplasser",
       "heading": "Mer enn boliger. Et <em>nabolag</em>.",
-      "lede": "Boligene er utviklet med fokus på funksjonelle planløsninger, gode lysforhold og moderne standard. Store vindusflater, hyggelige oppholdsrom og luftige balkonger skaper boliger som er enkle å trives i.",
+      "lede": "Her bor du tett på et levende fellesskap med moské, skole, bibliotek og kafé rett nedenfor. Store vindusflater, luftige balkonger og egen takhage gjør leilighetene lyse og gode å komme hjem til.",
       "listLabel": "Prosjektet vil også inkludere",
       "items": {
-        "outdoor": {
-          "title": "Grønne uterom og gårdsplass",
-          "body": "Med beplantning og sitteområder."
-        },
-        "hall": {
-          "title": "Flerbrukshall og aktivitetsrom",
-          "body": "For arrangementer og nærmiljøbruk."
-        },
-        "teaching": {
-          "title": "Undervisningsfasiliteter",
-          "body": "Fleksible rom til kurs, samlinger og foredrag i de lavere etasjene."
+        "mosque": {
+          "title": "Moské og bønnerom",
+          "body": "Rom for tro og tilbedelse."
         },
         "library": {
-          "title": "Bibliotek og sosiale soner",
-          "body": "Som skaper liv og møteplasser."
+          "title": "Bibliotek, kafé og restaurant",
+          "body": "Et sted å lese, spise og møtes."
+        },
+        "school": {
+          "title": "Skole",
+          "body": "Klasserom for barn og unge, 1.–7. klasse."
+        },
+        "outdoor": {
+          "title": "Grønne uterom",
+          "body": "Med beplantning og sitteområder."
         },
         "terrace": {
           "title": "Takterrasser",
@@ -2799,7 +2714,7 @@
     "cta": {
       "eyebrow": "Til salgs",
       "heading": "Femten leiligheter i det <em>nye</em> bygget.",
-      "body": "I femte og sjette etasje, ved takhagen og med byen rett utenfor døra. Salget er med på å finansiere bygget under.",
+      "body": "I toppetasjene, med takterrasse og utsikt over hele byen. Salget er med på å finansiere moskeen.",
       "cta": "Se leilighetene",
       "countLabel": "Leiligheter",
       "sizeLabel": "Størrelser"
@@ -2832,15 +2747,15 @@
     "people": {
       "amara": {
         "role": "Teologisk leder",
-        "bio": "Utdannet ved sharia-fakultetet ved Universitetet i Beirut og i pedagogikk ved Høgskolen i Oslo. Lærer i Bærum kommune 2001–2008, og en mye brukt foredragsholder i moskeer i Norge og Europa."
+        "bio": "Teologisk leder i Rabita siden begynnelsen av 2000-tallet. Utdannet ved shariafakultetet ved Universitetet i Beirut og i pedagogikk ved Høgskolen i Oslo. Leder Det europeiske imamrådet (European Council of Imams), har lang erfaring som lærer i norsk skole og er en mye brukt foredragsholder i Norge og Europa. Har det overordnede ansvaret for teologiske spørsmål og vurderinger i trossamfunnet."
       },
       "andreas": {
-        "role": "Imam",
-        "bio": "Holder kurset i islamsk lære på norsk og jevnlige foredrag for medlemmer og besøkende. Stemmen du hører i bønneropet på gateiftaren."
+        "role": "Norsk imam",
+        "bio": "Norskspråklig imam siden 2023. Har studert under flere norske imamer, blant annet Sh. Bouchta. Holder fredagstaler og har en sentral rolle i undervisning, foredragsvirksomhet og samtaler med medlemmer og besøkende som primært snakker norsk. Behersker flere språk og er kjent for sin rolige og vakre koranresitasjon."
       },
       "aldiri": {
         "role": "Imam og teolog",
-        "bio": "Ansatt som imam i 2025. Doktorgrad og høy faglig kompetanse innen islamsk lære, dialogarbeid, ungdomsarbeid og kommunikasjon."
+        "bio": "Ansatt som imam i 2025. Har doktorgrad i islamske studier fra Universitetet i Jordan og bred faglig kompetanse innen dialogarbeid, ungdomsarbeid og kommunikasjon. Er særlig engasjert i utviklingen av unge muslimer. Holder korte faglige påminnelser etter de daglige bønnene og bidrar med teologisk veiledning og undervisning."
       }
     }
   },
@@ -2923,17 +2838,17 @@
         "body": "Etter flere år med idéer, skisser og nøye planlegging kom den første store milepælen i 2025. I ramadan det året startet rivingen av 1800-tallsbygget som hadde vært moskeen vår i generasjoner. Vi tok med oss minnene og historiene som ble formet innenfor veggene, og visste samtidig at dette var begynnelsen på noe nytt."
       },
       "construction": {
-        "label": "2026",
+        "label": "Pågår",
         "name": "Bygging",
-        "body": "I første kvartal av 2026 er målet å starte byggingen av fundament, hovedkonstruksjon og fasade. Dette er prosjektets mest kritiske fase — en milepæl som bringer oss nærmere visjonen om en ny, moderne moské midt i Oslo."
+        "body": "Målet for denne fasen er å bygge fundament, hovedkonstruksjon og fasade. Dette er prosjektets mest kritiske fase — en milepæl som bringer oss nærmere visjonen om en ny, moderne moské midt i Oslo."
       },
       "interior": {
-        "label": "2027",
+        "label": "Kommer",
         "name": "Innredning",
-        "body": "Ved utgangen av 2027 er målet å ferdigstille innredningen av kjeller, første og andre etasje. Disse planene utgjør hjertet i bygget, med bønnesaler over tre etasjer, wudu-fasiliteter og garderober."
+        "body": "Målet for denne fasen er å ferdigstille innredningen av kjeller, første og andre etasje. Disse planene utgjør hjertet i bygget, med bønnesaler over tre etasjer, wudu-fasiliteter og garderober."
       },
       "completion": {
-        "label": "2028",
+        "label": "Kommer",
         "name": "Ferdigstillelse",
         "body": "I den siste fasen er målet å ferdigstille de øvre etasjene. Tredje etasje vies til undervisning, med moderne klasserom og fleksible rom for helgeskole, kurs og forelesninger. Fjerde etasje rommer kontorer, møterom, studio og en stor ungdomsklubb. Femte og sjette etasje blir leiligheter som gir stabile inntekter til drift og aktiviteter i årene som kommer."
       }
@@ -2978,7 +2893,8 @@
       "interior": {
         "name": "Innredning",
         "items": [
-          "Innredning av kjeller, 1. og 2. etasje"
+          "Innredning av kjeller, 1. og 2. etasje",
+          "Moské, inngang, kafé, restaurant, flerbrukshall"
         ]
       },
       "ferdigstillelse": {
@@ -2999,17 +2915,22 @@
     "scrollHint": "Bla for å utforske",
     "heroEyebrow": "Fremdrift",
     "heroTitle": "Slik <em>vokser</em> det fram.",
-    "heroLede": "Seks år, fra den første skissa til et ferdig bygg i Calmeyers gate. Her er hvor prosjektet står, og hva som kommer."
+    "heroLede": "Seks år, fra den første skissa til et ferdig bygg i Calmeyers gate. Her er hvor prosjektet står, og hva som kommer.",
+    "status": {
+      "done": "Fullført",
+      "current": "Pågår",
+      "next": "Kommer"
+    }
   },
   "floorByFloor": {
     "eyebrow": "Etasje for etasje",
     "tapHint": "Trykk på et punkt for å se bilder",
     "heading": "Bygget, nedenfra og opp.",
     "stages": [
-      "Bygget nedenfra og opp, tomten er ryddet.",
+      "Bygget reiser seg, etasje for etasje.",
       "Alle tillatelser er gitt.",
       "Entreprenør er valgt.",
-      "Dørene åpner 2028."
+      "Nå gjenstår finansieringen."
     ],
     "altFinal": "Arkitektens snitt av det ferdige bygget, med takterrasse, kuppel og minaret",
     "rooms": {
@@ -3043,25 +2964,32 @@
       "minaret": "Minaret"
     },
     "roomDesc": {
-      "prayerMain": "Rader i grønt under galleriet, med lysringene i taket. Salen alle samles i på fredager.",
-      "prayerMen": "Bønnerommet i underetasjen, med bokhyllene langs veggen og galleriet åpent over.",
-      "prayerWomen": "Kvinnenes sal på galleriet: 500 plasser, opp fra 100 i dag, med utsyn ned i hovedsalen.",
-      "wuduMen": "Vaskeplassene før bønnen — benker, kraner og plass til at mange gjør wudu samtidig.",
-      "sportsHall": "Flerbrukshallen i underetasjen — bane, trening og plass til hele klubben.",
-      "foyer": "Dagslys ovenfra, biblioteket til siden, og trappen som binder etasjene sammen.",
-      "cafe": "Kafeen ligger rett innenfor gata, åpen for menigheten og for byen. Ingen dørstokk.",
-      "library": "Lesesal, seminarrom og en egen ungdomsavdeling — et sted å studere som ikke er hjemme.",
-      "commercial": "Restauranten mot gata: spisesal, servering og et fullt kjøkken bak.",
-      "childrensRoom": "Lekerommet ved siden av bønnesalen, så de minste har et sted mens foreldrene ber.",
-      "imamOffice": "Kontorene til imamene. Hit kommer du for en samtale, for nikah, eller for råd i en vanskelig uke.",
-      "garden": "Et skjermet uterom midt i kvartalet: benker, blomster og en fontene med åttekantet stjerne.",
-      "school": "Fire hundre elever og nitten lærere. Egne klasserom med dagslys, og korridorer brede nok til en hel klasse.",
-      "conference": "Ett rom for mye: konferanse, vigsel, begravelse og kurs.",
-      "meetingRooms": "Møterom for styret, for kurs og for utleie, med kontorene innenfor glassveggen.",
-      "youthClub": "Et sted å være på fredagskvelden: klubbrom, kontorer for de frivillige og et studio ved siden av.",
-      "apartments": "Femten utleieleiligheter. Leieinntektene betaler driften, slik at vedlikehold aldri spiser opp organisasjonen.",
-      "roofTerrace": "Bord under gule seil, planter og utsikt utover takene — uterommet for skolen og klubben.",
-      "minaret": "Minareten står i gårdsrommet, med balkongene og blomsterkassene rundt."
+      "prayerMain": "Byggets hjerte. Her samles menigheten til de daglige bønnene, fredagsbønn og høytidsmarkeringer.",
+      "prayerMen": "Bønnerommet i underetasjen med bokhyller langs veggene og åpent galleri over.",
+      "prayerWomen": "Plassert på galleriet med utsyn over hovedsalen og direkte tilgang til hagen.",
+      "wuduMen": "Vaskeplassene før bønnen, utformet for at mange kan gjøre wudu samtidig.",
+      "sportsHall": "En hall for idrett, trening og aktiviteter gjennom hele uken.",
+      "foyer": "Dagslys ovenfra, biblioteket til siden og trappen som binder etasjene sammen.",
+      "cafe": "Kafeen ligger rett innenfor gata og er åpen for både menigheten og byen rundt.",
+      "library": "Norske, engelske og arabiske bøker om islam. Et sted for fordypning, læring og ro.",
+      "commercial": "Restaurant mot gata med spisesal, servering og fullt kjøkken.",
+      "childrensRoom": "Et lekerom ved siden av bønnesalen, slik at de minste har et sted å være mens foreldrene ber.",
+      "imamOffice": "Kontorene til imamene. Et sted for samtaler, veiledning og støtte i små og store spørsmål.",
+      "garden": "Et skjermet uterom midt i kvartalet med benker, blomster og en fontene med åttekantet stjerne.",
+      "school": "Lyse og moderne klasserom der barn og unge kan lære, utvikle seg og bygge trygg identitet.",
+      "conference": "Fleksible lokaler for konferanser, kurs, vigsler og markeringer.",
+      "meetingRooms": "Møterom for styret, administrasjonen, avdelingene og samarbeidspartnere.",
+      "youthClub": "Et sted for barn og ungdom med spill, aktiviteter og sosiale møteplasser.",
+      "apartments": "Femten svært attraktive leiligheter med sentral beliggenhet i hjertet av Oslo.",
+      "roofTerrace": "Bord under seil, planter og utsikt over byens tak. Et uterom for både besøkende og beboere.",
+      "minaret": "Minareten er integrert i gårdsrommet og utformet med utgangspunkt i byggets branntrapp. Den bygger på en lang tradisjon innen islamsk arkitektur og er tilpasset byggets moderne formspråk.",
+      "prayerScreened": "Et eget bønnerom for voksne med små barn.",
+      "wuduWomen": "Egne fasiliteter for rituell vask, utformet for komfort og tilgjengelighet før bønn.",
+      "amphi": "Trappetrinn som blir sitteplasser. Et sted for samlinger, presentasjoner og frisk luft.",
+      "administration": "Kontorene til de ansatte som planlegger, organiserer og holder moskeen i gang.",
+      "studio": "Et studio for opptak og streaming av foredrag, fredagstaler og digitalt innhold.",
+      "guestArea": "Et rom for besøkende og gjester, rett ved trappen som binder etasjene sammen.",
+      "dome": "Kuppelen er et sentralt element i moskéarkitekturen og symboliserer fellesskap, tro og tilhørighet."
     },
     "floors": {
       "lower": "Underetasjen · bønnerom og flerbrukshall",
@@ -3084,8 +3012,8 @@
   },
   "eventsCalendar": {
     "eyebrow": "Kalender",
-    "heading": "Måned for måned, i begge kalendere.",
-    "lede": "Arrangementer på Rabita, sammen med de islamske merkedagene. Trykk på en dato for å se hva som skjer.",
+    "heading": "Arrangementer og høytider, samlet på ett sted.",
+    "lede": "Trykk på en dato for å se hva som skjer.",
     "prev": "Forrige måned",
     "next": "Neste måned",
     "gridLabel": "Kalender for {month}",

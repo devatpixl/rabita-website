@@ -39,9 +39,16 @@ export const HERO_ART = {
   brightness: 0.9,
 } as const;
 
+// Client, Bildeplassering (2026-09-19): the Eid congregation replaces the
+// gateiftar volunteers as the hovedbilde. Both crops come from the one
+// 2048x1365 file he sent — 16:9 held 150px high so the hall keeps its depth,
+// 4:5 taken from the centre where the rows read clearest.
+//
+// The old files stay in /public/hero, untouched: volunteers-gateiftar is
+// still the sharper photograph and putting it back is these two lines.
 const HERO_IMAGE = {
-  desktop: '/hero/volunteers-gateiftar-16x9.jpg',
-  mobile: '/hero/volunteers-gateiftar-4x5.jpg',
+  desktop: '/hero/eid-congregation-16x9.jpg',
+  mobile: '/hero/eid-congregation-4x5.jpg',
 } as const;
 
 // Measured (utility strip 61px + sticky main header 69px = 130px).
@@ -297,11 +304,24 @@ export async function Hero() {
               )}
               {t('headlineAfter')}
             </h1>
-            {/* Carries who Rabita is as well as what is being built. The
-               founding line that used to sit above the headline was a gold
-               small-caps caption, which read as decoration and got skipped;
-               the same fact in a sentence at reading size gets read. */}
-            <p className="mt-5 max-w-[52ch] text-body text-paper/80">{t('subhead')}</p>
+            {/* The client's second hero line — Tekst (endelig), Sept 2026:
+               "Sentral i byen og sentral i troen, siden 1987", set directly
+               under the headline. It is `hero.credLine`, the key that used
+               to carry the gold small-caps founding caption above the
+               headline. That caption read as decoration and got skipped,
+               which is why it was pulled; the same fact at reading size,
+               below the headline, gets read.
+
+               Sized BETWEEN the headline and the lede on purpose. Equal to
+               the lede it would read as a stray first paragraph, and the
+               hero would have two bodies of text and no middle. */}
+            <p className="mt-4 max-w-[46ch] font-serif text-[1.0625rem] leading-snug text-paper/85 sm:text-[1.1875rem]">
+              {t('credLine')}
+            </p>
+            {/* Carries who Rabita is as well as what is being built. Steps
+               DOWN from the line above (paper/70 against paper/85) so the
+               three blocks descend instead of competing. */}
+            <p className="mt-4 max-w-[52ch] text-body text-paper/70">{t('subhead')}</p>
 
             <div className="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link

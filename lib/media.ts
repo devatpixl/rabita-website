@@ -39,6 +39,65 @@ export const IMAM_WELCOME: SiteVideo | null = {
 };
 
 
+// Client, Bildeplassering (2026-09-19): "Bønnetider › Video pop opp".
+//
+// A separate export from IMAM_WELCOME on purpose. His document names THREE
+// films — one for Bønnetider, one for Tjenester, one for Undervisning — so
+// the page has to choose its own; a single shared constant would put the same
+// film in all three the moment the other two arrive.
+//
+// Delivered as Captions_3FE13E.MP4: 1080x1920, 34s, 65 MB at 15 Mbps, which
+// is a phone recording rather than a web asset. Re-encoded H.264 crf 26 at
+// 540x960 -> 4.1 MB, an 94% saving. 540 and not 720 because VideoCard
+// declares sizes="(min-width: 768px) 34rem" — the card never renders above
+// 544px, so anything wider is bytes nobody sees.
+//
+// STILL MISSING: subtitles, same as the imam's welcome. Most people watch
+// muted. Drop VTT files at public/video/bonnetider-film.<locale>.vtt and list
+// them under `captions`.
+export const PRAYER_POPUP_FILM: SiteVideo | null = {
+  src: '/video/bonnetider-film.mp4',
+  poster: '/video/bonnetider-film-poster.webp',
+  seconds: 34,
+  // Shot vertically on a phone. Without this the 16:9 default would letterbox
+  // the middle of the frame.
+  aspect: '9 / 16',
+};
+
+// Client, Bildeplassering (2026-09-19): "Undervisning › Pop opp video".
+//
+// Delivered as Captions_4C99FC.MP4: 1080x1920, 69 seconds, 171 MB. Re-encoded
+// the same way as the prayer film — H.264 crf 26 at 540x960, which is the
+// width VideoCard actually renders — to 5.4 MB, a 97% saving.
+//
+// DECLARED BUT NOT YET RENDERED. /undervisning has no TimedCta on it, and the
+// popup needs a message namespace of its own (eyebrow, quotes[], give,
+// dismiss, thanksEyebrow, thanksTitle) in three locales. `cta.prayer` is the
+// only one that exists and its copy is about prayer times, so reusing it
+// would put the wrong words on the teaching page. Waiting on copy.
+export const TEACHING_POPUP_FILM: SiteVideo | null = {
+  src: '/video/undervisning-film.mp4',
+  poster: '/video/undervisning-film-poster.webp',
+  seconds: 69,
+  aspect: '9 / 16',
+};
+
+// Client, Bildeplassering (2026-09-19): "Tjenester › Video pop up".
+//
+// Delivered as "Campaign video (2) (1) 2.mov": 2160x3840, 47 seconds, 114 MB,
+// and encoded HEVC. The codec matters more than the size here — HEVC in an
+// MP4/MOV plays in Safari and is unreliable in Chrome and Firefox, so this is
+// transcoded rather than merely compressed: H.264 crf 26 at 540x960, 3.6 MB.
+//
+// DECLARED BUT NOT YET RENDERED, same as TEACHING_POPUP_FILM: /tjenester has
+// no TimedCta and there is no message namespace for one. See the note there.
+export const SERVICES_POPUP_FILM: SiteVideo | null = {
+  src: '/video/tjenester-film.mp4',
+  poster: '/video/tjenester-film-poster.webp',
+  seconds: 47,
+  aspect: '9 / 16',
+};
+
 // Stand-in while nothing has been filmed. Only the poster is real — VideoCard
 // is passed `placeholder` alongside it, so the src is never requested and the
 // play button is inert. Swap IMAM_WELCOME off null and this drops out of use

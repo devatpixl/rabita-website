@@ -78,7 +78,12 @@ export type PageBandProps = {
   kickerNote?: string;
   /** Pass through t.rich with <Accent surface="dusk">. */
   title: ReactNode;
-  lede: string;
+  /**
+   * Optional since Sept 2026: /aktuelt dropped its lede on the client's
+   * instruction and the band has to stand on kicker + title alone. Every
+   * other page still passes one.
+   */
+  lede?: string;
   image: string;
   /** '' when the band is decorative and the h1 carries the meaning. */
   alt?: string;
@@ -118,7 +123,7 @@ export function BandWords({
   kicker: string;
   kickerNote?: string;
   title: ReactNode;
-  lede: string;
+  lede?: string;
   rule?: string;
   titleClass?: string;
   className?: string;
@@ -146,9 +151,11 @@ export function BandWords({
       >
         {title}
       </h1>
-      <p className="mt-3 max-w-[46ch] text-[14px] leading-snug text-paper/75 md:mt-2 md:text-[13px]">
-        {lede}
-      </p>
+      {lede && (
+        <p className="mt-3 max-w-[46ch] text-[14px] leading-snug text-paper/75 md:mt-2 md:text-[13px]">
+          {lede}
+        </p>
+      )}
     </div>
   );
 }

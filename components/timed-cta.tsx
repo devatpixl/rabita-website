@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { GIVE_COMPLETE_EVENT, openGiveSheet } from './giving-sheet';
 import { VideoCard } from './video-card';
-import { IMAM_WELCOME, WELCOME_PLACEHOLDER } from '@/lib/media';
+import { IMAM_WELCOME, WELCOME_PLACEHOLDER, type SiteVideo } from '@/lib/media';
 import { cn } from '@/lib/cn';
 
 // A timed, page-specific ask, centred.
@@ -49,6 +49,7 @@ export function TimedCta({
   delayMs = 6000,
   amountNok = 10,
   showVideoInAsk = false,
+  video,
 }: {
   /** Message namespace holding `eyebrow`, `quotes[]`, `give`, `dismiss`. */
   ns: string;
@@ -59,6 +60,16 @@ export function TimedCta({
      Off by default: this popup interrupts someone checking a prayer time,
      and a film is a heavier interruption than a hadith. */
   showVideoInAsk?: boolean;
+  /**
+   * The film this popup shows. Defaults to the imam's welcome, which is what
+   * the thank-you card has always used.
+   *
+   * It is a prop rather than a constant because the client's image list
+   * (2026-09-19) puts a DIFFERENT film on each of three pages. Reading one
+   * global here would have meant the second page to arrive silently changed
+   * the first.
+   */
+  video?: SiteVideo | null;
 }) {
   const t = useTranslations(ns);
   const tVideo = useTranslations('video');
@@ -67,8 +78,9 @@ export function TimedCta({
   // and judged, but the button is inert and the corner reads "video coming".
   // The day IMAM_WELCOME stops being null in lib/media.ts, both cards below
   // become the real film with no edit here.
-  const film = IMAM_WELCOME ?? WELCOME_PLACEHOLDER;
-  const filmIsPlaceholder = IMAM_WELCOME === null;
+  const chosen = video !== undefined ? video : IMAM_WELCOME;
+  const film = chosen ?? WELCOME_PLACEHOLDER;
+  const filmIsPlaceholder = chosen === null;
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   // `t` is not guaranteed to be referentially stable across renders. If the

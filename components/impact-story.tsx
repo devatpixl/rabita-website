@@ -37,32 +37,63 @@ const CHAPTERS: {
 }[] = [
   {
     key: 'history',
-    photo: '/photos/story-visit-banner.webp',
-    // Not naming the visitor: he is plainly a public figure, but an alt
-    // text on a live site should not assert an identification nobody here
-    // has confirmed. The client can add the name.
+    // Client, Bildeplassering (2026-09-19). Cut from the 2048x1365 he sent,
+    // held RIGHT rather than centred: centred gives a bookshelf and the backs
+    // of heads, and the minbar only clips the edge. At x=880 the imam is
+    // whole and the chapter has a subject.
+    photo: '/photos/story-khutbah.webp',
     photoAlt:
-      'A guest in conversation with a Rabita representative in front of the mosque project banner',
-    // Both faces sit between 9% and 26% down the 1500px frame. A centred
-    // 16/11 crop starts at 22.5% and cuts them off at the eyes (client,
-    // 2026-09-10). 12% puts the band at 5.4-60.4%, which clears the
-    // ceiling, holds both heads and still reads the banner behind them.
-    mobileCrop: 'max-md:[object-position:50%_12%]',
+      'The Friday sermon in the old prayer hall: an imam on the minbar, the congregation seated on the carpet below',
+    // The 16/11 phone crop keeps 55% of the 1500px frame. The imam's head
+    // sits at 9-24% down, so a centred band would start at 22.5% and take
+    // it off at the shoulders. 10% holds him and still shows the rows.
+    mobileCrop: 'max-md:[object-position:50%_10%]',
   },
   {
     key: 'family',
-    photo: '/photos/family-together.webp',
-    photoAlt: 'Two young girls in traditional Palestinian dress holding a hand-painted sign at a community gathering in Oslo',
+    // Client, Bildeplassering (2026-09-19) — his "Medlemskap" frame. Cut from
+    // a 5313x3125 at x=1450: that is the only window where the face, the
+    // embrace and the Det Islamske Forbundet vest all survive a 4:5. Further
+    // left loses the vest, further right cuts the arm.
+    //
+    // family-together.webp is NOT deleted — gift-builds.tsx still renders it.
+    photo: '/photos/members-embrace.webp',
+    photoAlt: 'Two men embracing at a Rabita gathering, one wearing a Det Islamske Forbundet volunteer vest',
+    // Faces sit in the top quarter here, so the phone band is pulled up
+    // almost to the edge rather than centred.
+    mobileCrop: 'max-md:[object-position:50%_5%]',
   },
   {
     key: 'learning',
-    photo: '/photos/learning-lecture.webp',
-    photoAlt: 'Audience at a Rabita lecture, speakers presenting at the front',
+    // Client, Bildeplassering (2026-09-19) — his "Skolen" frame. The source is
+    // 1536x2048, and a full-width 4:5 of it is mostly ceiling and empty floor
+    // with the children small in the middle. Cropped to 1300 wide at y=360
+    // instead: the ceiling goes, every child stays in frame and the faces are
+    // readable. A tighter 1150 read better still but clipped the boy on the
+    // left, which is not a trade worth making on a photograph of children.
+    //
+    // learning-lecture.webp is NOT deleted — congregation-today.tsx and
+    // lib/services.ts both still reference it.
+    photo: '/photos/skolen-frokost.webp',
+    photoAlt: 'Pupils at Rabita school around the tables at breakfast, their classroom posters on the wall behind',
+    // Children sit across the middle band, a little above centre.
+    mobileCrop: 'max-md:[object-position:50%_42%]',
   },
   {
     key: 'volunteer',
-    photo: '/photos/volunteer-megaphone.webp',
-    photoAlt: 'A Rabita volunteer with a megaphone, high-vis vest reading RABITA',
+    // Client, Bildeplassering (2026-09-19), IMG_0512 — a HEIC off a phone,
+    // converted and cut from 3024x4032. Held 800px down: at the top of the
+    // frame the group sits small under a third of empty sky, and this is the
+    // window where the FRIVILLIG lettering is still readable, which is the
+    // whole point of the picture.
+    //
+    // volunteer-megaphone.webp is NOT deleted — congregation-today.tsx still
+    // references it.
+    photo: '/photos/frivillige-eid.webp',
+    photoAlt: 'Rabita volunteers in blue FRIVILLIG vests at the outdoor Eid prayer',
+    // The group sits low in this frame, so the 16/11 phone band drops rather
+    // than centring — a centred band would cut them off at the knees.
+    mobileCrop: 'max-md:[object-position:50%_70%]',
   },
 
 ];
@@ -81,11 +112,21 @@ export function ImpactStory() {
       members: n(CAMPAIGN.members),
       nationalities: String(CAMPAIGN.nationalities),
       newMembers: n(CAMPAIGN.newMembersLastYear),
+      // Added Sept 2026: the rewritten card names the standing volunteers
+      // ("300 faste frivillige") where it used to name last year's joiners.
+      // Interpolated rather than typed so it cannot drift from the same
+      // figure on /om-oss. `newMembers` is left bound — the string no
+      // longer asks for it, and an unused value is harmless — so that
+      // restoring the old sentence needs no code change.
+      volunteers: n(CAMPAIGN.volunteers),
     },
-    // studentsPerYear, not pupils: this chapter counts everyone who sits in
-    // a class across a year, which is what the client's copy claims. `pupils`
-    // is the weekend-school enrolment and stays on the pages that say so.
-    learning: { students: n(CAMPAIGN.studentsPerYear) },
+    // pupils, not studentsPerYear. The card said "over 5 000 elever i året"
+    // (everyone who sits in a class across a year, evening courses
+    // included); the client's Sept 2026 text says "Over 400 elever", which
+    // is the weekend-school enrolment — the same figure /undervisning
+    // prints. Both constants are still right; this card changed which one
+    // it is about.
+    learning: { students: n(CAMPAIGN.pupils) },
     volunteer: { volunteers: n(CAMPAIGN.volunteers), visitors: n(CAMPAIGN.visitorsPerWeek) },
   };
 

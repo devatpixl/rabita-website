@@ -31,10 +31,6 @@ export default async function ProjectPage({
   const t = await getTranslations({ locale, namespace: 'projectPage' });
   const tp = await getTranslations({ locale, namespace: 'projectPages' });
   const tf = await getTranslations({ locale, namespace: 'fremdrift' });
-  const PLACES = new Intl.NumberFormat('nb-NO').format(
-    CAMPAIGN.mensPrayerCapacityAfter + CAMPAIGN.womensPrayerCapacityAfter,
-  );
-
   return (
     <main>
       {/* One call to action, not two (client, Hjem.pdf 2026-09-09). The
@@ -51,8 +47,8 @@ export default async function ProjectPage({
         title={tp.rich('pages.building.title', {
           em: (chunks) => <Accent surface="dusk">{chunks}</Accent>,
         })}
-        lede={tp('pages.building.lede', { places: PLACES })}
-        ledeShort={tp('pages.building.ledeShort', { places: PLACES })}
+        lede={tp('pages.building.lede')}
+        ledeShort={tp('pages.building.ledeShort')}
         image="/photos/band-facade.webp"
         alt={tp('pages.building.eyebrow')}
         primary={{ label: tp('pages.building.primary'), give: true }}
@@ -225,22 +221,20 @@ export default async function ProjectPage({
               // "when can we use it", which is what a reader of this register
               // is asking; a start quarter answers a question only the client
               // already knows the answer to.
+              // Capacity came out of this slot and the apartments took it
+              // (client, Tekst (endelig) Sept 2026: "«Kapasitet: 2 500
+              // personer» er fjernet fra nøkkeltallene ... konkrete
+              // kapasitets-/plasstall skal generelt ikke oppgis"). The same
+              // instruction emptied the prayer-places figure out of the home
+              // page's ledger, and the same fifteen apartments replaced it
+              // there — so the two registers still read as one pair.
+              //
+              // The four rows are now exactly his four, in his order:
+              // Bruksareal, Etasjer, Leiligheter, Byggetid.
+              // projectPage.capacity.* stay in the message files,
+              // unreferenced, as facts.completion* already do.
+              { key: 'apartments', icon: 'home', value: String(CAMPAIGN.rentalApartments) },
               { key: 'buildTime', icon: 'calendar', value: t('facts.buildTimeValue', { years: CAMPAIGN.constructionYears }) },
-              // Completion came out and capacity came in, in the same slot
-              // (client, 2026-09-13). The card that carried the two prayer
-              // figures beside this register is gone, so its one number that
-              // matters sits here on a single line — derived from the very
-              // constants that card read, so the two cannot drift apart.
-              // facts.completion* stay in the message files, unreferenced.
-              {
-                key: 'capacity',
-                label: t('capacity.heading'),
-                icon: 'people',
-                value: nf.format(
-                  CAMPAIGN.womensPrayerCapacityAfter + CAMPAIGN.mensPrayerCapacityAfter,
-                ),
-                unit: t('capacity.people'),
-              },
             ];
             const label = 'font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink-60';
             // One rhythm for both registers: every row is 5rem tall with its

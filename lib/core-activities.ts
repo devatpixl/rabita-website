@@ -45,6 +45,14 @@ export type Activity = {
   pending?: true;
 };
 
+// ── ORDER IS THE CLIENT'S ───────────────────────────────────────────────
+// Tekst (endelig), Sept 2026 numbers all seven: 1 Tro og bønn, 2 Barn og
+// ungdom, 3 Undervisning, 4 Id for alle, 5 Muslimske veivisere, 6 Humanitært
+// arbeid, 7 Fosterhjem. `youth` and `teaching` swapped to match; they are
+// both lead-row, so no plate changed shape and no photograph was recropped.
+// His numbering also lands 1-3 on the lead row and 4-7 on the named row
+// exactly, so the grid did not have to move either.
+
 export const ACTIVITIES: readonly Activity[] = [
   // ── Lead row ───────────────────────────────────────────────────────────
   {
@@ -83,6 +91,26 @@ export const ACTIVITIES: readonly Activity[] = [
     height: 1448,
   },
   {
+    key: 'youth',
+    row: 'lead',
+    // Client, Bildeplassering (2026-09-19), DSC_0385. He listed it against
+    // "Barn og ungdom" in the carousel this grid replaced, so the label it
+    // was chosen for is the label it still lands on.
+    //
+    // The source is 6016x4000 landscape and this plate is 4:5, so 47% of the
+    // width has to go and two of the four boys go with it. Held at x=1200
+    // rather than centred: that keeps the boy in the beanie as the anchor
+    // with a face either side of him, so it still reads as a group. Further
+    // right gives two clean portraits but stops looking like friends.
+    photo: '/photos/community/youth-friends.webp',
+    // Faces sit high. The short-laptop variant flattens this plate to 20:21,
+    // which is WIDER than 4:5 and therefore crops height — so the focus is
+    // pulled up, or the 20:21 takes them off at the chin.
+    focus: '50% 35%',
+    width: 1200,
+    height: 1500,
+  },
+  {
     // "undervisning eller kunnskap" — he offered both words. "Undervisning"
     // wins because it is already the nav item, the page slug and the heading
     // on /undervisning; introducing "Kunnskap" as a fourth name for the same
@@ -93,14 +121,6 @@ export const ACTIVITIES: readonly Activity[] = [
     focus: '50% 32%',
     width: 1200,
     height: 1600,
-  },
-  {
-    key: 'youth',
-    row: 'lead',
-    photo: '/photos/community/youth-table.webp',
-    focus: '50% 45%',
-    width: 900,
-    height: 1200,
   },
   // ── Named row ──────────────────────────────────────────────────────────
   {
@@ -119,8 +139,15 @@ export const ACTIVITIES: readonly Activity[] = [
     // visit". This frame is the one lib/services.ts used as the veivisere
     // BAND photo before the grid rewrite, and the service is defined as
     // "skolebesøk der unge muslimer møter elever ansikt til ansikt".
-    photo: '/photos/event-school-visit.webp',
-    focus: '50% 42%',
+    // Client, Bildeplassering (2026-09-19), 626282677 — the file he named for
+    // "Muslimske Veivisere" in the carousel this grid replaced, so the label
+    // it was chosen for is the label it lands on.
+    //
+    // Cut SQUARE, not 4:5: this is the `named` row, which renders
+    // aspect-square at lg (and 6:5 on a short laptop), not the lead row's
+    // 4:5. A 4:5 file here would be cropped top and bottom.
+    photo: '/photos/svc-veivisere-taler.webp',
+    focus: '50% 40%',
     width: 1600,
     height: 1000,
   },

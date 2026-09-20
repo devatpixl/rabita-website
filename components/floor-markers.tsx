@@ -201,6 +201,9 @@ function Chip({
 
 export function FloorMarkers({ floorKey, active }: { floorKey: string; active: boolean }) {
   const t = useTranslations('floorByFloor.rooms');
+  // Parent namespace, for the roomDesc lookup in `canOpen` below. Hoisted
+  // here with the other hooks: `canOpen` is defined after an early return.
+  const tDesc = useTranslations('floorByFloor');
   const markers: FloorMarker[] = FLOOR_MARKERS[floorKey] ?? [];
   // Which room's photographs are open, if any. Held per floor rather than on
   // the section: only the lit floor can be clicked, so only one of these eight
@@ -208,11 +211,24 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
   const [openRoom, setOpenRoom] = useState<string | null>(null);
   if (markers.length === 0) return null;
 
-  // A marker opens photographs only if it HAS photographs, and only while its
-  // own floor is the one lit. All eight floors are in the DOM at once, faded
-  // to nothing; without the `active` half, the reader would be clicking rooms
-  // on a drawing they cannot see.
-  const canOpen = (id: string) => active && photosFor(id).length > 0;
+  // A marker opens if it has anything to show — photographs OR a written
+  // description — and only while its own floor is the one lit. All eight
+  // floors are in the DOM at once, faded to nothing; without the `active`
+  // half, the reader would be clicking rooms on a drawing they cannot see.
+  //
+  // The description half is new (client, Tekst (endelig) Sept 2026): seven
+  // rooms — Skjermet bønnerom, Wudu kvinner, Amfi, Administrasjon, Studio,
+  // Gjesteområde and Kuppel — were listed as dead to the touch, with the
+  // instruction "Legg inn teksten, bilder kommer etter hvert". They were
+  // dead because the gate asked only about photographs, and those seven are
+  // precisely the rooms the architect has not shot yet. Now they open on
+  // their sentence, and gain the picture later without another change here.
+  //
+  // Their descriptions are written in all three locales deliberately: with
+  // no photograph to fall back on, the sentence IS the gate, and a room that
+  // opened on /no and stayed dead on /en would be the same bug again.
+  const canOpen = (id: string) =>
+    active && (photosFor(id).length > 0 || tDesc.has(`roomDesc.${id}`));
 
   return (
     <>

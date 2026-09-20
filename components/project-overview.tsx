@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
-import { CAMPAIGN, PROJECT_PHASES } from '@/lib/campaign';
+import { CAMPAIGN } from '@/lib/campaign';
 import { Accent } from './accent';
 import type { AppLocale } from '@/i18n/routing';
 import { FigureIcon } from './figure-icons';
@@ -37,12 +37,26 @@ export async function ProjectOverview() {
     // not a new one to open. Derived from the same constants, so it cannot
     // drift from the drawings.
     { icon: 'floors' as const, value: String(CAMPAIGN.floorsAbove + CAMPAIGN.floorsBelow), label: t('figures.floors') },
+    // ── Sept 2026, Tekst (endelig) — both of these figures CHANGED ──────
+    // Out: "Bønneplasser 2 500" and "Planlagt ferdig 2028". In: the fifteen
+    // apartments and the two-year build.
+    //
+    // Neither is cosmetic. The capacity figure goes because the client is
+    // retiring concrete capacity numbers site-wide ("konkrete kapasitets-/
+    // plasstall skal generelt ikke oppgis"). The year goes because there is
+    // no fixed start date to count from, and the document is explicit that a
+    // year must not be promised anywhere — this ledger was one of the places
+    // printing one.
+    //
+    // A DURATION, not a date: "2 år" stays true whenever ground is broken,
+    // which is the whole reason it replaced the year.
+    { icon: 'home' as const, value: String(CAMPAIGN.rentalApartments), label: t('figures.apartments') },
     {
-      icon: 'people' as const,
-      value: nf.format(CAMPAIGN.mensPrayerCapacityAfter + CAMPAIGN.womensPrayerCapacityAfter),
-      label: t('figures.places'),
+      icon: 'calendar' as const,
+      value: String(CAMPAIGN.constructionYears),
+      unit: t('figures.yearsUnit'),
+      label: t('figures.buildTime'),
     },
-    { icon: 'calendar' as const, value: String(PROJECT_PHASES[PROJECT_PHASES.length - 1].to), label: t('figures.done') },
   ];
 
   return (
@@ -106,7 +120,7 @@ export async function ProjectOverview() {
             id="project-overview-heading"
             className="mt-5 font-serif text-[clamp(2.25rem,5vw,4rem)] leading-[1.02] text-balance text-paper"
           >
-            {tp.rich('pages.building.title', {
+            {t.rich('heading', {
               em: (chunks) => <Accent surface="dusk">{chunks}</Accent>,
             })}
           </h2>
@@ -114,13 +128,7 @@ export async function ProjectOverview() {
              two lines down in the ledger, and a number written twice is a
              number that drifts. 50ch, not 44 — this paragraph is four times
              the length of the one it replaced. */}
-          <p className="mt-6 max-w-[50ch] text-body text-paper/80">
-            {t('briefShort', {
-              places: nf.format(
-                CAMPAIGN.mensPrayerCapacityAfter + CAMPAIGN.womensPrayerCapacityAfter,
-              ),
-            })}
-          </p>
+          <p className="mt-6 max-w-[50ch] text-body text-paper/80">{t('briefShort')}</p>
           <Link
             href={`/${locale}/moskeprosjektet`}
             className="group mt-8 hidden min-h-11 items-center gap-3 text-[15px] font-semibold text-paper transition-colors hover:text-gold md:inline-flex"
