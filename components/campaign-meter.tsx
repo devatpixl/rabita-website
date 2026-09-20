@@ -78,7 +78,6 @@ function Tile({ children }: { children: React.ReactNode }) {
 export async function CampaignMeter() {
   const locale = (await getLocale()) as AppLocale;
   const t = await getTranslations('meter');
-  const tPhase = await getTranslations('meter.phases');
 
   const raised = CAMPAIGN.raisedNok;
   const goal = CAMPAIGN.goalNok;
@@ -86,13 +85,27 @@ export async function CampaignMeter() {
   const pctInt = Math.round(pct);
   const phase = PHASES.find((p) => p.key === currentPhaseKey());
 
-  // The roadmap shown on hover over the goal and the phase: the three build
-  // years, each marked done / now / to come relative to the current phase.
-  const currentIdx = PHASES.findIndex((p) => p.key === currentPhaseKey());
-  const steps: PhaseStep[] = PHASES.map((p, i) => ({
-    year: String(p.year),
-    name: tPhase(p.key),
-    note: t(`phaseNotes.${p.key}`),
+  // ── THE STATUS TIMELINE IS THE CLIENT'S SIX STEPS ────────────────────
+  // Tekst (endelig), Sept 2026, "Statusboks (fasetidslinje — ingen årstall
+  // på kommende faser, siden oppstart er usikker)":
+  //
+  //   Rammetillatelse 2022 · Forprosjekt 2024 · Riving 2025 ·
+  //   Råbygg — fundament, bærekonstruksjon og fasade ·
+  //   Interiør (kommer) · Ferdigstillelse (kommer)
+  //
+  // It replaces the three build years this derived from PHASES. Two things
+  // his list does that the old one could not: it shows what is already DONE,
+  // which is most of what a donor wants to know, and it carries no year on
+  // anything unstarted — the same rule that took 2028 off this section.
+  //
+  // Order is his. It is not chronological — rammetillatelse 2022 before
+  // forprosjekt 2024 — and it is not ours to correct.
+  const TIMELINE = ['permit', 'preProject', 'demolition', 'shell', 'interior', 'completion'] as const;
+  const CURRENT = 'shell';
+  const currentIdx = TIMELINE.indexOf(CURRENT);
+  const steps: PhaseStep[] = TIMELINE.map((key, i) => ({
+    year: t(`timeline.${key}.year`),
+    name: t(`timeline.${key}.name`),
     state: i < currentIdx ? 'done' : i === currentIdx ? 'current' : 'next',
   }));
 

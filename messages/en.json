@@ -274,7 +274,7 @@
   },
   "meter": {
     "lattice": "Each mark is 1 000 000 kr",
-    "label": "Raised so far",
+    "label": "Secured capital",
     "eyebrow": "Raised for the <em>mosque project</em>",
     "updated": "as of {date}",
     "of": "of",
@@ -309,7 +309,33 @@
       "ferdigstillelse": "The building opens. Seven floors on one address."
     },
     "remainingLabel": "Remaining to the goal",
-    "goalMark": "2028 · The doors open"
+    "goalMark": "2028 · The doors open",
+    "timeline": {
+      "permit": {
+        "year": "2022",
+        "name": "Planning permission"
+      },
+      "preProject": {
+        "year": "2024",
+        "name": "Pre-project"
+      },
+      "demolition": {
+        "year": "2025",
+        "name": "Demolition"
+      },
+      "shell": {
+        "year": "",
+        "name": "Shell — foundation, structure and facade"
+      },
+      "interior": {
+        "year": "Upcoming",
+        "name": "Interior"
+      },
+      "completion": {
+        "year": "Upcoming",
+        "name": "Completion"
+      }
+    }
   },
   "trust": {
     "taxDeductible": "Tax deduction up to 25 000 kr/year",
@@ -2548,7 +2574,7 @@
         "body": "Become part of an active community with teaching, family activities, events and a range of offerings through the year."
       }
     },
-    "members": "Over 4,300 members are already on the roll.",
+    "members": "Become member number {count}.",
     "freeNote": "Membership at Rabita is free, and every member has a vote at the annual meeting.",
     "recognition": {
       "eyebrow": "Does this sound like you?",

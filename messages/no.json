@@ -274,7 +274,7 @@
   },
   "meter": {
     "lattice": "Hvert merke er 1 000 000 kr",
-    "label": "Samlet inn",
+    "label": "Sikret kapital",
     "eyebrow": "Samlet inn til <em>mosképrosjektet</em>",
     "updated": "per {date}",
     "of": "av",
@@ -309,7 +309,33 @@
       "ferdigstillelse": "Bygget åpner. Sju etasjer på én adresse."
     },
     "remainingLabel": "Gjenstår til målet",
-    "goalMark": "2028 · Dørene åpnes"
+    "goalMark": "2028 · Dørene åpnes",
+    "timeline": {
+      "permit": {
+        "year": "2022",
+        "name": "Rammetillatelse"
+      },
+      "preProject": {
+        "year": "2024",
+        "name": "Forprosjekt"
+      },
+      "demolition": {
+        "year": "2025",
+        "name": "Riving"
+      },
+      "shell": {
+        "year": "",
+        "name": "Råbygg — fundament, bærekonstruksjon og fasade"
+      },
+      "interior": {
+        "year": "Kommer",
+        "name": "Interiør"
+      },
+      "completion": {
+        "year": "Kommer",
+        "name": "Ferdigstillelse"
+      }
+    }
   },
   "trust": {
     "taxDeductible": "Skattefradrag opp til 25 000 kr/år",
@@ -2544,7 +2570,7 @@
         "body": "Bli en del av et aktivt fellesskap med undervisning, familieaktiviteter, arrangementer og ulike tilbud gjennom året."
       }
     },
-    "members": "Over 4 300 medlemmer står allerede oppført.",
+    "members": "Bli medlem nummer {count}.",
     "freeNote": "Medlemskap i Rabita er gratis, og hvert medlem har stemmerett på årsmøtet.",
     "recognition": {
       "eyebrow": "Kjenner du deg igjen?",

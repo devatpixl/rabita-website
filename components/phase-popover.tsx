@@ -10,9 +10,10 @@ import { cn } from '@/lib/cn';
 // blur and Escape. Touch: a tap toggles it. No library, one transition.
 
 export type PhaseStep = {
+  /** Empty for a step with no date — see the timeline note in campaign-meter. */
   year: string;
   name: string;
-  note: string;
+  note?: string;
   state: 'done' | 'current' | 'next';
 };
 
@@ -132,7 +133,7 @@ export function PhasePopover({
             const faded = s.state === 'next';
             return (
               <li
-                key={s.year}
+                key={`${s.year}-${s.name}`}
                 className={cn(
                   'relative flex gap-4 py-3',
                   i > 0 && 'border-t border-rule',
@@ -160,7 +161,7 @@ export function PhasePopover({
                       </span>
                     )}
                   </span>
-                  <span className="mt-0.5 text-[0.8rem] leading-snug text-ink-60">{s.note}</span>
+                  {s.note && <span className="mt-0.5 text-[0.8rem] leading-snug text-ink-60">{s.note}</span>}
                 </span>
               </li>
             );

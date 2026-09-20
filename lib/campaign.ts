@@ -26,9 +26,12 @@
 export const CAMPAIGN = Object.freeze({
   // Money — §10
   goalNok: 100_000_000,
-  raisedNok: 26_995_179,
-  lastMonthNok: 1_759_653,
-  raisedAsOf: '2026-08-01', // last snapshot date; replace when live feed lands
+  raisedNok: 59_345_333,
+  lastMonthNok: 1_097_454,
+  // September, not August: the figures above are the ones in Tekst
+  // (endelig), dated September 2026. Printing a September number under
+  // "per 1. august" would have been the misleading half of an update.
+  raisedAsOf: '2026-09-01', // replace when the live feed lands
   phase: 'foundations' as const,
 
   // Community — figures confirmed in Rabita Årsrapport 2025 (p. 1 & 9)
@@ -196,11 +199,12 @@ export const SUB_CAMPAIGN = Object.freeze({
 // components/phase-popover.tsx keep working untouched. (There is already a
 // third, unrelated set in lib/donor-wall.ts; a fourth would be the real
 // mistake here.)
-/** EUR→NOK, set 2026-09-18. The one number to change if the rate moves. */
-const EUR_NOK = 11.8;
-
-/** To the nearest 100 000 kr — see the rounding note above. */
-const toNok = (eur: number) => Math.round((eur * EUR_NOK) / 100_000) * 100_000;
+// EUR_NOK and toNok() are GONE (Sept 2026). They existed to turn the
+// brochure's euro into kroner because nobody had given us the kroner. The
+// client has now stated them phase by phase, so the site quotes his figures
+// instead of a rate that starts ageing the day it ships — which was the
+// standing worry in the note above. Restoring the derivation means restoring
+// two lines; the euro are still in PROJECT_PHASES.
 
 // YEARS ONLY ON WHAT HAS HAPPENED (client, Tekst (endelig) Sept 2026).
 // Phases 1 and 2 are finished and keep their dates; 3, 4 and 5 carry `null`,
@@ -221,12 +225,23 @@ const toNok = (eur: number) => Math.round((eur * EUR_NOK) / 100_000) * 100_000;
 // So Norwegian reads the kroner, English and Arabic read the euro the
 // brochure was actually budgeted in — and the euro figures are the originals,
 // not a conversion back, so no rounding error accumulates in either direction.
+// ── THE KRONER ARE HIS, THE EURO ARE THE BROCHURE'S ─────────────────────
+// `nok` was derived from `eur` via toNok() until Sept 2026. Tekst (endelig)
+// states the kroner outright, phase by phase, and the client has confirmed
+// his figures govern — so they are typed here and no longer computed. They
+// total 299,4 MNOK against the 289,5 the conversion produced, and the gap is
+// not rounding: his phase 4 is 136 MNOK where the conversion gave 76,1.
+//
+// `eur` stays because the English and Arabic pages print it (his note 15),
+// and it is still the number the brochure was budgeted in. The two are NOT
+// two views of one figure any more and must not be converted into each
+// other — which is exactly what fremdrift.goalNote tells the reader.
 export const PROJECT_PHASES = Object.freeze([
-  { n: 1, from: 2019, to: 2024, key: 'planning' as const, eur: 602_000, nok: toNok(602_000) },
-  { n: 2, from: 2025, to: 2025, key: 'demolition' as const, eur: 946_000, nok: toNok(946_000) },
-  { n: 3, from: null, to: null, key: 'fundament' as const, eur: 9_632_000, nok: toNok(9_632_000) },
-  { n: 4, from: null, to: null, key: 'interior' as const, eur: 6_450_000, nok: toNok(6_450_000) },
-  { n: 5, from: null, to: null, key: 'ferdigstillelse' as const, eur: 6_900_000, nok: toNok(6_900_000) },
+  { n: 1, from: 2019, to: 2024, key: 'planning' as const, eur: 602_000, nok: 7_400_000 },
+  { n: 2, from: 2025, to: 2025, key: 'demolition' as const, eur: 946_000, nok: 12_000_000 },
+  { n: 3, from: null, to: null, key: 'fundament' as const, eur: 9_632_000, nok: 100_000_000 },
+  { n: 4, from: null, to: null, key: 'interior' as const, eur: 6_450_000, nok: 136_000_000 },
+  { n: 5, from: null, to: null, key: 'ferdigstillelse' as const, eur: 6_900_000, nok: 44_000_000 },
 ]);
 
 /** The same sum in the currency it was budgeted in. Summed, never typed. */

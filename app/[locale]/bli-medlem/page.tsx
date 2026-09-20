@@ -223,7 +223,12 @@ export default async function JoinPage({
 
               <p className="mt-10 flex items-center gap-4 text-[13px] text-ink-60">
                 <span aria-hidden className="h-px w-10 shrink-0 bg-gold-deep/40" />
-                {t('members', { count: CAMPAIGN.members.toLocaleString('nb-NO') })}
+                {t('members', {
+                  // members + 1: "become member number X" is the NEXT number,
+                  // not the current count. Derived so it cannot drift from
+                  // the 4 344 the carousel and the Om oss figures print.
+                  count: (CAMPAIGN.members + 1).toLocaleString(locale === 'ar' ? 'ar-EG' : locale === 'en' ? 'en-GB' : 'nb-NO'),
+                })}
               </p>
             </div>
 
