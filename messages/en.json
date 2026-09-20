@@ -7,10 +7,10 @@
     "eyebrow": "Calmeyers gate 8, Oslo",
     "credLine": "Central to the city and central to the faith, since 1987",
     "headline": "The site is ready. Now we raise the building.",
-    "headlineBefore": "Mosque, school, library. ",
-    "headlineAccent": "One address.",
+    "headlineBefore": "Openness, knowledge and ",
+    "headlineAccent": "community",
     "headlineAfter": "",
-    "subhead": "Oslo's central mosque, across nationalities since 1987. It is open to everyone, young and old, women and men. We offer congregational prayer, teaching and courses, celebrations of the holidays, family camps and much more. Our vision is openness, knowledge and community.",
+    "subhead": "Oslo Central Mosque is open to everyone – young and old, women and men. We offer congregational prayer, teaching, courses, activities for children and families, celebration of the holy days and much more. Together we build an inclusive community across generations and backgrounds, and serve as a bridge between Norwegian Muslims and wider society.",
     "phaseLine": "Phase 1 · Foundations underway",
     "cta": {
       "primary": "See the mosque project",
@@ -214,7 +214,7 @@
     "openSheet": "Open giving",
     "closeSheet": "Close",
     "sheetTitle": "Give to Rabita",
-    "question": "Help build Europe's largest mosque",
+    "question": "Help build the mosque of Oslo’s future",
     "questionLede": "Regular monthly gifts make the build predictable. One-off gifts help just as much.",
     "wizard": {
       "back": "Back",
@@ -360,22 +360,22 @@
       "history": {
         "name": "History",
         "title": "Founded in <em>{year}</em>.",
-        "body": "The first mosque in Oslo not tied to a single nationality: a place for Muslims in Norway, wherever they come from. Still the only one that works that way, and you are met with warmth before questions."
+        "body": "The first Norwegian mosque not tied to a single nationality. In the heart of the capital we have been a gathering point for close to 40 years, for a great diversity of Norwegian Muslims from many backgrounds."
       },
       "family": {
-        "name": "Community",
+        "name": "Members",
         "title": "<em>{members}</em> members. One community.",
-        "body": "From more than {nationalities} nationalities, {newMembers} of them new last year alone. We stand together in prayer and in learning, in joy and in grief, and we outgrew our walls long ago."
+        "body": "From more than {nationalities} nationalities we have built a community carried by {volunteers} regular volunteers and 30 leaders across the board and the departments, supported by an administration of 6 staff, 3 imams and a managing director."
       },
       "learning": {
-        "name": "Learning",
-        "title": "Over <em>{students}</em> students a year.",
-        "body": "Every weekend the classrooms fill with children learning Quran and Arabic. In the evenings the adults take over: lectures, calligraphy, philosophy."
+        "name": "Pupils",
+        "title": "Over <em>{students}</em> pupils. Knowledge that builds.",
+        "body": "From weekend school for the youngest, focused on mother tongue and faith, to advanced courses for older students in language, Islam and art — Rabita offers learning for everyone. Through serious teaching we raise knowledgeable people with a secure Norwegian-Muslim identity."
       },
       "volunteer": {
-        "name": "Volunteering",
-        "title": "<em>{volunteers}</em> volunteers, all year.",
-        "body": "Around {visitors} visitors a week. Volunteers in yellow vests hand out food, coordinate with the borough and stand with neighbours in good times and bad. One vest is free for you."
+        "name": "Visitors",
+        "title": "<em>{visitors}+</em> visitors a week. A meeting place for all.",
+        "body": "Rabita is more than a mosque — it is a place people come to for prayer, teaching and activities, week after week. We also regularly welcome nurseries, school classes, researchers, journalists and partners who want to learn more about us. Our hallmark is “A meeting place for all”."
       }
     }
   },
@@ -863,7 +863,7 @@
       "services": {
         "eyebrow": "Here for you",
         "title": "For the biggest days, <em>and the hardest ones</em>.",
-        "lede": "Whatever brings you here, there is someone who can help. Every enquiry is handled discreetly.",
+        "lede": "From life’s great moments to everyday community — here is an overview of what Rabita offers you and your family. Tap a service and get in touch if you need help or support.",
         "note": "Ask at reception or send an email",
         "regEyebrow": "What we offer",
         "regHeading": "Ask about any of these.",
@@ -1015,16 +1015,16 @@
     "pending": "Content to come",
     "items": {
       "religious": {
-        "title": "<em>Faith</em>",
-        "body": "Nikah, janaza, shahada, hajj and umra — and a conversation with an imam when life calls for one."
+        "title": "Faith and <em>prayer</em>",
+        "body": "We are open for the daily prayers, Friday prayer and activities in Ramadan, offering a place for reflection, community and worship throughout the year."
       },
       "teaching": {
         "title": "<em>Teaching</em>",
-        "body": "Rabita school, the Quran school, Arabic, Islamic studies, Norwegian and calligraphy."
+        "body": "We offer weekend school, Qur’an teaching and courses in language, religion and art. The teaching is adapted to different age groups and supports personal development, deeper understanding and a secure identity in children, young people and adults alike."
       },
       "youth": {
         "title": "Children and <em>youth</em>",
-        "body": "Norway's Young Muslims, family activities, camps and safe places to meet through the year."
+        "body": "We offer safe meeting places, meaningful activities and preventive work where children and young people can grow, belong and be seen."
       },
       "eid": {
         "title": "Eid <em>for everyone</em>"
@@ -1036,7 +1036,7 @@
         "title": "Humanitarian <em>work</em>"
       },
       "foster": {
-        "title": "Become a <em>foster family</em>"
+        "title": "<em>Foster care</em>"
       }
     }
   },
@@ -1136,7 +1136,7 @@
   "membership": {
     "countdown": "{n} days away",
     "eyebrow": "NOTICE · ANNUAL MEETING 2027",
-    "headline": "The building isn't decided by us. It's decided by the <em>members</em>.",
+    "headline": "Your voice shapes <em>our future</em>.",
     "body": "The annual meeting elects the board. The board decides what the seven floors are used for. Every membership is one voice in that room.",
     "priceNote": "kr a year · one vote",
     "ctaPrimary": "Become a member",
@@ -1398,7 +1398,7 @@
         "mainHall": {
           "tag": "The main hall",
           "title": "The prayer hall",
-          "caption": "Rows in green beneath the gallery, light rings overhead. The hall everyone gathers in on Fridays.",
+          "caption": "Rows in green beneath the gallery, with the rings of light in the ceiling. The hall where everyone gathers on Fridays.",
           "alt": "The main prayer hall, green carpet and the gallery above"
         },
         "minaret": {
@@ -1710,7 +1710,7 @@
     "eyebrow": "Teaching",
     "title": "Arabic, Qur'an, and a school week that fits around the Norwegian one.",
     "titleShort": "Everything we <em>teach</em>.",
-    "lede": "Four hundred pupils and nineteen teachers, running every week of term. The new building gives the school its own floor instead of the rooms it borrows now."
+    "lede": "Every week we bring together over 400 pupils and 30 teachers for learning, growth and community. With the new building the school finally gets premises of its own, made for teaching and development, instead of depending on borrowed rooms."
   },
   "servicesIndex": {
     "eyebrow": "Services",
@@ -1726,428 +1726,272 @@
     },
     "items": {
       "nikah": {
-        "title": "Nikah: <em>wedding ceremony</em>",
-        "body": "The religious ceremony, once the marriage is registered.",
+        "title": "<em>Nikah</em> (Islamic marriage)",
+        "body": "Help planning and conducting the marriage ceremony.",
         "longBody": "Nikah is the Islamic marriage contract, entered into in accordance with Islamic principles. Rabita holds the religious nikah in the mosque, led by an imam. The couple must already be legally married and present a valid marriage certificate.",
-        "offerTitle": "A simple and solemn ceremony",
-        "offerLede": "Nikah at Rabita is led by an imam and held in the mosque. Get in touch in good time and we will find a date together.",
+        "offerTitle": "A ceremony you will remember",
+        "offerLede": "We assist with planning and conducting the religious ceremony itself, once the marriage has been registered. Get in touch early and we will find a date that suits you.",
         "offer": [
           {
-            "title": "Before the nikah",
-            "body": "The couple must already be legally married and present a valid marriage certificate.",
-            "detail": "Rabita does not perform a religious nikah unless the civil marriage has been registered first."
+            "title": "Pre-marriage guidance"
           },
           {
-            "title": "How the ceremony works",
-            "body": "The couple attend with the necessary witnesses and the imam leads the ceremony. Both parties confirm that they are entering the marriage of their own free will.",
-            "detail": "The marriage contract is concluded in the presence of witnesses, and the mahr is agreed between the parties as part of the Islamic marriage."
+            "title": "Conducting the nikah"
           },
           {
-            "title": "The imam's guidance",
-            "body": "The imam offers advice and reminders about marriage and what the spouses owe one another.",
-            "detail": "About the importance of building a home marked by respect, care and mercy."
-          },
-          {
-            "title": "A ceremony, not a wedding party",
-            "body": "Family and a few close relatives may attend.",
-            "detail": "Nikah at Rabita is a religious ceremony. The mosque does not accommodate large gatherings, catering or extensive celebration. Bookings and questions: post@rabita.no"
+            "title": "Access to ceremony rooms"
           }
         ]
       },
       "janaza": {
-        "title": "Janaza: <em>funeral</em>",
-        "body": "The Janazah prayer in the mosque, and guidance for the family.",
+        "title": "<em>Janaza</em> (funeral)",
+        "body": "Support and guidance in bereavement and Islamic burial.",
         "longBody": "In Islamic faith the end of a life has its own dignified frame. When someone passes away, family and community gather for the Janazah prayer — the last prayer for the deceased and a final farewell before burial. Rabita holds the Janazah prayer in the mosque, led by an imam.",
-        "offerTitle": "The last farewell",
-        "offerLede": "In a time of grief we want to make the religious farewell as simple and as dignified as possible for the family.",
+        "offerTitle": "We are here in the hardest of times",
+        "offerLede": "In the event of a death we assist the family with the janazah prayer in the mosque and guidance through the whole process. Get in touch as soon as you can and we will help you onward.",
         "offer": [
           {
-            "title": "The Janazah prayer",
-            "body": "The prayer is held in the mosque and led by an imam, with family, friends and others from the community present.",
-            "detail": "Janazah is the Muslim community’s last prayer for the deceased, and a final farewell before the burial."
+            "title": "Guidance in bereavement"
           },
           {
-            "title": "The ritual washing",
-            "body": "Rabita can help the family with guidance and put them in contact with people who can carry out the washing of the deceased.",
-            "detail": "The washing is performed in accordance with Islamic tradition."
+            "title": "Janazah prayer in the mosque"
           },
           {
-            "title": "What the funeral director does",
-            "body": "Handling of the deceased, transport, the coffin and coordination with the cemetery are not done by Rabita.",
-            "detail": "These are handled by the funeral directors, whom we work with when needed. The family contacts the funeral director for the practical side of the burial."
-          },
-          {
-            "title": "Get in touch",
-            "body": "Rabita assists with the religious part and the Janazah prayer.",
-            "detail": "For questions or to arrange a time: post@rabita.no"
+            "title": "Support for the family"
           }
         ]
       },
       "shahada": {
-        "title": "Shahada: <em>declaration of faith</em>",
-        "body": "An open conversation about Islam, and guidance if you want to take shahada.",
+        "title": "<em>Shahada</em> (becoming Muslim)",
+        "body": "Guidance and the ceremony for those who wish to become Muslim.",
         "longBody": "Are you curious about Islam, do you want to learn more about the faith, or do you have questions you would like to talk through with someone? At Rabita you are welcome to an open conversation with no obligation. Wherever you are in that process, we meet you with respect and on your own terms.",
         "offerTitle": "Interested in Islam?",
-        "offerLede": "You do not need to have decided anything to get in touch. Some want to know more, some want guidance, and some have reached the point of wanting to take the shahada.",
+        "offerLede": "You do not need to have decided anything to get in touch. Some want more knowledge, some want guidance, and some have reached the point of taking the shahada.",
         "offer": [
           {
-            "title": "A conversation with no obligation",
-            "body": "You are welcome to an open conversation, wherever you are in the process.",
-            "detail": "We meet you with respect and on your own terms. You do not need to have made up your mind about anything."
+            "title": "Conversation and guidance about Islam"
           },
           {
-            "title": "Questions and guidance",
-            "body": "Our imams answer questions, explain the basics of Islam and offer religious guidance.",
-            "detail": "Some get in touch because they want to know more about Islam. Others have been exploring the faith for a while and want guidance."
+            "title": "Taking the shahada"
           },
           {
-            "title": "Shahada",
-            "body": "For those who have decided to become Muslim, Rabita offers guidance around the shahada — the Islamic declaration of faith."
-          },
-          {
-            "title": "The time afterwards",
-            "body": "There can be a great many new questions when you are new to the faith.",
-            "detail": "We want Rabita to be a place where you also find knowledge, community and support going forward."
+            "title": "Follow-up and community afterwards"
           }
         ]
       },
       "counselling": {
         "title": "Counselling and <em>mediation</em>",
-        "body": "Confidential conversations and mediation with an imam or a female counsellor.",
+        "body": "Advice, conflict resolution and support in difficult situations.",
         "longBody": "Life can bring periods where conflict, difficulties in a relationship or other crises become hard to handle alone. Rabita offers confidential conversations and mediation with an imam or a female counsellor. The conversations rest on trust and are treated in confidence.",
-        "offerTitle": "Someone who listens, and who knows the ground",
-        "offerLede": "We meet people in all kinds of situations — difficulties between spouses, conflict within a family, conflict between generations, or anything else that has become hard to carry.",
+        "offerTitle": "A confidential room for difficult conversations",
+        "offerLede": "Whether it concerns family, marriage or other challenges, we offer conversations with an imam or a female counsellor. Every enquiry is handled discreetly.",
         "offer": [
           {
-            "title": "Confidential conversations",
-            "body": "A conversation with an imam or a female counsellor, for anyone who needs someone to listen and to offer advice and guidance.",
-            "detail": "What is said is treated in confidence, with respect and discretion, within the obligations that follow from Norwegian law."
+            "title": "Individual conversations"
           },
           {
-            "title": "Mediation",
-            "body": "In mediation we try to create a safe and neutral room where both parties can talk, be heard and work towards a solution.",
-            "detail": "The aim is not to take sides, but to help dialogue, understanding and, where it is possible, reconciliation."
+            "title": "Family and marriage counselling"
           },
           {
-            "title": "We know the communities",
-            "body": "Some people find they need guidance that also takes their faith, culture or family situation into account.",
-            "detail": "This is where the mosque can have a particular role. We know the communities, the languages, and the religious and cultural frames many of the people who come to us live within."
-          },
-          {
-            "title": "When a case needs more",
-            "body": "This does not replace professional health care, family counselling, legal aid or other public services.",
-            "detail": "When a case calls for other or more specialised help, we will encourage contact with the right agency. Get in touch: post@rabita.no"
+            "title": "Conflict mediation"
           }
         ]
       },
       "hajj-umrah": {
         "title": "Hajj and <em>umrah</em>",
-        "body": "Organised pilgrimages to Mecca, from Rabita’s own office.",
+        "body": "Information, preparation and guidance before the pilgrimage.",
         "longBody": "Hajj, the pilgrimage to Mecca, is the fifth pillar of Islam and an obligation on every Muslim with the physical and financial means to make the journey. Umrah is the lesser pilgrimage and can be performed through most of the year. The hajj and umrah office sits in Rabita’s own premises and is run by a committed team of volunteers with years of experience.",
-        "offerTitle": "The journey to Mecca, well organised",
-        "offerLede": "For many people hajj and umrah are among the largest journeys they will make. Our aim is to make the trip as safe and as clear as possible, so the time goes to what the journey is actually for.",
+        "offerTitle": "Sound preparation for the pilgrimage",
+        "offerLede": "Our partners at the Hajj and Umrah office give information and guidance before both hajj and umrah, and organise their own umrah trips several times a year. Get in touch to hear about the next one.",
         "offer": [
           {
-            "title": "Organised package trips",
-            "body": "The hajj and umrah office is based in Rabita’s premises and run by volunteers with long experience.",
-            "detail": "Over the years it has grown into one of the largest operators in Norway for organised pilgrimages to Mecca."
+            "title": "Information meetings"
           },
           {
-            "title": "We handle the practical side",
-            "body": "The visa process, travel documentation, flights, accommodation and any other coordination needed.",
-            "detail": "We put weight on offering good, complete travel packages at favourable prices."
+            "title": "Preparation course"
           },
           {
-            "title": "Preparation before you leave",
-            "body": "Travellers are given information and guidance on how hajj and umrah are performed.",
-            "detail": "That gives both first-time and more experienced travellers the chance to prepare for the religious as well as the practical sides of the journey."
-          },
-          {
-            "title": "When the trips run",
-            "body": "Hajj runs every year in the month of Dhul Hijjah. Umrah normally two to three times a year.",
-            "detail": "Umrah trips are mostly placed in the school holidays, which makes it easier for families with children to take part. Telephone 40 29 20 20 · hajjogumrah@gmail.com"
+            "title": "Travel guide"
           }
         ]
       },
       "skole": {
-        "title": "Rabita <em>school</em>",
-        "body": "Weekend school in Arabic, the Quran and Islamic studies, for children aged 6 to 16.",
+        "title": "<em>Rabita school</em>",
+        "body": "Weekend school for children and young people, teaching Arabic and Islam.",
         "longBody": "Rabita’s Arabic school is a weekend school for children and young people aged 6 to 16, and one of our largest and longest-established offerings for children and families. In 2025 it had 225 pupils across 13 classes.",
         "offerTitle": "More than teaching",
-        "offerLede": "We want the children to have a place where language, faith, identity and community belong together naturally.",
+        "offerLede": "With us children should find a place where language, faith, identity and community belong naturally together. We put great weight on the quality of the teaching and on teachers who are academically strong and good role models.",
         "offer": [
           {
-            "title": "Weekend school for ages 6 to 16",
-            "body": "One of our largest and longest-established offerings for children and families.",
-            "detail": "In 2025 the school had 225 pupils across 13 classes."
+            "title": "Arabic teaching"
           },
           {
-            "title": "Arabic, the Quran and Islamic studies",
-            "body": "The teaching follows a clear pedagogical structure.",
-            "detail": "The aim is that the children develop good language skills, come to know their religious and cultural heritage, build friendships and grow up with a secure identity as Norwegian Muslims."
+            "title": "Islamic teaching"
           },
           {
-            "title": "The teachers",
-            "body": "Every permanent teacher holds a teaching qualification and works day to day within Norwegian educational institutions."
-          },
-          {
-            "title": "Enrolment and contact",
-            "body": "Information about registration and available places is announced through Rabita’s own channels.",
-            "detail": "Questions about the teaching, year groups, registration or available places: undervisning@arabiskald.no"
-          },
-          {
-            "title": "Enrolling a child",
-            "body": "Places are grouped by level rather than by age, so a child who has never read Arabic sits with others starting in the same place.",
-            "detail": "Term: Autumn and spring, following the Oslo school calendar. Age: From six years old, in groups by reading level. Fee: Set per term, and no child is turned away over it."
+            "title": "A safe learning environment"
           }
         ]
       },
       "koran": {
-        "title": "The Koran <em>school</em>",
-        "body": "Koran teaching for children from 6 and for adults, with tajweed.",
+        "title": "<em>The Qur’an school</em>",
+        "body": "Qur’an teaching for children, young people and adults, with weight on correct recitation, memorisation and understanding.",
         "longBody": "Teaching in the Qur'an: learning by heart, and learning to read it correctly — tajweed. Children between 6 and 15 and adults over 16 have groups of their own.",
-        "offerTitle": "The Qur'an, read as it should be read",
-        "offerLede": "The teaching is as much about pronunciation as about the text. Arabic as a language is a course of its own.",
+        "offerTitle": "Learning the Qur’an, correctly and with understanding",
+        "offerLede": "We put weight on correct recitation (tajweed), memorisation and understanding, for children and adults alike.",
         "offer": [
           {
-            "title": "Tajweed",
-            "body": "Reading it correctly: pronunciation, lengths and pauses."
+            "title": "Tajweed and recitation"
           },
           {
-            "title": "Memorisation",
-            "body": "Learning by heart, at the pace the pupil can manage."
+            "title": "Memorising the Qur’an"
           },
           {
-            "title": "Children from 6",
-            "body": "Groups of their own for children between 6 and 15.",
-            "detail": "Adults over 16 have theirs."
-          },
-          {
-            "title": "Arabic is a separate course",
-            "body": "If you want the language rather than only the reading, that is the Arabic course."
+            "title": "Understanding the Qur’an"
           }
         ]
       },
       "kurs": {
-        "title": "Calligraphy and <em>geometry</em>",
-        "body": "Courses in Islamic calligraphy and geometric art.",
+        "title": "The calligraphy and <em>geometry school</em>",
+        "body": "Explore Islamic art and geometry through courses, workshops and creative activities.",
         "longBody": "Art and beauty have held an important place in the Islamic tradition for centuries. At Rabita we want to keep that tradition alive and within reach of new generations, through courses where traditional craft, history, precision and creative work meet.",
-        "offerTitle": "A living tradition",
-        "offerLede": "Calligraphy is closely bound to the Quran and to the wish to give the written word a beautiful and dignified form. With geometry, it is among the most characteristic expressions of Islamic art.",
+        "offerTitle": "Explore Islamic art",
+        "offerLede": "We offer courses in Arabic calligraphy and Islamic geometry, led by experienced artists. Open to beginners and the more advanced alike.",
         "offer": [
           {
-            "title": "Calligraphy with Ustadh Khalid Casado",
-            "body": "Participants work on classical letter proportions, technique and composition under individual guidance.",
-            "detail": "He holds diplomas from the master calligraphers Hasan Celebi, Ferhat Kurlu and Nuria Garcia Masip in the Ottoman tradition."
+            "title": "Arabic calligraphy"
           },
           {
-            "title": "Geometry with Samira Mian",
-            "body": "With compass and ruler, participants learn to construct the precise and complex patterns that have marked Islamic art and architecture for centuries.",
-            "detail": "The teaching also opens up the form’s history, from Spain in the west to India in the east, and participants work with colour and watercolour to make something of their own."
+            "title": "Islamic geometry"
           },
           {
-            "title": "Participants from several countries",
-            "body": "Our courses have drawn participants from Germany, Spain and England among others."
-          },
-          {
-            "title": "Dates and enrolment",
-            "body": "Courses run through the year and are announced on rabita.no and on our social media.",
-            "detail": "For questions or more information: post@rabita.no"
+            "title": "Courses and workshops"
           }
         ]
       },
       "veivisere": {
         "title": "Muslim <em>guides</em>",
-        "body": "School visits where young Muslims meet pupils face to face.",
+        "body": "Bridge-building, dialogue and sharing knowledge about Islam and Muslims.",
         "longBody": "Muslimske veivisere is a dialogue and knowledge programme set up to counter prejudice and discrimination against Norwegian Muslims. Through school visits, young Muslim guides meet pupils face to face and speak openly about faith, identity, belonging, and what it is like to grow up and live as a Muslim in Norway.",
-        "offerTitle": "What happens to prejudice when people actually meet?",
-        "offerLede": "The aim is simple, and it matters: more knowledge, less distance, fewer prejudices.",
+        "offerTitle": "Meetings that build understanding",
+        "offerLede": "Our guides visit schools across the country to answer questions about faith and identity, and to help reduce prejudice and build understanding. We also receive visits at the mosque.",
         "offer": [
           {
-            "title": "School visits",
-            "body": "Young guides speak openly about faith, identity and belonging, and about growing up Muslim in Norway.",
-            "detail": "Pupils get to ask questions — including the difficult ones there is not always a natural place to ask."
+            "title": "School visits"
           },
           {
-            "title": "More than 200 schools",
-            "body": "Since 2025 the guides have visited over 200 schools and met more than 10,000 pupils.",
-            "detail": "Schools can also visit the mosque, take a tour and meet the guides on their own ground."
+            "title": "Dialogue meetings and talks"
           },
           {
-            "title": "Where it came from",
-            "body": "Developed by Det Islamske Forbundet – Rabita and Minotenk, modelled on the Sami and Jewish guide schemes.",
-            "detail": "It was later written into the government’s Action Plan against Muslim Hostility 2025–2030, presented in December 2024."
-          },
-          {
-            "title": "Who runs it",
-            "body": "The scheme is owned today by Muslimsk Dialognettverk and operated by Det Islamske Forbundet – Rabita.",
-            "detail": "The work is done with Minotenk and the Faculty of Theology at the University of Oslo."
+            "title": "Tours of the mosque"
           }
         ]
       },
       "norsk": {
-        "title": "Norwegian and <em>taking part</em>",
-        "body": "Norwegian classes for adults who fall outside the ordinary provision.",
+        "title": "Norwegian <em>course</em>",
+        "body": "Free Norwegian teaching and guidance for adults who want to strengthen their language and knowledge of society.",
         "longBody": "Knowing the language of the country you live in is about far more than making yourself understood. It is about talking to your children’s school, understanding a letter from the authorities, applying for work, taking an education, following the public debate, and taking part in society on your own terms.",
-        "offerTitle": "Language is what lets people take part",
-        "offerLede": "We offer Norwegian teaching for adults who need somewhere accessible to learn and to practise.",
+        "offerTitle": "A springboard into society",
+        "offerLede": "We offer free Norwegian teaching for adults who fall outside the ordinary provision, focused on everyday language and taking part in society.",
         "offer": [
           {
-            "title": "For those who fall outside",
-            "body": "Some have no right to free Norwegian tuition. Others have lived in Norway for years but never had the chance to learn the language well enough.",
-            "detail": "The classes are aimed particularly at people whose Norwegian tuition is not covered by the public system."
+            "title": "Norwegian teaching"
           },
           {
-            "title": "More than grammar",
-            "body": "The aim is that participants become more confident and more independent in meeting working life, public services, school and education.",
-            "detail": "And that they get a real chance to take an active part in society."
+            "title": "Conversation practice"
           },
           {
-            "title": "A natural part of being a mosque",
-            "body": "We meet people at every stage of life, including people the public services do not always reach.",
-            "detail": "We want to use that trust and closeness to open more doors into Norwegian society."
-          },
-          {
-            "title": "Enrolment",
-            "body": "For information about the Norwegian classes, courses and how to sign up.",
-            "detail": "Get in touch with Rabita at post@rabita.no"
+            "title": "Knowledge of society"
           }
         ]
       },
       "ungdom": {
-        "title": "Norges Unge <em>Muslimer</em>",
-        "body": "Rabita’s youth organisation, run by and for young people.",
+        "title": "<em>Norway’s Young Muslims</em> (NUM)",
+        "body": "Activities and community for young people.",
         "longBody": "Young people need more than somewhere to be. They need community, good role models, knowledge, and places where they can develop, take responsibility and feel they belong. Norges Unge Muslimer is Rabita’s youth organisation, with a board of its own.",
-        "offerTitle": "Room to make, to lead and to shape",
-        "offerLede": "We do not just want to put on activities for young people. We want to give them real room to make things, to lead and to shape what happens.",
+        "offerTitle": "A community for young people",
+        "offerLede": "NUM is Rabita’s own youth organisation, run by and for young people. Here they meet for social evenings, camps and talks.",
         "offer": [
           {
-            "title": "Run by young people",
-            "body": "The organisation is run by and for young people, with an independent board.",
-            "detail": "Planning and running activities gives them real experience of working together, of organising, of responsibility and of leadership."
+            "title": "Youth evenings"
           },
           {
-            "title": "Camps, courses and trips",
-            "body": "Through the year NUM runs camps, courses and theme evenings, conferences, social activities, trips and larger events.",
-            "detail": "The networks that form around the activities matter as much as the activities themselves."
+            "title": "Camps and trips"
           },
           {
-            "title": "Jenter i fokus and Gutter i fokus",
-            "body": "Two focused programmes for ages 11 to 15, combining Islamic teaching with guidance, activities and a social community.",
-            "detail": "At an age where many begin to explore questions of faith, identity, friendship and expectation, we want to offer steady places to meet, with trusted adults and good role models."
-          },
-          {
-            "title": "Prevention, and who we work with",
-            "body": "Preventing exclusion and crime, psychosocial safety, identity and participation are central parts of the work.",
-            "detail": "We work with the Norwegian Correctional Service, SALTO and Bydel Gamle Oslo among others."
+            "title": "Talks and workshops"
           }
         ]
       },
       "barn-og-familie": {
-        "title": "Children and <em>family</em>",
-        "body": "Activities and places to meet for children and families, all year round.",
+        "title": "Children and <em>families</em>",
+        "body": "Activities that strengthen family life, childhood and community.",
         "longBody": "Rabita should be a place where children too collect good memories, build friendships and feel the pleasure of being part of something larger. So through the year we run a range of activities and gatherings for children and families.",
-        "offerTitle": "Somewhere the children can call theirs too",
-        "offerLede": "For us this work is about belonging — for the children, and for the families around them.",
+        "offerTitle": "Good experiences, together",
+        "offerLede": "Through the year we arrange trips, workshops and gatherings that give children and parents good experiences together, and strengthen the bonds in the family.",
         "offer": [
           {
-            "title": "The festivals",
-            "body": "Through Id for alle, the Ramadan workshop and other markings, we want to build a good frame around our festivals.",
-            "detail": "Faith and tradition are not passed on through teaching alone, but through experiences, company and good memories."
+            "title": "Family activities"
           },
           {
-            "title": "Camps and trips",
-            "body": "Through the year we run camps, outings, trips and a range of social activities for children and families."
+            "title": "Trips and events"
           },
           {
-            "title": "Simply meeting",
-            "body": "Some activities belong to a particular occasion; others are simply about meeting and getting to know one another across families and generations."
-          },
-          {
-            "title": "When things happen",
-            "body": "Information about upcoming family activities, events and sign-up is published as it is set.",
-            "detail": "On Rabita’s website and on our social media."
+            "title": "Gatherings for parents and children"
           }
         ]
       },
       "fosterhjem": {
-        "title": "Become a <em>foster family</em>",
+        "title": "<em>Foster family</em>",
         "body": "Information and guidance for families considering fostering.",
         "longBody": "There are children and young people in Oslo who for various reasons cannot live with their parents, and who need a safe and stable home. Among them are children with a Muslim background waiting for a family who can give them care, safety and belonging.",
-        "offerTitle": "Perhaps it starts with a conversation",
-        "offerLede": "You do not have to have decided anything before you get in touch. At Rabita you can take the first step with no obligation at all.",
+        "offerTitle": "A safe home makes a difference",
+        "offerLede": "Through the project Bro til omsorg we inform and guide families who want to become foster carers for children of Muslim background.",
         "offer": [
           {
-            "title": "Why it matters",
-            "body": "When a child has to move away from their own family, that is already a large upheaval in their life.",
-            "detail": "For some children it can mean a great deal to come to a family who also understands their religious and cultural background — while the most important thing is always that the child gets a safe and good home."
+            "title": "Information about fostering"
           },
           {
-            "title": "Bro til omsorg",
-            "body": "Through the project Bro til omsorg, Rabita works with Oslo’s child and family agency to inform and recruit Muslim foster families.",
-            "detail": "The project is funded by Bufdir."
+            "title": "Help becoming a foster family"
           },
           {
-            "title": "The questions you are sitting with",
-            "body": "Who can become a foster parent? What is required? How does the process work? And what would it mean for the family and for everyday life?",
-            "detail": "Our role is to answer questions, give information, and be a bridge between families considering opening their home to a child and Oslo’s child and family agency."
-          },
-          {
-            "title": "Take the first step",
-            "body": "You can contact us with no obligation for information and guidance on what fostering involves."
+            "title": "Guidance for families"
           }
         ]
       },
       "id-for-alle": {
-        "title": "Eid for <em>everyone</em>",
-        "body": "A family day at Eid, with activities and games for young and old.",
+        "title": "Eid <em>for everyone</em>",
+        "body": "Open and inclusive Eid events for the whole family.",
         "longBody": "Rabita invites the whole family to a day of activities, games and good spirits, for young and old alike. Eid for everyone has been held in several places across the city — among them Hersleb skole, Ekeberghallen and Rådhusplassen — and is announced afresh before each Eid.",
-        "offerTitle": "The feast, kept together",
-        "offerLede": "Eid is a family day. The programme is built so that children and adults both have something to do, and everyone is welcome.",
+        "offerTitle": "A day for the whole family",
+        "offerLede": "Our Eid celebrations bring together thousands of people from different backgrounds for a safe and festive day of shared prayer, activities and good food.",
         "offer": [
           {
-            "title": "Open to the whole family",
-            "body": "Young and old in the same room. The day is made for both, not for one with the other in tow."
+            "title": "Shared Eid prayer"
           },
           {
-            "title": "Activities and games",
-            "body": "A programme running through the day, with games and activities for the children."
+            "title": "Activities for children and families"
           },
           {
-            "title": "Wherever there is room",
-            "body": "The day moves to whatever hall will hold it.",
-            "detail": "Previously held at Hersleb skole, Ekeberghallen and Rådhusplassen, among others."
-          },
-          {
-            "title": "The date follows the feast",
-            "body": "Eid for everyone is announced before each Eid.",
-            "detail": "Time and place come in the newsletter and on Facebook."
+            "title": "Food and community"
           }
         ]
       },
       "kurs-islam": {
-        "title": "A course in <em>Islam</em>",
-        "body": "Foundational knowledge for children and teenagers, in separate groups.",
+        "title": "Course in <em>Islam</em>",
+        "body": "Foundational teaching in Islamic faith and practice.",
         "longBody": "Teaching in Islam for several groups. Jenter i Fokus and Gutter i Fokus cover the foundations — prayer, ritual washing and tawhid — across two age groups: 10 to 13, and 14 to 18.",
-        "offerTitle": "The foundations, properly",
-        "offerLede": "The courses cover what a young Muslim needs to know, in groups put together by age.",
+        "offerTitle": "Foundational knowledge in a safe setting",
+        "offerLede": "The course gives children and young people a solid grounding in Islamic faith and practice, adapted to their own age groups.",
         "offer": [
           {
-            "title": "Jenter i Fokus",
-            "body": "A group of their own, for girls."
+            "title": "Islamic creed"
           },
           {
-            "title": "Gutter i Fokus",
-            "body": "A group of their own, for boys."
+            "title": "Islamic practice"
           },
           {
-            "title": "Prayer, wudu and tawhid",
-            "body": "The foundations: the prayer, the ritual washing, and the oneness of God."
-          },
-          {
-            "title": "Two age groups",
-            "body": "Teaching is split by age.",
-            "detail": "10–13 and 14–18."
+            "title": "Questions and answers"
           }
         ]
       },
@@ -2179,37 +2023,40 @@
         ]
       },
       "arabisk": {
-        "title": "A course in <em>Arabic</em>",
-        "body": "Arabic for adults over 16, at two levels.",
+        "title": "Course in <em>Arabic</em>",
+        "body": "Arabic tuition for adults at different levels, from beginner to advanced.",
         "longBody": "Teaching in Arabic for adults over 16, at two levels. Level 1 begins with the alphabet. Level 2 builds on it with grammar, vocabulary and reading continuous text.",
-        "offerTitle": "From the alphabet to the page",
-        "offerLede": "Two levels, so you can start where you are.",
+        "offerTitle": "From the first word to fluency",
+        "offerLede": "We offer Arabic tuition at two levels, for adults who want to learn the language or strengthen it.",
         "offer": [
           {
-            "title": "Level 1",
-            "body": "The alphabet and the first words, for those starting from nothing."
+            "title": "Beginner level"
           },
           {
-            "title": "Level 2",
-            "body": "Grammar, vocabulary and reading continuous text."
+            "title": "Advanced level"
           },
           {
-            "title": "For adults",
-            "body": "The courses are for participants over 16.",
-            "detail": "Children and teenagers belong in the Koran school."
-          },
-          {
-            "title": "The language the Qur'an came in",
-            "body": "Arabic lets you meet the text without a translation in between."
+            "title": "Reading, writing and conversation"
           }
         ]
       },
       "kvinnetreff": {
-        "title": "Kvinnetreff: <em>a meeting place for women</em>",
-        "body": "A meeting place for women in the congregation — conversation, teaching and community.",
+        "title": "<em>Women’s gatherings</em>",
+        "body": "Educational, social and spiritual offerings for women of all ages.",
         "longBody": "Kvinnetreff is a meeting place of its own for the women of Rabita, with room for conversation, teaching and time together. The gatherings are held at the mosque. Get in touch to hear when the next one takes place, or to say you would like to come.",
-        "offerTitle": "A room of our own",
-        "offerLede": "Kvinnetreff brings together women of every age for conversation, teaching and community. Get in touch and we will let you know when the next gathering is arranged."
+        "offerTitle": "A community for women of all ages",
+        "offerLede": "With us women meet for talks, social gatherings and educational sessions in a safe and welcoming setting.",
+        "offer": [
+          {
+            "title": "Talks and courses"
+          },
+          {
+            "title": "Social gatherings"
+          },
+          {
+            "title": "Spiritual community"
+          }
+        ]
       }
     },
     "allEyebrow": "All services",
@@ -2648,32 +2495,32 @@
     "heading": "The <em>dream mosque</em> in the heart of Oslo."
   },
   "joinPage": {
-    "lede": "Membership is how you are counted here. It brings the newsletter and invitations to what happens in the building. A voting membership adds a vote at the annual meeting that elects the board.",
-    "headline": "Membership is how you are counted here.",
-    "formEyebrow": "Join our community",
-    "formLede": "One form, and you are on the roll.",
+    "lede": "As a member you help shape Rabita’s future. You get a vote at the annual meeting, can influence important decisions and contribute to the development of both the congregation and the new mosque building. Membership is free, and it takes only a minute.",
+    "headline": "Become a member, and get more from what we offer.",
+    "formEyebrow": "Become a member",
+    "formLede": "One form. One minute.",
     "imageCaption": "Together we build a stronger community.",
-    "ledeShort": "Be counted at Rabita. The newsletter, invitations, and a vote if you want one.",
+    "ledeShort": "You get a vote at the annual meeting and support the congregation and the new mosque building. Free, and it takes a minute.",
     "points": {
       "updates": {
         "title": "News and invitations",
         "body": "The newsletter, and word of what is happening in the building."
       },
       "vote": {
-        "title": "A vote for every member",
-        "body": "Every member has one vote at the annual meeting, and can stand for the board."
+        "title": "Your voice counts",
+        "body": "As a member you have a vote at the annual meeting and can help elect the board and influence important decisions."
       },
       "renewal": {
         "title": "Renews yearly",
         "body": "Membership runs year by year, and you can end it whenever you want."
       },
       "free": {
-        "title": "Free for everyone",
-        "body": "No fee. Membership at Rabita costs nothing."
+        "title": "Free membership",
+        "body": "No fee, no hidden costs. Membership of Rabita is completely free."
       },
       "support": {
-        "title": "Supports the mosque project",
-        "body": "You can only be a member of one religious community. Your membership decides where the state support goes — and here it goes to the building in Calmeyers gate."
+        "title": "You strengthen the community",
+        "body": "Your membership strengthens Rabita and helps develop what we offer and realise the new mosque building."
       },
       "access": {
         "title": "Access to activities and services",
@@ -2684,15 +2531,15 @@
     "freeNote": "Membership at Rabita is free, and every member has a vote at the annual meeting.",
     "recognition": {
       "eyebrow": "Does this sound like you?",
-      "headline": "A place to pray. And a place to <em>grow</em>.",
-      "lede": "Rabita is more than prayer times. It is teaching, counselling and community — and people who want the same things you do.",
+      "headline": "A place to pray. A place to <em>belong</em>.",
+      "lede": "Rabita is more than prayer times. It is knowledge, community and people who want to grow in faith and contribute positively to society.",
       "points": {
         "quiet": "Do you want more quiet for prayer and reflection in a busy week?",
-        "children": "Do you want your children to grow up with somewhere to belong?",
-        "community": "Do you miss a community that makes you a better person?",
-        "learn": "Do you want to learn more about your faith, alongside people who know it?"
+        "children": "Do you want your children to grow up with a strong sense of belonging and good values?",
+        "community": "Do you miss a community that inspires you to become a better version of yourself?",
+        "learn": "Do you want to learn more about your faith alongside people who can guide and support you?"
       },
-      "closing": "This is what Rabita is for. Membership is <em>free</em>, and it takes a minute.",
+      "closing": "Does any of this sound like you? Then <em>Rabita</em> is a place for you.",
       "cta": "Join",
       "alt": [
         "Someone being welcomed at the door at Rabita",
@@ -2706,8 +2553,8 @@
   "apartmentsPage": {
     "units": {
       "eyebrow": "The apartments",
-      "heading": "Every home, <em>one by one</em>.",
-      "lede": "Each apartment with its own layout. Tap an apartment to see the floor plan.",
+      "heading": "Price and size of <em>the apartments</em>.",
+      "lede": "Tap an apartment to see its floor plan.",
       "prev": "Previous apartment",
       "next": "Next apartment",
       "openLabel": "See the floor plan",
@@ -2792,9 +2639,9 @@
       "more": "More apartments"
     },
     "eyebrow": "Apartments",
-    "title": "Fifteen apartments on <em>one</em> address.",
-    "lede": "Fifteen apartments for sale on the upper floors of Calmeyers gate 8, beside the roof garden and with the city outside the door. The sale helps finance the building below.",
-    "ledeShort": "Fifteen apartments for sale on the top floors of Calmeyers gate 8, beside the roof garden.",
+    "title": "A home on the top floor, <em>in the middle of Oslo</em>.",
+    "lede": "A home with a view over the city, and a community right below. Fifteen apartments for sale in Calmeyers gate 8.",
+    "ledeShort": "Fifteen apartments for sale on the top floors of Calmeyers gate 8.",
     "primary": "Register interest",
     "secondary": "See the whole project",
     "facts": {
@@ -2846,7 +2693,7 @@
     "quality": {
       "eyebrow": "Quality and common ground",
       "heading": "More than homes. A <em>neighbourhood</em>.",
-      "lede": "The homes are designed around functional layouts, good daylight and a modern standard. Large windows, comfortable living rooms and airy balconies make them easy to settle into.",
+      "lede": "Here you live close to a living community, with a mosque, school, library and café right below. Large windows, airy balconies and a roof garden of your own make the apartments bright and good to come home to.",
       "listLabel": "The project will also include",
       "items": {
         "mosque": {
@@ -2887,7 +2734,7 @@
     "cta": {
       "eyebrow": "For sale",
       "heading": "Fifteen apartments in the <em>new</em> building.",
-      "body": "On the fifth and sixth floors, beside the roof garden with the city outside the door. The sale helps finance the building below.",
+      "body": "On the top floors, with a roof terrace and a view over the whole city. The sale helps finance the mosque.",
       "cta": "See the apartments",
       "countLabel": "Apartments",
       "sizeLabel": "Sizes"
@@ -2920,15 +2767,15 @@
     "people": {
       "amara": {
         "role": "Theological leader",
-        "bio": "Trained at the Sharia Faculty of the University of Beirut and in pedagogy at Oslo University College. A teacher in Bærum from 2001 to 2008, and a frequent lecturer in mosques across Norway and Europe."
+        "bio": "Theological director at Rabita since the early 2000s. Educated at the sharia faculty of the University of Beirut and in pedagogy at Oslo University College. Heads the European Council of Imams, has long experience as a teacher in Norwegian schools and is a much-invited speaker in Norway and Europe. Holds overall responsibility for theological questions and rulings in the congregation."
       },
       "andreas": {
-        "role": "Imam",
-        "bio": "Teaches the Islamic-studies course in Norwegian and gives regular lectures for members and visitors. The voice of the adhan at the street iftar."
+        "role": "Norwegian-speaking imam",
+        "bio": "Norwegian-speaking imam since 2023. Has studied under several Norwegian imams, among them Sh. Bouchta. Delivers the Friday sermon and plays a central role in teaching, lecturing and conversations with members and visitors who speak mainly Norwegian. Speaks several languages and is known for his calm and beautiful Qur’anic recitation."
       },
       "aldiri": {
         "role": "Imam and theologian",
-        "bio": "Joined as imam in 2025. Holds a doctorate, with deep expertise in Islamic scholarship, dialogue, youth work and communication."
+        "bio": "Appointed imam in 2025. Holds a doctorate in Islamic studies from the University of Jordan and broad expertise in dialogue work, youth work and communication. He is particularly committed to the development of young Muslims. Gives short reminders after the daily prayers and contributes theological guidance and teaching."
       }
     }
   },
@@ -3013,12 +2860,12 @@
       "construction": {
         "label": "In progress",
         "name": "Construction",
-        "body": "In the first quarter of 2026, the goal is to begin construction of the foundation, main structure and external facade. This is the most critical phase of the project, a defining milestone that brings us closer to the vision of a new, modern mosque in the heart of Oslo."
+        "body": "The aim of this phase is to build the foundation, main structure and facade. This is the project’s most critical phase — a milestone that brings us closer to the vision of a new, modern mosque in the middle of Oslo."
       },
       "interior": {
         "label": "Upcoming",
         "name": "Interior",
-        "body": "By the end of 2027, our goal is to complete the interior work in the basement, first floor and second floor. These levels will form the heart of the building, with prayer areas spread across three floors, including wudu facilities and changing rooms."
+        "body": "The aim of this phase is to complete the interior of the basement, first and second floors. These floors are the heart of the building, with prayer halls across three storeys, wudu facilities and cloakrooms."
       },
       "completion": {
         "label": "Upcoming",
@@ -3066,7 +2913,8 @@
       "interior": {
         "name": "Interior",
         "items": [
-          "Interior completion of basement, 1st and 2nd floors"
+          "Interior completion of basement, 1st and 2nd floors",
+          "Mosque, entrance, café, restaurant, multi-purpose hall"
         ]
       },
       "ferdigstillelse": {
@@ -3136,25 +2984,25 @@
       "minaret": "Minaret"
     },
     "roomDesc": {
-      "prayerMain": "Rows of green beneath the gallery, with the rings of light overhead. The hall everyone gathers in on Fridays.",
-      "prayerMen": "The prayer room in the lower floor, bookshelves along the wall and the gallery open above it.",
-      "prayerWomen": "The women’s hall on the gallery: 500 places, up from 100 today, looking down into the main hall.",
-      "wuduMen": "The washing places before prayer — benches, taps, and room for many to make wudu at once.",
-      "sportsHall": "The multi-purpose hall in the lower floor — a court, training space and room for the whole club.",
-      "foyer": "Daylight from above, the library to one side, and the stair that ties the floors together.",
-      "cafe": "The café sits just inside the street, open to the congregation and to the city. No threshold.",
-      "library": "A reading room, seminar rooms and a youth section — somewhere to study that is not home.",
-      "commercial": "The restaurant facing the street: dining room, servery and a full kitchen behind.",
-      "childrensRoom": "The playroom beside the prayer hall, so the youngest have somewhere to be while their parents pray.",
-      "imamOffice": "The imams’ offices. Where you come for a conversation, for a nikah, or for advice in a hard week.",
-      "garden": "A sheltered outdoor room in the middle of the block: benches, flowers and a fountain with an eight-pointed star.",
-      "school": "Four hundred pupils and nineteen teachers. Classrooms with their own daylight, and corridors wide enough for a whole class.",
-      "conference": "One room for a great deal: conferences, weddings, funerals and courses.",
-      "meetingRooms": "Meeting rooms for the board, for courses and for hire, with the offices behind the glass wall.",
-      "youthClub": "Somewhere to be on a Friday evening: club rooms, offices for the volunteers and a studio next door.",
-      "apartments": "Fifteen rental apartments. The rent pays for running the building, so maintenance never eats the organisation again.",
-      "roofTerrace": "Tables under yellow canopies, planting and a view out across the roofs — the outdoor room for the school and the club.",
-      "minaret": "The minaret stands in the courtyard, with the balconies and flower boxes around it.",
+      "prayerMain": "The heart of the building. Here the congregation gathers for the daily prayers, Friday prayer and the celebration of the holy days.",
+      "prayerMen": "The prayer room in the lower floor, with bookshelves along the walls and an open gallery above.",
+      "prayerWomen": "Set on the gallery with a view over the main hall and direct access to the garden.",
+      "wuduMen": "The washing places before prayer, designed so that many can perform wudu at once.",
+      "sportsHall": "A hall for sport, training and activities through the whole week.",
+      "foyer": "Daylight from above, the library to one side and the staircase that ties the floors together.",
+      "cafe": "The café sits just inside the street and is open to the congregation and the city alike.",
+      "library": "Norwegian, English and Arabic books on Islam. A place for study, learning and quiet.",
+      "commercial": "A restaurant facing the street, with a dining room, service and a full kitchen.",
+      "childrensRoom": "A playroom beside the prayer hall, so the youngest have somewhere to be while their parents pray.",
+      "imamOffice": "The imams’ offices. A place for conversation, guidance and support in matters large and small.",
+      "garden": "A sheltered outdoor room in the middle of the block, with benches, flowers and a fountain with an eight-pointed star.",
+      "school": "Bright, modern classrooms where children and young people can learn, develop and build a secure identity.",
+      "conference": "Flexible premises for conferences, courses, weddings and celebrations.",
+      "meetingRooms": "Meeting rooms for the board, the administration, the departments and partners.",
+      "youthClub": "A place for children and young people, with games, activities and somewhere to be together.",
+      "apartments": "Fifteen highly attractive apartments, centrally placed in the heart of Oslo.",
+      "roofTerrace": "Tables under sails, planting and a view over the city’s rooftops. An outdoor room for visitors and residents alike.",
+      "minaret": "The minaret is integrated into the courtyard and shaped from the building’s fire stair. It draws on a long tradition in Islamic architecture and is adapted to the building’s modern idiom.",
       "prayerScreened": "A prayer room of its own for adults with small children.",
       "wuduWomen": "Separate facilities for ritual washing, designed for comfort and accessibility before prayer.",
       "amphi": "Steps that become seating. A place for gatherings, presentations and fresh air.",
