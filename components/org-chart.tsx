@@ -198,42 +198,47 @@ export async function OrgChart({ locale }: { locale: string }) {
             const lead = i === 0;
             const src = im.photo;
             return (
-              // Centred in the cell from sm (client, 2026-09-18: "make these
-              // imams also in centre, see the above 3 are in centre").
+              // THE SAME OBJECT AS THE LEADERSHIP CARD ABOVE (client,
+              // 2026-09-20: show the imams the way the people above them
+              // are shown). Identical 4:5 plate, identical hover, and the
+              // role / name / biography left-aligned under it.
               //
-              // The leadership plates fill their whole grid cell, so they read
-              // as centred in their column whatever their type does. A 112px
-              // circle parked at the start of a cell three times that wide
-              // does not — it leaves a long gap to its right and the row sits
-              // off to one side of a group that is supposed to balance the one
-              // above it. Centring the circle AND its type is what makes the
-              // two rows read as the same object at two sizes.
-              <li key={im.key} className="flex items-center gap-4 sm:flex-col sm:items-center sm:gap-0 sm:text-center">
-                <span
+              // It replaces a centred circle. That circle was right while
+              // these three carried a name and a title and nothing else —
+              // but Tekst (endelig) gave each of them a biography, and a
+              // paragraph of ragged-centre text is hard to read and sat
+              // oddly beside the ragged-left paragraphs directly above it.
+              <li key={im.key} className="group flex items-center gap-5 sm:block">
+                <div
                   className={cn(
-                    // Bigger from md UP ONLY (client, 2026-09-18: "let it remain as it
-                    // is on phones and small tabs, but on mac 12-14 inches make
-                    // the imams photos a bit bigger"). 80 on a phone and 112 on a
-                    // small tablet are untouched; a 13" MacBook is ~1470px wide, so
-                    // it takes the lg step.
-                    //
-                    // 160 is the ceiling, not a taste call: the source files are
-                    // 400x400, and a 160px circle on a retina screen asks for 320.
-                    // Anything larger starts upscaling.
-                    'relative grid h-20 w-20 shrink-0 place-items-center overflow-hidden rounded-full bg-paper ring-offset-[3px] ring-offset-sage sm:h-28 sm:w-28 md:h-32 md:w-32 lg:h-40 lg:w-40',
-                    lead ? 'ring-2 ring-gold-deep' : 'ring-1 ring-sage-line',
+                    'relative aspect-[4/5] w-28 shrink-0 overflow-hidden rounded-2xl transition-[box-shadow] duration-300 ease-out sm:w-full',
+                    // The theological leader keeps his gold edge, exactly as
+                    // components/imams.tsx marks him on /bonnetider. It is
+                    // the one thing the circle carried that the plate had to
+                    // keep.
+                    lead
+                      ? 'bg-paper ring-2 ring-gold-deep'
+                      : src && hasPhoto(src)
+                        ? 'bg-paper ring-1 ring-sage-line group-hover:ring-gold-deep/45'
+                        : 'bg-dusk ring-1 ring-inset ring-paper/10 group-hover:ring-gold/45',
                   )}
                 >
                   {src && hasPhoto(src) ? (
-                    <Image src={src} alt={im.name} fill sizes="(min-width: 1024px) 160px, (min-width: 768px) 128px, (min-width: 640px) 112px, 80px" className="object-cover" />
+                    <Image
+                      src={src}
+                      alt={im.name}
+                      fill
+                      sizes="(min-width: 640px) 33vw, 100vw"
+                      className="object-cover transition-transform duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover:scale-[1.04]"
+                    />
                   ) : (
-                    <span aria-hidden className="font-serif text-[1.5rem] text-gold-deep/35 md:text-[1.75rem] lg:text-[2.125rem]">
+                    <span aria-hidden className="absolute inset-0 grid place-items-center font-serif text-[2.125rem] text-gold-soft/70">
                       {initials(im.name)}
                     </span>
                   )}
-                </span>
+                </div>
 
-                <div className="min-w-0 sm:mt-5">
+                <div className="min-w-0 sm:mt-4">
                   <p className="font-mono text-[0.625rem] uppercase leading-snug tracking-[0.16em] text-ink-40">
                     {t(`roles.${im.role}`)}
                   </p>
