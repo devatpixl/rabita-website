@@ -224,7 +224,17 @@ export default async function AboutPage({
                  is a tall pale rectangle doing nothing, and the quote reads
                  perfectly well as a plain pull quote — which is what it
                  becomes there. */}
-              <aside className="lg:col-span-5">
+              {/* CENTRED AGAINST THE STORY, not pinned to its top.
+                 The grid is items-start, so the arch used to begin level
+                 with the heading — fine when the story was two paragraphs.
+                 Tekst (endelig) took it to four, and the column grew to
+                 886px against the arch's 544, leaving 342px of empty sage
+                 under it and the picture stranded at the top.
+
+                 self-center rather than a typed margin: it splits whatever
+                 slack there is, so the balance survives the next time the
+                 copy changes length. */}
+              <aside className="lg:col-span-5 lg:self-center">
                 <div className="relative ms-auto hidden w-full max-w-[23rem] lg:block">
                   <div
                     aria-hidden
