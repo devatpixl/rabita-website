@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import fs from 'node:fs';
 import path from 'node:path';
 import Image from 'next/image';
@@ -317,7 +318,18 @@ export async function OrgChart({ locale }: { locale: string }) {
            here — the client's own instruction for this group is "kun
            avdelingsnavn", names only. Ten arrows pointing at nothing is the
            same fault we just took off the visit cards. */}
-        <ol className="mt-7 grid grid-cols-1 gap-3 sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-5 sm:gap-x-5">
+        {/* Two columns, filled DOWN the first then down the second, so the
+           numbering reads 01-04 on the left and 05-08 on the right.
+           grid-flow-col needs an explicit row count to know where to break,
+           and that count was hardcoded at 5 — correct for the ten
+           departments this list used to hold, and the reason eight rendered
+           as 5 + 3.
+           Derived now, via a CSS variable, so the split follows the array
+           instead of a number somebody has to remember to change. */}
+        <ol
+          className="mt-7 grid grid-cols-1 gap-3 sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-[repeat(var(--dept-rows),minmax(0,1fr))] sm:gap-x-5"
+          style={{ '--dept-rows': Math.ceil(DEPARTMENTS.length / 2) } as CSSProperties}
+        >
           {DEPARTMENTS.map((key, i) => (
             <li
               key={key}
