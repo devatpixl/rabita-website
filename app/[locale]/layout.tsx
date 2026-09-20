@@ -83,6 +83,7 @@ export default async function LocaleLayout({
               <FindUsGoogle
                 locale={locale}
                 variant="map"
+                place="visit"
                 className="mx-auto max-w-[30rem] lg:max-w-none"
               />
             }

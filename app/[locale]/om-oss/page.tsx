@@ -298,9 +298,6 @@ export default async function AboutPage({
          reports + chart. That is one fewer than /om-oss and one more than
          islamic.no, and every one of them does a single thing. */}
 
-      {/* ══ 5. PARTNERS ═══════════════════════════════════════════════════
-         Unchanged and shared with /om-oss. Innocents joined it 2026-09-17. */}
-      <PartnerLogos locale={locale} />
 
       {/* ══ 6. BESØK OSS, SIMPLIFIED ══════════════════════════════════════
          Client: "forenkle besøk oss som er lenger opp."
@@ -529,6 +526,22 @@ export default async function AboutPage({
          paperwork and the people belong after the invitation, not before it,
          if this page wins, the two files merge and only one survives. */}
       <AnnualReports locale={locale} />
+
+      {/* ══ SAMARBEIDSPARTNERE, LAST ═══════════════════════════════════════
+         Client, Tekst (endelig) Sept 2026: "Flytt hele
+         samarbeidspartnere-seksjonen til helt nederst på siden, og la den
+         ERSTATTE dagens «Besøk oss»-seksjon som i dag ligger nederst."
+
+         A MOVE, NOT A DELETION, and his own document is what settles that:
+         the section he calls "Besøk oss" is given NY TEKST two pages earlier
+         under the heading "Kontakt oss" — address, prayer window, office
+         hours, e-mail — so it cannot be the thing being removed. What he saw
+         was partners sitting ABOVE it; "erstatte" is him describing the slot
+         partners should end up in, which is the bottom.
+
+         The page now runs in his content order exactly: Historie ->
+         Kontakt oss -> Organisasjonen -> Samarbeidspartnere. */}
+      <PartnerLogos locale={locale} />
     </main>
   );
 }

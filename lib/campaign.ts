@@ -212,13 +212,25 @@ const toNok = (eur: number) => Math.round((eur * EUR_NOK) / 100_000) * 100_000;
 // null rather than deleting the fields: projectPhaseState() reads them to
 // decide done / current / next, and a phase with no dates is simply one that
 // has not been scheduled. Restoring a year is one value per row.
+// `eur` IS THE SOURCE, `nok` is derived. Both are carried because the site
+// prints different ones in different languages (client, Tekst (endelig) Sept
+// 2026): "Alle beløp er endret fra euro (€) til norske kroner (kr) — valutaen
+// som står på siden i dag er feil. I den engelske og arabiske versjonen bør
+// det står i euro."
+//
+// So Norwegian reads the kroner, English and Arabic read the euro the
+// brochure was actually budgeted in — and the euro figures are the originals,
+// not a conversion back, so no rounding error accumulates in either direction.
 export const PROJECT_PHASES = Object.freeze([
-  { n: 1, from: 2019, to: 2024, key: 'planning' as const, nok: toNok(602_000) },
-  { n: 2, from: 2025, to: 2025, key: 'demolition' as const, nok: toNok(946_000) },
-  { n: 3, from: null, to: null, key: 'fundament' as const, nok: toNok(9_632_000) },
-  { n: 4, from: null, to: null, key: 'interior' as const, nok: toNok(6_450_000) },
-  { n: 5, from: null, to: null, key: 'ferdigstillelse' as const, nok: toNok(6_900_000) },
+  { n: 1, from: 2019, to: 2024, key: 'planning' as const, eur: 602_000, nok: toNok(602_000) },
+  { n: 2, from: 2025, to: 2025, key: 'demolition' as const, eur: 946_000, nok: toNok(946_000) },
+  { n: 3, from: null, to: null, key: 'fundament' as const, eur: 9_632_000, nok: toNok(9_632_000) },
+  { n: 4, from: null, to: null, key: 'interior' as const, eur: 6_450_000, nok: toNok(6_450_000) },
+  { n: 5, from: null, to: null, key: 'ferdigstillelse' as const, eur: 6_900_000, nok: toNok(6_900_000) },
 ]);
+
+/** The same sum in the currency it was budgeted in. Summed, never typed. */
+export const TOTAL_BUILD_COST_EUR = PROJECT_PHASES.reduce((a, p) => a + p.eur, 0);
 export type ProjectPhaseKey = (typeof PROJECT_PHASES)[number]['key'];
 
 // Summed, never typed twice: a total that can disagree with its own parts is

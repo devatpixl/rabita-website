@@ -1,5 +1,11 @@
 import { getTranslations } from 'next-intl/server';
-import { PROJECT_PHASES, TOTAL_BUILD_COST_NOK, CAMPAIGN, projectPhaseState } from '@/lib/campaign';
+import {
+  PROJECT_PHASES,
+  TOTAL_BUILD_COST_NOK,
+  TOTAL_BUILD_COST_EUR,
+  CAMPAIGN,
+  projectPhaseState,
+} from '@/lib/campaign';
 import { formatAmount } from '@/lib/format';
 import type { AppLocale } from '@/i18n/routing';
 import { cn } from '@/lib/cn';
@@ -33,6 +39,12 @@ export async function ProgressPhases({
   locale: AppLocale;
   compact?: boolean;
 }) {
+  // THE BUILD COST IS PRINTED IN THE CURRENCY EACH AUDIENCE WAS GIVEN
+  // (client, Tekst (endelig) Sept 2026): kroner on the Norwegian pages,
+  // euro on the English and Arabic ones. The donation GOAL is not touched —
+  // it is a kroner target either way, and the note under these two figures
+  // is there precisely to say they are not the same number.
+  const euro = locale !== 'no';
   const t = await getTranslations('fremdrift');
   const now = new Date();
 
@@ -171,8 +183,8 @@ export async function ProgressPhases({
                         : 'text-[clamp(1.2rem,1.9vw,1.5rem)]',
                     )}
                   >
-                    {formatAmount(locale, phase.nok)}{' '}
-                    <span className="font-mono text-[0.75rem] tracking-[0.06em]">kr</span>
+                    {formatAmount(locale, euro ? phase.eur : phase.nok)}{' '}
+                    <span className="font-mono text-[0.75rem] tracking-[0.06em]">{euro ? '\u20AC' : 'kr'}</span>
                   </p>
                 </div>
 
@@ -225,8 +237,8 @@ export async function ProgressPhases({
                 {t('totalLabel')}
               </dt>
               <dd className="mt-3 font-serif text-[clamp(1.75rem,3vw,2.4rem)] leading-none tabular-nums text-ink">
-                {formatAmount(locale, TOTAL_BUILD_COST_NOK)}{' '}
-                <span className="font-mono text-[0.8125rem] tracking-[0.06em] text-ink-60">kr</span>
+                {formatAmount(locale, euro ? TOTAL_BUILD_COST_EUR : TOTAL_BUILD_COST_NOK)}{' '}
+                <span className="font-mono text-[0.8125rem] tracking-[0.06em] text-ink-60">{euro ? '\u20AC' : 'kr'}</span>
               </dd>
             </div>
             <div>

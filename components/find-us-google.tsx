@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { cn } from '@/lib/cn';
-import { DIRECTIONS_URL, LANDMARKS, ROUTES } from '@/lib/location';
+import { DIRECTIONS_URL, LANDMARKS, ROUTES, VISIT } from '@/lib/location';
 
 // The apartments map, as a real Google map (client, 2026-09-15: "Real google
 // maps / Remove the lines / Just put in the point").
@@ -61,10 +61,27 @@ export async function FindUsGoogle({
    *           have been the second answer to a question already answered.
    */
   variant = 'full',
+  /**
+   * WHICH ADDRESS THE MAP SHOWS. Client, Tekst (endelig) Sept 2026:
+   * "Footer-kartet skal vise Sørligata 8a (der menigheten holder til
+   * midlertidig i dag) — IKKE Calmeyers gate 8. Dette gjelder footeren på
+   * ALLE sider." And in the same breath, about the other two: "Kartene på
+   * selve Moskeprosjektet-siden og Leiligheter-siden skal derimot fortsatt
+   * vise Calmeyers gate 8 ... disse to skal IKKE endres."
+   *
+   * So this is the same split lib/campaign.ts already draws between
+   * visitAddress and address: where the congregation IS, against what is
+   * being BUILT. A footer is somebody working out how to come on Friday.
+   *
+   * 'visit'   — Sørligata 8a, a plain Google Maps place embed.
+   * 'project' — Calmeyers gate 8, the My Maps with the landmark pins.
+   */
+  place = 'project',
   className,
 }: {
   locale: string;
   variant?: 'full' | 'map';
+  place?: 'visit' | 'project';
   className?: string;
 }) {
   const t = await getTranslations({ locale, namespace: 'footer.findUs' });
@@ -125,11 +142,29 @@ export async function FindUsGoogle({
           )}
         >
           <iframe
-            src={`https://www.google.com/maps/d/embed?mid=${MAP_MID}&ehbc=2E312F`}
+            src={
+              place === 'visit'
+                ? // A PLAIN PLACE EMBED, not My Maps. Three of the client's
+                  // complaints about this box disappear by construction:
+                  // there is no owner title bar, so no black stripe to crop;
+                  // it fills its frame at any width, so no empty half; and
+                  // the single pin is labelled by Google itself, so there
+                  // are no marker names to go missing. Keyless and stable —
+                  // ?q=<address>&output=embed is the long-standing form.
+                  `https://www.google.com/maps?q=${encodeURIComponent(VISIT.address)}&hl=${locale === 'ar' ? 'ar' : locale === 'en' ? 'en' : 'no'}&z=15&output=embed`
+                : `https://www.google.com/maps/d/embed?mid=${MAP_MID}&ehbc=2E312F`
+            }
             title={t('mapTitle')}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            style={{ marginTop: `-${HEADER_PX}px`, height: `calc(100% + ${HEADER_PX}px)` }}
+            // The pull-up is the My Maps title-bar crop and nothing else.
+            // A place embed has no bar, and cropping one would only hide the
+            // top of the map.
+            style={
+              place === 'visit'
+                ? { height: '100%' }
+                : { marginTop: `-${HEADER_PX}px`, height: `calc(100% + ${HEADER_PX}px)` }
+            }
             className="block w-full border-0"
           />
         </div>

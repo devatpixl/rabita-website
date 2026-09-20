@@ -2899,7 +2899,7 @@
     "phaseLabel": "Phase {n}",
     "totalLabel": "Total build cost",
     "goalLabel": "Fundraising goal",
-    "goalNote": "The build cost is given in euro, as it is budgeted per phase. Our fundraising is in kroner and covers a share of it — the two are not the same figure, and we do not convert one into the other.",
+    "goalNote": "The build cost is the sum of the five phases, budgeted in euro. Our fundraising is in kroner and covers part of it — the two figures are not the same number, and we do not convert one into the other.",
     "stateDone": "Completed",
     "stateCurrent": "In progress",
     "tasksShow": "Show tasks ({n})",

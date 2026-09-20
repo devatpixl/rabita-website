@@ -2895,7 +2895,7 @@
     "phaseLabel": "Fase {n}",
     "totalLabel": "Samlet byggekostnad",
     "goalLabel": "Innsamlingsmål",
-    "goalNote": "Byggekostnaden er oppgitt i euro, slik den er budsjettert per fase. Innsamlingen vår er i kroner og dekker en del av den — de to tallene er ikke det samme, og vi regner dem ikke om mot hverandre.",
+    "goalNote": "Byggekostnaden er summen av de fem fasene, oppgitt i kroner. Innsamlingen vår dekker en del av den — de to tallene er ikke det samme.",
     "stateDone": "Fullført",
     "stateCurrent": "Pågår",
     "tasksShow": "Vis oppgaver ({n})",
