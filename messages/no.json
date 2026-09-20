@@ -1279,7 +1279,13 @@
       "completionTbd": "settes av byggefase",
       "eyebrow": "Det nye bygget",
       "title": "En moské med <em>alt under ett tak</em>.",
-      "apartments": "Leiligheter"
+      "apartments": "Leiligheter",
+      "facilityLines": {
+        "prayer": "Bønnerom fordelt over tre etasjer",
+        "school": "Klasserom for 1.–7. trinn",
+        "library": "Bibliotek, kafé og restaurant",
+        "youth": "Ungdomsklubb, flerbrukshall og hage"
+      }
     },
     "capacity": {
       "heading": "Kapasitet",
@@ -2105,7 +2111,22 @@
         "num": "NUM",
         "strategy": "Strategi",
         "dialogue": "Dialog",
-        "childrenFamily": "Barn- og familie"
+        "childrenFamily": "Barn og familie"
+      },
+      "bios": {
+        "hasnaoui": "Leder den daglige driften av Rabita og koordinerer organisasjonens administrasjon, aktiviteter og avdelinger. Har mastergrad i ledelse og bachelorgrad i organisasjonspsykologi, HR og ledelse fra Handelshøyskolen BI. Har bred erfaring innen ledelse, prosjektarbeid og organisasjonsutvikling, blant annet fra Rabita og Landsforeningen for Pårørende innen Psykisk helse (LPP).",
+        "ghozlan": "Leder styret og bidrar til å videreutvikle Rabitas visjon, strategi og samfunnsengasjement. Har lang erfaring fra ledelse og organisasjonsarbeid i Rabita, blant annet som forstander, styremedlem og styreleder. Utdannet dataingeniør ved Høgskolen i Oslo og har hovedfag i informatikk fra Universitetet i Oslo. Har også vært leder for Islamsk Råd Norge og er en profilert stemme innen tros- og livssynsdialog.",
+        "jeridi": "Bistår styreleder i styrets arbeid og bidrar til oppfølging av organisasjonens strategiske mål og prioriteringer. Har lang erfaring fra organisasjons- og frivillighetsarbeid og har vært engasjert i Rabita gjennom mange år. Har tidligere hatt verv som styremedlem og nestleder. Har også erfaring fra humanitært arbeid gjennom Ezzeitona Hjelp."
+      },
+      "departments": {
+        "education": "Ansvarlig for skoler, kurs og undervisningstilbud for barn, ungdom og voksne.",
+        "knowledge": "Formidler islamsk lære og daʿwa gjennom foredrag, studiesirkler og teologisk veiledning.",
+        "childrenFamily": "Skaper trygge møteplasser og aktiviteter for barn og familier som styrker fellesskap, trivsel og familieliv.",
+        "num": "Rabitas ungdomsorganisasjon som skaper fellesskap, engasjement og aktiviteter for ungdom.",
+        "women": "Tilrettelegger for aktiviteter, fellesskap og faglige tilbud for kvinner i menigheten.",
+        "dialogue": "Bygger relasjoner og samarbeid med tros- og livssynssamfunn, myndigheter og sivilsamfunn. Tilbyr også samtaler, rådgivning og megling.",
+        "buildingProject": "Leder arbeidet med realiseringen av Rabitas nye moské- og samfunnssenter.",
+        "safety": "Bidrar til trygge og godt organiserte arrangementer og aktiviteter i moskeen."
       }
     },
     "reports": {

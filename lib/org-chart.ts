@@ -49,12 +49,44 @@ export type OrgPerson = {
   photo: string;
 };
 
-/** Styreleder, nestleder, daglig leder — the three he named, in his order. */
+/**
+ * Daglig leder, styreleder, nestleder — the three he names in Tekst
+ * (endelig), in his order.
+ *
+ * ── THE BOARD CHANGED (Sept 2026) ────────────────────────────────────────
+ * His list is NOT the one this file carried, and the difference is people,
+ * not wording:
+ *
+ *   Basim Ghozlan   nestleder  ->  STYRELEDER
+ *   Salem Jeridi    not here   ->  NESTLEDER
+ *   Hossam Belkilani  styreleder  ->  not on his list at all
+ *
+ * Tekst (endelig) is the newest word on who leads the organisation, so it
+ * governs. Hossam Belkilani therefore comes off the site — FLAGGED TO THE
+ * CLIENT, because removing a named person is not something to infer from a
+ * document quietly. public/photos/leadership/hossam-belkilani.webp is left
+ * on disk and this line restores him:
+ *   { role: 'chair', boardRole: true, name: 'Hossam Belkilani', photo: '/photos/leadership/hossam-belkilani.webp' },
+ *
+ * Salem Jeridi has no photograph yet. That is fine by design — OrgChart
+ * checks disk at build time and falls back to a monogram plate — so dropping
+ * salem-jeridi.webp into public/photos/leadership/ is the whole of adding
+ * one.
+ */
 export const LEADERSHIP: readonly OrgPerson[] = [
-  { role: 'chair', boardRole: true, name: 'Hossam Belkilani', photo: '/photos/leadership/hossam-belkilani.webp' },
-  { role: 'vice', boardRole: true, name: 'Basim Ghozlan', photo: '/photos/leadership/basim-ghozlan.webp' },
   { role: 'director', name: 'Imen Hasnaoui', photo: '/photos/leadership/imen-hasnaoui.webp' },
+  { role: 'chair', boardRole: true, name: 'Basim Ghozlan', photo: '/photos/leadership/basim-ghozlan.webp' },
+  { role: 'vice', boardRole: true, name: 'Salem Jeridi', photo: '/photos/leadership/salem-jeridi.webp' },
 ];
+
+/** Message key under aboutPage.org.bios for each leader's short description
+ *  (client: "navn, bilde og kort beskrivelse for hver"). Keyed by name so a
+ *  change of role does not silently move a biography to another person. */
+export const LEADERSHIP_BIO: Record<string, string> = {
+  'Imen Hasnaoui': 'hasnaoui',
+  'Basim Ghozlan': 'ghozlan',
+  'Salem Jeridi': 'jeridi',
+};
 
 /**
  * The chart's title for each imam, keyed by the imam's own id in lib/imams.ts.
@@ -93,12 +125,22 @@ export const IMAM_LEADERS = IMAMS.map((im) => ({
 export const DEPARTMENTS: readonly string[] = [
   'education',
   'knowledge',
+  'childrenFamily',
+  'num',
   'women',
-  'artsCulture',
+  'dialogue',
   'buildingProject',
   'safety',
-  'num',
-  'strategy',
-  'dialogue',
-  'childrenFamily',
 ];
+
+// ── TWO DEPARTMENTS CAME OFF, AND HE ASKED US TO CHECK ───────────────────
+// Kunst og kultur (`artsCulture`) and Strategi (`strategy`) are not on his
+// Sept 2026 list. His own note: "Kunst og kultur- og Strategi-avdelingene
+// fra det gamle organisasjonskartet er ikke med i den nye, forenklede
+// avdelingslisten — bekreft at dette er bevisst før publisering."
+//
+// So the list below follows him and the question stands with the client.
+// Both role labels are still translated in all three locales and both keys
+// still resolve; restoring either is one line in the array above.
+//
+// The order is his too, and it is not alphabetical in any language.

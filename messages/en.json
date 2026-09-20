@@ -1275,7 +1275,13 @@
       "completionTbd": "set by build phase",
       "eyebrow": "The new building",
       "title": "One mosque, <em>everything under one roof</em>.",
-      "apartments": "Apartments"
+      "apartments": "Apartments",
+      "facilityLines": {
+        "prayer": "Prayer halls across three floors",
+        "school": "Classrooms for years 1–7",
+        "library": "Library, café and restaurant",
+        "youth": "Youth club, multi-purpose hall and garden"
+      }
     },
     "capacity": {
       "heading": "Capacity",
@@ -2102,6 +2108,21 @@
         "strategy": "Strategy",
         "dialogue": "Dialogue",
         "childrenFamily": "Children and family"
+      },
+      "bios": {
+        "hasnaoui": "Leads the daily running of Rabita and coordinates the organisation’s administration, activities and departments. Holds a master’s in management and a bachelor’s in organisational psychology, HR and management from BI Norwegian Business School. Brings broad experience in leadership, project work and organisational development, from Rabita among others and from the National Association for Relatives in Mental Health (LPP).",
+        "ghozlan": "Chairs the board and helps develop Rabita’s vision, strategy and civic engagement. Long experience of leadership and organisational work at Rabita, as forstander, board member and chair. Trained as a computer engineer at Oslo University College with a master’s in informatics from the University of Oslo. Has also led the Islamic Council Norway and is a prominent voice in interfaith dialogue.",
+        "jeridi": "Supports the chair in the board’s work and helps follow up the organisation’s strategic goals and priorities. Long experience of organisational and voluntary work, and involved with Rabita for many years. Has previously served as board member and deputy chair. Also brings experience of humanitarian work through Ezzeitona Hjelp."
+      },
+      "departments": {
+        "education": "Responsible for the schools, courses and teaching offered to children, young people and adults.",
+        "knowledge": "Shares Islamic learning and daʿwa through talks, study circles and theological guidance.",
+        "childrenFamily": "Creates safe meeting places and activities for children and families that strengthen community, wellbeing and family life.",
+        "num": "Rabita’s youth organisation, creating community, engagement and activities for young people.",
+        "women": "Arranges activities, community and educational sessions for the women of the congregation.",
+        "dialogue": "Builds relationships and cooperation with faith and belief communities, public authorities and civil society. Also offers conversations, counselling and mediation.",
+        "buildingProject": "Leads the work of realising Rabita’s new mosque and community centre.",
+        "safety": "Helps keep events and activities at the mosque safe and well organised."
       }
     },
     "reports": {

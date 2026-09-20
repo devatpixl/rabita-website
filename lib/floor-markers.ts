@@ -108,13 +108,27 @@ export const FLOOR_ROOM_COUNT = new Set(
     .flatMap(([, markers]) => markers.map((m) => m.id)),
 ).size;
 
-/** The six the card shows, in the order it shows them: the home page's own
- *  promise first — moské, skole, bibliotek — then the three nobody expects. */
+/**
+ * The FASILITETER card's four lines, in the client's own order and wording
+ * (Tekst (endelig), Sept 2026):
+ *
+ *   Bønnerom fordelt over tre etasjer
+ *   Klasserom for 1.-7. trinn
+ *   Bibliotek, kafé og restaurant
+ *   Ungdomsklubb, flerbrukshall og hage
+ *
+ * GROUPS, NOT ROOMS. The card used to list six individual rooms and read
+ * their labels straight from floorByFloor.rooms. His list groups them — one
+ * line covers three prayer halls, another covers the youth club, the
+ * multi-purpose hall and the garden together — so the text now lives in
+ * projectPage.facts.facilityLines and these keys only choose the glyph.
+ *
+ * It is the same instruction that removed "Kapasitet: 2 500 personer" from
+ * the key figures: "erstattet med fasilitetslisten".
+ */
 export const FACILITIES = [
-  'prayerMain',
-  'school',
-  'library',
-  'sportsHall',
-  'cafe',
-  'roofTerrace',
+  { key: 'prayer', glyph: 'prayerMain' },
+  { key: 'school', glyph: 'school' },
+  { key: 'library', glyph: 'library' },
+  { key: 'youth', glyph: 'sportsHall' },
 ] as const;

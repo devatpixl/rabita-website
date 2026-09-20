@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { cn } from '@/lib/cn';
 import { DepartmentIcon } from './department-icons';
-import { DEPARTMENTS, IMAM_LEADERS, LEADERSHIP } from '@/lib/org-chart';
+import { DEPARTMENTS, IMAM_LEADERS, LEADERSHIP, LEADERSHIP_BIO } from '@/lib/org-chart';
 
 // The organisation chart as markup rather than as a picture of one.
 //
@@ -91,6 +91,8 @@ function GroupHead({ label, count }: { label: string; count: number }) {
 
 export async function OrgChart({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: 'aboutPage.org' });
+  // Single source for the imam biographies — see the note at the render.
+  const tim = await getTranslations({ locale, namespace: 'imams' });
   // chair and vice were already translated for the board section that used to
   // sit on this page, so two of the six titles cost nothing new.
   const tb = await getTranslations({ locale, namespace: 'aboutPage.board.roles' });
@@ -169,6 +171,15 @@ export async function OrgChart({ locale }: { locale: string }) {
                 <p className="mt-1.5 font-serif text-[1.35rem] leading-snug text-ink">
                   <bdi>{p.name}</bdi>
                 </p>
+                {/* "navn, bilde og kort beskrivelse for hver" (client, Sept
+                   2026). Keyed by NAME rather than by role — see
+                   LEADERSHIP_BIO — so that a change of title cannot quietly
+                   hand one person another person's biography. */}
+                {LEADERSHIP_BIO[p.name] && (
+                  <p className="mt-3 text-[14px] leading-relaxed text-ink-60">
+                    {t(`bios.${LEADERSHIP_BIO[p.name]}`)}
+                  </p>
+                )}
               </div>
             </li>
           ))}
@@ -233,6 +244,17 @@ export async function OrgChart({ locale }: { locale: string }) {
                     <bdi>
                       <span className="text-ink-60">{im.title}</span> {im.name}
                     </bdi>
+                  </p>
+                  {/* "navn, bilde og kort beskrivelse for hver" — the imams
+                     get one too (client, Sept 2026). Read from
+                     imams.people.<key>.bio, which is the SAME string
+                     /bonnetider sets: his document prints the identical
+                     biography in both places, and one source means the two
+                     pages cannot drift. The link below still goes to
+                     /bonnetider, where they sit with the languages each man
+                     takes a conversation in. */}
+                  <p className="mt-3 text-[14px] leading-relaxed text-ink-60">
+                    {tim(`people.${im.key}.bio`)}
                   </p>
                 </div>
               </li>
@@ -317,8 +339,17 @@ export async function OrgChart({ locale }: { locale: string }) {
               >
                 <DepartmentIcon name={key} className="h-5 w-5" />
               </span>
-              <span className="min-w-0 font-serif text-[1.0625rem] leading-snug text-ink">
-                {t(`roles.${key}`)}
+              {/* "KUN avdelingsnavn + 1–2 setninger, uten navn/bilde"
+                 (client, Sept 2026). The name alone was all this card
+                 carried; his sentence says what the department actually
+                 does, which is the point of listing it. */}
+              <span className="min-w-0">
+                <span className="block font-serif text-[1.0625rem] leading-snug text-ink">
+                  {t(`roles.${key}`)}
+                </span>
+                <span className="mt-1.5 block text-[13.5px] leading-relaxed text-ink-60">
+                  {t(`departments.${key}`)}
+                </span>
               </span>
             </li>
           ))}

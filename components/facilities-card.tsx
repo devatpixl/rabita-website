@@ -110,7 +110,6 @@ function Glyph({ name, className }: { name: string; className?: string }) {
 
 export function FacilitiesCard() {
   const t = useTranslations('projectPage');
-  const troom = useTranslations('floorByFloor.rooms');
 
   return (
     <Link
@@ -172,8 +171,8 @@ export function FacilitiesCard() {
 
       {/* ── THE SIX ROOMS ──────────────────────────────────────────────── */}
       <ul className="relative mt-3 pe-[30%]">
-        {FACILITIES.map((room) => (
-          <li key={room}>
+        {FACILITIES.map(({ key, glyph }) => (
+          <li key={key}>
             {/* group/row + CSS, where a useState used to be. The state only
                existed to drive the photo swap; the chevron nudge was riding
                along on it, and a hover nudge is something CSS does without a
@@ -184,11 +183,11 @@ export function FacilitiesCard() {
                 className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-paper transition-transform duration-300"
                 style={{ backgroundColor: CHIP }}
               >
-                <Glyph name={room} className="h-4 w-4" />
+                <Glyph name={glyph} className="h-4 w-4" />
               </span>
 
-              <span className="whitespace-nowrap text-[0.9375rem] leading-none text-ink">
-                {troom(room)}
+              <span className="text-[0.9375rem] leading-snug text-ink">
+                {t(`facts.facilityLines.${key}`)}
               </span>
 
               <span aria-hidden className="h-px flex-1 bg-rule" />
