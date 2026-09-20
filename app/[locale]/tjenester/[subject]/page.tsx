@@ -513,29 +513,17 @@ export default async function ServiceDetail({
                 {tj('boxBody')}
               </p>
 
-              {/* The benefits, ruled — TITLES ONLY (client, 2026-09-16:
-                 "keep this very short for CTA text"). Each point's body ran
-                 two more lines underneath and took the aside to 477px beside
-                 a 518px form, which is not an aside any more, it is a second
-                 column of prose competing with the enquiry. The three titles
-                 already name the three benefits; the page the button leads to
-                 carries the detail. joinPage.points.*.body is untouched in the
-                 message files and still renders on /bli-medlem. */}
-              <ul className="mt-6 border-t border-rule">
-                {/* `updates` and `renewal` left the client's list in Sept
-                   2026. Three of his four, in his order; `access` is the
-                   one left out, because it is the least specific of the
-                   four and this box has room for three. */}
-                {(['free', 'vote', 'support'] as const).map((k) => (
-                  <li
-                    key={k}
-                    className="border-b border-rule py-3 text-[14px] leading-snug text-ink"
-                  >
-                    {tj(`points.${k}.title`)}
-                  </li>
-                ))}
-              </ul>
+              {/* THE THREE BENEFIT ROWS ARE GONE (client, 2026-09-20).
+                 Gratis medlemskap / Din stemme teller / Du bidrar til
+                 fellesskapet sat between the sentence above and the button,
+                 ruled top and bottom. They restated what the sentence had
+                 just said — "prioritert tilgang til våre tjenester og
+                 aktiviteter" — in three fragments, and pushed the one thing
+                 the box is for another 150px down the page.
 
+                 joinPage.points.* are untouched in all three locales and
+                 still carry the section on /bli-medlem, which is where
+                 someone goes for the detail. */}
               {/* "Bli medlem", which is the label the client actually asked
                  for. It said "Få stemmerett" until 2026-09-16 — the voting
                  tier's own CTA, narrower than this block now is. */}
@@ -546,7 +534,7 @@ export default async function ServiceDetail({
                 // keeps its ink hairline: an outline button already wearing
                 // the accent would compete with the filled one for primacy,
                 // and the enquiry is what this section is for.
-                className="group mt-7 inline-flex min-h-11 items-center gap-2 rounded-full border border-ink px-6 text-[14px] font-semibold text-ink transition-colors hover:border-gold-deep hover:bg-gold-deep hover:text-paper"
+                className="group mt-6 inline-flex min-h-11 items-center gap-2 rounded-full border border-ink px-6 text-[14px] font-semibold text-ink transition-colors hover:border-gold-deep hover:bg-gold-deep hover:text-paper"
               >
                 {tm('join')}
                 <span
