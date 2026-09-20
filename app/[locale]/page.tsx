@@ -1,7 +1,8 @@
 import { setRequestLocale } from 'next-intl/server';
 import { CampaignMeter } from '@/components/campaign-meter';
 import { FollowUs } from '@/components/follow-us';
-import { CoreActivities } from '@/components/core-activities';
+// Off the home page 2026-09-20 — see the note where it used to render.
+// import { CoreActivities } from '@/components/core-activities';
 import { CongregationToday } from '@/components/congregation-today';
 import { ImpactStory } from '@/components/impact-story';
 import { Hero } from '@/components/hero';
@@ -62,32 +63,33 @@ export default async function HomePage({
          introduce the organisation. */}
       <BrandType />
       <ImpactStory />
-      {/* The seven core activities (client, 2026-09-17: "Endre til våre
-         kjerneaktiviteter", ISNA.net's services grid as the reference).
-         
-         This REPLACES the thirteen-card "Våre tjenester" carousel that stood
-         here. congregation-today.tsx is untouched on disk — 759 lines and
-         three rounds of the client's own card ordering — so putting the
-         slider back is this line and its import, nothing more.
-         
-         No MotionRise wrapper: the plates already reveal themselves in two
-         staggered rows, and running a section-level rise underneath that gave
-         the grid two entrances for one arrival. */}
-      <CoreActivities locale={locale} />
+      {/* ── THE KJERNEAKTIVITETER GRID IS OFF THE HOME PAGE ─────────────
+         Client, 2026-09-20. Versjon 5's "Endre til våre kjerneaktiviteter"
+         was one of three points he marked in red as NOT to be carried out,
+         so the seven-plate grid that replaced this slot on 18 Sep comes out
+         and the services carousel has it back.
+
+         WORTH KNOWING BEFORE ANYONE UNDOES THIS. Tekst (endelig) (Sept 2026)
+         still carries a section headed "Kjerneaktiviteter (7 kort) —
+         erstatter «Tjenester»-seksjonen", with all seven card names and a
+         paragraph he wrote for each. The two documents disagree; the red
+         marking is the later word and is what this follows. Raised with the
+         client.
+
+         NOTHING IS DELETED. components/core-activities.tsx, lib/core-
+         activities.ts, the seven photographs and coreActivities.* in all
+         three locales are untouched. Restoring is this import and one line.
+      <CoreActivities locale={locale} /> */}
 
       {/* ── THE SERVICES CAROUSEL IS BACK ─────────────────────────────────
          Client, 2026-09-20. It came off on 18 Sep when the kjerneaktiviteter
-         grid took its slot; both now stand, in that order.
+         grid took this slot, and it has the slot back — see the note above
+         for why the grid went.
 
-         They are not the same thing and that is why both can. The grid is
-         seven headings a visitor understands in six seconds — what Rabita
-         IS. The carousel is thirteen named services with a sentence each —
-         what Rabita DOES, and the thing you scroll when one of them is why
-         you came. Its slides keep the client's own ordering from three
-         earlier rounds.
-
-         MotionRise here and not on the grid above: the plates run their own
-         staggered reveal, this does not. */}
+         Nothing had to be rebuilt: congregationToday was never deleted, all
+         thirteen slides survive in every locale in the ordering the client
+         settled over three earlier rounds, and the import had been left
+         commented in place against exactly this. */}
       <MotionRise><CongregationToday /></MotionRise>
       {/* The building before the money. The meter's heading is "Raised for
          the new mosque", and until this section runs the page has never

@@ -2795,8 +2795,7 @@
     "meta": "{rooms}-room · {m2} m² · Floor {floor}",
     "rooms": "{n}-room",
     "floorLabel": "Floor {floor}",
-    "area": "{m2} m²",
-    "details": "See details"
+    "area": "{m2} m²"
   },
   "imams": {
     "eyebrow": "The imams",

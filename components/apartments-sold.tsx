@@ -170,9 +170,20 @@ export function ApartmentsSold({ locale }: { locale: string }) {
            pictures ran wider would read as a mistake rather than a choice.
            Everything above and below this section keeps the 1152 measure.
 
+           GATED ON HEIGHT TOO, and that is not decoration. A MacBook Air is
+           1440x900 or 1470x956 — wide enough to trip any plain `xl:`, which
+           is exactly the machine the max-w-[1040px] rule above exists for. A
+           width-only rule overrode it and undid that work. min-height:901
+           keeps the two apart: short screens stay at 1040, tall ones widen.
+
+           min(92vw,90rem) rather than a flat 80rem: at exactly 1280 a flat
+           1280 measure left no gutter at all and the stage touched both
+           edges. The vw term guarantees a margin at every width and the rem
+           term stops it sprawling past 1440 on a 27" monitor.
+
            !max-w because lib/cn is clsx and merges nothing: without it both
            max-widths ship and the narrower one can win. */}
-        <SectionBody className="[@media(min-width:768px)_and_(max-height:900px)]:max-w-[1040px] xl:!max-w-[80rem] 2xl:!max-w-[90rem]">
+        <SectionBody className="[@media(min-width:768px)_and_(max-height:900px)]:max-w-[1040px] [@media(min-width:1280px)_and_(min-height:901px)]:!max-w-[min(92vw,90rem)]">
         {/* Head. The count is the argument, so it is the headline — and it is
            read from the data, never typed: sell a fourth flat and this
            sentence rewrites itself. */}
@@ -231,7 +242,7 @@ export function ApartmentsSold({ locale }: { locale: string }) {
            movement in the section and it is doing a job: it separates "a new
            picture" from "the same picture, redrawn". */}
         <div
-          className="mt-10 grid gap-4 md:mt-12 lg:grid-cols-[6.5rem_minmax(0,1fr)_15.5rem] lg:items-stretch xl:gap-5 xl:grid-cols-[7.5rem_minmax(0,1fr)_18rem] 2xl:gap-6 2xl:grid-cols-[8.5rem_minmax(0,1fr)_20rem] [@media(min-width:768px)_and_(max-height:900px)]:!mt-7"
+          className="mt-10 grid gap-4 md:mt-12 lg:grid-cols-[6.5rem_minmax(0,1fr)_15.5rem] lg:items-stretch [@media(min-width:1280px)_and_(min-height:901px)]:gap-5 [@media(min-width:1280px)_and_(min-height:901px)]:grid-cols-[7.5rem_minmax(0,1fr)_18rem] [@media(min-width:1700px)_and_(min-height:901px)]:gap-6 [@media(min-width:1700px)_and_(min-height:901px)]:grid-cols-[8.5rem_minmax(0,1fr)_20rem] [@media(min-width:768px)_and_(max-height:900px)]:!mt-7"
           onMouseEnter={() => setHeld(true)}
           onMouseLeave={() => setHeld(false)}
           onFocusCapture={() => setHeld(true)}
@@ -244,7 +255,7 @@ export function ApartmentsSold({ locale }: { locale: string }) {
              under the stage carries the same three on small screens, so
              nothing is lost — the rail is the desktop affordance. */}
           <div className="hidden flex-col lg:flex">
-            <ul className="flex flex-col gap-2.5 xl:gap-3">
+            <ul className="flex flex-col gap-2.5 [@media(min-width:1280px)_and_(min-height:901px)]:gap-3">
               {SLIDES.map((s, n) => (
                 <li key={s.id}>
                   <button
@@ -294,7 +305,7 @@ export function ApartmentsSold({ locale }: { locale: string }) {
           </div>
 
           {/* ── THE HERO ───────────────────────────────────────────────── */}
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-ink sm:aspect-[16/10] lg:aspect-auto lg:min-h-[26rem] xl:min-h-[31rem] 2xl:min-h-[35rem] [@media(min-width:768px)_and_(max-height:900px)]:!min-h-[21rem]">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-ink sm:aspect-[16/10] lg:aspect-auto lg:min-h-[26rem] [@media(min-width:1280px)_and_(min-height:901px)]:min-h-[31rem] [@media(min-width:1700px)_and_(min-height:901px)]:min-h-[35rem] [@media(min-width:768px)_and_(max-height:900px)]:!min-h-[21rem]">
           {SLIDES.map((s, n) => (
             <Image
               key={s.id}
@@ -363,19 +374,6 @@ export function ApartmentsSold({ locale }: { locale: string }) {
             </ul>
           </div>
 
-          {/* Next, on the frame itself — the one control within reach of a
-             thumb on the picture you are already looking at. */}
-          <button
-            type="button"
-            onClick={() => go(i + 1)}
-            aria-label={t('cta', { n: stats.available })}
-            className="absolute bottom-6 end-6 z-10 grid h-12 w-12 place-items-center rounded-full bg-dusk/70 text-paper ring-1 ring-paper/20 backdrop-blur-[6px] transition-colors duration-200 hover:bg-dusk hover:ring-gold/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold sm:bottom-8 sm:end-8"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 rtl:rotate-180" aria-hidden>
-              <path d="M5 12h14" />
-              <path d="M13 6l6 6-6 6" />
-            </svg>
-          </button>
         </div>
 
           {/* ── THE DETAIL PANEL ────────────────────────────────────────
@@ -387,18 +385,24 @@ export function ApartmentsSold({ locale }: { locale: string }) {
 
              lg and up, like the rail — below that the overlay is the whole
              story and the section's CTA is a thumb-reach away. */}
-          <div className="hidden flex-col rounded-2xl bg-paper/[0.04] p-6 ring-1 ring-paper/10 lg:flex xl:p-7 2xl:p-8">
+          <div className="hidden flex-col rounded-2xl bg-paper/[0.04] p-6 ring-1 ring-paper/10 lg:flex [@media(min-width:1280px)_and_(min-height:901px)]:p-7 [@media(min-width:1700px)_and_(min-height:901px)]:p-8">
+            {/* my-auto: with the button gone the panel had ~90px of dead
+               space between the last fact and the dots, because the facts
+               were pinned to the top and the dots to the foot. Centring the
+               block splits that space above and below it, which reads as
+               room rather than as something missing. */}
+            <div className="my-auto">
             <p className="font-mono text-[0.6875rem] uppercase tracking-[0.28em] text-gold-soft">
               {active.unit}
             </p>
-            <p className="mt-3 font-serif text-[1.875rem] leading-none text-paper xl:text-[2.25rem] 2xl:text-[2.5rem]">
+            <p className="mt-3 font-serif text-[1.875rem] leading-none text-paper [@media(min-width:1280px)_and_(min-height:901px)]:text-[2.25rem] [@media(min-width:1700px)_and_(min-height:901px)]:text-[2.5rem]">
               {formatAmount(loc, active.priceNok)}{' '}
               <span className="font-sans text-[0.45em] tracking-wide text-paper/70">kr</span>
             </p>
 
             <span aria-hidden className="mt-5 block h-px w-10 bg-gold/60" />
 
-            <ul className="mt-5 space-y-3.5 xl:mt-6 xl:space-y-4">
+            <ul className="mt-5 space-y-3.5 [@media(min-width:1280px)_and_(min-height:901px)]:mt-6 [@media(min-width:1280px)_and_(min-height:901px)]:space-y-4">
               {[
                 { g: 'rooms' as const, label: t('rooms', { n: active.rooms }) },
                 { g: 'area' as const, label: t('area', { m2: active.m2 }) },
@@ -410,23 +414,14 @@ export function ApartmentsSold({ locale }: { locale: string }) {
                 </li>
               ))}
             </ul>
-
-            <LinkVT
-              href={`/${locale}/moskeprosjektet/leiligheter`}
-              className="group/det mt-7 inline-flex min-h-11 items-center justify-center gap-2.5 rounded-full bg-gold-deep px-5 py-3 text-[0.9375rem] font-semibold text-paper transition-colors duration-200 hover:bg-gold hover:text-dusk xl:mt-8"
-            >
-              {t('details')}
-              <span aria-hidden className="inline-block transition-transform duration-200 group-hover/det:translate-x-0.5 rtl:rotate-180 rtl:group-hover/det:-translate-x-0.5">
-                →
-              </span>
-            </LinkVT>
+            </div>
 
             {/* Three dots for three flats. The mock drew five, which is the
                kind of thing a generated image does — there are three sold
                units and the count is read from the data everywhere else on
                this page, so five would be the one number here that was
                decoration. */}
-            <div className="mt-auto flex items-center gap-2 pt-6">
+            <div className="flex items-center gap-2 pt-6">
               {SLIDES.map((s, n) => (
                 <button
                   key={s.id}

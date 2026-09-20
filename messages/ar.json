@@ -2795,8 +2795,7 @@
     "meta": "{rooms} غرف · {m2} م² · الطابق {floor}",
     "rooms": "{n} غرف",
     "floorLabel": "الطابق {floor}",
-    "area": "{m2} م²",
-    "details": "عرض التفاصيل"
+    "area": "{m2} م²"
   },
   "imams": {
     "eyebrow": "الأئمة",
