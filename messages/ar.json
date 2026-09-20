@@ -2793,7 +2793,10 @@
     "stamp": "مباعة",
     "cta": "شاهد الشقق المتاحة ({n})",
     "meta": "{rooms} غرف · {m2} م² · الطابق {floor}",
-    "rooms": "{n} غرف"
+    "rooms": "{n} غرف",
+    "floorLabel": "الطابق {floor}",
+    "area": "{m2} م²",
+    "details": "عرض التفاصيل"
   },
   "imams": {
     "eyebrow": "الأئمة",

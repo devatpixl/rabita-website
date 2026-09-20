@@ -2,8 +2,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { CampaignMeter } from '@/components/campaign-meter';
 import { FollowUs } from '@/components/follow-us';
 import { CoreActivities } from '@/components/core-activities';
-// Kept, not deleted — see the note where CoreActivities renders.
-// import { CongregationToday } from '@/components/congregation-today';
+import { CongregationToday } from '@/components/congregation-today';
 import { ImpactStory } from '@/components/impact-story';
 import { Hero } from '@/components/hero';
 import { HeroGive } from '@/components/hero-give';
@@ -75,6 +74,21 @@ export default async function HomePage({
          staggered rows, and running a section-level rise underneath that gave
          the grid two entrances for one arrival. */}
       <CoreActivities locale={locale} />
+
+      {/* ── THE SERVICES CAROUSEL IS BACK ─────────────────────────────────
+         Client, 2026-09-20. It came off on 18 Sep when the kjerneaktiviteter
+         grid took its slot; both now stand, in that order.
+
+         They are not the same thing and that is why both can. The grid is
+         seven headings a visitor understands in six seconds — what Rabita
+         IS. The carousel is thirteen named services with a sentence each —
+         what Rabita DOES, and the thing you scroll when one of them is why
+         you came. Its slides keep the client's own ordering from three
+         earlier rounds.
+
+         MotionRise here and not on the grid above: the plates run their own
+         staggered reveal, this does not. */}
+      <MotionRise><CongregationToday /></MotionRise>
       {/* The building before the money. The meter's heading is "Raised for
          the new mosque", and until this section runs the page has never
          said what the new mosque IS — the zoom parallax shows it, wordlessly,

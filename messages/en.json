@@ -2793,7 +2793,10 @@
     "stamp": "Sold",
     "cta": "See the {n} available",
     "meta": "{rooms}-room · {m2} m² · Floor {floor}",
-    "rooms": "{n}-room"
+    "rooms": "{n}-room",
+    "floorLabel": "Floor {floor}",
+    "area": "{m2} m²",
+    "details": "See details"
   },
   "imams": {
     "eyebrow": "The imams",

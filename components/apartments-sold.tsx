@@ -62,6 +62,55 @@ const SLIDES: Slide[] = APARTMENT_UNITS.filter((u) => u.sold).map((u) => {
   };
 });
 
+/* ── THE THREE UNIT GLYPHS ───────────────────────────────────────────────
+   Drawn here rather than added to FigureIcon: that set is the site's
+   institutional vocabulary (building, floors, people, book, globe) and
+   these three are furniture-listing marks that belong to one component.
+   24x24, stroke 1.5, same weight as the rest of the site's line work. */
+function UnitGlyph({ name, className }: { name: 'rooms' | 'area' | 'floor'; className?: string }) {
+  const paths = {
+    // A bed, seen from the side: headboard, mattress, pillow, two legs.
+    rooms: (
+      <>
+        <path d="M3 8v11" />
+        <path d="M3 18h18v-4a3 3 0 0 0-3-3H9" />
+        <path d="M21 19v-2" />
+        <path d="M6.5 11.5h2" />
+      </>
+    ),
+    // Corner-to-corner arrows: the floor-plan symbol for area.
+    area: (
+      <>
+        <path d="M4 10V4h6" />
+        <path d="M20 14v6h-6" />
+        <path d="M4 4l7 7" />
+        <path d="M20 20l-7-7" />
+      </>
+    ),
+    // A flight of stairs: which floor the flat is on.
+    floor: (
+      <>
+        <path d="M3 20h4v-4h4v-4h4V8h4" />
+        <path d="M19 8V4" />
+      </>
+    ),
+  } as const;
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+      className={className}
+    >
+      {paths[name]}
+    </svg>
+  );
+}
+
 const DWELL_MS = 7000;
 
 function usePrefersReducedMotion(): boolean {
@@ -106,7 +155,24 @@ export function ApartmentsSold({ locale }: { locale: string }) {
 
   return (
     <section id="solgte-leiligheter" className="bg-dusk py-section-md [@media(min-width:768px)_and_(max-height:900px)]:!py-8">
-      <SectionBody className="[@media(min-width:768px)_and_(max-height:900px)]:max-w-[1040px]">
+      {/* ── A WIDER MEASURE, FROM xl UP ───────────────────────────────
+           Client, 2026-09-20: "in desktops large screens, why so conjested?
+           make it big and all for larger desktop screens".
+
+           SectionBody is max-w-6xl — 1152px — which is a reading measure and
+           the right one for every text section on this page. On a 1920
+           monitor it left 408px of empty dusk on EACH side of a carousel
+           whose whole job is to show a photograph large.
+
+           So the stage widens and nothing else does: 1280 at xl, 1440 at 2xl.
+           The head widens with it deliberately — the eyebrow and the CTA are
+           the stage's own furniture, and holding them at 1152 while the
+           pictures ran wider would read as a mistake rather than a choice.
+           Everything above and below this section keeps the 1152 measure.
+
+           !max-w because lib/cn is clsx and merges nothing: without it both
+           max-widths ship and the narrower one can win. */}
+        <SectionBody className="[@media(min-width:768px)_and_(max-height:900px)]:max-w-[1040px] xl:!max-w-[80rem] 2xl:!max-w-[90rem]">
         {/* Head. The count is the argument, so it is the headline — and it is
            read from the data, never typed: sell a fourth flat and this
            sentence rewrites itself. */}
@@ -165,12 +231,70 @@ export function ApartmentsSold({ locale }: { locale: string }) {
            movement in the section and it is doing a job: it separates "a new
            picture" from "the same picture, redrawn". */}
         <div
-          className="relative mt-10 aspect-[4/3] w-full overflow-hidden rounded-2xl bg-ink sm:aspect-[16/10] lg:aspect-[16/9] md:mt-12 [@media(min-width:768px)_and_(max-height:900px)]:!mt-7 [@media(min-width:768px)_and_(max-height:900px)]:!aspect-[2/1]"
+          className="mt-10 grid gap-4 md:mt-12 lg:grid-cols-[6.5rem_minmax(0,1fr)_15.5rem] lg:items-stretch xl:gap-5 xl:grid-cols-[7.5rem_minmax(0,1fr)_18rem] 2xl:gap-6 2xl:grid-cols-[8.5rem_minmax(0,1fr)_20rem] [@media(min-width:768px)_and_(max-height:900px)]:!mt-7"
           onMouseEnter={() => setHeld(true)}
           onMouseLeave={() => setHeld(false)}
           onFocusCapture={() => setHeld(true)}
           onBlurCapture={() => setHeld(false)}
         >
+          {/* ── THE RAIL ────────────────────────────────────────────────
+             Three thumbnails and a pair of steppers. lg and up only: at
+             104px a thumbnail is already near the floor of useful, and
+             below lg the column would have to shrink past it. The strip
+             under the stage carries the same three on small screens, so
+             nothing is lost — the rail is the desktop affordance. */}
+          <div className="hidden flex-col lg:flex">
+            <ul className="flex flex-col gap-2.5 xl:gap-3">
+              {SLIDES.map((s, n) => (
+                <li key={s.id}>
+                  <button
+                    type="button"
+                    onClick={() => go(n)}
+                    aria-label={s.unit}
+                    aria-current={n === i ? 'true' : undefined}
+                    className={cn(
+                      'group/th relative block aspect-[4/3] w-full overflow-hidden rounded-xl ring-1 transition-[box-shadow,opacity] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold',
+                      n === i
+                        ? 'opacity-100 ring-gold shadow-[0_0_0_1px_rgba(192,161,101,0.45),0_8px_24px_-12px_rgba(0,0,0,0.8)]'
+                        : 'opacity-55 ring-paper/12 hover:opacity-85 hover:ring-paper/25',
+                    )}
+                  >
+                    <Image
+                      src={unitFace(s.id)}
+                      alt=""
+                      fill
+                      sizes="104px"
+                      loading="eager"
+                      className="object-cover"
+                    />
+                  </button>
+                </li>
+              ))}
+            </ul>
+
+            {/* Steppers. They repeat what the rail and the strip already do,
+               which is the mock's call, not a discovery of mine — but they
+               are the only control here that does not need you to know which
+               flat you want next, so they earn the space. */}
+            <div className="mt-5 flex flex-col items-center gap-2.5">
+              {([['prev', -1], ['next', 1]] as const).map(([dir, step]) => (
+                <button
+                  key={dir}
+                  type="button"
+                  onClick={() => go(i + step)}
+                  aria-label={dir === 'prev' ? t('eyebrow') + ' ←' : t('eyebrow') + ' →'}
+                  className="grid h-9 w-9 place-items-center rounded-full ring-1 ring-paper/15 text-paper/70 transition-colors duration-200 hover:bg-paper/[0.06] hover:text-paper hover:ring-paper/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4" aria-hidden>
+                    <path d={dir === 'prev' ? 'M6 15l6-6 6 6' : 'M6 9l6 6 6-6'} />
+                  </svg>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* ── THE HERO ───────────────────────────────────────────────── */}
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-ink sm:aspect-[16/10] lg:aspect-auto lg:min-h-[26rem] xl:min-h-[31rem] 2xl:min-h-[35rem] [@media(min-width:768px)_and_(max-height:900px)]:!min-h-[21rem]">
           {SLIDES.map((s, n) => (
             <Image
               key={s.id}
@@ -178,6 +302,14 @@ export function ApartmentsSold({ locale }: { locale: string }) {
               alt=""
               fill
               priority={n === 0}
+              // eager on the rest, not just the first. Every slide is mounted
+              // and cross-faded on opacity, so the inactive ones are painted
+              // but invisible — and a lazily-loaded image that is never in
+              // view never gets requested at all. The result was a blank dark
+              // plate the moment the carousel advanced past the priority
+              // slide. Three interior renders is not a budget worth being
+              // clever about.
+              loading={n === 0 ? undefined : 'eager'}
               sizes="(min-width: 1024px) 66vw, 100vw"
               className={cn(
                 'object-cover transition-[opacity,transform] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]',
@@ -212,9 +344,103 @@ export function ApartmentsSold({ locale }: { locale: string }) {
               {formatAmount(loc, active.priceNok)}{' '}
               <span className="font-sans text-[0.42em] tracking-wide text-paper/70">kr</span>
             </p>
-            <p className="mt-3 font-mono text-[0.6875rem] tracking-[0.12em] text-paper/70">
-              {t('meta', { rooms: active.rooms, m2: active.m2, floor: active.floor })}
+            {/* The three facts as marked items rather than one dotted line.
+               Same content the `meta` string carried; the glyphs let the eye
+               take all three at once instead of reading a sentence. `meta`
+               stays in the message files — the strip and the panel below
+               both still want the one-line form on small screens. */}
+            <ul className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
+              {[
+                { g: 'rooms' as const, label: t('rooms', { n: active.rooms }) },
+                { g: 'area' as const, label: t('area', { m2: active.m2 }) },
+                { g: 'floor' as const, label: t('floorLabel', { floor: active.floor }) },
+              ].map((f) => (
+                <li key={f.g} className="flex items-center gap-2 text-paper/85">
+                  <UnitGlyph name={f.g} className="h-[18px] w-[18px] shrink-0 text-gold-soft/90" />
+                  <span className="font-mono text-[0.6875rem] tracking-[0.12em]">{f.label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Next, on the frame itself — the one control within reach of a
+             thumb on the picture you are already looking at. */}
+          <button
+            type="button"
+            onClick={() => go(i + 1)}
+            aria-label={t('cta', { n: stats.available })}
+            className="absolute bottom-6 end-6 z-10 grid h-12 w-12 place-items-center rounded-full bg-dusk/70 text-paper ring-1 ring-paper/20 backdrop-blur-[6px] transition-colors duration-200 hover:bg-dusk hover:ring-gold/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold sm:bottom-8 sm:end-8"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 rtl:rotate-180" aria-hidden>
+              <path d="M5 12h14" />
+              <path d="M13 6l6 6-6 6" />
+            </svg>
+          </button>
+        </div>
+
+          {/* ── THE DETAIL PANEL ────────────────────────────────────────
+             The same three facts as the overlay, set as a list rather than a
+             row, plus the only link out of the stage. It is not redundant
+             with the overlay: the overlay sits on a photograph and has to
+             survive whatever is behind it, so it can never be more than a
+             few words. This is on a flat ground and can carry a button.
+
+             lg and up, like the rail — below that the overlay is the whole
+             story and the section's CTA is a thumb-reach away. */}
+          <div className="hidden flex-col rounded-2xl bg-paper/[0.04] p-6 ring-1 ring-paper/10 lg:flex xl:p-7 2xl:p-8">
+            <p className="font-mono text-[0.6875rem] uppercase tracking-[0.28em] text-gold-soft">
+              {active.unit}
             </p>
+            <p className="mt-3 font-serif text-[1.875rem] leading-none text-paper xl:text-[2.25rem] 2xl:text-[2.5rem]">
+              {formatAmount(loc, active.priceNok)}{' '}
+              <span className="font-sans text-[0.45em] tracking-wide text-paper/70">kr</span>
+            </p>
+
+            <span aria-hidden className="mt-5 block h-px w-10 bg-gold/60" />
+
+            <ul className="mt-5 space-y-3.5 xl:mt-6 xl:space-y-4">
+              {[
+                { g: 'rooms' as const, label: t('rooms', { n: active.rooms }) },
+                { g: 'area' as const, label: t('area', { m2: active.m2 }) },
+                { g: 'floor' as const, label: t('floorLabel', { floor: active.floor }) },
+              ].map((f) => (
+                <li key={f.g} className="flex items-center gap-3 text-paper/85">
+                  <UnitGlyph name={f.g} className="h-[18px] w-[18px] shrink-0 text-gold-soft/90" />
+                  <span className="text-[0.9375rem]">{f.label}</span>
+                </li>
+              ))}
+            </ul>
+
+            <LinkVT
+              href={`/${locale}/moskeprosjektet/leiligheter`}
+              className="group/det mt-7 inline-flex min-h-11 items-center justify-center gap-2.5 rounded-full bg-gold-deep px-5 py-3 text-[0.9375rem] font-semibold text-paper transition-colors duration-200 hover:bg-gold hover:text-dusk xl:mt-8"
+            >
+              {t('details')}
+              <span aria-hidden className="inline-block transition-transform duration-200 group-hover/det:translate-x-0.5 rtl:rotate-180 rtl:group-hover/det:-translate-x-0.5">
+                →
+              </span>
+            </LinkVT>
+
+            {/* Three dots for three flats. The mock drew five, which is the
+               kind of thing a generated image does — there are three sold
+               units and the count is read from the data everywhere else on
+               this page, so five would be the one number here that was
+               decoration. */}
+            <div className="mt-auto flex items-center gap-2 pt-6">
+              {SLIDES.map((s, n) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => go(n)}
+                  aria-label={s.unit}
+                  aria-current={n === i ? 'true' : undefined}
+                  className={cn(
+                    'h-1.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold',
+                    n === i ? 'w-6 bg-gold' : 'w-1.5 bg-paper/25 hover:bg-paper/50',
+                  )}
+                />
+              ))}
+            </div>
           </div>
         </div>
 

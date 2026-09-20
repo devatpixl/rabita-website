@@ -10,24 +10,28 @@ import { Accent } from './accent';
 // body, field and button — and left one thing to us: "Hor denne seksjonen
 // skal plasseres bestemmes av utvikler."
 //
-// ── WHERE, AND WHY THERE ──────────────────────────────────────────────────
-// Between Arrangementer and the calendar, which is the only position on the
-// page that earns its keep three times over:
+// ── WHERE ─────────────────────────────────────────────────────────────────
+// Last on the page, under the calendar. Client, 2026-09-20: "in aktuelt,
+// move this down below the calendar."
 //
-//   1. RHYTHM. /aktuelt is a dusk hero, then paper-2, then paper-2. A dark
-//      band between the two paper sections gives the page a beat instead of
-//      one long pale run. Placed last it would have been dusk against the
-//      dusk footer; placed first it would have been dusk against the dusk
-//      hero. The middle is the only slot where it reads as a break.
-//   2. DISTANCE FROM THE FOOTER. There is already a newsletter field in the
-//      footer of every page. At the foot of this one the two would have sat
-//      a few hundred pixels apart — the same ask, twice, in one screen.
-//   3. IT DOES NOT GATE THE NEWS. A signup directly under the hero, before
-//      a reader has been given anything, is the pattern people resent. This
-//      one comes after the events they came to read.
+// It sat between Arrangementer and the calendar until then, for three
+// reasons. One survives the move, two do not, and the two are worth knowing:
+//
+//   1. RHYTHM — LOST. /aktuelt is a dusk hero, then paper-2, then paper-2.
+//      In the middle this dark band broke one long pale run. Last, it lands
+//      dusk against the dusk footer, so the page now ends on a single tall
+//      dark block instead of a beat.
+//   2. DISTANCE FROM THE FOOTER — LOST. The footer already carries a
+//      newsletter field on every page, so the same ask now appears twice
+//      within one screen at the foot of this one. If that reads as
+//      duplication, the fix is to suppress the footer's field on /aktuelt
+//      rather than move this back.
+//   3. IT DOES NOT GATE THE NEWS — KEPT, and more so. A signup under the
+//      hero, before the reader has been given anything, is the pattern
+//      people resent. Below the calendar it is the last thing on the page.
 //
 // The "Kalender →" button in the section above still jumps straight to
-// #kalender, so anyone who wants the calendar skips this entirely.
+// #kalender.
 //
 // ── THE FORM IS NOT WIRED ─────────────────────────────────────────────────
 // Same as the footer's: it validates and it says thank you, and nothing is

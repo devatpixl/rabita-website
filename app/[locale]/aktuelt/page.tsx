@@ -248,11 +248,13 @@ export default async function NewsPage({
          — and it is where the Islamic dates live, which the cards have no
          room for. Client-side: it needs a real "today" and these pages are
          statically generated. */}
-      {/* Between the events and the calendar — see the note in the
-         component for why here and not at the foot of the page. */}
-      <NewsletterBand />
-
       <EventsCalendar />
+
+      {/* Under the calendar, not above it (client, 2026-09-20: "in aktuelt,
+         move this down below the calendar"). It sat between Arrangementer
+         and the calendar until then; the note in the component records what
+         that position was buying and what moving it costs. */}
+      <NewsletterBand />
 
       {/* ── THE NUMBERED NEWS LIST CAME OFF HERE, 2026-09-16 ──────────
          Client: "remove this section". It was three rows — gold numeral,

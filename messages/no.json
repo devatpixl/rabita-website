@@ -2789,7 +2789,10 @@
     "stamp": "Solgt",
     "cta": "Se de {n} ledige",
     "meta": "{rooms}-roms · {m2} m² · Etasje {floor}",
-    "rooms": "{n}-roms"
+    "rooms": "{n}-roms",
+    "floorLabel": "Etasje {floor}",
+    "area": "{m2} m²",
+    "details": "Se detaljer"
   },
   "imams": {
     "eyebrow": "Imamene",
