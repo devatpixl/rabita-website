@@ -69,7 +69,38 @@ export const FLOOR_MARKERS: Record<string, FloorMarker[]> = {
     { id: 'school', x: 50, y: 35, lx: 24, ly: 10, align: 'end' },
     { id: 'amphi', x: 65, y: 53, lx: 97, ly: 36, align: 'start' },
     { id: 'garden', x: 70, y: 64, lx: 99, ly: 66, align: 'start' },
-    { id: 'conference', x: 30, y: 57, lx: 10, ly: 86, align: 'end' },
+    // SPLIT INTO TWO, 2026-09-23. Client, Versjon 6: "Breake konferanse og
+    // selskapslokaler."
+    //
+    // An earlier pass split only the TEXT and left one pin, on the reasoning
+    // that two pins on one room would be a false statement on an architect's
+    // drawing. That reasoning was right and the premise was wrong: there are
+    // two rooms. The drawing shows two large open plates in the west corner
+    // divided by a full-height wall, and the single pin it used to carry
+    // (x:30 y:57) sat ON that dividing wall — which is why it read as one
+    // room. Verified by plotting candidates on step-4.webp before moving
+    // anything, not read off the percentages.
+    //
+    // Which is which is the one thing the drawing cannot tell us. The
+    // conference room is the west plate here because the banquet room then
+    // sits beside the roof garden and the amfi, which is where a wedding
+    // party would spill out. If the client says otherwise it is a swap of
+    // the two ids and nothing else — the coordinates stay.
+    //
+    // conference keeps conference-1.webp: that render is rows of chairs, two
+    // projector screens and a presenter, so it is unambiguously the seminar
+    // room. banquet has no photograph and does not need one to be clickable —
+    // FloorMarkers.canOpen() opens a room on EITHER a photograph or a
+    // roomDesc, and banquet has the second. He owes us the picture.
+    //
+    // Phone overrides on both. The rooms are adjacent — 14% apart across and
+    // 10% down — so at CHIP_W the two name-plates would sit on top of each
+    // other. The overrides pull them apart vertically, to the top of the west
+    // plate and the bottom of the south one, where each still reads as
+    // belonging to the room under it. mx on conference is 22 rather than its
+    // true 20 so the chip's left edge clears the frame.
+    { id: 'conference', x: 20, y: 52, lx: 4, ly: 36, align: 'end', mx: 22, my: 48 },
+    { id: 'banquet', x: 34, y: 62, lx: 10, ly: 86, align: 'end', mx: 36, my: 66 },
   ],
   fourth: [
     { id: 'meetingRooms', x: 52, y: 25, lx: 18, ly: 8, align: 'end' },
@@ -82,7 +113,18 @@ export const FLOOR_MARKERS: Record<string, FloorMarker[]> = {
   sixth: [{ id: 'apartments', x: 50, y: 24, lx: 22, ly: 8, align: 'end' }],
   whole: [
     { id: 'roofTerrace', x: 44, y: 22, lx: 72, ly: 8, align: 'start' },
-    { id: 'dome', x: 31, y: 33, lx: 8, ly: 22, align: 'end' },
+    // Nudged up onto the dome itself, 2026-09-22. It was x:31 y:33, which
+    // on a 1258x1400 frame is pixel (390,462) — the grey roof SLAB of the
+    // orange rooftop volume, about 60px below the thing it names. The dome
+    // in this design is the small faceted lantern set into that slab, at
+    // pixel (380,402): x:30 y:29.
+    //
+    // Found while checking the client's Versjon 6 line "Legg inn minraet
+    // siste bildet på kuppel". The MINARET marker turned out to be exact —
+    // x:55 y:35 lands in the middle of the perforated tower — so if
+    // anything on that drawing was pointing at the wrong place, it was this
+    // one.
+    { id: 'dome', x: 30, y: 29, lx: 8, ly: 22, align: 'end' },
     { id: 'minaret', x: 55, y: 35, lx: 90, ly: 40, align: 'start' },
   ],
 };

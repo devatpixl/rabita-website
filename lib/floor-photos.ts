@@ -64,7 +64,19 @@ export const FLOOR_PHOTOS: Record<string, readonly string[]> = {
   apartments: ['/photos/rooms/apartments-1.webp', '/photos/rooms/apartments-2.webp'],
   // whole
   roofTerrace: ['/photos/rooms/roofTerrace-1.webp', '/photos/rooms/roofTerrace-2.webp'],
-  minaret: ['/photos/rooms/minaret-1.webp'],
+  // Client, 2026-09-23 ("9. Minaret skrå.jpg"): the minaret from the
+  // courtyard, looking up — the perforated lantern lit, the spiral stair
+  // wrapped round the shaft, people on the balconies and the roof garden.
+  // Replaces minaret-1 (the rooftop from above), which stays on disk unused;
+  // the dome marker has its own dusk render now, so nothing else needs it.
+  minaret: ['/photos/rooms/minaret-2.webp'],
+  // Client, 2026-09-23 ("Minaret ny.jpeg"): the rooftop at dusk — the
+  // lattice-clad dome volume lit from inside, the perforated minaret beside
+  // it, the terrace in use. The first render that actually has the dome in
+  // it. Versjon 6 ("Legg inn minaret siste bildet på kuppel") had this
+  // marker borrowing minaret-1 as a stand-in; that file stays on the
+  // minaret marker above, where it belongs.
+  dome: ['/photos/rooms/dome-1.webp'],
 };
 
 export function photosFor(roomId: string): readonly string[] {

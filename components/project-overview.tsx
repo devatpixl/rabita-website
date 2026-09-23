@@ -28,7 +28,7 @@ export async function ProjectOverview() {
   // How big, how tall, who it is for, and when. All four in the same
   // off-white: the one gold accent in this section is "one" in the headline.
   const figures = [
-    { icon: 'building' as const, value: nf.format(CAMPAIGN.buildingM2), unit: 'm²', label: t('figures.area') },
+    { icon: 'building' as const, value: `${nf.format(CAMPAIGN.buildingM2)}+`, unit: 'm²', label: t('figures.area') },
     // SEVEN here too (client, 2026-09-15). This is the second of the two
     // places that printed "6 + U1"; the key-figures register on
     // /moskeprosjektet is the other. Changing one and not the other would

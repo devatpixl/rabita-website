@@ -58,13 +58,62 @@ export const SERVICE_IMAGE: Record<ServiceKey, string> = {
   // lattice claims nothing about who attends. Swap it the day a real
   // photograph arrives.
   kvinnetreff: '/photos/svc-wudu.webp',
-  nikah: '/photos/subj-nikah.webp',
-  janaza: '/photos/subj-janaza.webp',
-  shahada: '/photos/subj-shahada.webp',
+  // Client-generated, 2026-09-23. Replaces subj-nikah.webp at 1086x724 — the
+  // same defect the old janaza card had: landscape, and undersized for a card
+  // that renders ~595px wide portrait. The old file stays on disk unused.
+  //
+  // Rings on silk rather than the ceremony itself, for two reasons. The frame
+  // carries no architecture, so the client cannot say it is not their mosque
+  // and it does not date when Ekebergveien opens; and it belongs to no one
+  // culture, which matters on a card Somali, Arab, Pakistani and Norwegian
+  // couples all read.
+  //
+  // NOT a contract-and-pen shot, which is the obvious nikah picture: the page
+  // states the couple must already be legally married and bring a vigselsattest,
+  // so the paperwork happens elsewhere. The headline is "En seremoni dere vil
+  // huske". See SERVICE_STORY, where the contract frame still fits.
+  //
+  // Also deliberately not hands — shahada took that frame above, and two hand
+  // close-ups in one grid read as the same card printed twice.
+  nikah: '/photos/subj-nikah-ringer.webp',
+  // Client-generated, 2026-09-23. Replaces subj-janaza.webp at 1086x724 —
+  // landscape and undersized for a card that renders ~595px wide portrait.
+  janaza: '/photos/subj-janaza-bonn.webp',
+  // Client-generated, 2026-09-23. Two hands clasped, close, on a dark blurred
+  // ground — and deliberately no architecture in the frame. The mosque does
+  // not exist yet, so any arch, lattice or hall in a generated image invites
+  // "that is not our mosque" from the client, and dates the card the moment
+  // Ekebergveien is finished. A close detail claims nothing about a building.
+  //
+  // It is also how a shahada is actually taken: the imam holds the right hand
+  // while the words are repeated. To someone who has not decided anything —
+  // which the page lede addresses in as many words — clasped hands read as a
+  // welcome rather than a ceremony, so the picture does not argue with the
+  // copy the way a conversion scene would. Replaces subj-shahada.webp, which
+  // stays on disk unused.
+  shahada: '/photos/subj-shahada-hender.webp',
   // Matching the Conversations slide on the home page.
   // Client, Bildeplassering (2026-09-19). hvhj.png.
-  counselling: '/photos/svc-samtaler-kontor.webp',
-  'hajj-umrah': '/photos/subj-hajj.webp',
+  // Client-generated, 2026-09-23. Replaces svc-samtaler-kontor.webp, which
+  // was 819x1024 — the smallest file on the site and soft in a card that
+  // renders ~595px wide. See SERVICE_STORY below for why the same frame
+  // serves both slots.
+  counselling: '/photos/subj-samtaler.webp',
+  // Client's own photograph (Bildeplassering, 2026-09-19, pexels-tahir-osman)
+  // — tawaf at the Kaaba, already carrying the service page below. Promoted to
+  // the card 2026-09-23 in place of subj-hajj.webp, which was 1500x1000:
+  // landscape, and soft in a card that renders ~595px wide portrait.
+  //
+  // NOT generated, deliberately, where the other four cards are. Gemini cannot
+  // write Arabic, so the kiswah band comes back as nonsense glyphs — and this
+  // is the one image on the site the congregation will look at closely enough
+  // to notice. A real photograph of the real thing beats a generated one here
+  // by a distance we could not close.
+  //
+  // The card and the story frame are on different pages (SERVICE_IMAGE is read
+  // only by service-grid and service-index), so this is reuse, not a repeat.
+  // subj-hajj.webp stays on disk unused.
+  'hajj-umrah': '/photos/subj-hajj-kaaba.webp',
   // The certificate class, matching the Learning slide on the home page
   // (client, 2026-09-09). bazaar-child was a girl with face paint at a
   // bazaar — a nice photograph, but not a school.
@@ -284,10 +333,19 @@ export const SERVICE_PAGES = {
 // against 0.02 for janaza) and the least interesting half of the frame.
 // Pulling the crop toward the inline start keeps the man and drops the screen.
 export const SERVICE_FOCUS: Partial<Record<ServiceKey, string>> = {
+    // Still 40% after the 2026-09-23 swap, by luck rather than design: the
+    // rings sit at 40% of the new frame too. 896x1200 into 4:5 loses 80px of
+    // height, so this steers very little either way.
     nikah: '50% 40%',
     janaza: '50% 50%',
-    shahada: '50% 38%',
+    // 896x1200 into a 4:5 frame loses only 80px of height, and the hands
+    // already sit at 49%. Centre is the honest value here, not a tuned one.
+    shahada: '50% 50%',
     counselling: '50% 42%',
+    // Inert since the 2026-09-23 swap, and kept only so the key does not look
+    // forgotten: subj-hajj-kaaba.webp is 1200x1500, which is exactly 4:5, so
+    // object-cover has no overflow left to steer. It bites again the moment
+    // this card is pointed at a source of any other ratio.
     'hajj-umrah': '50% 45%',
     skole: '50% 32%',
     // The mus'haf and the children sit above centre; the phone card is 4:3
@@ -521,7 +579,30 @@ export const SERVICE_STORY: Partial<
   // the answer is this: the congregation in rows, facing the qibla wall.
   // 1086x1448 in a 3:2 frame shows half the height; 45% holds the bowed
   // heads and the top of the timber wall.
-  janaza: { src: '/photos/svc-janaza-prayer.webp', objectClass: 'object-[50%_45%]' },
+  // ── JANAZA: THE CONGREGATION, NOT THE FUNERAL ────────────────────────
+  // Client, Versjon 6: AI images on the first five services. Generated
+  // 2026-09-23, same frame as SERVICE_IMAGE above.
+  //
+  // The page headline is "Vi er her i den vanskeligste tiden", and that is
+  // what decided the picture. An empty hall is the safe, dignified choice
+  // and it was the first instinct — but an empty room says nobody came,
+  // which argues with the one line the page leads on. So: rows standing for
+  // janazah prayer, shot from the back of the hall.
+  //
+  // WHAT IS DELIBERATELY ABSENT: the deceased. A real janaza has the body
+  // before the imam; including it makes a service page confronting. No
+  // coffin, no shroud, no flowers, no visible grief, and no faces — the
+  // frame is backs and shoulders only.
+  //
+  // The lattice screen at the left edge and the green carpet are the
+  // building's own materials, the same pair that ties the counselling
+  // photograph and the Vindu gift card to the arcade behind every page.
+  //
+  // objectClass centres it: the standing rows sit in the upper two thirds by
+  // construction, so no vertical nudge is needed.
+  //
+  // svc-janaza-prayer.webp is NOT deleted; it is what this reverts to.
+  janaza: { src: '/photos/subj-janaza-bonn.webp', objectClass: 'object-center' },
   // Client, Bildeplassering (2026-09-19), IMG_8833 — his Seksjonsbilde for
   // Shahada. Cut 400px down from a 3648x5472: that window puts the face
   // larger and sets the lit crescent beside his head rather than crowding the
@@ -545,11 +626,46 @@ export const SERVICE_STORY: Partial<
   // chair and the young men around him all read.
   //
   // subj-counselling.webp is NOT deleted; it is what this reverts to.
-  counselling: { src: '/photos/subj-samtaler-krets-TEMP.webp', objectClass: 'object-center' },
+  // ── COUNSELLING: ONE FRAME, BOTH SLOTS ───────────────────────────────
+  // Client, Versjon 6: "Legg in ai bilder på 5 av de første tjenestene."
+  // Generated 2026-09-23 and it is the same file as SERVICE_IMAGE above, on
+  // purpose: click the card and the page opens on the picture you clicked.
+  // That reads as confirmation rather than repetition, and it is honest —
+  // one service, one image.
+  //
+  // WHAT IT REPLACES: subj-samtaler-krets-TEMP.webp, which was named TEMP
+  // and had been since it went in. That file is not deleted.
+  //
+  // WHY THIS FRAME AND NOT THE FIRST ONE GENERATED: the first attempt was a
+  // pair of hands round a cup on an oak table in Scandinavian window light —
+  // well made, and it could have sat on any wellness clinic or café in Oslo.
+  // Every other photograph on this site is specific to this community. This
+  // version moves the same gesture into the building's own material world:
+  // the carved lattice screen out of focus behind, pale stone, a sliver of
+  // the prayer hall's green at the foot, prayer beads on the table. The
+  // lattice in particular is the facade motif that already carries the Vindu
+  // gift card and the arcade behind every service page.
+  //
+  // NO FACES, deliberately. The page promises "Alle henvendelser behandles
+  // diskret"; a recognisable person in frame argues with the one thing it
+  // says.
+  counselling: { src: '/photos/subj-samtaler.webp', objectClass: 'object-center' },
   // The real photograph the client asked for (2026-09-16: "use some photo
   // here man of women gathering"). Portrait, 1125x1500, so it renders as a
-  // portrait plate. The BAND above it keeps the neutral lattice render —
-  // running this frame twice on one page would be worse than either.
+  // portrait plate.
+  //
+  // ⚠ BOTH CLAIMS ABOVE ARE WRONG, measured 2026-09-23: the file on disk is
+  // 1359x1019 — LANDSCAPE — and it is not in PORTRAIT_PHOTOS. The rendering is
+  // correct anyway, because galleryOrientation hands an unregistered file a
+  // 4:3 frame and 1359x1019 is 4:3. Left as it renders; the note is corrected
+  // so nobody "fixes" it by adding the file to that set and cropping it.
+  //
+  // The line about a BAND is also stale. SERVICE_BAND is dead — defined below
+  // and imported by nothing. The detail page renders SERVICE_STORY and the
+  // logo mark, and nothing else. So this frame does NOT appear twice on one
+  // page, and the card above could take it — except that a 1359x1019
+  // landscape in a 4:5 card is the exact defect fixed on nikah, janaza and
+  // hajj on 2026-09-23. It needs a portrait photograph, not a re-point.
   // Client, Bildeplassering (2026-09-19). 7-_DSC0317.
   kvinnetreff: { src: '/photos/subj-kvinnetreff-samling.webp', objectClass: 'object-[50%_45%]' },
   // Client, Bildeplassering (2026-09-19). pexels-tahir-osman — tawaf at the Kaaba.
@@ -752,7 +868,14 @@ const PORTRAIT_PHOTOS: ReadonlySet<string> = new Set([
   // disk — a portrait photograph missing from here is handed a 4:3 frame and
   // loses its top and bottom. The first two were my own omission on 09-19.
   '/photos/svc-shahada-adhan.webp',
-  '/photos/subj-samtaler-krets-TEMP.webp',
+  // 896x1200. Swapped from subj-samtaler-krets-TEMP.webp 2026-09-23 —
+  // replacing the file without updating this line handed the new portrait a
+  // 4:3 frame and cropped the lattice and the green out of it.
+  '/photos/subj-samtaler.webp',
+  // 896x1200, added 2026-09-23 with the card swap above.
+  '/photos/subj-shahada-hender.webp',
+  // 896x1200, added 2026-09-23 with the card swap above.
+  '/photos/subj-nikah-ringer.webp',
   '/photos/subj-hajj-kaaba.webp',
   '/photos/subj-koran-klasse.webp',
   '/photos/subj-skole-klassebilde.webp',
@@ -769,6 +892,7 @@ const PORTRAIT_PHOTOS: ReadonlySet<string> = new Set([
   '/photos/svc-fosterhjem-stand.webp',
   '/photos/svc-gathering.webp',
   '/photos/svc-janaza-prayer.webp',
+  '/photos/subj-janaza-bonn.webp', // 896x1200, added with the image 2026-09-23
 ]);
 
 /** Portrait only when EVERY frame in the set is portrait — one landscape

@@ -96,13 +96,21 @@ const SCRIM_FOOT =
 // phone there is no second column, the text sits over the lower half of the
 // picture, and a side weighted gradient leaves it illegible. This one keeps
 // the faces readable near the top and darkens down into the text.
+// Deepened through the middle on 2026-09-22. The stops below 42% are
+// unchanged — that is where the faces are, and washing them out was the
+// thing the two-gradient design was built to avoid. What changed is the
+// band the TEXT sits in: 0.52 -> 0.66 at 42% and 0.88 -> 0.94 at 62%, and
+// the darkest stop starts higher up. Measured against the client's phone
+// screenshot, the subhead was landing at about 55-70% of the hero, where
+// the old curve was still passing a crowded photograph through at nearly
+// half strength.
 const SCRIM_MOBILE =
   'linear-gradient(180deg,' +
   ' rgba(22,36,46,0.44) 0%,' +
   ' rgba(22,36,46,0.20) 18%,' +
-  ' rgba(22,36,46,0.52) 42%,' +
-  ' rgba(22,36,46,0.88) 68%,' +
-  ' rgba(22,36,46,0.96) 100%)';
+  ' rgba(22,36,46,0.66) 42%,' +
+  ' rgba(22,36,46,0.94) 62%,' +
+  ' rgba(22,36,46,0.97) 100%)';
 
 // The headline is a list, and automatic wrapping was breaking it between
 // every article and its noun: "En moské. En / skole. Et / bibliotek. Et /
@@ -321,7 +329,30 @@ export async function Hero() {
             {/* Carries who Rabita is as well as what is being built. Steps
                DOWN from the line above (paper/70 against paper/85) so the
                three blocks descend instead of competing. */}
-            <p className="mt-4 max-w-[52ch] text-body text-paper/70">{t('subhead')}</p>
+            {/* ── TWO LENGTHS, ONE MESSAGE ──────────────────────────────
+               On a phone the full paragraph ran to NINE lines of paper/70
+               over the busiest part of the photograph — a crowd at prayer —
+               and was, in the client's words, not readable. Nine lines is
+               too many for a hero at any contrast; over a picture it is a
+               wall.
+
+               hero.subheadShort keeps his own opening clause verbatim
+               ("Åpen for alle – store og små, kvinner og menn") and the two
+               things a first-time visitor needs — what happens here, and
+               where — in about three lines. The full text is unchanged and
+               still runs from md up, where there is a column wide enough
+               for it and a side-weighted scrim under it.
+
+               Opacity also steps up on the phone: paper/80 against the
+               desktop's paper/70. The horizontal scrim on desktop carries
+               the text at 0.92; the portrait one is doing less work under
+               this block, so the type makes up the difference. */}
+            <p className="mt-4 max-w-[52ch] text-body text-paper/80 md:hidden">
+              {t('subheadShort')}
+            </p>
+            <p className="mt-4 hidden max-w-[52ch] text-body text-paper/70 md:block">
+              {t('subhead')}
+            </p>
 
             <div className="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link

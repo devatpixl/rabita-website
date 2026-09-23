@@ -43,11 +43,24 @@ export function HallBackdrop({
   bottomSeam = 'h-16 md:h-44',
   /** The colour the seams fade FROM, matching the section above and below. */
   from = 'rgb(250,248,244)',
+  /**
+   * CSS filter on the photograph. Empty by default, which is what every
+   * caller before 2026-09-23 got and what the subject pages still want.
+   *
+   * It exists because the file is a near-white cream wall: under a wash of
+   * near-white paper it resolves to near-white and the arcade disappears
+   * entirely. /aktuelt has always graded it for exactly this reason —
+   * saturate(0.72) contrast(1.12) brightness(0.9) — and /om-oss now asks for
+   * the same look. Without the grade, a wash above about 55 leaves nothing
+   * on screen at all, which is what happened on /om-oss for one build.
+   */
+  grade = '',
 }: {
   wash?: number;
   topSeam?: string;
   bottomSeam?: string;
   from?: string;
+  grade?: string;
 } = {}) {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
@@ -63,6 +76,7 @@ export function HallBackdrop({
             // the content covers the middle, so the crop moves to the centre
             // where there is actually something to see.
             className="object-cover object-center md:object-[70%_50%]"
+            style={grade ? { filter: grade } : undefined}
           />
         </div>
         <div

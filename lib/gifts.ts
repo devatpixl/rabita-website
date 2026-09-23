@@ -1,73 +1,86 @@
-// Gift Ladder inventory data.
+// The gift levels behind "Hver sum bygger noe ekte" on /moskeprosjektet.
 //
-// Each tier has a fixed unit total (rooms, shelves, desks, panels the
-// building physically has) and a running count of how many are already
-// funded. The Gift Ladder shows both plus a thin progress bar so a
-// visitor can see honest scarcity — e.g. "48 facade panels exist, 3
-// are taken" — without any photography being needed.
+// ── SIX LEVELS IN TWO SECTIONS, SINCE 2026-09-22 ──────────────────────────
+// Client, Versjon 6: "Seksjon om de ulike doneringsalternativer, vi skal lage
+// 4 alternativer:" followed by six, and then "DELE I 2 SEKSJONER".
 //
-// TODO(rabita): these unitFunded counts must come from real designation
-// tracking. Rabita needs to record, per gift, which physical unit the
-// donor's contribution is earmarked for. Until that pipeline is in
-// place, set `unitFunded: null` for the row and the UI falls back to
-// showing the denominator only ("1 200 m² totalt", no bar). Inventing
-// numbers on a mosque fundraising page is not acceptable.
-// Five levels added 2026-09-15 (client: "Legge til flere betalingskategorier
-// under «Budsjettet er kostet rom for rom»"). His list had seven; two of them
-// name amounts this ladder already occupies — 25 000 is "En pult i skolen"
-// and 100 000 is "Et panel i fasaden", both with copy and photographs he
-// supplied on 2026-09-13 — so those two keep what he chose then, and his
-// names for them (Bønneplassen, Grunnleggerne) are NOT applied. Flagged to
-// him; renaming is two strings if he confirms.
-export type GiftKey =
-  | 'self'
-  | 'family'
-  | 'block'
-  | 'quran'
-  | 'prayer'
-  | 'shelf'
-  | 'desk'
-  | 'friends'
-  | 'panel';
+//   100 000  stifter med eget signert dokument
+//    50 000  Skoleplass (la en elev få mer i3lm på grunn av deg)
+//    25 000  Bønneplass
+//    10 000  Wudu plass
+//     5 000  Vindu
+//     2 000  Dør
+//
+// ("i3lm" is ilm — knowledge — written in the Arabic chat alphabet.)
+//
+// Nine levels became these six. 500, 1 000 and 15 000 are gone; 2 000, 5 000,
+// 10 000, 25 000, 50 000 and 100 000 keep their amounts and take his names.
+//
+// The two sections fall out of his own list: the top three are a place or a
+// standing that belongs to a PERSON — a founder's document, a pupil's seat, a
+// worshipper's spot — and the bottom three are PARTS OF THE BUILDING you can
+// point at. They are labelled that way rather than "big" and "small", which
+// would be true and say nothing.
+//
+// ── THIS SETTLES A FLAG OPEN SINCE 2026-09-15 ─────────────────────────────
+// He asked for "Bønneplassen" at 25 000 and "Grunnleggerne" at 100 000 then,
+// and it was NOT applied: he had personally chosen the copy and the
+// photographs for those two levels on 13 September, so his own earlier choice
+// was kept and the rename was flagged back to him. Asking a second time is
+// the answer to that flag.
+//
+// ── NO INVENTED COUNTS ────────────────────────────────────────────────────
+// unitTotal/unitFunded are null on every level. The old ladder carried real
+// denominators for four of its rows (48 facade panels, 120 desks) and null
+// for the rest; none of those rows survived the rename with its meaning
+// intact, and nobody has told us how many doors, windows or wudu places the
+// building has. Inventing them on a mosque fundraising page is not
+// acceptable. Fill them in when Rabita supplies the figures and the bar
+// appears on its own.
+// ── TWO COMPONENTS WENT WITH THE OLD KEYS ────────────────────────────────
+// components/gift-ladder.tsx and components/inventory-bar.tsx were deleted
+// in the same change. GiftLadder rendered on no page — it was superseded by
+// GiftBuilds — and InventoryBar was used by nothing but GiftLadder. Both
+// hardcoded the old nine keys, so keeping them would have meant rewriting
+// two dead components around a level set nobody displays. They are in git at
+// e9d6571 if the progress-bar treatment is ever wanted again.
+export type GiftKey = 'founder' | 'schoolPlace' | 'prayerPlace' | 'wudu' | 'window' | 'door';
+
+/** Which of the client's two sections a level belongs to. */
+export type GiftSection = 'named' | 'parts';
 
 export type Gift = {
   key: GiftKey;
   amountNok: number;
+  section: GiftSection;
   /**
-   * How many of the physical unit exist. `null` for the levels that are not
-   * an inventory of anything — "For deg selv" is a sum, not a countable
-   * thing, and giving it a made-up total would be exactly the invention the
-   * note above forbids.
-   *
-   * Only GiftLadder ever read this, and GiftLadder renders nowhere. The
-   * component on the page, GiftBuilds, shows `items.<key>.meta` instead.
+   * How many of the physical unit exist, or null when nobody has counted
+   * them. Null renders no progress bar at all, which is the honest state —
+   * see the note above.
    */
   unitTotal: number | null;
-  /**
-   * Number of units already funded. Set to `null` (not zero) when the
-   * data is unavailable. `null` renders the denominator-only fallback;
-   * `0` would render a real zero-progress bar and imply we know the
-   * count is zero, which we may not.
-   */
+  /** How many are already funded. Null, not zero: zero is a claim. */
   unitFunded: number | null;
 };
 
-// Ordered small → large so the ladder reads bottom-up.
+// HIS ORDER, largest first within each section — the order he wrote them in.
 export const GIFTS: readonly Gift[] = [
-  { key: 'prayer',  amountNok: 500,     unitTotal: 1200, unitFunded: 412  },
-  { key: 'self',    amountNok: 1_000,   unitTotal: null, unitFunded: null },
-  { key: 'family',  amountNok: 2_000,   unitTotal: null, unitFunded: null },
-  { key: 'block',   amountNok: 5_000,   unitTotal: null, unitFunded: null },
-  { key: 'quran',   amountNok: 10_000,  unitTotal: null, unitFunded: null },
-  { key: 'shelf',   amountNok: 15_000,  unitTotal: 60,   unitFunded: 18   },
-  { key: 'desk',    amountNok: 25_000,  unitTotal: 120,  unitFunded: 9    },
-  { key: 'friends', amountNok: 50_000,  unitTotal: null, unitFunded: null },
-  { key: 'panel',   amountNok: 100_000, unitTotal: 48,   unitFunded: 3    },
+  { key: 'founder',     amountNok: 100_000, section: 'named', unitTotal: null, unitFunded: null },
+  { key: 'schoolPlace', amountNok:  50_000, section: 'named', unitTotal: null, unitFunded: null },
+  { key: 'prayerPlace', amountNok:  25_000, section: 'named', unitTotal: null, unitFunded: null },
+  { key: 'wudu',        amountNok:  10_000, section: 'parts', unitTotal: null, unitFunded: null },
+  { key: 'window',      amountNok:   5_000, section: 'parts', unitTotal: null, unitFunded: null },
+  { key: 'door',        amountNok:   2_000, section: 'parts', unitTotal: null, unitFunded: null },
 ];
 
+/** The two sections, in the order they are shown. */
+export const GIFT_SECTIONS: readonly GiftSection[] = ['named', 'parts'];
+
+export function giftsIn(section: GiftSection): readonly Gift[] {
+  return GIFTS.filter((g) => g.section === section);
+}
+
 export function fundedPercent(gift: Gift): number | null {
-  // unitTotal is nullable since 2026-09-15: a level like "For deg selv" is a
-  // sum, not an inventory, so there is no denominator to be a percentage of.
   if (
     typeof gift.unitFunded !== 'number' ||
     typeof gift.unitTotal !== 'number' ||

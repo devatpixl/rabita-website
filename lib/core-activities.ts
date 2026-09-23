@@ -81,8 +81,11 @@ export const ACTIVITIES: readonly Activity[] = [
     // label for a different page.
     key: 'religious',
     row: 'lead',
-    // The portrait crop, not SERVICE_IMAGE.nikah (subj-nikah.webp, 1086x724).
-    // A 3:2 landscape source in a 4:5 plate throws away 47% of its width.
+    // The portrait crop, not SERVICE_IMAGE.nikah. Written when that was
+    // subj-nikah.webp at 1086x724 — a 3:2 landscape source in a 4:5 plate
+    // throws away 47% of its width. SERVICE_IMAGE.nikah is portrait as of
+    // 2026-09-23, but it is now rings on silk: a still life, which is right
+    // on a service card and wrong on a section plate this size.
     // congregation-today.tsx already commissioned portrait variants for its
     // 3:4 cards and this section inherits them.
     photo: '/photos/svc-nikah-ceremony.webp',

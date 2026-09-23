@@ -16,7 +16,8 @@
       "primary": "See the mosque project",
       "secondary": "Donate now"
     },
-    "campaignToggle": "Show fundraising details"
+    "campaignToggle": "Show fundraising details",
+    "subheadShort": "Open to everyone – young and old, women and men. Congregational prayer, teaching and activities for children and families, in the heart of Oslo."
   },
   "utility": {
     "prayer": {
@@ -68,19 +69,9 @@
       "news": [],
       "project": [
         {
-          "label": "Progress",
-          "blurb": "Five phases, and what each one costs",
-          "href": "/moskeprosjektet/fremdrift"
-        },
-        {
           "label": "Apartments",
           "blurb": "Fifteen homes on the top floors, for sale",
           "href": "/moskeprosjektet/leiligheter"
-        },
-        {
-          "label": "Where the money goes",
-          "blurb": "Accounts, bank details and tax relief",
-          "href": "/hvor-pengene-gar"
         }
       ],
       "apartments": [],
@@ -149,6 +140,11 @@
           "href": "/tjenester/koran"
         },
         {
+          "label": "Calligraphy and geometry",
+          "blurb": "Courses in Islamic calligraphy and geometric art.",
+          "href": "/tjenester/kurs"
+        },
+        {
           "label": "A course in Islam",
           "blurb": "Foundational knowledge for children and teenagers.",
           "href": "/tjenester/kurs-islam"
@@ -162,11 +158,6 @@
           "label": "Norwegian",
           "blurb": "Norwegian classes for adults who fall outside the ordinary provision.",
           "href": "/tjenester/norsk"
-        },
-        {
-          "label": "Calligraphy and geometry",
-          "blurb": "Courses in Islamic calligraphy and geometric art.",
-          "href": "/tjenester/kurs"
         }
       ],
       "visit": [
@@ -270,7 +261,14 @@
       "giveWithMonthly": "Give <amount></amount> kr/mo with {method}"
     },
     "perMonth": "/mo",
-    "sheetTitleBuilding": "Give to the building"
+    "sheetTitleBuilding": "Give to the building",
+    "presetGifts": {
+      "brick": "A brick",
+      "lamp": "A lamp",
+      "quran": "A Qur’an",
+      "carpet": "A carpet"
+    },
+    "chipAriaGift": "Choose {gift} — {amount} kroner"
   },
   "meter": {
     "lattice": "Each mark is 1 000 000 kr",
@@ -325,7 +323,7 @@
       },
       "shell": {
         "year": "",
-        "name": "Shell — foundation, structure and facade"
+        "name": "Construction — foundation, structure and facade"
       },
       "interior": {
         "year": "Upcoming",
@@ -424,7 +422,7 @@
     "etasje": "Floor {n}",
     "svg": {
       "groundLevel": "STREET LEVEL · CALMEYERS GATE",
-      "plot": "PLOT · 5 745 M²",
+      "plot": "PLOT · 6 000+ M²",
       "floorsUp": "FLOORS TO RISE",
       "belowGround": "two below street"
     },
@@ -488,61 +486,52 @@
     "lede": "Every contribution, whatever its size, becomes part of the building and helps raise a lasting home for prayer, learning and community in Norway.",
     "anchorLabel": "FULL TAX DEDUCTION",
     "ctaAll": "See all ways to give",
-    "prev": "Previous gift",
-    "next": "Next gift",
     "cta": "Choose an amount",
     "footnote": "Tax deductible up to 25 000 kr per year.",
     "items": {
-      "self": {
-        "title": "For yourself"
+      "founder": {
+        "title": "Founder"
       },
-      "family": {
-        "title": "For your family"
+      "schoolPlace": {
+        "title": "A school place"
       },
-      "block": {
-        "title": "The building block"
+      "prayerPlace": {
+        "title": "A prayer place"
       },
-      "quran": {
-        "title": "Quran"
+      "wudu": {
+        "title": "A wudu place"
       },
-      "friends": {
-        "title": "Friends of Rabita"
+      "window": {
+        "title": "A window"
       },
-      "prayer": {
-        "title": "One square metre of prayer hall floor"
-      },
-      "shelf": {
-        "title": "A shelf section in the library"
-      },
-      "desk": {
-        "title": "A desk in the school"
-      },
-      "panel": {
-        "title": "A panel in the facade"
+      "door": {
+        "title": "A door"
       }
     },
-    "units": {
-      "prayer": "m²",
-      "shelf": "shelves",
-      "desk": "desks",
-      "panel": "panels"
-    },
-    "totalSuffix": "total",
     "alt": {
-      "self": "A person praying alone in the mosque",
-      "family": "Two guests at an outdoor table during iftar",
-      "block": "The site cleared, with the old building demolished",
-      "quran": "An open Qur’an",
-      "friends": "Street iftar in Grønland, long tables under the bridge",
-      "prayer": "Prayer hall floor",
-      "shelf": "Library shelving",
-      "desk": "Pupils at their desks in the classroom",
-      "panel": "Facade panel from within"
+      "founder": "The Calmeyers gate block from above, with the roof terrace",
+      "schoolPlace": "Pupils in a classroom in the new school",
+      "prayerPlace": "The prayer hall in the new mosque",
+      "wudu": "The men’s wudu places in the new mosque",
+      "window": "The facade lattice seen from inside, each diamond a window",
+      "door": "The main entrance, with the stair rising through the building"
+    },
+    "notes": {
+      "founder": "You are recorded as a founder, with your own signed document.",
+      "schoolPlace": "Let a pupil gain more knowledge because of you.",
+      "prayerPlace": "A place on the floor, for whoever comes to pray.",
+      "wudu": "Where you wash before the prayer.",
+      "window": "Daylight into a room that will be used every day.",
+      "door": "A door into the house, open to everyone."
+    },
+    "sections": {
+      "named": "Give a place in the mosque",
+      "parts": "Build a part of the mosque"
     }
   },
   "floors": {
     "eyebrow": "The building, floor by floor",
-    "heading": "Six floors above ground, one below. 5 745 square metres.",
+    "heading": "Six floors above ground, one below. Over 6,000 square metres.",
     "attribution": "Architect: {architect}. The Alhambra references are visible, but the building also speaks Norwegian, in materials, daylight and its relationship to the street.",
     "floorLabel": "Floor {floor}",
     "items": {
@@ -677,11 +666,11 @@
       "building": {
         "eyebrow": "The building",
         "title": "The dream of one of <em>Europe’s largest</em> new mosques",
-        "lede": "In Calmeyers gate 8 we are building more than a mosque. We are building an Islamic centre with a school, a library, a café, a restaurant, a youth club, a multi-purpose hall and a roof terrace across close to 6,000 square metres and seven floors. The old building has been demolished, the permits are in place and the contractor has been chosen. What remains is the last and most important part: funding the project. This is where you can help make the dream real.",
+        "lede": "In Calmeyers gate 8 we are building more than a mosque. We are building an Islamic centre with a school, a library, a café, a restaurant, a youth club, a multi-purpose hall and a roof terrace across over 6,000 square metres and seven floors. The old building has been demolished, the permits are in place and the contractor has been chosen. What remains is the last and most important part: funding the project. This is where you can help make the dream real.",
         "primary": "Give to the building",
         "secondary": "Where the money goes",
         "briefLabel": "In short",
-        "brief": "The old mosque was demolished in 2025. What replaces it is one building doing the work of five, on a 5 745 square metre plot, designed so the ground floor stays open to the street rather than turning its back on it.",
+        "brief": "The old mosque was demolished in 2025. What replaces it is one building doing the work of five, on a plot of over 6,000 square metres, designed so the ground floor stays open to the street rather than turning its back on it.",
         "colEyebrow": "Floor by floor",
         "colHeading": "What each level is for.",
         "items": [
@@ -1246,7 +1235,8 @@
         "oslo-city": "Oslo City",
         "bussterminalen": "Oslo bus terminal",
         "operahuset": "The Opera House",
-        "regjeringskvartalet": "The Government Quarter"
+        "regjeringskvartalet": "The Government Quarter",
+        "slottet": "The Royal Palace"
       },
       "prayerWindow": "Fajr, Dhuhr to Isha",
       "prayerLink": "see prayer times",
@@ -1587,10 +1577,10 @@
     "notes": {
       "nikah": "Tell us briefly about the planned date and number of attendees.",
       "janaza": "Family contact and what has already been arranged.",
-      "shahada": "Briefly about your background and whether you want witnesses.",
-      "counselling": "Briefly what the conversation should be about.",
+      "shahada": "Briefly, your background, when suits you, and whether you would like witnesses.",
+      "counselling": "Briefly, what the conversation should be about, and when suits you.",
       "hajj-umrah": "Number of travellers, planned dates and any agency involved.",
-      "visit": "Type of group, number and age of attendees.",
+      "visit": "The kind of group, how many, the ages, and the date you would like.",
       "contact": "What is the enquiry about?",
       "apartments": "When would you like to move in, and anything else we should know?",
       "skole": "The child’s age and school year.",
@@ -2529,7 +2519,7 @@
     }
   },
   "projectOverview": {
-    "briefShort": "The old building has been demolished, and construction of our new mosque is under way. In Calmeyers gate 8 we are raising one of Europe’s largest new mosques, with a prayer hall across three floors, a school, a library, a café, a restaurant, a youth club, a multi-purpose hall and a roof terrace over close to 6,000 square metres and seven floors. It will be a gathering place for faith, learning and community for generations to come.",
+    "briefShort": "The old building has been demolished, and construction of our new mosque is under way. In Calmeyers gate 8 we are raising one of Europe’s largest new mosques, with a prayer hall across three floors, a school, a library, a café, a restaurant, a youth club, a multi-purpose hall and a roof terrace across over 6,000 square metres and seven floors. It will be a gathering place for faith, learning and community for generations to come.",
     "cta": "See the mosque project",
     "figures": {
       "area": "Floor area",
@@ -2764,7 +2754,6 @@
           "body": "With a view over the city."
         }
       },
-      "close": "All of it adds up to a sociable, welcoming place to live.",
       "chip": {
         "title": "Built for community",
         "body": "Spaces that bring people together, every day."
@@ -3021,7 +3010,8 @@
       "school": "School",
       "amphi": "Amphitheatre",
       "garden": "Garden",
-      "conference": "Conference and function rooms",
+      "conference": "Conference rooms",
+      "banquet": "Function rooms",
       "meetingRooms": "Meeting rooms",
       "administration": "Administration",
       "studio": "Studio",
@@ -3046,7 +3036,8 @@
       "imamOffice": "The imams’ offices. A place for conversation, guidance and support in matters large and small.",
       "garden": "A sheltered outdoor room in the middle of the block, with benches, flowers and a fountain with an eight-pointed star.",
       "school": "Bright, modern classrooms where children and young people can learn, develop and build a secure identity.",
-      "conference": "Flexible premises for conferences, courses, weddings and celebrations.",
+      "conference": "For conferences, courses and seminars.",
+      "banquet": "For weddings, family celebrations and gatherings.",
       "meetingRooms": "Meeting rooms for the board, the administration, the departments and partners.",
       "youthClub": "A place for children and young people, with games, activities and somewhere to be together.",
       "apartments": "Fifteen highly attractive apartments, centrally placed in the heart of Oslo.",
@@ -3106,8 +3097,8 @@
   },
   "newsletterBand": {
     "eyebrow": "Newsletter",
-    "heading": "Stay <em>up to date</em>.",
-    "body": "Get the latest on the building and the events straight to your inbox.",
+    "heading": "Follow <em>the build</em>.",
+    "body": "Updates from the site, and invitations to what happens at the mosque.",
     "note": "You can unsubscribe at any time.",
     "done": "Thank you. Your address is registered."
   }

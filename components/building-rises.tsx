@@ -507,12 +507,18 @@ function BuildingSVG({
         );
       })}
 
-      {/* TOMT label — on the ground line, knocked out of what is behind it */}
+      {/* TOMT label — on the ground line, knocked out of what is behind it.
+         The rect is a fixed-width knockout, so it has to be wide enough for
+         the longest of the three locales' labels. 148px fitted "TOMT · 5 745
+         M²" with 7px to spare; "TOMT · 6 000+ M²" (Versjon 6) is a character
+         longer and would have spilled onto the drawing behind it. 172 leaves
+         the same margin again. Right edge is unchanged — the text is
+         anchored "end", so only the left edge moves. */}
       <g>
         <rect
-          x={BUILDING_RIGHT - 152}
+          x={BUILDING_RIGHT - 176}
           y={GROUND_Y + 4}
-          width={148}
+          width={172}
           height={20}
           fill="#F2EEE7"
         />

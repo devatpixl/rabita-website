@@ -10,6 +10,18 @@ import { usePrayerPanel } from './prayer-panel-provider';
 
 // Above the logo, scrolls away (§2). On --paper-deep.
 //
+// ── VISIBLE ON PHONES SINCE 2026-09-22 ────────────────────────────────────
+// It was `hidden md:block` from the start, which meant the whole strip — and
+// therefore every prayer time in the page chrome — did not exist below 768px.
+// The nav's own compact trigger is `min-[1800px]:block` and its "Bønnetider"
+// ghost button is `lg:inline-flex`, so nothing covered for it: a phone
+// landing on any page saw no prayer time at all. That is the gap behind the
+// client's 2026-09-22 note, and see prayer-times-widget.tsx for the rail that
+// now fills the strip.
+//
+// Height is no longer fixed at 44px: `min-h-11` applies from md only, because
+// the rail wraps to two rows of three on a phone and must be allowed to.
+//
 // This is now a client component because it (a) tracks its own
 // viewport visibility via IntersectionObserver so the shared prayer
 // panel provider knows which trigger to render, and (b) hosts the
@@ -63,9 +75,9 @@ export function UtilityStrip() {
       ref={rootRef}
       data-prayer-panel-scope
       data-print-hide
-      className="relative hidden md:block border-b border-gold bg-paper-deep"
+      className="relative block border-b border-gold bg-paper-deep"
     >
-      <div className="mx-auto w-full max-w-[84rem] px-6 md:px-10 lg:px-12 flex min-h-11 items-center justify-between gap-6">
+      <div className="mx-auto flex w-full max-w-[84rem] items-center justify-between gap-6 px-4 md:min-h-11 md:px-10 lg:px-12">
         <PrayerTimesWidget />
       </div>
       {open && stripInView && (

@@ -42,6 +42,8 @@ const FOOT = 52; // the link bar covers the bottom of the plate
 // were pitched apart for it; Oslo City came off the map on 2026-09-15, so
 // Oslo S now has that space to itself.
 const LABEL_POS: Record<string, { side: 'left' | 'right'; dy: number; dx?: number }> = {
+  // Slottet is the westernmost point on this plate (Versjon 6).
+  slottet: { side: 'left', dy: -6 },
   brugata: { side: 'right', dy: -24 },
   gronland: { side: 'left', dy: 18 },
   'oslo-s': { side: 'left', dy: 14, dx: -4 },
@@ -54,6 +56,8 @@ const LABEL_POS: Record<string, { side: 'left' | 'right'; dy: number; dx?: numbe
   operahuset: { side: 'right', dy: -16 },
 };
 const LABEL_POS_COMPACT: Record<string, { side: 'left' | 'right'; dy: number; dx?: number }> = {
+  // Slottet is the westernmost point on this plate (Versjon 6).
+  slottet: { side: 'left', dy: -6 },
   brugata: { side: 'right', dy: -22 },
   gronland: { side: 'left', dy: 0 },
   'oslo-s': { side: 'right', dy: 0 },

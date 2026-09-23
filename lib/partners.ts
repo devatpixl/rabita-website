@@ -45,6 +45,21 @@ export type Partner = {
   shape: 'wide' | 'mid' | 'square';
 };
 
+// ── THE THREE BUILD FIRMS ARE IN THIS LIST, NOT A ROW OF THEIR OWN ───────
+// Client, Versjon 6 (2026-09-22): "Samarbeidspartnere: Legg inn Logo til
+// Norconsult (forprosjektet) HLF arkitekter (arkitekt), og Bunde Bygg
+// (entreprenør). Spesielt førstnevnte er anerkjent internasjonalt."
+//
+// They were built as a separate labelled row first — PRE-PROJECT ·
+// NORCONSULT and so on — on the argument that suppliers on one building are
+// a different category from Oslo kommune, Bufdir and Kriminalomsorgen, and
+// that a bare mark does not deliver the recognition he was after. He did not
+// ask for that. He named Samarbeidspartnere, so that is where they go.
+//
+// WHAT THAT COSTS, if it ever comes back up: the marquee prints no captions
+// (an earlier brief decision), so the roles are not shown anywhere. A visitor
+// sees "Norconsult" and learns nothing about why it is on the page. The
+// labelled-row version is in git if he asks for the roles back.
 export const PARTNERS: readonly Partner[] = [
   { name: 'Oslo kommune', logo: '/partners/oslo-kommune.webp', shape: 'mid' },
   { name: 'Bydel Gamle Oslo', logo: '/partners/bydel-gamle-oslo.svg', shape: 'mid' },
@@ -103,4 +118,24 @@ export const PARTNERS: readonly Partner[] = [
   // maps it exactly onto the paper with no grey rectangle. Green ink has a
   // wide channel spread and cannot be touched by a neutral-only lift.
   { name: 'Norges Unge Muslimer', logo: '/partners/num.png', shape: 'mid' },
+  // The mosque project's own firms (client, Versjon 6). Files were supplied
+  // 2026-09-23 and all three needed work before they could sit on paper:
+  // Norconsult arrived as a JPEG on white and Bunde Bygg as WHITE ON BLACK,
+  // so both had their field knocked out and the mark re-laid in ink; HLF
+  // came with a real alpha channel and needed only a trim, then gained the
+  // "HLF" wordmark beside it on 2026-09-23.
+  { name: 'Norconsult', logo: '/partners/norconsult.png', shape: 'wide' },
+  // shape MID, not square. The file was the bare H monogram at 227x308
+  // (ratio 0.74) until 2026-09-23, when the client asked for "HLF" beside
+  // it — the glyph alone identifies nobody, and the other two marks in this
+  // strip both carry their name. The lockup is 633x308, ratio 2.06, which is
+  // mid by the rule documented on Partner.shape. Left as square it would
+  // have rendered at h-14/h-16 and towered over every wordmark in the row.
+  // hlf.png, NOT hlf-arkitekter.png. The file was replaced in place when the
+  // wordmark was added and next/image kept serving the cached 227x308
+  // transform — its cache key is the URL, which had not changed. Renaming is
+  // the fix that also holds on Vercel, where a stale transform would outlive
+  // any local cache clear.
+  { name: 'HLF Arkitekter', logo: '/partners/hlf.png', shape: 'mid' },
+  { name: 'Bunde Bygg', logo: '/partners/bunde-bygg.png', shape: 'mid' },
 ];

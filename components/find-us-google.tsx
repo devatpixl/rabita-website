@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { cn } from '@/lib/cn';
-import { DIRECTIONS_URL, LANDMARKS, ROUTES, VISIT } from '@/lib/location';
+import { DIRECTIONS_URL, LANDMARKS, ROUTES, VISIT_EMBED_QUERY } from '@/lib/location';
 
 // The apartments map, as a real Google map (client, 2026-09-15: "Real google
 // maps / Remove the lines / Just put in the point").
@@ -46,8 +46,11 @@ const MAP_MID = '1IE-Lk2r5dkb-hqk8RV0oV8So1UIsPKg';
  *  rendered embed; it is a fixed chrome height, not a content-dependent one. */
 const HEADER_PX = 56;
 
-/** The five he listed, in his order. Rabita itself is the sixth pin. */
-const SHOWN = ['regjeringskvartalet', 'stortinget', 'oslo-s', 'bussterminalen', 'operahuset'] as const;
+/** The five he listed in September, plus Slottet (Versjon 6, 2026-09-22:
+ *  "Legg til Slottet ... i tillegg til de allerede viste"). Rabita itself is
+ *  the pin at the centre. The list below renders nearest-first, so his order
+ *  here only decides nothing — it is the routed metres that sort it. */
+const SHOWN = ['regjeringskvartalet', 'stortinget', 'oslo-s', 'bussterminalen', 'operahuset', 'slottet'] as const;
 
 export async function FindUsGoogle({
   locale,
@@ -150,8 +153,13 @@ export async function FindUsGoogle({
                   // it fills its frame at any width, so no empty half; and
                   // the single pin is labelled by Google itself, so there
                   // are no marker names to go missing. Keyless and stable —
-                  // ?q=<address>&output=embed is the long-standing form.
-                  `https://www.google.com/maps?q=${encodeURIComponent(VISIT.address)}&hl=${locale === 'ar' ? 'ar' : locale === 'en' ? 'en' : 'no'}&z=15&output=embed`
+                  // ?q=<query>&output=embed is the long-standing form.
+                  //
+                  // The query leads with the business name rather than the
+                  // street so the pin reads "Rabita" — see VISIT_EMBED_QUERY
+                  // in lib/location.ts for what was verified and what is
+                  // still best-effort about that.
+                  `https://www.google.com/maps?q=${encodeURIComponent(VISIT_EMBED_QUERY)}&hl=${locale === 'ar' ? 'ar' : locale === 'en' ? 'en' : 'no'}&z=15&output=embed`
                 : `https://www.google.com/maps/d/embed?mid=${MAP_MID}&ehbc=2E312F`
             }
             title={t('mapTitle')}
@@ -168,6 +176,20 @@ export async function FindUsGoogle({
             className="block w-full border-0"
           />
         </div>
+
+        {/* NO LABEL PLATE OF OUR OWN — and the reason is worth keeping.
+           A dusk card reading "RABITA / Sørligata 8a" was drawn over the
+           bottom-left of this map for about an hour on 2026-09-22, on the
+           assumption that Google would label the pin with the street and we
+           would have to supply the identity ourselves.
+
+           Pointing the query at the real listing (see VISIT_EMBED_QUERY)
+           made that wrong: Google renders its OWN place card — the name,
+           the address and 4,7 ★ (179) — so the plate became a second card
+           saying less, on a map only ~340px wide, sitting over the street
+           layout. Removed. If a future change ever drops back to an
+           address-only query, the plate is the thing to bring back, because
+           then nothing names the place. */}
       </div>
 
       {!mapOnly && (

@@ -40,6 +40,46 @@ export const VISIT = {
   lon: 10.768639,
 } as const;
 
+/**
+ * What the footer's place embed SEARCHES for, as opposed to what it shows.
+ *
+ * Client, Versjon 6 (2026-09-22): "Undersøk om det er mulig å legge inn
+ * Rabita istedenfor Sørligata 8a på kartet" — he asked us to find out, not to
+ * assume. Checked on Google Maps the same day: the place exists and is
+ * already named the way he wants.
+ *
+ *   Rabita — Det Islamske forbundet · 4,7 ★ (179) · Mosque
+ *   Sørligata 8 a, 0577 Oslo · rabita.no · +47 22 99 36 62
+ *
+ * A `?q=` place embed resolves its query to a place and labels the pin with
+ * that place's NAME, so leading with "Rabita" is what moves the label off the
+ * street. The address stays in the query as the disambiguator — "Rabita"
+ * alone is a common enough word that the nearest match is not guaranteed to
+ * be this one.
+ *
+ * TWO THINGS TO KNOW BEFORE TOUCHING THIS.
+ *
+ * 1. IT IS BEST-EFFORT, and the map now leans on it. Resolving the query
+ *    makes Google render its own place card — name, address, 4,7 ★ (179) —
+ *    which is the only thing naming the mosque on that map since the label
+ *    plate came out of find-us-google.tsx. If a keyless embed ever fails to
+ *    resolve, it falls back to printing the query string, and the map is
+ *    left with no identity at all. Bring the plate back if that happens.
+ *
+ *    One locale caveat, observed the same day: the card's TITLE follows the
+ *    viewer's Google language. It read "Rabita" in English and "Det Islamske
+ *    forbundet" in Norwegian — both the organisation, neither the street,
+ *    which is what the client asked for. Claiming the profile (below) is
+ *    what would pin it to one name everywhere.
+ *
+ * 2. THE LISTING IS UNCLAIMED. It showed "Claim this business" on
+ *    2026-09-22, which means nobody at Rabita controls the name, hours,
+ *    phone or photos on it, and none of the 179 reviews can be replied to.
+ *    Raised with the client — claiming the Google Business Profile is free
+ *    and fixes this everywhere Google appears, not only inside our iframe.
+ */
+export const VISIT_EMBED_QUERY = `Rabita, ${VISIT.address}`;
+
 export type LandmarkKind = 'metro' | 'rail' | 'tram' | 'bus' | 'place';
 
 export type Landmark = {
@@ -50,7 +90,8 @@ export type Landmark = {
     | 'stortinget'
     | 'bussterminalen'
     | 'operahuset'
-    | 'regjeringskvartalet';
+    | 'regjeringskvartalet'
+    | 'slottet';
   kind: LandmarkKind;
   lat: number;
   lon: number;
@@ -85,6 +126,19 @@ export const LANDMARKS: readonly Landmark[] = [
   // It needs no change to the plate: at 59.9152/10.7426 it falls inside the
   // bounds the existing routes already set, so nothing rescales.
   { key: 'regjeringskvartalet', kind: 'place', lat: 59.9152, lon: 10.7426, extended: true },
+  // Slottet (client, Versjon 6, 2026-09-22): "Legg til Slottet som eget
+  // punkt/markør på kartet, i tillegg til de allerede viste (Oslo S,
+  // Stortinget, Regjeringskvartalet, osv.)"
+  //
+  // Routed like every other entry — routing.openstreetmap.de foot profile,
+  // fetched 2026-09-22: 1 808 m on foot against 1 452 m straight line, 24
+  // minutes. It is comfortably the FARTHEST thing in this list; the next is
+  // Operahuset at 1 270. That is the honest number and the list is sorted
+  // nearest-first, so it simply lands last rather than being smoothed.
+  //
+  // The marker inside the Google My Maps embed is separate from this row and
+  // has to be added in the My Maps editor — this only adds the distance.
+  { key: 'slottet', kind: 'place', lat: 59.9169, lon: 10.7275, extended: true },
 ];
 
 const R = 6_371_000;

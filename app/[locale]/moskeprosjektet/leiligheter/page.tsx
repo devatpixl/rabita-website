@@ -314,15 +314,22 @@ export default async function ApartmentsPage({
             </ol>
           </div>
 
-          {/* The closing line as a quote bar: the oversized mark, a rule,
-             the sentence. */}
-          <div className="mt-8 flex items-center gap-5 rounded-2xl bg-paper-deep/60 px-6 py-4 md:mt-10 md:px-8">
-            <span aria-hidden className="font-serif text-[2.2rem] leading-none text-gold-deep">&ldquo;</span>
-            <span aria-hidden className="h-8 w-px shrink-0 bg-gold-deep/30" />
-            <p className="font-serif text-[clamp(1.05rem,2vw,1.3rem)] italic leading-snug text-ink">
-              {t('quality.close')}
-            </p>
-          </div>
+          {/* NO CLOSING QUOTE BAR.
+             A gold-mark quote bar sat here reading "Alt dette bidrar til et
+             sosialt og inkluderende bomiljø." Client, Versjon 6
+             (2026-09-22): Fjern.
+
+             He is right to cut it. The five plates above name what is in the
+             building — moské, bibliotek, skole, uterom, takterrasser — and
+             the heading over them already says "Mer enn boliger. Et
+             nabolag." The sentence restated the heading as a conclusion the
+             reader had just drawn for themselves, set in italic quote marks
+             as though somebody had said it.
+
+             apartmentsPage.quality.close is REMOVED from all three locales
+             rather than orphaned, because a closing line is not something
+             that comes back unchanged — if he wants one it will be a new
+             sentence. */}
         </SectionBody>
       </section>
 

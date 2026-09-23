@@ -33,10 +33,13 @@ export function Footer({ map }: { map?: ReactNode }) {
 
   return (
     <footer data-print-hide className="relative isolate z-[1] bg-dusk text-paper">
-      {/* One band, three columns: the lockup with the contact ledger,
-         newsletter and follow, and the map plate on the right. Two columns
-         from sm, three from lg; below lg the map comes FIRST (see the
-         order-first note on it). */}
+      {/* One band, three columns: the lockup with the contact ledger, the
+         social row, and the map plate on the right. Two columns from sm,
+         three from lg; below lg the map comes FIRST (see the order-first
+         note on it).
+
+         The middle column carried the newsletter above the social row until
+         2026-09-23; see the note where it stood. */}
       <div className="mx-auto max-w-6xl px-5 py-8 sm:px-6 sm:py-10 md:py-16">
         <div className="grid gap-7 sm:grid-cols-2 sm:gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
@@ -80,12 +83,16 @@ export function Footer({ map }: { map?: ReactNode }) {
                window says what it is and links to the table that has the
                actual minutes, and the office gets its own row. */}
             <dl className="divide-y divide-paper/10 border-y border-paper/10 lg:mt-8 sm:space-y-4 sm:divide-y-0 sm:border-0">
-              <div className="flex items-baseline gap-3 py-2.5 sm:block sm:py-0">
-                <dt className={cn(DT, 'w-20 shrink-0 sm:w-auto')}>{t('findUs.address')}</dt>
-                <dd className="min-w-0 flex-1 text-[14px] leading-snug text-paper sm:mt-1 sm:text-body">
-                  {CAMPAIGN.visitAddress} <span className="text-paper/60">· {CAMPAIGN.visitPostal}</span>
-                </dd>
-              </div>
+              {/* ÅPENT FOR BØNN SITS ABOVE THE ADDRESS.
+                 Client, Versjon 6 (2026-09-22), under Footer: "Fajr, Duhur
+                 til Isha flytte opp." It was the second row, under the
+                 street.
+
+                 Which is the right order anyway, on the evidence we have:
+                 the strip at the top of every page now carries all six
+                 prayer times because his own congregation told him that is
+                 what people come for. The footer answering "when is it open"
+                 before "where is it" follows the same reader. */}
               <div className="flex items-baseline gap-3 py-2.5 sm:block sm:py-0">
                 <dt className={cn(DT, 'w-20 shrink-0 sm:w-auto')}>{t('findUs.hours')}</dt>
                 <dd className="min-w-0 flex-1 text-[14px] leading-snug text-paper sm:mt-1 sm:text-body">
@@ -93,6 +100,12 @@ export function Footer({ map }: { map?: ReactNode }) {
                   <Link href={p('/bonnetider')} className="whitespace-nowrap text-paper/60 underline decoration-paper/25 underline-offset-2 transition-colors hover:text-gold hover:decoration-gold">
                     {t('findUs.prayerLink')} &rarr;
                   </Link>
+                </dd>
+              </div>
+              <div className="flex items-baseline gap-3 py-2.5 sm:block sm:py-0">
+                <dt className={cn(DT, 'w-20 shrink-0 sm:w-auto')}>{t('findUs.address')}</dt>
+                <dd className="min-w-0 flex-1 text-[14px] leading-snug text-paper sm:mt-1 sm:text-body">
+                  {CAMPAIGN.visitAddress} <span className="text-paper/60">· {CAMPAIGN.visitPostal}</span>
                 </dd>
               </div>
               <div className="flex items-baseline gap-3 py-2.5 sm:hidden">
@@ -111,7 +124,18 @@ export function Footer({ map }: { map?: ReactNode }) {
               </div>
               {/* sm and up keep the two-up pair — office where the telephone
                  used to sit, so the column count is unchanged. */}
-              <div className="hidden grid-cols-2 gap-4 sm:grid">
+              {/* Office and e-mail, stacked rather than two-up from lg.
+                 They shared a row until 2026-09-23: in a column that is a
+                 third of the band, that is about 170px each, and "Weekdays
+                 10:00-14:00" needs more — it wrapped onto two lines. Side by
+                 side at sm, where the column is half the band and wide
+                 enough; stacked at lg, where it is not.
+
+                 The e-mail briefly moved to the middle column the same day
+                 and came straight back (client: "move mail back"). It reads
+                 as part of the contact register, not as a thing beside the
+                 social row. */}
+              <div className="hidden grid-cols-2 gap-4 sm:grid lg:grid-cols-1 lg:gap-5">
                 <div>
                   <dt className={DT}>{t('findUs.office')}</dt>
                   <dd className="mt-1 text-body text-paper">{t('findUs.officeHours')}</dd>
@@ -126,13 +150,65 @@ export function Footer({ map }: { map?: ReactNode }) {
                 </div>
               </div>
             </dl>
-            {/* Hidden on phones (client, 2026-08-30). Both are already
-               reachable right there: the map plate above carries "Open in
-               Google Maps", and the address sits in the register directly
-               over these. Two big buttons repeating them cost ~64px of a
-               footer that was the complaint. They return from sm, where the
-               map sits in a different column and the repetition is not one. */}
-            <div className="hidden flex-wrap gap-3 sm:mt-6 sm:flex">
+          </div>
+
+          {/* ── THE SECOND COLUMN: SOCIAL, THEN THE TWO BUTTONS ──────
+             The e-mail is NOT here. It sat here for about ten minutes on
+             2026-09-23 and went back to the register, where it belongs —
+             it is contact detail, not something that pairs with a social
+             row.
+
+             VERTICALLY CENTRED, and that is the whole point of the flex
+             (client: "bring this vertically in centre"). This column holds
+             roughly 150px of content in a band whose height is set by the
+             map plate beside it, near 380px. Left at the top it reads as a
+             column that ran out rather than one that was placed; centred,
+             its foot lands close to where the left register ends and the
+             three columns read as one object.
+
+             It replaces an lg:mt-[5.5rem] that tried to line FOLLOW US up
+             with OPEN FOR PRAYER by matching the wordmark's height. That
+             aligned the tops and left the same hole underneath. Centring
+             solves the thing the offset was aiming at.
+
+             items-center centres the three blocks on each other across
+             (client: "horizontally make both in centre, so it looks neat").
+             The discs run about 200px and the two buttons about 230, so
+             left-aligned they sat on a ragged edge. As flex children they
+             now each shrink to their own width and share one centre line,
+             and the label rides with them rather than being left behind on
+             the start edge.
+
+             The ul keeps its own sm:justify-start. That is not a conflict:
+             once the ul is shrink-to-fit there is no free space inside it
+             for justify-* to distribute, so the rule is inert here and
+             still correct at sm, where this column is left-aligned.
+
+             BOTH ONLY BITE AT lg. Below that the columns stack full width
+             and this column is left-aligned like everything beside it —
+             centring there would put it out of step with the register it
+             sits under, not in step with it. */}
+          <div className="lg:col-span-3 lg:flex lg:flex-col lg:items-center lg:justify-center">
+            {/* DT, the same mono the left register uses for OPEN FOR PRAYER
+               and ADDRESS. This was 11px at 50% against their 10px at 45%. */}
+            <h3 className={DT}>{t('cols.follow')}</h3>
+            <ul className="mt-3 flex flex-wrap justify-center gap-2.5 sm:mt-4 sm:justify-start">
+              {CHANNELS.map(({ key, href }) => (
+                <li key={key}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={t(`social.${key}`)}
+                    style={{ '--ch-ring': `rgb(${CHANNEL_RGB[key]} / 0.65)` } as CSSProperties}
+                    className="grid h-11 w-11 place-items-center rounded-full bg-paper transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:ring-2 hover:ring-[color:var(--ch-ring)]"
+                  >
+                    <ChannelMark channel={key} instance={`footer-${key}`} className="h-5 w-5" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8 hidden flex-wrap gap-3 sm:flex">
               <a
                 href={VISIT_DIRECTIONS_URL}
                 target="_blank"
@@ -151,75 +227,6 @@ export function Footer({ map }: { map?: ReactNode }) {
             </div>
           </div>
 
-          <div className="lg:col-span-3">
-            <h3 className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-paper/50">{t('newsletter.heading')}</h3>
-            <p className="mt-2 max-w-prose text-[13.5px] leading-snug text-paper/70 sm:mt-4 sm:text-[15px] sm:leading-relaxed">{t('newsletter.body')}</p>
-            <form
-              className="mt-3 flex overflow-hidden rounded-full border border-paper/25 focus-within:border-gold sm:mt-4"
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
-            >
-              <input
-                type="email"
-                required
-                placeholder={t('newsletter.placeholder')}
-                aria-label={t('newsletter.heading')}
-                className="min-h-11 w-full min-w-0 bg-transparent px-4 text-[15px] text-paper outline-none placeholder:text-paper/40"
-              />
-              <button type="submit" className="m-1 shrink-0 rounded-full bg-gold px-4 text-[14px] font-semibold text-dusk transition-colors hover:bg-paper">
-                {t('newsletter.submit')}
-              </button>
-            </form>
-
-            <h3 className="mt-5 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-paper/50 sm:mt-8">{t('cols.follow')}</h3>
-            {/* Real logos, real colours (client, 2026-09-16: "Legg inn logo
-               til alle sosiale medier nederst"), from the same glyphs the
-               home-page cards use — see social-marks.tsx.
-
-               EACH SITS ON A PAPER DISC, and that is not decoration. Two of
-               the four cannot be painted straight onto dusk #16242E and stay
-               themselves: TikTok is black with a cyan and a magenta offset,
-               and the black layer — the one carrying the note's shape —
-               disappears on a dark ground, leaving a cyan-and-magenta ghost.
-               Facebook's #1877F2 on #16242E is blue on blue. The disc is what
-               every brand guideline prescribes for a dark background: put the
-               full-colour mark on a light field rather than recolour it.
-
-               44px discs, so the tap target is the whole mark and the row
-               still clears Apple's minimum with a 20px glyph inside it.
-
-               The hover beat is the ring, in that platform's own colour, and
-               a half-step rise. The logo itself never moves or recolours —
-               a recoloured brand mark is not that brand's mark. Same rule the
-               cards follow. */}
-            {/* Centred on a phone (client, 2026-09-16), left from sm.
-               Below sm this column is the full page width, so four 44px
-               discs left-aligned left ~60% of the row empty; from sm the
-               column narrows and left is right again. */}
-            <ul className="mt-3 flex flex-wrap justify-center gap-2.5 sm:mt-4 sm:justify-start">
-              {CHANNELS.map(({ key, href }) => (
-                <li key={key}>
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={t(`social.${key}`)}
-                    style={{ '--ch-ring': `rgb(${CHANNEL_RGB[key]} / 0.65)` } as CSSProperties}
-                    className="grid h-11 w-11 place-items-center rounded-full bg-paper transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:ring-2 hover:ring-[color:var(--ch-ring)]"
-                  >
-                    <ChannelMark channel={key} instance={`footer-${key}`} className="h-5 w-5" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* order-first below lg (client, 2026-08-30): the map used to be the
-             last thing in a footer that already runs long on a phone, so the
-             one panel that answers "where is this place" sat behind three
-             screens of scroll. At lg the three columns sit side by side and
-             the natural order is right again. */}
           <div className="order-first sm:col-span-2 lg:order-none lg:col-span-5">
             {/* The same Google map as Leiligheter, since 2026-09-15 ("also
                show here in the footer without increating size of footer, it
@@ -281,7 +288,21 @@ export function Footer({ map }: { map?: ReactNode }) {
          for it to leave this bar (2026-08-30) — it needs a home, e.g. the
          consent banner. */}
       <div className="border-t border-paper/12">
-        <div className="mx-auto grid max-w-6xl items-center gap-y-2 px-5 py-3 sm:grid-cols-3 sm:gap-y-3 sm:px-6 sm:py-5">
+        {/* ── ROOM FOR THE FLOATING BUTTON, PHONES ONLY ───────────────────
+           Client, 2026-09-23: scrolled to the very bottom on a phone, the
+           org.nr line sat under the "Questions?" button. That button is
+           fixed at bottom-5 (20px) and about 48px tall, so the bottom ~68px
+           of every viewport is spoken for — and on a phone this bar is the
+           last thing on the page, with 12px under it. He asked for the fix
+           without moving the button, so the bar gets the room instead:
+           5rem of bottom padding plus the safe-area inset, which means at
+           full scroll the last line sits clear ABOVE the button rather than
+           behind it. Measured on a 390x844: the credit line ends 15px above
+           the button's top edge; at 4.5rem it was 7, which is clear but
+           reads as touching. sm:pb-5 hands the old padding back from sm, where the
+           bar is three columns wide and the button only ever overlaps empty
+           ground on its right. */}
+        <div className="mx-auto grid max-w-6xl items-center gap-y-2 px-5 py-3 pb-[calc(5rem+env(safe-area-inset-bottom))] sm:grid-cols-3 sm:gap-y-3 sm:px-6 sm:py-5 sm:pb-5">
           <p className="text-center font-mono text-[0.625rem] uppercase leading-none tracking-[0.16em] text-gold sm:text-start">
             &copy; {new Date().getFullYear()} Rabita · {t('orgNr')} {CAMPAIGN.orgNr}
           </p>

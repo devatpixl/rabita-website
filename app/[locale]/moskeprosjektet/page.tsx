@@ -55,11 +55,29 @@ export default async function ProjectPage({
         aside={
           // The whole giving flow, in place: amounts, details, payment, all
           // inside the hero card, earmarked for the building.
-          <div className="overflow-hidden rounded-2xl border border-paper/15 bg-paper text-ink shadow-[0_24px_60px_-28px_rgba(0,0,0,0.6)]">
-            <p className="flex items-center gap-2 border-b border-rule bg-paper-2 px-6 py-2.5 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-gold-deep">
-              <span aria-hidden className="inline-block h-1.5 w-1.5 rotate-45 bg-gold-deep" />
-              {t('giveBox.eyebrow')}
-            </p>
+          <div className="overflow-hidden rounded-2xl border border-gold/30 bg-paper text-ink shadow-[0_24px_60px_-28px_rgba(0,0,0,0.6)]">
+            {/* ── NO EARMARK BAR ────────────────────────────────────────
+               A gold strip reading "◆ TIL MOSKEPROSJEKTET · ØREMERKET" sat
+               here until 2026-09-22. Client, Versjon 6: "Fjern hele og
+               kopier fra hovedssiden selve doneringsskjemaet" — remove the
+               whole thing and copy the home page's donation form. The
+               WIDGET was already his (see the note below); the bar was the
+               only thing this page had that the home page does not, so the
+               bar is what "hele" means.
+
+               It also had to go on its own merits: it was no longer true.
+               The same client asked in Tekst (endelig) for this page to use
+               the home page's widget rather than an earmarked variant, so
+               purpose="building" was removed and gifts made here are
+               recorded exactly like any other. The bar went on promising
+               they were earmarked. A false claim about where someone's
+               money goes is not a styling detail.
+
+               The border moves from paper/15 to gold/30 to match the home
+               page's card, which is the rest of "kopier fra hovedsiden".
+
+               projectPage.giveBox.eyebrow stays in all three locales,
+               unreferenced. */}
             {/* NO purpose (client, Tekst (endelig) Sept 2026): "Bruk
                akkurat samme donasjonswidget som på hovedsiden — IKKE en
                øremerket variant spesifikt for moskeprosjektet." It ran
@@ -220,7 +238,7 @@ export default async function ProjectPage({
               unit?: string;
               muted?: boolean;
             }[] = [
-              { key: 'building', icon: 'building', value: nf.format(CAMPAIGN.buildingM2), unit: 'm²' },
+              { key: 'building', icon: 'building', value: `${nf.format(CAMPAIGN.buildingM2)}+`, unit: 'm²' },
               // SEVEN, not "6 + U1" (client, 2026-09-15). Derived, not typed:
               // it is the same two constants added up, so the figure cannot
               // drift from the drawings. This also ENDS A CONTRADICTION the
@@ -267,7 +285,7 @@ export default async function ProjectPage({
             // lines and align as per modern way the texts and figures". The
             // hairline between registers and the leader dash from each label
             // are both gone from md up. Losing the leader cost the figures
-            // their anchor — flush right, "5 745 m²" and "2 500 people" put
+            // their anchor — flush right, "6 000+ m²" and "2 500 people" put
             // their numerals 80px apart — and the card is only ~229px of
             // content wide, too narrow to give the figures their own column
             // beside a label as long as "Construction time". So the pair

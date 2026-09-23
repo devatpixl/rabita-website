@@ -119,12 +119,26 @@ export async function FollowUs() {
                   {t(`channels.${key}.handle`)}
                 </p>
 
-                <p className="mt-4 text-[0.9rem] leading-snug text-ink-60">
-                  {t(`channels.${key}.blurb`)}
-                </p>
+                {/* NO DESCRIBING LINE UNDER THE MARK.
+                   Client, Versjon 6 (2026-09-22), under Hovedsiden: "Fjerne
+                   teksten fra hver logo altså den lille teksten som
+                   beskriver." These four cards are the only logos on the
+                   home page that carried one — the partner row on /om-oss
+                   has never had captions — so this is the text he means.
 
-                {/* mt-auto so the action sits on one line across all three
-                   cards however long the blurb above it runs. */}
+                   It read "Bilder fra huset, hver uke", "Arrangementer og
+                   kunngjøringer" and so on. The strings are still in all
+                   three locales under followUs.channels.<key>.blurb, unused;
+                   restoring the line is this paragraph back.
+
+                   He is right that it was doing little. The mark says which
+                   platform it is and the handle says which account — what
+                   Instagram is for is not something a visitor needs told. */}
+
+                {/* mt-auto so the action sits on one line across all four
+                   cards. With the blurb gone they are the same height by
+                   construction, but the rule still holds if one channel's
+                   name ever wraps and another's does not. */}
                 <span className="mt-auto flex items-center gap-2 pt-6 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-gold-deep">
                   {t('action')}
                   <span

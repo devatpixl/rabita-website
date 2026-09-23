@@ -109,15 +109,20 @@ export const IMAMS: readonly Imam[] = [
     // Client, Bildeplassering (2026-09-19), Usman.png. Same treatment: a
     // tight head-and-shoulders square at 800px.
     photo: '/photos/imams/usman-minbar.webp',
-    languages: [
-      'norwegian',
-      'english',
-      'arabicSimple',
-      'urdu',
-      'persianSome',
-      'italian',
-      'french',
-      'latin',
-    ],
+    // SIX, not eight. Client, Versjon 6 (2026-09-22), under Bønnetider:
+    // "Fjern arabisk, persisk (basis)" — drop the two that carried the
+    // qualifier. They rendered as "Arabisk (basis)" and "Persisk (basis)",
+    // which is how he names them here.
+    //
+    // It also reads better. An imam's card listing basic Arabic invites the
+    // wrong question in a mosque where two other imams speak it natively,
+    // and the qualifier was doing the opposite of what a staff page should:
+    // it made the longest list on the page the least confident one.
+    //
+    // His own list from 2026-09-15 is what is being trimmed, so this is him
+    // revising himself, not us dropping something he gave us. The keys
+    // 'arabicSimple' and 'persianSome' stay in LangKey and in all three
+    // locales, now unused — putting either back is one line in this array.
+    languages: ['norwegian', 'english', 'urdu', 'italian', 'french', 'latin'],
   },
 ];

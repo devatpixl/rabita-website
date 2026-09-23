@@ -64,7 +64,18 @@ export const CAMPAIGN = Object.freeze({
   mensPrayerCapacityAfter: 2_000,
 
   // Building — §10
-  buildingM2: 5_745, // client, Hjem.pdf 2026-09-09 (was 6 762)
+  // Client, Versjon 6 (2026-09-22): "Endre fra 5 745 til 6000 samlet areal"
+  // and, in the same list, "6000 + istedenfor 5745". So the figure is 6 000
+  // and it is written with a PLUS wherever it is set as a number — the two
+  // call sites below append it, they do not carry their own number.
+  //
+  // His word is "samlet areal", total area. The site had been using this one
+  // figure for both the total area and the PLOT ("TOMT · 5 745 M²"), which
+  // are not the same thing, and he has not given a separate plot size.
+  // Flagged to him; until he splits them, one figure serves both, as before.
+  //
+  // Was 5 745 (client, Hjem.pdf 2026-09-09), and 6 762 before that.
+  buildingM2: 6_000,
   floorsAbove: 6,
   // One basement, not two (client, Hjem.pdf 2026-09-09: "6 etasjer + U1").
   // It also settles a contradiction: the architect's floor drawings run
@@ -172,8 +183,8 @@ export const SUB_CAMPAIGN = Object.freeze({
 // ── CONVERTED FROM EURO 2026-09-18, ON THE CLIENT'S INSTRUCTION ──────────
 // "Faser: Legge inn riktig valuta så kroner." The brochure figures are, and
 // always were, genuine EURO — not kroner that had been mislabelled. The
-// arithmetic settles it: 24.53M € over the building's 5 745 m² is about
-// 50 000 NOK/m² at any plausible rate, which is ordinary Oslo commercial
+// arithmetic settles it: 24.53M € over the building's 6 000 m² is about
+// 49 000 NOK/m² at any plausible rate, which is ordinary Oslo commercial
 // construction. Read as kroner the same figures give 4 270 NOK/m², roughly a
 // tenth of what it costs to build anything here. So this is a conversion, not
 // a correction of a labelling mistake.
@@ -237,10 +248,34 @@ export const SUB_CAMPAIGN = Object.freeze({
 // two views of one figure any more and must not be converted into each
 // other — which is exactly what fremdrift.goalNote tells the reader.
 export const PROJECT_PHASES = Object.freeze([
-  { n: 1, from: 2019, to: 2024, key: 'planning' as const, eur: 602_000, nok: 7_400_000 },
-  { n: 2, from: 2025, to: 2025, key: 'demolition' as const, eur: 946_000, nok: 12_000_000 },
-  { n: 3, from: null, to: null, key: 'fundament' as const, eur: 9_632_000, nok: 100_000_000 },
-  { n: 4, from: null, to: null, key: 'interior' as const, eur: 6_450_000, nok: 136_000_000 },
+  // ── THE EURO FIGURES ARE ROUNDED, THE KRONER ARE NOT ───────────────────
+  // Client, Versjon 6 (2026-09-22): "Rund opp til runde tall (Euro på
+  // engelsk)." The euro column is what the English and Arabic pages print
+  // (see components/progress-phases.tsx), and two of the five read as
+  // conversion arithmetic rather than as a budget: 946 000 and 9 632 000.
+  //
+  //   602 000  ->    600 000
+  //   946 000  ->    950 000
+  // 9 632 000  ->  9 600 000
+  // 6 450 000  ->  6 500 000
+  // 6 900 000  ->  6 900 000   (already round)
+  //
+  // Nearest 50 000, not strictly upward: "rund opp til runde tall" puts the
+  // weight on ROUND, and rounding 602 000 up to a genuinely round number
+  // means 650 000 — an 8% overstatement of what a phase cost, on a page
+  // asking people for money. Two of the five move down by less than half a
+  // percent; nothing moves by more than 0.8%.
+  //
+  // TOTAL_BUILD_COST_EUR is summed from this list, so the total follows on
+  // its own: 24 530 000 -> 24 550 000.
+  //
+  // THE KRONER ARE UNTOUCHED. They are already round, they are his own
+  // stated figures rather than conversions of these, and he asked only
+  // about the euro.
+  { n: 1, from: 2019, to: 2024, key: 'planning' as const, eur: 600_000, nok: 7_400_000 },
+  { n: 2, from: 2025, to: 2025, key: 'demolition' as const, eur: 950_000, nok: 12_000_000 },
+  { n: 3, from: null, to: null, key: 'fundament' as const, eur: 9_600_000, nok: 100_000_000 },
+  { n: 4, from: null, to: null, key: 'interior' as const, eur: 6_500_000, nok: 136_000_000 },
   { n: 5, from: null, to: null, key: 'ferdigstillelse' as const, eur: 6_900_000, nok: 44_000_000 },
 ]);
 
@@ -314,7 +349,34 @@ export const FOUNDATION_WALL_THRESHOLD_NOK = 10_000;
 // 500 stays RECOMMENDED and DEFAULT: it is the third rung in the new ladder
 // instead of the second, which makes the highlighted box an upsell from the
 // two beneath it rather than the midpoint. That is deliberate.
-export const AMOUNT_PRESETS = [150, 300, 500, 1_500] as const;
+// ── THE DONATION BOX, NAMED ───────────────────────────────────────────────
+// Client, Versjon 6 (2026-09-22): "Vi trenger å endre donasjonsboksen:
+// Legg inn murstein på 100,- / Legg inn lys/lampe på 300,- / Legg inn Koran
+// på 500,- / Legg inn teppe 1000,-"
+//
+// So the four boxes stop being bare sums and become four things the building
+// actually needs. 150 and 1 500 are gone; 100 and 1 000 take their places,
+// and 300 and 500 keep theirs and gain a name.
+//
+// He wrote "lys/lampe" — light/lamp. Rendered as the lamp, because a light
+// FITTING is a thing the building has a countable number of and a "light" is
+// not. Two words to change if he meant a candle.
+//
+// The names live in messages under giving.presetGifts.<key>, not here: they
+// are copy in three languages, and this file holds figures. The map below is
+// the join between them, and it is keyed by AMOUNT — so changing an amount
+// here without changing its key leaves the tile unlabelled rather than
+// mislabelled, which is the failure worth having.
+export const AMOUNT_PRESETS = [100, 300, 500, 1_000] as const;
+
+export const PRESET_GIFT_KEYS: Readonly<Record<number, 'brick' | 'lamp' | 'quran' | 'carpet'>> =
+  Object.freeze({
+    100: 'brick',
+    300: 'lamp',
+    500: 'quran',
+    1_000: 'carpet',
+  });
+
 export const RECOMMENDED_AMOUNT: (typeof AMOUNT_PRESETS)[number] = 500;
 export const DEFAULT_AMOUNT: (typeof AMOUNT_PRESETS)[number] = 500;
 export const DEFAULT_FREQUENCY: 'monthly' | 'once' = 'monthly';

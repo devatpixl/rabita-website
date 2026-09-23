@@ -44,8 +44,36 @@ export function NewsletterBand() {
   const tf = useTranslations('footer.newsletter');
   const [done, setDone] = useState(false);
 
+  // ── SMALLER SINCE 2026-09-22 ──────────────────────────────────────
+  // Client, Versjon 6, under Footer: "Fiks nyhetsbrev en del av footer,
+  // men gjør selve nyhetsbrev seksjonen mindre."
+  //
+  // So the newsletter STAYS in the footer — it was never leaving — and
+  // this standalone band, which he did not ask for and then asked to
+  // keep, stops behaving like a major section. 56/80px of padding down
+  // to 40/56, and the display heading down from a 3.25rem cap to
+  // 2.25rem, which is the size the page's own section headings run at
+  // rather than a hero's.
+  //
+  // "→ endre teksten" is the other half of that line, and it IS done as of
+  // 2026-09-23. He never said what the copy should become — he wrote the old
+  // wording himself in Tekst (endelig) and then asked for it changed — so
+  // this is our proposal, and he judges it.
+  //
+  // WHAT CHANGED AND WHY. "Hold deg oppdatert" would sit unaltered on any
+  // website in Norway; "Følg byggingen" could only sit on this one, and it
+  // names the single thing worth subscribing for — one of Europe's largest
+  // new mosques going up in central Oslo, currently in the foundation phase.
+  // "rett i innboksen" went because it is dead words, which also shortens
+  // the line to suit a band that just dropped from hero size to section size.
+  // The <em> accent moved off "oppdatert", a filler word, onto "byggingen".
+  //
+  // NO FREQUENCY PROMISE, deliberately. "Noen få e-poster i året" is the line
+  // that answers the real objection and it converts, but nobody has told us
+  // how often Rabita actually sends. A cadence we promise and they break is
+  // worse than none. Add it the day he gives a real number.
   return (
-    <section className="star-texture relative isolate overflow-hidden bg-dusk py-14 text-paper md:py-20">
+    <section className="star-texture relative isolate overflow-hidden bg-dusk py-10 text-paper md:py-14">
       {/* NO SEPARATE WATERMARK. The first draft floated an oversized
          rabita-mark in the corner at 4%; .star-texture already tiles that
          same mark across the whole band as its ground, so it was the same
@@ -57,16 +85,16 @@ export function NewsletterBand() {
          into flow as a 384px block and pushed the content to the bottom of
          a 708px section. Worth knowing before putting anything else
          absolutely positioned directly inside a .star-texture element. */}
-      <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 lg:grid-cols-12 lg:gap-16">
+      <div className="mx-auto grid max-w-6xl items-center gap-7 px-6 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-7">
           <p className="flex items-center gap-3 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
             <span aria-hidden className="h-px w-6 shrink-0 bg-gold/50" />
             {t('eyebrow')}
           </p>
-          <h2 className="mt-4 max-w-[16ch] font-serif text-[clamp(2rem,4vw,3.25rem)] leading-[1.04] tracking-[-0.02em] text-balance text-paper">
+          <h2 className="mt-3 max-w-[20ch] font-serif text-[clamp(1.5rem,2.6vw,2.25rem)] leading-[1.08] tracking-[-0.015em] text-balance text-paper">
             {t.rich('heading', { em: (chunks) => <Accent surface="dusk">{chunks}</Accent> })}
           </h2>
-          <p className="mt-5 max-w-[46ch] text-body text-paper/70">{t('body')}</p>
+          <p className="mt-3 max-w-[52ch] text-[15px] leading-snug text-paper/70">{t('body')}</p>
         </div>
 
         {/* The form sits in its own column from lg and under the words below
@@ -96,7 +124,23 @@ export function NewsletterBand() {
                 required
                 placeholder={tf('placeholder')}
                 aria-label={t('eyebrow')}
-                className="w-full min-w-0 bg-transparent px-6 text-[15px] text-paper outline-none placeholder:text-paper/40"
+                // NO OUTLINE HERE — and the wrapper is why it is safe.
+                //
+                // Client, Versjon 6 (2026-09-22): "Fjern den røde streken når
+                // du holder musen over innskrivningsboksen." The red line is
+                // OUR focus ring, not a browser default. globals.css draws
+                // `outline: 2px solid #b4381f` on every focused control; this
+                // form is `overflow-hidden rounded-full`, so three sides of
+                // that rectangle are clipped away and the only segment left
+                // is its RIGHT edge — a 2px red bar standing between the
+                // field and the button, which is exactly what he described
+                // and reads as a rendering fault rather than a focus state.
+                //
+                // Focus is still plainly visible: the form carries
+                // `focus-within:border-gold`, so the whole pill turns gold
+                // the moment the field is entered. Removing the outline
+                // leaves the indicator intact — it does not remove one.
+                className="w-full min-w-0 bg-transparent px-6 text-[15px] text-paper outline-none focus-visible:outline-none placeholder:text-paper/40"
               />
               <button
                 type="submit"

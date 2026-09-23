@@ -236,20 +236,33 @@ export function NavBar() {
               initial={reduced ? false : { opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.14, ease: WORDMARK_EASE }}
-              /* display-opsz + tracking (client, 2026-09-16: "vurdere en
-                 finere skrifttype"). Nothing here changed face: this is the
-                 same Fraunces, on the optical-size axis the rest of the site
-                 already rides. globals.css has carried `.display-opsz`
-                 (opsz 144) since the hero was built, and every headline and
-                 section opener uses it — but the wordmark never did, so the
-                 one piece of type that signs the site was rendering at
-                 Fraunces' DEFAULT low optical size: the chunky, low-contrast
-                 text grade. That is why it read coarser than the page under
-                 it. At opsz 144 the hairlines thin and the contrast opens.
-                 A wordmark also wants air between its letters; at default
-                 tracking 19px Fraunces reads as a sentence rather than a
-                 mark. Both cost zero height. */
-              className="display-opsz font-serif text-[15px] font-medium leading-[1.12] tracking-[0.015em] md:text-[19px] lg:text-[22px]"
+              /* NO display-opsz, NO extra tracking — the wordmark renders
+                 exactly as the footer's does (client, 2026-09-23, in English:
+                 "The font in the navbar same as the footer check the right
+                 side of the logo in the navbar").
+
+                 THIS REVERSES 2026-09-16. That day, on "vurdere en finere
+                 skrifttype", this line was moved onto Fraunces' display
+                 optical size (globals.css `.display-opsz`, opsz 144) and given
+                 0.015em of tracking. The reasoning still holds in the
+                 abstract — opsz 144 thins the hairlines and opens the
+                 contrast, which is the cut every headline on this site uses.
+                 What it missed is that the FOOTER wordmark never moved with
+                 it. So the one mark that signs the site was rendering two
+                 different ways on the same page, and he has now noticed.
+
+                 Unified downward rather than upward on his wording: he said
+                 navbar same as FOOTER, and he asked only to "consider" the
+                 finer cut a week ago. It is also the safer direction — this
+                 line is 15px on a phone, and globals.css itself warns that
+                 Fraunces at opsz 144 "would read too thin" below display
+                 sizes. 15px is well below.
+
+                 To go the other way instead, put `display-opsz` back here and
+                 add it to the two footer wordmarks (components/footer.tsx,
+                 the header mark and the bottom-bar mark). Both must move
+                 together or this bug returns. */
+              className="font-serif text-[15px] font-medium leading-[1.12] md:text-[19px] lg:text-[22px]"
             >
               {t('orgName')}
             </motion.span>

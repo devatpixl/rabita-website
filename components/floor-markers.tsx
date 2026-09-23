@@ -192,7 +192,22 @@ function Chip({
     <button
       type="button"
       onClick={onClick}
-      style={{ ...style, cursor: 'pointer', pointerEvents: 'auto', font: 'inherit' }}
+      // ORDER MATTERS, and it was wrong until 2026-09-23. `font` is a
+      // SHORTHAND: set after the spread it reset fontSize and fontFamily to
+      // their inherited values, so every clickable chip rendered at 16 user
+      // units in Inter instead of LABEL_TYPE in the mono face. At a 390px
+      // phone the pane is 331 wide, a scale of 0.263, which put those names
+      // at about 4px. It had that shape on every floor, and since canOpen()
+      // is true for nearly every room, nearly every phone label was affected.
+      //
+      // It is also why raising LABEL_TYPE from 34 to 46 on 2026-09-14 did not
+      // answer the client's "some labels are too small... its tiny now": the
+      // constant never reached a chip that could be opened. The span branch
+      // below was always correct, which is why this survived a look.
+      //
+      // `font: 'inherit'` still goes in — it is what clears the UA button
+      // font — but FIRST, so the explicit values that follow win.
+      style={{ font: 'inherit', ...style, cursor: 'pointer', pointerEvents: 'auto' }}
     >
       {inner}
     </button>

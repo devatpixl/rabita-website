@@ -142,7 +142,7 @@ export function GivingSheet() {
       aria-labelledby="giving-sheet-title"
       className="w-full max-w-lg overflow-hidden rounded-2xl border border-rule/60 bg-paper shadow-[0_2px_6px_rgba(0,0,0,0.06),0_24px_60px_-24px_rgba(0,0,0,0.45)]"
     >
-      <div className="border-b border-rule bg-paper px-6 py-4 flex items-center justify-between">
+      <div className="border-b border-rule bg-paper px-6 py-3 flex items-center justify-between">
         <h2 id="giving-sheet-title" className="text-card font-serif">
           {purpose === 'building' ? t('sheetTitleBuilding') : t('sheetTitle')}
         </h2>
@@ -155,8 +155,32 @@ export function GivingSheet() {
           <CloseIcon className="h-5 w-5" />
         </button>
       </div>
-      <div className="max-h-[80vh] overflow-y-auto">
-        <GivingCard onSubmit={handleSubmit} initialAmount={initialAmount} />
+      {/* ── FITS ONE SCREEN ─────────────────────────────────────────────
+         Client, 2026-09-23: "make them compact vertically so it fills in one
+         screen, no need to scroll it. Don't ruin the card."
+
+         Two things were wrong, and neither was the card.
+
+         1. `fit` was never passed. GivingCard has carried a viewport-HEIGHT
+            ladder since 2026-09-18 (see FIT in giving-card.tsx) — padding,
+            gaps, tile heights and one type step, tuned for exactly this,
+            removing nothing — and the homepage hero turns it on. This sheet
+            did not, so the roomiest version of the card sat inside a box
+            it could not fit, on every laptop the client uses.
+
+         2. The box was max-h-[80vh]. On a 13" MacBook that is ~690px, and
+            the un-fitted card alone is ~700. So it scrolled. The cap is now
+            the viewport less this sheet's own title bar and enough margin
+            for the dialog to float — which on a short screen is more room
+            than 80vh, not less — and overflow-y-auto stays only as the
+            safety net for a genuinely tiny window. With fit on, nothing
+            reaches it on a laptop.
+
+         100vh, not dvh/svh: the dialog reset in globals.css already sizes
+         the dialog itself in vh, and this only matters on desktop, where
+         the two agree. */}
+      <div className="max-h-[calc(100vh-7rem)] overflow-y-auto">
+        <GivingCard onSubmit={handleSubmit} initialAmount={initialAmount} fit />
       </div>
     </dialog>
   );

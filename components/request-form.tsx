@@ -195,10 +195,10 @@ export function RequestForm({
   /** Serif title set inside the form, above the first rule. */
   heading?: string;
   /**
-   * Drops the optional "preferred time" field. For layouts that must fit a
-   * screen — the service spread — where an optional field is the first thing
-   * worth ~80px. The field still posts as an empty string, so the API
-   * contract is unchanged.
+   * Tightens the form for layouts that must fit a screen — the service
+   * spread. It used to be the flag that dropped the optional "preferred
+   * time" field; that field is gone for everyone since 2026-09-22 (see the
+   * note where it rendered), so this now only governs spacing.
    */
   compact?: boolean;
   /** Raised paper card, for when the form sits on a tinted ground.
@@ -236,7 +236,6 @@ export function RequestForm({
   const [name, setName] = useState('');
   const [contact, setContact] = useState('');
   const [notes, setNotes] = useState('');
-  const [preferred, setPreferred] = useState('');
   const [bedrooms, setBedrooms] = useState<string>('');
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
@@ -268,7 +267,7 @@ export function RequestForm({
           name,
           contact,
           notes,
-          preferred: subject === 'apartments' && bedrooms ? `${bedrooms} ${t('bedroomsUnit')}` : preferred,
+          preferred: subject === 'apartments' && bedrooms ? `${bedrooms} ${t('bedroomsUnit')}` : '',
         }),
       });
       // The route answers 400 on a zod failure. Neither the status nor the
@@ -415,20 +414,22 @@ export function RequestForm({
         </div>
       )}
 
-      {/* "Preferred time" is for bookings; an apartment enquiry has none, and
-         a one-screen layout has no room for an optional one. */}
-      {subject !== 'apartments' && !compact && (
-        <div className="mt-4">
-          <Field id={`${uid}-preferred`} label={t('preferred')} icon="calendar" tone={tone} card={card}>
-            <input
-              id={`${uid}-preferred`}
-              value={preferred}
-              onChange={(e) => setPreferred(e.target.value)}
-              className={cn(VALUE, c.value)}
-            />
-          </Field>
-        </div>
-      )}
+      {/* ── NO "ØNSKET TID" FIELD ─────────────────────────────────────
+         Client, Versjon 6 (2026-09-22), twice — under Tjenester ("Fjern
+         ønsket tid på kontaktskjema") and again under Kontaktskjema ("Fjern
+         ønsket tid" / "Slå sammen ønsket tid og din melding").
+
+         It was an optional free-text line asking when suits you, sitting
+         between the contact details and the message. The merge he asks for
+         is already most of the way done: the per-subject hint under "Din
+         melding" asks for the date wherever a date is the point — nikah
+         ("planlagt dato"), hajj-umrah ("planlagt tid"), veivisere ("ønsket
+         dato"), leiligheter ("når ønsker du å flytte inn"). Three hints that
+         needed it have gained the clause; see messages requestForm.notes.
+
+         requestForm.preferred stays in all three locales, unused. The API
+         field is .optional().default(''), so nothing downstream changes —
+         an apartments enquiry still posts the bedroom count through it. */}
 
       <div className="mt-4">
         {/* The per-subject sentence — "Tell us briefly about the planned date

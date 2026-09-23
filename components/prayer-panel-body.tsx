@@ -6,6 +6,8 @@ import { useLocale, useTranslations } from 'next-intl';
 import type { PrayerDay } from '@/lib/prayer-times';
 import type { AppLocale } from '@/i18n/routing';
 import { cn } from '@/lib/cn';
+import { hijriDate } from '@/lib/hijri';
+import { VISIT } from '@/lib/location';
 import { PRAYER_PANEL_ID } from './prayer-panel-provider';
 import { joinJumuah, usePrayerData, usePrayerDay, usePrayerDayAfter } from './prayer-data-provider';
 
@@ -103,6 +105,12 @@ export function PrayerPanelBody() {
 
   const nextKey = info?.nextKey ?? null;
 
+  // Moved here from the utility strip on 2026-09-22, when the strip gave its
+  // width to all six prayer times. A Hijri date is something you read once,
+  // not something you arrive for, so it belongs behind the chevron with the
+  // rest of the detail rather than in front of the times.
+  const hijri = useMemo(() => (now ? hijriDate(locale, now) : ''), [locale, now]);
+
   return (
     <div
       ref={regionRef}
@@ -168,11 +176,21 @@ export function PrayerPanelBody() {
 
         {/* Footer row — Jumu'ah + venue left, full-week link right. */}
         <div className="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+          {/* THE ADDRESS IS THE TEMPORARY ONE, and that is not a detail.
+             This line read "Calmeyers gate 8" until 2026-09-22, which is the
+             building site. Client, Tekst (endelig): "Footer-kartet skal vise
+             Sørligata 8a (der menigheten holder til midlertidig i dag) —
+             IKKE Calmeyers gate 8." His rule was written about the footer
+             map, but the reason behind it applies here with more force:
+             anything printed beside a prayer time is read by somebody
+             working out where to be at 19:22. Sending them to a hole in the
+             ground is the one mistake this panel must not make. */}
           <p className="text-[14px] text-ink-60">
             <span className="tabular-nums">
               {t('names.jumua')} {joinJumuah(jumuah)}
             </span>
-            <span> · Calmeyers gate 8</span>
+            <span> · {VISIT.address}</span>
+            {hijri && <span className="tabular-nums"> · {hijri}</span>}
           </p>
           <Link
             href={`/${locale}/bonnetider`}

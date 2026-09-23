@@ -212,6 +212,7 @@ export async function PartnerLogos({ locale }: { locale: string }) {
           </ul>
         ))}
       </div>
+
     </section>
   );
 }

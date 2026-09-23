@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { AnnualReports } from '@/components/annual-reports';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
@@ -8,6 +7,7 @@ import { Section, SectionBody } from '@/components/primitives';
 import { PageBand } from '@/components/page-band';
 import { FigureIcon, type FigureIconName } from '@/components/figure-icons';
 import { PartnerLogos } from '@/components/partner-logos';
+import { HallBackdrop, HALL_HOST } from '@/components/hall-backdrop';
 import { RequestForm } from '@/components/request-form';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -118,15 +118,55 @@ export default async function AboutPage({
          The ledger card is NOT here (client, 2026-09-17: "remove these
          cards"). The four figures it held get their own band below, where
          they can be a hierarchy instead of a 2x2 table. */}
-      <section className="relative isolate overflow-hidden bg-sage">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -top-24 end-[4%] -z-10 h-[34rem] w-[34rem] rounded-full bg-gold/[0.07] blur-3xl"
+      {/* ══ ONE ARCADE BEHIND THE STORY AND THE VISIT ═════════════════════
+         Client, 2026-09-23: carry the background into the visit section too,
+         "like we did in service pages", and fix the hard edge at the top.
+
+         Both are one fix. What stood here was a hand-rolled copy of
+         /aktuelt's treatment — an absolutely positioned Image, a
+         bg-paper/55 wash and two `to-transparent` gradients — living inside
+         the story section alone. Two faults:
+
+           1. IT STOPPED AT THE STORY. The visit section below started on
+              flat paper-2, so the page went arcade, then nothing, and the
+              join read as two unrelated grounds.
+           2. THE SEAMS DIRTIED. Tailwind's `to-transparent` is
+              rgba(0,0,0,0), so a fade to it interpolates THROUGH GREY —
+              which on a warm near-white ground is exactly the hard, muddy
+              line in his screenshot. components/hall-backdrop.tsx documents
+              this and fades to an explicit rgba of the ground instead.
+
+         So this is HallBackdrop, the component the subject pages already
+         use, spanning both sections — the pattern he pointed at. It brings
+         the sticky parallax the hand-rolled version never had, and its seams
+         are the explicit-rgba kind.
+
+         `from` is paper-2 rather than the component's paper default, because
+         that is the ground these two sections stand on. wash 55 matches
+         /aktuelt; the subject pages run 62 because their prose is denser. */}
+      {/* bg-paper-2 on the HOST, not on the sections. Both of them are
+         transparent now so the one backdrop shows through, which means that
+         if the photograph ever fails they would fall through to the page's
+         own paper. Naming the ground here keeps it paper-2 either way. */}
+      <div className={`${HALL_HOST} bg-paper-2`}>
+        {/* THE GRADE IS NOT OPTIONAL HERE, and this cost a build to learn.
+           HallBackdrop paints the photograph raw and washes it with
+           rgba(250,248,244,wash). The file is a near-white cream wall, so at
+           wash 62 the result was near-white on near-white: the sticky layer
+           was present, loaded and covering the viewport, and NOTHING was
+           visible — the contact section looked like plain paper.
+
+           /aktuelt has always graded it: saturate(0.72) contrast(1.12)
+           brightness(0.9). That is what makes the arch, the lantern and the
+           olive branch read at all. Passed here, with the wash back to
+           /aktuelt's 55. */}
+        <HallBackdrop
+          wash={55}
+          from="rgb(242,238,231)"
+          grade="saturate(0.72) contrast(1.12) brightness(0.9)"
         />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-paper to-sage md:h-40"
-        />
+
+      <section className="relative">
         <div className="pb-14 pt-9 md:pb-24 md:pt-section-lg">
           <SectionBody>
             {/* ── TWO COLUMNS, 7 AND 5 ─────────────────────────────────
@@ -145,137 +185,102 @@ export default async function AboutPage({
                asked to keep: "maybe remove these cards in about us 1 and
                then keep this to keep it aesthetic". The cards are what went;
                the arch is what stayed. */}
-            <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-14">
-              {/* ── the story ──────────────────────────────────────── */}
-              <div className="lg:col-span-7">
-                {/* THE SECTION MARKER (client, 2026-09-17: "can we have
-                   another proper heading here ... this line looks bad").
+            {/* ── NO ARCH, AND NO COLUMN FOR IT ────────────────────────
+               Client, 2026-09-23: "just remove this then", pointing at the
+               arch and its quote.
 
-                   It was a pill chip followed by a hairline stretching five
-                   hundred pixels to nowhere — two devices doing one job, and
-                   the rule in particular had nothing to join. A rule that
-                   ends in empty space is a rule that is only there to fill
-                   it, which is the same fault as the empty column was.
+               It had been through two rounds. The first version of this
+               section ran the story in one narrow column with the right side
+               empty — "i dont like it at all, looks very old school ...
+               something should be on right" — so the arch came back to
+               anchor that side. Versjon 6 then asked for the text to be
+               pulled out to the full section, which left the arch beside a
+               heading rather than beside prose, and a gap above the columns
+               that he did not like either.
 
-                   What replaces it is two things this site already owns: a
-                   short gold rule, exactly the one set above the quote in the
-                   arch beside this, and the gold mono label used as the
-                   eyebrow on every other section of the site
-                   (annual-reports, the partner strip, the imams on
-                   /bonnetider). Stacked, they are also precisely how
-                   islamic.no marks its sections — the one detail of theirs
-                   worth taking.
+               The arcade photograph behind the section does the job the arch
+               was doing: it keeps the ground from reading as empty, and it
+               does it across the whole width instead of in one column. With
+               that there, the arch is a second decoration competing with it.
 
-                   His text is unchanged: still aboutPage.historyChip. */}
-                <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
-                  <span aria-hidden className="mb-5 block h-px w-10 bg-gold-deep/50" />
-                  {t('historyChip')}
-                </p>
+               WHAT WENT WITH IT: the 7/5 grid, /photos/arch-light.jpg (still
+               in the project, used nowhere else), and aboutPage.quote in all
+               three locales — the quote lived only on the arch. Putting it
+               back means the aside, the grid, and the string.
 
-                {/* Unchanged from the version he approved: the headline runs
-                   at display size on its own measure, the prose keeps a
-                   reading measure under it. */}
-                <h2 className="mt-7 max-w-[17ch] font-serif text-[clamp(2.25rem,5vw,4rem)] leading-[1.02] tracking-[-0.02em] text-balance text-ink">
-                  {t('historyHeading')}
-                </h2>
+               The heading now simply opens the section, and the story runs
+               under it at full width. */}
+            {/* THE SECTION MARKER (client, 2026-09-17: "can we have another
+               proper heading here ... this line looks bad").
 
-                <div className="mt-9 max-w-[56ch] space-y-6 text-[clamp(1rem,1.15vw,1.125rem)] leading-relaxed text-ink-60">
-                  {/* FOUR paragraphs again. p3 (the royal visit) was cut
-                     here on 2026-09-17 as "a fine fact, not the point of an
-                     About page" — OUR editorial call, not the client's — and
-                     Tekst (endelig) Sept 2026 prints the section with the
-                     royal visit in it and a fourth paragraph after it. His
-                     text is the text. */}
-                  <p>{t('history.p1')}</p>
-                  <p>{t('history.p2')}</p>
-                  <p>{t('history.p3')}</p>
-                  <p>{t('history.p4')}</p>
-                </div>
+               It was a pill chip followed by a hairline stretching five
+               hundred pixels to nowhere — two devices doing one job, and the
+               rule in particular had nothing to join. What replaces it is
+               two things this site already owns: a short gold rule and the
+               gold mono label used as the eyebrow on every other section.
+               His text is unchanged: still aboutPage.historyChip. */}
+            <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
+              <span aria-hidden className="mb-5 block h-px w-10 bg-gold-deep/50" />
+              {t('historyChip')}
+            </p>
 
-                <Link
-                  href={`/${locale}/moskeprosjektet`}
-                  className="group mt-10 inline-flex min-h-11 items-center gap-3 border-t border-ink/15 pt-6 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink transition-colors hover:text-gold-deep"
-                >
-                  {tpo('cta')}
-                  <span
-                    aria-hidden
-                    className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
-                  >
-                    &rarr;
-                  </span>
-                </Link>
-              </div>
+            {/* Unchanged from the version he approved: the headline runs at
+               display size on its own measure. It opens the section now
+               rather than sharing a row with the arch. */}
+            <h2 className="mt-7 max-w-[17ch] font-serif text-[clamp(2.25rem,5vw,4rem)] leading-[1.02] tracking-[-0.02em] text-balance text-ink">
+              {t('historyHeading')}
+            </h2>
 
-              {/* ── the arch, carrying the quote ───────────────────────
-                 Lifted from /om-oss with its treatment intact — same source,
-                 same 45% opacity, same sepia grade, same paper veil over it,
-                 same masked foot so the shape dissolves instead of ending on
-                 an edge. It is faint by design: it is a ground for the quote,
-                 not a photograph competing with one.
+            {/* ── THE STORY RUNS THE FULL SECTION, IN TWO COLUMNS ──────────
+               Client, Versjon 6 (2026-09-22), under Om oss: "Dra teksten
+               helt ut til en seksjon" — pull the text all the way out into a
+               section. It was inside the 7-of-12 column above, capped at
+               56ch, which on a 1920px screen is 621px of prose against a
+               near-empty right half. His words are exactly that complaint.
 
-                 WHAT IS DIFFERENT HERE: on /om-oss the arch is absolutely
-                 positioned at -z-10 behind a stats card, with the quote in a
-                 13rem column beside it — machinery that exists because it has
-                 to dodge the card. With the card gone the arch can simply BE
-                 the column, and the quote can sit on it where it belongs.
-                 Fewer parts, same picture.
+               WHY TWO COLUMNS AND NOT ONE WIDE ONE. Pulled out and left as a
+               single column, the measure would be ~104 characters, which is
+               unreadable — and he has already rejected the other obvious
+               answer: the first version of this section ran the story in one
+               narrow column with the right side empty, and the verdict was
+               "i dont like it at all, looks very old school ... something
+               should be on right". Two columns at ~50ch each fill the
+               section, keep a reading measure, and cannot leave a half of it
+               empty, because there is no half.
 
-                 Hidden below lg: at phone width a 19rem arch under the prose
-                 is a tall pale rectangle doing nothing, and the quote reads
-                 perfectly well as a plain pull quote — which is what it
-                 becomes there. */}
-              {/* CENTRED AGAINST THE STORY, not pinned to its top.
-                 The grid is items-start, so the arch used to begin level
-                 with the heading — fine when the story was two paragraphs.
-                 Tekst (endelig) took it to four, and the column grew to
-                 886px against the arch's 544, leaving 342px of empty sage
-                 under it and the picture stranded at the top.
+               The arch stays where it is. He asked for it specifically
+               ("keep this to keep it aesthetic") and it now sits with the
+               heading rather than beside a column of prose.
 
-                 self-center rather than a typed margin: it splits whatever
-                 slack there is, so the balance survives the next time the
-                 copy changes length. */}
-              <aside className="lg:col-span-5 lg:self-center">
-                <div className="relative ms-auto hidden w-full max-w-[23rem] lg:block">
-                  <div
-                    aria-hidden
-                    className="relative h-[34rem] w-full overflow-hidden rounded-t-[11rem] border border-gold-deep/20"
-                    style={{
-                      maskImage:
-                        'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 100%)',
-                      WebkitMaskImage:
-                        'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 100%)',
-                    }}
-                  >
-                    <Image
-                      src="/photos/arch-light.jpg"
-                      alt=""
-                      fill
-                      sizes="304px"
-                      className="object-cover opacity-[0.78]"
-                      style={{ filter: 'saturate(0.38) sepia(0.32) contrast(1.08) brightness(1.0)' }}
-                    />
-                    <span aria-hidden className="absolute inset-0 bg-paper-2/10" />
-                  </div>
-
-                  {/* On the arch, in its upper third — where the photograph
-                     is brightest and before the mask starts taking it away. */}
-                  <figure className="absolute inset-x-0 top-[6.5rem] m-0 px-11">
-                    <span aria-hidden className="block h-px w-10 bg-gold-deep/40" />
-                    <blockquote className="mt-5 font-serif text-[1.15rem] italic leading-relaxed text-ink">
-                      {`«${t('quote')}»`}
-                    </blockquote>
-                  </figure>
-                </div>
-
-                {/* Phone and tablet: the quote alone, as a pull quote. */}
-                <figure className="m-0 lg:hidden">
-                  <span aria-hidden className="block h-px w-10 bg-gold-deep/40" />
-                  <blockquote className="mt-5 font-serif text-[1.05rem] italic leading-relaxed text-ink-60">
-                    {`«${t('quote')}»`}
-                  </blockquote>
-                </figure>
-              </aside>
+               columns-2, not a two-column grid: the four paragraphs flow and
+               balance themselves, so the block stays even when the copy
+               changes length. break-inside-avoid keeps a paragraph whole,
+               and the margins are per-paragraph because space-y collapses
+               wrongly at a column break. */}
+            <div className="mt-10 text-[clamp(1rem,1.15vw,1.125rem)] leading-relaxed text-ink-60 md:mt-14 lg:columns-2 lg:gap-14 [&>p]:mb-6 [&>p]:break-inside-avoid [&>p:last-child]:mb-0">
+              {/* FOUR paragraphs. p3 (the royal visit) was cut here on
+                 2026-09-17 as "a fine fact, not the point of an About page"
+                 — OUR editorial call, not the client's — and Tekst (endelig)
+                 Sept 2026 prints the section with the royal visit in it and a
+                 fourth paragraph after it. His text is the text. */}
+              <p>{t('history.p1')}</p>
+              <p>{t('history.p2')}</p>
+              <p>{t('history.p3')}</p>
+              <p>{t('history.p4')}</p>
             </div>
+
+            <Link
+              href={`/${locale}/moskeprosjektet`}
+              className="group mt-10 inline-flex min-h-11 items-center gap-3 border-t border-ink/15 pt-6 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink transition-colors hover:text-gold-deep"
+            >
+              {tpo('cta')}
+              <span
+                aria-hidden
+                className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
+              >
+                &rarr;
+              </span>
+            </Link>
           </SectionBody>
         </div>
       </section>
@@ -328,7 +333,8 @@ export default async function AboutPage({
          into a short, wide shape that read as a leftover. Nothing else moved. */}
       <Section
         id="besok-oss"
-        tone="paper-2"
+        // The arcade above is this section's ground now.
+        tone="none"
         pad="tight"
         /* ── ONE SCREEN ON A MACBOOK AIR ──────────────────────────
            Client, 2026-09-20: "vertically reduce it so it fits in one
@@ -441,8 +447,27 @@ export default async function AboutPage({
                       <span className="block font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-40">
                         {f.term}
                       </span>
+                      {/* A detail that carries a " · " is SET AS LINES, not
+                         as one run. Client, Versjon 6 (2026-09-22), under Om
+                         oss: "Flytt teksten til under hverandre på slik
+                         finner du fram."
+
+                         Only one fact has a separator — "3 min fra Tøyen
+                         T-bane · 5 min fra Grønland T-bane" — and on a card
+                         this narrow it wrapped wherever it ran out of room,
+                         which put the break in the middle of a station name
+                         as often as between the two journeys. Two routes are
+                         two facts; they get a line each and the middot goes.
+
+                         Split rather than two message keys: the string stays
+                         one editable sentence in all three locales, and a
+                         fact with no separator renders exactly as before. */}
                       <span className="mt-1.5 block font-serif text-[1.0625rem] leading-snug text-ink">
-                        {f.detail}
+                        {f.detail.split(' · ').map((line) => (
+                          <span key={line} className="block">
+                            {line}
+                          </span>
+                        ))}
                       </span>
                     </span>
                   </li>
@@ -529,6 +554,7 @@ export default async function AboutPage({
           </div>
         </SectionBody>
       </Section>
+      </div>
 
       {/* ══ 7. ÅRSRAPPORTER + ORGANISASJONSKART ═══════════════════════════
          Unchanged and shared with /om-oss — the chart was already rebuilt to

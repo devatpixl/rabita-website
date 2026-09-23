@@ -15,6 +15,7 @@ import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import {
   AMOUNT_PRESETS,
+  PRESET_GIFT_KEYS,
   DEFAULT_AMOUNT,
   DEFAULT_FREQUENCY,
   RECOMMENDED_AMOUNT,
@@ -721,19 +722,29 @@ function StepAmount({
         {presets.map((amount) => {
           const selected = presetAmount === amount;
           const recommended = amount === recommendedAmount;
+          // The client's four things (Versjon 6) — see PRESET_GIFT_KEYS in
+          // lib/campaign.ts. Keyed by amount, so a preset list that does not
+          // match his four simply renders as bare sums, the way it did
+          // before, rather than putting the wrong noun on a number.
+          const giftKey = PRESET_GIFT_KEYS[amount];
+          const gift = giftKey ? t(`presetGifts.${giftKey}`) : null;
           return (
             <button
               key={amount}
               type="button"
               role="radio"
               aria-checked={selected}
-              aria-label={t('chipAria', { amount: formatAmount(locale, amount) })}
+              aria-label={
+                gift
+                  ? t('chipAriaGift', { gift, amount: formatAmount(locale, amount) })
+                  : t('chipAria', { amount: formatAmount(locale, amount) })
+              }
               onClick={() => {
                 setPresetAmount(amount);
                 setCustomAmount('');
               }}
               className={cn(
-                'relative flex items-baseline gap-1.5 rounded-tile text-start transition-colors',
+                'relative flex flex-col justify-center gap-0.5 rounded-tile text-start transition-colors',
                 compact ? 'min-h-[3rem] px-3 py-2' : cn('min-h-[3.25rem] px-3 py-2 sm:min-h-[4.25rem] sm:px-4 sm:py-3', fit && FIT.presetCell),
                 // Selected is an OUTLINE in the brand gold, not a solid
                 // ink fill. Filled, the chosen amount was the only dark
@@ -768,12 +779,29 @@ function StepAmount({
                   {t('wizard.recommended')}
                 </span>
               )}
-              <span className={cn('whitespace-nowrap font-serif leading-none tabular-nums', compact ? 'text-[1.15rem]' : 'text-[1.15rem] sm:text-[1.35rem]')}>
-                {formatAmount(locale, amount)} kr
-              </span>
-              {frequency === 'monthly' && (
-                <span className="text-[12px] text-ink-60">{t('perMonth')}</span>
+              {/* THE NAME SITS ABOVE THE SUM, not beside it. A brick and
+                 100 kr are one idea, and reading the noun first is what
+                 makes the number mean something — beside the figure it
+                 would read as a caption on a price. Mono and small so the
+                 serif sum stays the thing the eye lands on. */}
+              {gift && (
+                <span
+                  className={cn(
+                    'whitespace-nowrap font-mono uppercase leading-none tracking-[0.12em] text-ink-60',
+                    compact ? 'text-[9px]' : 'text-[9px] sm:text-[10px]',
+                  )}
+                >
+                  {gift}
+                </span>
               )}
+              <span className="flex items-baseline gap-1.5">
+                <span className={cn('whitespace-nowrap font-serif leading-none tabular-nums', compact ? 'text-[1.15rem]' : 'text-[1.15rem] sm:text-[1.35rem]')}>
+                  {formatAmount(locale, amount)} kr
+                </span>
+                {frequency === 'monthly' && (
+                  <span className="text-[12px] text-ink-60">{t('perMonth')}</span>
+                )}
+              </span>
             </button>
           );
         })}

@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Eyebrow, Section, SectionBody, SectionHeading } from '@/components/primitives';
 import { RequestForm, type RequestSubject } from '@/components/request-form';
-import { Accent } from '@/components/accent';
 import { cn } from '@/lib/cn';
 import { HALL_HOST, HallBackdrop } from '@/components/hall-backdrop';
+import { ServiceHero } from '@/components/service-hero';
 import {
   galleryOrientation,
   SERVICE_KEYS,
@@ -131,57 +131,6 @@ export default async function ServiceDetail({
          whole opening moves up together rather than just spreading out.
 
          Same instrument giving-card.tsx already uses for the hero card. */}
-      <section className="bg-paper pt-10 md:pt-16 [@media(min-width:768px)_and_(max-height:900px)]:pt-7">
-        <SectionBody>
-            {/* NO LEADING RULE (client, 2026-09-18: "dont like this the too
-             much -------, remove it").
-
-             On /om-oss the same rule sits ABOVE its label, where it reads
-             as a section mark. Inline, ahead of the words, it reads as a
-             dash — and this kicker already has a divider in it, so the line
-             carried two horizontal marks before it carried any meaning.
-             The label alone is enough. The divider between the two halves
-             stays: it is separating two real things. */}
-          {/* ONE WORD: the section this page belongs to, named exactly as the
-             nav names it (client, 2026-09-18: "only 1 word like services").
-             
-             It used to be two halves joined by a hairline — the hardcoded
-             servicePages.crumb plus the service's own family from
-             servicesIndex.groups. Three things were wrong with that:
-             
-               1. servicePages.crumb is ONE string, "Bønn og tjenester", so
-                  it was printed on all eighteen subjects including the five
-                  teaching ones, naming a section the visitor had not come
-                  from.
-               2. The two halves restated each other. "PRAYER AND SERVICES |
-                  RELIGIOUS SERVICES" says "services" twice and adds nothing
-                  the headline underneath does not already say, and on a
-                  teaching subject it read "PRAYER AND SERVICES | TEACHING",
-                  which contradicts itself inside one line.
-               3. It did not match the nav. The bar says "Tjenester" and
-                  "Undervisning"; the crumb said neither.
-             
-             So the label is nav.items.* — the same word the visitor just
-             clicked, already translated in all three locales. Nothing new to
-             write, and the crumb can no longer drift from the menu.
-             
-             servicesIndex.groups is untouched in the message files; the
-             services index still uses it to head its groups. */}
-          <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
-            {tnav(isTeaching ? 'items.teaching' : 'items.services')}
-          </p>
-
-          <h1 className="mt-7 max-w-[18ch] font-serif text-[clamp(2.25rem,5.5vw,4.25rem)] leading-[1.02] tracking-[-0.02em] text-balance text-ink [@media(min-width:768px)_and_(max-height:900px)]:mt-4 [@media(min-width:768px)_and_(max-height:900px)]:text-[clamp(2rem,4.4vw,3.25rem)]">
-            {t.rich(`items.${s}.title`, {
-              em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
-            })}
-          </h1>
-
-          <p className="mt-8 max-w-[56ch] text-[clamp(1rem,1.15vw,1.125rem)] leading-relaxed text-ink-60 [@media(min-width:768px)_and_(max-height:900px)]:mt-4">
-            {t(`items.${s}.body`)}
-          </p>
-        </SectionBody>
-      </section>
 
       {/* ── 2. What we offer ───────────────────────────────────────────────
          The client's mockup (2026-09-06): eyebrow, headline and a short
@@ -201,15 +150,17 @@ export default async function ServiceDetail({
          SERVICE_STORY, the second photograph, moves down to section 3. The
          mockup has no picture here, and the enquiry rail had ~150px of
          empty green under the address for it to fill. */}
-      {/* ── THE ARCADE BEHIND BOTH SECTIONS ────────────────────────────
+      {/* ── THE ARCADE BEHIND ALL THREE SECTIONS ───────────────────────
          Client, 2026-09-16: "also use this image in bg and make it still but
          let section move for these 2 sections ... as it looks so basic now".
 
          The same still photograph the two index pages stand on, so a subject
          page is visibly part of the set it was reached from rather than a
-         plain white page at the end of a click. Sections 2 and 3 each host
-         their own, which keeps the tone step between them — paper-2 for the
-         offer, paper for the enquiry — doing the work of separating them.
+         plain white page at the end of a click.
+
+         Section 1 joined it on 2026-09-22 — see the note on the header
+         itself. It spanned sections 2 and 3 before that, and the header sat
+         on flat paper above it.
 
          WHAT WENT: a gold radial bloom and a .star-texture tile. Both were
          standing in for a photograph, and with a real one behind them they
@@ -238,153 +189,16 @@ export default async function ServiceDetail({
            and the form card is opaque bg-paper, so it still reads as a card
            standing on something. */}
         <HallBackdrop wash={62} />
-      {/* ── SPACING AFTER A HEADER WITH NO PICTURE ────────────────────
-         Client, 2026-09-18: "move the bottom sections a bit up with modern
-         spacing, since when image gone, there would be too much space."
 
-         He is right, and it is not simply that the header got shorter. The
-         PageBand ends on a hard dusk edge, so the 60px under it reads as the
-         gap BETWEEN two objects. The pilot header is type on paper and this
-         section is type on paper, so the same 60px, stacked on the header's
-         own bottom rhythm, reads as a hole in one continuous page. Same
-         measurement, different job.
-
-         36/56 instead of 60/60, on every service since the header rollout
-         (client approved the pilot 2026-09-18).
-
-         `!pt-*` because lib/cn is plain clsx with no tailwind-merge: the
-         Section's own `py-section-md` stays in the class list either way, and
-         without the important flag which one wins is down to stylesheet
-         order. */}
-      <Section tone="none" className="!pt-9 md:!pt-14 [@media(min-width:768px)_and_(max-height:900px)]:!pt-7">
-        <SectionBody>
-          <div className="grid gap-10 md:grid-cols-12 md:gap-12 lg:gap-16">
-            {/* self-center, the same call section 3 used to make and for the
-               same reason: the photo column is taller than the type, so the
-               text sat at the top of a stretched cell with ~160px of slack
-               dumped underneath it. */}
-            <div className={cn(story ? 'md:col-span-5' : 'md:col-span-8', 'md:self-center')}>
-              {/* `detail.what` is reused rather than a new per-service
-                 string, and it no longer echoes the heading below it, because
-                 the heading is now the service's own offerTitle. */}
-              <Eyebrow tone="gold-deep">{t('detail.what')}</Eyebrow>
-              <SectionHeading className="mt-5">{t(`items.${s}.offerTitle`)}</SectionHeading>
-              <p className="mt-6 max-w-[38ch] text-body text-ink-60">{t(`items.${s}.offerLede`)}</p>
-
-              {/* The foot of the column. Rabita's own mark, not a drawn
-                 per-service glyph (client, 2026-09-06). */}
-              <div className="mt-10 flex items-center gap-5">
-                <Image
-                  src="/logo/rabita-mark-256.png"
-                  alt=""
-                  width={40}
-                  height={40}
-                  aria-hidden
-                  className="h-10 w-10 shrink-0 opacity-70"
-                />
-                <span aria-hidden className="h-px flex-1 bg-gold-deep/30" />
-              </div>
-            </div>
-
-            {/* ── THE PHOTOGRAPH, WHERE THE 01-04 LIST USED TO BE ────────
-               Client, 2026-09-15: "in this section we remove the bullts and
-               add image there, very modern".
-
-               The photograph is SERVICE_STORY — the same frame that used to
-               sit at the foot of section 3's rail, which this same round of
-               changes removes. So the page loses a column and gains a plate
-               without needing a single new asset.
-
-               PLATE, NOT A FULL-WIDTH BLEED. The full-bleed version of this
-               treatment shipped on the spread prototype earlier today and
-               the client's verdict was "very cheap its looking". Two reasons
-               it fails, both measured: this site frames every other
-               photograph it has (rounded-3xl on a tinted ground, no shadow),
-               so a bleed reads as foreign; and these are phone photographs,
-               which at full width run near 1:1 and show every defect.
-
-               The ratio is MEASURED, not assumed. SERVICE_STORY is mixed —
-               bazaar-stand is 1125x1500 portrait while prayer-congregation
-               is 1312x736 landscape — so a single locked frame would crop
-               roughly half of one group away. galleryOrientation reads the
-               real file dimensions. */}
-            {/* Centred on a phone, pushed to the OUTER edge from md up.
-               Start-aligned, a portrait plate sat hard against the text and
-               read as crowding the middle of the page (client, 2026-09-15:
-               "image too much in centre on desktop, move it a bit to right
-               when vertical"). End-aligned, the portrait and the landscape
-               plates share one right edge with the band above them, so the
-               page keeps a single outer margin instead of two.
-
-               justify, not auto margins: `mx-auto` is a physical property and
-               `me-0`/`ms-auto` are logical ones, so mixing them leaves the
-               winner to stylesheet order rather than intent. justify-end also
-               mirrors correctly in Arabic for free. */}
-            {story && (
-            <div className="flex justify-center md:col-span-7 md:justify-end">
-              <figure
-                className={cn(
-                  'relative w-full',
-                  storyOrientation === 'portrait' ? 'max-w-[24rem]' : 'max-w-none',
-                )}
-              >
-                {/* The ghost card — this site's own way of giving a flat
-                   photograph depth WITHOUT a drop shadow (service-index.tsx
-                   says exactly that). Only 2 of the 32 shadows in this
-                   codebase touch a photograph. */}
-                {/* Wrapped around the PLATE only. inset-0 on the figure made
-                   the outline enclose the caption too, which read as a box
-                   drawn round a picture and its label rather than as a
-                   second plate behind the first. */}
-                <div className="relative">
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 translate-x-2 translate-y-2 rounded-3xl border border-gold-deep/25 md:translate-x-3 md:translate-y-3"
-                />
-                <div
-                  className={cn(
-                    'relative w-full overflow-hidden rounded-3xl bg-paper-deep ring-1 ring-inset ring-ink/10',
-                    storyOrientation === 'portrait' ? 'aspect-[4/5]' : 'aspect-[4/3]',
-                  )}
-                >
-                  <Image
-                    src={story.src}
-                    alt={plainTitle}
-                    fill
-                    sizes="(min-width: 768px) 58vw, 100vw"
-                    className="object-cover"
-                    // The site's grade with a touch of grayscale, matching
-                    // the spread: these are phone photographs shot on
-                    // different days, and a little desaturation pulls them
-                    // into one set. No brightness cut — the client had that
-                    // taken off the gift photos on 2026-09-15 for reading
-                    // too dark.
-                    style={{ filter: 'grayscale(0.15) saturate(0.9) contrast(1.06)' }}
-                  />
-                </div>
-                </div>
-                {/* NO CAPTION HERE, deliberately.
-                   It said "Fotografier fra Rabita", which is false on this
-                   page: SERVICE_STORY is a mixed bag, and several entries
-                   are CGI renders of the planned building rather than
-                   photographs — svc-prayer, used by nikah, is a render of
-                   the mihrab (synthetic light, texture-mapped marble, no
-                   camera noise). Captioning a render as a photograph is a
-                   claim the site should not make.
-
-                   Crediting them as renders is also out: the client had the
-                   architect credit removed on 2026-09-15. So the plate
-                   stands uncaptioned, which costs nothing — the ghost
-                   outline and the frame already say "considered".
-
-                   The caption DOES stay on the id-for-alle spread, where all
-                   four frames are genuinely Rabita's own event photographs. */}
-              </figure>
-            </div>
-            )}
-          </div>
-        </SectionBody>
-      </Section>
+      {/* ── 1 + 2: THE MERGED OPENER ────────────────────────────────────
+         One section where there were two. The header (title + body) and
+         "what we offer" (offerTitle + offerLede + photograph) now open the
+         page together, with the photograph out on the right edge. See
+         components/service-hero.tsx for the reasoning and the per-title
+         rules. Piloted on shahada 2026-09-23, then rolled to all eighteen
+         the same day on the client's approval; the two-section template is
+         in git history (e9d6571 and earlier) if it is ever wanted back. */}
+      <ServiceHero s={s} crumb={tnav(isTeaching ? 'items.teaching' : 'items.services')} />
 
       {/* ── 3. Asking for it ───────────────────────────────────────────────
          The form, on the site's white (client, 2026-09-06).

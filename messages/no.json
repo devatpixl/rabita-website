@@ -16,7 +16,8 @@
       "primary": "Se moskeprosjektet",
       "secondary": "Doner nå"
     },
-    "campaignToggle": "Vis detaljer om innsamlingen"
+    "campaignToggle": "Vis detaljer om innsamlingen",
+    "subheadShort": "Åpen for alle – store og små, kvinner og menn. Felles bønn, undervisning og aktiviteter for barn og familier, midt i Oslo."
   },
   "utility": {
     "prayer": {
@@ -68,19 +69,9 @@
       "news": [],
       "project": [
         {
-          "label": "Fremdrift",
-          "blurb": "Fem faser, og hva hver av dem koster",
-          "href": "/moskeprosjektet/fremdrift"
-        },
-        {
           "label": "Leiligheter",
           "blurb": "Femten boliger i toppetasjene, til salgs",
           "href": "/moskeprosjektet/leiligheter"
-        },
-        {
-          "label": "Hvor pengene går",
-          "blurb": "Regnskap, kontoer og skattefradrag",
-          "href": "/hvor-pengene-gar"
         }
       ],
       "apartments": [],
@@ -149,6 +140,11 @@
           "href": "/tjenester/koran"
         },
         {
+          "label": "Kalligrafi og geometri",
+          "blurb": "Kurs i islamsk kalligrafi og geometrisk kunst.",
+          "href": "/tjenester/kurs"
+        },
+        {
           "label": "Kurs i islam",
           "blurb": "Grunnleggende islamkunnskap for barn og ungdom.",
           "href": "/tjenester/kurs-islam"
@@ -162,11 +158,6 @@
           "label": "Norsk",
           "blurb": "Norskundervisning for voksne som faller utenfor de ordinære tilbudene.",
           "href": "/tjenester/norsk"
-        },
-        {
-          "label": "Kalligrafi og geometri",
-          "blurb": "Kurs i islamsk kalligrafi og geometrisk kunst.",
-          "href": "/tjenester/kurs"
         }
       ],
       "visit": [
@@ -270,7 +261,14 @@
       "giveWithMonthly": "Gi <amount></amount> kr/mnd med {method}"
     },
     "perMonth": "/mnd",
-    "sheetTitleBuilding": "Gi til bygget"
+    "sheetTitleBuilding": "Gi til bygget",
+    "presetGifts": {
+      "brick": "Murstein",
+      "lamp": "Lampe",
+      "quran": "Koran",
+      "carpet": "Teppe"
+    },
+    "chipAriaGift": "Velg {gift} — {amount} kroner"
   },
   "meter": {
     "lattice": "Hvert merke er 1 000 000 kr",
@@ -325,7 +323,7 @@
       },
       "shell": {
         "year": "",
-        "name": "Råbygg — fundament, bærekonstruksjon og fasade"
+        "name": "Bygging — fundament, bærekonstruksjon og fasade"
       },
       "interior": {
         "year": "Kommer",
@@ -424,7 +422,7 @@
     "etasje": "Etasje {n}",
     "svg": {
       "groundLevel": "GATENIVÅ · CALMEYERS GATE",
-      "plot": "TOMT · 5 745 M²",
+      "plot": "TOMT · 6 000+ M²",
       "floorsUp": "ETASJER SKAL OPP",
       "belowGround": "to under bakken"
     },
@@ -488,61 +486,52 @@
     "lede": "Hvert bidrag, uansett størrelse, blir en del av bygget og er med på å reise et varig hjem for bønn, læring og fellesskap i Norge.",
     "anchorLabel": "FULLT SKATTEFRADRAG",
     "ctaAll": "Se alle måter å gi",
-    "prev": "Forrige gave",
-    "next": "Neste gave",
     "cta": "Velg et beløp",
     "footnote": "Fradragsberettiget opp til 25 000 kr i året.",
     "items": {
-      "self": {
-        "title": "For deg selv"
+      "founder": {
+        "title": "Stifter"
       },
-      "family": {
-        "title": "For familien din"
+      "schoolPlace": {
+        "title": "Skoleplass"
       },
-      "block": {
-        "title": "Byggesteinen"
+      "prayerPlace": {
+        "title": "Bønneplass"
       },
-      "quran": {
-        "title": "Koran"
+      "wudu": {
+        "title": "Wudu-plass"
       },
-      "friends": {
-        "title": "Venner av Rabita"
+      "window": {
+        "title": "Vindu"
       },
-      "prayer": {
-        "title": "Én kvadratmeter gulv i bønnesalen"
-      },
-      "shelf": {
-        "title": "En hylleseksjon i biblioteket"
-      },
-      "desk": {
-        "title": "En pult i skolen"
-      },
-      "panel": {
-        "title": "Et panel i fasaden"
+      "door": {
+        "title": "Dør"
       }
     },
-    "units": {
-      "prayer": "m²",
-      "shelf": "hyller",
-      "desk": "pulter",
-      "panel": "paneler"
-    },
-    "totalSuffix": "totalt",
     "alt": {
-      "self": "En person i bønn alene i moskeen",
-      "family": "To gjester ved bordet under iftar ute",
-      "block": "Tomten ryddet, med det gamle bygget revet",
-      "quran": "En åpen koran",
-      "friends": "Gateiftar på Grønland, lange bord under brua",
-      "prayer": "Gulvet i bønnesalen",
-      "shelf": "Hyller i biblioteket",
-      "desk": "Elever ved pultene i klasserommet",
-      "panel": "Fasadepanel sett innenfra"
+      "founder": "Kvartalet i Calmeyers gate sett ovenfra, med takterrassen",
+      "schoolPlace": "Elever i klasserommet i den nye skolen",
+      "prayerPlace": "Bønnesalen i den nye moskeen",
+      "wudu": "Wudu-plassene for menn i den nye moskeen",
+      "window": "Fasadens rutemønster sett innenfra, hver rute et vindu",
+      "door": "Hovedinngangen med trappen opp gjennom huset"
+    },
+    "notes": {
+      "founder": "Du står oppført som stifter, med eget signert dokument.",
+      "schoolPlace": "La en elev få mer kunnskap på grunn av deg.",
+      "prayerPlace": "En plass på gulvet, for den som kommer til bønn.",
+      "wudu": "Der man vasker seg før bønnen.",
+      "window": "Dagslys inn i et rom som skal brukes hver dag.",
+      "door": "En dør inn i huset, åpen for alle."
+    },
+    "sections": {
+      "named": "Gi en plass i moskeen",
+      "parts": "Bygg en del av moskeen"
     }
   },
   "floors": {
     "eyebrow": "Bygget, etasje for etasje",
-    "heading": "Seks etasjer over bakken, én under. 5 745 kvadratmeter.",
+    "heading": "Seks etasjer over bakken, én under. Over 6 000 kvadratmeter.",
     "attribution": "Arkitekt: {architect}. Referansene til Alhambra er tydelige, men bygget snakker også norsk, i materialbruk, dagslys og forholdet til gaten.",
     "floorLabel": "Etasje {floor}",
     "items": {
@@ -677,11 +666,11 @@
       "building": {
         "eyebrow": "Bygget",
         "title": "Drømmen om en av <em>Europas største</em> nye moskéer",
-        "lede": "I Calmeyers gate 8 bygger vi mer enn en moské. Vi bygger et islamsk senter med skole, bibliotek, kafé, restaurant, ungdomsklubb, flerbrukshall og takterrasse fordelt på nær 6 000 kvadratmeter og sju etasjer. Det gamle bygget er revet, tillatelsene er på plass og entreprenøren er valgt. Nå gjenstår den siste og viktigste delen: å finansiere prosjektet. Her kan du være med og gjøre drømmen til virkelighet.",
+        "lede": "I Calmeyers gate 8 bygger vi mer enn en moské. Vi bygger et islamsk senter med skole, bibliotek, kafé, restaurant, ungdomsklubb, flerbrukshall og takterrasse fordelt på over 6 000 kvadratmeter og sju etasjer. Det gamle bygget er revet, tillatelsene er på plass og entreprenøren er valgt. Nå gjenstår den siste og viktigste delen: å finansiere prosjektet. Her kan du være med og gjøre drømmen til virkelighet.",
         "primary": "Gi til bygget",
         "secondary": "Hvor pengene går",
         "briefLabel": "Kort sagt",
-        "brief": "Den gamle moskeen ble revet i 2025. Det som kommer i stedet er ett bygg som gjør jobben til fem, på en tomt på 5 745 kvadratmeter, tegnet slik at første etasje står åpen mot gata.",
+        "brief": "Den gamle moskeen ble revet i 2025. Det som kommer i stedet er ett bygg som gjør jobben til fem, på en tomt på over 6 000 kvadratmeter, tegnet slik at første etasje står åpen mot gata.",
         "colEyebrow": "Etasje for etasje",
         "colHeading": "Hva hver etasje er til for.",
         "items": [
@@ -1250,7 +1239,8 @@
         "oslo-city": "Oslo City",
         "bussterminalen": "Oslo bussterminal",
         "operahuset": "Operahuset",
-        "regjeringskvartalet": "Regjeringskvartalet"
+        "regjeringskvartalet": "Regjeringskvartalet",
+        "slottet": "Slottet"
       },
       "prayerWindow": "Fajr, Dhuhr til Isha",
       "prayerLink": "se bønnetider",
@@ -1591,10 +1581,10 @@
     "notes": {
       "nikah": "Fortell kort om planlagt dato og deltakerantall.",
       "janaza": "Kontaktinfo til familien og hva som allerede er avtalt.",
-      "shahada": "Kort om bakgrunn og om du ønsker vitner.",
-      "counselling": "Kort om hva samtalen bør handle om.",
+      "shahada": "Kort om bakgrunn, når det passer for deg, og om du ønsker vitner.",
+      "counselling": "Kort om hva samtalen bør handle om, og når det passer for deg.",
       "hajj-umrah": "Antall reisende, planlagt tid og evt. reisebyrå.",
-      "visit": "Type gruppe, antall og alder på deltakerne.",
+      "visit": "Type gruppe, antall og alder på deltakerne, og ønsket dato.",
       "contact": "Hva gjelder henvendelsen?",
       "apartments": "Når ønsker du å flytte inn, og er det noe mer vi bør vite?",
       "skole": "Barnets alder og hvilket klassetrinn.",
@@ -2533,7 +2523,7 @@
     }
   },
   "projectOverview": {
-    "briefShort": "Det gamle bygget er revet, og byggingen av vår nye moské er i gang. I Calmeyers gate 8 reiser vi en av Europas største nye moskéer, med bønnesal over tre etasjer, skole, bibliotek, kafé, restaurant, ungdomsklubb, flerbrukshall og takterrasse fordelt på nær 6 000 kvadratmeter og sju etasjer. Dette blir et samlingspunkt for tro, læring og fellesskap i generasjoner fremover.",
+    "briefShort": "Det gamle bygget er revet, og byggingen av vår nye moské er i gang. I Calmeyers gate 8 reiser vi en av Europas største nye moskéer, med bønnesal over tre etasjer, skole, bibliotek, kafé, restaurant, ungdomsklubb, flerbrukshall og takterrasse fordelt på over 6 000 kvadratmeter og sju etasjer. Dette blir et samlingspunkt for tro, læring og fellesskap i generasjoner fremover.",
     "cta": "Se moskeprosjektet",
     "figures": {
       "area": "Bruksareal",
@@ -2760,7 +2750,6 @@
           "body": "Med utsyn over byen."
         }
       },
-      "close": "Alt dette bidrar til et sosialt og inkluderende bomiljø.",
       "chip": {
         "title": "Bygget for fellesskap",
         "body": "Rom som samler folk, hver dag."
@@ -3017,7 +3006,8 @@
       "school": "Skole",
       "amphi": "Amfi",
       "garden": "Hage",
-      "conference": "Konferanse- og selskapslokaler",
+      "conference": "Konferanse­lokaler",
+      "banquet": "Selskaps­lokaler",
       "meetingRooms": "Møterom",
       "administration": "Administrasjon",
       "studio": "Studio",
@@ -3042,7 +3032,8 @@
       "imamOffice": "Kontorene til imamene. Et sted for samtaler, veiledning og støtte i små og store spørsmål.",
       "garden": "Et skjermet uterom midt i kvartalet med benker, blomster og en fontene med åttekantet stjerne.",
       "school": "Lyse og moderne klasserom der barn og unge kan lære, utvikle seg og bygge trygg identitet.",
-      "conference": "Fleksible lokaler for konferanser, kurs, vigsler og markeringer.",
+      "conference": "For konferanser, kurs og seminarer.",
+      "banquet": "For vigsler, familieselskaper og markeringer.",
       "meetingRooms": "Møterom for styret, administrasjonen, avdelingene og samarbeidspartnere.",
       "youthClub": "Et sted for barn og ungdom med spill, aktiviteter og sosiale møteplasser.",
       "apartments": "Femten svært attraktive leiligheter med sentral beliggenhet i hjertet av Oslo.",
@@ -3102,8 +3093,8 @@
   },
   "newsletterBand": {
     "eyebrow": "Nyhetsbrev",
-    "heading": "Hold deg <em>oppdatert</em>.",
-    "body": "Få siste nytt om byggingen og arrangementene rett i innboksen.",
+    "heading": "Følg <em>byggingen</em>.",
+    "body": "Oppdateringer fra tomten, og invitasjoner til det som skjer i moskeen.",
     "note": "Du kan melde deg av når som helst.",
     "done": "Takk. Vi har registrert adressen din."
   }
