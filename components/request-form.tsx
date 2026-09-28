@@ -1,8 +1,10 @@
 'use client';
 
 import { useId, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { cn } from '@/lib/cn';
+import { CAMPAIGN } from '@/lib/campaign';
+import type { ServiceKey } from '@/lib/services';
 
 // One reusable form (§5). Subject-switch for nikah, janaza, shahada,
 // counselling, visits, contact. Every field has a real <label>, so screen
@@ -16,18 +18,11 @@ import { cn } from '@/lib/cn';
 //
 // It now sits in the same raised panel those two use, with the fields a shade
 // lighter than the panel so they read as wells rather than outlines.
-export type RequestSubject =
-  | 'nikah'
-  | 'janaza'
-  | 'shahada'
-  | 'counselling'
-  | 'hajj-umrah'
-  | 'skole'
-  | 'koran'
-  | 'kurs'
-  | 'apartments'
-  | 'visit'
-  | 'contact';
+// Every service key, not a hand-kept list of eight. The list drifted: ten
+// services were added after it was written and their pages posted a subject
+// the API's enum rejected — a 400 on every send, shown to the visitor as
+// "something was missing" with every field filled (found 2026-09-28).
+export type RequestSubject = ServiceKey | 'apartments' | 'visit' | 'contact';
 
 // Field language (2026-09-05, client): the fields are WELLS — filled, a
 // shade off the surface they stand on, inside a 1.5px box.
@@ -231,12 +226,25 @@ export function RequestForm({
   rule?: boolean;
 }) {
   const t = useTranslations('requestForm');
+  const locale = useLocale();
   const c = TONE[tone];
   const uid = useId();
   const [name, setName] = useState('');
   const [contact, setContact] = useState('');
   const [notes, setNotes] = useState('');
   const [bedrooms, setBedrooms] = useState<string>('');
+  // ── NIKAH'S OWN TWO FIELDS (pilot, 2026-09-28) ──────────────────────
+  // The reference the client sent (islamic.no/vigsel) asks for both names
+  // and whether the civil certificate exists, and both are what Rabita
+  // needs before it can answer at all: a nikah is booked for a couple, and
+  // the page's own longBody says it cannot happen without the certificate.
+  // "Navn" becomes the groom's name so nothing is asked twice.
+  //
+  // NO DATE FIELD, on purpose. He removed "ønsket tid" twice in Versjon 6;
+  // the message hint under "Din melding" still asks for the date.
+  const [bride, setBride] = useState('');
+  const [certificate, setCertificate] = useState<'yes' | 'notYet' | ''>('');
+  const isNikah = subject === 'nikah';
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState<'empty' | 'network' | 'invalid' | null>(null);
@@ -252,12 +260,17 @@ export function RequestForm({
     //
     // The form is noValidate, so the browser will not do this for us and
     // :user-invalid never matches — it has to be state.
-    if (!name.trim() || !contact.trim()) {
+    if (!name.trim() || !contact.trim() || (isNikah && !bride.trim())) {
       setError('empty');
       return;
     }
     setSubmitting(true);
     setError(null);
+    const extra: Record<string, string> = {};
+    if (isNikah) {
+      extra.bride = bride;
+      if (certificate) extra.certificate = t(certificate);
+    }
     try {
       const res = await fetch('/api/requests', {
         method: 'POST',
@@ -268,8 +281,26 @@ export function RequestForm({
           contact,
           notes,
           preferred: subject === 'apartments' && bedrooms ? `${bedrooms} ${t('bedroomsUnit')}` : '',
+          extra,
+          locale,
         }),
       });
+      // 503 not_configured is the route's answer until Rabita's mail key is
+      // on Vercel. The same fallback the contact button uses: hand the
+      // visitor a prefilled draft to the front desk rather than a false
+      // thank-you. Nothing typed is lost.
+      if (res.status === 503) {
+        const lines = [
+          `${t('name')}: ${name}`,
+          ...(isNikah ? [`${t('bride')}: ${bride}`] : []),
+          `${t('contact')}: ${contact}`,
+          ...(isNikah && certificate ? [`${t('certificate')} ${t(certificate)}`] : []),
+          '',
+          notes,
+        ];
+        window.location.href = `mailto:${CAMPAIGN.contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+        return;
+      }
       // The route answers 400 on a zod failure. Neither the status nor the
       // body was checked before, so a REJECTED enquiry rendered the "we have
       // received it" screen and the sender never found out.
@@ -344,7 +375,7 @@ export function RequestForm({
       >
         <Field
           id={`${uid}-name`}
-          label={t('name')}
+          label={isNikah ? t('groom') : t('name')}
           icon="person"
           tone={tone}
           card={card}
@@ -359,6 +390,25 @@ export function RequestForm({
             className={cn(VALUE, c.value)}
           />
         </Field>
+        {isNikah && (
+          <Field
+            id={`${uid}-bride`}
+            label={t('bride')}
+            icon="person"
+            tone={tone}
+            card={card}
+            invalid={error === 'empty' && !bride.trim()}
+          >
+            <input
+              id={`${uid}-bride`}
+              required
+              autoComplete="off"
+              value={bride}
+              onChange={(e) => setBride(e.target.value)}
+              className={cn(VALUE, c.value)}
+            />
+          </Field>
+        )}
         <Field
           id={`${uid}-contact`}
           label={t('contact')}
@@ -378,6 +428,42 @@ export function RequestForm({
           />
         </Field>
       </div>
+
+      {/* Nikah: has the civil certificate been issued? Two chips, optional,
+         in the apartments chip language below. */}
+      {isNikah && (
+        <div className="mt-4">
+          <span className={cn('block font-mono text-[0.625rem] uppercase tracking-[0.18em]', c.hint)}>
+            {t('certificate')}
+          </span>
+          <div className="mt-3 flex flex-wrap gap-2" role="radiogroup" aria-label={t('certificate')}>
+            {(['yes', 'notYet'] as const).map((v) => {
+              const on = certificate === v;
+              return (
+                <button
+                  key={v}
+                  type="button"
+                  role="radio"
+                  aria-checked={on}
+                  onClick={() => setCertificate(on ? '' : v)}
+                  className={cn(
+                    'min-h-10 rounded-full border-[1.5px] px-4 font-serif text-[1.05rem] transition-colors',
+                    tone === 'dusk'
+                      ? on
+                        ? 'border-gold bg-gold text-dusk'
+                        : 'border-paper/25 text-paper hover:border-paper'
+                      : on
+                        ? 'border-ink bg-ink text-paper'
+                        : 'border-ink/25 text-ink hover:border-ink',
+                  )}
+                >
+                  {t(v)}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* Apartments: bedrooms as chips instead of a free-text time. */}
       {subject === 'apartments' && (

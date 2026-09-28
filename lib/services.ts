@@ -900,3 +900,32 @@ const PORTRAIT_PHOTOS: ReadonlySet<string> = new Set([
 export function galleryOrientation(srcs: readonly string[]): 'portrait' | 'landscape' {
   return srcs.length > 0 && srcs.every((s) => PORTRAIT_PHOTOS.has(s)) ? 'portrait' : 'landscape';
 }
+
+// ── THE CONVERSION PILOT (2026-09-28) ─────────────────────────────────────
+// Client: the service pages "are not converting", with islamic.no/vigsel and
+// /hajj as the reference. Those pages are plainer than ours and answer what
+// ours never did: what do I need, who do I talk to, where, and what happens
+// next. The page shape that answers it is in app/[locale]/tjenester/[subject]
+// behind this list, so the other seventeen keep the 2026-09-23 opener until
+// he has seen one.
+//
+// Adding a key here is safe without steps or facts — every new section is
+// guarded and renders nothing when its copy is absent — but it is only
+// worth doing once items.<key>.longBody and .offer are checked, because the
+// pilot prints both and they have never been on a page before.
+export const SERVICE_PILOT = ['nikah'] as const satisfies readonly ServiceKey[];
+
+// Who answers for a service, when it is not the front desk. Locale-neutral
+// facts only (an address is a string in every language); anything that needs
+// translating — a weekday, a price note — lives in items.<key>.facts.
+//
+// Every value here is one rabita.no publishes today, so nothing is invented;
+// the front desk (CAMPAIGN.contactEmail) is the fallback for the rest.
+//   hajj-umrah   40 29 20 20 · Hajjogumrah@gmail.com   rabita.no/hajj-og-umra
+//   shahada      nyemuslimer@rabita.no                  rabita.no/shahada
+//   veivisere    veiviser@rabita.no                     rabita.no/muslimske-veivisere
+//   skole/koran/arabisk/kurs-islam  undervisning@rabita.no · WhatsApp 9600 4046
+// Only nikah is wired while the pilot runs; the rest go in with their pages.
+export const SERVICE_CONTACT: Partial<Record<ServiceKey, { email?: string; phone?: string }>> = {
+  nikah: {},
+};

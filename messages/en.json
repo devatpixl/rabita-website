@@ -1613,7 +1613,12 @@
       "empty": "Fill in your name and contact details, and we will pass the enquiry on.",
       "network": "We could not send your enquiry. Check your connection and try again — or send us an email instead.",
       "invalid": "Something was missing, so the enquiry was not sent. Please check your name and contact details and try again."
-    }
+    },
+    "groom": "Groom's name",
+    "bride": "Bride's name",
+    "certificate": "Do you have the marriage certificate?",
+    "yes": "Yes",
+    "notYet": "Not yet"
   },
   "bonnetiderPage": {
     "eyebrow": "Prayer times",
@@ -1749,7 +1754,13 @@
       "what": "What we offer",
       "request": "Send an enquiry",
       "photos": "Photographs from Rabita",
-      "requestLede": "Tell us a little about yourself and we will get in touch for a conversation."
+      "requestLede": "Tell us a little about yourself and we will get in touch for a conversation.",
+      "about": "About the service",
+      "steps": "How it works",
+      "facts": "Practical details",
+      "related": "Other services",
+      "write": "Write to us",
+      "orWrite": "Prefer e-mail? Write to"
     },
     "items": {
       "nikah": {
@@ -1767,6 +1778,30 @@
           },
           {
             "title": "Access to ceremony rooms"
+          }
+        ],
+        "steps": [
+          {
+            "title": "Certificate from Skatteetaten",
+            "body": "Apply to Skatteetaten for the certificate of no impediment. It must be in place before the wedding."
+          },
+          {
+            "title": "Civil wedding",
+            "body": "The marriage is entered into before a registrar with the authority to marry, for example the courthouse. Rabita does not currently hold that authority."
+          },
+          {
+            "title": "Agree a date with us",
+            "body": "Get in touch early and we will find a date that suits you."
+          },
+          {
+            "title": "Nikah in the mosque",
+            "body": "The ceremony takes place in the mosque, led by an imam. Bring the valid marriage certificate."
+          }
+        ],
+        "facts": [
+          {
+            "label": "Requirement",
+            "value": "Legally married, with a valid marriage certificate"
           }
         ]
       },

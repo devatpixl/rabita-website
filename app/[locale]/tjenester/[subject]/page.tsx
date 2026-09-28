@@ -7,10 +7,19 @@ import { RequestForm, type RequestSubject } from '@/components/request-form';
 import { cn } from '@/lib/cn';
 import { HALL_HOST, HallBackdrop } from '@/components/hall-backdrop';
 import { ServiceHero } from '@/components/service-hero';
+import { ServiceOpener } from '@/components/service-opener';
+import { ServiceOverview } from '@/components/service-overview';
+import { ServiceSteps } from '@/components/service-steps';
+import { ServiceFacts } from '@/components/service-facts';
+import { ServiceRelated } from '@/components/service-related';
+import { ServiceStickyCta } from '@/components/service-sticky-cta';
+import { CAMPAIGN } from '@/lib/campaign';
 import {
   galleryOrientation,
+  SERVICE_CONTACT,
   SERVICE_KEYS,
   SERVICE_PAGES,
+  SERVICE_PILOT,
   SERVICE_STORY,
   type ServiceKey,
 } from '@/lib/services';
@@ -74,6 +83,104 @@ export default async function ServiceDetail({
   // unused, the same way components/service-page.tsx keeps ServiceVisit — it
   // is a working component and comes back with one branch if the one-screen
   // idea returns.
+
+  // ── THE CONVERSION PILOT (2026-09-28) ─────────────────────────────────
+  // Client: the pages "are not converting"; islamic.no/vigsel and /hajj as
+  // the reference. See SERVICE_PILOT in lib/services.ts. The seventeen
+  // services not on that list fall through to the 09-23 template below,
+  // untouched, until he has approved this shape on nikah.
+  //
+  // Opener (62vh, title + line + two actions) → overview (the offer heading
+  // over longBody and the numbered offer, both written long ago and never
+  // rendered) → steps (only where the copy exists) → the form with the
+  // practical register beside it → the membership band → three related
+  // services. The phone gets a standing Send button.
+  if ((SERVICE_PILOT as readonly string[]).includes(s)) {
+    const crumb = tnav(isTeaching ? 'items.teaching' : 'items.services');
+    const email = SERVICE_CONTACT[s]?.email ?? CAMPAIGN.contactEmail;
+    return (
+      <main>
+        <div className={HALL_HOST}>
+          <HallBackdrop wash={62} />
+          <ServiceOpener s={s} crumb={crumb} />
+        </div>
+
+        <ServiceOverview s={s} />
+        <ServiceSteps s={s} />
+
+        {/* The arcade returns behind the form, as it stood behind the whole
+           page before. This host holds the enquiry AND the two opaque
+           sections after it, so the sticky photograph has room to travel
+           behind the form rather than sitting still under it. */}
+        <div className={HALL_HOST}>
+          <HallBackdrop wash={62} />
+          <Section id="enquiry" tone="none" className="scroll-mt-24 bg-paper/45 pb-20 md:pb-28">
+            <SectionBody>
+              <Eyebrow tone="gold-deep">{plainTitle}</Eyebrow>
+              <SectionHeading className="mt-5">{t('detail.request')}</SectionHeading>
+              <p className="mt-4 max-w-[42ch] text-body text-ink-60">{t('detail.requestLede')}</p>
+
+              <div className="mt-10 md:grid md:grid-cols-12 md:items-start md:gap-12 lg:gap-16">
+                <div className="md:col-span-7">
+                  <RequestForm subject={s as RequestSubject} card rule={false} />
+                  {/* islamic.no closes its form on "eller kontakt oss direkte";
+                     one line, the same address the opener's second action
+                     points at. */}
+                  <p className="mt-5 text-[14px] leading-snug text-ink-60">
+                    {t('detail.orWrite')}{' '}
+                    <a href={`mailto:${email}`} className="font-semibold text-ink underline decoration-gold underline-offset-4 hover:text-gold-deep">
+                      {email}
+                    </a>
+                  </p>
+                </div>
+                {/* The practical register, in the slot the "Bli medlem"
+                   aside had. Sticky from md so the facts stay beside the
+                   form as it scrolls; the aside is far shorter than the
+                   card. */}
+                <ServiceFacts s={s} className="mt-12 md:sticky md:top-32 md:col-span-5 md:mt-0 md:border-s md:border-rule md:ps-10 lg:ps-14" />
+              </div>
+            </SectionBody>
+          </Section>
+
+          {/* ── BLI MEDLEM, AFTER THE FORM ───────────────────────────────
+             Client, Tjenester list point 5, still honoured: the CTA and its
+             reason stay on every service page. It moves from beside the
+             form to a band under it, because beside the form it was a
+             second offer at the moment the reader was deciding on the
+             first. Same copy as before: medlemskapPage.eyebrow,
+             joinPage.headline, joinPage.boxBody, membership.join. */}
+          <section className="border-t border-rule bg-paper-deep/90 py-12 md:py-14">
+            <SectionBody>
+              <div className="md:grid md:grid-cols-12 md:items-center md:gap-12">
+                <div className="md:col-span-8">
+                  <Eyebrow tone="gold-deep">{tmp('eyebrow')}</Eyebrow>
+                  <h2 className="mt-4 max-w-[24ch] font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-[1.15] text-balance text-ink">
+                    {tj('headline')}
+                  </h2>
+                  <p className="mt-3 max-w-[48ch] text-body text-ink-60">{tj('boxBody')}</p>
+                </div>
+                <div className="mt-7 md:col-span-4 md:mt-0 md:flex md:justify-end">
+                  <Link
+                    href={`/${locale}/bli-medlem`}
+                    className="group inline-flex min-h-12 items-center gap-2 rounded-full border border-ink px-7 text-[15px] font-semibold text-ink transition-colors hover:border-gold-deep hover:bg-gold-deep hover:text-paper"
+                  >
+                    {tm('join')}
+                    <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">
+                      &rarr;
+                    </span>
+                  </Link>
+                </div>
+              </div>
+            </SectionBody>
+          </section>
+
+          <ServiceRelated s={s} locale={locale} />
+        </div>
+
+        <ServiceStickyCta label={t('detail.request')} />
+      </main>
+    );
+  }
 
   return (
     <main>

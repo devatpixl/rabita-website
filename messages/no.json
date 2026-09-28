@@ -1617,7 +1617,12 @@
       "empty": "Fyll inn navn og kontaktopplysninger, så sender vi henvendelsen videre.",
       "network": "Vi fikk ikke sendt henvendelsen. Sjekk nettforbindelsen og prøv igjen — eller send oss en e-post.",
       "invalid": "Noe manglet, så henvendelsen ble ikke sendt. Kontroller navn og kontaktopplysninger, og prøv igjen."
-    }
+    },
+    "groom": "Brudgommens navn",
+    "bride": "Brudens navn",
+    "certificate": "Har dere vigselsattest?",
+    "yes": "Ja",
+    "notYet": "Ikke ennå"
   },
   "bonnetiderPage": {
     "eyebrow": "Bønnetider",
@@ -1753,7 +1758,13 @@
       "what": "Hva vi tilbyr",
       "request": "Send henvendelse",
       "photos": "Fotografier fra Rabita",
-      "requestLede": "Fortell oss litt om deg selv, så tar vi kontakt for en samtale."
+      "requestLede": "Fortell oss litt om deg selv, så tar vi kontakt for en samtale.",
+      "about": "Om tjenesten",
+      "steps": "Slik går det til",
+      "facts": "Praktisk",
+      "related": "Andre tjenester",
+      "write": "Skriv til oss",
+      "orWrite": "Foretrekker du e-post? Skriv til"
     },
     "items": {
       "nikah": {
@@ -1771,6 +1782,30 @@
           },
           {
             "title": "Tilgang til seremonilokaler"
+          }
+        ],
+        "steps": [
+          {
+            "title": "Prøvingsattest fra Skatteetaten",
+            "body": "Søk om prøving av ekteskapsvilkår hos Skatteetaten. Attesten må være på plass før vielsen."
+          },
+          {
+            "title": "Borgerlig vigsel",
+            "body": "Ekteskapet inngås hos en vigsler med vigselsrett, for eksempel tinghuset. Rabita har per i dag ikke vigselsrett."
+          },
+          {
+            "title": "Avtal dato med oss",
+            "body": "Ta kontakt tidlig, så finner vi en dato som passer."
+          },
+          {
+            "title": "Nikah i moskeen",
+            "body": "Seremonien gjennomføres i moskeen, ledet av imam. Ta med gyldig vigselsattest."
+          }
+        ],
+        "facts": [
+          {
+            "label": "Forutsetning",
+            "value": "Juridisk gift, med gyldig vigselsattest"
           }
         ]
       },
