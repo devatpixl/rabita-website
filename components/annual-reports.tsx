@@ -34,71 +34,6 @@ export async function AnnualReports({ locale }: { locale: string }) {
   // sections would have met here and read as one flat strip instead of two.
   return (
     <>
-    <section id="arsrapporter" className="scroll-mt-24 bg-paper py-section-md">
-      <SectionBody>
-        <div className="grid gap-8 md:grid-cols-12 md:gap-12">
-          <div className="md:col-span-5">
-            <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
-              {t('eyebrow')}
-            </p>
-            <h2 className="mt-4 font-serif text-section text-balance text-ink">
-              {t.rich('heading', { em: (chunks) => <Accent surface="paper">{chunks}</Accent> })}
-            </h2>
-            <p className="mt-4 max-w-prose text-body text-ink-60">{t('lede')}</p>
-          </div>
-
-          {/* TWO controls per row, not one (client, 2026-09-14: "download them
-             as doing now, but also open in new page so can view it").
-             A single click cannot do both: `download` tells the browser to
-             save the file and specifically NOT to navigate to it, so the row
-             could either open a viewer or save, never both. Forcing both from
-             one click means scripting a save alongside window.open, which
-             trips popup blockers and gives the reader two surprises at once.
-
-             So the row opens the PDF in a new tab — "open like normally
-             things open" — and a separate button beside it saves. Two
-             anchors side by side rather than one wrapping the other, because
-             an <a> inside an <a> is invalid markup. */}
-          <ul className="self-center border-t border-ink md:col-span-7">
-            {ANNUAL_REPORTS.map((r) => (
-              <li
-                key={r.year}
-                className="flex min-h-[3.75rem] items-center gap-2 border-b border-rule"
-              >
-                <a
-                  href={r.file}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group flex flex-1 items-center gap-3 self-stretch px-1 text-ink transition-[padding,color] duration-200 hover:px-3 hover:text-gold-deep"
-                >
-                  {/* The label pair is baseline-aligned to itself; the row is
-                     centre-aligned. Mixing the two on one flex line is what
-                     put the two arrows on different lines. */}
-                  <span className="font-serif text-[1.15rem] leading-none tabular-nums">
-                    {t('year', { year: r.year })}
-                  </span>
-                  <span
-                    aria-hidden
-                    className="ms-auto shrink-0 text-ink-60 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-gold-deep rtl:rotate-180 rtl:group-hover:-translate-x-1"
-                  >
-                    &rarr;
-                  </span>
-                </a>
-                <a
-                  href={r.file}
-                  download
-                  aria-label={t('download', { year: r.year })}
-                  className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-ink-60 transition-colors hover:bg-paper-2 hover:text-gold-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-deep/50"
-                >
-                  <span aria-hidden className="text-[0.95rem] leading-none">&darr;</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-      </SectionBody>
-    </section>
 
     {/* ── ORGANISASJONSKART, ON THE SAGE GROUND ──────────────────────────
        Client, 2026-09-16: "for this organisation part, use light green in
@@ -176,6 +111,77 @@ export async function AnnualReports({ locale }: { locale: string }) {
              at aboutPage.reports.chartOpen, so this is a revert of these
              fifteen lines if he wants the archive link back. */}
         </div>
+      </SectionBody>
+    </section>
+    {/* ÅRSRAPPORTER AFTER THE CHART, since 2026-09-28 (user: "move years
+       report under this section ... in between these 2 sections", the two
+       being Organisasjonen and Samarbeidspartnere). The page now runs
+       chart -> reports -> partners: the people, then the paperwork about
+       them, then the company they keep. The chart's sage against the
+       reports' paper still makes the step between them. */}
+    <section id="arsrapporter" className="scroll-mt-24 bg-paper py-section-md">
+      <SectionBody>
+        <div className="grid gap-8 md:grid-cols-12 md:gap-12">
+          <div className="md:col-span-5">
+            <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
+              {t('eyebrow')}
+            </p>
+            <h2 className="mt-4 font-serif text-section text-balance text-ink">
+              {t.rich('heading', { em: (chunks) => <Accent surface="paper">{chunks}</Accent> })}
+            </h2>
+            <p className="mt-4 max-w-prose text-body text-ink-60">{t('lede')}</p>
+          </div>
+
+          {/* TWO controls per row, not one (client, 2026-09-14: "download them
+             as doing now, but also open in new page so can view it").
+             A single click cannot do both: `download` tells the browser to
+             save the file and specifically NOT to navigate to it, so the row
+             could either open a viewer or save, never both. Forcing both from
+             one click means scripting a save alongside window.open, which
+             trips popup blockers and gives the reader two surprises at once.
+
+             So the row opens the PDF in a new tab — "open like normally
+             things open" — and a separate button beside it saves. Two
+             anchors side by side rather than one wrapping the other, because
+             an <a> inside an <a> is invalid markup. */}
+          <ul className="self-center border-t border-ink md:col-span-7">
+            {ANNUAL_REPORTS.map((r) => (
+              <li
+                key={r.year}
+                className="flex min-h-[3.75rem] items-center gap-2 border-b border-rule"
+              >
+                <a
+                  href={r.file}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex flex-1 items-center gap-3 self-stretch px-1 text-ink transition-[padding,color] duration-200 hover:px-3 hover:text-gold-deep"
+                >
+                  {/* The label pair is baseline-aligned to itself; the row is
+                     centre-aligned. Mixing the two on one flex line is what
+                     put the two arrows on different lines. */}
+                  <span className="font-serif text-[1.15rem] leading-none tabular-nums">
+                    {t('year', { year: r.year })}
+                  </span>
+                  <span
+                    aria-hidden
+                    className="ms-auto shrink-0 text-ink-60 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-gold-deep rtl:rotate-180 rtl:group-hover:-translate-x-1"
+                  >
+                    &rarr;
+                  </span>
+                </a>
+                <a
+                  href={r.file}
+                  download
+                  aria-label={t('download', { year: r.year })}
+                  className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-ink-60 transition-colors hover:bg-paper-2 hover:text-gold-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-deep/50"
+                >
+                  <span aria-hidden className="text-[0.95rem] leading-none">&darr;</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
       </SectionBody>
     </section>
     </>
