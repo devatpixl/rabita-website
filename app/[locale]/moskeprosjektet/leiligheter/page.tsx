@@ -294,7 +294,15 @@ export default async function ApartmentsPage({
             </svg>
             <ol className="relative grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 md:grid-cols-5 md:gap-x-6">
               {QUALITY_ITEMS.map((k, i) => (
-                <li key={k} className="flex flex-col items-center text-center md:border-s md:border-rule/70 md:first:border-s-0">
+                <li
+                  key={k}
+                  // Phones run two columns, so the fifth plate sat alone on the
+                  // left of its row. It takes the whole row there and centres
+                  // (client, 2026-09-28: "move terrace to center, mobile
+                  // only"). From sm the grid is three across and 3+2 needs no
+                  // help, so the span is undone there.
+                  className="flex flex-col items-center text-center last:col-span-2 sm:last:col-span-1 md:border-s md:border-rule/70 md:first:border-s-0"
+                >
                   {/* The arch: the building's own doorway shape as the icon
                      plate. */}
                   <span className="grid h-16 w-[3.5rem] place-items-center rounded-t-full rounded-b-xl bg-paper-deep/60 md:h-[4.5rem] md:w-16">
