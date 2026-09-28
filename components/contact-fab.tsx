@@ -47,6 +47,7 @@ export function ContactFab() {
   const [question, setQuestion] = useState('');
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState<Err>(null);
 
@@ -103,9 +104,9 @@ export function ContactFab() {
   // it for them, we hand them the message addressed and ready.
   const mailto = useCallback(() => {
     const subject = t('mailSubject');
-    const body = [question, '', name && `— ${name}`, email].filter(Boolean).join('\n');
+    const body = [question, '', name && `— ${name}`, email, phone].filter(Boolean).join('\n');
     return `mailto:${CAMPAIGN.contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  }, [t, question, name, email]);
+  }, [t, question, name, email, phone]);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -121,6 +122,7 @@ export function ContactFab() {
           question: question.trim(),
           email: email.trim(),
           name: name.trim(),
+          phone: phone.trim(),
           locale,
         }),
       });
@@ -280,6 +282,23 @@ export function ContactFab() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder={t('namePlaceholder')}
+                      className={cn(VALUE, 'text-[1rem] text-ink caret-gold-deep placeholder:text-ink-40')}
+                    />
+                  </Field>
+                  {/* Phone, optional (user, 2026-09-28: "name, email, phone
+                     number and message ... phone is missing"). Travels with
+                     the mail and the fallback draft; nothing validates it,
+                     since it is a courtesy for the office, not a requirement
+                     on the visitor. */}
+                  <Field id={`${uid}-p`} label={t('phone')} icon="phone" tone="paper">
+                    <input
+                      id={`${uid}-p`}
+                      type="tel"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      placeholder={t('phonePlaceholder')}
                       className={cn(VALUE, 'text-[1rem] text-ink caret-gold-deep placeholder:text-ink-40')}
                     />
                   </Field>

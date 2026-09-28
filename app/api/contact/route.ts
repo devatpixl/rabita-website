@@ -30,6 +30,7 @@ const schema = z.object({
   question: z.string().trim().min(1).max(2000),
   email: z.string().trim().email().max(200),
   name: z.string().trim().max(120).optional().default(''),
+  phone: z.string().trim().max(60).optional().default(''),
   locale: z.enum(['no', 'en', 'ar']).optional().default('no'),
 });
 
@@ -38,7 +39,7 @@ export async function POST(req: Request) {
   if (!parsed.success) {
     return NextResponse.json({ ok: false, error: 'invalid_payload' }, { status: 400 });
   }
-  const { question, email, name, locale } = parsed.data;
+  const { question, email, name, phone, locale } = parsed.data;
 
   const key = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO;
@@ -55,6 +56,7 @@ export async function POST(req: Request) {
     '—',
     name ? `Navn: ${name}` : null,
     `E-post: ${email}`,
+    phone ? `Telefon: ${phone}` : null,
     `Språk: ${locale}`,
     'Sendt fra kontaktknappen på rabita.no',
   ]

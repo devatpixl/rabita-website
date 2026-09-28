@@ -2261,6 +2261,8 @@
     "emailPlaceholder": "navn@eksempel.no",
     "name": "Navn",
     "namePlaceholder": "Valgfritt",
+    "phone": "Telefon",
+    "phonePlaceholder": "Valgfritt",
     "send": "Send spørsmålet",
     "sending": "Sender …",
     "close": "Lukk",

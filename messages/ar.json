@@ -2257,6 +2257,8 @@
     "emailPlaceholder": "name@example.com",
     "name": "الاسم",
     "namePlaceholder": "اختياري",
+    "phone": "الهاتف",
+    "phonePlaceholder": "اختياري",
     "send": "أرسل السؤال",
     "sending": "جارٍ الإرسال …",
     "close": "إغلاق",
