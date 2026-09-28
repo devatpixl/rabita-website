@@ -16,10 +16,10 @@ import type { ServiceKey } from '@/lib/services';
  * half-empty column — the first stacked cut left the end half of the
  * screen bare.
  *
- * SECTION TWO — the points. "Slik går det til" in four columns divided by
- * hairlines, each opened by the gold numbered disc his reference draws,
- * with a soft rise as they enter. Below md the columns become rows with
- * the disc beside the text. Renders nothing without items.<s>.steps.
+ * SECTION TWO — the points. "Slik går det til" as a ruled list, one step
+ * per row: the gold numbered disc his reference draws, the title, the
+ * body beside it from md. A soft rise as it enters. Renders nothing
+ * without items.<s>.steps.
  */
 export async function ServiceOverview({ s }: { s: ServiceKey }) {
   const t = await getTranslations('servicesIndex');
@@ -70,18 +70,20 @@ export async function ServiceOverview({ s }: { s: ServiceKey }) {
           <SectionBody>
             <SectionHeading>{t('detail.steps')}</SectionHeading>
             <MotionRise>
-              <ol className="mt-10 grid gap-y-8 md:mt-12 md:grid-cols-4 md:gap-y-0">
+              {/* A LIST, not columns (client, 2026-09-28, pointing at the
+                 offer row: "this maybe in points but in list order"). One
+                 step per ruled row, the disc at the start, the title and
+                 the body side by side from md so a row stays one line deep
+                 where the text allows. */}
+              <ol className="mt-10 border-t border-ink/20 md:mt-12">
                 {steps.map((st, i) => (
-                  <li
-                    key={st.title}
-                    className="flex gap-5 md:block md:border-s md:border-ink/15 md:px-7 md:first:border-s-0 md:first:ps-0 lg:px-9 lg:first:ps-0"
-                  >
+                  <li key={st.title} className="flex gap-5 border-b border-rule py-6 md:gap-8 md:py-7">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-deep font-mono text-[0.85rem] font-medium tabular-nums text-paper">
                       {i + 1}
                     </span>
-                    <div className="pt-1.5 md:pt-0">
-                      <h3 className="font-serif text-[1.3rem] leading-[1.25] text-balance text-ink md:mt-7">{st.title}</h3>
-                      <p className="mt-2 text-[15px] leading-relaxed text-ink-60 md:mt-3">{st.body}</p>
+                    <div className="pt-1.5 md:grid md:flex-1 md:grid-cols-12 md:gap-8 md:pt-2">
+                      <h3 className="font-serif text-[1.3rem] leading-[1.25] text-balance text-ink md:col-span-5 md:text-[1.4rem]">{st.title}</h3>
+                      <p className="mt-2 max-w-[56ch] text-body text-ink-60 md:col-span-7 md:mt-0">{st.body}</p>
                     </div>
                   </li>
                 ))}
