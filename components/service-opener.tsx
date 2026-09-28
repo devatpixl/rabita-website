@@ -94,6 +94,32 @@ export async function ServiceOpener({ s, crumb }: { s: ServiceKey; crumb: string
               {t(`items.${s}.body`)}
             </p>
 
+            {/* ── THE MEMBER BENEFITS, IN THE TEXT ─────────────────────
+               Client via the user, 2026-09-28: remove the "Bli medlem"
+               block and instead say, in the opening text, what becoming a
+               member actually gets you — "real benefits". The four named
+               here are the four the site already claims on /bli-medlem
+               and in the membership tiers (joinPage.points, membership
+               .tiers): priority access, newsletter and invitations, the
+               vote at the annual meeting, and that ordinary membership is
+               free. "Mulighet for stemmerett" rather than "stemmerett",
+               because the tiers page ties the vote to the voting tier
+               while /bli-medlem gives it to every member — the site
+               contradicts itself and this sentence is true under both.
+               The link is text, not a button: the page keeps one action. */}
+            <p className="mt-4 max-w-[50ch] text-[clamp(0.9375rem,1.05vw,1.0625rem)] leading-[1.55] text-paper/70">
+              {t.rich('detail.memberNote', {
+                link: (chunks) => (
+                  <a
+                    href={`/${locale}/bli-medlem`}
+                    className="font-semibold text-paper underline decoration-gold/70 underline-offset-4 transition-colors hover:text-gold"
+                  >
+                    {chunks}
+                  </a>
+                ),
+              })}
+            </p>
+
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a
                 href="#enquiry"
