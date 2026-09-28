@@ -2583,6 +2583,85 @@
     "formBody": "Det tar bare ett minutt å registrere seg. Fyll ut skjemaet nedenfor og bli en del av fellesskapet.",
     "boxBody": "Som medlem får du prioritert tilgang til våre tjenester og aktiviteter."
   },
+  "utmeldingPage": {
+    "eyebrow": "Medlemskap",
+    "title": "Vurderer du å melde deg <em>ut</em>?",
+    "lede": "Det er greit å ombestemme seg. Før du gjør det, vil vi bare at du skal vite hva medlemskapet ditt faktisk gjør – og hva du sier fra deg.",
+    "imageAlt": "Bønnesalen i den nye moskeen",
+    "before": {
+      "eyebrow": "Før du bestemmer deg",
+      "heading": "Tre ting medlemskapet ditt bærer",
+      "lede": "Ikke for å presse deg til å bli. Bare for at valget skal være et informert et.",
+      "items": {
+        "vote": {
+          "title": "Stemmerett på årsmøtet",
+          "body": "Som medlem har du én stemme og kan selv stille til styret. Meldt ut mister du den retten – med det samme."
+        },
+        "grant": {
+          "title": "Statsstøtten flytter med deg",
+          "body": "Du kan bare stå som medlem ett sted. Melder du deg ut her, følger tilskuddet ditt med til det trossamfunnet du eventuelt står oppført hos i stedet – ikke til bygget i Calmeyers gate."
+        },
+        "community": {
+          "title": "Tilgang til fellesskapet",
+          "body": "Undervisning, arrangementer og aktiviteter for barn og voksne er noe medlemmer bygger sammen. Det er ikke borte for godt – men det er ikke lenger ditt å forme."
+        }
+      }
+    },
+    "choice": {
+      "eyebrow": "Ditt valg",
+      "heading": "Det er ikke vi som bestemmer om du blir. Det har det aldri vært.",
+      "body": "Kanskje du flytter. Kanskje du har funnet et annet sted å høre til. Kanskje det rett og slett er riktig for deg akkurat nå. Alt vi ber om er at det er et valg du har tatt bevisst – ikke et skjema du fylte ut i farta.",
+      "prompt": "Usikker, eller vil du bare snakke med noen først?",
+      "cta": "Skriv til oss",
+      "imageAlt": "To medlemmer omfavner hverandre etter en samling"
+    },
+    "faq": {
+      "eyebrow": "Spørsmål og svar",
+      "heading": "Vanlige spørsmål om utmelding",
+      "items": {
+        "cost": {
+          "q": "Koster det noe å melde meg ut?",
+          "a": "Nei. Medlemskap i Rabita er gratis, og det er også å melde seg ut. Det er ingen kontingent å si opp."
+        },
+        "rejoin": {
+          "q": "Kan jeg melde meg inn igjen senere?",
+          "a": "Ja, når som helst. Du melder deg inn på nytt på Bli medlem-siden, og medlemskapet er gratis som før."
+        },
+        "data": {
+          "q": "Hva skjer med opplysningene mine?",
+          "a": "Du tas ut av medlemsregisteret, og opplysningene dine behandles i tråd med personvernerklæringen vår."
+        },
+        "attend": {
+          "q": "Kan jeg fortsatt delta på bønn og arrangementer?",
+          "a": "Ja. Moskeen er åpen for alle, medlem eller ikke. Bønn, fredagsbønn og åpne arrangementer er som før."
+        }
+      }
+    },
+    "form": {
+      "eyebrow": "Utmeldingsskjema",
+      "heading": "Meld meg ut",
+      "lede": "Vi bekrefter utmeldingen din per e-post innen 24 timer.",
+      "firstName": "Fornavn",
+      "lastName": "Etternavn",
+      "email": "E-post ved innmelding",
+      "phone": "Telefon (valgfritt)",
+      "reason": "Hvorfor melder du deg ut? (valgfritt)",
+      "reasonHint": "Hjelper oss å bli bedre – svaret ditt endrer ikke utmeldingen.",
+      "child": "Dette gjelder et barn under 15 år, og jeg har foreldreansvar",
+      "submit": "Meld meg ut",
+      "sending": "Sender …",
+      "note": "Fødselsnummer trengs ikke. Personvernerklæringen vår gjelder for opplysningene du sender inn.",
+      "required": "Fyll ut fornavn, etternavn og e-post.",
+      "networkError": "Noe gikk galt. Prøv igjen, eller send utmeldingen som e-post til {email}.",
+      "imageAlt": "Lys gjennom et geometrisk vindu",
+      "mailSubject": "Utmelding fra Rabita",
+      "mailIntro": "Jeg ønsker å melde meg ut av Rabita – Det Islamske Forbundet."
+    },
+    "done": {
+      "title": "Takk. Utmeldingen din er mottatt.",
+      "body": "Vi bekrefter per e-post til {email}. Har du spørsmål, skriv til {contact}."
+    }
+  },
   "apartmentsPage": {
     "units": {
       "eyebrow": "Leilighetene",

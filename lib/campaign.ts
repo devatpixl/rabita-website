@@ -157,6 +157,11 @@ export const CAMPAIGN = Object.freeze({
   openingHours: 'Man til søn, 06:00 til 22:00', // TODO confirm; placeholder
   newsletterEmail: 'nyhetsbrev@rabita.no', // TODO confirm; placeholder
   contactEmail: 'post@rabita.no', // TODO confirm; placeholder
+  // The one address on this list the client gave us himself (ticket
+  // "Nettside medlemskap", 2026-09-17): everything about membership —
+  // joining, leaving, dobbelt medlemskap — is answered from here. The
+  // resignation form (/api/utmelding) sends to it.
+  membershipEmail: 'medlemskap@rabita.no',
   // TODO CONFIRM — CONFLICT. Årsrapport 2024 and 2025 both print
   // "Tlf: 22 99 36 62" on the back cover, beside the Sørligata address.
   // This value is the one that was here, unsourced. One of the two is

@@ -2587,6 +2587,85 @@
     "formBody": "Registering takes a minute. Fill in the form below and become part of the community.",
     "boxBody": "As a member you get priority access to our services and activities."
   },
+  "utmeldingPage": {
+    "eyebrow": "Membership",
+    "title": "Thinking of leaving <em>Rabita</em>?",
+    "lede": "It is fine to change your mind. Before you do, we only want you to know what your membership actually does – and what you are giving up.",
+    "imageAlt": "The prayer hall of the new mosque",
+    "before": {
+      "eyebrow": "Before you decide",
+      "heading": "Three things your membership carries",
+      "lede": "Not to pressure you into staying. Only so the choice is an informed one.",
+      "items": {
+        "vote": {
+          "title": "A vote at the annual meeting",
+          "body": "As a member you have one vote and can stand for the board yourself. Once you leave, that right goes – immediately."
+        },
+        "grant": {
+          "title": "The state grant moves with you",
+          "body": "You can be registered as a member in one place only. If you leave here, your grant follows you to whichever faith community you are registered with instead – not to the building in Calmeyers gate."
+        },
+        "community": {
+          "title": "A place in the community",
+          "body": "Teaching, events and activities for children and adults are things members build together. They do not disappear – but they are no longer yours to shape."
+        }
+      }
+    },
+    "choice": {
+      "eyebrow": "Your choice",
+      "heading": "Whether you stay is not our decision. It never has been.",
+      "body": "Perhaps you are moving. Perhaps you have found somewhere else to belong. Perhaps it is simply the right thing for you right now. All we ask is that it is a choice you have made deliberately – not a form filled in on the way past.",
+      "prompt": "Unsure, or would you rather talk to someone first?",
+      "cta": "Write to us",
+      "imageAlt": "Two members embracing after a gathering"
+    },
+    "faq": {
+      "eyebrow": "Questions and answers",
+      "heading": "Common questions about leaving",
+      "items": {
+        "cost": {
+          "q": "Does it cost anything to leave?",
+          "a": "No. Membership at Rabita is free, and so is leaving. There is no fee to cancel."
+        },
+        "rejoin": {
+          "q": "Can I join again later?",
+          "a": "Yes, at any time. You sign up again on the Become a member page, and membership is free as before."
+        },
+        "data": {
+          "q": "What happens to my details?",
+          "a": "You are removed from the membership register, and your details are handled in line with our privacy policy."
+        },
+        "attend": {
+          "q": "Can I still attend prayers and events?",
+          "a": "Yes. The mosque is open to everyone, member or not. Prayers, Friday prayer and open events are as before."
+        }
+      }
+    },
+    "form": {
+      "eyebrow": "Resignation form",
+      "heading": "Remove my membership",
+      "lede": "We confirm your resignation by e-mail within 24 hours.",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "E-mail used when you joined",
+      "phone": "Phone (optional)",
+      "reason": "Why are you leaving? (optional)",
+      "reasonHint": "Helps us improve – your answer does not affect the resignation.",
+      "child": "This concerns a child under 15, and I am the parent or guardian",
+      "submit": "Remove my membership",
+      "sending": "Sending …",
+      "note": "No national identity number is needed. Our privacy policy applies to what you submit.",
+      "required": "Fill in first name, last name and e-mail.",
+      "networkError": "Something went wrong. Try again, or send your resignation by e-mail to {email}.",
+      "imageAlt": "Light through a geometric window",
+      "mailSubject": "Resignation from Rabita",
+      "mailIntro": "I wish to end my membership of Rabita – Det Islamske Forbundet."
+    },
+    "done": {
+      "title": "Thank you. Your resignation has been received.",
+      "body": "We will confirm by e-mail to {email}. If you have questions, write to {contact}."
+    }
+  },
   "apartmentsPage": {
     "units": {
       "eyebrow": "The apartments",
