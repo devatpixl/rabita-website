@@ -111,16 +111,24 @@ export default async function ServiceDetail({
           <HallBackdrop wash={62} />
           <Section id="enquiry" tone="none" className="scroll-mt-24 bg-paper/45 pb-20 md:pb-28">
             <SectionBody>
-              <Eyebrow tone="gold-deep">{plainTitle}</Eyebrow>
-              <SectionHeading className="mt-5">{t('detail.request')}</SectionHeading>
-              <p className="mt-4 max-w-[42ch] text-body text-ink-60">{t('detail.requestLede')}</p>
+              {/* ── ONE CENTRED COLUMN ────────────────────────────────────
+                 The "Bli medlem" aside that stood beside the form was
+                 removed on the client's instruction (2026-09-28, via the
+                 user, with a screenshot of exactly that block). With the
+                 aside gone a form in the start half of a twelve-column grid
+                 leaves the end half empty, so the enquiry becomes one
+                 column, 40rem, centred on the page — the reference does the
+                 same — with the heading, the lede and the card in it and
+                 the text still left-aligned. */}
+              <div className="mx-auto max-w-[40rem]">
+                <Eyebrow tone="gold-deep">{plainTitle}</Eyebrow>
+                <SectionHeading className="mt-5">{t('detail.request')}</SectionHeading>
+                <p className="mt-4 max-w-[42ch] text-body text-ink-60">{t('detail.requestLede')}</p>
 
-              <div className="mt-10 md:grid md:grid-cols-12 md:items-center md:gap-12 lg:gap-16">
-                <div className="md:col-span-7">
+                <div className="mt-10">
                   <RequestForm subject={s as RequestSubject} card rule={false} />
                   {/* islamic.no closes its form on "eller kontakt oss direkte";
-                     one line, the same address the hero's second action and
-                     its strip carry. */}
+                     one line, the same address the hero's second action carries. */}
                   <p className="mt-5 text-[14px] leading-snug text-ink-60">
                     {t('detail.orWrite')}{' '}
                     <a href={`mailto:${email}`} className="font-semibold text-ink underline decoration-gold underline-offset-4 hover:text-gold-deep">
@@ -128,28 +136,6 @@ export default async function ServiceDetail({
                     </a>
                   </p>
                 </div>
-
-                {/* The "Bli medlem" aside, exactly as the client approved it
-                   on 2026-09-20 (see the same block in the fall-through
-                   template below). The first cut moved it to a band under
-                   the form; back beside it, because that is his layout and
-                   the facts it was competing with now live in the hero. */}
-                <aside className="mt-12 md:col-span-5 md:mt-0 md:border-s md:border-rule md:ps-10 lg:ps-14">
-                  <Eyebrow tone="gold-deep">{tmp('eyebrow')}</Eyebrow>
-                  <h2 className="mt-5 max-w-[24ch] font-serif text-[clamp(1.3rem,1.9vw,1.55rem)] leading-[1.18] text-balance text-ink">
-                    {tj('headline')}
-                  </h2>
-                  <p className="mt-3 max-w-[32ch] text-[14px] leading-snug text-ink-60">{tj('boxBody')}</p>
-                  <Link
-                    href={`/${locale}/bli-medlem`}
-                    className="group mt-6 inline-flex min-h-11 items-center gap-2 rounded-full border border-ink px-6 text-[14px] font-semibold text-ink transition-colors hover:border-gold-deep hover:bg-gold-deep hover:text-paper"
-                  >
-                    {tm('join')}
-                    <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">
-                      &rarr;
-                    </span>
-                  </Link>
-                </aside>
               </div>
             </SectionBody>
           </Section>
