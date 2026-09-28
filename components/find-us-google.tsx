@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { cn } from '@/lib/cn';
 import { DIRECTIONS_URL, LANDMARKS, ROUTES, VISIT_EMBED_QUERY } from '@/lib/location';
+import { MyMapsFrame } from './my-maps-frame';
 
 // The apartments map, as a real Google map (client, 2026-09-15: "Real google
 // maps / Remove the lines / Just put in the point").
@@ -61,6 +62,19 @@ const HEADER_PX = 67;
 // now hold all six pins with the Opera well clear of the bottom chrome.
 const MAP_CENTRE = '59.9137,10.7433';
 const MAP_ZOOM = 14;
+
+/** The opening view BELOW sm, where the frame is ~330px. Slottet is 1.8 km
+ *  west of the rest and a phone frame at this zoom is ~1.4 km across, so a
+ *  view that includes it cannot include the other five properly: on the
+ *  laptop centre the five central pins were jammed against the right edge
+ *  with the west half of the frame empty (client, 2026-09-28, screenshot of
+ *  the map panned to where he wanted it). This is the midpoint of THOSE five
+ *  — Regjeringskvartalet 10.7426 to the bus terminal 10.759 — so Slottet sits
+ *  one swipe west rather than the whole map being made worse to fit it. Same
+ *  zoom: at 13 the labels are unreadable at phone size. */
+// Latitude ~80 m north of the five's midpoint: the /leiligheter frame is
+// 18rem on phones and at the midpoint it cut the head off Rabita's pin.
+const MAP_CENTRE_PHONE = '59.9132,10.7508';
 
 /** The five he listed in September, plus Slottet (Versjon 6, 2026-09-22:
  *  "Legg til Slottet ... i tillegg til de allerede viste"). Rabita itself is
@@ -162,37 +176,46 @@ export async function FindUsGoogle({
             mapOnly ? 'h-[23rem] sm:h-[23.5rem]' : 'h-[18rem] sm:h-[21rem]',
           )}
         >
-          <iframe
-            src={
-              place === 'visit'
-                ? // A PLAIN PLACE EMBED, not My Maps. Three of the client's
-                  // complaints about this box disappear by construction:
-                  // there is no owner title bar, so no black stripe to crop;
-                  // it fills its frame at any width, so no empty half; and
-                  // the single pin is labelled by Google itself, so there
-                  // are no marker names to go missing. Keyless and stable —
-                  // ?q=<query>&output=embed is the long-standing form.
-                  //
-                  // The query leads with the business name rather than the
-                  // street so the pin reads "Rabita" — see VISIT_EMBED_QUERY
-                  // in lib/location.ts for what was verified and what is
-                  // still best-effort about that.
-                  `https://www.google.com/maps?q=${encodeURIComponent(VISIT_EMBED_QUERY)}&hl=${locale === 'ar' ? 'ar' : locale === 'en' ? 'en' : 'no'}&z=15&output=embed`
-                : `https://www.google.com/maps/d/embed?mid=${MAP_MID}&ehbc=2E312F&ll=${MAP_CENTRE}&z=${MAP_ZOOM}`
-            }
-            title={t('mapTitle')}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            // The pull-up is the My Maps title-bar crop and nothing else.
-            // A place embed has no bar, and cropping one would only hide the
-            // top of the map.
-            style={
-              place === 'visit'
-                ? { height: '100%' }
-                : { marginTop: `-${HEADER_PX}px`, height: `calc(100% + ${HEADER_PX}px)` }
-            }
-            className="block w-full border-0"
-          />
+          {place === 'visit' ? (
+            // A PLAIN PLACE EMBED, not My Maps. Three of the client's
+            // complaints about this box disappear by construction: there is
+            // no owner title bar, so no black stripe to crop; it fills its
+            // frame at any width, so no empty half; and the single pin is
+            // labelled by Google itself, so there are no marker names to go
+            // missing. Keyless and stable — ?q=<query>&output=embed is the
+            // long-standing form.
+            //
+            // The query leads with the business name rather than the street
+            // so the pin reads "Rabita" — see VISIT_EMBED_QUERY in
+            // lib/location.ts for what was verified and what is still
+            // best-effort about that.
+            //
+            // No pull-up: a place embed has no title bar, and cropping one
+            // would only hide the top of the map.
+            //
+            // Unused since 2026-09-28 (the footer went back to the landmark
+            // map) but kept: it is the one keyless way to show the visit
+            // address, and the client has changed his mind on this box twice.
+            <iframe
+              src={`https://www.google.com/maps?q=${encodeURIComponent(VISIT_EMBED_QUERY)}&hl=${locale === 'ar' ? 'ar' : locale === 'en' ? 'en' : 'no'}&z=15&output=embed`}
+              title={t('mapTitle')}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              style={{ height: '100%' }}
+              className="block w-full border-0"
+            />
+          ) : (
+            // The landmark map. Two opening views, chosen on the client by
+            // viewport — see my-maps-frame.tsx for why it is done there. The
+            // pull-up is the My Maps title-bar crop and nothing else.
+            <MyMapsFrame
+              src={`https://www.google.com/maps/d/embed?mid=${MAP_MID}&ehbc=2E312F&ll=${MAP_CENTRE}&z=${MAP_ZOOM}`}
+              phoneSrc={`https://www.google.com/maps/d/embed?mid=${MAP_MID}&ehbc=2E312F&ll=${MAP_CENTRE_PHONE}&z=${MAP_ZOOM}`}
+              title={t('mapTitle')}
+              style={{ marginTop: `-${HEADER_PX}px`, height: `calc(100% + ${HEADER_PX}px)` }}
+              className="block w-full border-0"
+            />
+          )}
         </div>
 
         {/* NO LABEL PLATE OF OUR OWN — and the reason is worth keeping.
