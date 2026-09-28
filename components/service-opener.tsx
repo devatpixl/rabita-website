@@ -33,6 +33,30 @@ import { SERVICE_CONTACT, SERVICE_IMAGE, SERVICE_STORY, type ServiceKey } from '
  * The title rule from the 09-23 opener holds: <em> becomes a block only
  * when the title opens with it, decided per locale from the raw string.
  */
+// ── WHERE A PORTRAIT IS CROPPED TO, IN THE WIDE HERO ─────────────────────
+// Six page photographs are portrait (3:4 or 4:5). In a 1440-wide hero the
+// box is roughly 2.2:1, so object-cover shows about a third of the frame's
+// height, and the objectClass tuned for the old square plate put that band
+// through the torsos — on janaza the heads were gone entirely (user,
+// 2026-09-29, with a screenshot). Each value below is the band that keeps
+// the subject, read off the source file:
+//   janaza     rows of men, heads at 28–40% of the height       → 25%
+//   shahada    the caller's face at 15–35%                        → 22%
+//   hajj-umrah the Kaaba's body at 25–65%, skyline above it       → 45%
+//   skole      the children's faces at 35–55%                     → 40%
+//   koran      the teacher at the board 10–45%, pupils below      → 35%
+//   counselling hands and cups at 40–65%                          → 45%
+// Landscape sources keep SERVICE_STORY's own objectClass. On a phone the box
+// is portrait and shows most of the frame, so these barely move anything.
+const HERO_POSITION: Partial<Record<ServiceKey, string>> = {
+  janaza: '50% 25%',
+  shahada: '50% 22%',
+  'hajj-umrah': '50% 45%',
+  skole: '50% 40%',
+  koran: '50% 35%',
+  counselling: '50% 45%',
+};
+
 export async function ServiceOpener({ s, crumb }: { s: ServiceKey; crumb: string }) {
   const t = await getTranslations('servicesIndex');
   const locale = await getLocale();
@@ -60,8 +84,11 @@ export async function ServiceOpener({ s, crumb }: { s: ServiceKey; crumb: string
             // A shade darker and quieter than the plate treatment: white
             // type has to hold on it, and a wedding photograph at full
             // saturation under a dusk scrim goes muddy rather than warm.
-            style={{ filter: 'saturate(0.8) contrast(1.05) brightness(0.82)' }}
-            className={cn('object-cover', story.objectClass)}
+            style={{
+              filter: 'saturate(0.8) contrast(1.05) brightness(0.82)',
+              ...(HERO_POSITION[s] ? { objectPosition: HERO_POSITION[s] } : {}),
+            }}
+            className={cn('object-cover', !HERO_POSITION[s] && story.objectClass)}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-dusk via-dusk/55 to-dusk/10" />
           <div
