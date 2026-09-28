@@ -246,34 +246,10 @@ export function ContactFab() {
                 <p className="mt-3 px-1 text-[13px] leading-relaxed text-ink-60">{t('lede')}</p>
 
                 <div className="mt-5 space-y-2.5">
-                  <Field id={`${uid}-q`} label={t('question')} icon="message" tone="paper">
-                    <textarea
-                      id={`${uid}-q`}
-                      rows={3}
-                      value={question}
-                      onChange={(e) => setQuestion(e.target.value)}
-                      placeholder={t('questionPlaceholder')}
-                      className={cn(VALUE, 'resize-none text-[1rem] text-ink caret-gold-deep placeholder:text-ink-40')}
-                    />
-                  </Field>
-                  <Field
-                    id={`${uid}-e`}
-                    label={t('email')}
-                    icon="mail"
-                    tone="paper"
-                    invalid={error === 'email'}
-                  >
-                    <input
-                      id={`${uid}-e`}
-                      type="email"
-                      inputMode="email"
-                      autoComplete="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder={t('emailPlaceholder')}
-                      className={cn(VALUE, 'text-[1rem] text-ink caret-gold-deep placeholder:text-ink-40')}
-                    />
-                  </Field>
+                  {/* Who first, then what (user, 2026-09-28: "name, number,
+                     mail should come first, then message"). The three short
+                     wells lead and the message closes, so the panel reads as
+                     a form rather than a text box with fields under it. */}
                   <Field id={`${uid}-n`} label={t('name')} icon="person" tone="paper">
                     <input
                       id={`${uid}-n`}
@@ -300,6 +276,34 @@ export function ContactFab() {
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder={t('phonePlaceholder')}
                       className={cn(VALUE, 'text-[1rem] text-ink caret-gold-deep placeholder:text-ink-40')}
+                    />
+                  </Field>
+                  <Field
+                    id={`${uid}-e`}
+                    label={t('email')}
+                    icon="mail"
+                    tone="paper"
+                    invalid={error === 'email'}
+                  >
+                    <input
+                      id={`${uid}-e`}
+                      type="email"
+                      inputMode="email"
+                      autoComplete="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder={t('emailPlaceholder')}
+                      className={cn(VALUE, 'text-[1rem] text-ink caret-gold-deep placeholder:text-ink-40')}
+                    />
+                  </Field>
+                  <Field id={`${uid}-q`} label={t('question')} icon="message" tone="paper">
+                    <textarea
+                      id={`${uid}-q`}
+                      rows={3}
+                      value={question}
+                      onChange={(e) => setQuestion(e.target.value)}
+                      placeholder={t('questionPlaceholder')}
+                      className={cn(VALUE, 'resize-none text-[1rem] text-ink caret-gold-deep placeholder:text-ink-40')}
                     />
                   </Field>
                 </div>
