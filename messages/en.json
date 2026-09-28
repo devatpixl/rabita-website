@@ -1829,7 +1829,26 @@
           {
             "title": "Support for the family"
           }
-        ]
+        ],
+        "steps": [
+          {
+            "title": "Get in touch as soon as possible",
+            "body": "Call or write to us when someone has died, and we will help you onward."
+          },
+          {
+            "title": "Funeral home",
+            "body": "For practical and legal help we recommend Al-Khidmat Begravelsesbyrå or Muslimsk Begravelsesbyrå."
+          },
+          {
+            "title": "Janazah prayer in the mosque",
+            "body": "Family and community gather for the janazah prayer, led by an imam."
+          },
+          {
+            "title": "Support for the bereaved",
+            "body": "We stay with the family through the whole process."
+          }
+        ],
+        "nextLast": "We help you onward."
       },
       "shahada": {
         "title": "<em>Shahada</em> (becoming Muslim)",
@@ -1847,7 +1866,22 @@
           {
             "title": "Follow-up and community afterwards"
           }
-        ]
+        ],
+        "steps": [
+          {
+            "title": "An informal conversation",
+            "body": "Get in touch and we will arrange a meeting in the mosque. You do not need to have decided anything."
+          },
+          {
+            "title": "Shahada",
+            "body": "The declaration of faith is made in the mosque, with witnesses if you wish."
+          },
+          {
+            "title": "Follow-up and community",
+            "body": "A course for new Muslims every Friday, and a community to belong to."
+          }
+        ],
+        "nextLast": "We arrange a meeting in the mosque."
       },
       "counselling": {
         "title": "Counselling and <em>mediation</em>",
@@ -1865,7 +1899,22 @@
           {
             "title": "Conflict mediation"
           }
-        ]
+        ],
+        "steps": [
+          {
+            "title": "Get in touch",
+            "body": "Tell us briefly what the conversation should be about, and when suits you. The service is free."
+          },
+          {
+            "title": "The conversation",
+            "body": "A confidential conversation with an imam or a female counsellor. Everything is treated in confidence."
+          },
+          {
+            "title": "Mediation",
+            "body": "When both parties wish it, we can act as a neutral party in a conflict."
+          }
+        ],
+        "nextLast": "We find a time that suits you."
       },
       "hajj-umrah": {
         "title": "Hajj and <em>umrah</em>",
@@ -1883,7 +1932,26 @@
           {
             "title": "Travel guide"
           }
-        ]
+        ],
+        "steps": [
+          {
+            "title": "Contact the Hajj and Umrah office",
+            "body": "The office is based in Rabita’s premises. Ask about the next journey."
+          },
+          {
+            "title": "Information meeting",
+            "body": "Information and guidance before both hajj and umrah."
+          },
+          {
+            "title": "Preparation course",
+            "body": "A course before departure, for both hajj and umrah."
+          },
+          {
+            "title": "The journey",
+            "body": "Our own umrah journeys several times a year, with a travel guide."
+          }
+        ],
+        "nextLast": "You hear about the next journey."
       },
       "skole": {
         "title": "<em>Rabita school</em>",
@@ -1901,7 +1969,22 @@
           {
             "title": "A safe learning environment"
           }
-        ]
+        ],
+        "steps": [
+          {
+            "title": "Get in touch",
+            "body": "The child’s age and year group."
+          },
+          {
+            "title": "A place in a class",
+            "body": "We reply about available places. New members of Rabita are given priority."
+          },
+          {
+            "title": "Weekend teaching",
+            "body": "Once a week, on Saturday or Sunday."
+          }
+        ],
+        "nextLast": "We reply about available places."
       },
       "koran": {
         "title": "<em>The Qur’an school</em>",
@@ -1955,7 +2038,22 @@
           {
             "title": "Tours of the mosque"
           }
-        ]
+        ],
+        "steps": [
+          {
+            "title": "Send a request",
+            "body": "School or organisation, year group and preferred date."
+          },
+          {
+            "title": "We arrange the visit",
+            "body": "A school visit, a talk, or a tour of the mosque."
+          },
+          {
+            "title": "The meeting",
+            "body": "Young guides answer questions about faith, identity and life as a Muslim in Norway."
+          }
+        ],
+        "nextLast": "We arrange the visit."
       },
       "norsk": {
         "title": "Norwegian <em>course</em>",
@@ -2027,7 +2125,22 @@
           {
             "title": "Guidance for families"
           }
-        ]
+        ],
+        "steps": [
+          {
+            "title": "Read about foster care",
+            "body": "Bufdir has gathered information about the scheme at bufdir.no/fosterhjem."
+          },
+          {
+            "title": "An informal conversation",
+            "body": "We explain how the scheme works and answer your questions."
+          },
+          {
+            "title": "On to the right agency",
+            "body": "When you are ready, we help you take the next step."
+          }
+        ],
+        "nextLast": "We help you on to the right agency."
       },
       "id-for-alle": {
         "title": "Eid <em>for everyone</em>",

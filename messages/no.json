@@ -1833,7 +1833,26 @@
           {
             "title": "Støtte til pårørende"
           }
-        ]
+        ],
+        "steps": [
+          {
+            "title": "Ta kontakt så snart som mulig",
+            "body": "Ring eller skriv til oss ved dødsfall, så hjelper vi dere videre."
+          },
+          {
+            "title": "Begravelsesbyrå",
+            "body": "For praktisk og juridisk hjelp anbefaler vi Al-Khidmat Begravelsesbyrå eller Muslimsk Begravelsesbyrå."
+          },
+          {
+            "title": "Janazah-bønn i moskeen",
+            "body": "Familie og fellesskap samles til janazah-bønn, ledet av en imam."
+          },
+          {
+            "title": "Støtte til pårørende",
+            "body": "Vi følger familien gjennom hele prosessen."
+          }
+        ],
+        "nextLast": "Vi hjelper dere videre."
       },
       "shahada": {
         "title": "<em>Shahada</em> (bli muslim)",
@@ -1851,7 +1870,22 @@
           {
             "title": "Oppfølging og fellesskap etterpå"
           }
-        ]
+        ],
+        "steps": [
+          {
+            "title": "En uforpliktende samtale",
+            "body": "Ta kontakt, så avtaler vi et møte i moskeen. Du trenger ikke å ha bestemt deg."
+          },
+          {
+            "title": "Shahada",
+            "body": "Trosbekjennelsen avlegges i moskeen, med vitner om du ønsker det."
+          },
+          {
+            "title": "Oppfølging og fellesskap",
+            "body": "Kurs for nye muslimer hver fredag, og et fellesskap å høre til i."
+          }
+        ],
+        "nextLast": "Vi avtaler et møte i moskeen."
       },
       "counselling": {
         "title": "Samtaler og <em>megling</em>",
@@ -1869,7 +1903,22 @@
           {
             "title": "Konfliktmegling"
           }
-        ]
+        ],
+        "steps": [
+          {
+            "title": "Ta kontakt",
+            "body": "Skriv kort hva samtalen bør handle om, og når det passer for deg. Tjenesten er gratis."
+          },
+          {
+            "title": "Samtalen",
+            "body": "Fortrolig samtale med imam eller kvinnelig rådgiver. Alt behandles konfidensielt."
+          },
+          {
+            "title": "Megling",
+            "body": "Når begge parter ønsker det, kan vi være en nøytral part i konfliktsituasjoner."
+          }
+        ],
+        "nextLast": "Vi finner en tid som passer."
       },
       "hajj-umrah": {
         "title": "Hajj og <em>umrah</em>",
@@ -1887,7 +1936,26 @@
           {
             "title": "Reiseguide"
           }
-        ]
+        ],
+        "steps": [
+          {
+            "title": "Ta kontakt med Hajj- og umrah-kontoret",
+            "body": "Kontoret holder til i Rabitas lokaler. Hør om neste reise."
+          },
+          {
+            "title": "Informasjonsmøte",
+            "body": "Informasjon og veiledning før både hajj og umrah."
+          },
+          {
+            "title": "Forberedelseskurs",
+            "body": "Kurs før avreise, for både hajj og umrah."
+          },
+          {
+            "title": "Reisen",
+            "body": "Egne umrah-reiser flere ganger i året, med reiseguide."
+          }
+        ],
+        "nextLast": "Du får høre om neste reise."
       },
       "skole": {
         "title": "<em>Rabita skole</em>",
@@ -1905,7 +1973,22 @@
           {
             "title": "Trygt læringsmiljø"
           }
-        ]
+        ],
+        "steps": [
+          {
+            "title": "Ta kontakt",
+            "body": "Barnets alder og klassetrinn."
+          },
+          {
+            "title": "Plass i en klasse",
+            "body": "Vi svarer om ledig plass. Nye medlemmer av Rabita prioriteres."
+          },
+          {
+            "title": "Undervisning i helgen",
+            "body": "Én gang i uken, lørdag eller søndag."
+          }
+        ],
+        "nextLast": "Vi svarer om ledig plass."
       },
       "koran": {
         "title": "<em>Koranskolen</em>",
@@ -1959,7 +2042,22 @@
           {
             "title": "Omvisninger i moskeen"
           }
-        ]
+        ],
+        "steps": [
+          {
+            "title": "Send en forespørsel",
+            "body": "Skole eller organisasjon, klassetrinn og ønsket dato."
+          },
+          {
+            "title": "Vi avtaler besøket",
+            "body": "Skolebesøk, foredrag eller omvisning i moskeen."
+          },
+          {
+            "title": "Møtet",
+            "body": "Unge veivisere svarer på spørsmål om tro, identitet og livet som muslim i Norge."
+          }
+        ],
+        "nextLast": "Vi avtaler besøket."
       },
       "norsk": {
         "title": "Kurs i <em>norsk</em>",
@@ -2031,7 +2129,22 @@
           {
             "title": "Veiledning for familier"
           }
-        ]
+        ],
+        "steps": [
+          {
+            "title": "Les om fosterhjem",
+            "body": "Bufdir har samlet informasjon om ordningen på bufdir.no/fosterhjem."
+          },
+          {
+            "title": "En uforpliktende samtale",
+            "body": "Vi forklarer hvordan ordningen fungerer og svarer på det du lurer på."
+          },
+          {
+            "title": "Videre til rett instans",
+            "body": "Når du er klar, hjelper vi deg videre."
+          }
+        ],
+        "nextLast": "Vi hjelper deg videre til rett instans."
       },
       "id-for-alle": {
         "title": "Id <em>for alle</em>",

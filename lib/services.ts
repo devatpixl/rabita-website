@@ -913,7 +913,10 @@ export function galleryOrientation(srcs: readonly string[]): 'portrait' | 'lands
 // guarded and renders nothing when its copy is absent — but it is only
 // worth doing once items.<key>.longBody and .offer are checked, because the
 // pilot prints both and they have never been on a page before.
-export const SERVICE_PILOT = ['nikah'] as const satisfies readonly ServiceKey[];
+// 2026-09-29: rolled to all eighteen on the client's word ("apply to all
+// pages"). Kept as a list rather than deleted so a service can be pulled
+// back to the old template with one edit if one of them misbehaves.
+export const SERVICE_PILOT = SERVICE_KEYS;
 
 // Who answers for a service, when it is not the front desk. Locale-neutral
 // facts only (an address is a string in every language); anything that needs
@@ -925,7 +928,14 @@ export const SERVICE_PILOT = ['nikah'] as const satisfies readonly ServiceKey[];
 //   shahada      nyemuslimer@rabita.no                  rabita.no/shahada
 //   veivisere    veiviser@rabita.no                     rabita.no/muslimske-veivisere
 //   skole/koran/arabisk/kurs-islam  undervisning@rabita.no · WhatsApp 9600 4046
-// Only nikah is wired while the pilot runs; the rest go in with their pages.
+// The hero's "Skriv til oss" and the line under the form point at these.
+// The hajj office publishes a Gmail address; it is theirs, printed as is.
 export const SERVICE_CONTACT: Partial<Record<ServiceKey, { email?: string; phone?: string }>> = {
-  nikah: {},
+  'hajj-umrah': { email: 'Hajjogumrah@gmail.com', phone: '40 29 20 20' },
+  shahada: { email: 'nyemuslimer@rabita.no' },
+  veivisere: { email: 'veiviser@rabita.no' },
+  skole: { email: 'undervisning@rabita.no' },
+  koran: { email: 'undervisning@rabita.no' },
+  arabisk: { email: 'undervisning@rabita.no' },
+  'kurs-islam': { email: 'undervisning@rabita.no' },
 };

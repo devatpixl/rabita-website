@@ -4,7 +4,7 @@ import { SectionBody } from './primitives';
 import { Accent } from './accent';
 import { cn } from '@/lib/cn';
 import { CAMPAIGN } from '@/lib/campaign';
-import { SERVICE_CONTACT, SERVICE_STORY, type ServiceKey } from '@/lib/services';
+import { SERVICE_CONTACT, SERVICE_IMAGE, SERVICE_STORY, type ServiceKey } from '@/lib/services';
 
 /**
  * The pilot hero, second cut (2026-09-28, same evening).
@@ -38,7 +38,9 @@ export async function ServiceOpener({ s, crumb }: { s: ServiceKey; crumb: string
   const locale = await getLocale();
   const rtl = locale === 'ar';
 
-  const story = SERVICE_STORY[s];
+  // SERVICE_STORY is Partial; every service has an index card image, so a
+  // service added before its page photograph arrives still gets a picture.
+  const story = SERVICE_STORY[s] ?? { src: SERVICE_IMAGE[s], objectClass: 'object-center' };
   const rawTitle = t.raw(`items.${s}.title`) as string;
   const plainTitle = rawTitle.replace(/<\/?em>/g, '');
   const shortTitle = plainTitle.split('(')[0]!.trim();
