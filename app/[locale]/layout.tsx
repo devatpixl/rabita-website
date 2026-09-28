@@ -7,6 +7,7 @@ import { cairo, fraunces, inter, jetbrainsMono, notoSansArabic } from '../fonts'
 import { ConsentBanner } from '@/components/consent-banner';
 import { ContactFab } from '@/components/contact-fab';
 import { Footer } from '@/components/footer';
+import { NewsletterBand } from '@/components/newsletter-band';
 import { FindUsGoogle } from '@/components/find-us-google';
 import { GivingSheet } from '@/components/giving-sheet';
 import { NavBar } from '@/components/nav-bar';
@@ -74,6 +75,13 @@ export default async function LocaleLayout({
             <NavBar />
           </PrayerPanelProvider>
           <div id="main" className="pb-16 md:pb-0">{children}</div>
+          {/* The newsletter band, on every page, as the top of the footer
+             (user, 2026-09-28: "add send newsletter in the footer like in
+             aktuelt page, so attach that to top of footer everywhere"). It
+             was /aktuelt's own section until then; that page no longer
+             renders it itself, or it would appear twice. Dusk on dusk, so
+             band and footer read as one block. */}
+          <NewsletterBand />
           {/* The footer map is rendered HERE, on the server, and passed in.
              Footer is 'use client' and FindUsGoogle is an async server
              component, so the footer cannot import it — see the note beside

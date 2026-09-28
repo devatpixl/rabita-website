@@ -4,7 +4,9 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Accent } from './accent';
 
-// The newsletter band on /aktuelt.
+// The newsletter band. On /aktuelt alone until 2026-09-28; now rendered by
+// the layout above the footer on every page (user: "attach that to top of
+// footer everywhere"). The placement notes below are /aktuelt's history.
 //
 // The client wrote this section in Tekst (endelig) (Sept 2026) — heading,
 // body, field and button — and left one thing to us: "Hor denne seksjonen
@@ -73,7 +75,7 @@ export function NewsletterBand() {
   // how often Rabita actually sends. A cadence we promise and they break is
   // worse than none. Add it the day he gives a real number.
   return (
-    <section className="star-texture relative isolate overflow-hidden bg-dusk py-10 text-paper md:py-14">
+    <section data-print-hide className="star-texture relative isolate overflow-hidden bg-dusk py-10 text-paper md:py-14">
       {/* NO SEPARATE WATERMARK. The first draft floated an oversized
          rabita-mark in the corner at 4%; .star-texture already tiles that
          same mark across the whole band as its ground, so it was the same

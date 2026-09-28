@@ -1,7 +1,6 @@
 import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
-import { NewsletterBand } from '@/components/newsletter-band';
 import { EventsCalendar } from '@/components/events-calendar';
 import { PageBand } from '@/components/page-band';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
@@ -250,11 +249,10 @@ export default async function NewsPage({
          statically generated. */}
       <EventsCalendar />
 
-      {/* Under the calendar, not above it (client, 2026-09-20: "in aktuelt,
-         move this down below the calendar"). It sat between Arrangementer
-         and the calendar until then; the note in the component records what
-         that position was buying and what moving it costs. */}
-      <NewsletterBand />
+      {/* The newsletter band is no longer this page's: since 2026-09-28 the
+         layout renders it above the footer on every page, which on this page
+         is the same place it stood (under the calendar, client 2026-09-20).
+         Rendering it here too would show it twice. */}
 
       {/* ── THE NUMBERED NEWS LIST CAME OFF HERE, 2026-09-16 ──────────
          Client: "remove this section". It was three rows — gold numeral,
