@@ -35,21 +35,39 @@ export function Footer({ map }: { map?: ReactNode }) {
     <footer data-print-hide className="relative isolate z-[1] bg-dusk text-paper">
       {/* One band, three columns: the lockup with the contact ledger, the
          social row, and the map plate on the right. Two columns from sm,
-         three from lg; below lg the map comes FIRST (see the order-first
+         three from xl; below xl the map comes FIRST (see the order-first
          note on it).
+
+         THREE COLUMNS FROM xl, NOT lg, AND THE BAND IS max-w-7xl, NOT 6xl
+         (2026-09-28). Both follow from one number: the landmark map came back
+         into this footer (client: the Sørligata pin "didn't turn out very
+         well", he wants the map "where it clearly shows how centrally located
+         the mosque is"), and a My Maps embed needs ≥520px of width before
+         Google's own bottom chrome stops colliding with itself. On the 6xl
+         band a 12-column 4/3/5 split gave the iframe 417px. The map track is
+         now minmax(0,5fr) against 3fr for the register and an auto column for
+         the social row, on a 1280px band: register ~346, map ~576 → iframe
+         ~556. Below 1280 the 3fr track starves the register (the prayer line
+         wraps), so the two-column layout holds up to xl instead of lg — on a
+         1024–1279 screen the map runs full width above the columns, which is
+         what phones and tablets already did.
+
+         The 7xl band sits 64px wider each side than the 6xl page sections
+         above it. Deliberate: the alternative was a narrower map, and the
+         site already mixes 6xl with 84rem bands.
 
          The middle column carried the newsletter above the social row until
          2026-09-23; see the note where it stood. */}
-      <div className="mx-auto max-w-6xl px-5 py-8 sm:px-6 sm:py-10 md:py-16">
-        <div className="grid gap-7 sm:grid-cols-2 sm:gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-4">
+      <div className="mx-auto max-w-7xl px-5 py-8 sm:px-6 sm:py-10 md:py-16">
+        <div className="grid gap-7 sm:grid-cols-2 sm:gap-10 xl:grid-cols-[minmax(0,3fr)_auto_minmax(0,5fr)]">
+          <div>
             {/* The lockup signs the page — mark plus both lines of the name.
                lg and up only: below that it moves to the foot of the footer,
                next to the social links, as its own grid item further down
                (client, 2026-08-30). A signature belongs at the end. */}
             <Link
               href={p('')}
-              className="hidden items-center gap-4 transition-opacity hover:opacity-80 lg:inline-flex"
+              className="hidden items-center gap-4 transition-opacity hover:opacity-80 xl:inline-flex"
               aria-label={`${tNav('orgName')}, ${tNav('wordmark')}`}
             >
               <Image src="/logo/rabita-mark-256.png" alt="" width={56} height={56} className="h-14 w-14" />
@@ -82,7 +100,7 @@ export function Footer({ map }: { map?: ReactNode }) {
                the year, and the office keeps its own hours. So the prayer
                window says what it is and links to the table that has the
                actual minutes, and the office gets its own row. */}
-            <dl className="divide-y divide-paper/10 border-y border-paper/10 lg:mt-8 sm:space-y-4 sm:divide-y-0 sm:border-0">
+            <dl className="divide-y divide-paper/10 border-y border-paper/10 xl:mt-8 sm:space-y-4 sm:divide-y-0 sm:border-0">
               {/* ÅPENT FOR BØNN SITS ABOVE THE ADDRESS.
                  Client, Versjon 6 (2026-09-22), under Footer: "Fajr, Duhur
                  til Isha flytte opp." It was the second row, under the
@@ -135,7 +153,7 @@ export function Footer({ map }: { map?: ReactNode }) {
                  and came straight back (client: "move mail back"). It reads
                  as part of the contact register, not as a thing beside the
                  social row. */}
-              <div className="hidden grid-cols-2 gap-4 sm:grid lg:grid-cols-1 lg:gap-5">
+              <div className="hidden grid-cols-2 gap-4 sm:grid xl:grid-cols-1 xl:gap-5">
                 <div>
                   <dt className={DT}>{t('findUs.office')}</dt>
                   <dd className="mt-1 text-body text-paper">{t('findUs.officeHours')}</dd>
@@ -188,7 +206,7 @@ export function Footer({ map }: { map?: ReactNode }) {
              and this column is left-aligned like everything beside it —
              centring there would put it out of step with the register it
              sits under, not in step with it. */}
-          <div className="lg:col-span-3 lg:flex lg:flex-col lg:items-center lg:justify-center">
+          <div className="xl:flex xl:flex-col xl:items-center xl:justify-center">
             {/* DT, the same mono the left register uses for OPEN FOR PRAYER
                and ADDRESS. This was 11px at 50% against their 10px at 45%. */}
             <h3 className={DT}>{t('cols.follow')}</h3>
@@ -227,7 +245,7 @@ export function Footer({ map }: { map?: ReactNode }) {
             </div>
           </div>
 
-          <div className="order-first sm:col-span-2 lg:order-none lg:col-span-5">
+          <div className="order-first sm:col-span-2 xl:order-none xl:col-auto">
             {/* The same Google map as Leiligheter, since 2026-09-15 ("also
                show here in the footer without increating size of footer, it
                can fit and make it fit"). It replaces the site's own drawn SVG
@@ -244,10 +262,11 @@ export function Footer({ map }: { map?: ReactNode }) {
                SIZED TO THE SLOT THE PLATE HAD — measured 437x398 — so the
                footer does not grow, which is the part he was explicit about.
 
-               Known and accepted: at 437px the embed is under the ~600px
-               where Google's two attribution groups stop overlapping, so they
-               collide down here. That is Google's own chrome and the only
-               cure is a wider column, which is exactly what he ruled out.
+               Was 437px wide until 2026-09-28, under the ~520px where
+               Google's bottom chrome stops colliding with itself. The column
+               is now the widest track of the band (see the note on the grid),
+               which is the only cure for that; the footer's height did not
+               change.
 
                PASSED IN AS A SLOT, not imported. This file is 'use client'
                (it calls useLocale), and FindUsGoogle is an async server
@@ -265,7 +284,7 @@ export function Footer({ map }: { map?: ReactNode }) {
              which is where the client asked for it. order-last keeps it there
              whatever the grid does above; lg:hidden because the copy at the
              top of the first column takes over from lg. */}
-          <div className="order-last sm:col-span-2 lg:hidden">
+          <div className="order-last sm:col-span-2 xl:hidden">
             <Link
               href={p('')}
               className="inline-flex items-center gap-3 transition-opacity hover:opacity-80"
@@ -302,7 +321,7 @@ export function Footer({ map }: { map?: ReactNode }) {
            reads as touching. sm:pb-5 hands the old padding back from sm, where the
            bar is three columns wide and the button only ever overlaps empty
            ground on its right. */}
-        <div className="mx-auto grid max-w-6xl items-center gap-y-2 px-5 py-3 pb-[calc(5rem+env(safe-area-inset-bottom))] sm:grid-cols-3 sm:gap-y-3 sm:px-6 sm:py-5 sm:pb-5">
+        <div className="mx-auto grid max-w-7xl items-center gap-y-2 px-5 py-3 pb-[calc(5rem+env(safe-area-inset-bottom))] sm:grid-cols-3 sm:gap-y-3 sm:px-6 sm:py-5 sm:pb-5">
           <p className="text-center font-mono text-[0.625rem] uppercase leading-none tracking-[0.16em] text-gold sm:text-start">
             &copy; {new Date().getFullYear()} Rabita · {t('orgNr')} {CAMPAIGN.orgNr}
           </p>

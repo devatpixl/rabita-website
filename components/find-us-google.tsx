@@ -43,8 +43,24 @@ import { DIRECTIONS_URL, LANDMARKS, ROUTES, VISIT_EMBED_QUERY } from '@/lib/loca
 const MAP_MID = '1IE-Lk2r5dkb-hqk8RV0oV8So1UIsPKg';
 
 /** Height of the My Maps title bar, which is cropped away. Measured on the
- *  rendered embed; it is a fixed chrome height, not a content-dependent one. */
-const HEADER_PX = 56;
+ *  rendered embed (getBoundingClientRect on the bar, 2026-09-28): 67px, not
+ *  the 56 it shipped at. At 56 the bottom 11px of the bar — the "About" link —
+ *  showed as a stripe along the top of the map. It is a fixed chrome height,
+ *  not a content-dependent one. */
+const HEADER_PX = 67;
+
+/** Where the My Maps embed opens. Without ll/z it centres on the map's own
+ *  bounds, which put the pins in the right half of the footer frame with
+ *  Frognerkilen filling the left. This is the midpoint of the six pins
+ *  (Slottet 10.7275 to the bus terminal 10.759; the Opera 59.9075 to Slottet
+ *  59.9169) at a zoom where all six labels fit inside a ~520px frame with
+ *  room to spare. */
+// Latitude sits ~170 m north of the pins' true midpoint (59.9122): the
+// Leiligheter frame is 40px shorter than the footer's and at the true
+// midpoint it clipped the head of Slottet's pin at the top edge. Both frames
+// now hold all six pins with the Opera well clear of the bottom chrome.
+const MAP_CENTRE = '59.9137,10.7433';
+const MAP_ZOOM = 14;
 
 /** The five he listed in September, plus Slottet (Versjon 6, 2026-09-22:
  *  "Legg til Slottet ... i tillegg til de allerede viste"). Rabita itself is
@@ -136,11 +152,13 @@ export async function FindUsGoogle({
             'overflow-hidden',
             // Shorter than the 26rem it shipped at this morning (client,
             // 2026-09-15: "make this map small"). The WIDTH is untouched at
-            // ~626px, deliberately: below about 600 Google's two attribution
-            // groups overlap, so height is the only dimension that can give.
+            // ~626px, deliberately: below about 520 Google's "Keyboard
+            // shortcuts" button runs into the scale bar and the second
+            // attribution group (measured 2026-09-28: 470 collides, 520 is
+            // clean), so height is the only dimension that can give.
             //
-            // In the footer it fills the slot the drawn plate had — measured
-            // 437x398 — so the footer does not grow, which he asked for.
+            // In the footer it wants ≥520px of iframe for the same reason —
+            // the footer grid is sized for that from xl; see footer.tsx.
             mapOnly ? 'h-[23rem] sm:h-[23.5rem]' : 'h-[18rem] sm:h-[21rem]',
           )}
         >
@@ -160,7 +178,7 @@ export async function FindUsGoogle({
                   // in lib/location.ts for what was verified and what is
                   // still best-effort about that.
                   `https://www.google.com/maps?q=${encodeURIComponent(VISIT_EMBED_QUERY)}&hl=${locale === 'ar' ? 'ar' : locale === 'en' ? 'en' : 'no'}&z=15&output=embed`
-                : `https://www.google.com/maps/d/embed?mid=${MAP_MID}&ehbc=2E312F`
+                : `https://www.google.com/maps/d/embed?mid=${MAP_MID}&ehbc=2E312F&ll=${MAP_CENTRE}&z=${MAP_ZOOM}`
             }
             title={t('mapTitle')}
             loading="lazy"
