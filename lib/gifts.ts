@@ -76,8 +76,14 @@ export const GIFTS: readonly Gift[] = [
 /** The two sections, in the order they are shown. */
 export const GIFT_SECTIONS: readonly GiftSection[] = ['named', 'parts'];
 
+// ASCENDING WITHIN A SECTION (user, 2026-09-28: "keep row order same, but in
+// column use ascending order according to prices"). GIFTS above stays in
+// his written order, largest first, because that is the order the list was
+// agreed in; the rows on the page read 25 000 → 50 000 → 100 000 and
+// 2 000 → 5 000 → 10 000, the cheapest way in first. The sections keep
+// their order: the named places above, the parts of the building below.
 export function giftsIn(section: GiftSection): readonly Gift[] {
-  return GIFTS.filter((g) => g.section === section);
+  return GIFTS.filter((g) => g.section === section).sort((a, b) => a.amountNok - b.amountNok);
 }
 
 export function fundedPercent(gift: Gift): number | null {
