@@ -190,14 +190,12 @@ export function FacilitiesCard() {
                 {t(`facts.facilityLines.${key}`)}
               </span>
 
+              {/* No chevron at the end of the row (user, 2026-09-28: "the 4
+                 rows not needed with arrows"). The rows are not links — the
+                 whole card is — so four chevrons beside the foot's arrow and
+                 the disc on the photo made three kinds of arrow on one card.
+                 The hairline stays: it is what ties a name to the edge. */}
               <span aria-hidden className="h-px flex-1 bg-rule" />
-
-              <span
-                aria-hidden
-                className="shrink-0 font-mono text-[0.9375rem] leading-none text-gold-deep transition-transform duration-300 group-hover/row:translate-x-1 rtl:group-hover/row:-translate-x-1"
-              >
-                &rsaquo;
-              </span>
             </span>
           </li>
         ))}
