@@ -9,8 +9,6 @@ import { HALL_HOST, HallBackdrop } from '@/components/hall-backdrop';
 import { ServiceHero } from '@/components/service-hero';
 import { ServiceOpener } from '@/components/service-opener';
 import { ServiceOverview } from '@/components/service-overview';
-import { ServiceSteps } from '@/components/service-steps';
-import { ServiceFacts } from '@/components/service-facts';
 import { ServiceRelated } from '@/components/service-related';
 import { ServiceStickyCta } from '@/components/service-sticky-cta';
 import { CAMPAIGN } from '@/lib/campaign';
@@ -100,18 +98,15 @@ export default async function ServiceDetail({
     const email = SERVICE_CONTACT[s]?.email ?? CAMPAIGN.contactEmail;
     return (
       <main>
-        <div className={HALL_HOST}>
-          <HallBackdrop wash={62} />
-          <ServiceOpener s={s} crumb={crumb} />
-        </div>
+        {/* Full-bleed photographic hero with the contact strip on its
+           foot. No arcade behind it — the picture is the ground. */}
+        <ServiceOpener s={s} crumb={crumb} />
 
+        {/* The words and the sequence, one spread. */}
         <ServiceOverview s={s} />
-        <ServiceSteps s={s} />
 
-        {/* The arcade returns behind the form, as it stood behind the whole
-           page before. This host holds the enquiry AND the two opaque
-           sections after it, so the sticky photograph has room to travel
-           behind the form rather than sitting still under it. */}
+        {/* The arcade returns behind the form, and stays behind the related
+           services after it, so the sticky photograph has room to travel. */}
         <div className={HALL_HOST}>
           <HallBackdrop wash={62} />
           <Section id="enquiry" tone="none" className="scroll-mt-24 bg-paper/45 pb-20 md:pb-28">
@@ -120,12 +115,12 @@ export default async function ServiceDetail({
               <SectionHeading className="mt-5">{t('detail.request')}</SectionHeading>
               <p className="mt-4 max-w-[42ch] text-body text-ink-60">{t('detail.requestLede')}</p>
 
-              <div className="mt-10 md:grid md:grid-cols-12 md:items-start md:gap-12 lg:gap-16">
+              <div className="mt-10 md:grid md:grid-cols-12 md:items-center md:gap-12 lg:gap-16">
                 <div className="md:col-span-7">
                   <RequestForm subject={s as RequestSubject} card rule={false} />
                   {/* islamic.no closes its form on "eller kontakt oss direkte";
-                     one line, the same address the opener's second action
-                     points at. */}
+                     one line, the same address the hero's second action and
+                     its strip carry. */}
                   <p className="mt-5 text-[14px] leading-snug text-ink-60">
                     {t('detail.orWrite')}{' '}
                     <a href={`mailto:${email}`} className="font-semibold text-ink underline decoration-gold underline-offset-4 hover:text-gold-deep">
@@ -133,46 +128,31 @@ export default async function ServiceDetail({
                     </a>
                   </p>
                 </div>
-                {/* The practical register, in the slot the "Bli medlem"
-                   aside had. Sticky from md so the facts stay beside the
-                   form as it scrolls; the aside is far shorter than the
-                   card. */}
-                <ServiceFacts s={s} className="mt-12 md:sticky md:top-32 md:col-span-5 md:mt-0 md:border-s md:border-rule md:ps-10 lg:ps-14" />
-              </div>
-            </SectionBody>
-          </Section>
 
-          {/* ── BLI MEDLEM, AFTER THE FORM ───────────────────────────────
-             Client, Tjenester list point 5, still honoured: the CTA and its
-             reason stay on every service page. It moves from beside the
-             form to a band under it, because beside the form it was a
-             second offer at the moment the reader was deciding on the
-             first. Same copy as before: medlemskapPage.eyebrow,
-             joinPage.headline, joinPage.boxBody, membership.join. */}
-          <section className="border-t border-rule bg-paper-deep/90 py-12 md:py-14">
-            <SectionBody>
-              <div className="md:grid md:grid-cols-12 md:items-center md:gap-12">
-                <div className="md:col-span-8">
+                {/* The "Bli medlem" aside, exactly as the client approved it
+                   on 2026-09-20 (see the same block in the fall-through
+                   template below). The first cut moved it to a band under
+                   the form; back beside it, because that is his layout and
+                   the facts it was competing with now live in the hero. */}
+                <aside className="mt-12 md:col-span-5 md:mt-0 md:border-s md:border-rule md:ps-10 lg:ps-14">
                   <Eyebrow tone="gold-deep">{tmp('eyebrow')}</Eyebrow>
-                  <h2 className="mt-4 max-w-[24ch] font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-[1.15] text-balance text-ink">
+                  <h2 className="mt-5 max-w-[24ch] font-serif text-[clamp(1.3rem,1.9vw,1.55rem)] leading-[1.18] text-balance text-ink">
                     {tj('headline')}
                   </h2>
-                  <p className="mt-3 max-w-[48ch] text-body text-ink-60">{tj('boxBody')}</p>
-                </div>
-                <div className="mt-7 md:col-span-4 md:mt-0 md:flex md:justify-end">
+                  <p className="mt-3 max-w-[32ch] text-[14px] leading-snug text-ink-60">{tj('boxBody')}</p>
                   <Link
                     href={`/${locale}/bli-medlem`}
-                    className="group inline-flex min-h-12 items-center gap-2 rounded-full border border-ink px-7 text-[15px] font-semibold text-ink transition-colors hover:border-gold-deep hover:bg-gold-deep hover:text-paper"
+                    className="group mt-6 inline-flex min-h-11 items-center gap-2 rounded-full border border-ink px-6 text-[14px] font-semibold text-ink transition-colors hover:border-gold-deep hover:bg-gold-deep hover:text-paper"
                   >
                     {tm('join')}
                     <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">
                       &rarr;
                     </span>
                   </Link>
-                </div>
+                </aside>
               </div>
             </SectionBody>
-          </section>
+          </Section>
 
           <ServiceRelated s={s} locale={locale} />
         </div>

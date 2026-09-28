@@ -1,27 +1,34 @@
 import { getTranslations } from 'next-intl/server';
-import { Eyebrow } from './primitives';
 import { cn } from '@/lib/cn';
 import { CAMPAIGN } from '@/lib/campaign';
 import { VISIT } from '@/lib/location';
 import { SERVICE_CONTACT, type ServiceKey } from '@/lib/services';
 
 /**
- * "Praktisk" — the register beside the enquiry form (pilot, 2026-09-28).
+ * The practical strip (pilot, 2026-09-28): e-mail · phone (when a service
+ * has one) · address · office hours · any locale rows from
+ * items.<s>.facts. The 09-15 request took the phone and the address off
+ * the service pages; the reference the client now points to prints a
+ * contact card and the address on the same screen as the words, so they
+ * come back here, as a ruled row along the foot of the hero.
  *
- * The 09-15 request took the phone, the address and the e-mail off the
- * service pages; the reference the client now points to prints a contact
- * card, a fee strip and the address on the same page as the form. This
- * puts the facts back, in the slot the "Bli medlem" aside had, so the
- * form's neighbour is information rather than a second offer.
+ * Rows, not cards: the reference's two tiles ("Gebyr via Vipps",
+ * "Adresse") are the same information, and a row of mono labels over
+ * serif values is what the footer and the visit page already do with
+ * exactly these facts. A fee column appears the day the client sends one.
  *
- * Rows, in order: e-mail (per service, else the front desk) · phone (only
- * when a service has one) · address (lib/location VISIT — where the
- * congregation is, not the plot) · office hours (the footer's own string)
- * · then any locale rows from items.<s>.facts, such as nikah's
- * "Forutsetning". A row with no value is not rendered; a fee row will
- * appear the day the client sends one.
+ * tone="dusk" is for the hero; "paper" is kept for the day the strip is
+ * wanted on a light ground.
  */
-export async function ServiceFacts({ s, className }: { s: ServiceKey; className?: string }) {
+export async function ServiceFacts({
+  s,
+  tone = 'paper',
+  className,
+}: {
+  s: ServiceKey;
+  tone?: 'paper' | 'dusk';
+  className?: string;
+}) {
   const t = await getTranslations('servicesIndex');
   const tf = await getTranslations('footer.findUs');
   const contact = SERVICE_CONTACT[s];
@@ -37,25 +44,38 @@ export async function ServiceFacts({ s, className }: { s: ServiceKey; className?
     ...(Array.isArray(local) ? local : []),
   ];
 
+  const dusk = tone === 'dusk';
+
   return (
-    <aside className={className}>
-      <Eyebrow tone="gold-deep">{t('detail.facts')}</Eyebrow>
-      <dl className="mt-5 border-t border-ink/20">
-        {rows.map((r) => (
-          <div key={r.label} className="border-b border-rule py-4">
-            <dt className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60">{r.label}</dt>
-            <dd className={cn('mt-1.5 font-serif text-[1.15rem] leading-snug text-ink', r.href && 'break-all')}>
-              {r.href ? (
-                <a href={r.href} className="underline decoration-gold underline-offset-4 transition-colors hover:text-gold-deep">
-                  {r.value}
-                </a>
-              ) : (
-                r.value
-              )}
-            </dd>
-          </div>
-        ))}
-      </dl>
-    </aside>
+    <dl
+      className={cn(
+        'grid gap-x-8 gap-y-5 border-t pt-6 sm:grid-cols-2 md:flex md:flex-wrap md:gap-x-12',
+        dusk ? 'border-paper/25' : 'border-ink/20',
+        className,
+      )}
+    >
+      {rows.map((r) => (
+        <div key={r.label} className="min-w-0">
+          <dt className={cn('font-mono text-[0.625rem] uppercase tracking-[0.18em]', dusk ? 'text-gold' : 'text-ink-60')}>
+            {r.label}
+          </dt>
+          <dd className={cn('mt-1.5 font-serif text-[1.1rem] leading-snug', dusk ? 'text-paper' : 'text-ink')}>
+            {r.href ? (
+              <a
+                href={r.href}
+                className={cn(
+                  'underline underline-offset-4 transition-colors',
+                  dusk ? 'decoration-gold/60 hover:text-gold' : 'decoration-gold hover:text-gold-deep',
+                )}
+              >
+                {r.value}
+              </a>
+            ) : (
+              r.value
+            )}
+          </dd>
+        </div>
+      ))}
+    </dl>
   );
 }
