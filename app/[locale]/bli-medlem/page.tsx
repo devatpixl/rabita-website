@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
 import { Accent } from '@/components/accent';
@@ -234,6 +235,59 @@ export default async function JoinPage({
 
             <div className="order-1 lg:order-2 lg:col-span-8 lg:self-center">
               <MembershipSignup />
+            </div>
+          </div>
+        </SectionBody>
+      </Section>
+
+      {/* Dobbelt medlemskap (client, ticket "Nettside medlemskap",
+         2026-09-18): "Når det gjelder 'bli medlem' fanen. Så ønsker jeg litt
+         info om dobbelt medlemsskap. Og at det er viktig at de melder seg ut
+         av annet tross samfunn også. Link gjerne til utmelding.rabita.no."
+
+         One short block, below the form and above the closing section, in
+         the register's own voice: the grant counts a person once, so a new
+         member who is still on another community's list has to leave it
+         too. The first link is the tool that does exactly that
+         (utmelding.rabita.no — leaving OTHER communities, not Rabita); the
+         second is the longer explanation on the membership page. "Litt
+         info", so it is a paragraph, not a section with a picture. */}
+      <Section pad="tight" tone="paper">
+        <SectionBody>
+          <div className="grid gap-6 border-y border-rule py-8 md:grid-cols-12 md:gap-10 md:py-10">
+            <div className="md:col-span-4">
+              <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">{t('dual.eyebrow')}</p>
+              <h2 className="mt-3 font-serif text-[clamp(1.35rem,2.2vw,1.7rem)] leading-tight text-ink">{t('dual.heading')}</h2>
+            </div>
+            <div className="md:col-span-8">
+              <p className="max-w-[58ch] text-body leading-relaxed text-ink-60">{t('dual.body')}</p>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <a
+                  href="https://utmelding.rabita.no"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/25 px-5 text-[14px] font-semibold text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper"
+                >
+                  {t('dual.tool')}
+                  <span aria-hidden className="rtl:rotate-180">&rarr;</span>
+                </a>
+                <Link
+                  href={`/${locale}/tjenester/medlemskap#dobbelt-medlemskap`}
+                  className="inline-flex min-h-11 items-center px-2 text-[14px] font-semibold text-ink underline decoration-gold-deep/50 underline-offset-4 transition-colors hover:decoration-ink"
+                >
+                  {t('dual.more')}
+                </Link>
+              </div>
+              <p className="mt-4 text-[13.5px] text-ink-60">
+                {t.rich('dual.contact', {
+                  email: CAMPAIGN.membershipEmail,
+                  a: (chunks) => (
+                    <a href={`mailto:${CAMPAIGN.membershipEmail}`} className="text-ink underline decoration-gold-deep/50 underline-offset-4 hover:decoration-ink">
+                      {chunks}
+                    </a>
+                  ),
+                })}
+              </p>
             </div>
           </div>
         </SectionBody>

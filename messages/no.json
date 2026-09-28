@@ -126,6 +126,11 @@
           "label": "Barn og familie",
           "blurb": "Aktiviteter og møteplasser for barn og familier gjennom hele året.",
           "href": "/tjenester/barn-og-familie"
+        },
+        {
+          "label": "Medlemskap",
+          "blurb": "Innmelding, utmelding, dobbelt medlemskap og gaver – alt om medlemskapet på ett sted.",
+          "href": "/tjenester/medlemskap"
         }
       ],
       "teaching": [
@@ -2092,6 +2097,12 @@
       "guidance": "Veiledning",
       "teaching": "Undervisning",
       "community": "Fellesskap og samfunn"
+    },
+    "membershipStrip": {
+      "eyebrow": "Medlemskap",
+      "heading": "Alt om medlemskapet – på ett sted.",
+      "body": "Innmelding, utmelding, dobbelt medlemskap og gaver.",
+      "cta": "Se medlemskap"
     }
   },
   "aboutPage": {
@@ -2581,7 +2592,15 @@
       ]
     },
     "formBody": "Det tar bare ett minutt å registrere seg. Fyll ut skjemaet nedenfor og bli en del av fellesskapet.",
-    "boxBody": "Som medlem får du prioritert tilgang til våre tjenester og aktiviteter."
+    "boxBody": "Som medlem får du prioritert tilgang til våre tjenester og aktiviteter.",
+    "dual": {
+      "eyebrow": "Dobbelt medlemskap",
+      "heading": "Ett medlemskap teller. To teller ikke.",
+      "body": "Staten gir tilskudd per medlem – men bare for den som står registrert ett sted. Er du fortsatt registrert i et annet trossamfunn, får verken de eller vi støtte for deg. Meld deg ut der også, så teller medlemskapet ditt her.",
+      "tool": "Meld deg ut av et annet trossamfunn",
+      "more": "Les mer om dobbelt medlemskap",
+      "contact": "Spørsmål? Skriv til <a>{email}</a>"
+    }
   },
   "utmeldingPage": {
     "eyebrow": "Medlemskap",
@@ -2659,7 +2678,46 @@
     },
     "done": {
       "title": "Takk. Utmeldingen din er mottatt.",
-      "body": "Vi bekrefter per e-post til {email}. Har du spørsmål, skriv til {contact}."
+      "body": "Vi bekrefter per e-post til {email}. Har du spørsmål, skriv til <a>{contact}</a>."
+    }
+  },
+  "membershipHub": {
+    "kicker": "Medlemskap",
+    "title": "Medlemskap i <em>Rabita</em>.",
+    "lede": "Gratis, én stemme på årsmøtet, og grunnlaget for statsstøtten til menigheten. Her finner du det du trenger om å melde deg inn, melde deg ut – og om å stå registrert flere steder.",
+    "join": {
+      "prompt": "Ikke medlem ennå?",
+      "cta": "Bli medlem"
+    },
+    "leave": {
+      "index": "01",
+      "eyebrow": "Utmelding",
+      "heading": "Vil du melde deg ut?",
+      "body": "Medlemskap i Rabita er frivillig, og det er gratis å melde seg ut. Vi ber bare om at valget er bevisst. På utmeldingssiden forklarer vi hva medlemskapet ditt bærer, svarer på vanlige spørsmål og har skjemaet nederst.",
+      "cta": "Gå til utmelding"
+    },
+    "dual": {
+      "index": "02",
+      "eyebrow": "Dobbelt medlemskap",
+      "heading": "Er du registrert flere steder?",
+      "p1": "Staten gir tilskudd til tros- og livssynssamfunn per registrerte medlem – men bare for medlemmer som står oppført ett sted. Hvert årsskifte sammenligner Brønnøysundregistrene medlemslistene fra alle tros- og livssynssamfunn.",
+      "p2": "Står du registrert både hos Rabita og hos et annet trossamfunn, får ingen av dem støtte for deg. Da teller ikke medlemskapet ditt for moskeprosjektet, uansett hvor aktiv du er.",
+      "p3": "Av personvernhensyn får vi ikke vite hvor du eventuelt er registrert i tillegg. Derfor er det bare du som kan rydde opp: meld deg ut av det andre trossamfunnet, så teller medlemskapet ditt her fra neste årsskifte.",
+      "p4": "Usikker på om du står oppført et annet sted? Sjekk Min side hos Brønnøysundregistrene.",
+      "toolCta": "Send utmelding til et annet trossamfunn",
+      "toolNote": "Verktøyet på utmelding.rabita.no hjelper deg å sende utmelding til andre trossamfunn du står registrert i – ikke til Rabita.",
+      "checkCta": "Sjekk hos Brønnøysundregistrene"
+    },
+    "give": {
+      "index": "03",
+      "eyebrow": "Donasjon",
+      "heading": "Vil du gi mer enn medlemskapet?",
+      "body": "Medlemskapet er gratis. Moskeprosjektet og aktivitetene finansieres i tillegg av gaver – store og små, én gang eller hver måned. Hver gave går til bygget i Calmeyers gate og til det menigheten gjør i dag.",
+      "cta": "Gi en gave"
+    },
+    "contact": {
+      "prompt": "Spørsmål om medlemskap?",
+      "cta": "Skriv til {email}"
     }
   },
   "apartmentsPage": {

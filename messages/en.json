@@ -126,6 +126,11 @@
           "label": "Children and family",
           "blurb": "Activities and places to meet for children and families, all year round.",
           "href": "/tjenester/barn-og-familie"
+        },
+        {
+          "label": "Membership",
+          "blurb": "Joining, leaving, dual membership and gifts – everything about membership in one place.",
+          "href": "/tjenester/medlemskap"
         }
       ],
       "teaching": [
@@ -2088,6 +2093,12 @@
       "guidance": "Guidance",
       "teaching": "Teaching",
       "community": "Community and society"
+    },
+    "membershipStrip": {
+      "eyebrow": "Membership",
+      "heading": "Everything about membership – in one place.",
+      "body": "Joining, leaving, dual membership and gifts.",
+      "cta": "See membership"
     }
   },
   "aboutPage": {
@@ -2585,7 +2596,15 @@
       ]
     },
     "formBody": "Registering takes a minute. Fill in the form below and become part of the community.",
-    "boxBody": "As a member you get priority access to our services and activities."
+    "boxBody": "As a member you get priority access to our services and activities.",
+    "dual": {
+      "eyebrow": "Dual membership",
+      "heading": "One membership counts. Two do not.",
+      "body": "The state funds communities per member – but only for those registered in one place. If you are still registered with another faith community, neither they nor we receive the grant for you. Resign there too, and your membership here counts.",
+      "tool": "Resign from another faith community",
+      "more": "Read more about dual membership",
+      "contact": "Questions? Write to <a>{email}</a>"
+    }
   },
   "utmeldingPage": {
     "eyebrow": "Membership",
@@ -2663,7 +2682,46 @@
     },
     "done": {
       "title": "Thank you. Your resignation has been received.",
-      "body": "We will confirm by e-mail to {email}. If you have questions, write to {contact}."
+      "body": "We will confirm by e-mail to {email}. If you have questions, write to <a>{contact}</a>."
+    }
+  },
+  "membershipHub": {
+    "kicker": "Membership",
+    "title": "Membership at <em>Rabita</em>.",
+    "lede": "Free, one vote at the annual meeting, and the basis of the state grant to the congregation. Here is what you need to know about joining, leaving – and being registered in more than one place.",
+    "join": {
+      "prompt": "Not a member yet?",
+      "cta": "Become a member"
+    },
+    "leave": {
+      "index": "01",
+      "eyebrow": "Leaving",
+      "heading": "Do you want to leave?",
+      "body": "Membership at Rabita is voluntary, and leaving is free. We only ask that the choice is a deliberate one. The resignation page explains what your membership carries, answers common questions, and has the form at the bottom.",
+      "cta": "Go to the resignation page"
+    },
+    "dual": {
+      "index": "02",
+      "eyebrow": "Dual membership",
+      "heading": "Are you registered in more than one place?",
+      "p1": "The state funds faith and life-stance communities per registered member – but only for members registered in one place. Every New Year the Brønnøysund Register Centre compares the membership lists of all such communities.",
+      "p2": "If you are registered both with Rabita and with another community, neither receives the grant for you. Your membership then counts for nothing towards the mosque project, however active you are.",
+      "p3": "For privacy reasons we are not told where else you may be registered. So only you can put it right: resign from the other community, and your membership here counts from the next New Year.",
+      "p4": "Unsure whether you are registered somewhere else? Check My page at the Brønnøysund Register Centre.",
+      "toolCta": "Send a resignation to another community",
+      "toolNote": "The tool at utmelding.rabita.no helps you send a resignation to other faith communities you are registered with – not to Rabita.",
+      "checkCta": "Check with the Brønnøysund Register Centre"
+    },
+    "give": {
+      "index": "03",
+      "eyebrow": "Donation",
+      "heading": "Want to give more than a membership?",
+      "body": "Membership is free. The mosque project and the activities are funded on top of that by gifts – large and small, once or every month. Every gift goes to the building in Calmeyers gate and to what the congregation does today.",
+      "cta": "Give a gift"
+    },
+    "contact": {
+      "prompt": "Questions about membership?",
+      "cta": "Write to {email}"
     }
   },
   "apartmentsPage": {

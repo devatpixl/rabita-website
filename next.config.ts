@@ -56,6 +56,18 @@ const nextConfig: NextConfig = {
         destination: '/:locale/tjenester/barn-og-familie',
         permanent: true,
       },
+      // /medlemskap was the membership explainer with its own signup form —
+      // a second /bli-medlem that nothing had linked to since the AGM
+      // buttons moved (see the note that stood in its page.tsx). The client
+      // asked for membership as a page under Tjenester (2026-09-18), which
+      // is that explainer's successor, so the old address goes there. The
+      // page file is deleted, not shadowed: a redirect over a live route is
+      // the trap recorded below for /undervisning and veivisere.
+      {
+        source: '/:locale(no|en|ar)/medlemskap',
+        destination: '/:locale/tjenester/medlemskap',
+        permanent: true,
+      },
       // The /undervisning 308 that stood here is GONE, not edited (client,
       // 2026-09-13: "Del opp i to sider"). The page is back, and a redirect on
       // that source would shadow the route before it ever rendered — the same

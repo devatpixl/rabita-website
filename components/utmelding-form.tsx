@@ -99,10 +99,11 @@ export function UtmeldingForm() {
         <p className="font-serif text-[1.5rem] leading-tight text-ink">{td('title')}</p>
         <p className="mt-3 max-w-[44ch] text-body text-ink-60">
           {td.rich('body', {
-            email: () => <span className="text-ink">{email}</span>,
-            contact: () => (
+            email,
+            contact: CAMPAIGN.membershipEmail,
+            a: (chunks) => (
               <a href={`mailto:${CAMPAIGN.membershipEmail}`} className="text-ink underline decoration-gold-deep/50 underline-offset-4 hover:decoration-ink">
-                {CAMPAIGN.membershipEmail}
+                {chunks}
               </a>
             ),
           })}
