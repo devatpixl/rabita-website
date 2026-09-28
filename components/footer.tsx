@@ -9,6 +9,7 @@ import { CAMPAIGN } from '@/lib/campaign';
 import { VISIT_DIRECTIONS_URL } from '@/lib/location';
 
 import { CHANNELS, CHANNEL_RGB, ChannelMark } from './social-marks';
+import { RosetteMark } from './marks';
 import { LanguageSwitcher } from './language-switcher';
 import { QiblaCompass } from './qibla-compass';
 
@@ -25,6 +26,62 @@ import { QiblaCompass } from './qibla-compass';
 // label is worse than a two-line one.
 const DT = 'font-mono text-[0.625rem] uppercase leading-[1.45] tracking-[0.16em] text-paper/45';
 
+// ── THE REGISTER'S ICON DISCS (client mock, 2026-09-28) ──────────────────
+// Each row of the contact register gets a dark disc with a gold line glyph
+// beside it: a mihrab for the prayer window, a pin, a clock, an envelope.
+// The disc is the same dusk as the footer, lifted 6% and ringed, so it reads
+// as a coin set into the ground rather than a button. From sm only — on a
+// phone the register is the compact label|value list and a disc per row
+// would cost 40px × 4 of a footer that was once the complaint.
+const DISC =
+  'hidden h-10 w-10 shrink-0 place-items-center rounded-full bg-paper/[0.06] text-gold ring-1 ring-paper/12 sm:grid';
+
+type FooterGlyphName = 'prayer' | 'pin' | 'clock' | 'mail';
+function FooterGlyph({ name, className }: { name: FooterGlyphName; className?: string }) {
+  const common = {
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: 1.5,
+    strokeLinecap: 'round' as const,
+    strokeLinejoin: 'round' as const,
+    className,
+    'aria-hidden': true as const,
+  };
+  if (name === 'prayer') {
+    // A mihrab: the pointed arch on two jambs, and the floor line.
+    return (
+      <svg {...common}>
+        <path d="M6 20V11.5C6 7.9 8.7 5 12 4c3.3 1 6 3.9 6 7.5V20" />
+        <path d="M4.5 20h15" />
+        <path d="M9 20v-5.5a3 3 0 0 1 6 0V20" />
+      </svg>
+    );
+  }
+  if (name === 'pin') {
+    return (
+      <svg {...common}>
+        <path d="M12 21s6.5-5.7 6.5-11A6.5 6.5 0 0 0 5.5 10c0 5.3 6.5 11 6.5 11Z" />
+        <circle cx="12" cy="10" r="2.3" />
+      </svg>
+    );
+  }
+  if (name === 'clock') {
+    return (
+      <svg {...common}>
+        <circle cx="12" cy="12" r="8.5" />
+        <path d="M12 7.5V12l3 2" />
+      </svg>
+    );
+  }
+  return (
+    <svg {...common}>
+      <rect x="3.5" y="6" width="17" height="12" rx="2" />
+      <path d="m4 7 8 6 8-6" />
+    </svg>
+  );
+}
+
 export function Footer({ map }: { map?: ReactNode }) {
   const t = useTranslations('footer');
   const tNav = useTranslations('nav');
@@ -32,7 +89,16 @@ export function Footer({ map }: { map?: ReactNode }) {
   const p = (path: string) => `/${locale}${path}`;
 
   return (
-    <footer data-print-hide className="relative isolate z-[1] bg-dusk text-paper">
+    <footer data-print-hide className="relative isolate z-[1] overflow-hidden bg-dusk text-paper">
+      {/* ── THE ORNAMENT IN THE CORNERS (client mock, 2026-09-28) ──────────
+         The rosette construction drawing, gold at 7%, bleeding off the
+         top-start and bottom-end corners. It is the site's own mark (the
+         same one the newsletter band tiles at 1.5%), not an imported
+         arabesque, so the footer's flourish is the mosque's geometry.
+         Logical corners (start/end), so Arabic mirrors it. xl only: below
+         that the columns stack and the drawing would sit behind type. */}
+      <RosetteMark className="pointer-events-none absolute -start-44 -top-40 hidden w-[30rem] text-gold opacity-[0.07] xl:block" />
+      <RosetteMark className="pointer-events-none absolute -bottom-44 -end-44 hidden w-[30rem] text-gold opacity-[0.07] xl:block" />
       {/* One band, three columns: the lockup with the contact ledger, the
          social row, and the map plate on the right. Two columns from sm,
          three from xl; below xl the map comes FIRST (see the order-first
@@ -74,7 +140,7 @@ export function Footer({ map }: { map?: ReactNode }) {
          The middle column carried the newsletter above the social row until
          2026-09-23; see the note where it stood. */}
       <div className="mx-auto max-w-7xl px-5 py-8 sm:px-6 sm:py-10 md:py-16 xl:px-10">
-        <div className="grid gap-7 sm:grid-cols-2 sm:gap-10 xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,33rem)] xl:gap-7">
+        <div className="grid gap-7 sm:grid-cols-2 sm:gap-10 xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,33rem)] xl:gap-0">
           <div>
             {/* The lockup signs the page — mark plus both lines of the name.
                lg and up only: below that it moves to the foot of the footer,
@@ -85,10 +151,11 @@ export function Footer({ map }: { map?: ReactNode }) {
               className="hidden items-center gap-4 transition-opacity hover:opacity-80 xl:inline-flex"
               aria-label={`${tNav('orgName')}, ${tNav('wordmark')}`}
             >
-              <Image src="/logo/rabita-mark-256.png" alt="" width={56} height={56} className="h-14 w-14" />
+              <Image src="/logo/rabita-mark-256.png" alt="" width={64} height={64} className="h-16 w-16" />
               <span className="flex flex-col font-serif leading-tight text-paper">
-                <span className="text-[1.15rem] font-medium">{tNav('orgName')}</span>
-                <span className="text-[1rem] italic text-paper/60">Rabita</span>
+                <span className="text-[1.35rem] font-medium">{tNav('orgName')}</span>
+                {/* Gold, not paper/60 (client mock, 2026-09-28). */}
+                <span className="text-[1.05rem] italic text-gold">Rabita</span>
               </span>
             </Link>
 
@@ -115,7 +182,7 @@ export function Footer({ map }: { map?: ReactNode }) {
                the year, and the office keeps its own hours. So the prayer
                window says what it is and links to the table that has the
                actual minutes, and the office gets its own row. */}
-            <dl className="divide-y divide-paper/10 border-y border-paper/10 xl:mt-8 sm:space-y-4 sm:divide-y-0 sm:border-0">
+            <dl className="divide-y divide-paper/10 border-y border-paper/10 xl:mt-9 sm:space-y-5 sm:divide-y-0 sm:border-0">
               {/* ÅPENT FOR BØNN SITS ABOVE THE ADDRESS.
                  Client, Versjon 6 (2026-09-22), under Footer: "Fajr, Duhur
                  til Isha flytte opp." It was the second row, under the
@@ -126,20 +193,31 @@ export function Footer({ map }: { map?: ReactNode }) {
                  prayer times because his own congregation told him that is
                  what people come for. The footer answering "when is it open"
                  before "where is it" follows the same reader. */}
-              <div className="flex items-baseline gap-3 py-2.5 sm:block sm:py-0">
-                <dt className={cn(DT, 'w-20 shrink-0 sm:w-auto')}>{t('findUs.hours')}</dt>
-                <dd className="min-w-0 flex-1 text-[14px] leading-snug text-paper sm:mt-1 sm:text-body">
-                  {t('findUs.prayerWindow')}{' '}
-                  <Link href={p('/bonnetider')} className="whitespace-nowrap text-paper/60 underline decoration-paper/25 underline-offset-2 transition-colors hover:text-gold hover:decoration-gold">
-                    {t('findUs.prayerLink')} &rarr;
-                  </Link>
-                </dd>
+              <div className="flex items-baseline gap-3 py-2.5 sm:items-start sm:gap-4 sm:py-0">
+                <span aria-hidden className={DISC}><FooterGlyph name="prayer" className="h-[18px] w-[18px]" /></span>
+                <div className="flex min-w-0 flex-1 items-baseline gap-3 sm:block">
+                  <dt className={cn(DT, 'w-20 shrink-0 sm:w-auto')}>{t('findUs.hours')}</dt>
+                  <dd className="min-w-0 flex-1 text-[14px] leading-snug text-paper sm:mt-1 sm:text-body">
+                    {t('findUs.prayerWindow')}
+                    {/* Gold, and set off by a wider gap (client mock). At xl
+                       it takes its own line under the window: the disc beside
+                       the row costs the register 56px, and inline the sentence
+                       broke as "Fajr, Dhuhr til / Isha se bønnetider", which
+                       is worse than a link on the line below. */}
+                    <Link href={p('/bonnetider')} className="ms-2 whitespace-nowrap text-gold underline decoration-gold/40 underline-offset-[5px] transition-colors hover:text-paper hover:decoration-paper sm:ms-4 xl:ms-0 xl:mt-1.5 xl:block xl:w-fit">
+                      {t('findUs.prayerLink')} &rarr;
+                    </Link>
+                  </dd>
+                </div>
               </div>
-              <div className="flex items-baseline gap-3 py-2.5 sm:block sm:py-0">
-                <dt className={cn(DT, 'w-20 shrink-0 sm:w-auto')}>{t('findUs.address')}</dt>
-                <dd className="min-w-0 flex-1 text-[14px] leading-snug text-paper sm:mt-1 sm:text-body">
-                  {CAMPAIGN.visitAddress} <span className="text-paper/60">· {CAMPAIGN.visitPostal}</span>
-                </dd>
+              <div className="flex items-baseline gap-3 py-2.5 sm:items-start sm:gap-4 sm:py-0">
+                <span aria-hidden className={DISC}><FooterGlyph name="pin" className="h-[18px] w-[18px]" /></span>
+                <div className="flex min-w-0 flex-1 items-baseline gap-3 sm:block">
+                  <dt className={cn(DT, 'w-20 shrink-0 sm:w-auto')}>{t('findUs.address')}</dt>
+                  <dd className="min-w-0 flex-1 text-[14px] leading-snug text-paper sm:mt-1 sm:text-body">
+                    {CAMPAIGN.visitAddress} <span className="text-paper/60">· {CAMPAIGN.visitPostal}</span>
+                  </dd>
+                </div>
               </div>
               <div className="flex items-baseline gap-3 py-2.5 sm:hidden">
                 <dt className={cn(DT, 'w-20 shrink-0')}>{t('findUs.office')}</dt>
@@ -169,17 +247,23 @@ export function Footer({ map }: { map?: ReactNode }) {
                  as part of the contact register, not as a thing beside the
                  social row. */}
               <div className="hidden grid-cols-2 gap-4 sm:grid xl:grid-cols-1 xl:gap-5">
-                <div>
-                  <dt className={DT}>{t('findUs.office')}</dt>
-                  <dd className="mt-1 text-body text-paper">{t('findUs.officeHours')}</dd>
+                <div className="flex items-start gap-4">
+                  <span aria-hidden className={DISC}><FooterGlyph name="clock" className="h-[18px] w-[18px]" /></span>
+                  <div className="min-w-0">
+                    <dt className={DT}>{t('findUs.office')}</dt>
+                    <dd className="mt-1 text-body text-paper">{t('findUs.officeHours')}</dd>
+                  </div>
                 </div>
-                <div>
-                  <dt className={DT}>{t('findUs.email')}</dt>
-                  <dd className="mt-1">
-                    <a href={`mailto:${CAMPAIGN.contactEmail}`} className="break-all text-body text-paper transition-colors hover:text-gold">
-                      {CAMPAIGN.contactEmail}
-                    </a>
-                  </dd>
+                <div className="flex items-start gap-4">
+                  <span aria-hidden className={DISC}><FooterGlyph name="mail" className="h-[18px] w-[18px]" /></span>
+                  <div className="min-w-0">
+                    <dt className={DT}>{t('findUs.email')}</dt>
+                    <dd className="mt-1">
+                      <a href={`mailto:${CAMPAIGN.contactEmail}`} className="break-all text-body text-paper transition-colors hover:text-gold">
+                        {CAMPAIGN.contactEmail}
+                      </a>
+                    </dd>
+                  </div>
                 </div>
               </div>
             </dl>
@@ -221,11 +305,25 @@ export function Footer({ map }: { map?: ReactNode }) {
              and this column is left-aligned like everything beside it —
              centring there would put it out of step with the register it
              sits under, not in step with it. */}
-          <div className="xl:flex xl:flex-col xl:items-center xl:justify-center">
+          {/* xl:border-x + xl:px-7 — the two hairlines between the columns
+             (client mock, 2026-09-28). They live on this column's own edges,
+             and the column's padding IS the grid gap on those two sides
+             (xl:gap-0 on the grid): 28px each, the same 28 the gap was, so
+             the register's 331px budget — see the note on the grid — is
+             untouched. self-stretch, not centre, so the rules run the full
+             height of the band; the content inside is still centred. */}
+          <div className="xl:flex xl:flex-col xl:items-center xl:justify-center xl:self-stretch xl:border-x xl:border-paper/10 xl:px-7">
             {/* DT, the same mono the left register uses for OPEN FOR PRAYER
                and ADDRESS. This was 11px at 50% against their 10px at 45%. */}
-            <h3 className={DT}>{t('cols.follow')}</h3>
-            <ul className="mt-3 flex flex-wrap justify-center gap-2.5 sm:mt-4 sm:justify-start">
+            {/* The label between two rules, at xl (client mock). Below xl
+               the column is left-aligned under the register and the label
+               is the register's own DT, as before. */}
+            <h3 className={cn(DT, 'xl:flex xl:items-center xl:gap-4 xl:text-[0.75rem] xl:tracking-[0.22em] xl:text-paper/70')}>
+              <span aria-hidden className="hidden h-px w-14 bg-paper/20 xl:block" />
+              {t('cols.follow')}
+              <span aria-hidden className="hidden h-px w-14 bg-paper/20 xl:block" />
+            </h3>
+            <ul className="mt-3 flex flex-wrap justify-center gap-2.5 sm:mt-4 sm:justify-start xl:mt-7 xl:gap-4">
               {CHANNELS.map(({ key, href }) => (
                 <li key={key}>
                   <a
@@ -234,26 +332,38 @@ export function Footer({ map }: { map?: ReactNode }) {
                     rel="noreferrer"
                     aria-label={t(`social.${key}`)}
                     style={{ '--ch-ring': `rgb(${CHANNEL_RGB[key]} / 0.65)` } as CSSProperties}
-                    className="grid h-11 w-11 place-items-center rounded-full bg-paper transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:ring-2 hover:ring-[color:var(--ch-ring)]"
+                    // DARK DISCS WITH A RING (client mock, 2026-09-28),
+                    // where paper discs stood since 2026-09-16. The paper
+                    // was load-bearing for TikTok's black layer, which
+                    // vanishes on dusk — so the mark is drawn with a paper
+                    // ink here (ChannelMark `ink`), and the cyan and magenta
+                    // offsets still read. Facebook's blue is a little quiet
+                    // on dusk; that is the mock's choice, and the hover ring
+                    // in the channel colour is what lifts it.
+                    className="grid h-12 w-12 place-items-center rounded-full bg-paper/[0.06] ring-1 ring-paper/15 transition-[transform,box-shadow,background-color] duration-200 ease-out hover:-translate-y-0.5 hover:bg-paper/10 hover:ring-2 hover:ring-[color:var(--ch-ring)] xl:h-[3.25rem] xl:w-[3.25rem]"
                   >
-                    <ChannelMark channel={key} instance={`footer-${key}`} className="h-5 w-5" />
+                    <ChannelMark channel={key} instance={`footer-${key}`} ink="#F4F1EA" className="h-[22px] w-[22px]" />
                   </a>
                 </li>
               ))}
             </ul>
-            <div className="mt-8 hidden flex-wrap gap-3 sm:flex">
+            <div className="mt-8 hidden flex-wrap gap-3 sm:flex xl:mt-10">
+              {/* The glow (client mock): a soft gold halo under the filled
+                 button, so it reads as the lit one of the pair. Sizes are
+                 unchanged — the pair measures 285px and the register's
+                 budget cannot spare more. */}
               <a
                 href={VISIT_DIRECTIONS_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gold px-5 py-2 text-[14px] font-semibold text-dusk transition-colors hover:bg-paper"
+                className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gold px-5 py-2 text-[14px] font-semibold text-dusk shadow-[0_0_28px_rgba(192,161,101,0.35)] transition-[background-color,box-shadow] hover:bg-paper hover:shadow-[0_0_32px_rgba(244,241,234,0.3)]"
               >
                 {t('findUs.directions')}
                 <span aria-hidden className="rtl:rotate-180">&rarr;</span>
               </a>
               <Link
                 href={p('/om-oss#besok-oss')}
-                className="inline-flex min-h-11 items-center rounded-full border border-paper/30 px-5 py-2 text-[14px] font-semibold text-paper transition-colors hover:border-paper hover:bg-paper hover:text-dusk"
+                className="inline-flex min-h-11 items-center rounded-full border border-paper/40 px-5 py-2 text-[14px] font-semibold text-paper transition-colors hover:border-paper hover:bg-paper hover:text-dusk"
               >
                 {t('findUs.visit')}
               </Link>

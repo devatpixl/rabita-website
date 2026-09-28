@@ -85,12 +85,18 @@ export function ChannelMark({
   channel,
   instance,
   className,
+  ink = '#000000',
 }: {
   channel: ChannelKey;
   /** Distinguishes this render from the other one on the same card, so the
    *  Instagram gradient gets a document-unique id. */
   instance: string;
   className?: string;
+  /** TikTok's note is black with cyan and magenta offsets; on a dark disc
+   *  the black layer disappears and only the ghost is left. Pass the ground's
+   *  paper here to draw the note in it (footer, 2026-09-28). The other three
+   *  marks carry their own brand colour and ignore this. */
+  ink?: string;
 }) {
   const common = { viewBox: '0 0 24 24', className, 'aria-hidden': true as const };
 
@@ -130,7 +136,7 @@ export function ChannelMark({
         <g transform="translate(12 12) scale(0.92) translate(-12 -12)">
           <path fill="#25F4EE" transform="translate(-0.9 -0.9)" d={TIKTOK_PATH} />
           <path fill="#FE2C55" transform="translate(0.9 0.9)" d={TIKTOK_PATH} />
-          <path fill="#000000" d={TIKTOK_PATH} />
+          <path fill={ink} d={TIKTOK_PATH} />
         </g>
       </svg>
     );
