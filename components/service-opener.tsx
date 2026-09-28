@@ -2,7 +2,6 @@ import Image from 'next/image';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { SectionBody } from './primitives';
 import { Accent } from './accent';
-import { ServiceFacts } from './service-facts';
 import { cn } from '@/lib/cn';
 import { CAMPAIGN } from '@/lib/campaign';
 import { SERVICE_CONTACT, SERVICE_STORY, type ServiceKey } from '@/lib/services';
@@ -19,9 +18,7 @@ import { SERVICE_CONTACT, SERVICE_STORY, type ServiceKey } from '@/lib/services'
  * This is the moment. The photograph runs the full measure and most of
  * the first screen, the way islamic.no/hajj opens — the page he sent as
  * the reference — with the words standing on it in paper white and the
- * accent in the photo gold. Under the words, still inside the picture, a
- * strip carries the three facts the old page had thrown away: e-mail,
- * address, office hours. First screen answers who and where.
+ * accent in the photo gold.
  *
  * SAME FOUR STRINGS. title / body print here; offerTitle / offerLede
  * print in ServiceOverview. The two action labels are detail.request and
@@ -75,7 +72,7 @@ export async function ServiceOpener({ s, crumb }: { s: ServiceKey; crumb: string
       )}
 
       <div className="relative flex min-h-[clamp(34rem,78vh,48rem)] flex-col justify-end md:min-h-[clamp(36rem,80vh,50rem)]">
-        <SectionBody className="w-full pt-28 md:pt-36">
+        <SectionBody className="w-full pb-14 pt-28 md:pb-20 md:pt-36">
           <div className="max-w-[40rem]">
             <p className="flex items-center gap-2.5 font-mono text-[0.6875rem] uppercase leading-none tracking-[0.18em] text-gold">
               {crumb}
@@ -116,8 +113,11 @@ export async function ServiceOpener({ s, crumb }: { s: ServiceKey; crumb: string
             </div>
           </div>
 
-          {/* The contact strip, on the picture's foot. */}
-          <ServiceFacts s={s} tone="dusk" className="mt-12 md:mt-16" />
+          {/* The contact strip that ran along the foot here (e-mail,
+             address, office hours, requirement) was removed on the user's
+             call the same evening. ServiceFacts is kept in the tree; the
+             address and mail still reach the reader through the "Skriv til
+             oss" action, the line under the form and the footer. */}
         </SectionBody>
       </div>
     </section>
