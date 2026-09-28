@@ -111,21 +111,12 @@ export default async function ServiceDetail({
           <HallBackdrop wash={62} />
           <Section id="enquiry" tone="none" className="scroll-mt-24 bg-paper/45 pb-20 md:pb-28">
             <SectionBody>
-              {/* ── ONE CENTRED COLUMN ────────────────────────────────────
-                 The "Bli medlem" aside that stood beside the form was
-                 removed on the client's instruction (2026-09-28, via the
-                 user, with a screenshot of exactly that block). With the
-                 aside gone a form in the start half of a twelve-column grid
-                 leaves the end half empty, so the enquiry becomes one
-                 column, 40rem, centred on the page — the reference does the
-                 same — with the heading, the lede and the card in it and
-                 the text still left-aligned. */}
-              <div className="mx-auto max-w-[40rem]">
-                <Eyebrow tone="gold-deep">{plainTitle}</Eyebrow>
-                <SectionHeading className="mt-5">{t('detail.request')}</SectionHeading>
-                <p className="mt-4 max-w-[42ch] text-body text-ink-60">{t('detail.requestLede')}</p>
+              <Eyebrow tone="gold-deep">{plainTitle}</Eyebrow>
+              <SectionHeading className="mt-5">{t('detail.request')}</SectionHeading>
+              <p className="mt-4 max-w-[42ch] text-body text-ink-60">{t('detail.requestLede')}</p>
 
-                <div className="mt-10">
+              <div className="mt-10 md:grid md:grid-cols-12 md:items-center md:gap-12 lg:gap-16">
+                <div className="md:col-span-7">
                   <RequestForm subject={s as RequestSubject} card rule={false} />
                   {/* islamic.no closes its form on "eller kontakt oss direkte";
                      one line, the same address the hero's second action carries. */}
@@ -136,6 +127,37 @@ export default async function ServiceDetail({
                     </a>
                   </p>
                 </div>
+
+                {/* ── WHAT HAPPENS NEXT ─────────────────────────────────
+                   The slot beside the form, third occupant. The facts
+                   register and then the "Bli medlem" aside were both
+                   removed on the client's instruction (2026-09-28). What
+                   his reference does here that ours did not: it says what
+                   happens after Send ("så tar vi kontakt innen 2–3
+                   virkedager"). Three lines, all from sentences the pages
+                   already carry — detail.requestLede ("så tar vi kontakt
+                   for en samtale") and each service's offerLede — with
+                   the last line per service (items.<s>.nextLast) and a
+                   generic fallback. No promise of days: that number is the
+                   client's to give, and a promise he cannot keep is worse
+                   than none. */}
+                <aside className="mt-12 md:col-span-5 md:mt-0 md:border-s md:border-rule md:ps-10 lg:ps-14">
+                  <h3 className="font-serif text-[clamp(1.3rem,1.9vw,1.55rem)] leading-[1.18] text-ink">{t('detail.next')}</h3>
+                  <ol className="mt-5">
+                    {(t.raw('detail.nextSteps') as string[]).map((line, i, arr) => {
+                      const isLast = i === arr.length - 1;
+                      const text = isLast && t.has(`items.${s}.nextLast`) ? t(`items.${s}.nextLast`) : line;
+                      return (
+                        <li key={i} className="flex gap-4 border-t border-rule py-3.5 first:border-t-0 first:pt-0">
+                          <span className="pt-[0.3rem] font-mono text-[0.6875rem] tabular-nums tracking-[0.18em] text-gold-deep">
+                            {String(i + 1).padStart(2, '0')}
+                          </span>
+                          <p className="font-serif text-[1.15rem] leading-snug text-ink">{text}</p>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                </aside>
               </div>
             </SectionBody>
           </Section>

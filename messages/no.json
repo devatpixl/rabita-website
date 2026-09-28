@@ -1765,7 +1765,13 @@
       "related": "Andre tjenester",
       "write": "Skriv til oss",
       "orWrite": "Foretrekker du e-post? Skriv til",
-      "memberNote": "Som medlem får du prioritert tilgang til våre tjenester og aktiviteter, nyhetsbrev og invitasjoner, og mulighet for stemmerett på årsmøtet. Ordinært medlemskap er gratis. <link>Bli medlem</link>."
+      "memberNote": "Som medlem får du prioritert tilgang til våre tjenester og aktiviteter, nyhetsbrev og invitasjoner, og mulighet for stemmerett på årsmøtet. Ordinært medlemskap er gratis. <link>Bli medlem</link>.",
+      "next": "Hva skjer videre",
+      "nextSteps": [
+        "Vi leser henvendelsen din.",
+        "Vi tar kontakt for en samtale.",
+        "Vi hjelper deg videre."
+      ]
     },
     "items": {
       "nikah": {
@@ -1808,7 +1814,8 @@
             "label": "Forutsetning",
             "value": "Juridisk gift, med gyldig vigselsattest"
           }
-        ]
+        ],
+        "nextLast": "Sammen finner vi en dato som passer."
       },
       "janaza": {
         "title": "<em>Janaza</em> (begravelse)",

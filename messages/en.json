@@ -1761,7 +1761,13 @@
       "related": "Other services",
       "write": "Write to us",
       "orWrite": "Prefer e-mail? Write to",
-      "memberNote": "As a member you get priority access to our services and activities, the newsletter and invitations, and the chance to vote at the annual meeting. Ordinary membership is free. <link>Become a member</link>."
+      "memberNote": "As a member you get priority access to our services and activities, the newsletter and invitations, and the chance to vote at the annual meeting. Ordinary membership is free. <link>Become a member</link>.",
+      "next": "What happens next",
+      "nextSteps": [
+        "We read your enquiry.",
+        "We get in touch for a conversation.",
+        "We help you take the next step."
+      ]
     },
     "items": {
       "nikah": {
@@ -1804,7 +1810,8 @@
             "label": "Requirement",
             "value": "Legally married, with a valid marriage certificate"
           }
-        ]
+        ],
+        "nextLast": "Together we find a date that suits you."
       },
       "janaza": {
         "title": "<em>Janaza</em> (funeral)",
