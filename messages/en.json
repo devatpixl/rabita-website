@@ -2688,7 +2688,9 @@
   "membershipHub": {
     "kicker": "Membership",
     "title": "Membership at <em>Rabita</em>.",
-    "lede": "Free, one vote at the annual meeting, and the basis of the state grant to the congregation. Here is what you need to know about joining, leaving – and being registered in more than one place.",
+    "body": "Free, one vote at the annual meeting, and the basis of the state grant to the congregation. Here is what you need to know about joining, leaving – and being registered in more than one place.",
+    "offerTitle": "Three things you may need",
+    "offerLede": "Leaving, dual membership and gifts – everything about membership is gathered on this page. Not a member yet? Joining takes a minute.",
     "join": {
       "prompt": "Not a member yet?",
       "cta": "Become a member"

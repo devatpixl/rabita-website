@@ -2684,7 +2684,9 @@
   "membershipHub": {
     "kicker": "Medlemskap",
     "title": "Medlemskap i <em>Rabita</em>.",
-    "lede": "Gratis, én stemme på årsmøtet, og grunnlaget for statsstøtten til menigheten. Her finner du det du trenger om å melde deg inn, melde deg ut – og om å stå registrert flere steder.",
+    "body": "Gratis, én stemme på årsmøtet, og grunnlaget for statsstøtten til menigheten. Her finner du det du trenger om å melde deg inn, melde deg ut – og om å stå registrert flere steder.",
+    "offerTitle": "Tre ting du kan trenge",
+    "offerLede": "Utmelding, dobbelt medlemskap og gaver – alt om medlemskapet er samlet på denne siden. Er du ikke medlem ennå, tar innmeldingen ett minutt.",
     "join": {
       "prompt": "Ikke medlem ennå?",
       "cta": "Bli medlem"

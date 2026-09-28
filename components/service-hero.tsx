@@ -39,8 +39,35 @@ import { SERVICE_STORY, galleryOrientation, type ServiceKey } from '@/lib/servic
  * included — they route through the same [subject] page. Shahada was the
  * pilot; the client approved it and asked for the rest.
  */
-export async function ServiceHero({ s, crumb }: { s: ServiceKey; crumb: string }) {
+// Two ways in. A service passes its key and everything is read from
+// servicesIndex.items.<s> and SERVICE_STORY. A page that is not a service
+// but wants the same opener (2026-09-28: /tjenester/medlemskap, "follow the
+// format of the rest of the service pages") passes a namespace whose
+// title / body / offerTitle / offerLede keys carry the same copy, plus its
+// own photograph and its own link. Nothing about the layout changes; only
+// where the words come from.
+export async function ServiceHero({
+  s,
+  ns,
+  crumb,
+  story: storyProp,
+  cta,
+  short,
+}: {
+  s?: ServiceKey;
+  /** A namespace with title / body / offerTitle / offerLede, when `s` is not set. */
+  ns?: string;
+  crumb: string;
+  /** The photograph, when `s` is not set (a service reads SERVICE_STORY). */
+  story?: { src: string; objectClass: string };
+  /** The link after the offer paragraph. A service links to its own #enquiry. */
+  cta?: { href: string; label: string };
+  /** The kicker's second half, when `s` is not set (a service derives it from its title). */
+  short?: string;
+}) {
   const t = await getTranslations('servicesIndex');
+  const tx = s ? t : await getTranslations(ns ?? 'servicesIndex');
+  const key = (k: string) => (s ? `items.${s}.${k}` : k);
   const locale = await getLocale();
   const rtl = locale === 'ar';
 
@@ -48,10 +75,10 @@ export async function ServiceHero({ s, crumb }: { s: ServiceKey; crumb: string }
   // Every branch below is guarded rather than asserted, so a service added to
   // REDESIGNED before its picture arrives degrades to a full-width type
   // column instead of crashing the route.
-  const story = SERVICE_STORY[s];
-  const rawTitle = t.raw(`items.${s}.title`) as string;
+  const story = s ? SERVICE_STORY[s] : storyProp;
+  const rawTitle = tx.raw(key('title')) as string;
   const plainTitle = rawTitle.replace(/<\/?em>/g, '');
-  const shortTitle = plainTitle.split('(')[0]!.trim();
+  const shortTitle = short ?? plainTitle.split('(')[0]!.trim();
 
   // ── DOES THE NAME GET ITS OWN LINE? ───────────────────────────────────
   // Only when the title OPENS with the <em>. Seven of the eighteen do —
@@ -276,7 +303,7 @@ export async function ServiceHero({ s, crumb }: { s: ServiceKey; crumb: string }
                cannot fit would otherwise run under the picture. This only
                ever fires for a word wider than the column. */}
             <h1 className="mt-7 max-w-[18ch] break-words font-serif text-[clamp(2.25rem,5.5vw,4.25rem)] leading-[1.02] tracking-[-0.02em] text-balance text-ink md:[font-variation-settings:'opsz'_144] md:mt-5 md:max-w-[14ch] md:text-[clamp(2.6rem,5vw,4.75rem)] md:leading-[1.0] md:text-wrap [@media(min-width:768px)_and_(max-height:900px)]:text-[clamp(2.4rem,4.5vw,4.25rem)]">
-              {t.rich(`items.${s}.title`, {
+              {tx.rich(key('title'), {
                 em: (chunks) => (
                   <Accent surface="paper" className={emLeads ? 'md:block md:ltr:-ms-[0.03em]' : undefined}>
                     {chunks}
@@ -289,7 +316,7 @@ export async function ServiceHero({ s, crumb }: { s: ServiceKey; crumb: string }
                the h1 in section 1. */}
             {/* A step up with the title, so the lede is not dwarfed by it. */}
             <p className="mt-8 max-w-[56ch] text-[clamp(1rem,1.15vw,1.125rem)] leading-relaxed text-ink-60 md:mt-6 md:max-w-[42ch] md:text-[clamp(1.0625rem,1.2vw,1.2rem)] md:leading-[1.6]">
-              {t(`items.${s}.body`)}
+              {tx(key('body'))}
             </p>
 
             {/* ── WHAT WAS SECTION 2 ──────────────────────────────────────
@@ -304,10 +331,10 @@ export async function ServiceHero({ s, crumb }: { s: ServiceKey; crumb: string }
             <div className="mt-9 md:mt-14 md:mt-10 md:border-t md:border-rule md:pt-8">
               <Eyebrow tone="gold-deep">{t('detail.what')}</Eyebrow>
               <h2 className="font-serif text-section text-ink mt-5 md:mt-4 md:max-w-[20ch] md:text-[clamp(1.45rem,2.2vw,1.95rem)] md:leading-[1.15] md:tracking-[-0.01em] md:text-balance">
-                {t(`items.${s}.offerTitle`)}
+                {tx(key('offerTitle'))}
               </h2>
               <p className="mt-6 max-w-[38ch] text-body text-ink-60 md:mt-4 md:max-w-[46ch] md:leading-relaxed">
-                {t(`items.${s}.offerLede`)}
+                {tx(key('offerLede'))}
               </p>
               {/* Client, 2026-09-23 (English list): "at end of each paragraph
                  we can have a href link here." One link, after the paragraph
@@ -316,10 +343,10 @@ export async function ServiceHero({ s, crumb }: { s: ServiceKey; crumb: string }
                  is detail.request, the heading that form already carries, so
                  no new string in any locale. */}
               <a
-                href="#enquiry"
+                href={cta?.href ?? '#enquiry'}
                 className="group mt-5 inline-flex min-h-11 items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-gold-deep transition-colors hover:text-ink"
               >
-                {t('detail.request')}
+                {cta?.label ?? t('detail.request')}
                 <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">&rarr;</span>
               </a>
               {/* The foot of the column, as it was: Rabita's own mark and a
