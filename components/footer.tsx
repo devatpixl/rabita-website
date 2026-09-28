@@ -305,14 +305,13 @@ export function Footer({ map }: { map?: ReactNode }) {
              and this column is left-aligned like everything beside it —
              centring there would put it out of step with the register it
              sits under, not in step with it. */}
-          {/* xl:border-x + xl:px-7 — the two hairlines between the columns
-             (client mock, 2026-09-28). They live on this column's own edges,
-             and the column's padding IS the grid gap on those two sides
+          {/* xl:px-7 — the column's padding IS the grid gap on its two sides
              (xl:gap-0 on the grid): 28px each, the same 28 the gap was, so
              the register's 331px budget — see the note on the grid — is
-             untouched. self-stretch, not centre, so the rules run the full
-             height of the band; the content inside is still centred. */}
-          <div className="xl:flex xl:flex-col xl:items-center xl:justify-center xl:self-stretch xl:border-x xl:border-paper/10 xl:px-7">
+             untouched. The two hairlines the mock drew on these edges were
+             here for an hour on 2026-09-28 and came off on the user's call
+             ("remove the 2 vertical lines"). */}
+          <div className="xl:flex xl:flex-col xl:items-center xl:justify-center xl:px-7">
             {/* DT, the same mono the left register uses for OPEN FOR PRAYER
                and ADDRESS. This was 11px at 50% against their 10px at 45%. */}
             {/* The label between two rules, at xl (client mock). Below xl
