@@ -57,7 +57,11 @@ export function LanguageSwitcher({
 
   const swap = (locale: AppLocale) => {
     const rest = pathname.replace(/^\/(no|en|ar)/, '') || '/';
-    router.push(`/${locale}${rest === '/' ? '' : rest}`);
+    // scroll: false — a reader who changes language halfway down a page
+    // should stay halfway down it (user, 2026-09-28: "website starts from
+    // top" on every switch). The default push scrolls to the top like a new
+    // page; this is the same page in another language.
+    router.push(`/${locale}${rest === '/' ? '' : rest}`, { scroll: false });
     setOpen(false);
   };
 
