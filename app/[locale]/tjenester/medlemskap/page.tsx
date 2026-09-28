@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
+import { GiveSheetButton } from '@/components/give-sheet-button';
 import { HALL_HOST, HallBackdrop } from '@/components/hall-backdrop';
 import { Section, SectionBody } from '@/components/primitives';
 import { ServiceHero } from '@/components/service-hero';
@@ -149,11 +150,14 @@ export default async function MembershipHubPage({
                 <div className="md:col-span-8">
                   <h2 className={heading}>{t('give.heading')}</h2>
                   <p className={`mt-4 ${body}`}>{t('give.body')}</p>
+                  {/* Opens the giving sheet, the way the header's button
+                     does. Nothing on the site links to /gi-en-gave as a
+                     page, and this was about to be the one thing that did. */}
                   <div className="mt-6">
-                    <Link href={p('/gi-en-gave')} className={pill}>
+                    <GiveSheetButton className={pill}>
                       {t('give.cta')}
                       {arrow}
-                    </Link>
+                    </GiveSheetButton>
                   </div>
                 </div>
               </li>
