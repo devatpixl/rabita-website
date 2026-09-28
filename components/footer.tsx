@@ -43,23 +43,38 @@ export function Footer({ map }: { map?: ReactNode }) {
          into this footer (client: the Sørligata pin "didn't turn out very
          well", he wants the map "where it clearly shows how centrally located
          the mosque is"), and a My Maps embed needs ≥520px of width before
-         Google's own bottom chrome stops colliding with itself. On the 6xl
-         band a 12-column 4/3/5 split gave the iframe 417px. The map track is
-         now minmax(0,5fr) against 3fr for the register and an auto column for
-         the social row, on a 1280px band: register ~346, map ~576 → iframe
-         ~556. Below 1280 the 3fr track starves the register (the prayer line
-         wraps), so the two-column layout holds up to xl instead of lg — on a
-         1024–1279 screen the map runs full width above the columns, which is
-         what phones and tablets already did.
+         Google's own bottom chrome stops colliding with itself (measured
+         2026-09-28: 490 touches, 500 is clean). On the 6xl band a 12-column
+         4/3/5 split gave the iframe 417px.
 
-         The 7xl band sits 64px wider each side than the 6xl page sections
-         above it. Deliberate: the alternative was a narrower map, and the
-         site already mixes 6xl with 84rem bands.
+         THE TRACKS, and every number is load-bearing. Map: minmax(0,33rem)
+         = 528px track = 508px iframe inside the plate's 10px padding. The
+         standalone embed is clean at 500, but inside the page at 500 the
+         scale bar still nicked the K of "Keyboard shortcuts"; 508 clears it.
+         Not a pixel more, because every pixel over it comes out of the
+         edges (below). Social row: auto, which measures 285px (the two
+         buttons side by side). Register: the remainder, which must hold the
+         English prayer line "Fajr, Dhuhr to Isha see prayer times →" at
+         ~323px unwrapped. At xl the band is 1280 − 2×40 padding = 1200,
+         minus 2×28 gaps = 1144, minus 285 and 528 = 331 for the register.
+         Eight pixels of slack. Widen the padding or the gaps and the prayer
+         line wraps; narrow the map and Google's chrome collides.
+
+         Below 1280 the register starves, so the two-column layout holds up
+         to xl instead of lg — on a 1024–1279 screen the map runs full width
+         above the columns, which is what phones and tablets already did.
+
+         xl:px-10, not the sm:px-6 the rest of the band uses: the client saw
+         the footer on a 13-inch MacBook with 24px to each edge and asked for
+         "a little more" room at the sides (2026-09-28). 40px is what the
+         numbers above allow. The 7xl band still sits wider than the 6xl page
+         sections above it; deliberate, the alternative was a narrower map,
+         and the site already mixes 6xl with 84rem bands.
 
          The middle column carried the newsletter above the social row until
          2026-09-23; see the note where it stood. */}
-      <div className="mx-auto max-w-7xl px-5 py-8 sm:px-6 sm:py-10 md:py-16">
-        <div className="grid gap-7 sm:grid-cols-2 sm:gap-10 xl:grid-cols-[minmax(0,3fr)_auto_minmax(0,5fr)]">
+      <div className="mx-auto max-w-7xl px-5 py-8 sm:px-6 sm:py-10 md:py-16 xl:px-10">
+        <div className="grid gap-7 sm:grid-cols-2 sm:gap-10 xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,33rem)] xl:gap-7">
           <div>
             {/* The lockup signs the page — mark plus both lines of the name.
                lg and up only: below that it moves to the foot of the footer,
@@ -321,7 +336,7 @@ export function Footer({ map }: { map?: ReactNode }) {
            reads as touching. sm:pb-5 hands the old padding back from sm, where the
            bar is three columns wide and the button only ever overlaps empty
            ground on its right. */}
-        <div className="mx-auto grid max-w-7xl items-center gap-y-2 px-5 py-3 pb-[calc(5rem+env(safe-area-inset-bottom))] sm:grid-cols-3 sm:gap-y-3 sm:px-6 sm:py-5 sm:pb-5">
+        <div className="mx-auto grid max-w-7xl items-center gap-y-2 px-5 py-3 pb-[calc(5rem+env(safe-area-inset-bottom))] sm:grid-cols-3 sm:gap-y-3 sm:px-6 sm:py-5 sm:pb-5 xl:px-10">
           <p className="text-center font-mono text-[0.625rem] uppercase leading-none tracking-[0.16em] text-gold sm:text-start">
             &copy; {new Date().getFullYear()} Rabita · {t('orgNr')} {CAMPAIGN.orgNr}
           </p>
