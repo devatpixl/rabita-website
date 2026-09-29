@@ -140,7 +140,18 @@ export function GivingSheet() {
       ref={dialogRef}
       onClick={onDialogClick}
       aria-labelledby="giving-sheet-title"
-      className="w-full max-w-lg overflow-hidden rounded-2xl border border-rule/60 bg-paper shadow-[0_2px_6px_rgba(0,0,0,0.06),0_24px_60px_-24px_rgba(0,0,0,0.45)]"
+      /* ── A MARGIN ON A PHONE (user, 2026-09-29) ──────────────────────
+         w-full against the global `dialog { max-width: 100vw }` reset put the
+         card edge to edge, so its 16px corner radius met the screen edge and
+         the whole thing read as a page that had replaced the site rather than
+         a panel floating over it. 14px a side is the smallest gap that still
+         shows the backdrop and the shadow down both edges — enough to say
+         "this is on top of something", not so much that the preset tiles
+         start crowding.
+
+         max-w-lg still governs from ~540px up, so tablets and desktop are
+         untouched. */
+      className="w-[calc(100%-1.75rem)] max-w-lg overflow-hidden rounded-2xl border border-rule/60 bg-paper shadow-[0_2px_6px_rgba(0,0,0,0.06),0_24px_60px_-24px_rgba(0,0,0,0.45)]"
     >
       <div className="border-b border-rule bg-paper px-6 py-3 max-sm:px-4 max-sm:py-2.5 flex items-center justify-between">
         <h2 id="giving-sheet-title" className="text-card font-serif">
