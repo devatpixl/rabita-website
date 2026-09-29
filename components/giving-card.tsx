@@ -144,19 +144,32 @@ function isValidFnr(v: string) {
 // NOTHING IS REMOVED. The payment strip and the anonymous checkbox both stay;
 // this is padding, gaps, tile heights and one type step, which is what the
 // tier was tuned to give up in the first place.
+// ── AND THE WHOLE LADDER IS GATED ON WIDTH (2026-09-29) ──────────────────
+// The paragraph above describes the flag as the thing that keeps these off
+// phones. It was not: `fit` is passed by the giving SHEET, which is what the
+// header's give button opens on a phone, and by /moskeprosjektet's hero. On a
+// 390x844 screen every tier below 1100 therefore fired, and the 3.5rem preset
+// box really did make the phone card taller than its own base measure.
+//
+// A flag cannot express "this axis only applies once the other axis is roomy",
+// so the media query says it instead. min-width:640 rather than 768 because
+// this card's own phone/roomy boundary is `sm` everywhere else in the file,
+// and splitting the two axes at the same place is what keeps 640-767 rendering
+// exactly as it does today. Desktop is untouched: min-width is always true
+// there, so every tier resolves as before.
 const FIT = {
-  header: '[@media(max-height:1100px)]:pt-3 [@media(max-height:1100px)]:pb-2 [@media(max-height:760px)]:pt-2.5 [@media(max-height:720px)]:pt-2 [@media(max-height:720px)]:pb-1.5',
-  stepRow: '[@media(max-height:1100px)]:mt-3 [@media(max-height:760px)]:mt-2 [@media(max-height:720px)]:mt-1.5',
-  title: '[@media(max-height:1100px)]:mt-2 [@media(max-height:1100px)]:text-xl',
-  lede: '[@media(max-height:760px)]:mt-1 [@media(max-height:720px)]:hidden',
-  body: '[@media(max-height:1100px)]:py-3.5 [@media(max-height:760px)]:py-2.5 [@media(max-height:720px)]:py-2',
-  toggle: '[@media(max-height:1100px)]:mb-3 [@media(max-height:760px)]:mb-2 [@media(max-height:720px)]:mb-1.5',
-  presetGrid: '[@media(max-height:1100px)]:gap-2 [@media(max-height:760px)]:gap-1.5 [@media(max-height:720px)]:mb-1',
-  presetCell: '[@media(max-height:1100px)]:min-h-[3.5rem] [@media(max-height:1100px)]:py-2 [@media(max-height:760px)]:min-h-[3.1rem] [@media(max-height:720px)]:min-h-[2.8rem] [@media(max-height:720px)]:py-1.5',
-  other: '[@media(max-height:1100px)]:mb-3 [@media(max-height:1100px)]:min-h-[3rem] [@media(max-height:760px)]:mb-2 [@media(max-height:760px)]:min-h-[2.75rem] [@media(max-height:720px)]:mb-1.5 [@media(max-height:720px)]:min-h-[2.5rem]',
-  anon: '[@media(max-height:1100px)]:py-2 [@media(max-height:760px)]:py-1.5 [@media(max-height:720px)]:py-1',
-  actions: '[@media(max-height:1100px)]:pb-3 [@media(max-height:760px)]:pb-2 [@media(max-height:720px)]:pb-1.5',
-  footer: '[@media(max-height:1100px)]:py-1.5 [@media(max-height:760px)]:py-1 [@media(max-height:720px)]:py-0.5',
+  header: '[@media(min-width:640px)_and_(max-height:1100px)]:pt-3 [@media(min-width:640px)_and_(max-height:1100px)]:pb-2 [@media(min-width:640px)_and_(max-height:760px)]:pt-2.5 [@media(min-width:640px)_and_(max-height:720px)]:pt-2 [@media(min-width:640px)_and_(max-height:720px)]:pb-1.5',
+  stepRow: '[@media(min-width:640px)_and_(max-height:1100px)]:mt-3 [@media(min-width:640px)_and_(max-height:760px)]:mt-2 [@media(min-width:640px)_and_(max-height:720px)]:mt-1.5',
+  title: '[@media(min-width:640px)_and_(max-height:1100px)]:mt-2 [@media(min-width:640px)_and_(max-height:1100px)]:text-xl',
+  lede: '[@media(min-width:640px)_and_(max-height:760px)]:mt-1 [@media(min-width:640px)_and_(max-height:720px)]:hidden',
+  body: '[@media(min-width:640px)_and_(max-height:1100px)]:py-3.5 [@media(min-width:640px)_and_(max-height:760px)]:py-2.5 [@media(min-width:640px)_and_(max-height:720px)]:py-2',
+  toggle: '[@media(min-width:640px)_and_(max-height:1100px)]:mb-3 [@media(min-width:640px)_and_(max-height:760px)]:mb-2 [@media(min-width:640px)_and_(max-height:720px)]:mb-1.5',
+  presetGrid: '[@media(min-width:640px)_and_(max-height:1100px)]:gap-2 [@media(min-width:640px)_and_(max-height:760px)]:gap-1.5 [@media(min-width:640px)_and_(max-height:720px)]:mb-1',
+  presetCell: '[@media(min-width:640px)_and_(max-height:1100px)]:min-h-[3.5rem] [@media(min-width:640px)_and_(max-height:1100px)]:py-2 [@media(min-width:640px)_and_(max-height:760px)]:min-h-[3.1rem] [@media(min-width:640px)_and_(max-height:720px)]:min-h-[2.8rem] [@media(min-width:640px)_and_(max-height:720px)]:py-1.5',
+  other: '[@media(min-width:640px)_and_(max-height:1100px)]:mb-3 [@media(min-width:640px)_and_(max-height:1100px)]:min-h-[3rem] [@media(min-width:640px)_and_(max-height:760px)]:mb-2 [@media(min-width:640px)_and_(max-height:760px)]:min-h-[2.75rem] [@media(min-width:640px)_and_(max-height:720px)]:mb-1.5 [@media(min-width:640px)_and_(max-height:720px)]:min-h-[2.5rem]',
+  anon: '[@media(min-width:640px)_and_(max-height:1100px)]:py-2 [@media(min-width:640px)_and_(max-height:760px)]:py-1.5 [@media(min-width:640px)_and_(max-height:720px)]:py-1',
+  actions: '[@media(min-width:640px)_and_(max-height:1100px)]:pb-3 [@media(min-width:640px)_and_(max-height:760px)]:pb-2 [@media(min-width:640px)_and_(max-height:720px)]:pb-1.5',
+  footer: '[@media(min-width:640px)_and_(max-height:1100px)]:py-1.5 [@media(min-width:640px)_and_(max-height:760px)]:py-1 [@media(min-width:640px)_and_(max-height:720px)]:py-0.5',
 } as const;
 
 export function GivingCard({
@@ -443,9 +456,9 @@ const TOTAL_STEPS = 3;
          Written as arbitrary variants rather than named ones in
          tailwind.config: a config-level variant only compiles after the dev
          server restarts, and these compile on save. */}
-      <header className={cn('border-b border-rule', compact ? 'px-5 pt-4 pb-3' : cn('px-4 pt-4 pb-3 sm:px-6 sm:pt-5 sm:pb-4', fit && FIT.header))}>
+      <header className={cn('border-b border-rule', compact ? 'px-5 pt-4 pb-3' : cn('px-4 pt-4 pb-3 max-sm:pt-3 max-sm:pb-2.5 sm:px-6 sm:pt-5 sm:pb-4', fit && FIT.header))}>
         <ProgressBar current={step} total={TOTAL_STEPS} />
-        <div className={cn('mt-4', fit && FIT.stepRow)}>
+        <div className={cn('mt-4 max-sm:mt-2.5', fit && FIT.stepRow)}>
           <span className="font-mono text-[0.75rem] uppercase tracking-[0.18em] text-gold">
             {t('wizard.stepLabel', {
               n: step,
@@ -458,15 +471,33 @@ const TOTAL_STEPS = 3;
           ref={headingRef}
           tabIndex={-1}
           style={{ outline: 'none' }}
-          className={cn('font-serif leading-tight text-ink focus:outline-none focus-visible:outline-none', compact ? 'mt-2 text-xl' : cn('mt-2 text-xl sm:mt-3 sm:text-2xl', fit && FIT.title))}
+          className={cn('font-serif leading-tight text-ink focus:outline-none focus-visible:outline-none', compact ? 'mt-2 text-xl' : cn('mt-2 text-xl max-sm:mt-1.5 max-sm:text-[1.125rem] max-sm:leading-snug sm:mt-3 sm:text-2xl', fit && FIT.title))}
         >
-          {stepHeading}
+          {/* ── TWO LENGTHS ON STEP 1 (2026-09-29) ────────────────────
+             `giving.question` is "Vær med på å bygge fremtidens moské i
+             Oslo" — 46 characters, which at the phone's type size is three
+             lines and about 84px of a card that has to fit a screen. The
+             short twin says the same thing in one line. Steps 2 and 3 are
+             already short and print as they always did.
+
+             One <h2>, two spans, so the ref and the focus target the
+             wizard moves between steps are untouched — and only one span
+             is ever in a rendered subtree, so a screen reader hears one
+             heading, not two. */}
+          {step === 1 ? (
+            <>
+              <span className="sm:hidden">{t('questionShort')}</span>
+              <span className="hidden sm:inline">{stepHeading}</span>
+            </>
+          ) : (
+            stepHeading
+          )}
         </h2>
         {/* A reason for the choice, not just the choice. Step 1 only: steps
            2 and 3 are a form and a payment method, and neither is a
            decision this sentence could help with. */}
         {step === 1 && (
-          <p className={cn('max-w-[46ch] text-ink-60', compact ? 'mt-1.5 text-[13px] leading-snug' : 'mt-2 text-[13px] leading-snug sm:text-[14px]')}>
+          <p className={cn('max-w-[46ch] text-ink-60', compact ? 'mt-1.5 text-[13px] leading-snug' : 'mt-2 text-[13px] leading-snug max-sm:hidden sm:text-[14px]')}>
             {t('questionLede')}
           </p>
         )}
@@ -485,7 +516,7 @@ const TOTAL_STEPS = 3;
          step is showing. */}
       <AnimatedHeight reduced={reduced}>
         <div
-          className={compact ? 'px-5 py-4' : cn('px-4 py-4 sm:px-6 sm:py-5', fit && FIT.body)}
+          className={compact ? 'px-5 py-4' : cn('px-4 py-4 max-sm:py-3 sm:px-6 sm:py-5', fit && FIT.body)}
           key={step}
           style={{
             opacity: entered ? 1 : 0,
@@ -538,7 +569,7 @@ const TOTAL_STEPS = 3;
       </AnimatedHeight>
 
       {/* Footer buttons — back (ghost) + primary. */}
-      <div className={cn('flex items-center gap-3', compact ? 'px-5 pb-3' : cn('px-4 pb-3 sm:px-6 sm:pb-4', fit && FIT.actions))}>
+      <div className={cn('flex items-center gap-3', compact ? 'px-5 pb-3' : cn('px-4 pb-3 max-sm:pb-2.5 sm:px-6 sm:pb-4', fit && FIT.actions))}>
         {step > 1 && (
           <button
             type="button"
@@ -572,8 +603,8 @@ const TOTAL_STEPS = 3;
 
       {/* Payment marks in place of the tax-deduction line (client request
          2026-08-30). Monochrome, so five brands read as one quiet row. */}
-      <footer className={cn('border-t border-rule bg-paper-2/40', compact ? 'px-5 py-2' : cn('px-4 py-2 sm:px-6 sm:py-3', fit && FIT.footer))}>
-        <PaymentLogos label={t('paymentLogosAria')} />
+      <footer className={cn('border-t border-rule bg-paper-2/40', compact ? 'px-5 py-2' : cn('px-4 py-2 max-sm:py-1.5 sm:px-6 sm:py-3', fit && FIT.footer))}>
+        <PaymentLogos label={t('paymentLogosAria')} more={t('paymentLogosMore')} />
       </footer>
     </div>
   );
@@ -701,7 +732,7 @@ function StepAmount({
 
       {/* Frequency toggle — shared selection language. */}
       <div
-        className={cn('relative inline-flex w-full items-center rounded-full bg-paper-2 p-1', compact ? 'mb-3' : cn('mb-3 sm:mb-5', fit && FIT.toggle))}
+        className={cn('relative inline-flex w-full items-center rounded-full bg-paper-2 p-1', compact ? 'mb-3' : cn('mb-3 max-sm:mb-2.5 sm:mb-5', fit && FIT.toggle))}
         role="tablist"
         aria-label={t('sheetTitle')}
       >
@@ -732,7 +763,7 @@ function StepAmount({
          period as a small suffix, one box tagged as recommended. */}
       {!hidePresets && (
       <div
-        className={cn('grid grid-cols-2', compact ? 'mt-1 mb-2 gap-2' : cn('mt-1 mb-2 gap-2 sm:mt-0 sm:mb-3 sm:gap-3', fit && FIT.presetGrid))}
+        className={cn('grid grid-cols-2', compact ? 'mt-1 mb-2 gap-2' : cn('mt-1 mb-2 gap-2 max-sm:gap-1.5 sm:mt-0 sm:mb-3 sm:gap-3', fit && FIT.presetGrid))}
         role="radiogroup"
         aria-label={t('customLabel')}
       >
@@ -762,7 +793,7 @@ function StepAmount({
               }}
               className={cn(
                 'relative flex flex-col justify-center gap-0.5 rounded-tile text-start transition-colors',
-                compact ? 'min-h-[3rem] px-3 py-2' : cn('min-h-[3.25rem] px-3 py-2 sm:min-h-[4.25rem] sm:px-4 sm:py-3', fit && FIT.presetCell),
+                compact ? 'min-h-[3rem] px-3 py-2' : cn('min-h-[3.25rem] px-3 py-2 max-sm:min-h-[2.75rem] max-sm:py-1.5 sm:min-h-[4.25rem] sm:px-4 sm:py-3', fit && FIT.presetCell),
                 // Selected is an OUTLINE in the brand gold, not a solid
                 // ink fill. Filled, the chosen amount was the only dark
                 // object on a light card — it read as a hole punched in the
@@ -831,7 +862,7 @@ function StepAmount({
       <label
         className={cn(
           'flex items-center justify-between gap-4 rounded-tile px-4 transition-colors',
-          compact ? 'mb-3 min-h-[2.75rem]' : cn('mb-3 min-h-[2.75rem] sm:mb-5 sm:min-h-[3.5rem]', fit && FIT.other),
+          compact ? 'mb-3 min-h-[2.75rem]' : cn('mb-3 min-h-[2.75rem] max-sm:mb-2 max-sm:min-h-[2.5rem] sm:mb-5 sm:min-h-[3.5rem]', fit && FIT.other),
           presetAmount === 'custom'
             ? 'border-[1.5px] border-gold-deep bg-gold-soft/30'
             : 'border-[1.5px] border-ink/15 focus-within:border-gold-deep',
@@ -863,7 +894,7 @@ function StepAmount({
       {/* border-t only. Two rules around one checkbox was a third and
          fourth horizontal line on a card that already carries a progress
          bar and a payment strip. */}
-      <label className={cn('group flex cursor-pointer items-center gap-3 border-t border-rule', compact ? 'py-2' : cn('py-3', fit && FIT.anon))}>
+      <label className={cn('group flex cursor-pointer items-center gap-3 border-t border-rule', compact ? 'py-2' : cn('py-3 max-sm:py-2', fit && FIT.anon))}>
         <span className="relative inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-[1.5px] border-ink transition-colors group-hover:border-gold">
           <input
             type="checkbox"
@@ -1037,19 +1068,34 @@ const PAYMENT_MARKS = [
   { key: 'vipps', name: 'Vipps', w: 'w-16' },
   { key: 'visa', name: 'Visa', w: 'w-12' },
   { key: 'mastercard', name: 'Mastercard', w: 'w-9' },
-  { key: 'applepay', name: 'Apple Pay', w: 'w-12' },
-  { key: 'googlepay', name: 'Google Pay', w: 'w-20' },
+  // phoneOnly:false — the two wallets come off below sm. Five marks are
+  // 276px of logo plus 80px of gaps in a ~308px strip, so the row wrapped to
+  // two lines on every phone. Vipps, Visa and Mastercard are the three that
+  // answer "can I pay the way I normally do"; the wallets are named in full
+  // on the payment step two taps later, and the trailing "og flere" says
+  // they exist.
+  { key: 'applepay', name: 'Apple Pay', w: 'w-12', phone: false },
+  { key: 'googlepay', name: 'Google Pay', w: 'w-20', phone: false },
 ] as const;
 
-function PaymentLogos({ label }: { label: string }) {
+function PaymentLogos({ label, more }: { label: string; more: string }) {
   return (
-    <ul aria-label={label} className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+    <ul aria-label={label} className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 max-sm:gap-x-4">
       {PAYMENT_MARKS.map((m) => (
-        <li key={m.key} className="flex items-center" role="img" aria-label={m.name}>
+        <li
+          key={m.key}
+          className={cn('flex items-center', 'phone' in m && m.phone === false && 'max-sm:hidden')}
+          role="img"
+          aria-label={m.name}
+        >
           {/* eslint-disable-next-line @next/next/no-img-element -- static same-origin SVG */}
-          <img src={`/payments/${m.key}.svg`} alt="" className={cn('h-8 object-contain', m.w)} aria-hidden />
+          <img src={`/payments/${m.key}.svg`} alt="" className={cn('h-8 object-contain max-sm:h-6', m.w)} aria-hidden />
         </li>
       ))}
+      {/* Phones only, and deliberately text rather than a sixth mark: a
+         display:none logo leaves the accessibility tree with it, so without
+         this line a phone would claim Rabita takes three methods. */}
+      <li className="hidden font-mono text-[10px] uppercase tracking-[0.12em] text-ink-60 max-sm:block">{more}</li>
     </ul>
   );
 }

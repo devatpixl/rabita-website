@@ -31,16 +31,6 @@ const stroke = {
   strokeLinejoin: 'round' as const,
 };
 
-function IconFoundation() {
-  return (
-    <svg viewBox="0 0 24 24" className={ICON} {...stroke} aria-hidden>
-      <path d="M3 20h18" />
-      <path d="M6 20v-6h12v6" />
-      <path d="M12 14V8" />
-      <path d="M8.5 8h7l-3.5-4.5L8.5 8Z" />
-    </svg>
-  );
-}
 function IconHeart() {
   return (
     <svg viewBox="0 0 24 24" className="h-4 w-4" {...stroke} strokeWidth={1.8} aria-hidden>
@@ -57,23 +47,7 @@ function IconPeople() {
     </svg>
   );
 }
-function IconTarget() {
-  return (
-    <svg viewBox="0 0 24 24" className={ICON} {...stroke} aria-hidden>
-      <circle cx="12" cy="12" r="9" />
-      <circle cx="12" cy="12" r="5" />
-      <circle cx="12" cy="12" r="1.2" />
-    </svg>
-  );
-}
 // A label in a tinted tile, the phone layout's repeating unit.
-function Tile({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gold-soft/45 text-gold-deep">
-      {children}
-    </span>
-  );
-}
 
 export async function CampaignMeter() {
   const locale = (await getLocale()) as AppLocale;
@@ -313,57 +287,31 @@ export async function CampaignMeter() {
              first line, figure under it — the reference's order, and the one
              that lets a two-line label sit beside a 9px tile without
              pushing the figure off its own baseline. */}
-          <dl className="mt-3 grid grid-cols-2 gap-3">
-            {/* flex-col + mt-auto, because the labels can run to different
-               numbers of lines: without it the two figures sit at different
-               heights and the pair reads as a mistake. whitespace-nowrap on
-               the figures for the same reason — these numbers break after a
-               digit group if they are allowed to.
+          {/* ── THE TWO FIGURES, AS A ROW (2026-09-29) ─────────────────────
+             Two raised cards, each with its own ring, a rounded icon tile and
+             a label stacked over a figure: about 150px of chrome carrying two
+             numbers, directly beneath a progress bar that is itself the
+             headline figure. As a ruled two-column row they read as the
+             footnote to that bar, which is what they are.
 
-               Which means the size has to be fluid, or nowrap just moves
-               the problem outside the card — and the longest string in the
-               pair got longer when the goal moved in here: "100 000 000 kr"
-               against the "73 004 821 kr" this card used to hold.
-
-               ONE clamp across both cards, not one each. Sizing them
-               separately so each just fits its own string is what a
-               per-card measurement leads to, and it looks like a bug: two
-               figures side by side in identical cards, set 2px apart.
-
-               Re-measured in the browser at 320/360/390/430 rather than
-               scaled off the old numbers: the figure runs 6.87px of width
-               per 1px of type, and a card is 96px inside its padding at
-               320. So 0.84rem is the floor, which leaves about 4px there,
-               and 4.2vw reaches it at 320 and the 20px ceiling at 477. */}
-            <div className="flex flex-col rounded-2xl bg-paper p-4 ring-1 ring-rule">
-              <div className="flex items-start gap-2.5">
-                <Tile>
-                  <IconPeople />
-                </Tile>
-                <dt className="font-mono text-[0.5625rem] uppercase leading-[1.6] tracking-[0.1em] text-ink-60">
-                  {t('lastMonthLabel')}
-                </dt>
-              </div>
-              <dd className="mt-auto whitespace-nowrap pt-3 font-serif text-[clamp(0.84rem,4.2vw,1.25rem)] leading-none tabular-nums text-gold-deep">
+             The goal stays in the row. The client moved it here in Versjon 3
+             and that is not a decision to reopen on a phone. */}
+          <dl className="mt-4 grid grid-cols-2 gap-x-4 border-t border-rule pt-4">
+            <div>
+              <dd className="whitespace-nowrap font-serif text-[clamp(1rem,4.6vw,1.35rem)] leading-none tabular-nums text-gold-deep">
                 +{formatAmount(locale, CAMPAIGN.lastMonthNok)} <span className="text-[0.8em]">kr</span>
               </dd>
+              <dt className="mt-1.5 font-mono text-[0.5625rem] uppercase leading-[1.5] tracking-[0.1em] text-ink-60">
+                {t('lastMonthLabel')}
+              </dt>
             </div>
-            <div className="flex flex-col rounded-2xl bg-paper p-4 ring-1 ring-rule">
-              <div className="flex items-start gap-2.5">
-                <Tile>
-                  <IconTarget />
-                </Tile>
-                <dt className="font-mono text-[0.5625rem] uppercase leading-[1.6] tracking-[0.1em] text-ink-60">
-                  {t('goalLabel')}
-                </dt>
-              </div>
-              {/* Upright here too. The same figure is set twice on this
-                 page — ledger above, phone card here — and a number that
-                 goes upright on one screen and stays italic on the other is
-                 a bug you only see on the device you were not testing on. */}
-              <dd className="mt-auto whitespace-nowrap pt-3 font-serif text-[clamp(0.84rem,4.2vw,1.25rem)] leading-none tabular-nums tracking-[-0.02em] text-gold-deep">
+            <div className="border-s border-rule ps-4">
+              <dd className="whitespace-nowrap font-serif text-[clamp(1rem,4.6vw,1.35rem)] leading-none tabular-nums tracking-[-0.01em] text-ink">
                 {formatAmount(locale, goal)} <span className="text-[0.8em]">kr</span>
               </dd>
+              <dt className="mt-1.5 font-mono text-[0.5625rem] uppercase leading-[1.5] tracking-[0.1em] text-ink-60">
+                {t('goalLabel')}
+              </dt>
             </div>
           </dl>
 
@@ -375,20 +323,20 @@ export async function CampaignMeter() {
              below 640px by design (it is a hover affordance), so a phone
              reader now gets the current phase as a statement with no way to
              read the whole roadmap. Restoring the link restores it. */}
-          <div className="mt-3 flex items-center gap-3 rounded-2xl bg-sage-soft p-4 ring-1 ring-sage-line">
-            <Tile>
-              <IconFoundation />
-            </Tile>
-            <span className="min-w-0 flex-1">
-              <span className="block font-serif text-[1.0625rem] leading-snug text-ink">
+          {/* The phase, as one line rather than a third tinted box. The
+             pulse dot already says "this is live"; the sage plate around it
+             was saying it a second time, in 84px. */}
+          <p className="mt-4 flex items-start gap-2.5 border-t border-rule pt-3">
+            <span className="pulse-dot mt-1.5 shrink-0 text-gold-deep" aria-hidden />
+            <span className="min-w-0">
+              <span className="block font-serif text-[0.9375rem] leading-snug text-ink">
                 {t(`phaseNow.${phase?.key ?? 'fundament'}`)}
               </span>
-              <span className="mt-1.5 flex items-center gap-2 font-mono text-[0.5625rem] uppercase tracking-[0.12em] text-ink-60">
-                <span className="pulse-dot text-gold-deep" aria-hidden />
+              <span className="mt-1 block font-mono text-[0.5625rem] uppercase tracking-[0.12em] text-ink-60">
                 {t('updated', { date: formatDate(locale, CAMPAIGN.raisedAsOf) })}
               </span>
             </span>
-          </div>
+          </p>
         </div>
       </div>
     </section>

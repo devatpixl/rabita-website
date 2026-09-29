@@ -183,7 +183,8 @@
     "closeMenu": "Close the menu",
     "openMenu": "Open the menu",
     "openHours": "Fajr, Dhuhr to Isha",
-    "join": "Become a member"
+    "join": "Become a member",
+    "giveShort": "Give"
   },
   "giving": {
     "freqMonthly": "Monthly",
@@ -274,7 +275,9 @@
       "carpet": "A carpet"
     },
     "chipAriaGift": "Choose {gift} — {amount} kroner",
-    "amountLabel": "Amount"
+    "amountLabel": "Amount",
+    "paymentLogosMore": "and more",
+    "questionShort": "Help build the mosque"
   },
   "meter": {
     "lattice": "Each mark is 1 000 000 kr",
@@ -390,22 +393,26 @@
       "history": {
         "name": "History",
         "title": "Founded in <em>{year}</em>.",
-        "body": "The first Norwegian mosque not tied to a single nationality. In the heart of the capital we have been a gathering point for close to 40 years, for a great diversity of Norwegian Muslims from many backgrounds."
+        "body": "The first Norwegian mosque not tied to a single nationality. In the heart of the capital we have been a gathering point for close to 40 years, for a great diversity of Norwegian Muslims from many backgrounds.",
+        "bodyShort": "The first Norwegian mosque not tied to a single nationality. For close to 40 years a gathering point in the heart of the capital."
       },
       "family": {
         "name": "Members",
         "title": "<em>{members}</em> members. One community.",
-        "body": "From more than {nationalities} nationalities we have built a community carried by {volunteers} regular volunteers and 30 leaders across the board and the departments, supported by an administration of 6 staff, 3 imams and a managing director."
+        "body": "From more than {nationalities} nationalities we have built a community carried by {volunteers} regular volunteers and 30 leaders across the board and the departments, supported by an administration of 6 staff, 3 imams and a managing director.",
+        "bodyShort": "From more than {nationalities} nationalities, carried by {volunteers} regular volunteers, 30 leaders, 3 imams and 6 staff."
       },
       "learning": {
         "name": "Pupils",
         "title": "Over <em>{students}</em> pupils. Knowledge that builds.",
-        "body": "From weekend school for the youngest, focused on mother tongue and faith, to advanced courses for older students in language, Islam and art — Rabita offers learning for everyone. Through serious teaching we raise knowledgeable people with a secure Norwegian-Muslim identity."
+        "body": "From weekend school for the youngest, focused on mother tongue and faith, to advanced courses for older students in language, Islam and art — Rabita offers learning for everyone. Through serious teaching we raise knowledgeable people with a secure Norwegian-Muslim identity.",
+        "bodyShort": "From weekend school for the youngest to advanced courses in language, Islam and art. Learning for everyone, and a confident Norwegian-Muslim identity."
       },
       "volunteer": {
         "name": "Visitors",
         "title": "<em>{visitors}+</em> visitors a week. A meeting place for all.",
-        "body": "Rabita is more than a mosque — it is a place people come to for prayer, teaching and activities, week after week. We also regularly welcome nurseries, school classes, researchers, journalists and partners who want to learn more about us. Our hallmark is “A meeting place for all”."
+        "body": "Rabita is more than a mosque — it is a place people come to for prayer, teaching and activities, week after week. We also regularly welcome nurseries, school classes, researchers, journalists and partners who want to learn more about us. Our hallmark is “A meeting place for all”.",
+        "bodyShort": "Prayer, teaching and activities, week after week. We also host school classes, researchers and journalists. \"A meeting place for all\"."
       }
     }
   },
@@ -2843,7 +2850,8 @@
       "yearsUnit": "yrs"
     },
     "credit": "Architect",
-    "heading": "The <em>dream mosque</em> in the heart of Oslo."
+    "heading": "The <em>dream mosque</em> in the heart of Oslo.",
+    "briefPhone": "The old building is down and construction is under way. At Calmeyers gate 8 we are raising one of Europe’s largest new mosques — a gathering place for faith, learning and community for generations."
   },
   "joinPage": {
     "lede": "As a member you help shape Rabita’s future. You get a vote at the annual meeting, can influence important decisions and contribute to the development of both the congregation and the new mosque building. Membership is free, and it takes only a minute.",

@@ -105,20 +105,45 @@ export async function ProjectOverview() {
         />
         <div
           aria-hidden
-          className="absolute inset-x-0 bottom-0 h-24 md:hidden"
-          style={{ background: 'linear-gradient(180deg, rgba(22,36,46,0) 0%, rgba(22,36,46,1) 100%)' }}
+          className="absolute inset-x-0 bottom-0 h-48 md:hidden"
+          /* 96px -> 192px, and four stops instead of two. The phone layout
+             below now lifts the words up over the picture's foot, so this
+             stopped being a tidy edge where the image meets the section and
+             became the ground the eyebrow and headline stand on. */
+          style={{
+            background:
+              'linear-gradient(180deg, rgba(22,36,46,0) 0%, rgba(22,36,46,0.55) 40%, rgba(22,36,46,0.92) 75%, rgba(22,36,46,1) 100%)',
+          }}
         />
       </div>
 
-      <div className="relative mx-auto flex min-h-0 max-w-6xl flex-col px-6 pb-10 pt-10 md:min-h-[min(88svh,52rem)] md:justify-between md:pb-24 md:pt-24">
+      {/* ── ONE PLATE ON PHONES, NOT IMAGE-THEN-COLUMN (client, 2026-09-29) ──
+         "coming to this MOS project it's not very good at all it's looking
+         like a broken section". It was: a 4:3 aerial render, then a hard
+         edge, then a separate cream-on-dusk column of eyebrow, headline,
+         60-word paragraph, a pill and four bordered figure cards — about
+         1150px reading as two unrelated blocks.
+
+         The negative top margin lifts this column back over the picture's
+         foot, where the deepened scrim above is waiting for it, so the
+         section becomes one plate with the words on it. Desktop already
+         composes that way via md:absolute on the image; this is the phone
+         catching up, not a new idea. */}
+      <div className="relative mx-auto flex min-h-0 max-w-6xl flex-col px-6 pb-10 pt-10 max-md:-mt-28 max-md:pb-8 max-md:pt-0 md:min-h-[min(88svh,52rem)] md:justify-between md:pb-24 md:pt-24">
         {/* Words, on the reading side. */}
-        <div className="max-w-xl">
+        {/* max-md:contents dissolves this wrapper on phones ONLY, so its children
+           become direct children of the flex column above and the phone pill's
+           `order-last` can carry it below the stats row. On desktop the class
+           is inert and this stays the plain max-w-xl block it has always
+           been — the words column must not become a flex parent there, or the
+           margins inside it stop collapsing. */}
+        <div className="max-w-xl max-md:contents">
           <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
             {CAMPAIGN.address}
           </p>
           <h2
             id="project-overview-heading"
-            className="mt-5 font-serif text-[clamp(2.25rem,5vw,4rem)] leading-[1.02] text-balance text-paper"
+            className="mt-5 font-serif text-[clamp(2.25rem,5vw,4rem)] leading-[1.02] text-balance text-paper max-md:mt-3 max-md:text-[2rem]"
           >
             {t.rich('heading', {
               em: (chunks) => <Accent surface="dusk">{chunks}</Accent>,
@@ -128,7 +153,13 @@ export async function ProjectOverview() {
              two lines down in the ledger, and a number written twice is a
              number that drifts. 50ch, not 44 — this paragraph is four times
              the length of the one it replaced. */}
-          <p className="mt-6 max-w-[50ch] text-body text-paper/80">{t('briefShort')}</p>
+          <p className="mt-6 max-w-[50ch] text-body text-paper/80 max-md:hidden">{t('briefShort')}</p>
+          {/* briefShort is 60 words and prints at every width — there is no
+             long twin to hide, so the phone gets a third length rather than
+             a rename that would touch the desktop path. It drops the square
+             metres and the floor count on purpose: both are in the stats row
+             ~40px below it. */}
+          <p className="mt-4 text-body text-paper/85 md:hidden">{t('briefPhone')}</p>
           <Link
             href={`/${locale}/moskeprosjektet`}
             className="group mt-8 hidden min-h-11 items-center gap-3 text-[15px] font-semibold text-paper transition-colors hover:text-gold md:inline-flex"
@@ -149,7 +180,7 @@ export async function ProjectOverview() {
              one gives. */}
           <Link
             href={`/${locale}/moskeprosjektet`}
-            className="group mt-8 flex min-h-12 w-full items-center justify-center gap-3 rounded-full text-[15px] font-semibold text-paper ring-1 ring-paper/30 transition-colors hover:bg-paper/5 hover:ring-gold md:hidden"
+            className="group order-last mt-6 flex min-h-12 w-full items-center justify-center gap-3 rounded-full text-[15px] font-semibold text-paper ring-1 ring-paper/30 transition-colors hover:bg-paper/5 hover:ring-gold md:hidden"
           >
             {t('cta')}
             <span
@@ -174,26 +205,33 @@ export async function ProjectOverview() {
            relatives rather than twins.
 
            The gold rule under each label is the cartouche's too. */}
-        <div className="mt-10 md:hidden">
-          <dl className="grid grid-cols-2 gap-3">
+        <div className="mt-5 md:hidden">
+          {/* ── ONE ROW OF FOUR, NOT A 2x2 OF CARDS (2026-09-29) ──────
+             Four bordered tiles with a diamond, a figure, a label and a
+             gold rule each came to ~290px of chrome for four numbers, and
+             they were the last thing between the headline and the next
+             section. As a single row they are a caption to the picture
+             above, which is what they are.
+
+             flex, not grid-cols-4: "6 000+ m²" needs about twice the
+             width of "7", and equal columns would either wrap the first
+             or starve the rest. At 360px the four measure 312px together.
+             The diamonds and rules come off — at this size they were more
+             ink than the figures. */}
+          <dl className="flex items-start justify-between gap-3 border-t border-paper/15 pt-4">
             {figures.map((f) => (
-              <div key={f.label} className="rounded-2xl bg-paper/[0.045] p-4 ring-1 ring-paper/[0.12]">
+              <div key={f.label} className="min-w-0">
                 {/* The frame is a rotated square; the icon is not, so it
                    stays upright inside it. */}
-                <span className="relative grid h-9 w-9 place-items-center">
-                  <span aria-hidden className="absolute inset-0.5 rotate-45 border border-gold/45" />
-                  <FigureIcon name={f.icon} className="relative h-4 w-4 text-gold/85" />
-                </span>
-                <dd className="mt-3.5 flex items-baseline gap-1.5 font-serif text-[clamp(1.5rem,6.2vw,1.9rem)] leading-none tabular-nums text-paper">
+                <dd className="flex items-baseline gap-1 whitespace-nowrap font-serif text-[1.25rem] leading-none tabular-nums text-paper">
                   <span>{f.value}</span>
                   {f.unit && (
                     <span className="font-mono text-[10px] tracking-[0.08em] text-paper/55">{f.unit}</span>
                   )}
                 </dd>
-                <dt className="mt-2 font-mono text-[0.5625rem] uppercase leading-[1.5] tracking-[0.1em] text-paper/55">
+                <dt className="mt-1.5 font-mono text-[0.5rem] uppercase leading-[1.4] tracking-[0.08em] text-paper/55">
                   {f.label}
                 </dt>
-                <span aria-hidden className="mt-2.5 block h-px w-6 bg-gold/70" />
               </div>
             ))}
           </dl>

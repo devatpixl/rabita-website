@@ -285,7 +285,21 @@ export function ImpactStory() {
                     em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
                   })}
                 </h3>
-                <p className="mt-5 max-w-prose text-body text-ink">
+                {/* ── TWO LENGTHS (client, 2026-09-29) ──────────────────
+                   Of this section he said the animation is good and to leave
+                   it alone, and in the same breath, of the text: "you can see
+                   here a lot of text". Both are true — the four chapters run
+                   35, 38, 39 and 47 words, which on a 390px column is five to
+                   seven lines each while a photograph is pinned above them.
+
+                   So the layout, the sticky frame, the observer and the
+                   spacing are untouched, and only the paragraph changes
+                   length. Every figure the long copy interpolates survives in
+                   the short one; what goes is the subordinate clause. */}
+                <p className="mt-5 max-w-prose text-body text-ink md:hidden">
+                  {t(`items.${c.key}.bodyShort`, values[c.key])}
+                </p>
+                <p className="mt-5 hidden max-w-prose text-body text-ink md:block">
                   {t(`items.${c.key}.body`, values[c.key])}
                 </p>
               </li>

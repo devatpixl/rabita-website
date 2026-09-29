@@ -183,7 +183,8 @@
     "closeMenu": "Lukk menyen",
     "openMenu": "Åpne menyen",
     "openHours": "Fajr, Dhuhr til Isha",
-    "join": "Bli medlem"
+    "join": "Bli medlem",
+    "giveShort": "Gi"
   },
   "giving": {
     "freqMonthly": "Månedlig",
@@ -274,7 +275,9 @@
       "carpet": "Teppe"
     },
     "chipAriaGift": "Velg {gift} — {amount} kroner",
-    "amountLabel": "Beløp"
+    "amountLabel": "Beløp",
+    "paymentLogosMore": "og flere",
+    "questionShort": "Bygg moskeen med oss"
   },
   "meter": {
     "lattice": "Hvert merke er 1 000 000 kr",
@@ -390,22 +393,26 @@
       "history": {
         "name": "Historie",
         "title": "Grunnlagt i <em>{year}</em>.",
-        "body": "Den første norske moskéen som ikke var knyttet til én nasjonalitet. Midt i hjertet av hovedstaden har vi i snart 40 år vært et samlingspunkt for et stort mangfold av norske muslimer med ulike bakgrunner."
+        "body": "Den første norske moskéen som ikke var knyttet til én nasjonalitet. Midt i hjertet av hovedstaden har vi i snart 40 år vært et samlingspunkt for et stort mangfold av norske muslimer med ulike bakgrunner.",
+        "bodyShort": "Den første norske moskéen som ikke var knyttet til én nasjonalitet. I snart 40 år et samlingspunkt midt i hovedstaden."
       },
       "family": {
         "name": "Medlemmer",
         "title": "<em>{members}</em> medlemmer. Ett fellesskap.",
-        "body": "Fra mer enn {nationalities} nasjonaliteter har vi bygd et fellesskap som bæres av {volunteers} faste frivillige og 30 ledere på tvers av styret og avdelingene, støttet av en administrasjon med 6 ansatte, 3 imamer og en daglig leder."
+        "body": "Fra mer enn {nationalities} nasjonaliteter har vi bygd et fellesskap som bæres av {volunteers} faste frivillige og 30 ledere på tvers av styret og avdelingene, støttet av en administrasjon med 6 ansatte, 3 imamer og en daglig leder.",
+        "bodyShort": "Fra mer enn {nationalities} nasjonaliteter, båret av {volunteers} faste frivillige, 30 ledere, 3 imamer og 6 ansatte."
       },
       "learning": {
         "name": "Elever",
         "title": "Over <em>{students}</em> elever. Kunnskap som bygger.",
-        "body": "Fra helgeskole for de yngste med fokus på morsmål og tro, til fordypningskurs for de eldre i språk, islam og kunst — Rabita tilbyr læring for alle. Gjennom faglig undervisning bygger vi kunnskapsrike mennesker med en trygg norsk-muslimsk identitet."
+        "body": "Fra helgeskole for de yngste med fokus på morsmål og tro, til fordypningskurs for de eldre i språk, islam og kunst — Rabita tilbyr læring for alle. Gjennom faglig undervisning bygger vi kunnskapsrike mennesker med en trygg norsk-muslimsk identitet.",
+        "bodyShort": "Fra helgeskole for de yngste til fordypningskurs i språk, islam og kunst. Læring for alle, med en trygg norsk-muslimsk identitet."
       },
       "volunteer": {
         "name": "Besøkende",
         "title": "<em>{visitors}+</em> besøkende i uken. Et møtested for alle.",
-        "body": "Rabita er mer enn en moské — det er et sted folk kommer til for bønn, undervisning og aktiviteter, uke etter uke. Vi tar også jevnlig imot barnehager, skoleklasser, forskere, journalister og samarbeidspartnere som ønsker å lære mer om oss. Vårt kjennetegn er «Et møtested for alle»."
+        "body": "Rabita er mer enn en moské — det er et sted folk kommer til for bønn, undervisning og aktiviteter, uke etter uke. Vi tar også jevnlig imot barnehager, skoleklasser, forskere, journalister og samarbeidspartnere som ønsker å lære mer om oss. Vårt kjennetegn er «Et møtested for alle».",
+        "bodyShort": "Bønn, undervisning og aktiviteter, uke etter uke. Vi tar også imot skoleklasser, forskere og journalister. «Et møtested for alle»."
       }
     }
   },
@@ -2847,7 +2854,8 @@
       "yearsUnit": "år"
     },
     "credit": "Arkitekt",
-    "heading": "<em>Drømmemoskéen</em> i hjertet av Oslo."
+    "heading": "<em>Drømmemoskéen</em> i hjertet av Oslo.",
+    "briefPhone": "Det gamle bygget er revet, og byggingen er i gang. I Calmeyers gate 8 reiser vi en av Europas største nye moskeer — et samlingssted for tro, læring og fellesskap i generasjoner."
   },
   "joinPage": {
     "lede": "Som medlem er du med på å forme fremtiden til Rabita. Du får stemmerett på årsmøtet, kan påvirke viktige beslutninger og bidra til utviklingen av både menigheten og det nye moskébygget. Det er gratis å bli medlem, og det tar bare ett minutt.",

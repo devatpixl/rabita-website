@@ -68,7 +68,60 @@ export async function FollowUs() {
            costed gifts use on /moskeprosjektet, so the two read as one system.
            Cards sit at 78% so the next one peeks in and the row reads as
            swipeable without needing a hint. */}
-        <ul className="no-scrollbar -mx-1 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 pb-1 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 sm:overflow-visible sm:px-0 md:mt-10">
+        {/* ── PHONES GET ROWS, NOT A RAIL (client, 2026-09-29) ─────────────
+           "the social icons I think we should show them in card in one page
+           not swipe-able". Right on both counts: four channels hidden behind
+           a horizontal scroll on a page that already scrolls vertically, and
+           nothing but a peeking card edge to say they were there.
+
+           ROWS RATHER THAN A 2x2 GRID, which was the other option. The
+           handles are the reason: "@detislamskeforbundet" is 21 monospace
+           characters and the WhatsApp entry is a full phone number. In a
+           2x2 cell at 360px each gets about 150px and has to break-all,
+           which is precisely the broken look being fixed. A row gives the
+           handle the whole measure. Four rows come to ~240px against the
+           rail's ~230px plus a scroll nobody discovers.
+
+           The grid below is untouched from sm up; it only gains `hidden
+           sm:grid`. Note pb-1 stays: it was never reset at sm, so dropping
+           it would move the desktop. */}
+        <ul className="mt-6 divide-y divide-ink/10 sm:hidden">
+          {CHANNELS.map(({ key, href }) => (
+            <li key={key}>
+              <a
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                style={
+                  {
+                    '--ch-tint': `rgb(${CHANNEL_RGB[key]} / 0.12)`,
+                    '--ch-ring': `rgb(${CHANNEL_RGB[key]} / 0.3)`,
+                  } as React.CSSProperties
+                }
+                className="group flex min-h-[3.5rem] items-center gap-3.5 py-3"
+              >
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[color:var(--ch-tint)] ring-1 ring-[color:var(--ch-ring)]">
+                  {/* A distinct `instance` per render site: the Instagram mark
+                     carries a gradient whose id must be unique on the page, and
+                     the grid below renders the same four marks. */}
+                  <ChannelMark channel={key} instance={`${key}-row`} className="h-[22px] w-[22px]" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block font-serif text-[1.05rem] leading-tight text-ink">{tSocial(key)}</span>
+                  <span className="mt-0.5 block truncate font-mono text-[0.625rem] uppercase tracking-[0.12em] text-ink-40">
+                    {t(`channels.${key}.handle`)}
+                  </span>
+                </span>
+                <span className="ms-auto flex shrink-0 items-center gap-1.5 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-gold-deep">
+                  {t('action')}
+                  <span aria-hidden className="rtl:rotate-180">&rarr;</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <ul className="no-scrollbar -mx-1 mt-8 hidden snap-x snap-mandatory gap-4 px-1 pb-1 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 sm:overflow-visible sm:px-0 md:mt-10">
           {CHANNELS.map(({ key, href }) => (
             <li key={key} className="w-[78%] shrink-0 snap-start sm:w-auto sm:shrink">
               <a

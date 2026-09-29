@@ -384,13 +384,31 @@ export function NavBar() {
            way to give from the chrome at all on first paint. Icon only, with
            the label carried by aria-label, which is what innocents.no does
            with its donate glyph at this width. */}
+        {/* ── THE WORD, NOT JUST THE HEART (client, 2026-09-29) ───────────
+           "this heart button doesn't look like it's asking for a donation".
+           He is right, and the note above is where it went wrong: a bare
+           glyph with the label carried by aria-label is legible to a screen
+           reader and to nobody else. A heart on its own is a like, a
+           favourite, a saved item — every other product on a phone has
+           taught people that. Only the word says give.
+
+           So the icon keeps its place and the label comes out of the
+           attribute and onto the button. aria-label goes with it: the
+           visible text is now the accessible name, and re-adding a longer
+           one ("Gi en gave") would leave voice control matching a phrase
+           that is not on screen. "Gi" is a prefix of it, so label-in-name
+           still holds.
+
+           Measured at 360px, the narrowest phone worth designing for: the
+           lockup is 150, this pill ~88 and the burger 44, inside 328 of
+           usable width. */}
         <button
           type="button"
           onClick={() => openGiveSheet()}
-          aria-label={t('give')}
-          className="grid h-10 w-10 place-items-center rounded-full bg-gold-deep text-paper transition-colors active:scale-[0.98] md:hidden"
+          className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-gold-deep px-4 text-[13px] font-semibold text-paper transition-colors active:scale-[0.98] md:hidden"
         >
-          <HeartIcon className="h-4 w-4" />
+          <HeartIcon className="h-3.5 w-3.5" />
+          {t('giveShort')}
         </button>
 
         {/* Up to xl, not md. The desktop nav now starts at 1280 — below that

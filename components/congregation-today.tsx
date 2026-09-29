@@ -69,7 +69,17 @@ type SlideKey = (typeof SLIDE_KEYS)[number];
 const TOTAL = SLIDE_KEYS.length;
 const HALF = Math.floor(TOTAL / 2);
 
-const CARD_H = 'clamp(380px, 52svh, 660px)';
+// ── THE DECK IS SHORTER ON A PHONE (2026-09-29) ──────────────────────────
+// 52svh is right when the deck is the only thing on screen. With the caption
+// moved above it the two share the viewport, and at 390x844 the pair ran past
+// the fold — you could read the sentence or see the picture, not both. 44svh
+// with a 420px ceiling puts the whole beat on one screen.
+//
+// A CSS variable rather than a JS width check: the deck's cards are absolutely
+// positioned and sized from these strings in inline styles, so a media query
+// in the stylesheet is the only place a breakpoint can reach them without a
+// re-render. See the @media rule in app/globals.css.
+const CARD_H = 'var(--cong-card-h, clamp(380px, 52svh, 660px))';
 const CARD_W = `calc(${CARD_H} * 0.75)`;
 const GAP_PX = 48;
 const INNER_SCALE = 0.70;
@@ -362,7 +372,17 @@ export function CongregationToday() {
            align-items: baseline; the indicator wrapper's vertical
            centre is nudged onto the statement's text baseline (see
            the transform inside). */}
-        <div className="mx-auto max-w-6xl w-full px-6">
+        {/* ── PHONES PUT THE WORDS ABOVE THE PICTURE (client, 2026-09-29) ──
+           "the image should be down and the text should be up". The DOM
+           order is statement, rail, dots, caption — which on a phone means
+           you meet a photograph before you are told what it is of.
+
+           Done with `order` on the four children rather than by moving the
+           markup: the rail is an absolutely-positioned deck inside a
+           fixed-height relative box, and lifting it in the DOM would mean
+           duplicating it. order is inert from md, so the desktop row is
+           untouched. */}
+        <div className="mx-auto max-w-6xl w-full px-6 max-md:order-1">
           <div className="flex items-baseline justify-between" style={{ gap: '32px' }}>
             <h2
               className="display-opsz font-serif text-ink text-balance"
@@ -410,7 +430,7 @@ export function CongregationToday() {
            any viewport; overflow-y stays visible so the active card's
            numeral bleeds above the top edge. */}
         <div
-          className="relative"
+          className="relative max-md:order-3"
           style={{
             marginTop: '32px',
             width: '100vw',
@@ -593,7 +613,7 @@ export function CongregationToday() {
            the picture it describes; under the rail it reads as a caption for
            what you are looking at, and it is where the thumb already is. */}
         <div
-          className="mt-5 flex items-center justify-center md:hidden"
+          className="mt-5 flex items-center justify-center md:hidden max-md:order-4"
           style={{ columnGap: '6px' }}
           role="tablist"
           aria-label={t('carouselLabel')}
@@ -606,8 +626,7 @@ export function CongregationToday() {
            (down from 20) so the larger heading above fits the budget
            at 1280×800. */}
         <div
-          className="mx-auto max-w-6xl w-full px-6"
-          style={{ marginTop: '16px' }}
+          className="mt-4 mx-auto max-w-6xl w-full px-6 max-md:order-2 max-md:mb-6"
           aria-live="polite"
         >
           {/* Fixed height, so a one-line service and a two-line one with a

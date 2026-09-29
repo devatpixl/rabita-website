@@ -347,9 +347,15 @@ export async function Hero() {
                desktop's paper/70. The horizontal scrim on desktop carries
                the text at 0.92; the portrait one is doing less work under
                this block, so the type makes up the difference. */}
-            <p className="mt-4 max-w-[52ch] text-body text-paper/80 md:hidden">
-              {t('subheadShort')}
-            </p>
+            {/* ── NO PARAGRAPH ON PHONES (client, 2026-09-29) ───────────
+               The phone hero was headline + cred line + a 22-word paragraph
+               + two buttons + the campaign figure, all inside one screen,
+               and the paragraph was the part nobody read: it restates in
+               prose what the two buttons under it offer to do. The desktop
+               keeps its own longer `subhead` below — the key
+               `hero.subheadShort` stays in the message files unreferenced,
+               which is this repo's convention for copy the client wrote and
+               may want back. */}
             <p className="mt-4 hidden max-w-[52ch] text-body text-paper/70 md:block">
               {t('subhead')}
             </p>
@@ -366,7 +372,7 @@ export async function Hero() {
                  testimonials further down (client, 2026-09-09). */}
               <a
                 href={`/${locale}/gi-en-gave`}
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-paper/60 px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:bg-paper/10 sm:justify-start"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-paper/60 px-6 py-3 text-[15px] font-semibold text-paper transition-colors max-sm:hidden hover:bg-paper/10 sm:justify-start"
               >
                 {t('cta.secondary')}
                 <ArrowIcon className="h-3.5 w-3.5" />

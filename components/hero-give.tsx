@@ -16,7 +16,7 @@ export async function HeroGive() {
   const t = await getTranslations('giving');
 
   return (
-    <section aria-label={t('sheetTitle')} className="bg-dusk px-5 pb-12 md:hidden">
+    <section aria-label={t('sheetTitle')} className="bg-dusk px-5 pb-10 md:hidden">
       <div className="mx-auto max-w-[30rem]">
         <div className="overflow-hidden rounded-2xl border border-gold/30 bg-paper text-ink shadow-[0_1px_2px_rgba(0,0,0,0.06),0_8px_24px_-10px_rgba(0,0,0,0.35),0_28px_60px_-24px_rgba(0,0,0,0.4)]">
           <GivingCard />

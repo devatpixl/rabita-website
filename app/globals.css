@@ -827,3 +827,16 @@ body.sheet-open {
 @media (prefers-reduced-motion: reduce) {
   .marquee { animation-name: none; }
 }
+
+/* ── The congregation deck, on a phone (2026-09-29) ─────────────────────────
+   components/congregation-today.tsx sizes its cards from CARD_H in inline
+   styles, so a Tailwind variant cannot reach them. With the caption now above
+   the deck (client: "the image should be down and the text should be up") the
+   two share the screen, and 52svh left the pair running past the fold. This is
+   the one knob that fixes both the deck and the cards at once, because CARD_W
+   is derived from it. */
+@media (max-width: 767.98px) {
+  :root {
+    --cong-card-h: clamp(300px, 44svh, 420px);
+  }
+}
