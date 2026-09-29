@@ -92,7 +92,25 @@ export function PrayerTimesWidget() {
          justify-between spends what is left on the gutters. Nothing is
          abbreviated and nothing collides. From md the rail is a flex row and
          none of this applies. */}
-      <ul className="grid flex-1 grid-cols-[repeat(3,auto)] justify-between gap-x-3 gap-y-0.5 md:flex md:justify-start md:gap-x-4 md:gap-y-0 lg:gap-x-5 xl:gap-x-7">
+      {/* ── THE COLUMNS SIZE BY minmax(max-content,1fr) (2026-09-29) ──────
+         The note below is still true about why equal thirds fail. What it
+         missed is the third option. With `auto` tracks each column is exactly
+         its own content, `justify-between` spends the leftover on the gutters,
+         and so the TIMES never line up: every cell is shrink-wrapped, so the
+         figure sits wherever its name happens to leave it. Three columns, six
+         times, no two of them on a common edge — which is the raggedness the
+         client was looking at when he said the header was not looking nice.
+
+         `minmax(max-content,1fr)` gives every column at least the width its
+         longest pair needs — Soloppgang still gets its 111px, nothing is
+         abbreviated, nothing collides — and then shares what is left EQUALLY
+         rather than dumping it into the gaps. That slack is what lets each
+         cell justify its name to the start and its time to the end, so the
+         figures fall on three straight edges down the bar.
+
+         Same height, same six times, same type size. From md the rail is a
+         flex row and none of this applies. */}
+      <ul className="grid flex-1 grid-cols-[repeat(3,auto)] justify-between gap-x-3 gap-y-0.5 max-md:grid-cols-[repeat(3,minmax(max-content,1fr))] max-md:gap-x-2.5 max-md:gap-y-1 md:flex md:justify-start md:gap-x-4 md:gap-y-0 lg:gap-x-5 xl:gap-x-7">
         {ORDER.map((key) => {
           const isNext = next?.key === key;
           // Sunrise is not a prayer — it closes Fajr. The panel has always
@@ -103,15 +121,48 @@ export function PrayerTimesWidget() {
               key={key}
               className={cn(
                 'flex items-baseline gap-1.5 whitespace-nowrap font-mono text-[10.5px] uppercase tracking-[0.06em] tabular-nums sm:text-[11px] md:gap-2 md:text-[12px] md:tracking-[0.08em] xl:text-[13px]',
+                // The slack the columns now carry is spent here: name to the
+                // start of the column, figure to its end. Phones only — from
+                // md the rail is a flex row of shrink-wrapped items and there
+                // is no slack in a cell to justify anything against.
+                'max-md:justify-between',
+                // ── THE NEXT ONE IS A CHIP, NOT A COLOUR (2026-09-29) ─────
+                // It was marked by turning its name from ink-60 to gold-deep:
+                // a hue shift on 10.5px type against a cream bar, which is
+                // the smallest signal in the site's vocabulary being asked to
+                // carry the bar's only piece of hierarchy. Filled, it reads
+                // at arm's length and it reads first.
+                //
+                // The chip fills its whole grid cell, which is why it is
+                // square-shouldered rather than a pill: aligned to the same
+                // three edges as everything else, it belongs to the grid
+                // instead of floating on it. The negative margins let it
+                // bleed just past the type it contains without moving it.
+                isNext &&
+                  'max-md:-mx-1.5 max-md:-my-0.5 max-md:rounded max-md:bg-gold-deep max-md:px-1.5 max-md:py-0.5',
                 isNext && 'md:gap-2',
               )}
             >
-              <span className={isNext ? 'text-gold-deep' : 'text-ink-60'}>
+              <span
+                className={cn(
+                  isNext ? 'text-gold-deep' : 'text-ink-60',
+                  // Inside the chip the name is on gold, not on cream.
+                  isNext && 'max-md:text-paper/75',
+                  // Sunrise is not a prayer, it closes Fajr, and the code has
+                  // always meant it to read quieter so the eye counts five.
+                  // It never did: ink-60 is what every other name already is,
+                  // and Soloppgang is the longest word in the bar, so the one
+                  // item meant to recede was the most prominent thing in it.
+                  isSunrise && !isNext && 'max-md:text-ink-40',
+                )}
+              >
                 {t(`names.${key}`)}
               </span>
               <span
                 className={cn(
                   isSunrise ? 'text-ink-60' : isNext ? 'font-medium text-ink' : 'text-ink',
+                  isNext && 'max-md:text-paper',
+                  isSunrise && !isNext && 'max-md:text-ink-40',
                 )}
               >
                 {today ? today[key] : '—'}
