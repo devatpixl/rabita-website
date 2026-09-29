@@ -92,11 +92,24 @@ export default async function AboutPage({
         lede={t('lede')}
         image="/photos/visit-entrance.webp"
         alt={ts('pages.about.captionIftar')}
-        layout="over"
+        /* layout="feature" (2026-09-29): full-bleed, ~78svh, the photograph
+           drifting on scroll and the headline composing itself. The `over`
+           plate this replaces was 340px inside the page gutter — right for a
+           service page, too small for the one page whose subject is thirty-
+           eight years of standing somewhere.
+
+           It is a THIRD layout, not a change to `over`: the other seventeen
+           bands on this site are untouched. See components/band-feature.tsx.
+
+           "1987" is the accent word, so it lands in gold serif italic inside
+           the headline — the year is the whole claim. */
+        layout="feature"
+        accentWord="1987"
+        cueHref="#historien"
+        cueLabel={t('historyChip')}
         mark="elevation"
         tone="warm"
-        objectClass="object-[50%_45%]"
-        padBottom="none"
+        objectClass="object-[50%_42%]"
       />
       {/* NO CAPTION UNDER THE BAND (client, 2026-09-17: "remove this shit").
          It read «Gateiftar på Grønland» in small mono under the photograph.
@@ -166,7 +179,7 @@ export default async function AboutPage({
           grade="saturate(0.72) contrast(1.12) brightness(0.9)"
         />
 
-      <section className="relative">
+      <section id="historien" className="relative">
         <div className="pb-14 pt-9 md:pb-24 md:pt-section-lg">
           <SectionBody>
             {/* ── TWO COLUMNS, 7 AND 5 ─────────────────────────────────

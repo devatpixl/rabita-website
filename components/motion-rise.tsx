@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
+import { Fragment, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 
 // useLayoutEffect on the client so the element is hidden before the first
 // paint — with useEffect the section would flash in and then out again.
@@ -89,9 +89,12 @@ export function StaggerWords({
   accentSurface?: 'paper' | 'dusk';
 }) {
   const words = text.split(' ');
-  const prefersReduced =
-    typeof window !== 'undefined' &&
-    window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  // NO `typeof window` branch here. Reading the media query during render
+  // makes the server emit the animated markup and a reduced-motion client
+  // emit different markup, which is React error #418 -- "a tree hydrated but
+  // some attributes of the server rendered HTML didn't match". The markup is
+  // now identical either way and CSS turns the motion off; see the
+  // .stagger-word rule in globals.css.
 
   const norm = (s: string) => s.replace(/[.,;:!?'"«»()\[\]—–-]/g, '').toLowerCase();
   const accentIdx = accentWord ? words.findIndex((w) => norm(w) === norm(accentWord)) : -1;
@@ -102,24 +105,29 @@ export function StaggerWords({
       {words.map((w, i) => {
         const isAccent = i === accentIdx;
         const cls = isAccent
-          ? `inline-block italic font-normal ${accentColour}`
-          : 'inline-block';
+          ? `stagger-word inline-block italic font-normal ${accentColour}`
+          : 'stagger-word inline-block';
+        // The separator is a SIBLING of the span, not its last child.
+        // Inside an inline-block a trailing space sits at the end of that
+        // box's own line box and the browser trims it -- so every word ran
+        // into the next one ("Rabita siden 1987." rendered as
+        // "Rabitasiden1987."). Outside the box it is an ordinary text node
+        // between two inline-blocks and it survives.
         return (
-          <span
-            key={`${i}-${w}`}
-            aria-hidden
-            className={cls}
-            style={{
-              opacity: prefersReduced ? 1 : 0,
-              transform: prefersReduced ? 'none' : 'translateY(18px)',
-              animation: prefersReduced
-                ? undefined
-                : `rabita-word-in 700ms ${i * 90}ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards`,
-            }}
-          >
-            {w}
-            {i < words.length - 1 ? ' ' : ''}
-          </span>
+          <Fragment key={`${i}-${w}`}>
+            <span
+              aria-hidden
+              className={cls}
+              style={{
+                opacity: 0,
+                transform: 'translateY(18px)',
+                animation: `rabita-word-in 700ms ${i * 90}ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards`,
+              }}
+            >
+              {w}
+            </span>
+            {i < words.length - 1 ? ' ' : null}
+          </Fragment>
         );
       })}
     </span>

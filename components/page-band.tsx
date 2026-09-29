@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import Image from 'next/image';
 import { SectionBody } from './primitives';
 import { ArchMark, ElevationMark, OrbitMark, RosetteMark } from './marks';
+import { BandFeature } from './band-feature';
 import { cn } from '@/lib/cn';
 
 // The band the prayer page opens on, made reusable and given a phone design.
@@ -89,7 +90,12 @@ export type PageBandProps = {
   alt?: string;
   /** Tailwind object-position, responsive allowed: 'object-[50%_30%] md:object-center'. */
   objectClass?: string;
-  layout?: 'over' | 'split';
+  layout?: 'over' | 'split' | 'feature';
+  /** feature only — set in gold serif italic inside the headline. */
+  accentWord?: string;
+  /** feature only — anchor the foot cue points at. No href, no cue. */
+  cueHref?: string;
+  cueLabel?: string;
   tone?: BandTone;
   mark?: BandMark;
   sizes?: string;
@@ -169,6 +175,9 @@ export function PageBand({
   alt = '',
   objectClass = 'object-center',
   layout = 'over',
+  accentWord,
+  cueHref,
+  cueLabel,
   tone = 'calm',
   mark = 'none',
   sizes,
@@ -181,6 +190,37 @@ export function PageBand({
 }: PageBandProps) {
   const t = TONE[tone];
   const Mark = MARKS[mark];
+
+  // ── feature ──────────────────────────────────────────────────────────
+  // Returns BEFORE the shared <section>, because this layout is full-bleed
+  // and the other two are plates inside SectionBody's 1104px measure. There
+  // is no sensible way to be both, and wrapping then un-wrapping with a
+  // negative margin is how you end up with a horizontal scrollbar the width
+  // of the reader's scrollbar. `title` is a ReactNode on the shared props
+  // but StaggerWords needs a string, so this layout asks for one.
+  if (layout === 'feature') {
+    if (typeof title !== 'string') {
+      throw new Error('PageBand layout="feature" needs a string title');
+    }
+    return (
+      <BandFeature
+        kicker={kicker}
+        kickerNote={kickerNote}
+        title={title}
+        accentWord={accentWord}
+        lede={lede}
+        image={image}
+        alt={alt}
+        objectClass={objectClass}
+        grade={t.grade}
+        veil={t.veil}
+        rule={t.rule}
+        cueHref={cueHref}
+        cueLabel={cueLabel}
+        mark={mark}
+      />
+    );
+  }
 
   return (
     // pt-5 is the prayer band's mt-5: the plate starts just under the header
