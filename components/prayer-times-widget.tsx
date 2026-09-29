@@ -80,101 +80,11 @@ export function PrayerTimesWidget() {
   }, [now, next, locale, t]);
 
   return (
-    // `relative` + `pe-7` on mobile: the chevron is pinned to the right edge
-    // and the two rows of times are inset to clear it. From md the chevron
-    // rejoins the flow at the end of the single row.
+    // `relative` + `pe-7` on mobile: the chevron is pinned to the end edge and
+    // the times are inset to clear it. From md the chevron rejoins the flow.
     <div className="relative flex w-full items-center gap-4 py-1.5 pe-7 md:py-0 md:pe-0">
-      {/* CONTENT-SIZED COLUMNS ON THE PHONE, not equal thirds.
-         Equal thirds put every cell at 98px on a 390px screen, and
-         "SOLOPPGANG 07:01" needs 110 — measured, it spilled 12px and ate the
-         whole gutter before DHUHR. `auto` columns let column 2 take the width
-         the longest word in it actually needs (Soloppgang / Maghrib), and
-         justify-between spends what is left on the gutters. Nothing is
-         abbreviated and nothing collides. From md the rail is a flex row and
-         none of this applies. */}
-      {/* ── THE COLUMNS SIZE BY minmax(max-content,1fr) (2026-09-29) ──────
-         The note below is still true about why equal thirds fail. What it
-         missed is the third option. With `auto` tracks each column is exactly
-         its own content, `justify-between` spends the leftover on the gutters,
-         and so the TIMES never line up: every cell is shrink-wrapped, so the
-         figure sits wherever its name happens to leave it. Three columns, six
-         times, no two of them on a common edge — which is the raggedness the
-         client was looking at when he said the header was not looking nice.
-
-         `minmax(max-content,1fr)` gives every column at least the width its
-         longest pair needs — Soloppgang still gets its 111px, nothing is
-         abbreviated, nothing collides — and then shares what is left EQUALLY
-         rather than dumping it into the gaps. That slack is what lets each
-         cell justify its name to the start and its time to the end, so the
-         figures fall on three straight edges down the bar.
-
-         Same height, same six times, same type size. From md the rail is a
-         flex row and none of this applies. */}
-      <ul className="grid flex-1 grid-cols-[repeat(3,auto)] justify-between gap-x-3 gap-y-0.5 max-md:grid-cols-[repeat(3,minmax(max-content,1fr))] max-md:gap-x-2.5 max-md:gap-y-1 md:flex md:justify-start md:gap-x-4 md:gap-y-0 lg:gap-x-5 xl:gap-x-7">
-        {ORDER.map((key) => {
-          const isNext = next?.key === key;
-          // Sunrise is not a prayer — it closes Fajr. The panel has always
-          // greyed it; the rail does the same so the eye counts five.
-          const isSunrise = key === 'sunrise';
-          return (
-            <li
-              key={key}
-              className={cn(
-                'flex items-baseline gap-1.5 whitespace-nowrap font-mono text-[10.5px] uppercase tracking-[0.06em] tabular-nums sm:text-[11px] md:gap-2 md:text-[12px] md:tracking-[0.08em] xl:text-[13px]',
-                // The slack the columns now carry is spent here: name to the
-                // start of the column, figure to its end. Phones only — from
-                // md the rail is a flex row of shrink-wrapped items and there
-                // is no slack in a cell to justify anything against.
-                'max-md:justify-between',
-                // ── THE NEXT ONE IS A CHIP, NOT A COLOUR (2026-09-29) ─────
-                // It was marked by turning its name from ink-60 to gold-deep:
-                // a hue shift on 10.5px type against a cream bar, which is
-                // the smallest signal in the site's vocabulary being asked to
-                // carry the bar's only piece of hierarchy. Filled, it reads
-                // at arm's length and it reads first.
-                //
-                // The chip fills its whole grid cell, which is why it is
-                // square-shouldered rather than a pill: aligned to the same
-                // three edges as everything else, it belongs to the grid
-                // instead of floating on it. The negative margins let it
-                // bleed just past the type it contains without moving it.
-                isNext &&
-                  'max-md:-mx-1.5 max-md:-my-0.5 max-md:rounded max-md:bg-gold-deep max-md:px-1.5 max-md:py-0.5',
-                isNext && 'md:gap-2',
-              )}
-            >
-              <span
-                className={cn(
-                  isNext ? 'text-gold-deep' : 'text-ink-60',
-                  // Inside the chip the name is on gold, not on cream.
-                  isNext && 'max-md:text-paper/75',
-                  // Sunrise is not a prayer, it closes Fajr, and the code has
-                  // always meant it to read quieter so the eye counts five.
-                  // It never did: ink-60 is what every other name already is,
-                  // and Soloppgang is the longest word in the bar, so the one
-                  // item meant to recede was the most prominent thing in it.
-                  isSunrise && !isNext && 'max-md:text-ink-40',
-                )}
-              >
-                {t(`names.${key}`)}
-              </span>
-              <span
-                className={cn(
-                  isSunrise ? 'text-ink-60' : isNext ? 'font-medium text-ink' : 'text-ink',
-                  isNext && 'max-md:text-paper',
-                  isSunrise && !isNext && 'max-md:text-ink-40',
-                )}
-              >
-                {today ? today[key] : '—'}
-              </span>
-              {isNext && countdown && (
-                // Only on the next one, and only where there is room for it.
-                <span className="hidden text-ink-60 lg:inline">({countdown})</span>
-              )}
-            </li>
-          );
-        })}
-      </ul>
+      <PhoneRail today={today} nextKey={next?.key ?? null} t={t} />
+      <DeskRail today={today} nextKey={next?.key ?? null} countdown={countdown} t={t} />
 
       {/* Jumu'ah keeps its place from lg. It is a weekly fact rather than a
          today fact, so it is the first thing to yield width, not the times. */}
@@ -197,6 +107,140 @@ export function PrayerTimesWidget() {
         />
       </button>
     </div>
+  );
+}
+
+/**
+ * The rail on phones: six columns, one row, the label above its figure.
+ *
+ * ── WHY THIS IS A SEPARATE LIST AND NOT MORE `max-md:` (2026-09-29) ───────
+ * Two rows of three was the shape from the day the rail went in, and it was
+ * always twelve pieces of text loose in 46px. It was tried twice as one list.
+ * First with `auto` tracks, where every cell shrink-wrapped and no two figures
+ * shared an edge. Then with `minmax(max-content,1fr)`, which lined the figures
+ * up beautifully and, by spending the slack inside the cells, pushed each name
+ * away from its own time — so the bar gained alignment and lost pairing, which
+ * is the worse of the two faults. The client's word for both was "messy", and
+ * he was right both times.
+ *
+ * Stacking fixes it by construction. Each pair is one centred column, so the
+ * name cannot drift from its figure, every name sits on one baseline and every
+ * figure on another, and six units read faster than twelve items. It also fits
+ * in ONE row, which is the actual win: the bar gets shorter, not taller.
+ *
+ * The names lose their capitals and their monospace here. Mono caps at 10.5px
+ * is the loudest quiet type in the system — it has no ascender rhythm, so six
+ * of them make a grey wall. Sentence case in the body face recedes and lets
+ * the figures, which are what anyone is looking for, be the loud part.
+ *
+ * `auto` tracks are right HERE, where they were wrong before: a column is now
+ * as wide as its wider LINE, both lines are centred in it, and nothing inside
+ * a cell can be pushed apart. Soloppgang, the longest word in the bar, simply
+ * takes the width it needs and the rest of the space goes to the gutters.
+ *
+ * This is a paired branch (`md:hidden` beside `hidden md:flex`) rather than
+ * more `max-md:` classes, and deliberately: the desktop row carries `sm:` and
+ * `md:` type sizes that would beat `max-md:` in the 640-767 band, which is
+ * still on this layout. Two lists means the phone rail owns its own classes
+ * outright and the desktop rail is byte-identical to what shipped.
+ */
+function PhoneRail({
+  today,
+  nextKey,
+  t,
+}: {
+  today: PrayerDay | null;
+  nextKey: PrayerKey | null;
+  t: (k: string) => string;
+}) {
+  return (
+    <ul className="grid flex-1 grid-cols-[repeat(6,auto)] justify-between gap-x-2 md:hidden">
+      {ORDER.map((key) => {
+        const isNext = nextKey === key;
+        // Sunrise is not a prayer, it closes Fajr. The panel has always greyed
+        // it; here it goes one step quieter still so the eye counts five.
+        const isSunrise = key === 'sunrise';
+        return (
+          <li key={key} className="flex flex-col items-center gap-[3px] whitespace-nowrap">
+            <span
+              className={cn(
+                'text-[9.5px] leading-none tracking-[0.01em]',
+                isNext ? 'text-gold-deep' : isSunrise ? 'text-ink-40' : 'text-ink-60',
+              )}
+            >
+              {t(`names.${key}`)}
+            </span>
+            <span
+              className={cn(
+                'font-mono text-[12.5px] leading-none tabular-nums',
+                isNext
+                  ? 'font-medium text-gold-deep'
+                  : isSunrise
+                    ? 'text-ink-40'
+                    : 'text-ink',
+              )}
+            >
+              {today ? today[key] : '—'}
+            </span>
+            {/* Always drawn, transparent unless this is the next one, so the
+               row cannot change height when the clock moves on. A 2px rule
+               under the figure marks it without putting a filled block in a
+               46px bar -- which is what the chip before this did, and why it
+               read as one more thing rather than as the answer. */}
+            <span
+              aria-hidden
+              className={cn(
+                'h-[2px] w-full rounded-full',
+                isNext ? 'bg-gold-deep' : 'bg-transparent',
+              )}
+            />
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+/** The rail from md up: one flex row of inline pairs. Unchanged since 09-22. */
+function DeskRail({
+  today,
+  nextKey,
+  countdown,
+  t,
+}: {
+  today: PrayerDay | null;
+  nextKey: PrayerKey | null;
+  countdown: string | null;
+  t: (k: string) => string;
+}) {
+  return (
+    <ul className="hidden flex-1 md:flex md:justify-start md:gap-x-4 lg:gap-x-5 xl:gap-x-7">
+      {ORDER.map((key) => {
+        const isNext = nextKey === key;
+        const isSunrise = key === 'sunrise';
+        return (
+          <li
+            key={key}
+            className="flex items-baseline gap-2 whitespace-nowrap font-mono text-[12px] uppercase tracking-[0.08em] tabular-nums xl:text-[13px]"
+          >
+            <span className={isNext ? 'text-gold-deep' : 'text-ink-60'}>
+              {t(`names.${key}`)}
+            </span>
+            <span
+              className={cn(
+                isSunrise ? 'text-ink-60' : isNext ? 'font-medium text-ink' : 'text-ink',
+              )}
+            >
+              {today ? today[key] : '—'}
+            </span>
+            {isNext && countdown && (
+              // Only on the next one, and only where there is room for it.
+              <span className="hidden text-ink-60 lg:inline">({countdown})</span>
+            )}
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 
