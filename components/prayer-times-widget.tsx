@@ -68,6 +68,25 @@ export function PrayerTimesWidget() {
     () => (now && today ? nextPrayer(now, today, tomorrow) : null),
     [now, today, tomorrow],
   );
+  // ── WHICH ONES HAVE BEEN AND GONE ────────────────────────────────────
+  // The rail marked the next prayer and dimmed Sunrise, and that was all, so
+  // at two in the afternoon Fajr at 05:15 and Isha at 20:47 were drawn
+  // identically although one was eleven hours past. The bar showed the day
+  // but not where you were in it.
+  //
+  // Derived from the SAME clock and the same day row as `next`, so the dimmed
+  // ones and the lit one cannot disagree. The wrap falls out on its own: past
+  // Isha every time today is behind us, so all six are passed and tomorrow's
+  // Fajr is next — which is why the row renders `isNext` first and lets it win
+  // over `passed` for that one key.
+  //
+  // Empty until mount, like everything else keyed on `now`. It changes colour
+  // only, never layout, so the hydration tick cannot move anything.
+  const passed = useMemo(() => {
+    if (!now || !today) return new Set<PrayerKey>();
+    return new Set(ORDER.filter((k) => parseTimeOn(now, today[k]).getTime() <= now.getTime()));
+  }, [now, today]);
+
   const countdown = useMemo(() => {
     if (!now || !next) return null;
     const diff = Math.max(0, next.at.getTime() - now.getTime());
@@ -83,7 +102,7 @@ export function PrayerTimesWidget() {
     // `relative` + `pe-7` on mobile: the chevron is pinned to the end edge and
     // the times are inset to clear it. From md the chevron rejoins the flow.
     <div className="relative flex w-full items-center gap-4 py-1.5 pe-7 md:py-0 md:pe-0">
-      <PhoneRail today={today} nextKey={next?.key ?? null} t={t} />
+      <PhoneRail today={today} nextKey={next?.key ?? null} passed={passed} t={t} />
       <DeskRail today={today} nextKey={next?.key ?? null} countdown={countdown} t={t} />
 
       {/* Jumu'ah keeps its place from lg. It is a weekly fact rather than a
@@ -147,10 +166,12 @@ export function PrayerTimesWidget() {
 function PhoneRail({
   today,
   nextKey,
+  passed,
   t,
 }: {
   today: PrayerDay | null;
   nextKey: PrayerKey | null;
+  passed: Set<PrayerKey>;
   t: (k: string) => string;
 }) {
   return (
@@ -161,7 +182,20 @@ function PhoneRail({
         // it; here it goes one step quieter still so the eye counts five.
         const isSunrise = key === 'sunrise';
         return (
-          <li key={key} className="flex flex-col items-center gap-[3px] whitespace-nowrap">
+          <li
+            key={key}
+            className={cn(
+              'flex flex-col items-center gap-[3px] whitespace-nowrap transition-opacity duration-500',
+              // One opacity on the whole column rather than a paler ink on
+              // each line: it dims the label and the figure by the same
+              // amount, so a passed prayer keeps its own internal hierarchy
+              // instead of flattening into two greys. It also stays clear of
+              // Sunrise's ink-40, which means something different -- not a
+              // prayer -- and has to keep reading differently when both are
+              // behind us.
+              !isNext && passed.has(key) && 'opacity-45',
+            )}
+          >
             <span
               className={cn(
                 'text-[9.5px] leading-none tracking-[0.01em]',
