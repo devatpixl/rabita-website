@@ -51,10 +51,18 @@ const CHAPTERS: {
   },
   {
     key: 'family',
-    // Client, Bildeplassering (2026-09-19) — his "Medlemskap" frame. Cut from
-    // a 5313x3125 at x=1450: that is the only window where the face, the
-    // embrace and the Det Islamske Forbundet vest all survive a 4:5. Further
-    // left loses the vest, further right cuts the arm.
+    // Client, Bildeplassering (2026-09-19) — his "Medlemskap" frame, cut from
+    // a 5313x3125 around x=2700: the only window where the face, the embrace
+    // and the Det Islamske Forbundet vest all survive. Further left loses the
+    // vest, further right cuts the arm.
+    //
+    // SQUARE, NOT 4:5 (2026-09-29). It shipped as 1200x1500 because the frames
+    // that wanted it were 4:5. This chapter's frame is 4:5 only from md — on a
+    // phone it is 16/11, and a 0.8 source in a 1.45 box loses 45% of its
+    // height: the top of the head went, and what was left read as a black
+    // sleeve. 1:1 is the one ratio neither frame has to cut hard. Desktop and
+    // /utmelding, both 4:5, lose 20% of the width instead, which is inside the
+    // margin his window was chosen with.
     //
     // family-together.webp is NOT deleted — gift-builds.tsx still renders it.
     photo: '/photos/members-embrace.webp',
