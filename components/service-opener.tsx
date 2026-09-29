@@ -43,7 +43,6 @@ import { SERVICE_CONTACT, SERVICE_IMAGE, SERVICE_STORY, type ServiceKey } from '
 //   janaza     rows of men, heads at 28–40% of the height       → 25%
 //   shahada    the caller's face at 15–35%                        → 22%
 //   hajj-umrah the Kaaba's body at 25–65%, skyline above it       → 45%
-//   skole      the children's faces at 35–55%                     → 40%
 //   koran      the teacher at the board 10–45%, pupils below      → 35%
 //   counselling hands and cups at 40–65%                          → 45%
 // Landscape sources keep SERVICE_STORY's own objectClass. On a phone the box
@@ -52,7 +51,8 @@ const HERO_POSITION: Partial<Record<ServiceKey, string>> = {
   janaza: '50% 25%',
   shahada: '50% 22%',
   'hajj-umrah': '50% 45%',
-  skole: '50% 40%',
+  // skole no longer needs one: its hero source became a 5313x3125 landscape
+  // on 2026-09-29 (the client's own 4.png), so there is no portrait to steer.
   koran: '50% 35%',
   counselling: '50% 45%',
 };

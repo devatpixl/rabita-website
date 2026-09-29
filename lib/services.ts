@@ -685,7 +685,21 @@ export const SERVICE_STORY: Partial<
   // This also settles 4.png, which he listed as Rabita skolen's Hovedbilde
   // (a slot that no longer exists). His intended file arrived, so it is
   // used and 4.png stays unplaced.
-  skole: { src: '/photos/subj-skole-klassebilde.webp', objectClass: 'object-center' },
+  // ── HIS OWN FILE, FINALLY PLACED (2026-09-29) ──────────────────────────
+  // The note further up records that he listed 4.png as Rabita skolen's
+  // Hovedbilde and that it "stays unplaced" because that slot no longer
+  // existed. The service hero built on 2026-09-28 is that slot, so it is
+  // placed now — this is his choice restored, not a new one.
+  //
+  // It also closes the gap flagged when the heroes were cropped: skole was
+  // one of two services whose only frame was PORTRAIT (1200x1500), and a
+  // portrait in a 2.2:1 hero shows a third of its height. 5313x3125 landscape
+  // needs no crop band at all, so skole comes out of HERO_POSITION in
+  // components/service-opener.tsx.
+  //
+  // subj-skole-klassebilde.webp stays on disk: PORTRAIT_PHOTOS still lists it
+  // and the client named its source (711828319) separately.
+  skole: { src: '/photos/subj-skole-klasserom.webp', objectClass: 'object-center' },
   // Not learn-school.webp (client, 2026-09-10: "why zoomed"). That file is a
   // 2200x1000 panorama of the mushaf on its rihal; a 3:2 frame keeps 68% of
   // its width, which at 430px wide reads as a close-up of a book rather than

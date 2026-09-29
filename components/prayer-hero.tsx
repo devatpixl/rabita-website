@@ -23,26 +23,23 @@ import { usePrayerWindow } from './use-prayer-window';
 // ONE CLOCK. Both this and PrayerBoard read usePrayerWindow, so the name lit
 // here and the row lit down there cannot disagree. See that file.
 //
-// ── WHY THE SCRIM IS HEAVY, AND WHY THE CROP NUMBER BARELY MATTERS ──────
-// The file is 2000x800. In a phone-width box taller than ~156px the source is
-// the WIDER of the two, so object-cover scales it to fill the height and crops
-// the WIDTH — which means the vertical objectPosition does nothing at all here,
-// and the frame's full height is always in view. That includes the graffiti
-// wall behind the congregation, which is the top 45% of the photograph and
-// which the desktop band never shows because its box is 4.6:1 and cuts it off.
+// ── THE SOURCE IS NOW A 4:5 CROP, AND THAT IS THE WHOLE FIX ─────────────
+// This used to point at prayer-band-iftar.webp, which is 2000x800. In a phone
+// box taller than about 156px a 2.5:1 source is always the WIDER of the two,
+// so object-cover scaled it to fill the height and cropped the width — and the
+// vertical objectPosition did nothing at all. The frame's full height was
+// always in view, graffiti wall included, and no amount of positioning could
+// move it. The scrim was doing the work a crop should have done.
 //
-// The first cut inherited the band's light scrim and the wall arrived in full
-// colour: a blue, busy top half under a page whose subject is a time. Swapping
-// in a calmer stock interior was the easy fix and the wrong one — this is the
-// gateiftar on Grønland, the congregation's own photograph, and the site
-// celebrates it elsewhere. So the scrim does the work instead: a heavier flat
-// veil plus a ramp that never thins past 35%, which drops the wall to texture
-// and leaves the bowed rows as the only thing with shape in it.
+// prayer-band-iftar-4x5.webp is the same photograph — the client's own
+// gateiftar shoot on Grønland — cut to 4:5 from the 5472x3648 original rather
+// than from the 2000px web file. Now the source is TALLER than the box, so
+// cover crops the height and objectPosition steers it, which is what lets the
+// bowed rows sit where they should instead of wherever the file happened to
+// put them.
 //
-// objectPosition's 50% is therefore the HORIZONTAL centre and is the part that
-// counts: at 390px we see the middle ~44% of the width, which is the group in
-// rukuʿ. The 40% is inert, kept only so the value still reads as deliberate if
-// the box is ever made short enough to crop vertically.
+// The desktop band on the page keeps the 5:2 file, also recut from the same
+// original: it was a 2000px crop and is now 2400px.
 const GRADE = 'saturate(0.72) contrast(1.12) brightness(0.9)';
 
 export function PrayerHero({ title }: { title: string }) {
@@ -53,13 +50,16 @@ export function PrayerHero({ title }: { title: string }) {
   return (
     <section className="relative isolate overflow-hidden bg-dusk text-paper md:hidden">
       <Image
-        src="/photos/prayer-band-iftar.webp"
+        src="/photos/prayer-band-iftar-4x5.webp"
         alt=""
         fill
         priority
         sizes="100vw"
         className="object-cover"
-        style={{ objectPosition: '50% 40%', filter: GRADE }}
+        // 38%: with a real vertical crop available at last, this lifts the
+        // window off the wet ground and holds the bowed backs and the wall
+        // behind them.
+        style={{ objectPosition: '50% 38%', filter: GRADE }}
       />
       {/* Two layers, and both earn their place: a flat veil so the whole frame
          drops far enough for paper type to hold anywhere on it, then a
