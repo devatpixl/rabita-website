@@ -1075,6 +1075,8 @@
     "now": "الآن",
     "untilHm": "بعد {h}س {m}د",
     "untilM": "بعد {m}د",
+    "untilHmBare": "{h}س {m}د",
+    "untilMBare": "{m}د",
     "eyebrow": "الصلاة والزيارة",
     "heading": "ما يجري اليوم، وكيف تزورنا.",
     "todayHeading": "أوقات الصلاة اليوم",

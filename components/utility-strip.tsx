@@ -1,8 +1,10 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { cn } from '@/lib/cn';
 
 import { useEffect, useRef } from 'react';
+import { usePathname } from '@/i18n/navigation';
 import { PrayerTimesWidget } from './prayer-times-widget';
 import { LanguageSwitcher } from './language-switcher';
 import { PrayerPanelBody } from './prayer-panel-body';
@@ -34,8 +36,28 @@ import { usePrayerPanel } from './prayer-panel-provider';
 // Height stays 44px (min-h-11) unchanged when the panel is closed;
 // when open, the panel body appends BELOW the strip's flex row with
 // a 1px --rule hairline seam, and pushes the nav + page content down.
+
+// ── HIDDEN ON PHONES ON /bonnetider ONLY (2026-09-29) ─────────────────────
+// The strip prints all six times, which is exactly what it is for and exactly
+// what the prayer page is about. On that one route a phone therefore opened on
+// the page's own subject, in 11px mono, 60px above a masthead trying to
+// announce it — and no amount of size on the masthead can beat being second.
+// So on this route, below md, the strip stands down and lets the page speak.
+//
+// Phones and this route only: every other page keeps it at every width, and
+// /bonnetider keeps it from md, where the band and the strip are far enough
+// apart to read as chrome and content rather than as the same thing twice.
+//
+// The observer still runs, because the element is still mounted — display:none
+// simply reports as not intersecting, so `stripInView` goes false and the
+// header renders its capsule. That is already the phone's resting state on
+// every page after 12px of scroll, so nothing about the header changes.
+const PRAYER_ROUTE = '/bonnetider';
+
 export function UtilityStrip() {
   const tNav = useTranslations('nav');
+  const pathname = usePathname();
+  const onPrayerPage = pathname === PRAYER_ROUTE;
   const { open, stripInView, setStripInView } = usePrayerPanel();
   const rootRef = useRef<HTMLDivElement | null>(null);
   // Mirrors stripInView so the observer can apply hysteresis without
@@ -75,7 +97,10 @@ export function UtilityStrip() {
       ref={rootRef}
       data-prayer-panel-scope
       data-print-hide
-      className="relative block border-b border-gold bg-paper-deep"
+      className={cn(
+        'relative block border-b border-gold bg-paper-deep',
+        onPrayerPage && 'max-md:hidden',
+      )}
     >
       <div className="mx-auto flex w-full max-w-[84rem] items-center justify-between gap-6 px-4 md:min-h-11 md:px-10 lg:px-12">
         <PrayerTimesWidget />

@@ -1079,6 +1079,8 @@
     "now": "Nå",
     "untilHm": "om {h}t {m}m",
     "untilM": "om {m}m",
+    "untilHmBare": "{h}t {m}m",
+    "untilMBare": "{m}m",
     "eyebrow": "Bønn og besøk",
     "heading": "Hva som skjer i dag, og hvordan komme innom.",
     "todayHeading": "Bønnetider i dag",

@@ -60,6 +60,25 @@ export function usePrayerWindow() {
       : tv('untilM', { m: win.untilNext })
     : '';
 
+  // The same figure without its preposition — "8t 1m", not "om 8t 1m".
+  //
+  // The phone masthead sets this as its hero figure at 3.5rem, and at that
+  // size the little Norwegian "om" is a word-shaped hole holding the two
+  // numbers apart. It belongs in a sentence, which is what `until` is for and
+  // where the board and the lit row still use it. The bare keys are the same
+  // strings with the preposition dropped, so nothing here is new prose.
+  const untilBare = win
+    ? win.untilNext >= 60
+      ? tv('untilHmBare', { h: Math.floor(win.untilNext / 60), m: win.untilNext % 60 })
+      : tv('untilMBare', { m: win.untilNext })
+    : '';
+
+  // Minutes since midnight, or null before mount. The day band in the masthead
+  // needs the reader's position on a scale the six times define, and deriving
+  // it there from `now` would mean a second component holding an opinion about
+  // what time it is.
+  const nowMinutes = now ? now.getHours() * 60 + now.getMinutes() : null;
+
   // Formatted from the day we are actually showing, not from the clock: keyed
   // on `now` this was client-only (blank in the HTML) and could name a
   // different date than the times printed under it. Parsed field-by-field
@@ -94,5 +113,16 @@ export function usePrayerWindow() {
   // `through` is already 0-1 from lib/prayer-window.
   const progress = win ? Math.min(100, Math.max(0, win.through * 100)) : 0;
 
-  return { now, today, win, until, gregorian, gregorianShort, hijri, progress };
+  return {
+    now,
+    nowMinutes,
+    today,
+    win,
+    until,
+    untilBare,
+    gregorian,
+    gregorianShort,
+    hijri,
+    progress,
+  };
 }

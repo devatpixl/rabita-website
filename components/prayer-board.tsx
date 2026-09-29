@@ -124,78 +124,106 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
           />
         </div>
 
-        {/* ── THE SIX, AS A LIST (phones, 2026-09-29) ──────────────────────
-           The grid below is six boxes, and at 390px it wraps to 3+3 — two
-           rows of tiles, each repeating a glyph, a label and a figure inside
-           its own border. It reads as a control panel. A day's prayer times
-           are a sequence, and a sequence on a phone is a list: one row each,
-           name at the start, time at the end, and a mark saying where in the
-           day you are.
+        {/* ── THE SIX, AND ONE MOMENT AMONG THEM (phones, 2026-09-29) ─────
+           The first pass made these a list instead of six boxes, which was
+           right and not enough. Six rows of equal weight with a 2px dot at the
+           end is a settings screen: the name was 1.05rem against a 1.3rem
+           time, so the number the reader came for was barely louder than its
+           label, and the lit row's 10% gold tint did not separate from paper.
+
+           Two changes, and the second is the one the client asked for.
+
+           TYPE. The time is now the loud part at 1.55rem serif and the name is
+           small mono capitals. A day's prayer times are a timetable, and on a
+           timetable you read the figures and use the names to confirm.
+
+           ONE MOMENT. The next prayer is no longer a tint on a row; it is a
+           card in dusk with the countdown inside it, so the list has a single
+           place the eye lands. Everything else stays quiet. This also puts the
+           countdown where a reader who has scrolled past the masthead can
+           still see it, which is most of the time on a 3 500px page.
+
+           THE DOT COLUMN IS GONE. Three dot states carried what the colour and
+           the card already say, and it cost every row 12px of its measure. The
+           states survive where they were actually needed: as sr-only words,
+           because weight and fill are exactly what a screen reader cannot see.
 
            THE STATE COMES FROM `win`, NOT FROM THE CLOCK. `win.next` is the
-           one row to light; everything at or before `win.current` has been
-           and gone. The one case worth naming is the wrap: after Isha,
-           win.current is 'isha' and win.next is 'fajr', so every row is
-           passed and Fajr — index 0, which is NOT after current — is next.
-           Testing `key === win.next` first is what makes that fall out right
-           instead of needing a special case.
+           one row to lift; everything at or before `win.current` has been and
+           gone. The one case worth naming is the wrap: after Isha, win.current
+           is 'isha' and win.next is 'fajr', so every row is passed and Fajr —
+           index 0, which is NOT after current — is next. Testing `key ===
+           win.next` first is what makes that fall out right instead of needing
+           a special case.
 
-           Before mount `win` is null and every row renders in its resting
-           state, which is correct rather than merely safe: the times are the
-           server's, the state is the reader's. */}
-        <ul className="divide-y divide-rule px-5 pb-3 pt-1 md:hidden">
-          {ORDER.map((key) => {
+           Before mount `win` is null, every row renders quiet and no card is
+           drawn. That is correct rather than merely safe: the times are the
+           server's, the state is the reader's. It does mean the card appears
+           on the hydration tick, which is why the list reserves nothing for it
+           — a card that pushes the rows below it down by 76px once, before
+           first interaction, is cheaper than 76px of hole on every load. */}
+        <ul className="px-5 pb-4 pt-2 md:hidden">
+          {ORDER.map((key, i) => {
             const isNext = win?.next === key;
             const passed =
               win != null && !isNext && ORDER.indexOf(key) <= ORDER.indexOf(win.current);
+
+            if (isNext) {
+              return (
+                <li
+                  key={key}
+                  className="-mx-2 my-2 rounded-2xl bg-dusk px-4 py-3.5 text-paper"
+                >
+                  <div className="flex items-baseline justify-between gap-3">
+                    <span className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-gold">
+                      {t('stateNext')} · {tv(`names.${key}`)}
+                    </span>
+                    <span className="shrink-0 font-serif text-[1.9rem] leading-none tabular-nums text-gold">
+                      {today ? today[key] : '—'}
+                    </span>
+                  </div>
+                  {/* min-h so the row does not settle by a line when the
+                     countdown arrives with the clock. */}
+                  <p className="mt-1 min-h-[1.2rem] font-serif text-[0.95rem] italic leading-tight text-paper/65">
+                    {until}
+                  </p>
+                </li>
+              );
+            }
+
+            // A hairline between quiet neighbours only. Drawing it against the
+            // card would put a rule hard up under a rounded corner, and the
+            // card's own edge is already the separation.
+            const ruled = i > 0 && win?.next !== ORDER[i - 1];
+
             return (
               <li
                 key={key}
                 className={cn(
-                  'flex items-center gap-3 py-3',
-                  // Full-bleed to the card's edge so the lit row reads as a
-                  // band across the list rather than an inset chip.
-                  isNext && '-mx-5 rounded-xl bg-gold/10 px-5',
+                  'flex items-baseline justify-between gap-3 py-3.5',
+                  ruled && 'border-t border-rule',
                 )}
               >
-                <PrayerGlyph
-                  prayer={key}
-                  className={cn('h-4 w-4 shrink-0', isNext ? 'text-gold-deep' : 'text-ink-40')}
-                />
                 <span
                   className={cn(
-                    'font-serif text-[1.05rem] leading-none',
-                    passed ? 'text-ink-60' : 'text-ink',
+                    'font-mono text-[0.6875rem] uppercase tracking-[0.18em]',
+                    passed ? 'text-ink-40' : 'text-ink-60',
                   )}
                 >
                   {tv(`names.${key}`)}
                 </span>
-                {isNext && (
-                  <span className="font-mono text-[0.5625rem] uppercase tracking-[0.14em] text-gold-deep">
-                    {t('stateNext')}
-                  </span>
-                )}
                 <span
                   className={cn(
-                    'ms-auto font-serif text-[1.3rem] leading-none tabular-nums',
-                    isNext ? 'text-gold-deep' : passed ? 'text-ink-40' : 'text-ink',
+                    'shrink-0 font-serif text-[1.55rem] leading-none tabular-nums',
+                    passed ? 'text-ink-40' : 'text-ink',
                   )}
                 >
                   {today ? today[key] : '—'}
                 </span>
-                {/* The state mark, and the only part of the row a screen
-                   reader cannot infer from the styling above it. */}
-                <span className="flex w-3 shrink-0 justify-end">
-                  {isNext ? (
-                    <span aria-hidden className="h-2 w-2 rounded-full bg-gold-deep ring-4 ring-gold-deep/15" />
-                  ) : passed ? (
-                    <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-ink-40" />
-                  ) : (
-                    <span aria-hidden className="h-1.5 w-1.5 rounded-full border border-ink-40" />
-                  )}
-                  <span className="sr-only">
-                    {isNext ? t('stateNext') : passed ? t('statePassed') : t('stateUpcoming')}
-                  </span>
+                {/* The one part of the row a reader who cannot see the weight
+                   has no other way to get. */}
+                <span className="sr-only">
+                  {passed ? t('statePassed') : t('stateUpcoming')}
                 </span>
               </li>
             );
