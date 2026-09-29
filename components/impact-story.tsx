@@ -56,15 +56,21 @@ const CHAPTERS: {
     // and the Det Islamske Forbundet vest all survive. Further left loses the
     // vest, further right cuts the arm.
     //
-    // SQUARE, NOT 4:5 (2026-09-29). It shipped as 1200x1500 because the frames
+    // 16:11, NOT 4:5 (2026-09-29). It shipped at 1200x1500 because the frames
     // that wanted it were 4:5. This chapter's frame is 4:5 only from md — on a
     // phone it is 16/11, and a 0.8 source in a 1.45 box loses 45% of its
-    // height: the top of the head went, and what was left read as a black
-    // sleeve. 1:1 is the one ratio neither frame has to cut hard. Desktop and
-    // /utmelding, both 4:5, lose 20% of the width instead, which is inside the
-    // margin his window was chosen with.
+    // height: the top of the head went and what was left read as a black
+    // sleeve.
     //
-    // family-together.webp is NOT deleted — gift-builds.tsx still renders it.
+    // Cutting to 1:1 was the first attempt and was not enough; the window was
+    // still the tight one. This uses 4545 of the original's 5313px, which is
+    // the widest 16:11 its height allows, so the phone sees the two men whole
+    // with the room around them.
+    //
+    // THE DESKTOP VIEW IS UNCHANGED, and that is arithmetic rather than luck:
+    // a 4:5 frame shows height x 0.8 = 2500 original pixels wide, centred on
+    // the file's centre. The centre is still x=2700, so it still shows
+    // 1450–3950 — exactly the window he picked. Same for /utmelding, also 4:5.
     photo: '/photos/members-embrace.webp',
     photoAlt: 'Two men embracing at a Rabita gathering, one wearing a Det Islamske Forbundet volunteer vest',
     // Faces sit in the top quarter here, so the phone band is pulled up
