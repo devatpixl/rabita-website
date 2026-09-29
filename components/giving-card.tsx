@@ -763,7 +763,7 @@ function StepAmount({
          period as a small suffix, one box tagged as recommended. */}
       {!hidePresets && (
       <div
-        className={cn('grid grid-cols-2', compact ? 'mt-1 mb-2 gap-2' : cn('mt-1 mb-2 gap-2 max-sm:gap-1.5 sm:mt-0 sm:mb-3 sm:gap-3', fit && FIT.presetGrid))}
+        className={cn('grid grid-cols-2', compact ? 'mt-1 mb-2 gap-2' : cn('mt-1 mb-2 gap-2 max-sm:gap-x-1.5 max-sm:gap-y-[1.125rem] sm:mt-0 sm:mb-3 sm:gap-3', fit && FIT.presetGrid))}
         role="radiogroup"
         aria-label={t('customLabel')}
       >
@@ -817,11 +817,33 @@ function StepAmount({
                 // applied to the tile rather than part of it — and it had to
                 // invert itself on the selected tile because that tile was
                 // black. Nothing to invert now.
+                // ── ON PHONES IT SITS ABOVE THE TILE, NOT ON IT ───────
+                // Measured at 390: the tile is 155x45 and the English badge
+                // was 127px of that width, so it lay straight across "A
+                // Qur'an" — and its 2px paper ring erased the letters it
+                // crossed. Norwegian escaped by eight characters, which is
+                // why only the English card looked broken.
+                //
+                // Shrinking it was not enough and could not be. The tile is
+                // two lines of type inside 12px of padding; there is no free
+                // room in it for a third object, so anything overlapping the
+                // top edge lands on the gift noun whatever size it is.
+                // Reserving padding for it does not work either: the label
+                // is `whitespace-nowrap`, so it overflows the reserve rather
+                // than yielding to it.
+                //
+                // So on phones the badge clears the tile entirely and sits
+                // in the row gutter, which is widened to 18px to hold it.
+                // That reads as a tab above the tile it belongs to, costs
+                // 12px of card height once, and cannot collide with anything
+                // in any locale. From sm the tile is 68px tall with 12px of
+                // padding and the original overlap has always been fine.
                 <span
                   className={cn(
                     'absolute -top-2 end-3 rounded-full bg-gold-deep font-mono uppercase tracking-[0.14em] text-paper',
                     'shadow-[0_0_0_2px_var(--tw-shadow-color)] shadow-paper',
                     compact ? 'px-1.5 py-px text-[8px] leading-[1.6]' : 'px-2 py-0.5 text-[9px] leading-[1.5]',
+                    'max-sm:-top-[15px] max-sm:end-2 max-sm:px-1.5 max-sm:py-0 max-sm:text-[8px] max-sm:leading-[1.6] max-sm:tracking-[0.06em]',
                   )}
                 >
                   {t('wizard.recommended')}
