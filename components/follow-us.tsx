@@ -112,9 +112,11 @@ export async function FollowUs() {
                     {t(`channels.${key}.handle`)}
                   </span>
                 </span>
-                <span className="ms-auto flex shrink-0 items-center gap-1.5 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-gold-deep">
+                {/* No arrow (user, 2026-09-29). Four of them stacked down the
+                   end edge read as a column of decoration rather than four
+                   links, and the word already says what the row does. */}
+                <span className="ms-auto shrink-0 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-gold-deep">
                   {t('action')}
-                  <span aria-hidden className="rtl:rotate-180">&rarr;</span>
                 </span>
               </a>
             </li>
