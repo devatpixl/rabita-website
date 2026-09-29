@@ -84,7 +84,7 @@ export function PrayerTimesWidget() {
   // only, never layout, so the hydration tick cannot move anything.
   const passed = useMemo(() => {
     if (!now || !today) return new Set<PrayerKey>();
-    return new Set(ORDER.filter((k) => parseTimeOn(now, today[k]).getTime() <= now.getTime()));
+    return new Set(RAIL_ORDER.filter((k) => parseTimeOn(now, today[k]).getTime() <= now.getTime()));
   }, [now, today]);
 
   const countdown = useMemo(() => {
@@ -102,7 +102,7 @@ export function PrayerTimesWidget() {
     // `relative` + `pe-7` on mobile: the chevron is pinned to the end edge and
     // the times are inset to clear it. From md the chevron rejoins the flow.
     <div className="relative flex w-full items-center gap-4 py-1.5 pe-7 md:py-0 md:pe-0">
-      <PhoneRail today={today} nextKey={next?.key ?? null} passed={passed} t={t} />
+      <PhoneRail today={today} now={now} passed={passed} t={t} />
       <DeskRail today={today} nextKey={next?.key ?? null} countdown={countdown} t={t} />
 
       {/* Jumu'ah keeps its place from lg. It is a weekly fact rather than a
@@ -163,24 +163,54 @@ export function PrayerTimesWidget() {
  * still on this layout. Two lists means the phone rail owns its own classes
  * outright and the desktop rail is byte-identical to what shipped.
  */
+/**
+ * The five, in the header. Sunrise is not among them.
+ *
+ * ── WHY IT LEAVES (2026-09-30) ────────────────────────────────────────────
+ * The rail exists because of the client's note of 2026-09-22: people look for
+ * the prayer times and will not click through for them. Sunrise is not a
+ * prayer — it closes the Fajr window — and the code has been trying to say so
+ * for as long as the rail has existed, first by greying it and then by greying
+ * it harder. It never worked, because the thing being demoted was also the
+ * longest word in the bar.
+ *
+ * Dropping it keeps the client's request exactly (he asked for bønnetidene)
+ * and hands a sixth of the measure back to the five that remain. It is still
+ * one tap away in the panel behind the chevron, and it is on /bonnetider in
+ * full, where a page about the day's timings is the right place for it.
+ *
+ * ── AND WHY "NEXT" IS RECOMPUTED HERE ─────────────────────────────────────
+ * The shared `nextPrayer` counts sunrise, so between Fajr and sunrise it
+ * answers "sunrise" — and a rail that does not list sunrise would then have
+ * nothing lit for those two hours. So the rail asks its own question, over the
+ * five it actually shows: for that window it says Dhuhr, which is the true
+ * answer to "what is the next prayer" once sunrise is not one of the
+ * candidates. The panel and /bonnetider still name sunrise, and should: they
+ * are answering "what happens next", which is a different question.
+ */
 function PhoneRail({
   today,
-  nextKey,
+  now,
   passed,
   t,
 }: {
   today: PrayerDay | null;
-  nextKey: PrayerKey | null;
+  now: Date | null;
   passed: Set<PrayerKey>;
   t: (k: string) => string;
 }) {
+  // Null before mount, like every other clock-derived value here, so the HTML
+  // carries the five times and nothing is lit until the reader's own minute
+  // is known. Colour only; the row cannot move.
+  const nextKey =
+    now && today
+      ? (RAIL_ORDER.find((k) => parseTimeOn(now, today[k]).getTime() > now.getTime()) ?? 'fajr')
+      : null;
+
   return (
-    <ul className="grid flex-1 grid-cols-[repeat(6,auto)] justify-between gap-x-2 md:hidden">
-      {ORDER.map((key) => {
+    <ul className="grid flex-1 grid-cols-[repeat(5,auto)] justify-between gap-x-2 md:hidden">
+      {RAIL_ORDER.map((key) => {
         const isNext = nextKey === key;
-        // Sunrise is not a prayer, it closes Fajr. The panel has always greyed
-        // it; here it goes one step quieter still so the eye counts five.
-        const isSunrise = key === 'sunrise';
         return (
           <li
             key={key}
@@ -189,17 +219,14 @@ function PhoneRail({
               // One opacity on the whole column rather than a paler ink on
               // each line: it dims the label and the figure by the same
               // amount, so a passed prayer keeps its own internal hierarchy
-              // instead of flattening into two greys. It also stays clear of
-              // Sunrise's ink-40, which means something different -- not a
-              // prayer -- and has to keep reading differently when both are
-              // behind us.
+              // instead of flattening into two greys.
               !isNext && passed.has(key) && 'opacity-45',
             )}
           >
             <span
               className={cn(
                 'text-[9.5px] leading-none tracking-[0.01em]',
-                isNext ? 'text-gold-deep' : isSunrise ? 'text-ink-40' : 'text-ink-60',
+                isNext ? 'text-gold-deep' : 'text-ink-60',
               )}
             >
               {t(`names.${key}`)}
@@ -207,11 +234,7 @@ function PhoneRail({
             <span
               className={cn(
                 'font-mono text-[12.5px] leading-none tabular-nums',
-                isNext
-                  ? 'font-medium text-gold-deep'
-                  : isSunrise
-                    ? 'text-ink-40'
-                    : 'text-ink',
+                isNext ? 'font-medium text-gold-deep' : 'text-ink',
               )}
             >
               {today ? today[key] : '—'}
@@ -280,6 +303,8 @@ function DeskRail({
 
 type PrayerKey = 'fajr' | 'sunrise' | 'dhuhr' | 'asr' | 'maghrib' | 'isha';
 const ORDER: PrayerKey[] = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'];
+/** The header rail's five: the same list without sunrise. See PhoneRail. */
+const RAIL_ORDER: PrayerKey[] = ORDER.filter((k) => k !== 'sunrise');
 
 function parseTimeOn(base: Date, hhmm: string): Date {
   const [h, m] = hhmm.split(':').map(Number);
