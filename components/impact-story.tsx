@@ -224,7 +224,7 @@ export function ImpactStory() {
              tall section, is the whole way through. order-2 puts it there
              visually; the DOM keeps the photo first so the desktop grid, where
              this is simply column one, is untouched. */}
-          <div className="sticky top-[68px] z-[1] bg-paper-2 pb-4 max-md:order-2 max-md:top-auto max-md:bottom-0 max-md:pt-3 md:static md:col-span-6 md:bg-transparent md:pb-0">
+          <div className="sticky top-[68px] z-[1] bg-paper-2 pb-4 max-md:order-2 max-md:top-auto max-md:bottom-0 max-md:pt-3 max-md:pb-20 md:static md:col-span-6 md:bg-transparent md:pb-0">
             {/* A 40px dissolve on the block's top edge, phones only. The
                chapter above scrolls up into the pinned photograph and was
                being sliced through the middle of a headline — a clean cut
