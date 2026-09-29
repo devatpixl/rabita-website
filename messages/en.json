@@ -3257,7 +3257,9 @@
         "role": "Imam and theologian",
         "bio": "Appointed imam in 2025. Holds a doctorate in Islamic studies from the University of Jordan and broad expertise in dialogue work, youth work and communication. He is particularly committed to the development of young Muslims. Gives short reminders after the daily prayers and contributes theological guidance and teaching."
       }
-    }
+    },
+    "more": "Read more",
+    "less": "Less"
   },
   "video": {
     "play": "Play",
@@ -3309,7 +3311,10 @@
     "khateebLabel": "This week's khateeb",
     "khateebPlaceholder": "The rota is not set yet",
     "langNo": "Norwegian",
-    "langAr": "Arabic"
+    "langAr": "Arabic",
+    "stateNext": "Next",
+    "statePassed": "Passed",
+    "stateUpcoming": "Upcoming"
   },
   "fremdrift": {
     "crumb": "The mosque project",

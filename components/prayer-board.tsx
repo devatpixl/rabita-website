@@ -2,14 +2,12 @@
 
 import Image from 'next/image';
 
-import { useEffect, useId, useMemo, useState } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
-import { PRAYER_ORDER, prayerWindow, type PrayerKey } from '@/lib/prayer-window';
-import { joinJumuah, usePrayerData, usePrayerDay } from './prayer-data-provider';
-import { isoDate } from '@/lib/prayer-times';
+import { useId } from 'react';
+import { useTranslations } from 'next-intl';
+import { PRAYER_ORDER, type PrayerKey } from '@/lib/prayer-window';
+import { joinJumuah, usePrayerData } from './prayer-data-provider';
 import { IMAMS } from '@/lib/imams';
-import { hijriDate } from '@/lib/hijri';
-import type { AppLocale } from '@/i18n/routing';
+import { usePrayerWindow } from './use-prayer-window';
 import { cn } from '@/lib/cn';
 
 // The prayer board — the lead block of /bonnetider, rebuilt 2026-08-31 to the
@@ -27,7 +25,6 @@ const ORDER = PRAYER_ORDER;
 export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
   const t = useTranslations('prayerBoard');
   const tv = useTranslations('prayerVisit');
-  const locale = useLocale();
   const { jumuah } = usePrayerData();
   // Two khateebs, not one (client, 2026-09-13: "Ukas khatib kan gjøres til to
   // personer uten tekst"), each labelled with the khutba he gives — the card
@@ -49,66 +46,11 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
     .filter((k): k is { imam: (typeof IMAMS)[number]; khutba: 'khutbaNo' | 'khutbaAr' } =>
       Boolean(k.imam),
     );
-  const [now, setNow] = useState<Date | null>(null);
-
-  useEffect(() => {
-    const tick = () => setNow(new Date());
-    tick();
-    const id = setInterval(tick, 30_000);
-    return () => clearInterval(id);
-  }, []);
-
-  // The six times are the whole point of this page, so they must be in the
-  // HTML — not gated behind a clock that only exists after hydration. The row
-  // is looked up from the server date first; once mounted, `now` takes over so
-  // the board is correct if the page is left open across midnight.
-  const { days } = usePrayerData();
-  const mountedDay = usePrayerDay(now);
-  const today = mountedDay ?? days.find((d) => d.date === isoDate(new Date())) ?? days[0] ?? null;
-  const win = useMemo(
-    () => (now && today ? prayerWindow(today, now.getHours() * 60 + now.getMinutes()) : null),
-    [now, today],
-  );
-
-  const until = win
-    ? win.untilNext >= 60
-      ? tv('untilHm', { h: Math.floor(win.untilNext / 60), m: win.untilNext % 60 })
-      : tv('untilM', { m: win.untilNext })
-    : '';
-
-  // Formatted from the day we are actually showing, not from the clock: keyed
-  // on `now` this was client-only (blank in the HTML) and could name a
-  // different date than the times printed under it. Parsed field-by-field
-  // because `new Date('2026-08-31')` is parsed as UTC and lands on the 30th
-  // for anyone west of Greenwich.
-  //
-  // Two lengths. The long one is 179px of mono capitals, which with the section
-  // label beside it is 368px of text in the 342px a 390px phone actually has —
-  // it wrapped. The year and the full weekday are the parts a phone can spare.
-  const [gregorian, gregorianShort] = useMemo(() => {
-    if (!today) return ['', ''];
-    const [y, m, d] = today.date.split('-').map(Number);
-    const date = new Date(y, m - 1, d);
-    const tag = locale === 'ar' ? 'ar-EG' : locale === 'en' ? 'en-GB' : 'nb-NO';
-    const fmt = (o: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat(tag, o).format(date);
-    return [
-      fmt({ weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }),
-      fmt({ weekday: 'short', day: 'numeric', month: 'short' }),
-    ];
-  }, [today, locale]);
-
-  // The hijri date of the SAME day the times are for — derived from
-  // today.date like the gregorian above, not from the client clock, so the
-  // two lines flanking this row can never name different days.
-  const hijri = useMemo(() => {
-    if (!today) return '';
-    const [y, m, d] = today.date.split('-').map(Number);
-    return hijriDate(locale as AppLocale, new Date(y, m - 1, d, 12));
-  }, [today, locale]);
-
-  // How far through the current window we are, for the rail along the foot.
-  // `through` is already 0-1 from lib/prayer-window.
-  const progress = win ? Math.min(100, Math.max(0, win.through * 100)) : 0;
+  // All of it — the 30s tick, the day, the window, the countdown, both date
+  // formats, the hijri line and the progress — moved to a shared hook on
+  // 2026-09-29 so the phone masthead above this board cannot disagree with it
+  // about which prayer is next. A pure move; see components/use-prayer-window.ts.
+  const { today, win, until, gregorian, gregorianShort, hijri, progress } = usePrayerWindow();
 
   // The day's order, beside Jumu'ah.
   //
@@ -125,7 +67,10 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
       {/* Section label and date on one baseline, ends of the same row. Both are
          the same small mono voice, so stacking them was two half-empty lines
          where one reads better and gives the board 50px more of the screen. */}
-      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+      {/* max-md:hidden as of 2026-09-29: the phone masthead above the board now
+         carries the page name AND both dates, so this row would be the second
+         printing of each on the same screen. From md it is unchanged. */}
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 max-md:hidden">
         {/* Phones only: from md up the band above the board carries this
            label, and repeating it here would print it twice. */}
         <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60 md:hidden">
@@ -149,7 +94,11 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
 
       {/* ── the board ─────────────────────────────────────────────────── */}
       <section className="overflow-hidden rounded-[1.5rem] border border-rule bg-paper">
-        <div className="grid items-center gap-5 p-6 md:grid-cols-[1fr_auto_13rem] md:gap-10 md:p-7">
+        {/* max-md:hidden as of 2026-09-29: name, countdown and time are the
+           masthead's subject on phones. Leaving this here as well printed the
+           same three facts twice, 60px apart, which is what made the phone page
+           read as a stack of boxes rather than an answer. */}
+        <div className="grid items-center gap-5 p-6 max-md:hidden md:grid-cols-[1fr_auto_13rem] md:gap-10 md:p-7">
           <div>
             <p className="flex items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-gold-deep">
               <ClockIcon className="h-3.5 w-3.5" />
@@ -175,8 +124,86 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
           />
         </div>
 
+        {/* ── THE SIX, AS A LIST (phones, 2026-09-29) ──────────────────────
+           The grid below is six boxes, and at 390px it wraps to 3+3 — two
+           rows of tiles, each repeating a glyph, a label and a figure inside
+           its own border. It reads as a control panel. A day's prayer times
+           are a sequence, and a sequence on a phone is a list: one row each,
+           name at the start, time at the end, and a mark saying where in the
+           day you are.
+
+           THE STATE COMES FROM `win`, NOT FROM THE CLOCK. `win.next` is the
+           one row to light; everything at or before `win.current` has been
+           and gone. The one case worth naming is the wrap: after Isha,
+           win.current is 'isha' and win.next is 'fajr', so every row is
+           passed and Fajr — index 0, which is NOT after current — is next.
+           Testing `key === win.next` first is what makes that fall out right
+           instead of needing a special case.
+
+           Before mount `win` is null and every row renders in its resting
+           state, which is correct rather than merely safe: the times are the
+           server's, the state is the reader's. */}
+        <ul className="divide-y divide-rule px-5 pb-3 pt-1 md:hidden">
+          {ORDER.map((key) => {
+            const isNext = win?.next === key;
+            const passed =
+              win != null && !isNext && ORDER.indexOf(key) <= ORDER.indexOf(win.current);
+            return (
+              <li
+                key={key}
+                className={cn(
+                  'flex items-center gap-3 py-3',
+                  // Full-bleed to the card's edge so the lit row reads as a
+                  // band across the list rather than an inset chip.
+                  isNext && '-mx-5 rounded-xl bg-gold/10 px-5',
+                )}
+              >
+                <PrayerGlyph
+                  prayer={key}
+                  className={cn('h-4 w-4 shrink-0', isNext ? 'text-gold-deep' : 'text-ink-40')}
+                />
+                <span
+                  className={cn(
+                    'font-serif text-[1.05rem] leading-none',
+                    passed ? 'text-ink-60' : 'text-ink',
+                  )}
+                >
+                  {tv(`names.${key}`)}
+                </span>
+                {isNext && (
+                  <span className="font-mono text-[0.5625rem] uppercase tracking-[0.14em] text-gold-deep">
+                    {t('stateNext')}
+                  </span>
+                )}
+                <span
+                  className={cn(
+                    'ms-auto font-serif text-[1.3rem] leading-none tabular-nums',
+                    isNext ? 'text-gold-deep' : passed ? 'text-ink-40' : 'text-ink',
+                  )}
+                >
+                  {today ? today[key] : '—'}
+                </span>
+                {/* The state mark, and the only part of the row a screen
+                   reader cannot infer from the styling above it. */}
+                <span className="flex w-3 shrink-0 justify-end">
+                  {isNext ? (
+                    <span aria-hidden className="h-2 w-2 rounded-full bg-gold-deep ring-4 ring-gold-deep/15" />
+                  ) : passed ? (
+                    <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-ink-40" />
+                  ) : (
+                    <span aria-hidden className="h-1.5 w-1.5 rounded-full border border-ink-40" />
+                  )}
+                  <span className="sr-only">
+                    {isNext ? t('stateNext') : passed ? t('statePassed') : t('stateUpcoming')}
+                  </span>
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+
         {/* ── the six ─────────────────────────────────────────────────── */}
-        <ul className="grid grid-cols-3 gap-2 px-4 pb-4 sm:grid-cols-6 sm:gap-3 sm:px-6 sm:pb-6">
+        <ul className="hidden gap-2 px-4 pb-4 md:grid md:grid-cols-6 md:gap-3 md:px-6 md:pb-6">
           {ORDER.map((key) => {
             const isNext = win?.next === key;
             return (
@@ -214,7 +241,8 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
         </ul>
 
         {/* ── progress rail ───────────────────────────────────────────── */}
-        <div className="flex items-center gap-4 border-t border-rule px-6 py-3.5">
+        {/* max-md:hidden: the masthead's hairline rail is the same number. */}
+        <div className="flex items-center gap-4 border-t border-rule px-6 py-3.5 max-md:hidden">
           <div className="h-1 flex-1 overflow-hidden rounded-full bg-paper-2">
             <div
               className="h-full rounded-full bg-gradient-to-r from-gold to-gold-deep transition-[width] duration-700 ease-out"
@@ -232,8 +260,8 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
          left end, so two thirds of the card was empty paper. It is a pair now:
          the times on the left, this week's khateeb on the right. Equal-height
          cards, because the grid stretches them. */}
-      <div className="grid gap-5 md:grid-cols-[1.35fr_1fr]">
-        <section className="relative overflow-hidden rounded-[1.5rem] border border-rule bg-paper-2/60 p-6 md:p-8 md:pb-24">
+      <div className="grid gap-5 max-md:gap-3 md:grid-cols-[1.35fr_1fr]">
+        <section className="relative overflow-hidden rounded-[1.5rem] border border-rule bg-paper-2/60 p-6 max-md:p-5 md:p-8 md:pb-24">
           <p className="flex items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-gold-deep">
             <MinaretIcon className="h-4 w-4" />
             {t('jumuahHeading')}
@@ -243,7 +271,7 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
              (client, 2026-09-02). Which language is at which hour is the
              thing people actually come here to find out, and it was the one
              fact that line did not carry. */}
-          <ul className="mt-3 space-y-1">
+          <ul className="mt-3 space-y-1 max-md:mt-2">
             {([
               [jumuah[0], t('langNo')],
               [jumuah[1], t('langAr')],
@@ -251,7 +279,7 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
               time ? (
                 <li
                   key={time}
-                  className="font-serif text-[clamp(1.35rem,2.8vw,1.9rem)] leading-tight text-ink"
+                  className="font-serif text-[clamp(1.35rem,2.8vw,1.9rem)] leading-tight text-ink max-md:flex max-md:items-baseline max-md:justify-between max-md:gap-3 max-md:text-[1.2rem]"
                 >
                   <span className="tabular-nums">{time}</span>{' '}
                   <span className="text-ink-60">{lang} khutba</span>
@@ -260,8 +288,8 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
             )}
           </ul>
 
-          <p className="mt-3 text-body text-ink-60">{t('jumuahNote')}</p>
-          <p className="mt-5 inline-flex items-center gap-3 rounded-full border border-rule bg-paper px-4 py-2.5 text-[14px] text-ink">
+          <p className="mt-3 text-body text-ink-60 max-md:mt-2 max-md:text-[13px]">{t('jumuahNote')}</p>
+          <p className="mt-5 inline-flex items-center gap-3 rounded-full border border-rule bg-paper px-4 py-2.5 text-[14px] text-ink max-md:mt-3 max-md:gap-2 max-md:rounded-none max-md:border-0 max-md:bg-transparent max-md:px-0 max-md:py-0 max-md:font-mono max-md:text-[0.625rem] max-md:uppercase max-md:tracking-[0.12em] max-md:text-ink-60">
             <PeopleIcon className="h-4 w-4 shrink-0 text-gold-deep" />
             {t('jumuahImams')}
           </p>
@@ -284,15 +312,15 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
            the card there is no room for two of them. The khutba language
            takes that slot: it is what tells the pair apart, and it is the one
            thing a reader needs here. */}
-        <section className="flex flex-col rounded-[1.5rem] border border-rule bg-paper p-6 md:p-7">
+        <section className="flex flex-col rounded-[1.5rem] border border-rule bg-paper p-6 max-md:p-5 md:p-7">
           <h3 className="font-serif text-[1.2rem] leading-none text-ink">{t('khateebLabel')}</h3>
-          <ul className="flex flex-1 flex-col justify-center divide-y divide-rule">
+          <ul className="flex flex-1 flex-col justify-center divide-y divide-rule max-md:grid max-md:grid-cols-2 max-md:gap-3 max-md:divide-y-0 max-md:pt-3">
             {khateebs.map(({ imam, khutba }) => (
-              <li key={imam.key} className="flex items-center gap-4 py-5 md:gap-5">
+              <li key={imam.key} className="flex items-center gap-4 py-5 max-md:flex-col max-md:items-start max-md:gap-2 max-md:py-0 md:gap-5">
                 {/* The portraits are square crops crested on the face, so a
                    circle sits right on them. A missing photo falls back to the
                    initial rather than to a broken frame. */}
-                <span className="relative flex h-[4.25rem] w-[4.25rem] shrink-0 items-center justify-center overflow-hidden rounded-full bg-paper-2 ring-1 ring-rule md:h-[4.75rem] md:w-[4.75rem]">
+                <span className="relative flex h-[4.25rem] w-[4.25rem] shrink-0 items-center justify-center overflow-hidden rounded-full bg-paper-2 ring-1 ring-rule max-md:h-12 max-md:w-12 md:h-[4.75rem] md:w-[4.75rem]">
                   {imam.photo ? (
                     <Image src={imam.photo} alt="" fill sizes="76px" className="object-cover" />
                   ) : (
@@ -320,7 +348,7 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
 
 /* ── marks ─────────────────────────────────────────────────────────────── */
 
-function ClockIcon({ className }: { className?: string }) {
+export function ClockIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" className={className} aria-hidden>
       <circle cx="12" cy="12" r="9" />
@@ -529,7 +557,7 @@ function PrayerScene({ prayer, className }: { prayer: PrayerKey; className?: str
 
 /* The six marks: a moon before dawn, the sun rising, high, setting, and the
    night moon again — so the row reads as a day even before you read a time. */
-function PrayerGlyph({ prayer, className }: { prayer: PrayerKey; className?: string }) {
+export function PrayerGlyph({ prayer, className }: { prayer: PrayerKey; className?: string }) {
   const common = {
     viewBox: '0 0 24 24',
     fill: 'none',

@@ -112,7 +112,20 @@ export function Section({
       : 'bg-paper';
   // Mutually exclusive, never an override: cn() is clsx-only here, so a
   // later class does not beat an earlier one.
-  const padClass = pad === 'tight' ? 'py-9 md:py-section-md' : 'py-section-md';
+  //
+  // ── THE PHONE STEP-DOWN (2026-09-29) ──────────────────────────────────
+  // `py-section-md` is 60px at every width, and two sections meeting stack
+  // it into 120px of empty page. On a laptop that is the rhythm the site is
+  // built on; on a 390px screen it is most of a thumb's travel between one
+  // idea and the next, and it is a large part of why the phone pages run 11
+  // to 14 screens.
+  //
+  // Both arms keep the md value, so from 768 up nothing changes anywhere —
+  // and that matters, because this one line moves 42 call sites at once.
+  // The tight arm steps 36 -> 32 rather than down to the default's 40: a
+  // section that already asked to be tight should not end up rounder than
+  // its neighbours.
+  const padClass = pad === 'tight' ? 'py-8 md:py-section-md' : 'py-10 md:py-section-md';
   return (
     <section id={id} className={cn(padClass, toneClass, className)}>
       {children}

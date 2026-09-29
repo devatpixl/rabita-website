@@ -3253,7 +3253,9 @@
         "role": "Imam og teolog",
         "bio": "Ansatt som imam i 2025. Har doktorgrad i islamske studier fra Universitetet i Jordan og bred faglig kompetanse innen dialogarbeid, ungdomsarbeid og kommunikasjon. Er særlig engasjert i utviklingen av unge muslimer. Holder korte faglige påminnelser etter de daglige bønnene og bidrar med teologisk veiledning og undervisning."
       }
-    }
+    },
+    "more": "Les mer",
+    "less": "Mindre"
   },
   "video": {
     "play": "Spill av",
@@ -3305,7 +3307,10 @@
     "khateebLabel": "Ukas khatib",
     "khateebPlaceholder": "Fast rota er ikke satt ennå",
     "langNo": "norsk",
-    "langAr": "arabisk"
+    "langAr": "arabisk",
+    "stateNext": "Neste",
+    "statePassed": "Passert",
+    "stateUpcoming": "Kommer"
   },
   "fremdrift": {
     "crumb": "Moskeprosjektet",

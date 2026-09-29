@@ -26,7 +26,7 @@ export async function CalendarDownload() {
   return (
     <section id="kalender" className="scroll-mt-24 bg-paper py-section-sm">
       <SectionBody>
-        <div className="grid gap-8 md:grid-cols-12 md:gap-12">
+        <div className="grid gap-8 max-md:gap-5 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-5">
             <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
               {tc('panelEyebrow')}
@@ -34,26 +34,26 @@ export async function CalendarDownload() {
             <h2 className="mt-4 font-serif text-section text-balance text-ink">
               {tc.rich('panelHeadingRich', { em: (chunks) => <Accent surface="paper">{chunks}</Accent> })}
             </h2>
-            <p className="mt-4 max-w-prose text-body text-ink-60">{tc('panelBody')}</p>
+            <p className="mt-4 max-w-prose text-body text-ink-60 max-md:hidden">{tc('panelBody')}</p>
           </div>
 
           {/* The months as one ruled register, not a grid of tinted boxes:
              five items never divide evenly into a grid, and the last row
              always left a hole. Same row pattern the key-figures registers
              use, so it reads as part of the same system. */}
-          <ul className="self-center border-t border-ink md:col-span-7">
+          <ul className="self-center border-t border-ink max-md:mt-2 max-md:grid max-md:grid-cols-2 max-md:gap-2 max-md:border-t-0 max-md:[&>li:last-child:nth-child(odd)]:col-span-2 md:col-span-7">
             {months.map((key) => (
               <li key={key}>
                 <Link
                   href={`/${l}/bonnetider/kalender?m=${key}`}
-                  className="group flex min-h-[3.75rem] items-center justify-between gap-4 border-b border-rule px-1 text-ink transition-colors duration-200 hover:px-3 hover:text-gold-deep"
+                  className="group flex min-h-[3.75rem] items-center justify-between gap-4 border-b border-rule px-1 text-ink transition-colors duration-200 max-md:min-h-11 max-md:justify-center max-md:rounded-full max-md:border max-md:border-rule max-md:px-4 hover:px-3 hover:text-gold-deep"
                 >
-                  <span className="font-serif text-[1.15rem] leading-none">
+                  <span className="font-serif text-[1.15rem] leading-none max-md:text-[1rem]">
                     {fmt.format(new Date(`${key}-01T00:00:00`))}
                   </span>
                   <span
                     aria-hidden
-                    className="shrink-0 text-ink-60 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-gold-deep rtl:rotate-180 rtl:group-hover:-translate-x-1"
+                    className="shrink-0 text-ink-60 transition-transform duration-200 max-md:hidden group-hover:translate-x-1 group-hover:text-gold-deep rtl:rotate-180 rtl:group-hover:-translate-x-1"
                   >
                     &rarr;
                   </span>

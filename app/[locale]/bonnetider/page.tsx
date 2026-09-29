@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Section, SectionBody } from '@/components/primitives';
 import { PrayerBoard } from '@/components/prayer-board';
+import { PrayerHero } from '@/components/prayer-hero';
 import { CalendarDownload } from '@/components/calendar-download';
 import { Imams } from '@/components/imams';
 import { TimedCta } from '@/components/timed-cta';
@@ -98,17 +99,20 @@ export default async function BonnetiderPage({
          board's foot off a 13" laptop screen — you could not see the progress
          rail without scrolling. They are one baseline row now (inside
          PrayerBoard), and the section opens on 24px instead of 48. */}
+      {/* The phone masthead — the photographic opening the desktop band gives
+         this page, which phones never had. md:hidden; the band above is its
+         opposite number. See components/prayer-hero.tsx. */}
+      <PrayerHero title={tp('pages.times.eyebrow')} />
+
       <Section tone="paper" className="pt-6 md:pt-8">
         <SectionBody>
-          {/* The band above carries the h1, but it is desktop-only, so phones
-             would have had none at all. This supplies one without changing
-             what a phone shows: the board underneath already announces itself,
-             and the client asked for no mobile changes here.
-
-             Both h1s stay in the markup; md:hidden and the band's own
-             hidden md:block mean only ever one of them is in a rendered
-             subtree, so only one reaches the accessibility tree. */}
-          <h1 className="sr-only md:hidden">{tp('pages.times.eyebrow')}</h1>
+          {/* THE sr-only h1 THAT STOOD HERE IS GONE (2026-09-29). It existed
+             because the band above is desktop-only and a phone would
+             otherwise have had no h1 at all — an invisible fix for an
+             invisible problem, and the client's "it's just there like it was
+             forcefully placed" was the visible half of the same thing.
+             PrayerHero above now carries a REAL h1 on phones, so this one
+             would have been the second in the subtree. */}
           <PrayerBoard eyebrow={tp('pages.times.eyebrow')} />
         </SectionBody>
       </Section>
