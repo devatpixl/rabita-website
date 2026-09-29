@@ -46,7 +46,7 @@ export async function ApartmentsCta({ locale }: { locale: AppLocale }) {
             className="absolute inset-0 bg-gradient-to-r from-dusk via-dusk/75 to-dusk/20 rtl:bg-gradient-to-l"
           />
 
-          <div className="relative grid gap-10 p-8 sm:p-12 md:grid-cols-[1.25fr_1fr] md:items-end md:gap-16 md:p-14">
+          <div className="relative grid gap-10 p-8 max-md:p-6 sm:p-12 md:grid-cols-[1.25fr_1fr] md:items-end md:gap-16 md:p-14">
             <div>
               <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
                 {t('cta.eyebrow')}

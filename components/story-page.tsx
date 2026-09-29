@@ -23,7 +23,7 @@ export function StoryHero({
   lede: string;
 }) {
   return (
-    <section className="bg-paper pt-section-sm pb-section-md">
+    <section className="bg-paper pt-8 pb-8 md:pt-section-sm md:pb-section-md">
       <SectionBody>
         <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-ink-60">{crumb}</p>
         <div className="mt-10 border-t-2 border-ink pt-8">
@@ -42,7 +42,7 @@ export function StoryHero({
 // One photograph on a hairline, captioned like a plate in a printed record.
 export function StoryPlate({ image, caption }: { image: string; caption: string }) {
   return (
-    <section className="bg-paper pb-section-md">
+    <section className="bg-paper pb-10 md:pb-section-md">
       <SectionBody>
         <figure>
           <div className="relative aspect-[21/9] w-full overflow-hidden rounded-3xl bg-paper-2">

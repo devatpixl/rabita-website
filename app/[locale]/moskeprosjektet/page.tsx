@@ -117,7 +117,7 @@ export default async function ProjectPage({
 
          The CTA is gone with the full-bleed design that carried it;
          projectPage.gallery.cta is now unreferenced. */}
-      <section className="bg-paper-2 pt-14 pb-section-md md:pt-20">
+      <section className="bg-paper-2 pt-10 pb-10 md:pt-20 md:pb-section-md">
         <SectionBody>
           <ProjectGallery
             // Named explicitly, so adding a slide for another page cannot
@@ -219,7 +219,7 @@ export default async function ProjectPage({
           <div aria-hidden className="h-px w-full bg-gold-deep/30" />
         </SectionBody>
         <div aria-hidden className="h-12 md:h-16 [@media(min-width:768px)_and_(max-height:900px)]:!h-8" />
-        <div className="pb-section-md">
+        <div className="pb-10 md:pb-section-md">
         <SectionBody>
           {/* Key figures and capacity as two registers of the same design:
              mono label, 1px rule, hairline rows on one rhythm, serif values

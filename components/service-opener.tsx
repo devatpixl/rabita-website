@@ -100,7 +100,7 @@ export async function ServiceOpener({ s, crumb }: { s: ServiceKey; crumb: string
         </div>
       )}
 
-      <div className="relative flex min-h-[clamp(34rem,78vh,48rem)] flex-col justify-end md:min-h-[clamp(36rem,80vh,50rem)]">
+      <div className="relative flex min-h-[clamp(30rem,70svh,48rem)] flex-col justify-end md:min-h-[clamp(36rem,80vh,50rem)]">
         <SectionBody className="w-full pb-14 pt-28 md:pb-20 md:pt-36">
           <div className="max-w-[40rem]">
             <p className="flex items-center gap-2.5 font-mono text-[0.6875rem] uppercase leading-none tracking-[0.18em] text-gold">

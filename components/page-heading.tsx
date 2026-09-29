@@ -46,7 +46,7 @@ export function PageHeading({
   // space and blend the first section with this top"). Putting it back
   // reopened the same gap.
   return (
-    <section className="bg-paper pt-12 md:pt-16">
+    <section className="bg-paper pt-8 md:pt-16">
       <SectionBody>
         <p className="flex items-center gap-3 font-mono text-[0.75rem] uppercase tracking-[0.16em] text-gold-deep">
           <span>{kicker}</span>

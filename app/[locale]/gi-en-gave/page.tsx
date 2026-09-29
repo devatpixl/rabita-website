@@ -64,7 +64,12 @@ export default async function GiveIndexPage({
             <div className="flex flex-col md:col-span-6">
               <SectionHeading>{t('cardHeading')}</SectionHeading>
               <p className="mt-4 text-body text-ink">{t('cardLede')}</p>
-              <div className="relative mt-10 min-h-[280px] flex-1 overflow-hidden rounded-3xl bg-paper-2">
+              {/* max-md:hidden (2026-09-29): a 280px photograph sitting between
+                 the routes copy and the giving card, on a page whose hero
+                 already opened on a picture. Two images in a row on a phone,
+                 with the card — the thing the page exists for — pushed a
+                 further screen down. */}
+              <div className="relative mt-10 min-h-[280px] flex-1 overflow-hidden rounded-3xl bg-paper-2 max-md:hidden">
                 <Image
                   src="/photos/give-bazar.webp"
                   alt={t('cardHeading')}

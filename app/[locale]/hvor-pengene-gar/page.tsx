@@ -104,11 +104,21 @@ export default async function WhereMoneyGoesPage({
           </p>
         </SectionBody>
       </Section>
-          <ProjectAssurance
-        heading={tp('assurance.heading')}
-        lede={tp('assurance.lede')}
-        items={tp.raw('assurance.items') as { title: string; body: string }[]}
-      />
+      {/* ── DESKTOP ONLY (2026-09-29) ────────────────────────────────────
+         This page is four sections — Skattefradrag, Regnskap,
+         Byggetillatelse, Organisasjonen — and the assurance block below
+         restates those same four promises in a grid. On a laptop the
+         repetition reads as a summary; on a phone, where the two are six
+         screens apart and the reader has just walked through all four, it is
+         the same page twice. The four sections stay because they are also
+         the anchors the home cards and the footer link to. */}
+      <div className="hidden md:block">
+        <ProjectAssurance
+          heading={tp('assurance.heading')}
+          lede={tp('assurance.lede')}
+          items={tp.raw('assurance.items') as { title: string; body: string }[]}
+        />
+      </div>
     </main>
   );
 }

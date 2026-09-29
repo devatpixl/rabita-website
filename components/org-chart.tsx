@@ -177,9 +177,26 @@ export async function OrgChart({ locale }: { locale: string }) {
                    LEADERSHIP_BIO — so that a change of title cannot quietly
                    hand one person another person's biography. */}
                 {LEADERSHIP_BIO[p.name] && (
-                  <p className="mt-3 text-[14px] leading-relaxed text-ink-60">
+                  <>
+                  {/* Folded behind a disclosure on phones (2026-09-29). Six
+                     bios in one column — three here and three below — were
+                     about 900px of continuous grey on the page that already
+                     ran 803 words. Nothing is cut: the summary is a real
+                     control and the text is one tap away. */}
+                  <details className="group mt-3 md:hidden">
+                    <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 font-mono text-[0.625rem] uppercase tracking-[0.14em] text-gold-deep [&::-webkit-details-marker]:hidden">
+                      <span className="group-open:hidden">{tim('more')}</span>
+                      <span className="hidden group-open:inline">{tim('less')}</span>
+                      <span aria-hidden className="text-[0.75rem] leading-none transition-transform duration-200 group-open:rotate-180">&darr;</span>
+                    </summary>
+                    <p className="mt-1 text-[14px] leading-relaxed text-ink-60">
+                      {t(`bios.${LEADERSHIP_BIO[p.name]}`)}
+                    </p>
+                  </details>
+                  <p className="mt-3 hidden text-[14px] leading-relaxed text-ink-60 md:block">
                     {t(`bios.${LEADERSHIP_BIO[p.name]}`)}
                   </p>
+                  </>
                 )}
               </div>
             </li>
@@ -259,7 +276,17 @@ export async function OrgChart({ locale }: { locale: string }) {
                      pages cannot drift. The link below still goes to
                      /bonnetider, where they sit with the languages each man
                      takes a conversation in. */}
-                  <p className="mt-3 text-[14px] leading-relaxed text-ink-60">
+<details className="group mt-3 md:hidden">
+                    <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 font-mono text-[0.625rem] uppercase tracking-[0.14em] text-gold-deep [&::-webkit-details-marker]:hidden">
+                      <span className="group-open:hidden">{tim('more')}</span>
+                      <span className="hidden group-open:inline">{tim('less')}</span>
+                      <span aria-hidden className="text-[0.75rem] leading-none transition-transform duration-200 group-open:rotate-180">&darr;</span>
+                    </summary>
+                    <p className="mt-1 text-[14px] leading-relaxed text-ink-60">
+                      {tim(`people.${im.key}.bio`)}
+                    </p>
+                  </details>
+                  <p className="mt-3 hidden text-[14px] leading-relaxed text-ink-60 md:block">
                     {tim(`people.${im.key}.bio`)}
                   </p>
                 </div>
@@ -332,13 +359,13 @@ export async function OrgChart({ locale }: { locale: string }) {
            Derived now, via a CSS variable, so the split follows the array
            instead of a number somebody has to remember to change. */}
         <ol
-          className="mt-7 grid grid-cols-1 gap-3 sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-[repeat(var(--dept-rows),minmax(0,1fr))] sm:gap-x-5"
+          className="mt-7 grid grid-cols-1 gap-3 max-md:mt-5 max-md:gap-2 sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-[repeat(var(--dept-rows),minmax(0,1fr))] sm:gap-x-5"
           style={{ '--dept-rows': Math.ceil(DEPARTMENTS.length / 2) } as CSSProperties}
         >
           {DEPARTMENTS.map((key, i) => (
             <li
               key={key}
-              className="group flex items-center gap-3.5 rounded-2xl bg-paper px-4 py-3.5 ring-1 ring-sage-line transition-colors duration-300 hover:ring-gold-deep/45 sm:px-5 sm:py-4"
+              className="group flex items-center gap-3.5 rounded-2xl bg-paper px-4 py-3.5 max-md:gap-3 max-md:px-3.5 max-md:py-3 ring-1 ring-sage-line transition-colors duration-300 hover:ring-gold-deep/45 sm:px-5 sm:py-4"
             >
               {/* Numeral, glyph, name — the reference's own order. The
                  numeral sits OUTSIDE the chip now that the chip has a glyph
@@ -346,13 +373,13 @@ export async function OrgChart({ locale }: { locale: string }) {
                  index the list. */}
               <span
                 aria-hidden
-                className="w-5 shrink-0 font-mono text-[0.6875rem] tabular-nums text-ink-40"
+                className="w-5 shrink-0 font-mono text-[0.6875rem] tabular-nums text-ink-40 max-md:hidden"
               >
                 {String(i + 1).padStart(2, '0')}
               </span>
               <span
                 aria-hidden
-                className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-sage-soft text-ink-60 ring-1 ring-sage-line transition-colors duration-300 group-hover:bg-gold-soft/50 group-hover:text-gold-deep group-hover:ring-gold-deep/25"
+                className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-sage-soft text-ink-60 max-md:h-8 max-md:w-8 ring-1 ring-sage-line transition-colors duration-300 group-hover:bg-gold-soft/50 group-hover:text-gold-deep group-hover:ring-gold-deep/25"
               >
                 <DepartmentIcon name={key} className="h-5 w-5" />
               </span>

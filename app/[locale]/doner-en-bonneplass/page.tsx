@@ -68,7 +68,7 @@ export default function SadaqaPage() {
         <SectionBody>
           <div className="grid gap-10 md:grid-cols-12 md:items-center">
             <div className="md:col-span-5">
-              <div className="relative aspect-[3/4] overflow-hidden rounded-3xl bg-paper-2">
+              <div className="relative aspect-[3/4] max-md:aspect-[16/10] overflow-hidden rounded-3xl bg-paper-2">
                 <Image
                   src="/photos/give-dedication.webp"
                   alt={t('formHeading')}

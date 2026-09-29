@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Accent } from './accent';
 import { AssuranceList, type AssuranceItem } from './assurance-list';
 import { SectionBody } from './primitives';
+import { cn } from '@/lib/cn';
 import { GiveCTA } from './give-cta';
 
 // The shared shape every page under "The mosque project" uses: a full bleed hero, a brief, a set of numbered columns, then the assurances. One structure, different content, so the section reads as one place.
@@ -46,7 +47,12 @@ export function ProjectHero({
          zoomed in. Capped, the render keeps its proportions and plain dusk
          carries the rest of the section behind the card. 52svh, not more:
          the source is a wide band, so a taller box magnifies it again. */}
-      <div className="absolute inset-x-0 top-0 h-[52svh] md:inset-0 md:h-auto">
+      {/* 40svh, down from 52 (2026-09-29). The render plus the h1 plus the
+         lede plus a CTA row plus the giving card ran the phone hero to about
+         1080px — a screen and a third before the page had said anything. The
+         base value never reaches md, where inset-0 takes over, so this is a
+         phone-only number. */}
+      <div className="absolute inset-x-0 top-0 h-[40svh] md:inset-0 md:h-auto">
         <Image src={image} alt={alt} fill priority sizes="100vw" className="object-cover" style={{ filter: GRADE }} />
         {/* A light veil plus a reading-side gradient. The flat 80% dusk
            that used to sit here turned every render into a dark slab; now
@@ -79,7 +85,7 @@ export function ProjectHero({
       {(() => {
         const Body = aside
           ? ({ children }: { children: ReactNode }) => (
-              <div className="relative z-10 mx-auto w-full max-w-[92rem] px-6 py-10 md:px-10 md:py-14 lg:px-12">
+              <div className="relative z-10 mx-auto w-full max-w-[92rem] px-6 py-10 max-md:pb-8 md:px-10 md:py-14 lg:px-12">
                 {children}
               </div>
             )
@@ -91,7 +97,7 @@ export function ProjectHero({
         {!aside && (
           <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-dusk-60">{crumb}</p>
         )}
-        <div className={aside ? 'grid items-center gap-10 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:gap-20' : undefined}>
+        <div className={aside ? 'grid items-center gap-10 max-md:gap-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:gap-20' : undefined}>
         <div className={aside ? 'max-w-3xl' : 'mt-8 max-w-3xl'}>
           {aside && (
             <p className="mb-5 font-mono text-[0.75rem] uppercase tracking-[0.16em] text-dusk-60">{crumb}</p>
@@ -106,7 +112,18 @@ export function ProjectHero({
             <p className="mt-6 max-w-prose text-body text-paper/80">{lede}</p>
           )}
           {(primary || secondary) && (
-            <div className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <div
+              className={cn(
+                'mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4',
+                // With an aside, the card IS the ask and it sits about 40px
+                // below this row — so on a phone, where the two stack, "Gi til
+                // bygget" opens a sheet containing the card the reader can
+                // already see. ~90px for a second door into the same room.
+                // From md they are side by side and the button is the label
+                // for the column beside it, so it stays.
+                aside && 'max-md:hidden',
+              )}
+            >
               {primary?.give && <GiveCTA label={primary.label} />}
               {primary && !primary.give && primary.href && (
                 <Link
@@ -213,7 +230,7 @@ export function ProjectColumns({
         <div className="max-w-3xl">
           <h2 className="font-serif text-section text-balance text-ink">{heading}</h2>
         </div>
-        <ul className="mt-14 grid gap-x-10 gap-y-10 md:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-14 max-md:mt-8 grid gap-x-10 gap-y-10 max-md:gap-y-6 md:grid-cols-2 lg:grid-cols-4">
           {items.map((it, i) => (
             <li key={it.title} className="border-t border-rule pt-5">
               <span className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-gold-deep">

@@ -56,7 +56,7 @@ export async function ProgressPhases({
          comes from the gutters and the side padding rather than from a
          taller card. Only at lg, where the row is five across; the phone and
          tablet stacks are untouched. */}
-      <ol className="grid items-stretch gap-x-5 gap-y-5 sm:grid-cols-2 sm:gap-y-8 lg:grid-cols-5 lg:gap-x-3">
+      <ol className="grid items-stretch gap-x-5 gap-y-5 max-md:gap-y-3 sm:grid-cols-2 sm:gap-y-8 lg:grid-cols-5 lg:gap-x-3">
         {PROJECT_PHASES.map((phase) => {
           const state = projectPhaseState(phase, now);
           // Phases 3-5 carry no dates since Sept 2026 (client: no year may be

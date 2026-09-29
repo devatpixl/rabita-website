@@ -257,7 +257,22 @@ export default async function AboutPage({
                changes length. break-inside-avoid keeps a paragraph whole,
                and the margins are per-paragraph because space-y collapses
                wrongly at a column break. */}
-            <div className="mt-10 text-[clamp(1rem,1.15vw,1.125rem)] leading-relaxed text-ink-60 md:mt-14 lg:columns-2 lg:gap-14 [&>p]:mb-6 [&>p]:break-inside-avoid [&>p:last-child]:mb-0">
+            {/* ── TWO PARAGRAPHS ON A PHONE (2026-09-29) ────────────────
+              The four above are 178 words, and on a 390px column that is a
+              single grey slab about 640px tall — the page's own worst
+              offender, and the reason /om-oss ran 803 words and eleven
+              screens.
+
+              These two carry every fact the four do: 1987 and the first
+              mosque in Oslo not tied to one nationality; what it grew into;
+              the 2009 royal visit; the premises outgrown and the ask. What
+              goes is the elaboration, not the record. The long version is
+              the client's text and is what desktop still prints. */}
+            <div className="mt-8 text-[1rem] leading-relaxed text-ink-60 md:hidden [&>p]:mb-5 [&>p:last-child]:mb-0">
+              <p>{t('historyShort.p1')}</p>
+              <p>{t('historyShort.p2')}</p>
+            </div>
+            <div className="mt-10 hidden text-[clamp(1rem,1.15vw,1.125rem)] leading-relaxed text-ink-60 md:block md:mt-14 lg:columns-2 lg:gap-14 [&>p]:mb-6 [&>p]:break-inside-avoid [&>p:last-child]:mb-0">
               {/* FOUR paragraphs. p3 (the royal visit) was cut here on
                  2026-09-17 as "a fine fact, not the point of an About page"
                  — OUR editorial call, not the client's — and Tekst (endelig)
@@ -431,19 +446,27 @@ export default async function AboutPage({
                  ("Norway", "Prayers & community activities"). Our facts are
                  {term, detail} — two lines, no third. Inventing a sub-line
                  per card would be writing copy nobody approved. */}
-              <ul className="mt-7 space-y-3 [@media(min-width:768px)_and_(max-height:900px)]:!mt-4 [@media(min-width:768px)_and_(max-height:900px)]:[&>li+li]:!mt-2">
+              {/* ── THE FIVE FACTS, RULED RATHER THAN CARDED (2026-09-29) ─
+                 Five raised cards, each a 44px gold disc beside a label over
+                 a value, came to ~420px on a phone — the tallest thing in a
+                 section whose job is an address and an opening hour. The
+                 card chrome comes off below md and each fact becomes one
+                 ruled row with the label at the start and the value at the
+                 end. There are five of them, not three: Kontor, E-post and
+                 Slik finner du fram joined when the text PDF landed. */}
+              <ul className="mt-7 max-md:mt-5 max-md:space-y-0 max-md:divide-y max-md:divide-rule max-md:border-y max-md:border-rule space-y-3 [@media(min-width:768px)_and_(max-height:900px)]:!mt-4 [@media(min-width:768px)_and_(max-height:900px)]:[&>li+li]:!mt-2">
                 {visitFacts.map((f, i) => (
                   <li
                     key={f.term}
-                    className="flex items-center gap-4 rounded-2xl bg-paper p-4 ring-1 ring-ink/[0.08] transition-shadow duration-300 hover:ring-gold-deep/30 sm:p-5 [@media(min-width:768px)_and_(max-height:900px)]:!px-4 [@media(min-width:768px)_and_(max-height:900px)]:!py-3"
+                    className="flex items-center gap-4 rounded-2xl bg-paper p-4 max-md:gap-3 max-md:rounded-none max-md:bg-transparent max-md:p-0 max-md:py-2.5 max-md:ring-0 ring-1 ring-ink/[0.08] transition-shadow duration-300 hover:ring-gold-deep/30 sm:p-5 [@media(min-width:768px)_and_(max-height:900px)]:!px-4 [@media(min-width:768px)_and_(max-height:900px)]:!py-3"
                   >
                     <span
                       aria-hidden
-                      className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gold-soft/40 text-gold-deep ring-1 ring-gold-deep/20 [@media(min-width:768px)_and_(max-height:900px)]:!h-[38px] [@media(min-width:768px)_and_(max-height:900px)]:!w-[38px]"
+                      className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gold-soft/40 text-gold-deep max-md:h-8 max-md:w-8 max-md:bg-transparent max-md:ring-0 ring-1 ring-gold-deep/20 [@media(min-width:768px)_and_(max-height:900px)]:!h-[38px] [@media(min-width:768px)_and_(max-height:900px)]:!w-[38px]"
                     >
                       <FigureIcon name={FACT_ICONS[i] ?? 'pin'} className="h-[19px] w-[19px]" />
                     </span>
-                    <span className="block min-w-0">
+                    <span className="block min-w-0 max-md:flex max-md:flex-1 max-md:items-baseline max-md:justify-between max-md:gap-3">
                       <span className="block font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-40">
                         {f.term}
                       </span>
@@ -462,7 +485,7 @@ export default async function AboutPage({
                          Split rather than two message keys: the string stays
                          one editable sentence in all three locales, and a
                          fact with no separator renders exactly as before. */}
-                      <span className="mt-1.5 block font-serif text-[1.0625rem] leading-snug text-ink">
+                      <span className="mt-1.5 block font-serif text-[1.0625rem] leading-snug text-ink max-md:mt-0 max-md:text-end max-md:text-[0.95rem]">
                         {f.detail.split(' · ').map((line) => (
                           <span key={line} className="block">
                             {line}

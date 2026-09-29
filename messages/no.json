@@ -2525,6 +2525,10 @@
       "annual": "Årsrapport",
       "press": "Pressehenvendelser",
       "onRequest": "Statutter, årsrapport og pressemateriell fås ved henvendelse til kontoret."
+    },
+    "historyShort": {
+      "p1": "Rabita ble stiftet i 1987 som den første moskeen i Oslo som ikke var knyttet til én bestemt nasjonalitet. Siden har vi vokst til mer enn en moské: skole, kultur- og samfunnsarbeid, dialog og frivillighet.",
+      "p2": "I oktober 2009 fikk vi besøk av kong Harald V og kronprins Haakon — det første kongelige besøket til en moské i Norge. I dag er lokalene blitt for små. Støtt arbeidet med å realisere det nye bygget."
     }
   },
   "contactPage": {

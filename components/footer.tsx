@@ -369,7 +369,13 @@ export function Footer({ map }: { map?: ReactNode }) {
             </div>
           </div>
 
-          <div className="order-first sm:col-span-2 xl:order-none xl:col-auto">
+          {/* max-sm:order-none (2026-09-29): order-first put a 368px map at
+             the very top of the footer on a phone, so the address, the
+             opening hour and the e-mail — the reasons anyone scrolls this
+             far — sat below it. Below sm the map takes its DOM position,
+             after the contact register, and its height drops to 15rem
+             (see find-us-google.tsx). From sm the order is unchanged. */}
+          <div className="order-first max-sm:order-none sm:col-span-2 xl:order-none xl:col-auto">
             {/* The same Google map as Leiligheter, since 2026-09-15 ("also
                show here in the footer without increating size of footer, it
                can fit and make it fit"). It replaces the site's own drawn SVG

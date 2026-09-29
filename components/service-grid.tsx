@@ -159,7 +159,7 @@ export async function ServiceGrid({
                 // rasterised onto a composited child — so the card flashes SQUARE
                 // for the length of the animation. Promoting the clipping element
                 // bakes the radius into its own layer. See core-activities.tsx.
-                  'group/card relative isolate flex aspect-[4/3] scroll-mt-28 flex-col justify-end overflow-hidden rounded-2xl bg-ink [transform:translateZ(0)] md:scroll-mt-32',
+                  'group/card relative isolate flex aspect-[4/3] max-md:aspect-[3/2] scroll-mt-28 flex-col justify-end overflow-hidden rounded-2xl bg-ink [transform:translateZ(0)] md:scroll-mt-32',
                   featured === 0
                     // The original contact sheet: portrait from lg.
                     ? 'lg:aspect-[4/5]'

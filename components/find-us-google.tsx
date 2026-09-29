@@ -173,7 +173,7 @@ export async function FindUsGoogle({
             //
             // In the footer it wants ≥520px of iframe for the same reason —
             // the footer grid is sized for that from xl; see footer.tsx.
-            mapOnly ? 'h-[23rem] sm:h-[23.5rem]' : 'h-[18rem] sm:h-[21rem]',
+            mapOnly ? 'h-[15rem] sm:h-[23.5rem]' : 'h-[18rem] sm:h-[21rem]',
           )}
         >
           {place === 'visit' ? (
