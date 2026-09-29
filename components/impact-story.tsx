@@ -140,15 +140,21 @@ export function ImpactStory() {
     setReduced(prefers);
     if (prefers) return;
 
-    // The trigger band has to sit BELOW the pinned photograph, not behind it.
-    // On desktop the photo is in the other column so the middle 20% of the
-    // viewport is free; on a phone the photo is pinned at the top and covers
-    // roughly 84-394px of a 760px screen, so a centred band would switch the
-    // picture for a chapter the reader cannot see yet. Below md the band moves
-    // into the lower third, which is the only part of the screen where a
-    // chapter is actually legible.
+    // The trigger band has to sit where the CHAPTER is, never behind the
+    // pinned photograph. On desktop the photo is in the other column, so the
+    // middle 20% of the viewport is free.
+    //
+    // On a phone the photo moved from the top of the screen to the bottom on
+    // 2026-09-29 (client: image down, text up), and the band had to move with
+    // it. It was -62%/-20%, i.e. the slice between 62% and 80% of the
+    // viewport — which is now exactly where the picture sits. Reading band and
+    // picture had swapped places, so the chapter that lit the photo would have
+    // been one the reader could not see.
+    //
+    // The photo now occupies roughly the lower 36% of an 844px screen, so the
+    // free part is the top ~64% and the band sits in the middle of that.
     const narrow = window.matchMedia('(max-width: 767px)').matches;
-    const rootMargin = narrow ? '-62% 0px -20% 0px' : '-40% 0px -40% 0px';
+    const rootMargin = narrow ? '-28% 0px -54% 0px' : '-40% 0px -40% 0px';
 
     // The observer only reports the panels whose intersection CHANGED, so
     // deciding from `entries` alone handed the picture to the next chapter
@@ -195,7 +201,7 @@ export function ImpactStory() {
        already has air above it. */
     <section id="menigheten-forteller" className="bg-paper-2 pt-14 pb-section-sm md:pt-0">
       <SectionBody>
-        <div className="md:grid md:gap-10 md:grid-cols-12">
+        <div className="max-md:flex max-md:flex-col md:grid md:gap-10 md:grid-cols-12">
           {/* Sticky photo column */}
           {/* Pinned on the phone too, not only from md. innocents.no keeps its
              story photo sticky at every width, shortens the crop and widens
@@ -205,8 +211,31 @@ export function ImpactStory() {
              8px of air; it was 84 for the old 77px bar),
              z-[1] keeps the chapters travelling behind the photograph rather
              than over it. */}
-          <div className="sticky top-[68px] z-[1] bg-paper-2 pb-4 md:static md:col-span-6 md:bg-transparent md:pb-0">
-            <div className="md:sticky md:top-20 md:h-[calc(100svh-5rem)] md:flex md:flex-col md:justify-center">
+          {/* ── PINNED TO THE FOOT, NOT THE HEAD (client, 2026-09-29) ────
+             "the image should be down and the text should be up". The
+             mechanism is unchanged and so is the animation he likes: the
+             photograph is still stuck to the viewport while four chapters
+             scroll past it and cross-fade it. Only the edge it is stuck to
+             has moved.
+
+             top-auto + bottom-0 is what flips it. A sticky box with `bottom`
+             set is held against the foot of the viewport for as long as its
+             own natural position is below it — which, as the last child of a
+             tall section, is the whole way through. order-2 puts it there
+             visually; the DOM keeps the photo first so the desktop grid, where
+             this is simply column one, is untouched. */}
+          <div className="sticky top-[68px] z-[1] bg-paper-2 pb-4 max-md:order-2 max-md:top-auto max-md:bottom-0 max-md:pt-3 md:static md:col-span-6 md:bg-transparent md:pb-0">
+            {/* A 40px dissolve on the block's top edge, phones only. The
+               chapter above scrolls up into the pinned photograph and was
+               being sliced through the middle of a headline — a clean cut
+               reads as a rendering fault rather than as depth. The gradient
+               sits just outside the block (bottom-full) so the text fades
+               into the same paper the block is painted in. */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 bottom-full h-10 bg-gradient-to-t from-paper-2 to-transparent md:hidden"
+            />
+            <div className="max-md:flex max-md:flex-col md:sticky md:top-20 md:h-[calc(100svh-5rem)] md:flex md:flex-col md:justify-center">
               {/* Capped so the whole photo is on screen at 100% zoom. The column is
                      wide enough for a 665px tall 4:5 crop, which is taller than a
                      laptop viewport once the sticky offset is taken off. The width
@@ -246,7 +275,7 @@ export function ImpactStory() {
 
               {/* Chapter counter under photo — mirrors the mono treatment
                  used elsewhere for tabular figures. */}
-              <div className="mx-auto mt-5 flex w-full items-center gap-4 font-mono text-label uppercase tracking-widest md:max-w-[calc((100svh-10rem)*0.8)]">
+              <div className="mx-auto mt-5 flex w-full items-center gap-4 font-mono text-label uppercase tracking-widest max-md:order-first max-md:mt-0 max-md:mb-2.5 md:max-w-[calc((100svh-10rem)*0.8)]">
                 <span className="shrink-0 text-gold-deep tabular-nums">
                   {(activeIndex + 1).toString().padStart(2, '0')} / {CHAPTERS.length.toString().padStart(2, '0')}
                 </span>
@@ -264,7 +293,18 @@ export function ImpactStory() {
              them cross the observer's trigger band in the same flick and the
              pinned photo skips a frame. 38vh between panels on mobile is the
              innocents.no measure, give or take. */}
-          <ol className="mt-[12vh] space-y-[38vh] pb-[16vh] md:col-span-6 md:mt-0 md:space-y-44 md:pt-[36vh] md:pb-[34vh]">
+          {/* max-md:pb-[26rem]: the runway now has to clear the pinned
+             photograph as well as give the last chapter its scroll distance.
+             The picture plus its counter is about 300px at 390 wide, so
+             anything less would leave chapter four permanently behind it.
+
+             THE LEAD-IN STAYS, at 18vh rather than 12. It used to clear a
+             photo pinned at the top; it now buys chapter one its turn in the
+             trigger band. Without it the first chapter sat above the band
+             before the section had finished arriving, and the counter read
+             02/04 three hundred pixels in. The 38vh between chapters is
+             untouched — that spacing IS the pacing of the animation. */}
+          <ol className="mt-[12vh] space-y-[38vh] pb-[16vh] max-md:order-1 max-md:mt-[18vh] max-md:pb-[26rem] md:col-span-6 md:mt-0 md:space-y-44 md:pt-[36vh] md:pb-[34vh]">
             {CHAPTERS.map((c, i) => (
               <li
                 key={c.key}
