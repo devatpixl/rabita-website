@@ -52,19 +52,50 @@ export function ProjectHero({
          1080px — a screen and a third before the page had said anything. The
          base value never reaches md, where inset-0 takes over, so this is a
          phone-only number. */}
-      <div className="absolute inset-x-0 top-0 h-[40svh] md:inset-0 md:h-auto">
+      {/* ── THE SCRIM IS HORIZONTAL FROM md AND VERTICAL BELOW IT ────────
+         (2026-09-30) The client on the phone view: "the mosque in bg cant be
+         seen ... its very bad". He was describing three overlays stacked on
+         one 338px box, all of them written for the desktop composition.
+
+         From md the words sit in a 3fr column on the left and the render
+         shows in the 2fr column on the right, so a LEFT-TO-RIGHT ramp is
+         exactly right: dark where the type is, clear where the building is.
+
+         A phone has no right column. The words span the full 342px, so that
+         same ramp put its solid end over the whole frame — 65% to 100% dusk
+         across everything — and then a 160px foot fade took the bottom half
+         to solid, and a flat 30% veil sat over all of it. Multiply those and
+         a brightness(0.9) grade and the render was a dark texture. Nothing of
+         Calmeyers gate 8 survived on the page that is about Calmeyers gate 8.
+
+         Below md the ramp is therefore VERTICAL and the picture is given the
+         top of the frame to itself: clear through the sky and the upper
+         lattice, ramping to solid dusk over the lower half where the words
+         are. The words move down to meet it rather than starting under the
+         header. Same photograph, same box, same grade — the building is
+         simply no longer being erased by a gradient meant for a layout the
+         phone does not have. */}
+      <div className="absolute inset-x-0 top-0 h-[44svh] md:inset-0 md:h-auto">
         <Image src={image} alt={alt} fill priority sizes="100vw" className="object-cover" style={{ filter: GRADE }} />
-        {/* A light veil plus a reading-side gradient. The flat 80% dusk
-           that used to sit here turned every render into a dark slab; now
-           the picture shows on the right and the words stay legible on
-           the left. */}
-        <div aria-hidden className="absolute inset-0 bg-dusk/30" />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-dusk via-dusk/65 to-transparent" />
-        {/* Foot fade, phones only: the capped crop has a hard bottom edge
-           otherwise, right where the dusk section continues. */}
+        {/* The veil drops to 12% on phones. At 30 it was costing the render
+           a third of its contrast before either gradient had touched it. */}
+        <div aria-hidden className="absolute inset-0 bg-dusk/30 max-md:bg-dusk/12" />
+        {/* md+ only. `max-md:bg-none` rather than a hidden/block pair because
+           this element carries nothing else — and lib/cn.ts is plain clsx, so
+           the two backgrounds would otherwise both ship and the later one in
+           the sheet would win by accident rather than by intent. */}
         <div
           aria-hidden
-          className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-dusk md:hidden"
+          className="absolute inset-0 bg-gradient-to-r from-dusk via-dusk/65 to-transparent max-md:bg-none"
+        />
+        {/* Phones: clear at the top, solid at the foot, so it hands over to
+           the dusk section below with no seam. This replaces BOTH the old
+           horizontal ramp and the 160px foot fade — one gradient doing one
+           job, instead of two fighting over the same pixels. It is vertical,
+           so there is no rtl: twin to keep in step. */}
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-b from-transparent via-dusk/60 to-dusk md:hidden"
         />
       </div>
 
@@ -85,22 +116,33 @@ export function ProjectHero({
       {(() => {
         const Body = aside
           ? ({ children }: { children: ReactNode }) => (
-              <div className="relative z-10 mx-auto w-full max-w-[92rem] px-6 py-10 max-md:pb-8 md:px-10 md:py-14 lg:px-12">
+              // max-md:pt-[9.5rem]: the words start 120px down on a phone so
+              // the top of the render is theirs alone. Without it the eyebrow
+              // sits 40px under the header, on the clearest part of the
+              // picture, and the only way to keep it legible is the scrim
+              // that was hiding the building.
+              <div className="relative z-10 mx-auto w-full max-w-[92rem] px-6 py-10 max-md:pb-8 max-md:pt-[9.5rem] md:px-10 md:py-14 lg:px-12">
                 {children}
               </div>
             )
           : ({ children }: { children: ReactNode }) => (
-              <SectionBody className="relative py-section-md">{children}</SectionBody>
+              // The same step-down as the card variant above. Only
+              // /moskeprosjektet passes an aside, so without this the other
+              // four heroes would keep the new vertical scrim while starting
+              // their words at the top of it — on the clearest part of the
+              // picture, which is the one place the old horizontal ramp had
+              // been covering for them.
+              <SectionBody className="relative py-section-md max-md:pt-[9.5rem]">{children}</SectionBody>
             );
         return (
       <Body>
         {!aside && (
-          <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-dusk-60">{crumb}</p>
+          <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-dusk-60 max-md:text-paper/70">{crumb}</p>
         )}
         <div className={aside ? 'grid items-center gap-10 max-md:gap-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:gap-20' : undefined}>
         <div className={aside ? 'max-w-3xl' : 'mt-8 max-w-3xl'}>
           {aside && (
-            <p className="mb-5 font-mono text-[0.75rem] uppercase tracking-[0.16em] text-dusk-60">{crumb}</p>
+            <p className="mb-5 font-mono text-[0.75rem] uppercase tracking-[0.16em] text-dusk-60 max-md:text-paper/70">{crumb}</p>
           )}
           <h1 className="font-serif text-display text-balance text-paper">{title}</h1>
           {ledeShort ? (
