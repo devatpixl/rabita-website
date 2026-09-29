@@ -273,7 +273,8 @@
       "quran": "مصحف",
       "carpet": "سجادة"
     },
-    "chipAriaGift": "اختر {gift} — {amount} كرونة"
+    "chipAriaGift": "اختر {gift} — {amount} كرونة",
+    "amountLabel": "المبلغ"
   },
   "meter": {
     "lattice": "كل علامة تعادل 1 000 000 كرونة",

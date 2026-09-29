@@ -273,7 +273,8 @@
       "quran": "A Qur’an",
       "carpet": "A carpet"
     },
-    "chipAriaGift": "Choose {gift} — {amount} kroner"
+    "chipAriaGift": "Choose {gift} — {amount} kroner",
+    "amountLabel": "Amount"
   },
   "meter": {
     "lattice": "Each mark is 1 000 000 kr",

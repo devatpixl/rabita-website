@@ -273,7 +273,8 @@
       "quran": "Koran",
       "carpet": "Teppe"
     },
-    "chipAriaGift": "Velg {gift} — {amount} kroner"
+    "chipAriaGift": "Velg {gift} — {amount} kroner",
+    "amountLabel": "Beløp"
   },
   "meter": {
     "lattice": "Hvert merke er 1 000 000 kr",

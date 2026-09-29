@@ -81,6 +81,12 @@ type Props = {
     details?: Details;
   }) => void;
   initialAmount?: number;
+  /** The sheet was opened from a card that names its own figure — a gift
+   *  on the ladder, a prayer place, a timed ask. The four preset tiles are
+   *  not shown (client, 2026-09-29: "don't show the default 4 options"),
+   *  the figure sits in the amount field alone, and the gift is a one-off
+   *  by default: 25 000 kr for a prayer place is not a monthly sum. */
+  fixedAmount?: boolean;
 };
 
 function usePrefersReducedMotion(): boolean {
@@ -156,6 +162,7 @@ const FIT = {
 export function GivingCard({
   onSubmit,
   initialAmount,
+  fixedAmount = false,
   presets = AMOUNT_PRESETS,
   recommended = RECOMMENDED_AMOUNT,
   defaultAmount = DEFAULT_AMOUNT,
@@ -169,7 +176,7 @@ export function GivingCard({
   const reduced = usePrefersReducedMotion();
 
   // ── Step 1 state ───────────────────────────────────────────────
-  const [frequency, setFrequency] = useState<Frequency>(DEFAULT_FREQUENCY);
+  const [frequency, setFrequency] = useState<Frequency>(fixedAmount ? 'once' : DEFAULT_FREQUENCY);
   const [presetAmount, setPresetAmount] = useState<number | 'custom'>(defaultAmount);
   const [customAmount, setCustomAmount] = useState<string>('');
   // Zakat is asked on the payment step (client request); anonymous on the
@@ -212,14 +219,20 @@ const TOTAL_STEPS = 3;
   // Amount preset sync from openGiveSheet(amount).
   useEffect(() => {
     if (typeof initialAmount !== 'number' || initialAmount <= 0) return;
-    if (presets.includes(initialAmount)) {
+    // A fixed figure always goes in the field, even when it happens to
+    // equal a preset — the tiles are hidden, so a selected tile would be
+    // an amount nobody can see.
+    // The sheet mounts this card once and re-opens it, so the one-off
+    // default for a fixed figure has to be set here, not in useState.
+    if (fixedAmount) setFrequency('once');
+    if (presets.includes(initialAmount) && !fixedAmount) {
       setPresetAmount(initialAmount);
       setCustomAmount('');
     } else {
       setPresetAmount('custom');
       setCustomAmount(String(initialAmount));
     }
-  }, [initialAmount, presets]);
+  }, [initialAmount, presets, fixedAmount]);
 
   // Derived amount.
   const effectiveAmount = useMemo(() => {
@@ -493,6 +506,7 @@ const TOTAL_STEPS = 3;
               isAnonymous={isAnonymous}
               setIsAnonymous={setIsAnonymous}
               presets={presets}
+              hidePresets={fixedAmount}
               recommended={recommended}
               compact={compact}
               fit={fit}
@@ -657,6 +671,7 @@ type StepAmountProps = {
   isAnonymous: boolean;
   setIsAnonymous: (v: boolean) => void;
   presets: readonly number[];
+  hidePresets: boolean;
   recommended: number;
   compact: boolean;
   fit: boolean;
@@ -673,6 +688,7 @@ function StepAmount({
   isAnonymous,
   setIsAnonymous,
   presets,
+  hidePresets,
   recommended: recommendedAmount,
   compact,
   fit,
@@ -714,6 +730,7 @@ function StepAmount({
 
       {/* Amount boxes — 2×2, the amount set large in serif with the
          period as a small suffix, one box tagged as recommended. */}
+      {!hidePresets && (
       <div
         className={cn('grid grid-cols-2', compact ? 'mt-1 mb-2 gap-2' : cn('mt-1 mb-2 gap-2 sm:mt-0 sm:mb-3 sm:gap-3', fit && FIT.presetGrid))}
         role="radiogroup"
@@ -806,6 +823,7 @@ function StepAmount({
           );
         })}
       </div>
+      )}
 
       {/* Other amount — always open, so typing a figure is one move rather
          than "Other" then a field. Typing selects it; picking a box above
@@ -820,7 +838,7 @@ function StepAmount({
         )}
       >
         <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-60">
-          {t('customLabel')}
+          {hidePresets ? t('amountLabel') : t('customLabel')}
         </span>
         <span className="flex min-w-0 items-baseline gap-1.5">
           <input

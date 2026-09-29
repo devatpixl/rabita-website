@@ -180,7 +180,9 @@ export function GivingSheet() {
          the dialog itself in vh, and this only matters on desktop, where
          the two agree. */}
       <div className="max-h-[calc(100vh-7rem)] overflow-y-auto">
-        <GivingCard onSubmit={handleSubmit} initialAmount={initialAmount} fit />
+        {/* A figure passed in means the sheet was opened from a card that
+           names its own amount; the card then shows that figure alone. */}
+        <GivingCard onSubmit={handleSubmit} initialAmount={initialAmount} fixedAmount={typeof initialAmount === 'number'} fit />
       </div>
     </dialog>
   );
