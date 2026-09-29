@@ -2006,6 +2006,24 @@
           {
             "title": "Koranforståelse"
           }
+        ],
+        "steps": [
+          {
+            "title": "Ta kontakt",
+            "body": "Alder, nivå, og om det gjelder barn eller voksen."
+          },
+          {
+            "title": "Egne grupper",
+            "body": "Barn mellom 6 og 15 år og voksne over 16 år har egne grupper."
+          },
+          {
+            "title": "Forkunnskap",
+            "body": "Du bør kunne de arabiske bokstavene fra før."
+          },
+          {
+            "title": "Undervisningen",
+            "body": "Å lære å lese riktig (tajweed), å memorere og å forstå."
+          }
         ]
       },
       "kurs": {
@@ -2023,6 +2041,20 @@
           },
           {
             "title": "Kurs og workshops"
+          }
+        ],
+        "steps": [
+          {
+            "title": "Ta kontakt",
+            "body": "Hvilket kurs, og om du har erfaring fra før."
+          },
+          {
+            "title": "To kurs",
+            "body": "Arabisk kalligrafi og islamsk geometri, ledet av erfarne kunstnere."
+          },
+          {
+            "title": "For alle nivåer",
+            "body": "Åpent for både nybegynnere og viderekomne."
           }
         ]
       },
@@ -2075,6 +2107,20 @@
           {
             "title": "Samfunnskunnskap"
           }
+        ],
+        "steps": [
+          {
+            "title": "Ta kontakt",
+            "body": "Nivået ditt i norsk i dag, og hva du ønsker å bruke språket til."
+          },
+          {
+            "title": "Gratis for voksne",
+            "body": "Norskundervisning for voksne som faller utenfor de ordinære tilbudene."
+          },
+          {
+            "title": "Hverdagsspråk",
+            "body": "Samtaletrening og samfunnskunnskap, med fokus på deltakelse i samfunnet."
+          }
         ]
       },
       "ungdom": {
@@ -2093,6 +2139,20 @@
           {
             "title": "Foredrag og workshops"
           }
+        ],
+        "steps": [
+          {
+            "title": "Ta kontakt",
+            "body": "Alder på den unge, og hva slags aktivitet det gjelder."
+          },
+          {
+            "title": "Drevet av og for ungdom",
+            "body": "NUM er Rabitas egen ungdomsorganisasjon, med et selvstendig styre."
+          },
+          {
+            "title": "Aktivitetene",
+            "body": "Sosiale kvelder, leirer og turer, foredrag og workshops."
+          }
         ]
       },
       "barn-og-familie": {
@@ -2110,6 +2170,20 @@
           },
           {
             "title": "Samlinger for foreldre og barn"
+          }
+        ],
+        "steps": [
+          {
+            "title": "Ta kontakt",
+            "body": "Barnas alder og hvilken aktivitet det gjelder."
+          },
+          {
+            "title": "Gjennom året",
+            "body": "Turer, verksteder og samlinger for barn og foreldre."
+          },
+          {
+            "title": "For hele familien",
+            "body": "Samlinger der barna bygger vennskap og opplever å være en del av et større fellesskap."
           }
         ]
       },
@@ -2162,6 +2236,20 @@
           {
             "title": "Mat og fellesskap"
           }
+        ],
+        "steps": [
+          {
+            "title": "Felles id-bønn",
+            "body": "Dagen åpner med fellesbønn."
+          },
+          {
+            "title": "Aktiviteter og mat",
+            "body": "Lek og aktiviteter for barn og familier, og god mat."
+          },
+          {
+            "title": "Følg med",
+            "body": "Sted og tid annonseres på nytt foran hver høytid. Tidligere holdt på Hersleb skole, i Ekeberghallen og på Rådhusplassen."
+          }
         ]
       },
       "kurs-islam": {
@@ -2179,6 +2267,20 @@
           },
           {
             "title": "Spørsmål og svar"
+          }
+        ],
+        "steps": [
+          {
+            "title": "Ta kontakt",
+            "body": "Alder på barnet, og om det gjelder jente- eller guttegruppa."
+          },
+          {
+            "title": "To aldersgrupper",
+            "body": "Jenter i Fokus og Gutter i Fokus, 10 til 13 år og 14 til 18 år."
+          },
+          {
+            "title": "Det grunnleggende",
+            "body": "Bønn, rituell vask og tawhid."
           }
         ]
       },
@@ -2207,6 +2309,20 @@
             "body": "Alle som har interesse av å lære er velkomne.",
             "detail": "Calmeyers gate 8, 3. etasje. Spørsmål: post@rabita.no"
           }
+        ],
+        "steps": [
+          {
+            "title": "Kom en fredag",
+            "body": "Kurset går hver fredag 17:00–19:00. Ingen påmelding."
+          },
+          {
+            "title": "Kom gjerne alene",
+            "body": "Åpent også for deg som er født muslim, og for deg som ikke er muslim."
+          },
+          {
+            "title": "Spørsmål",
+            "body": "Skriv til post@rabita.no."
+          }
         ]
       },
       "arabisk": {
@@ -2225,6 +2341,20 @@
           {
             "title": "Lesing, skriving og samtale"
           }
+        ],
+        "steps": [
+          {
+            "title": "Ta kontakt",
+            "body": "For voksne over 16 år. Fortell nivået ditt, og om du har lest arabisk før."
+          },
+          {
+            "title": "Nivå 1",
+            "body": "Begynner med alfabetet."
+          },
+          {
+            "title": "Nivå 2",
+            "body": "Grammatikk, ordforråd og lesing av sammenhengende tekst."
+          }
         ]
       },
       "kvinnetreff": {
@@ -2242,6 +2372,20 @@
           },
           {
             "title": "Åndelig fellesskap"
+          }
+        ],
+        "steps": [
+          {
+            "title": "Ta kontakt",
+            "body": "Hør når neste treff finner sted, eller si fra at du vil være med."
+          },
+          {
+            "title": "I moskeen",
+            "body": "Treffene arrangeres i moskeen."
+          },
+          {
+            "title": "Innholdet",
+            "body": "Foredrag og kurs, sosiale samlinger og åndelig fellesskap."
           }
         ]
       }

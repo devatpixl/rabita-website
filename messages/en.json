@@ -2002,6 +2002,24 @@
           {
             "title": "Understanding the Qur’an"
           }
+        ],
+        "steps": [
+          {
+            "title": "Get in touch",
+            "body": "Age, level, and whether it is for a child or an adult."
+          },
+          {
+            "title": "Separate groups",
+            "body": "Children aged 6 to 15 and adults over 16 have their own groups."
+          },
+          {
+            "title": "Prerequisite",
+            "body": "You should already know the Arabic letters."
+          },
+          {
+            "title": "The teaching",
+            "body": "Reading correctly (tajweed), memorising, and understanding."
+          }
         ]
       },
       "kurs": {
@@ -2019,6 +2037,20 @@
           },
           {
             "title": "Courses and workshops"
+          }
+        ],
+        "steps": [
+          {
+            "title": "Get in touch",
+            "body": "Which course, and whether you have prior experience."
+          },
+          {
+            "title": "Two courses",
+            "body": "Arabic calligraphy and Islamic geometry, led by experienced artists."
+          },
+          {
+            "title": "All levels",
+            "body": "Open to beginners and the more advanced alike."
           }
         ]
       },
@@ -2071,6 +2103,20 @@
           {
             "title": "Knowledge of society"
           }
+        ],
+        "steps": [
+          {
+            "title": "Get in touch",
+            "body": "Your level of Norwegian today, and what you want to use the language for."
+          },
+          {
+            "title": "Free for adults",
+            "body": "Norwegian classes for adults who fall outside the ordinary provision."
+          },
+          {
+            "title": "Everyday language",
+            "body": "Conversation practice and civic knowledge, with the focus on taking part in society."
+          }
         ]
       },
       "ungdom": {
@@ -2089,6 +2135,20 @@
           {
             "title": "Talks and workshops"
           }
+        ],
+        "steps": [
+          {
+            "title": "Get in touch",
+            "body": "The young person’s age, and what kind of activity it concerns."
+          },
+          {
+            "title": "Run by and for young people",
+            "body": "NUM is Rabita’s own youth organisation, with its own board."
+          },
+          {
+            "title": "The activities",
+            "body": "Social evenings, camps and trips, talks and workshops."
+          }
         ]
       },
       "barn-og-familie": {
@@ -2106,6 +2166,20 @@
           },
           {
             "title": "Gatherings for parents and children"
+          }
+        ],
+        "steps": [
+          {
+            "title": "Get in touch",
+            "body": "The children’s ages and which activity it concerns."
+          },
+          {
+            "title": "Through the year",
+            "body": "Trips, workshops and gatherings for children and parents."
+          },
+          {
+            "title": "For the whole family",
+            "body": "Gatherings where children build friendships and feel part of a larger community."
           }
         ]
       },
@@ -2158,6 +2232,20 @@
           {
             "title": "Food and community"
           }
+        ],
+        "steps": [
+          {
+            "title": "Eid prayer together",
+            "body": "The day opens with congregational prayer."
+          },
+          {
+            "title": "Activities and food",
+            "body": "Play and activities for children and families, and good food."
+          },
+          {
+            "title": "Stay tuned",
+            "body": "Place and time are announced afresh before each Eid. Previously held at Hersleb school, Ekeberghallen and Rådhusplassen."
+          }
         ]
       },
       "kurs-islam": {
@@ -2175,6 +2263,20 @@
           },
           {
             "title": "Questions and answers"
+          }
+        ],
+        "steps": [
+          {
+            "title": "Get in touch",
+            "body": "The child’s age, and whether it is the girls’ or the boys’ group."
+          },
+          {
+            "title": "Two age groups",
+            "body": "Jenter i Fokus and Gutter i Fokus, ages 10 to 13 and 14 to 18."
+          },
+          {
+            "title": "The basics",
+            "body": "Prayer, ritual washing and tawhid."
           }
         ]
       },
@@ -2203,6 +2305,20 @@
             "body": "Anyone with an interest in learning is welcome.",
             "detail": "Calmeyers gate 8, 3rd floor. Questions: post@rabita.no"
           }
+        ],
+        "steps": [
+          {
+            "title": "Come on a Friday",
+            "body": "The course runs every Friday 17:00–19:00. No registration."
+          },
+          {
+            "title": "Come alone if you like",
+            "body": "Open also to those born Muslim, and to those who are not Muslim."
+          },
+          {
+            "title": "Questions",
+            "body": "Write to post@rabita.no."
+          }
         ]
       },
       "arabisk": {
@@ -2221,6 +2337,20 @@
           {
             "title": "Reading, writing and conversation"
           }
+        ],
+        "steps": [
+          {
+            "title": "Get in touch",
+            "body": "For adults over 16. Tell us your level, and whether you have read Arabic before."
+          },
+          {
+            "title": "Level 1",
+            "body": "Starts with the alphabet."
+          },
+          {
+            "title": "Level 2",
+            "body": "Grammar, vocabulary and reading continuous text."
+          }
         ]
       },
       "kvinnetreff": {
@@ -2238,6 +2368,20 @@
           },
           {
             "title": "Spiritual community"
+          }
+        ],
+        "steps": [
+          {
+            "title": "Get in touch",
+            "body": "Ask when the next gathering is, or let us know you want to join."
+          },
+          {
+            "title": "In the mosque",
+            "body": "The gatherings are held in the mosque."
+          },
+          {
+            "title": "What happens",
+            "body": "Talks and courses, social gatherings and spiritual community."
           }
         ]
       }
