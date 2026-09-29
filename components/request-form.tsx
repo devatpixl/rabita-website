@@ -103,7 +103,8 @@ const TONE = {
 
 // Exported so the event RSVP form can be built from the same control
 // rather than a second dialect of it. One well, one implementation.
-export const VALUE = 'mt-2 block w-full bg-transparent font-serif text-[1.15rem] leading-snug outline-none';
+export const VALUE =
+  'mt-2 max-sm:mt-0.5 block w-full bg-transparent font-serif text-[1.15rem] max-sm:text-[1rem] leading-snug outline-none';
 
 export function Field({
   id,
@@ -132,6 +133,13 @@ export function Field({
     <div
       className={cn(
         'group rounded-2xl border-[1.5px] px-4 pb-3 pt-3 transition-colors',
+        // ── TIGHTER ON A PHONE (2026-09-29) ─────────────────────────
+        // The well is generous by design, but stacked one per line on a
+        // 390px screen the three of them plus the message box ran the
+        // enquiry past a screen and a half. 12px of padding instead of
+        // 16, and the value sits 4px under its label rather than 8 — the
+        // label and the thing it names were reading as two rows.
+        'max-sm:rounded-xl max-sm:px-3.5 max-sm:pb-2 max-sm:pt-2',
         // No focus ring on the WELL. globals.css already draws one on the
         // control itself — its :where() selector has zero specificity but
         // still lands, because Tailwind's outline-none is a transparent
@@ -166,7 +174,7 @@ export function Field({
         {label}
       </label>
       {hint && (
-        <p id={`${id}-hint`} className={cn('mt-1.5 text-[13px] leading-snug', c.hint)}>
+        <p id={`${id}-hint`} className={cn('mt-1.5 max-sm:mt-0.5 text-[13px] max-sm:text-[12px] leading-snug', c.hint)}>
           {hint}
         </p>
       )}
@@ -329,7 +337,7 @@ export function RequestForm({
     tone === 'dusk'
       ? 'text-paper'
       : card
-        ? 'rounded-[2rem] bg-paper p-6 text-ink ring-1 ring-sage-line/70 shadow-[0_1px_2px_rgba(26,26,24,0.04),0_28px_70px_-38px_rgba(26,26,24,0.3)] sm:p-8'
+        ? 'rounded-[2rem] bg-paper p-6 max-sm:rounded-3xl max-sm:p-5 text-ink ring-1 ring-sage-line/70 shadow-[0_1px_2px_rgba(26,26,24,0.04),0_28px_70px_-38px_rgba(26,26,24,0.3)] sm:p-8'
         : 'text-ink',
   );
 
@@ -365,7 +373,7 @@ export function RequestForm({
          old underline spacing would now read as drift. */}
       <div
         className={cn(
-          'grid gap-x-4 gap-y-4 sm:grid-cols-2',
+          'grid gap-x-4 gap-y-4 max-sm:gap-y-2.5 sm:grid-cols-2',
           // Three cases, one rule: after the opening hairline, clear it;
           // after a heading with no hairline, clear the heading; at the top
           // of its own column on the dusk plate, nothing — the form's first
@@ -517,7 +525,7 @@ export function RequestForm({
          field is .optional().default(''), so nothing downstream changes —
          an apartments enquiry still posts the bedroom count through it. */}
 
-      <div className="mt-4">
+      <div className="mt-4 max-sm:mt-2.5">
         {/* The per-subject sentence — "Tell us briefly about the planned date
            and the number of guests" — used to BE the label, set at 10px
            uppercase mono with 0.18em tracking. Good copy in the wrong slot:
@@ -541,7 +549,11 @@ export function RequestForm({
               VALUE,
               c.value,
               'resize-none',
-              compact ? 'min-h-[4rem]' : 'min-h-[5.5rem]',
+                            // rows={3} sets an INTRINSIC height, so a smaller min-height
+              // cannot shrink it — the box stayed ~75px of empty green under
+              // a two-line hint. An explicit height is the only thing that
+              // overrides the attribute, and with resize-none it holds.
+              compact ? 'min-h-[4rem]' : 'min-h-[5.5rem] max-sm:min-h-0 max-sm:h-[3.5rem]',
             )}
           />
         </Field>
@@ -568,7 +580,7 @@ export function RequestForm({
          about 30 characters, and a 10px tracked-out mono line broke to four
          ragged right-aligned lines. Stacked, it reads as one line of small
          print under the control it belongs to, at any width. */}
-      <div className={compact ? 'mt-5' : 'mt-7'}>
+      <div className={compact ? 'mt-5' : 'mt-7 max-sm:mt-4'}>
         <div
           className={cn(
             'flex items-center gap-5',
@@ -628,7 +640,7 @@ export function RequestForm({
         {!compact && (
           <p
             className={cn(
-              'mt-5 flex max-w-[52ch] items-start gap-2.5 font-mono text-[0.625rem] uppercase leading-relaxed tracking-[0.12em]',
+              'mt-5 max-sm:mt-3.5 flex max-w-[52ch] items-start gap-2.5 font-mono text-[0.625rem] uppercase leading-relaxed tracking-[0.12em]',
               c.meta,
             )}
           >
