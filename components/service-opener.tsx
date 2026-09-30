@@ -148,9 +148,21 @@ export async function ServiceOpener({ s, crumb }: { s: ServiceKey; crumb: string
                while /bli-medlem gives it to every member — the site
                contradicts itself and this sentence is true under both.
                The link is text, not a button: the page keeps one action. */}
-            <p className="mt-4 max-w-[50ch] text-[clamp(0.9375rem,1.05vw,1.0625rem)] leading-[1.55] text-paper/70">
-              {t.rich('detail.memberNote', {
-                link: (chunks) => (
+            {/* ── AND SHORTER ON A PHONE (client, 2026-09-30) ───────────
+               Four benefits and a link is five lines at 390px, under a
+               headline and a lede that have already asked for four more. He
+               was right that it is too much there: the hero stops being an
+               opening and becomes a paragraph.
+               
+               The phone line keeps the two claims that do the work — first
+               call on the services this very page is about, and that it
+               costs nothing — plus the link. The newsletter, the invitations
+               and the vote are not dropped from the site; they are on
+               /bli-medlem, which is where the link goes, and they are still
+               here in full from md. Same sentence, fewer clauses. */}
+            {(() => {
+              const linkFmt = {
+                link: (chunks: React.ReactNode) => (
                   <a
                     href={`/${locale}/bli-medlem`}
                     className="font-semibold text-paper underline decoration-gold/70 underline-offset-4 transition-colors hover:text-gold"
@@ -158,8 +170,20 @@ export async function ServiceOpener({ s, crumb }: { s: ServiceKey; crumb: string
                     {chunks}
                   </a>
                 ),
-              })}
-            </p>
+              };
+              const cls =
+                'mt-4 max-w-[50ch] text-[clamp(0.9375rem,1.05vw,1.0625rem)] leading-[1.55] text-paper/70';
+              return (
+                <>
+                  <p className={cn(cls, 'md:hidden')}>
+                    {t.rich('detail.memberNoteShort', linkFmt)}
+                  </p>
+                  <p className={cn(cls, 'hidden md:block')}>
+                    {t.rich('detail.memberNote', linkFmt)}
+                  </p>
+                </>
+              );
+            })()}
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a
@@ -171,9 +195,17 @@ export async function ServiceOpener({ s, crumb }: { s: ServiceKey; crumb: string
                   &rarr;
                 </span>
               </a>
+              {/* ── ONE ACTION ON A PHONE (client, 2026-09-30) ──────────
+                 "1 cta enough which is Send an enquiry". Stacked at 390px
+                 the two buttons read as a choice to make before the reader
+                 has been told anything, and the second one leaves the site
+                 for a mail client. The address is not lost: it is under the
+                 form on this same page, in the footer, and behind the
+                 floating contact button. From md they sit side by side,
+                 where a secondary action costs nothing. */}
               <a
                 href={`mailto:${email}`}
-                className="inline-flex min-h-12 items-center rounded-full border border-paper/45 px-6 text-[15px] font-semibold text-paper transition-colors hover:border-paper hover:bg-paper/10"
+                className="inline-flex min-h-12 items-center rounded-full border border-paper/45 px-6 text-[15px] font-semibold text-paper transition-colors hover:border-paper hover:bg-paper/10 max-md:hidden"
               >
                 {t('detail.write')}
               </a>
