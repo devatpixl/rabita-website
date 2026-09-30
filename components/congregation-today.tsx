@@ -384,16 +384,20 @@ export function CongregationToday() {
            untouched. */}
         <div className="mx-auto max-w-6xl w-full px-6 max-md:order-1">
           <div className="flex items-baseline justify-between" style={{ gap: '32px' }}>
+            {/* ── THE SIZE LIVES IN CLASSES, NOT THE STYLE OBJECT ────────
+               Client, 2026-09-30: "the heading of our services is too small
+               here ... this change only on mobile". The clamp bottoms out at
+               2.25rem below 720px, so every phone got 36px — a step under the
+               slide titles it introduces.
+
+               It has to move off the inline style to be fixed per width: an
+               inline fontSize cannot be overridden by a class. Base is the
+               phone size and `md:` restores the original expression verbatim,
+               so from 768 up nothing changes, including the 768-880 band
+               where the clamp is still on its floor. */}
             <h2
-              className="display-opsz font-serif text-ink text-balance"
+              className="display-opsz font-serif text-ink text-balance text-[2.625rem] md:text-[clamp(2.25rem,5vw,4rem)]"
               style={{
-                // clamp(2.25rem, 5vw, 4rem) — the same expression the
-                // project overview's "Sju etasjer på én adresse." uses, which
-                // is the section heading directly below this one. At 44px
-                // this sat a whole step under it and read as a label rather
-                // than as a section (client, Hjem.pdf 2026-09-09: make it
-                // bigger). 36 -> 64px across the range.
-                fontSize: 'clamp(2.25rem, 5vw, 4rem)',
                 lineHeight: 1.12,
                 fontWeight: 600,
                 letterSpacing: '-0.015em',
@@ -646,14 +650,19 @@ export function CongregationToday() {
              band the client was looking at. Moved off the inline style,
              because an inline minHeight cannot be overridden by a class.
 
-             8.75rem is 140px, measured rather than picked: the tallest of
-             the thirteen slides is 126px (nikah) in Norwegian and English
-             and 103px in Arabic, at both 360 and 390. That leaves 14px of
-             headroom, so a translation can grow a little without the rail
-             below starting to jump again — which is the whole reason this
-             box has a floor. */}
+             RE-MEASURED 2026-09-30, after the figure line came off the phone
+             (see TextBlock). 8.75rem/140px was sized for a block that could
+             carry one, and once it cannot the floor is 54px taller than
+             anything that goes in it — which is the empty band under every
+             card the client then photographed.
+
+             6.5rem is 104px. The tallest of the thirteen is now 86px in both
+             Norwegian and English and 63px in Arabic, measured slide by slide
+             through the dots at 390. 18px of headroom is left, so a longer
+             translation can still grow without the rail below starting to
+             jump — which is the whole reason this box has a floor. */}
           <div
-            className="mx-auto text-center min-h-[11.5rem] max-md:min-h-[8.75rem]"
+            className="mx-auto text-center min-h-[11.5rem] max-md:min-h-[6.5rem]"
             style={{ maxWidth: '62ch' }}
           >
             {reduced ? (
@@ -720,8 +729,18 @@ function TextBlock({
       >
         {title}
       </h3>
+      {/* ── THE FIGURE IS DESKTOP-ONLY NOW (client, 2026-09-30) ──────────
+         Exactly one of the thirteen slides carries one — "400+ pupils every
+         weekend" on Learning. On a phone the text block has a fixed floor so
+         the rail below cannot jump, which means that one extra line sets the
+         height for all thirteen and the other twelve swipe past with a band
+         of empty paper under them. That band is what he photographed.
+
+         One line on one card is not worth the hole on twelve, so on phones
+         the figure goes and every slide is title + sentence. From md the row
+         is wide, the floor is generous and it costs nothing, so it stays. */}
       {figure.kind !== 'none' && (
-        <div style={{ marginTop: '12px' }}>
+        <div className="max-md:hidden" style={{ marginTop: '12px' }}>
           <FigureInline figure={figure} />
         </div>
       )}
