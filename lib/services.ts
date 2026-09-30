@@ -664,8 +664,32 @@ export const SERVICE_STORY: Partial<
   //
   // Two files rather than one compromise, because the two boxes want
   // opposite things and a single ratio between them is bad at both.
+  // ── THE LAPTOP FRAME IS THE CLIENT'S OWN WIDER FILE (2026-09-30) ───
+  // He asked for a less tight opener on laptops and supplied the file. It is
+  // NOT a crop of IMG_8833: it is that photograph widened in ChatGPT, and
+  // the extra tree, sky, street lamps and the right-hand side of the pole
+  // are generated, not photographed. I showed him the comparison — the
+  // original at its full width next to his file — and he confirmed the
+  // choice. Recording it here so nobody later mistakes it for a camera
+  // frame, and so it can be swapped the moment a genuinely wider original
+  // turns up from the photographer.
+  //
+  // Two consequences worth knowing:
+  //   · No crop of the real file could have done this. object-cover already
+  //     shows 100% of svc-shahada-adhan-wide.webp's width at every laptop
+  //     size (file 1.80 in a 2.00-2.40 box, so cover matches width), and
+  //     that file is the original's full 3648px. The subject's size on
+  //     screen was fixed by where the photographer stood.
+  //   · His source is 1672x941. -v2 is Lanczos-upscaled to 2560 with a
+  //     light unsharp pass so next/image has a variant to downscale from
+  //     rather than the browser stretching 1672px across a retina hero.
+  //     That is cleaner, not sharper — the detail is not in the file.
+  //
+  // svc-shahada-adhan-wide.webp stays in /photos; reverting is this one line.
+  // The PHONE file is untouched, on his instruction: it is a real crop of
+  // the real photograph and it is the one the phone hero uses.
   shahada: {
-    src: '/photos/svc-shahada-adhan-wide.webp',
+    src: '/photos/svc-shahada-adhan-wide-v2.webp',
     objectClass: 'object-center',
     srcPhone: '/photos/svc-shahada-adhan-phone.webp',
     objectClassPhone: 'object-[50%_34%]',
