@@ -1767,6 +1767,7 @@
       "requestLede": "Tell us a little about yourself and we will get in touch for a conversation.",
       "about": "About the service",
       "steps": "How it works",
+      "journey": "Your journey",
       "facts": "Practical details",
       "related": "Other services",
       "write": "Write to us",
@@ -1865,6 +1866,7 @@
         "title": "<em>Shahada</em> (becoming Muslim)",
         "body": "Guidance and the ceremony for those who wish to become Muslim.",
         "longBody": "Are you curious about Islam, do you want to learn more about the faith, or do you have questions you would like to talk through with someone? At Rabita you are welcome to an open conversation with no obligation. Wherever you are in that process, we meet you with respect and on your own terms.",
+        "longBodyShort": "Curious about Islam, or looking for someone to talk to? At Rabita you are welcome to ask questions and explore at your own pace, with no obligation.",
         "offerTitle": "Interested in Islam?",
         "offerLede": "You do not need to have decided anything to get in touch. Some want more knowledge, some want guidance, and some have reached the point of taking the shahada.",
         "offer": [

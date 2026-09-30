@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { ServiceOverviewPhone } from './service-overview-phone';
 import { Eyebrow, Section, SectionBody, SectionHeading } from './primitives';
 import { MotionRise } from './motion-rise';
 import type { ServiceKey } from '@/lib/services';
@@ -30,7 +31,12 @@ export async function ServiceOverview({ s }: { s: ServiceKey }) {
 
   return (
     <>
-      <Section tone="paper" className="md:py-section-lg">
+      {/* Phones get their own three sections — see
+         components/service-overview-phone.tsx for what changes and why. The
+         desktop markup below is unchanged and simply steps aside there. */}
+      <ServiceOverviewPhone s={s} />
+
+      <Section tone="paper" className="max-md:hidden md:py-section-lg">
         <SectionBody>
           <div className="border-t border-ink pt-8 md:grid md:grid-cols-12 md:gap-12 md:pt-10 lg:gap-16">
             <div className="md:col-span-5">
@@ -66,7 +72,7 @@ export async function ServiceOverview({ s }: { s: ServiceKey }) {
       </Section>
 
       {hasSteps && (
-        <Section tone="paper-2" className="md:py-section-lg">
+        <Section tone="paper-2" className="max-md:hidden md:py-section-lg">
           <SectionBody>
             <SectionHeading>{t('detail.steps')}</SectionHeading>
             <MotionRise>

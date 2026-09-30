@@ -1771,6 +1771,7 @@
       "requestLede": "Fortell oss litt om deg selv, så tar vi kontakt for en samtale.",
       "about": "Om tjenesten",
       "steps": "Slik går det til",
+      "journey": "Din vei",
       "facts": "Praktisk",
       "related": "Andre tjenester",
       "write": "Skriv til oss",
@@ -1869,6 +1870,7 @@
         "title": "<em>Shahada</em> (bli muslim)",
         "body": "Veiledning og gjennomføring for dem som ønsker å bli muslim.",
         "longBody": "Er du nysgjerrig på islam, ønsker å lære mer om troen eller har spørsmål du gjerne vil snakke med noen om? Hos Rabita er du velkommen til en åpen og uforpliktende samtale. Uansett hvor du befinner deg i denne prosessen, møter vi deg med respekt og på dine egne premisser.",
+        "longBodyShort": "Nysgjerrig på islam, eller ønsker du noen å snakke med? Hos Rabita er du velkommen til å stille spørsmål og utforske i ditt eget tempo, helt uforpliktende.",
         "offerTitle": "Interessert i islam?",
         "offerLede": "Du trenger ikke å ha bestemt deg for noe for å ta kontakt. Noen ønsker mer kunnskap, andre ønsker veiledning, og noen har kommet frem til at de vil avlegge shahada.",
         "offer": [
