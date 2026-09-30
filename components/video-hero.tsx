@@ -141,8 +141,32 @@ export function VideoHero({
            hundred pixels instead of the whole frame. */}
         <div className="absolute inset-0 bg-gold-deep/14 mix-blend-multiply" />
         <div className="absolute inset-0 bg-dusk/10" />
+        {/* ── A DEEPER FOOT ON PHONES (client, 2026-09-30: "text is hard
+           to read") ─────────────────────────────────────────────────────
+           Measured at 390x844 before changing it: the headline sat 223-290px
+           off the foot of a 726px hero, which on the stops below is 0.61 to
+           0.75 of dusk — and the picture under it there is a sunlit roof
+           terrace, the brightest thing in the frame. Paper type on 0.61 over
+           that is exactly the complaint.
+
+           The laptop stops are untouched. They are right there: the words
+           sit in the same place but the hero is 828px, so the same block
+           falls lower in the gradient, and the film has room to be a film.
+
+           The phone set reaches 0.88 by a third of the way up, which puts
+           the whole block on 0.83 or darker, and still clears to nothing by
+           88% so the roof terrace and the minaret keep the top of the frame.
+           A pair rather than one blended layer, because two stacked
+           gradients compound into a value neither of them states. */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 md:hidden"
+          style={{
+            background:
+              'linear-gradient(to top, rgba(22,36,46,0.97) 0%, rgba(22,36,46,0.95) 20%, rgba(22,36,46,0.88) 36%, rgba(22,36,46,0.70) 50%, rgba(22,36,46,0.40) 64%, rgba(22,36,46,0.12) 78%, rgba(22,36,46,0) 88%)',
+          }}
+        />
+        <div
+          className="absolute inset-0 hidden md:block"
           style={{
             background:
               'linear-gradient(to top, rgba(22,36,46,0.97) 0%, rgba(22,36,46,0.93) 12%, rgba(22,36,46,0.82) 26%, rgba(22,36,46,0.58) 42%, rgba(22,36,46,0.28) 56%, rgba(22,36,46,0.06) 70%, rgba(22,36,46,0) 80%)',

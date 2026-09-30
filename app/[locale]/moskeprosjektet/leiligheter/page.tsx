@@ -70,9 +70,17 @@ export default async function ApartmentsPage({
         >
           {t('primary')}
         </a>
+        {/* max-md:hidden (client, 2026-09-30: "also use 1 cta here, the
+           register interest one, keep that"). Stacked at 390px the second
+           button is a whole row of the hero spent on an anchor to the next
+           section, which the reader reaches by scrolling anyway. Removing it
+           also lifts ~60px off the bottom of the stack, and since the hero
+           is items-end that moves the headline and the lede DOWN into the
+           darker foot of the picture, which is the other half of what he
+           asked for. From md both actions sit on one row and cost nothing. */}
         <a
           href="#om"
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-paper/50 px-6 text-[15px] font-semibold text-paper transition-colors hover:bg-paper/10"
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-paper/50 px-6 text-[15px] font-semibold text-paper transition-colors hover:bg-paper/10 max-md:hidden"
         >
           {t('about.eyebrow')}
         </a>
