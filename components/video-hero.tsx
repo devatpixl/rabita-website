@@ -203,7 +203,7 @@ export function VideoHero({
          rather than a prop nobody else would ever pass. */}
       <PlateFoot
         fill="#FAF8F4"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-12 w-full md:hidden"
+        className="pointer-events-none absolute inset-x-0 bottom-0 block h-12 w-full md:hidden"
       />
     </section>
   );

@@ -251,7 +251,7 @@ export function ProjectHero({
             // section.
             style={{ ['--project-card-cap' as string]: 'calc(100svh - 122px - clamp(12px, 100svh - 700px, 48px))' }}
           >
-            <PlateFoot fill="#F2EEE7" className="pointer-events-none absolute inset-x-0 -top-12 h-12 w-full md:hidden" />
+            <PlateFoot fill="#F2EEE7" className="pointer-events-none absolute inset-x-0 -top-12 block h-12 w-full md:hidden" />
             {aside}
           </div>
         )}
