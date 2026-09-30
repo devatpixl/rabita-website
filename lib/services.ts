@@ -602,7 +602,17 @@ export const SERVICE_STORY: Partial<
   // construction, so no vertical nudge is needed.
   //
   // svc-janaza-prayer.webp is NOT deleted; it is what this reverts to.
-  janaza: { src: '/photos/subj-janaza-bonn.webp', objectClass: 'object-center' },
+  // ── THE LANDSCAPE FRAME, WHICH MEETS THE SAME BRIEF (2026-09-30) ───
+  // Everything the note above asks for holds here too: no coffin, no shroud,
+  // no flowers, no visible grief and no faces — standing rows seen from
+  // behind. It is in fact the more exact picture of the two, because janaza
+  // is prayed standing, with no rukū', and that is what this shows.
+  //
+  // 1086x724 is modest for a full-bleed hero and it is the only size there
+  // is: it is not from the client's 2026-09-29 delivery, which I searched by
+  // content across all 1021 files with no match. Against a 0.75 file that
+  // crops to a strip in a wide frame, soft beats wrong.
+  janaza: { src: '/photos/subj-janaza.webp', objectClass: 'object-center' },
   // Client, Bildeplassering (2026-09-19), IMG_8833 — his Seksjonsbilde for
   // Shahada. Cut 400px down from a 3648x5472: that window puts the face
   // larger and sets the lit crescent beside his head rather than crowding the
@@ -611,7 +621,19 @@ export const SERVICE_STORY: Partial<
   //
   // object-center, not a tuned position: the file is cut to exactly 4:5 and
   // the frame is 4:5, so there is no overflow left to steer.
-  shahada: { src: '/photos/svc-shahada-adhan.webp', objectClass: 'object-center' },
+  // ── RECUT LANDSCAPE, SAME PHOTOGRAPH (2026-09-30) ──────────────────
+  // The 4:5 cut above was right for the frame this page used to have. The
+  // opener is wide now, and a 0.8 file in it crops to a strip of jacket.
+  //
+  // It is recut rather than replaced, and that matters: this is his
+  // Bildeplassering pick, and the 3648x5472 original has the room to give a
+  // 3:2 without losing the picture. The window is y 535..2967 — the face,
+  // the hand at the ear, the microphone and the lit crescent all inside it,
+  // and the "Muslimsk Dialognettverk" watermark in the bottom-left of the
+  // original still cropped away.
+  //
+  // svc-shahada-adhan.webp is NOT deleted; it is the 4:5 this reverts to.
+  shahada: { src: '/photos/svc-shahada-adhan-wide.webp', objectClass: 'object-center' },
   // Was womens-circle until 2026-09-16. That frame is six women together in a
   // room at the mosque — it is a kvinnetreff photograph in everything but
   // name, and kvinnetreff had none, so it moved there. subj-counselling has
@@ -713,7 +735,16 @@ export const SERVICE_STORY: Partial<
   // Client, Bildeplassering (2026-09-19), "Koran undervisning.png" — his
   // Seksjonsbilde for Koran skole. Delivered at 1122x1402, which is 0.800:
   // exactly the 4:5 this frame wants, so it ships uncropped.
-  koran: { src: '/photos/subj-koran-klasse.webp', objectClass: 'object-center' },
+  // ── HIS PICK CANNOT BE RECUT, SO THIS GOES BACK (2026-09-30) ───────
+  // "Koran undervisning.png" is his Bildeplassering choice and it is only
+  // 1122px wide. A 16:9 out of it is 1122x631, which is not enough for a
+  // full-bleed hero, so unlike Shahada there is nothing to recut.
+  //
+  // svc-koran-circle.webp is the class in the round on the mosque carpet at
+  // 1600x1200 — the same photograph the client's own folder holds under
+  // Tjenester/Koran, and the frame this page carried before the 4:5 switch.
+  // So this is a return, not a new direction.
+  koran: { src: '/photos/svc-koran-circle.webp', objectClass: 'object-center' },
   // A second calligraphy photograph (client, 2026-09-10), so the page no
   // longer has to borrow the building for its illustration: the band leads
   // on the calligrapher at her desk, this one is the qalam on the practice
