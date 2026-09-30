@@ -75,11 +75,24 @@ export function ProjectHero({
          header. Same photograph, same box, same grade — the building is
          simply no longer being erased by a gradient meant for a layout the
          phone does not have. */}
-      <div className="absolute inset-x-0 top-0 h-[44svh] md:inset-0 md:h-auto">
+      {/* ── 42svh, AND THE NUMBER IS ABOUT WIDTH, NOT HEIGHT ─────────────
+         The render is 1.81:1 and a phone box is about 1:1, so object-cover
+         matches the box's HEIGHT and throws away the width. A taller box is
+         therefore a more zoomed one: at 52svh the frame showed 49% of the
+         render and read as abstract lattice; at 42 it shows 61% and the
+         entrance and the street come back into it. Shorter again (34svh,
+         75%) starts squeezing the picture into a strip and pushes the
+         headline to the top of the frame. 42 is where the building is most
+         legible. Measured, all three, at 390. */}
+      <div className="absolute inset-x-0 top-0 h-[42svh] md:inset-0 md:h-auto">
         <Image src={image} alt={alt} fill priority sizes="100vw" className="object-cover" style={{ filter: GRADE }} />
         {/* The veil drops to 12% on phones. At 30 it was costing the render
            a third of its contrast before either gradient had touched it. */}
-        <div aria-hidden className="absolute inset-0 bg-dusk/30 max-md:bg-dusk/12" />
+        {/* No veil at all on phones now. The words no longer sit on the
+           picture — they sit on the solid foot of the ramp below it — so
+           nothing here has to be darkened for type to survive on it, and a
+           veil was only costing the render contrast. */}
+        <div aria-hidden className="absolute inset-0 bg-dusk/30 max-md:bg-transparent" />
         {/* md+ only. `max-md:bg-none` rather than a hidden/block pair because
            this element carries nothing else — and lib/cn.ts is plain clsx, so
            the two backgrounds would otherwise both ship and the later one in
@@ -93,9 +106,14 @@ export function ProjectHero({
            horizontal ramp and the 160px foot fade — one gradient doing one
            job, instead of two fighting over the same pixels. It is vertical,
            so there is no rtl: twin to keep in step. */}
+        {/* Stops, not a plain three-colour ramp. The picture is clear for
+           its first third and only then begins to go, so the building is
+           genuinely visible rather than merely present under a wash, and it
+           is solid dusk well before the box ends so the words below sit on
+           flat colour with no gradient showing through them. */}
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-b from-transparent via-dusk/60 to-dusk md:hidden"
+          className="absolute inset-0 bg-gradient-to-b from-transparent from-32% via-dusk/55 via-64% to-dusk to-94% md:hidden"
         />
       </div>
 
@@ -121,7 +139,7 @@ export function ProjectHero({
               // sits 40px under the header, on the clearest part of the
               // picture, and the only way to keep it legible is the scrim
               // that was hiding the building.
-              <div className="relative z-10 mx-auto w-full max-w-[92rem] px-6 py-10 max-md:pb-8 max-md:pt-[9.5rem] md:px-10 md:py-14 lg:px-12">
+              <div className="relative z-10 mx-auto w-full max-w-[92rem] px-6 py-10 max-md:pb-0 max-md:pt-[9.5rem] md:px-10 md:py-14 lg:px-12">
                 {children}
               </div>
             )
@@ -142,7 +160,14 @@ export function ProjectHero({
         <div className={aside ? 'grid items-center gap-10 max-md:gap-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:gap-20' : undefined}>
         <div className={aside ? 'max-w-3xl' : 'mt-8 max-w-3xl'}>
           {aside && (
-            <p className="mb-5 font-mono text-[0.75rem] uppercase tracking-[0.16em] text-dusk-60 max-md:text-paper/70">{crumb}</p>
+            <p className="mb-5 flex items-center gap-3 font-mono text-[0.75rem] uppercase tracking-[0.16em] text-dusk-60 max-md:text-paper/70">
+              {/* A short gold rule leading the line, phones only. It gives the
+                 eyebrow a left edge to start from on a plate that has no other
+                 structure, and it is the same gesture the dateline rules use
+                 elsewhere on this page. */}
+              <span aria-hidden className="h-px w-7 shrink-0 bg-gold md:hidden" />
+              {crumb}
+            </p>
           )}
           <h1 className="font-serif text-display text-balance text-paper">{title}</h1>
           {ledeShort ? (
@@ -185,9 +210,35 @@ export function ProjectHero({
               )}
             </div>
           )}
+          {/* The cue down to the card, phones only. The plate ends in a
+             curve rather than an edge, and a curve on its own does not say
+             there is more below it — this does. Decorative: the card it
+             points at is the next thing in the document either way. */}
+          {aside && (
+            <div aria-hidden className="mt-10 flex justify-center md:hidden">
+              <span className="grid h-10 w-10 place-items-center rounded-full border border-paper/30">
+                <ChevronDown className="h-4 w-4 text-paper/70" />
+              </span>
+            </div>
+          )}
         </div>
         {aside && (
           <div
+            // ── ON PHONES THIS IS A LIGHT BLOCK, NOT PART OF THE PLATE ────
+            // (2026-09-30, to the client's mockup) The card used to sit on
+            // the same dusk as the words, so the hero was one unbroken dark
+            // column a screen and a half long and the card read as more hero
+            // rather than as the thing to do about it.
+            //
+            // `-mx-6` cancels the Body's own padding so the block goes edge
+            // to edge, and `PlateFoot` above it draws the curve the dusk ends
+            // on. The card itself is untouched — this is the ground it stands
+            // on, not the card.
+            //
+            // From md none of it applies: the card sits in the 2fr column of
+            // a full-bleed photographic hero, which is the layout that was
+            // signed off.
+            className="no-scrollbar w-full max-md:relative max-md:-mx-6 max-md:mt-0 max-md:w-auto max-md:bg-paper-2 max-md:px-6 max-md:pb-10 max-md:pt-12 md:ms-auto md:max-w-[640px] lg:max-h-[var(--project-card-cap)] lg:self-center lg:overflow-y-auto"
             // Straight from components/hero.tsx: full width of the 2fr
             // column, pushed to its far edge, capped at 640px — a cap
             // neither page reaches, because the column is what decides.
@@ -198,9 +249,9 @@ export function ProjectHero({
             // to fit a 13-inch laptop with a three-step giving flow in it,
             // so the card scrolls inside itself rather than growing the
             // section.
-            className="no-scrollbar w-full md:ms-auto md:max-w-[640px] lg:max-h-[var(--project-card-cap)] lg:self-center lg:overflow-y-auto"
             style={{ ['--project-card-cap' as string]: 'calc(100svh - 122px - clamp(12px, 100svh - 700px, 48px))' }}
           >
+            <PlateFoot />
             {aside}
           </div>
         )}
@@ -319,4 +370,39 @@ export function ProjectAssurance({
 
 export function ProjectPage({ children }: { children: ReactNode }) {
   return <main>{children}</main>;
+}
+
+/**
+ * The curve the dusk plate ends on, phones only.
+ *
+ * Drawn as an SVG rather than a border-radius because the shape is a shallow
+ * sweep across the full width — a radius would round two corners and leave a
+ * straight run between them. `preserveAspectRatio="none"` lets one path serve
+ * every phone width: it stretches horizontally and keeps its 48px height,
+ * which is what stops the curve going slack at 430 and sharp at 360.
+ *
+ * It sits ABOVE the block it belongs to, pulled up by its own height, so the
+ * light appears to rise into the dusk rather than the dusk to stop short. The
+ * fill is paper-2 as a literal, because an SVG fill cannot read a Tailwind
+ * colour class.
+ */
+function PlateFoot() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 390 48"
+      preserveAspectRatio="none"
+      className="pointer-events-none absolute inset-x-0 -top-12 h-12 w-full md:hidden"
+    >
+      <path d="M0 48V14C64 0 150 22 232 30C300 36 350 30 390 16V48Z" fill="#F2EEE7" />
+    </svg>
+  );
+}
+
+function ChevronDown({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  );
 }
