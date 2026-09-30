@@ -452,12 +452,34 @@ export function Footer({ map }: { map?: ReactNode }) {
            line 10px short — so the padding is paying for a collision that
            can no longer happen, and the footer was left floating.
            
-           Back to the ordinary 12px, keeping the safe-area inset so the last
-           line still clears a home indicator. sm: is unchanged, as it has
-           been throughout. */}
-        <div className="mx-auto grid max-w-7xl items-center gap-y-2 px-5 py-3 pb-[calc(3.25rem+env(safe-area-inset-bottom))] sm:grid-cols-3 sm:gap-y-3 sm:px-6 sm:py-5 sm:pb-5 xl:px-10">
+           Given back in two steps, because the first was not enough: 5rem →
+           3.25rem, then 3.25rem → 0.75rem the same day, the client's words
+           being that it still sat too high. 0.75rem is py-3's own value, so
+           the bar is now symmetrical and the page ends where its last line
+           does. The safe-area inset stays on top of it, or the credit line
+           sits under a home indicator. sm: is unchanged, as it has been
+           throughout. */}
+        <div className="mx-auto grid max-w-7xl items-center gap-y-2 px-5 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] sm:grid-cols-3 sm:gap-y-3 sm:px-6 sm:py-5 sm:pb-5 xl:px-10">
+          {/* ── TWO LINES ON A PHONE, ONE FROM sm ──────────────────────
+             Same words, same order, one line break. It is what lets the bar
+             lose its padding without the org number being clipped.
+
+             At 390 the whole string measures 298px and centres to x 46–344,
+             while the floating contact disc occupies x 330–374 and y 780–824
+             — so with the bar sitting at its natural height the last glyphs
+             of the number run behind the disc. Nothing under 2.75rem of
+             bottom padding clears it vertically, which is the padding the
+             client has now twice asked to lose.
+
+             Broken in two, neither line reaches the corner: the © line is
+             111px wide and the number 162px, both centred, both stopping
+             more than 50px short of the disc. So the padding can go. */}
           <p className="text-center font-mono text-[0.625rem] uppercase leading-none tracking-[0.16em] text-gold sm:text-start">
-            &copy; {new Date().getFullYear()} Rabita · {t('orgNr')} {CAMPAIGN.orgNr}
+            &copy; {new Date().getFullYear()} Rabita
+            <span aria-hidden className="max-sm:hidden"> · </span>
+            <span className="max-sm:mt-1.5 max-sm:block">
+              {t('orgNr')} {CAMPAIGN.orgNr}
+            </span>
           </p>
           {/* Credit and the two controls share one row on a phone. They are
              wrapped so they can sit on a line together; `sm:contents` drops
