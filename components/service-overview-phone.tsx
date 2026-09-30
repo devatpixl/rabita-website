@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { cn } from '@/lib/cn';
 import { Section, SectionBody } from './primitives';
 import { RosetteMark } from './marks';
 import type { ServiceKey } from '@/lib/services';
@@ -152,7 +153,12 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
 
       {/* ── HOW IT WORKS ───────────────────────────────────────────────── */}
       {steps.length > 0 && (
-        <Section tone="paper-2" className="relative isolate overflow-hidden py-11">
+        <Section tone="paper-2" className="relative isolate overflow-hidden py-12">
+          {/* The corner mark the mockup frames this section with. */}
+          <RosetteMark
+            aria-hidden
+            className="pointer-events-none absolute -top-8 end-5 -z-10 h-24 w-24 text-gold-deep/25"
+          />
           <SectionBody>
             <div className="flex items-center gap-4">
               <p className="font-mono text-[0.625rem] uppercase tracking-[0.2em] text-gold-deep">
@@ -166,28 +172,39 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
 
             {/* The thread runs behind the discs and stops at the last one, so
                the column reads as a journey with an end rather than a list
-               that was cut off. `last:before:hidden` is what ends it. */}
-            <ol className="mt-7">
+               that was cut off. `last:before:hidden` is what ends it.
+
+               The hairline between steps sits on the CONTENT column, not on
+               the row, so it starts where the text starts and the thread runs
+               through the gap uninterrupted — which is what the mockup does
+               and what makes the discs read as beads on one line rather than
+               as three separate rows. */}
+            <ol className="mt-9">
               {steps.map((st, i) => (
                 <li
                   key={st.title}
-                  className="relative flex gap-4 pb-7 last:pb-0 before:absolute before:top-10 before:bottom-0 before:start-[1.1875rem] before:w-px before:bg-gold-deep/25 last:before:hidden"
+                  className="relative flex gap-5 pb-9 last:pb-0 before:absolute before:top-11 before:bottom-0 before:start-[1.1875rem] before:w-px before:bg-gold-deep/30 last:before:hidden"
                 >
                   <span className="relative z-[1] grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gold-deep font-mono text-[0.75rem] font-medium tabular-nums text-paper">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <div className="min-w-0 pt-1">
-                    <h3 className="font-serif text-[1.25rem] leading-[1.2] text-ink">{st.title}</h3>
-                    <p className="mt-1.5 text-[0.875rem] leading-[1.55] text-ink-60">{st.body}</p>
+                  <div
+                    className={cn(
+                      'min-w-0 flex-1',
+                      i === 0 ? 'pt-1' : 'border-t border-gold-deep/15 pt-6',
+                    )}
+                  >
+                    <h3 className="max-w-[15ch] font-serif text-[1.35rem] leading-[1.15] text-ink">{st.title}</h3>
+                    <p className="mt-2.5 text-[0.875rem] leading-[1.6] text-ink-60">{st.body}</p>
                   </div>
                 </li>
               ))}
             </ol>
 
-            <span aria-hidden className="mt-9 flex items-center justify-center gap-3">
-              <span className="h-px w-12 bg-gold-deep/25" />
+            <span aria-hidden className="mt-10 flex items-center justify-center gap-3">
+              <span className="h-px w-14 bg-gold-deep/25" />
               <StarGlyph className="h-4 w-4 text-gold-deep/60" />
-              <span className="h-px w-12 bg-gold-deep/25" />
+              <span className="h-px w-14 bg-gold-deep/25" />
             </span>
           </SectionBody>
         </Section>
