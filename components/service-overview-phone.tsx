@@ -62,8 +62,13 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
       {/* ── ABOUT ──────────────────────────────────────────────────────── */}
       <Section tone="paper" className="relative isolate overflow-hidden py-11">
         <SectionBody>
-          <span aria-hidden className="block h-px w-full bg-gold-deep/45" />
-          <p className="mt-6 font-mono text-[0.625rem] uppercase tracking-[0.2em] text-gold-deep">
+          {/* The gold hairline that opened this section is gone (client,
+             2026-09-30), the same call he made for the ink rule on laptops:
+             it sat a few pixels under the hero's curve and drew a second,
+             straighter edge across the same handover. The eyebrow loses its
+             mt-6 with it, so the section now opens on its own py-11 and the
+             spacing above the label is unchanged. */}
+          <p className="font-mono text-[0.625rem] uppercase tracking-[0.2em] text-gold-deep">
             {t('detail.about')}
           </p>
           <h2 className="mt-3 max-w-[13ch] font-serif text-[2rem] leading-[1.08] tracking-[-0.015em] text-ink">
