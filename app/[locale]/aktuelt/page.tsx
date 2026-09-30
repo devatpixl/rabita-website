@@ -132,6 +132,12 @@ export default async function NewsPage({
         tone="calm"
         mark="none"
         padBottom="none"
+        /* paper, NOT the paper-2 that section is toned. The Arrangementer
+           section carries the arcade photograph with a `from-paper` gradient
+           over its first 112px — see the seam note down there — so the colour
+           the curve actually meets is paper. Filling it paper-2 put a faint
+           band between the two. */
+        footCurve="#FAF8F4"
       />
       {/* ══ Arrangementer ═══════════════════════════════════════════════
          Client, 2026-09-15: "Flytte «Arrangementer» inn under «Aktuelt»".

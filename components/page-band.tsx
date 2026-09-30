@@ -108,6 +108,8 @@ export type PageBandProps = {
   /** feature layout only: an art-directed source below md. */
   imagePhone?: string;
   objectClassPhone?: string;
+  /** feature layout only: the curve it hands over on below md. */
+  footCurve?: string;
   /** A note or fact rail, in the same measure under the plate. */
   children?: ReactNode;
   /** 'none' when the section beneath the band supplies its own top padding
@@ -189,6 +191,7 @@ export function PageBand({
   heightClass,
   imagePhone,
   objectClassPhone,
+  footCurve,
   children,
   padBottom = 'default',
   className,
@@ -217,6 +220,7 @@ export function PageBand({
         image={image}
         imagePhone={imagePhone}
         objectClassPhone={objectClassPhone}
+        footCurve={footCurve}
         alt={alt}
         objectClass={objectClass}
         grade={t.grade}

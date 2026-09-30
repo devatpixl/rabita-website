@@ -87,6 +87,20 @@ export async function ServiceOpener({ s, crumb }: { s: ServiceKey; crumb: string
     <section className="relative isolate overflow-hidden bg-dusk text-paper">
       {story && (
         <div aria-hidden className="absolute inset-0">
+          {/* Two sources where a service has one (see SERVICE_STORY.srcPhone).
+             The wide file is hidden AND unlabelled on phones so a screen
+             reader is offered one picture, not two. */}
+          {story.srcPhone && (
+            <Image
+              src={story.srcPhone}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className={cn('object-cover md:hidden', story.objectClassPhone ?? story.objectClass)}
+              style={{ filter: 'saturate(0.8) contrast(1.05) brightness(0.82)' }}
+            />
+          )}
           <Image
             src={story.src}
             alt=""
@@ -100,7 +114,7 @@ export async function ServiceOpener({ s, crumb }: { s: ServiceKey; crumb: string
               filter: 'saturate(0.8) contrast(1.05) brightness(0.82)',
               ...(HERO_POSITION[s] ? { objectPosition: HERO_POSITION[s] } : {}),
             }}
-            className={cn('object-cover', !HERO_POSITION[s] && story.objectClass)}
+            className={cn('object-cover', !HERO_POSITION[s] && story.objectClass, story.srcPhone && 'hidden md:block')}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-dusk via-dusk/55 to-dusk/10" />
           <div

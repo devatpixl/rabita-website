@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { PlateFoot } from '@/components/plate-foot';
 import Image from 'next/image';
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import { StaggerWords } from './motion-rise';
@@ -66,6 +67,8 @@ export type BandFeatureProps = {
   image: string;
   /** Optional art-directed source below md. See the note at the <Image> pair. */
   imagePhone?: string;
+  /** Phones only: the curve this band hands over on, filled with the tone of the section BELOW it. */
+  footCurve?: string;
   objectClassPhone?: string;
   alt?: string;
   objectClass?: string;
@@ -88,6 +91,7 @@ export function BandFeature({
   image,
   imagePhone,
   objectClassPhone,
+  footCurve,
   alt = '',
   objectClass = 'object-center',
   grade,
@@ -290,6 +294,17 @@ export function BandFeature({
           </div>
         </div>
       </div>
+      {/* Phones only, and opt-in: a band that runs into a light section can
+         hand over on the same curve the mosque project uses, rather than on
+         a hard edge. Absolutely positioned, so the band keeps its 78svh.
+         `footCurve` is the fill, which must be the tone of what comes NEXT.
+         Bands that pass nothing are unchanged, which is /om-oss. */}
+      {footCurve && (
+        <PlateFoot
+          fill={footCurve}
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] block h-12 w-full md:hidden"
+        />
+      )}
     </section>
   );
 }

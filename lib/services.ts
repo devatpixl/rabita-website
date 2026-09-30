@@ -569,7 +569,23 @@ export const SERVICE_GALLERY: Partial<Record<ServiceKey, readonly string[]>> = {
  * returns on its own the moment a real frame is added.
  */
 export const SERVICE_STORY: Partial<
-  Record<ServiceKey, { src: string; objectClass: string }>
+  Record<
+    ServiceKey,
+    {
+      src: string;
+      objectClass: string;
+      /**
+       * An art-directed source below md, for the rare frame where one file
+       * cannot serve both boxes. The opener is ~1.9:1 on a laptop and ~0.62
+       * on a phone, and object-cover keeps one axis and discards the other —
+       * so a landscape file loses more than half its width on a phone.
+       * Only shahada needs it: it is one face, and a face is the one subject
+       * a hard crop cannot survive. See the note on it below.
+       */
+      srcPhone?: string;
+      objectClassPhone?: string;
+    }
+  >
 > = {
   // Client, Bildeplassering (2026-09-19). pexels-hugo-martinez — signing the contract.
   nikah: { src: '/photos/subj-nikah-kontrakt.webp', objectClass: 'object-center' },
@@ -633,7 +649,27 @@ export const SERVICE_STORY: Partial<
   // original still cropped away.
   //
   // svc-shahada-adhan.webp is NOT deleted; it is the 4:5 this reverts to.
-  shahada: { src: '/photos/svc-shahada-adhan-wide.webp', objectClass: 'object-center' },
+  // ── AND A SECOND FILE FOR PHONES (2026-09-30) ──────────────────────
+  // The 4:3 above is right for the laptop: in a 1.9:1 box it shows 69% of
+  // its height and his face clears the text column. On a phone the same
+  // file shows 46% of its WIDTH — and 46% of a crop that was already 2400
+  // of the original's 3648 is about 30% of the photograph. That is the
+  // "still soo zoomed in" the client sent back.
+  //
+  // The phone file is the original at 0.715, which is close enough to the
+  // 0.617 box that 86% of its width survives at 390 and 80% at 360. It is
+  // barely a crop at all: full width, and the foot trimmed to drop the
+  // "Muslimsk Dialognettverk" watermark. He is smaller in frame and the
+  // whole scene — the dusk, the bare trees, the lit crescent — comes back.
+  //
+  // Two files rather than one compromise, because the two boxes want
+  // opposite things and a single ratio between them is bad at both.
+  shahada: {
+    src: '/photos/svc-shahada-adhan-wide.webp',
+    objectClass: 'object-center',
+    srcPhone: '/photos/svc-shahada-adhan-phone.webp',
+    objectClassPhone: 'object-[50%_34%]',
+  },
   // Was womens-circle until 2026-09-16. That frame is six women together in a
   // room at the mosque — it is a kvinnetreff photograph in everything but
   // name, and kvinnetreff had none, so it moved there. subj-counselling has
