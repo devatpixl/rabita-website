@@ -1766,6 +1766,7 @@
     "jumpTo": "Velg en tjeneste",
     "detail": {
       "what": "Hva vi tilbyr",
+      "whatHeading": "Slik kan vi <em>støtte</em> deg",
       "request": "Send henvendelse",
       "photos": "Fotografier fra Rabita",
       "requestLede": "Fortell oss litt om deg selv, så tar vi kontakt for en samtale.",

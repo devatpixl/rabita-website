@@ -1,4 +1,6 @@
 import { getTranslations } from 'next-intl/server';
+import { Accent } from './accent';
+import Image from 'next/image';
 import { cn } from '@/lib/cn';
 import { Section, SectionBody } from './primitives';
 import { RosetteMark } from './marks';
@@ -97,22 +99,41 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
       {/* ── WHAT WE OFFER ──────────────────────────────────────────────── */}
       {offer.length > 0 && (
         <Section tone="paper" className="relative isolate overflow-hidden py-11 pt-0">
-          <RosetteMark
+          {/* The mosque's own mark, top-end, large and faint (client,
+             2026-09-30: "on top right it uses in bg the rabita logo"). The
+             real logo rather than RosetteMark: the rosette is a construction
+             drawing of the geometry, and what he is pointing at is the
+             identity. Bled off both edges so it reads as a watermark the
+             section is printed over, not a sticker in the corner. */}
+          <Image
+            src="/logo/rabita-mark-256.png"
+            alt=""
             aria-hidden
-            className="pointer-events-none absolute -top-10 -end-12 -z-10 h-44 w-44 text-gold-deep/[0.07]"
+            width={256}
+            height={256}
+            className="pointer-events-none absolute -top-10 -end-12 -z-10 h-44 w-44 opacity-[0.07]"
           />
           <RosetteMark
             aria-hidden
             className="pointer-events-none absolute -bottom-14 -start-16 -z-10 h-48 w-48 text-gold-deep/[0.05]"
           />
           <SectionBody>
-            {/* A rule, then the label AS the heading — the mockup's shape is
-               eyebrow, headline, standfirst, and the site has one string for
-               this section, so it is set as the headline rather than printed
-               twice at two sizes. */}
-            <span aria-hidden className="block h-px w-10 bg-gold-deep/45" />
-            <h2 className="mt-5 max-w-[13ch] font-serif text-[2rem] leading-[1.08] tracking-[-0.015em] text-ink">
-              {t('detail.what')}
+            {/* Eyebrow, then a headline of its own — the mockup's shape, and
+               the client asked for both rather than the label doing double
+               duty at heading size. detail.whatHeading is new and GENERIC: it
+               is true of every one of the eighteen services, makes no claim
+               about any of them, and carries one accented word the way every
+               other headline on this site does. */}
+            <div className="flex items-center gap-4">
+              <p className="font-mono text-[0.625rem] uppercase tracking-[0.2em] text-gold-deep">
+                {t('detail.what')}
+              </p>
+              <span aria-hidden className="h-px w-10 bg-gold-deep/45" />
+            </div>
+            <h2 className="mt-4 max-w-[12ch] font-serif text-[2.35rem] leading-[1.04] tracking-[-0.02em] text-ink">
+              {t.rich('detail.whatHeading', {
+                em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
+              })}
             </h2>
             {offerLedeRest && (
               <p className="mt-4 text-[1rem] leading-[1.62] text-ink-60">{offerLedeRest}</p>
@@ -131,15 +152,15 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
                its bullet, at the size the lost tile leaves room for. It is
                the page's own mark rather than a new one, and it claims
                nothing about the item. */}
-            <ul className="mt-7 space-y-3.5">
+            <ul className="mt-8 space-y-4">
               {offer.map((o) => (
                 <li
                   key={o.title}
-                  className="flex items-start gap-3.5 rounded-2xl border border-gold-deep/20 bg-paper px-5 py-6"
+                  className="flex items-start gap-4 rounded-[1.25rem] border border-gold-deep/35 bg-paper px-5 py-6 shadow-[0_1px_0_rgba(155,127,74,0.06)]"
                 >
-                  <span aria-hidden className="mt-[0.5rem] block h-2 w-2 shrink-0 rotate-45 bg-gold-deep" />
+                  <span aria-hidden className="mt-[0.55rem] block h-2 w-2 shrink-0 rotate-45 bg-gold-deep" />
                   <div className="min-w-0">
-                    <p className="font-serif text-[1.2rem] leading-[1.3] text-ink">{o.title}</p>
+                    <p className="font-serif text-[1.25rem] leading-[1.28] text-ink">{o.title}</p>
                     {o.body && (
                       <p className="mt-2 text-[0.875rem] leading-[1.55] text-ink-60">{o.body}</p>
                     )}
