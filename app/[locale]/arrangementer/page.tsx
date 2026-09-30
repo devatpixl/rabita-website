@@ -84,9 +84,16 @@ export default async function EventsPage({
           aria-hidden
           className="star-texture star-texture--light pointer-events-none absolute inset-0 -z-10"
         />
+        {/* The ground above this section is paper, so from-paper is right;
+           the ground BELOW it is the page's paper with the star texture over
+           it, which is not paper-2 — measured rgb(240,234,223) against
+           paper-2's rgb(242,238,231). Ending on paper-2 therefore left a
+           visible edge where the strip stopped. Ending on transparent lets
+           it dissolve into whatever is actually there. Same fault, same fix
+           as /om-oss, where it was cutting a headline in half. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-paper to-paper-2 md:h-40"
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-paper to-transparent md:h-40"
         />
         <SectionBody>
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">

@@ -435,9 +435,33 @@ export default async function AboutPage({
           aria-hidden
           className="star-texture star-texture--light pointer-events-none absolute inset-0 -z-10"
         />
+        {/* ── THE BAND THAT CUT THE HEADLINE IN HALF ──────────────────
+           Client, 2026-09-30: "the heading of Sørligata has a cutoff of two
+           colours, it is very bad".
+
+           He was seeing two hard edges, not one. This strip was written on
+           18 September, when the ground above this section was plain paper
+           and its own ground was paper-2, and it faded between the two. Then
+           HallBackdrop arrived on 24 September and put a washed photograph
+           above it, while the section's ground stayed the page's paper with
+           the star texture over it — so both ends of the fade were now wrong:
+
+             above the section  rgb(241,238,234)   the wash
+             fade at 0px        rgb(250,248,244)   from-paper   +9 jump
+             fade at 112px      rgb(242,238,231)   to-paper-2
+             below 112px        rgb(238,233,223)   texture      -8 jump
+
+           and the h2 sits 94px into the section, 32px tall, so the lower
+           edge fell straight through "Sørligata 8a, Oslo".
+
+           Both ends are now honest: paper-2 at the top is the tone
+           HallBackdrop washes to (it takes from="rgb(242,238,231)"), and
+           transparent at the bottom dissolves into whatever the ground
+           actually is rather than guessing a colour for it. A gradient that
+           ends in transparent cannot leave an edge. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-paper to-paper-2 md:h-40"
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-paper-2 to-transparent md:h-40"
         />
         <SectionBody>
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
