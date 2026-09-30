@@ -250,11 +250,19 @@ export async function ServiceOpener({ s, crumb }: { s: ServiceKey; crumb: string
 
          Absolutely positioned in the bottom 48px, which is empty: the words
          above carry pb-14, so the button clears the curve's highest point.
-         Nothing above moves. md:hidden, like every other one — on a laptop
-         the hero is wide and a straight edge is right there. */}
+         Nothing above moves.
+
+         ── AND ON LAPTOPS TOO, TALLER (client, 2026-09-30) ──────────────
+         It shipped md:hidden. He asked whether it would suit a wide screen;
+         it does, but only if the height grows with the width. 48px across
+         390 is a 1:8 arc and reads as a shape; the same 48px across 1920 is
+         1:40 and reads as a wobbly edge. 56px is the number: every hero on
+         the site clears its lowest element by at least 60px at 1280, 1440
+         and 1920, so 56 fits under all of them with room to spare, and 96
+         was measured touching the buttons. */}
       <PlateFoot
         fill="#FAF8F4"
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] block h-12 w-full md:hidden"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] block h-12 w-full md:h-14"
       />
     </section>
   );

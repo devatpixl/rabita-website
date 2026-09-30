@@ -18,6 +18,7 @@ export function ProjectHero({
   lede,
   ledeShort,
   aside,
+  footCurve,
   image,
   alt,
   primary,
@@ -35,6 +36,17 @@ export function ProjectHero({
   secondary?: { label: string; href: string };
   /** Optional right-hand column, e.g. a giving box. */
   aside?: ReactNode;
+  /**
+   * Opt-in curve at the foot of the hero, on WIDE SCREENS only. The value is
+   * the fill, and it must be the tone of the section that follows on this
+   * page, not this hero's own — paper after ProjectBrief, paper-2 on
+   * /moskeprosjektet, where a toned gallery comes next.
+   *
+   * It is separate from the phone curve below, which is a different device
+   * in a different place: that one sits at the TOP of the light block the
+   * giving card stands on, and that block only exists below md.
+   */
+  footCurve?: string;
 }) {
   // The negative margin pulls the hero under the sticky header so the picture
   // starts at the top of the screen. It has to match the header's real height,
@@ -259,6 +271,22 @@ export function ProjectHero({
       </Body>
         );
       })()}
+
+      {/* ── THE HERO HANDS OVER ON A CURVE, WIDE SCREENS (2026-09-30) ─────
+         Client's call, site-wide. 56px: measured at 1280, 1440 and 1920, the
+         lowest thing in this hero — the giving card on /moskeprosjektet, the
+         buttons elsewhere — clears the section foot by 59px at worst, so the
+         curve fits under all of them. See service-opener.tsx for why the
+         height grows with the width at all.
+
+         z-[2] puts it over the photograph but the card still sits above it:
+         the card is inside Body, which is z-10. */}
+      {footCurve && (
+        <PlateFoot
+          fill={footCurve}
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] hidden h-14 w-full md:block"
+        />
+      )}
     </section>
   );
 }

@@ -294,15 +294,20 @@ export function BandFeature({
           </div>
         </div>
       </div>
-      {/* Phones only, and opt-in: a band that runs into a light section can
-         hand over on the same curve the mosque project uses, rather than on
-         a hard edge. Absolutely positioned, so the band keeps its 78svh.
-         `footCurve` is the fill, which must be the tone of what comes NEXT.
-         Bands that pass nothing are unchanged, which is /om-oss. */}
+      {/* Opt-in: a band that runs into a light section can hand over on the
+         same curve the mosque project uses, rather than on a hard edge.
+         Absolutely positioned, so the band keeps its 78svh. `footCurve` is
+         the fill, which must be the tone of what comes NEXT. Bands that pass
+         nothing are unchanged.
+
+         Phones only until 2026-09-30, when the client asked for it on wide
+         screens as well. It grows to 56px from md — see service-opener.tsx
+         for why the height has to move with the width, and for where the
+         56 comes from. */}
       {footCurve && (
         <PlateFoot
           fill={footCurve}
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] block h-12 w-full md:hidden"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] block h-12 w-full md:h-14"
         />
       )}
     </section>

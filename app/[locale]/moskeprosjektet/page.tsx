@@ -42,6 +42,8 @@ export default async function ProjectPage({
          {places} in the lede is interpolated rather than typed: the same
          figure is derived in the ledger below and on the home page. */}
       <ProjectHero
+        /* The hero ends on the curve on wide screens; the fill is paper-2, the tone of the gallery below. */
+        footCurve="#F2EEE7"
         crumb={tp('crumb')}
         eyebrow={tp('pages.building.eyebrow')}
         title={tp.rich('pages.building.title', {

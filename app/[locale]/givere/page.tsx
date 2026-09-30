@@ -32,6 +32,8 @@ export default async function DonorsPage({
   return (
     <main>
       <ProjectHero
+        /* The hero ends on the curve on wide screens; the fill is paper, the tone of ProjectBrief below. */
+        footCurve="#FAF8F4"
         crumb={tp('crumb')}
         eyebrow={tp('pages.donors.eyebrow')}
         title={tp.rich('pages.donors.title', {

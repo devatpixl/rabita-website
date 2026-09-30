@@ -200,10 +200,14 @@ export function VideoHero({
          curve simply occupies the bottom 48px, which is empty ground.
 
          This is the only VideoHero on the site, so the fill is a literal
-         rather than a prop nobody else would ever pass. */}
+         rather than a prop nobody else would ever pass.
+
+         Wide screens get it too from 2026-09-30, at 56px — see
+         service-opener.tsx for why the height has to grow with the width.
+         The 86svh and the pb-16 are still untouched. */}
       <PlateFoot
         fill="#FAF8F4"
-        className="pointer-events-none absolute inset-x-0 bottom-0 block h-12 w-full md:hidden"
+        className="pointer-events-none absolute inset-x-0 bottom-0 block h-12 w-full md:h-14"
       />
     </section>
   );
