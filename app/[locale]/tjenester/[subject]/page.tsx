@@ -6,7 +6,6 @@ import { HALL_HOST, HallBackdrop } from '@/components/hall-backdrop';
 import { ServiceOpener } from '@/components/service-opener';
 import { ServiceOverview } from '@/components/service-overview';
 import { ServiceRelated } from '@/components/service-related';
-import { ServiceStickyCta } from '@/components/service-sticky-cta';
 import { CAMPAIGN } from '@/lib/campaign';
 import {
   SERVICE_CONTACT,
@@ -152,7 +151,13 @@ export default async function ServiceDetail({
         <ServiceRelated s={s} locale={locale} />
       </div>
 
-      <ServiceStickyCta label={t('detail.request')} />
+      {/* The pinned "Send henvendelse" that stood bottom-start on phones is
+         GONE (client, 2026-09-30). It was added on 2026-09-28 because the
+         form is four screens below the opener, but the opener now carries a
+         single action rather than two, the contact button is a disc in the
+         other corner, and three floating things on a 390px screen is two too
+         many. components/service-sticky-cta.tsx is deleted with it; git has
+         it if the reasoning ever changes. */}
     </main>
   );
 
