@@ -96,13 +96,39 @@ export default async function NewsPage({
          («Byggingen, arrangementene og saker som gjelder menigheten.») er
          fjernet — skal IKKE vises lenger." newsPage.lede is still written in
          all three locales; only the prop is gone. */}
+      {/* ── FULL-BLEED, AND TWO PHOTOGRAPHS (2026-09-30) ─────────────────
+         The `over` plate this replaces measured 1104x240 on a laptop — a
+         4.6:1 letterbox strip showing 35% of its picture, which at this
+         page's subject read as a band of brick wall. On a phone the same
+         plate asked for a file 390px wide and got one, so the photograph
+         was soft as well as cropped. Both are in the client's screenshot.
+
+         layout="feature" is the treatment /om-oss already uses: full-bleed,
+         about 78svh, the picture drifting on scroll and the headline
+         composing itself. Aktuelt is the page whose whole subject is what is
+         happening, so a strip was the wrong shape for it.
+
+         TWO SOURCES, not one crop. The band is ~2:1 on a laptop and ~0.6 on
+         a phone; no single frame is good at both. Both are the same Eid, and
+         each is composed for the screen it lands on: the congregation seen
+         wide for the laptop, the stage and the crowd upright for the phone.
+         See components/band-feature.tsx for why this is a pair rather than a
+         crop. Sources are the client's own 4240x2832 and 4158x6237.
+
+         The words are his, unchanged. "nytt" is the accent so the headline
+         has a gold note in it, the way /om-oss sets its year. */}
       <PageBand
         kicker={t('eyebrow')}
         title={t('title')}
-        image="/photos/visit-doorway-crowd.webp"
+        image="/photos/news-eid-congregation.webp"
+        imagePhone="/photos/news-eid-stage-phone.webp"
         alt={t('bandAlt')}
-        objectClass="object-[50%_58%]"
-        layout="over"
+        objectClass="object-[50%_46%]"
+        objectClassPhone="object-[50%_42%]"
+        layout="feature"
+        accentWord={locale === 'en' ? 'Latest' : locale === 'ar' ? 'أخبار' : 'nytt'}
+        cueHref="#kalender"
+        cueLabel={tev('calendar')}
         tone="calm"
         mark="none"
         padBottom="none"

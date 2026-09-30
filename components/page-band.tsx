@@ -105,6 +105,9 @@ export type PageBandProps = {
   /** Overrides the plate's min-height. The services index uses it to stand
    *  taller than the eleven pages it is the parent of. */
   heightClass?: string;
+  /** feature layout only: an art-directed source below md. */
+  imagePhone?: string;
+  objectClassPhone?: string;
   /** A note or fact rail, in the same measure under the plate. */
   children?: ReactNode;
   /** 'none' when the section beneath the band supplies its own top padding
@@ -184,6 +187,8 @@ export function PageBand({
   priority = true,
   titleClass,
   heightClass,
+  imagePhone,
+  objectClassPhone,
   children,
   padBottom = 'default',
   className,
@@ -210,6 +215,8 @@ export function PageBand({
         accentWord={accentWord}
         lede={lede}
         image={image}
+        imagePhone={imagePhone}
+        objectClassPhone={objectClassPhone}
         alt={alt}
         objectClass={objectClass}
         grade={t.grade}

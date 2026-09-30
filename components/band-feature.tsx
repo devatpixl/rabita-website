@@ -64,6 +64,9 @@ export type BandFeatureProps = {
   accentWord?: string;
   lede?: string;
   image: string;
+  /** Optional art-directed source below md. See the note at the <Image> pair. */
+  imagePhone?: string;
+  objectClassPhone?: string;
   alt?: string;
   objectClass?: string;
   /** Site GRADE string, passed down so tone stays PageBand's decision. */
@@ -83,6 +86,8 @@ export function BandFeature({
   accentWord,
   lede,
   image,
+  imagePhone,
+  objectClassPhone,
   alt = '',
   objectClass = 'object-center',
   grade,
@@ -154,13 +159,37 @@ export function BandFeature({
           className="absolute inset-x-0 top-0 h-[112%] will-change-transform"
           style={drift ? { y } : undefined}
         >
+          {/* ── ART DIRECTION, NOT A CROP (2026-09-30) ──────────────────
+             A band this tall is about 2:1 on a laptop and about 0.6 on a
+             phone, and no single file is good at both: object-cover holds
+             one axis and throws the other away, so a wide photograph loses
+             two thirds of its width on a phone and a tall one loses its top
+             and bottom on a laptop.
+             
+             Where a page has a second frame of the same occasion, it can
+             pass `imagePhone` and each screen gets a picture composed for
+             its own shape. This is a paired branch rather than a CSS crop
+             because the difference is which photograph, not which part of
+             one. Pages that pass nothing behave exactly as before. */}
+          {imagePhone && (
+            <Image
+              src={imagePhone}
+              alt={alt}
+              fill
+              priority
+              sizes="100vw"
+              className={cn('object-cover md:hidden', objectClassPhone ?? objectClass)}
+              style={{ filter: grade }}
+            />
+          )}
           <Image
             src={image}
-            alt={alt}
+            alt={imagePhone ? '' : alt}
+            aria-hidden={imagePhone ? true : undefined}
             fill
             priority
             sizes="100vw"
-            className={cn('object-cover', objectClass)}
+            className={cn('object-cover', objectClass, imagePhone && 'hidden md:block')}
             style={{ filter: grade }}
           />
         </motion.div>
