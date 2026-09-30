@@ -89,7 +89,21 @@ const CURVE = 'cubic-bezier(0.22, 0.61, 0.36, 1)';
 const PHOTOS: Record<SlideKey, { src: string; alt: string; width: number; height: number }> = {
   nikah: { src: '/photos/svc-nikah-ceremony.webp', alt: 'A nikah ceremony in the hall: the couple and the imam at a table, guests seated on the carpet', width: 1086, height: 1448 },
   janaza: { src: '/photos/svc-janaza-prayer.webp', alt: 'Janaza prayer: the congregation standing in rows, heads bowed, facing the timber qibla wall', width: 1086, height: 1448 },
-  shahada: { src: '/photos/subj-shahada.webp', alt: 'A shahada taken with witnesses at Rabita', width: 1600, height: 1000 },
+  // ── THE ONLY CARD THAT WAS NOT A PHOTOGRAPH (client, 2026-09-30) ─────
+  // subj-shahada.webp is a gold ring with a sunset inside it — a graphic, in
+  // a row of twelve documentary photographs, and it showed.
+  //
+  // No shahada being taken exists in the client's 907 files, so this is the
+  // nearest true thing: the adhan called outdoors at dusk. It is his own
+  // Bildeplassering pick for this service and the file is ALREADY in /photos
+  // at 1400x1750 — the 4:5 the service page used before its hero went wide —
+  // so nothing new is added. 0.8 in a 0.75 card crops 6% of the width and
+  // 1750 clears the 1113 a retina phone asks for.
+  //
+  // He was told it also opens the Shahada service page, so the same
+  // photograph appears twice for anyone who follows the card, and chose it
+  // anyway. subj-shahada.webp stays on disk; reverting is this one line.
+  shahada: { src: '/photos/svc-shahada-adhan.webp', alt: 'The adhan called outdoors at dusk, a lit crescent on the pole behind', width: 1400, height: 1750 },
   counselling: {
     // A new file rather than an overwrite of subj-counselling.webp, which
     // lib/services.ts pointed at when this changed. That page has since
