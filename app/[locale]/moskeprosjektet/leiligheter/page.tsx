@@ -7,6 +7,7 @@ import { FindUsGoogle } from '@/components/find-us-google';
 import { ProjectGallery } from '@/components/project-gallery';
 import { RequestForm } from '@/components/request-form';
 import { VideoHero } from '@/components/video-hero';
+import { cn } from '@/lib/cn';
 import { Section, SectionBody, SectionHeading } from '@/components/primitives';
 
 // The fifteen apartments in the new building, for sale. One page, by request.
@@ -252,7 +253,15 @@ export default async function ApartmentsPage({
                 {t.rich('quality.heading', { em: (chunks) => <Accent surface="paper">{chunks}</Accent> })}
               </SectionHeading>
               <span aria-hidden className="mt-4 block h-0.5 w-10 bg-gold-deep" />
-              <p className="mt-4 max-w-[46ch] text-body text-ink-60">{t('quality.lede')}</p>
+              {/* Shorter on a phone (client, 2026-09-30). Both claims
+                 survive — that the mosque, school, library and café are
+                 directly below, and that the windows, balcony and roof
+                 garden make the flats bright. What goes is the framing round
+                 them: "Her bor du tett på et levende fellesskap med …" says
+                 in eleven words what "Du bor rett over …" says in four, and
+                 the heading above it has already said "nabolag". */}
+              <p className="mt-4 max-w-[46ch] text-body text-ink-60 md:hidden">{t('quality.ledeShort')}</p>
+              <p className="mt-4 hidden max-w-[46ch] text-body text-ink-60 md:block">{t('quality.lede')}</p>
             </div>
 
             {/* The courtyard at dusk — the minaret over the shared garden,
@@ -300,33 +309,81 @@ export default async function ApartmentsPage({
             >
               <path d="M0 38 C 100 10, 180 52, 300 30 S 520 8, 640 34 S 880 54, 1000 22" fill="none" stroke="currentColor" strokeWidth="1.2" />
             </svg>
-            <ol className="relative grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 md:grid-cols-5 md:gap-x-6">
-              {QUALITY_ITEMS.map((k, i) => (
+            {/* ── TWO ROWS ON A PHONE: 2 THEN 3 (client, 2026-09-30) ──────
+               Two columns meant three rows and a fifth plate on its own, and
+               the whole list ran most of a screen. Six columns, with the
+               first two items spanning three and the last three spanning
+               two, gives 2 + 3 in two rows.
+
+               The first two are also drawn larger — a taller arch and a
+               bigger title — so the rows read as a hierarchy rather than a
+               grid that ran out of items. The three below keep their arch
+               and their name; their one-line gloss is the thing that goes,
+               because at 118px a column it wraps to four lines and the
+               height this change is meant to save comes straight back.
+
+               max-sm:, NOT max-md:. The band from 640 to 767 is on
+               sm:grid-cols-3 and `sm:` is emitted after `max-md:`, so a
+               max-md span would fight the three-column layout and lose in a
+               way that depends on sheet order. Below sm nothing else is
+               competing. */}
+            <ol className="relative grid grid-cols-2 gap-x-4 gap-y-8 max-sm:grid-cols-6 max-sm:gap-x-3 max-sm:gap-y-7 sm:grid-cols-3 md:grid-cols-5 md:gap-x-6">
+              {QUALITY_ITEMS.map((k, i) => {
+                const lead = i < 2;
+                return (
                 <li
                   key={k}
-                  // Phones run two columns, so the fifth plate sat alone on the
-                  // left of its row. It takes the whole row there and centres
-                  // (client, 2026-09-28: "move terrace to center, mobile
-                  // only"). From sm the grid is three across and 3+2 needs no
-                  // help, so the span is undone there.
-                  className="flex flex-col items-center text-center last:col-span-2 sm:last:col-span-1 md:border-s md:border-rule/70 md:first:border-s-0"
+                  // From sm the grid is three across and 3+2 needs no help.
+                  // Below it the spans above put two on the first row and
+                  // three on the second, which is why the old
+                  // `last:col-span-2` — the fifth plate centring itself
+                  // (client, 2026-09-28) — is gone: there is no lone fifth
+                  // plate to centre any more.
+                  className={cn(
+                    'flex flex-col items-center text-center sm:last:col-span-1 md:border-s md:border-rule/70 md:first:border-s-0',
+                    lead ? 'max-sm:col-span-3' : 'max-sm:col-span-2',
+                  )}
                 >
                   {/* The arch: the building's own doorway shape as the icon
                      plate. */}
-                  <span className="grid h-16 w-[3.5rem] place-items-center rounded-t-full rounded-b-xl bg-paper-deep/60 md:h-[4.5rem] md:w-16">
-                    <QualityIcon name={k} className="h-6 w-6 text-gold-deep" />
+                  <span
+                    className={cn(
+                      'grid place-items-center rounded-t-full rounded-b-xl bg-paper-deep/60 md:h-[4.5rem] md:w-16',
+                      lead ? 'h-16 w-[3.5rem] max-sm:h-[4.75rem] max-sm:w-[4.25rem]' : 'h-16 w-[3.5rem] max-sm:h-[3.25rem] max-sm:w-11',
+                    )}
+                  >
+                    <QualityIcon
+                      name={k}
+                      className={cn('text-gold-deep', lead ? 'h-6 w-6 max-sm:h-7 max-sm:w-7' : 'h-6 w-6 max-sm:h-5 max-sm:w-5')}
+                    />
                   </span>
-                  <span className="mt-3 font-mono text-[0.6875rem] tracking-[0.14em] text-gold-deep">
+                  <span
+                    className={cn(
+                      'mt-3 font-mono tracking-[0.14em] text-gold-deep',
+                      lead ? 'text-[0.6875rem]' : 'text-[0.6875rem] max-sm:mt-2 max-sm:text-[0.625rem]',
+                    )}
+                  >
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <h3 className="mt-1 max-w-[16ch] font-serif text-[1.02rem] leading-tight text-ink">
+                  <h3
+                    className={cn(
+                      'mt-1 max-w-[16ch] font-serif leading-tight text-ink',
+                      lead ? 'text-[1.02rem] max-sm:text-[1.15rem]' : 'text-[1.02rem] max-sm:text-[0.9rem]',
+                    )}
+                  >
                     {t(`quality.items.${k}.title`)}
                   </h3>
-                  <p className="mt-1.5 max-w-[22ch] text-[12.5px] leading-snug text-ink-60">
+                  <p
+                    className={cn(
+                      'mt-1.5 max-w-[22ch] text-[12.5px] leading-snug text-ink-60',
+                      !lead && 'max-sm:hidden',
+                    )}
+                  >
                     {t(`quality.items.${k}.body`)}
                   </p>
                 </li>
-              ))}
+                );
+              })}
             </ol>
           </div>
 
