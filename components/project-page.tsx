@@ -158,7 +158,17 @@ export function ProjectHero({
           <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-dusk-60 max-md:text-paper/70">{crumb}</p>
         )}
         <div className={aside ? 'grid items-center gap-10 max-md:gap-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:gap-20' : undefined}>
-        <div className={aside ? 'max-w-3xl' : 'mt-8 max-w-3xl'}>
+        <div
+          className={cn(
+            aside ? 'max-w-3xl' : 'mt-8 max-w-3xl',
+            // Clearance for the curve. It is 48px tall and is pulled up out
+            // of the light block below, so it reaches back into whatever sits
+            // above it — and the grid's own gap on phones is only 24. The
+            // removed chevron used to be the thing occupying that space, so
+            // taking it out put the foot of the lede under the sweep.
+            aside && 'max-md:pb-10',
+          )}
+        >
           {aside && (
             <p className="mb-5 flex items-center gap-3 font-mono text-[0.75rem] uppercase tracking-[0.16em] text-dusk-60 max-md:text-paper/70">
               {/* A short gold rule leading the line, phones only. It gives the
@@ -208,17 +218,6 @@ export function ProjectHero({
                   {secondary.label}
                 </Link>
               )}
-            </div>
-          )}
-          {/* The cue down to the card, phones only. The plate ends in a
-             curve rather than an edge, and a curve on its own does not say
-             there is more below it — this does. Decorative: the card it
-             points at is the next thing in the document either way. */}
-          {aside && (
-            <div aria-hidden className="mt-10 flex justify-center md:hidden">
-              <span className="grid h-10 w-10 place-items-center rounded-full border border-paper/30">
-                <ChevronDown className="h-4 w-4 text-paper/70" />
-              </span>
             </div>
           )}
         </div>
@@ -385,6 +384,10 @@ export function ProjectPage({ children }: { children: ReactNode }) {
  * light appears to rise into the dusk rather than the dusk to stop short. The
  * fill is paper-2 as a literal, because an SVG fill cannot read a Tailwind
  * colour class.
+ *
+ * There was a circled chevron above this, as a cue that the card followed.
+ * The client had it removed (2026-09-30): the curve is doing that job, and a
+ * scroll hint on a page that is already obviously scrollable is decoration.
  */
 function PlateFoot() {
   return (
@@ -395,14 +398,6 @@ function PlateFoot() {
       className="pointer-events-none absolute inset-x-0 -top-12 h-12 w-full md:hidden"
     >
       <path d="M0 48V14C64 0 150 22 232 30C300 36 350 30 390 16V48Z" fill="#F2EEE7" />
-    </svg>
-  );
-}
-
-function ChevronDown({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M6 9l6 6 6-6" />
     </svg>
   );
 }
