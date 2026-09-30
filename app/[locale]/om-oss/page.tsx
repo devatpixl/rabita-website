@@ -110,6 +110,11 @@ export default async function AboutPage({
         mark="elevation"
         tone="warm"
         objectClass="object-[50%_42%]"
+        /* Phones only: the same curve /moskeprosjektet, /aktuelt and the
+           apartments hero end on. paper-2, because that is the tone of the
+           story section immediately below — the fill has to be the colour the
+           band hands over TO, not the band's own. */
+        footCurve="#F2EEE7"
       />
       {/* NO CAPTION UNDER THE BAND (client, 2026-09-17: "remove this shit").
          It read «Gateiftar på Grønland» in small mono under the photograph.
