@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { getLocale, getTranslations } from 'next-intl/server';
+import { PlateFoot } from './plate-foot';
 import { SectionBody } from './primitives';
 import { Accent } from './accent';
 import { cn } from '@/lib/cn';
@@ -235,6 +236,26 @@ export async function ServiceOpener({ s, crumb }: { s: ServiceKey; crumb: string
              oss" action, the line under the form and the footer. */}
         </SectionBody>
       </div>
+
+      {/* ── THE HERO HANDS OVER ON A CURVE, PHONES ONLY ──────────────────
+         Client, 2026-09-30, asking whether the wave the other pages use
+         would suit the service heroes too. It would, and for the reason it
+         suits them: on a phone this is a dark photographic plate meeting a
+         cream section on a dead-straight line, which is the one condition
+         the curve was drawn for. The mosque project, /aktuelt, the
+         apartments and /om-oss all already end this way.
+
+         The fill is the tone of what comes NEXT, not this section's own —
+         #FAF8F4 is `paper`, which is ServiceOverviewPhone's first section.
+
+         Absolutely positioned in the bottom 48px, which is empty: the words
+         above carry pb-14, so the button clears the curve's highest point.
+         Nothing above moves. md:hidden, like every other one — on a laptop
+         the hero is wide and a straight edge is right there. */}
+      <PlateFoot
+        fill="#FAF8F4"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] block h-12 w-full md:hidden"
+      />
     </section>
   );
 }
