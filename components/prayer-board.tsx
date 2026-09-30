@@ -358,11 +358,11 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
           <h3 className="font-serif text-[1.2rem] leading-none text-ink">{t('khateebLabel')}</h3>
           <ul className="flex flex-1 flex-col justify-center divide-y divide-rule max-md:grid max-md:grid-cols-2 max-md:gap-3 max-md:divide-y-0 max-md:pt-3">
             {khateebs.map(({ imam, khutba }) => (
-              <li key={imam.key} className="flex items-center gap-4 py-5 max-md:flex-col max-md:items-start max-md:gap-2 max-md:py-0 md:gap-5">
+              <li key={imam.key} className="flex items-center gap-4 py-5 max-md:flex-col max-md:items-center max-md:gap-2.5 max-md:py-0 max-md:text-center md:gap-5">
                 {/* The portraits are square crops crested on the face, so a
                    circle sits right on them. A missing photo falls back to the
                    initial rather than to a broken frame. */}
-                <span className="relative flex h-[4.25rem] w-[4.25rem] shrink-0 items-center justify-center overflow-hidden rounded-full bg-paper-2 ring-1 ring-rule max-md:h-12 max-md:w-12 md:h-[4.75rem] md:w-[4.75rem]">
+                <span className="relative flex h-[4.25rem] w-[4.25rem] shrink-0 items-center justify-center overflow-hidden rounded-full bg-paper-2 ring-1 ring-rule max-md:h-[4.5rem] max-md:w-[4.5rem] md:h-[4.75rem] md:w-[4.75rem]">
                   {imam.photo ? (
                     <Image src={imam.photo} alt="" fill sizes="76px" className="object-cover" />
                   ) : (
@@ -371,7 +371,15 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
                     </span>
                   )}
                 </span>
-                <span className="min-w-0">
+                {/* ── CENTRED UNDER THE PORTRAIT ON PHONES (2026-09-30) ─
+                   The column was left-aligned with a 48px avatar, so each
+                   portrait sat at the start of a two-line name and the pair
+                   read as two ragged blocks rather than two people. The
+                   avatar goes to 72px — half again — and the whole column
+                   centres, so the face sits over its own name and the two
+                   cells balance. From md this is a row, portrait beside
+                   name, and none of it applies. */}
+                <span className="min-w-0 max-md:w-full">
                   <span className="block font-serif text-[clamp(1.1rem,2.1vw,1.35rem)] leading-tight text-ink">
                     <span className="opacity-70">{imam.title}</span> {imam.name}
                   </span>
