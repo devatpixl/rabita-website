@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArchMark } from '@/components/marks';
+import { OgeeMark } from '@/components/marks';
 import { AnnualReports } from '@/components/annual-reports';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
@@ -326,20 +326,23 @@ export default async function AboutPage({
             </Link>
 
             {/* ── THE ARCH, UNDER THE ACTION (client, 2026-09-30) ────────
-               His design closes this section with a mihrab drawn in line, a
-               star over its point. ArchMark is that drawing and it already
-               exists in this repo — niche, jambs, columns and the hanging
-               lamp — and it was on this very section until 2026-09-23, when
-               it was removed from the DESKTOP for competing with the arcade
-               photograph across the spread.
+               ── AN OGEE DOME, NOT A MIHRAB (client, 2026-09-30) ────────
+               First pass used ArchMark, which is a mihrab: a niche on two
+               columns with a lamp hung in it, seen from INSIDE the hall. His
+               words were "a shape og gumbad/minar" — the dome seen from
+               outside, which is a different drawing, and he was right that
+               what I put there was something else.
 
-               Nothing competes with it on a phone: there is no second column
-               and the photograph is not there. So it comes back here only,
-               centred under the action, at 25% gold — a closing device
-               rather than an illustration. */}
-            <span aria-hidden className="mt-11 flex flex-col items-center md:hidden">
-              <span className="mb-1 block h-2.5 w-2.5 rotate-45 bg-gold-deep/55" />
-              <ArchMark className="-mt-5 h-28 w-auto text-gold-deep/30" />
+               OgeeMark is that shape: the onion profile drawn twice, under a
+               four-point star, with the finial built in rather than stacked
+               on top. See components/marks.tsx.
+
+               Phones only. On a laptop the arcade photograph runs across the
+               spread and a second device would compete with it — which is
+               exactly why the mihrab was taken off this section's desktop on
+               2026-09-23. */}
+            <span aria-hidden className="mt-11 flex justify-center md:hidden">
+              <OgeeMark className="h-32 w-auto text-gold-deep/45" />
             </span>
           </SectionBody>
         </div>

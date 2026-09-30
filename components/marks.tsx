@@ -134,3 +134,37 @@ export function OrbitMark({ className }: MarkProps) {
 // headline on a photograph, where they are texture and not a picture.
 // That is the only job these are good at, and it is the only job they
 // still have.
+
+/* An ogee dome — the onion profile, drawn twice, under a four-point star.
+ *
+ * A FIFTH MARK, and the note below about four being the whole set still
+ * holds for the reason it gives: the four that survived are the ones that
+ * describe something real rather than decorate. This one qualifies on the
+ * same terms — it is the dome profile the new building is drawn with, and
+ * the client asked for it by name (2026-09-30: "a shape og gumbad/minar").
+ *
+ * It is NOT ArchMark. That is a mihrab: a niche on two columns with a lamp
+ * hung in it, seen from inside the hall. This is the dome seen from outside,
+ * which is what he was pointing at, and the two are not interchangeable.
+ *
+ * The star is filled rather than stroked so it holds at small sizes, where a
+ * 1.5px outline on an eight-pixel figure turns to mush. Its own viewBox is
+ * tight to the drawing, so the caller sets a height and the width follows.
+ */
+export function OgeeMark({ className }: MarkProps) {
+  return (
+    <svg viewBox="0 0 200 150" fill="none" className={className} aria-hidden>
+      <g stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M100 30 C 80 50 46 62 46 92 C 46 114 51 124 51 146" />
+        <path d="M100 30 C 120 50 154 62 154 92 C 154 114 149 124 149 146" />
+        <path d="M100 46 C 84 62 60 73 60 95 C 60 115 64 124 64 146" />
+        <path d="M100 46 C 116 62 140 73 140 95 C 140 115 136 124 136 146" />
+        <path d="M100 30 V 21" />
+      </g>
+      <path
+        d="M100 2 L103.6 13.4 115 17 103.6 20.6 100 32 96.4 20.6 85 17 96.4 13.4Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}

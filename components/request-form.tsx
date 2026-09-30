@@ -161,24 +161,53 @@ export function Field({
         invalid
           ? (card && c.boxInvalidOnCard ? c.boxInvalidOnCard : c.boxInvalid)
           : (card && c.boxOnCard ? c.boxOnCard : c.box),
+        // ── NO WELL ON A PHONE (client, 2026-09-30) ──────────────────────
+        // The well is the right control from sm up, where the form sits on a
+        // card and the filled box is what separates it from the page. On a
+        // phone four stacked boxes inside a fifth box read as boxes-in-boxes,
+        // which is what his design replaces: the field becomes an icon, a
+        // small label and the value on one hairline.
+        //
+        // Every phone override is `max-sm:` because the well's own measures
+        // start at `sm:` — see lib/cn.ts, which is plain clsx, so the winner
+        // is whichever rule the sheet emits last and `sm:` comes after
+        // `max-md:`. Below sm nothing competes.
+        'max-sm:flex max-sm:items-start max-sm:gap-3 max-sm:rounded-none max-sm:border-0 max-sm:border-b max-sm:bg-transparent max-sm:px-0 max-sm:pb-2.5 max-sm:pt-0',
+        invalid ? 'max-sm:border-alert' : 'max-sm:border-rule',
       )}
     >
-      <label
-        htmlFor={id}
-        className={cn(
-          'flex cursor-pointer items-center gap-2.5 font-mono text-[0.625rem] uppercase tracking-[0.18em] transition-colors',
-          c.label,
-        )}
-      >
-        {icon && <FieldIcon name={icon} className={cn('h-[15px] w-[15px] shrink-0', c.icon)} />}
-        {label}
-      </label>
-      {hint && (
-        <p id={`${id}-hint`} className={cn('mt-1.5 max-sm:mt-0.5 text-[13px] max-sm:text-[12px] leading-snug', c.hint)}>
-          {hint}
-        </p>
+      {/* The icon moves OUT of the label on a phone and into its own column,
+         centred against the pair, which is the shape his design has. It is
+         rendered twice rather than moved, so the md+ label keeps the icon
+         inline exactly as it was — both copies are decorative. */}
+      {icon && (
+        <FieldIcon
+          name={icon}
+          className={cn('mt-[1.15rem] hidden h-[17px] w-[17px] shrink-0 max-sm:block', c.icon)}
+        />
       )}
-      {children}
+      <div className="max-sm:min-w-0 max-sm:flex-1">
+        <label
+          htmlFor={id}
+          className={cn(
+            'flex cursor-pointer items-center gap-2.5 font-mono text-[0.625rem] uppercase tracking-[0.18em] transition-colors',
+            c.label,
+          )}
+        >
+          {icon && <FieldIcon name={icon} className={cn('h-[15px] w-[15px] shrink-0 max-sm:hidden', c.icon)} />}
+          {label}
+        </label>
+        {/* The guidance sentence goes on phones (client: "dont keep the
+           placeholder txet, just say your message"). It is a second line of
+           small print under a label in a form that is already four fields
+           deep. From sm it stays. */}
+        {hint && (
+          <p id={`${id}-hint`} className={cn('mt-1.5 text-[13px] leading-snug max-sm:hidden', c.hint)}>
+            {hint}
+          </p>
+        )}
+        {children}
+      </div>
     </div>
   );
 }
@@ -337,7 +366,11 @@ export function RequestForm({
     tone === 'dusk'
       ? 'text-paper'
       : card
-        ? 'rounded-[2rem] bg-paper p-6 max-sm:rounded-3xl max-sm:p-5 text-ink ring-1 ring-sage-line/70 shadow-[0_1px_2px_rgba(26,26,24,0.04),0_28px_70px_-38px_rgba(26,26,24,0.3)] sm:p-8'
+        // max-sm: the card chrome goes with the wells. A ring and a shadow
+        // around four hairlines is a box drawn around nothing — his design
+        // has the fields sitting straight on the page. From sm the card is
+        // what lifts the form off the section and it stays.
+        ? 'rounded-[2rem] bg-paper p-6 max-sm:rounded-none max-sm:bg-transparent max-sm:p-0 max-sm:ring-0 max-sm:shadow-none text-ink ring-1 ring-sage-line/70 shadow-[0_1px_2px_rgba(26,26,24,0.04),0_28px_70px_-38px_rgba(26,26,24,0.3)] sm:p-8'
         : 'text-ink',
   );
 
@@ -608,6 +641,10 @@ export function RequestForm({
             disabled={submitting}
             className={cn(
               'group inline-flex min-h-12 items-center justify-center gap-3 rounded-full px-7 text-[15px] font-semibold transition-colors active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-40',
+              // Full width on a phone: with the wells gone the button is the
+              // only boxed thing left, and a 160px pill floating under a
+              // column of hairlines reads as unfinished.
+              'max-sm:min-h-[3.25rem] max-sm:w-full',
               c.button,
             )}
           >
