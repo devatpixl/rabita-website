@@ -5,6 +5,7 @@ import { Accent } from './accent';
 import { AssuranceList, type AssuranceItem } from './assurance-list';
 import { SectionBody } from './primitives';
 import { cn } from '@/lib/cn';
+import { PlateFoot } from '@/components/plate-foot';
 import { GiveCTA } from './give-cta';
 
 // The shared shape every page under "The mosque project" uses: a full bleed hero, a brief, a set of numbered columns, then the assurances. One structure, different content, so the section reads as one place.
@@ -250,7 +251,7 @@ export function ProjectHero({
             // section.
             style={{ ['--project-card-cap' as string]: 'calc(100svh - 122px - clamp(12px, 100svh - 700px, 48px))' }}
           >
-            <PlateFoot />
+            <PlateFoot fill="#F2EEE7" className="pointer-events-none absolute inset-x-0 -top-12 h-12 w-full md:hidden" />
             {aside}
           </div>
         )}
@@ -371,33 +372,3 @@ export function ProjectPage({ children }: { children: ReactNode }) {
   return <main>{children}</main>;
 }
 
-/**
- * The curve the dusk plate ends on, phones only.
- *
- * Drawn as an SVG rather than a border-radius because the shape is a shallow
- * sweep across the full width — a radius would round two corners and leave a
- * straight run between them. `preserveAspectRatio="none"` lets one path serve
- * every phone width: it stretches horizontally and keeps its 48px height,
- * which is what stops the curve going slack at 430 and sharp at 360.
- *
- * It sits ABOVE the block it belongs to, pulled up by its own height, so the
- * light appears to rise into the dusk rather than the dusk to stop short. The
- * fill is paper-2 as a literal, because an SVG fill cannot read a Tailwind
- * colour class.
- *
- * There was a circled chevron above this, as a cue that the card followed.
- * The client had it removed (2026-09-30): the curve is doing that job, and a
- * scroll hint on a page that is already obviously scrollable is decoration.
- */
-function PlateFoot() {
-  return (
-    <svg
-      aria-hidden
-      viewBox="0 0 390 48"
-      preserveAspectRatio="none"
-      className="pointer-events-none absolute inset-x-0 -top-12 h-12 w-full md:hidden"
-    >
-      <path d="M0 48V14C64 0 150 22 232 30C300 36 350 30 390 16V48Z" fill="#F2EEE7" />
-    </svg>
-  );
-}

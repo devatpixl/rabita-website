@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { PlateFoot } from '@/components/plate-foot';
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/cn';
 
@@ -161,6 +162,25 @@ export function VideoHero({
         <p className="mt-6 max-w-[52ch] text-body text-paper/80">{lede}</p>
         {children && <div className="mt-9 flex flex-wrap items-center gap-3">{children}</div>}
       </div>
+
+      {/* ── THE CURVE, PHONES ONLY (client, 2026-09-30) ──────────────────
+         The same sweep /moskeprosjektet hands its card over on, asked for
+         here "just for design". Its fill is paper because that is the tone
+         of the section below this hero, and the curve is the light rising
+         into the dusk rather than the dusk stopping short.
+
+         It is ABSOLUTELY POSITIONED at the foot rather than added to the
+         flow, which is the client's other condition: "dont make this
+         section vertically small". The section keeps its 86svh and the
+         words keep their pb-16, so nothing above moves by a pixel — the
+         curve simply occupies the bottom 48px, which is empty ground.
+
+         This is the only VideoHero on the site, so the fill is a literal
+         rather than a prop nobody else would ever pass. */}
+      <PlateFoot
+        fill="#FAF8F4"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-12 w-full md:hidden"
+      />
     </section>
   );
 }
