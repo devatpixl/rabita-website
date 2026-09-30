@@ -437,21 +437,25 @@ export function Footer({ map }: { map?: ReactNode }) {
          for it to leave this bar (2026-08-30) — it needs a home, e.g. the
          consent banner. */}
       <div className="border-t border-paper/12">
-        {/* ── ROOM FOR THE FLOATING BUTTON, PHONES ONLY ───────────────────
-           Client, 2026-09-23: scrolled to the very bottom on a phone, the
-           org.nr line sat under the "Questions?" button. That button is
-           fixed at bottom-5 (20px) and about 48px tall, so the bottom ~68px
-           of every viewport is spoken for — and on a phone this bar is the
-           last thing on the page, with 12px under it. He asked for the fix
-           without moving the button, so the bar gets the room instead:
-           5rem of bottom padding plus the safe-area inset, which means at
-           full scroll the last line sits clear ABOVE the button rather than
-           behind it. Measured on a 390x844: the credit line ends 15px above
-           the button's top edge; at 4.5rem it was 7, which is clear but
-           reads as touching. sm:pb-5 hands the old padding back from sm, where the
-           bar is three columns wide and the button only ever overlaps empty
-           ground on its right. */}
-        <div className="mx-auto grid max-w-7xl items-center gap-y-2 px-5 py-3 pb-[calc(5rem+env(safe-area-inset-bottom))] sm:grid-cols-3 sm:gap-y-3 sm:px-6 sm:py-5 sm:pb-5 xl:px-10">
+        {/* ── THE ROOM FOR THE FLOATING BUTTON IS GIVEN BACK ──────────────
+           It was taken on 2026-09-23, when the client found the org.nr line
+           sitting under the "Questions?" button at full scroll. The button
+           was then a worded pill about 150px wide and 48px tall, pinned to
+           the bottom-right — wide enough to reach across a centred line —
+           so the bar was given 5rem of bottom padding to sit clear above it.
+           He asked for the fix without moving the button, so the bar moved.
+           
+           The button became a 44px disc on 2026-09-30, at his request, and
+           it now occupies only the corner: 44px wide against a 390px
+           viewport. Neither centred line reaches it any more — measured, the
+           org.nr line ends 3px short of the disc's left edge and the credit
+           line 10px short — so the padding is paying for a collision that
+           can no longer happen, and the footer was left floating.
+           
+           Back to the ordinary 12px, keeping the safe-area inset so the last
+           line still clears a home indicator. sm: is unchanged, as it has
+           been throughout. */}
+        <div className="mx-auto grid max-w-7xl items-center gap-y-2 px-5 py-3 pb-[calc(3.25rem+env(safe-area-inset-bottom))] sm:grid-cols-3 sm:gap-y-3 sm:px-6 sm:py-5 sm:pb-5 xl:px-10">
           <p className="text-center font-mono text-[0.625rem] uppercase leading-none tracking-[0.16em] text-gold sm:text-start">
             &copy; {new Date().getFullYear()} Rabita · {t('orgNr')} {CAMPAIGN.orgNr}
           </p>
