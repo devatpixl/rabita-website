@@ -181,7 +181,13 @@ export const SERVICE_IMAGE: Record<ServiceKey, string> = {
   // under "Tjenester:"; svc-barn-familie-eid (480770251) was his entry for
   // the REMOVED carousel and was routed here only because the right file had
   // not arrived. It stays on disk, now unused.
-  'barn-og-familie': '/photos/svc-barn-familie-bobler.webp',
+  // ── REPLACED 2026-09-30, on the client's pick ─────────────────────────
+  // The bubbles frame was 640x800, the smallest file on the site, and the
+  // card renders ~352px wide so it had almost nothing to spare. This is
+  // Id/_NKD9507.jpg at 3500x2333 — a father painting a small child's face at
+  // the Eid bazaar — cut to 4:5 from x=0.35 so he stays in frame behind her.
+  // svc-barn-familie-bobler.webp is kept; reverting is this one line.
+  'barn-og-familie': '/photos/svc-barn-familie-ansiktsmaling.webp',
   // Rabita's own foster-care information meeting: the imam presenting
   // "Behovet i Oslo" to a room. The doc says Rabita's role here is to
   // inform and to be a bridge, and this is that, being done.
@@ -204,7 +210,13 @@ export const SERVICE_IMAGE: Record<ServiceKey, string> = {
   // both the Undervisning card and the Kurs i Islam Hovedbilde, and only the
   // card exists, so it lands here. Cut 500px into a 1616x1080: that centres
   // the speaker between the minbar and the seated row.
-  'kurs-islam': '/photos/svc-kurs-islam-moske.webp',
+  // ── REPLACED 2026-09-30, on the client's pick ─────────────────────────
+  // Was 864x1080 of a speaker in a small room. This is the Ummah conference
+  // (Tjenester/14_12_2024_Rabita_Ummah_Konferanse3.jpg, 8092x5395) — the
+  // speaker centred under his own slide with the hall in front of him, which
+  // is what a course in Islam looks like when it is full. Centre-cut to 4:5.
+  // svc-kurs-islam-moske.webp is kept; reverting is this one line.
+  'kurs-islam': '/photos/svc-kurs-islam-konferanse.webp',
   'kurs-konvertitter': '/photos/community/welcome-embrace.webp',
   // A lecture hall, not the open Qur'an that was here: Koranskolen sits one
   // card away with a Qur'an on its face, and two of those in a row read as
@@ -765,7 +777,16 @@ export const SERVICE_STORY: Partial<
   // landscape in a 4:5 card is the exact defect fixed on nikah, janaza and
   // hajj on 2026-09-23. It needs a portrait photograph, not a re-point.
   // Client, Bildeplassering (2026-09-19). 7-_DSC0317.
-  kvinnetreff: { src: '/photos/subj-kvinnetreff-samling.webp', objectClass: 'object-[50%_45%]' },
+  // ── REPLACED 2026-09-30, on the client's pick ─────────────────────────
+  // Was 1359x1019 of a seated audience. This is Kvinner/20250607_170955000
+  // at 2048x1536 — the women themselves, together behind the table they laid.
+  // Same 4:3, so the frame and the objectClass are unchanged.
+  //
+  // 2048 is the honest ceiling here: the Kvinner folder has four files and
+  // this is the largest. It is fine at 1440 and soft on a retina 1920, and
+  // there is no bigger original anywhere in the client's set.
+  // subj-kvinnetreff-samling.webp is kept; reverting is this one line.
+  kvinnetreff: { src: '/photos/subj-kvinnetreff-bord.webp', objectClass: 'object-[50%_45%]' },
   // Client, Bildeplassering (2026-09-19). pexels-tahir-osman — tawaf at the Kaaba.
   // PORTRAIT, so it is registered in PORTRAIT_PHOTOS below or the frame
   // renders 4:3 and crops the Kaaba out of its own picture.
