@@ -3,7 +3,7 @@ import { Accent } from './accent';
 import Image from 'next/image';
 import { cn } from '@/lib/cn';
 import { Section, SectionBody } from './primitives';
-import { RosetteMark } from './marks';
+import { ElevationMark, RosetteMark } from './marks';
 import type { ServiceKey } from '@/lib/services';
 
 /**
@@ -62,11 +62,20 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
     <div className="md:hidden">
       {/* ── ABOUT ──────────────────────────────────────────────────────── */}
       <Section tone="paper" className="relative isolate overflow-hidden py-11">
-        {/* The arch, very faint, bleeding off the foot — the building's own
-           doorway used as a watermark rather than an illustration. */}
-        <RosetteMark
+        {/* The mosque itself, along the foot (client, 2026-09-30: "a small
+           bg line accent of mosque, very light but visible"). ElevationMark
+           already exists for this — dome, facade, arcade and minaret, drawn
+           as a line elevation — so this is the building's own drawing rather
+           than a shape that resembles one.
+           
+           Pushed most of the way below the section's foot, so what shows is
+           the dome, the finial and the top of the minaret rising out of the
+           edge, the way the mockup has it. The section is overflow-hidden,
+           which is what does the cutting. 20% gold: visible against paper,
+           never in competition with the type. */}
+        <ElevationMark
           aria-hidden
-          className="pointer-events-none absolute -bottom-16 -end-14 -z-10 h-56 w-56 text-gold-deep/[0.06]"
+          className="pointer-events-none absolute -bottom-28 end-0 -z-10 h-48 w-auto text-gold-deep/[0.2]"
         />
         <SectionBody>
           <span aria-hidden className="block h-px w-full bg-gold-deep/45" />
@@ -81,7 +90,11 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
           {/* The plate: his own invitation, set as the one quiet claim on the
              screen, with the page's single action under it. */}
           <div className="mt-7 rounded-2xl bg-paper-2 px-5 py-6">
-            <StarGlyph className="h-7 w-7 text-gold-deep" />
+            {/* The mosque's own mark. It was an eight-point star I drew; the
+                 client pointed out that the Rabita logo is a ten-fold
+                 interlaced rosette, which it is — so this is the logo file
+                 rather than an approximation of it. */}
+            <Image src="/logo/rabita-mark-256.png" alt="" aria-hidden width={256} height={256} className="h-9 w-9" />
             <p className="mt-4 font-serif text-[1.2rem] leading-[1.35] text-ink">{pull}</p>
             <a
               href="#enquiry"
@@ -222,10 +235,16 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
               ))}
             </ol>
 
-            <span aria-hidden className="mt-10 flex items-center justify-center gap-3">
-              <span className="h-px w-14 bg-gold-deep/25" />
-              <StarGlyph className="h-4 w-4 text-gold-deep/60" />
-              <span className="h-px w-14 bg-gold-deep/25" />
+            {/* Bigger, and the real mark (client, 2026-09-30: "make this
+               bigger on mobile only, so noticeable"). It was a 16px glyph
+               between two hairlines and read as a speck; the mark is 32px
+               now, the rules are longer and a shade stronger, and the whole
+               thing sits further down. Phones only — this component is
+               md:hidden, so there is nothing to gate. */}
+            <span aria-hidden className="mt-12 flex items-center justify-center gap-4">
+              <span className="h-px w-20 bg-gold-deep/35" />
+              <Image src="/logo/rabita-mark-256.png" alt="" aria-hidden width={256} height={256} className="h-8 w-8 opacity-70" />
+              <span className="h-px w-20 bg-gold-deep/35" />
             </span>
           </SectionBody>
         </Section>
@@ -234,21 +253,3 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
   );
 }
 
-/**
- * An eight-point girih star at ICON scale.
- *
- * RosetteMark is the site's real rosette and it is a construction drawing on
- * a 480-unit board — circles, radii, the two squares it is struck from. That
- * is right at 380px on a plate and illegible at 20, where it collapses into a
- * grey smudge. This is the same eight-point figure reduced to the two
- * overlaid squares that actually read at this size, on a 24-unit board with a
- * stroke that survives.
- */
-function StarGlyph({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" className={className} aria-hidden>
-      <path d="M12 2.5 15.2 8.8 21.5 12 15.2 15.2 12 21.5 8.8 15.2 2.5 12 8.8 8.8Z" />
-      <path d="M4.6 4.6h14.8v14.8H4.6Z" opacity="0.45" />
-    </svg>
-  );
-}
