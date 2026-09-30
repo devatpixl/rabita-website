@@ -43,7 +43,12 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
   const lede = t(`items.${s}.offerLede`);
   // The plate quotes the FIRST sentence of his lede, which is the line that
   // carries the invitation; the rest qualifies it and reads as a paragraph.
-  const pull = lede.split(/(?<=[.!?])\s+/)[0] ?? lede;
+  const sentences = lede.split(/(?<=[.!?])\s+/);
+  const pull = sentences[0] ?? lede;
+  // ...and the REST of that lede becomes the offer section's standfirst. It
+  // was being dropped on phones entirely, which is both a waste of his words
+  // and the reason that section had a heading and then bare cards.
+  const offerLedeRest = sentences.slice(1).join(' ').trim();
   const body = t.has(`items.${s}.longBodyShort`)
     ? t(`items.${s}.longBodyShort`)
     : t.has(`items.${s}.longBody`)
@@ -95,13 +100,22 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
             aria-hidden
             className="pointer-events-none absolute -top-10 -end-12 -z-10 h-44 w-44 text-gold-deep/[0.07]"
           />
+          <RosetteMark
+            aria-hidden
+            className="pointer-events-none absolute -bottom-14 -start-16 -z-10 h-48 w-48 text-gold-deep/[0.05]"
+          />
           <SectionBody>
-            <div className="flex items-center gap-4">
-              <p className="font-mono text-[0.625rem] uppercase tracking-[0.2em] text-gold-deep">
-                {t('detail.what')}
-              </p>
-              <span aria-hidden className="h-px w-10 bg-gold-deep/45" />
-            </div>
+            {/* A rule, then the label AS the heading — the mockup's shape is
+               eyebrow, headline, standfirst, and the site has one string for
+               this section, so it is set as the headline rather than printed
+               twice at two sizes. */}
+            <span aria-hidden className="block h-px w-10 bg-gold-deep/45" />
+            <h2 className="mt-5 max-w-[13ch] font-serif text-[2rem] leading-[1.08] tracking-[-0.015em] text-ink">
+              {t('detail.what')}
+            </h2>
+            {offerLedeRest && (
+              <p className="mt-4 text-[1rem] leading-[1.62] text-ink-60">{offerLedeRest}</p>
+            )}
             {/* ── A BULLET, NOT AN ICON (client, 2026-09-30) ─────────────
                The mockup gave each card a little drawing of what it
                describes. Doing that honestly means 54 of them — three for
@@ -116,15 +130,15 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
                its bullet, at the size the lost tile leaves room for. It is
                the page's own mark rather than a new one, and it claims
                nothing about the item. */}
-            <ul className="mt-6 space-y-3.5">
+            <ul className="mt-7 space-y-3.5">
               {offer.map((o) => (
                 <li
                   key={o.title}
-                  className="flex items-start gap-3.5 rounded-2xl border border-gold-deep/20 bg-paper px-5 py-5"
+                  className="flex items-start gap-3.5 rounded-2xl border border-gold-deep/20 bg-paper px-5 py-6"
                 >
                   <span aria-hidden className="mt-[0.5rem] block h-2 w-2 shrink-0 rotate-45 bg-gold-deep" />
                   <div className="min-w-0">
-                    <p className="font-serif text-[1.15rem] leading-[1.3] text-ink">{o.title}</p>
+                    <p className="font-serif text-[1.2rem] leading-[1.3] text-ink">{o.title}</p>
                     {o.body && (
                       <p className="mt-2 text-[0.875rem] leading-[1.55] text-ink-60">{o.body}</p>
                     )}
