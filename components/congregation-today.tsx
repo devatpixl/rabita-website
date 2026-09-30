@@ -81,7 +81,17 @@ const HALF = Math.floor(TOTAL / 2);
 // re-render. See the @media rule in app/globals.css.
 const CARD_H = 'var(--cong-card-h, clamp(380px, 52svh, 660px))';
 const CARD_W = `calc(${CARD_H} * 0.75)`;
-const GAP_PX = 48;
+// The step between a card and its neighbour. A CSS variable for the same
+// reason CARD_H is one: these are inline styles, so a media query in the
+// stylesheet is the only place a breakpoint can reach them.
+//
+// It has to shrink when the card grows, which is not obvious. The neighbour's
+// inner edge sits at centre + CARD_W*0.85 + GAP - CARD_W*0.35, so every pixel
+// the card gains pushes the neighbour half a pixel further out AND widens the
+// centre card by half a pixel — the peek closes twice as fast as the card
+// grows. At 390 with a 317px card and a 48px gap the neighbour started at
+// 401px, which is off a 390 screen entirely: the deck looked like one photo.
+const GAP = 'var(--cong-gap, 48px)';
 const INNER_SCALE = 0.70;
 const OUTER_SCALE = 0.52;
 const CURVE = 'cubic-bezier(0.22, 0.61, 0.36, 1)';
@@ -486,11 +496,11 @@ export function CongregationToday() {
               const opacity =
                 abs === 0 ? 1 : abs === 1 ? 0.55 : abs === 2 ? 0.30 : 0;
               const photo = PHOTOS[key];
-              // 0.85 = (1 + 0.70)/2 — the inner peek sits one GAP_PX
+              // 0.85 = (1 + 0.70)/2 — the inner peek sits one GAP
               // from the centre's edge. Outer cards then land at 2×
               // that step, which is deliberately past the viewport at
               // desktop widths so overflow-x: clip cuts them off.
-              const dxCalc = `calc(${off * dirSign} * (${CARD_W} * 0.85 + ${GAP_PX}px))`;
+              const dxCalc = `calc(${off * dirSign} * (${CARD_W} * 0.85 + ${GAP}))`;
               // Every VISIBLE side card is click-to-navigate, not just the
               // immediate neighbours. The outer pair was pointer-none as a
               // "decorative peek" on the assumption that overflow clipped

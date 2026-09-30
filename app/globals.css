@@ -855,12 +855,20 @@ body.sheet-open {
    is derived from it. */
 @media (max-width: 767.98px) {
   :root {
-    /* 44svh -> 50svh, 420 -> 460 (client, 2026-09-30: "the card here should
-       be a little more bigger"). The room came from the same screenshot round:
-       the figure line went off the phone and the text box floor with it, 140px
-       -> 104px, so 36 of the 51px this adds was already free. At 390x844 the
-       card goes 371 -> 422. */
-    --cong-card-h: clamp(320px, 50svh, 460px);
+    /* Bigger card, client 2026-09-30 — but the neighbours have to stay
+       visible, which is his follow-up and the reason for the second knob.
+
+       50svh alone pushed the side cards off the screen: the peek closes at
+       twice the rate the card grows (see the note on GAP in
+       congregation-today.tsx), so a 317px card with the desktop 48px gap put
+       the neighbour's edge at 401px on a 390 screen. The deck read as one
+       photograph.
+
+       48svh with a 12px gap instead. At 390x844: card 371 -> 405 tall and
+       238 -> 304 wide, and the side strips go 28 -> 31px, so they are
+       slightly MORE visible than before rather than less. */
+    --cong-card-h: clamp(320px, 48svh, 440px);
+    --cong-gap: 12px;
   }
 }
 
