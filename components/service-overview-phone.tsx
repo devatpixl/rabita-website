@@ -3,7 +3,6 @@ import { Accent } from './accent';
 import Image from 'next/image';
 import { cn } from '@/lib/cn';
 import { Section, SectionBody } from './primitives';
-import { ElevationMark, RosetteMark } from './marks';
 import type { ServiceKey } from '@/lib/services';
 
 /**
@@ -62,21 +61,6 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
     <div className="md:hidden">
       {/* ── ABOUT ──────────────────────────────────────────────────────── */}
       <Section tone="paper" className="relative isolate overflow-hidden py-11">
-        {/* The mosque itself, along the foot (client, 2026-09-30: "a small
-           bg line accent of mosque, very light but visible"). ElevationMark
-           already exists for this — dome, facade, arcade and minaret, drawn
-           as a line elevation — so this is the building's own drawing rather
-           than a shape that resembles one.
-           
-           Pushed most of the way below the section's foot, so what shows is
-           the dome, the finial and the top of the minaret rising out of the
-           edge, the way the mockup has it. The section is overflow-hidden,
-           which is what does the cutting. 20% gold: visible against paper,
-           never in competition with the type. */}
-        <ElevationMark
-          aria-hidden
-          className="pointer-events-none absolute -bottom-28 end-0 -z-10 h-48 w-auto text-gold-deep/[0.2]"
-        />
         <SectionBody>
           <span aria-hidden className="block h-px w-full bg-gold-deep/45" />
           <p className="mt-6 font-mono text-[0.625rem] uppercase tracking-[0.2em] text-gold-deep">
@@ -90,11 +74,6 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
           {/* The plate: his own invitation, set as the one quiet claim on the
              screen, with the page's single action under it. */}
           <div className="mt-7 rounded-2xl bg-paper-2 px-5 py-6">
-            {/* The mosque's own mark. It was an eight-point star I drew; the
-                 client pointed out that the Rabita logo is a ten-fold
-                 interlaced rosette, which it is — so this is the logo file
-                 rather than an approximation of it. */}
-            <Image src="/logo/rabita-mark-256.png" alt="" aria-hidden width={256} height={256} className="h-9 w-9" />
             <p className="mt-4 font-serif text-[1.2rem] leading-[1.35] text-ink">{pull}</p>
             <a
               href="#enquiry"
@@ -125,10 +104,6 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
             width={256}
             height={256}
             className="pointer-events-none absolute -top-10 -end-12 -z-10 h-44 w-44 opacity-[0.07]"
-          />
-          <RosetteMark
-            aria-hidden
-            className="pointer-events-none absolute -bottom-14 -start-16 -z-10 h-48 w-48 text-gold-deep/[0.05]"
           />
           <SectionBody>
             {/* Eyebrow, then a headline of its own — the mockup's shape, and
@@ -188,10 +163,17 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
       {/* ── HOW IT WORKS ───────────────────────────────────────────────── */}
       {steps.length > 0 && (
         <Section tone="paper-2" className="relative isolate overflow-hidden py-12">
-          {/* The corner mark the mockup frames this section with. */}
-          <RosetteMark
+          {/* The same corner mark as the section above, and the same file.
+             It was RosetteMark — the geometry's construction drawing — which
+             at this size and opacity read as a stray artefact rather than a
+             mark. The client's words were that it looks fake, and it did. */}
+          <Image
+            src="/logo/rabita-mark-256.png"
+            alt=""
             aria-hidden
-            className="pointer-events-none absolute -top-8 end-5 -z-10 h-24 w-24 text-gold-deep/25"
+            width={256}
+            height={256}
+            className="pointer-events-none absolute -top-10 -end-12 -z-10 h-44 w-44 opacity-[0.07]"
           />
           <SectionBody>
             <div className="flex items-center gap-4">
