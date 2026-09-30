@@ -240,6 +240,24 @@ dialog {
   max-height: 100vh;
 }
 
+/* ── NO FOCUS RING ON THE DIALOG BOX ITSELF (client, 2026-09-30) ──────────
+   showModal() puts focus on the <dialog> when nothing inside it is focusable
+   yet, and the timed CTA mounts its body one tick after opening, so that is
+   every time. Safari then paints its own blue ring around the whole card,
+   which is the rectangle in his screenshot.
+
+   Neither rule above catches it: the ring at line 66 is ours and rust, and
+   `dialog` is not in its :where() list; and `:focus:not(:focus-visible)`
+   misses because Safari counts a scripted focus on the dialog as visible.
+
+   Nothing is lost by removing it. The dialog is a container, not a control —
+   Tab moves straight to the close button, which keeps the rust ring, as does
+   every other control inside. */
+dialog:focus,
+dialog:focus-visible {
+  outline: none;
+}
+
 /* The seal on the visit photograph. One slow turn, and none at all for anyone
    who has asked for less movement. */
 @keyframes seal-turn {
