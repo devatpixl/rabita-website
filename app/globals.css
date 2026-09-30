@@ -468,6 +468,42 @@ body.sheet-open {
   }
 }
 
+/* ── THE CURTAIN IS OFF ON PHONES (client, 2026-09-30) ─────────────────────
+   "it shows rectangle and takes a second to make it round, i dont want this
+   delay in mobile".
+
+   Both halves of that are the same thing. .rv-mask is an opaque paper panel
+   over the whole card that retracts on a 1.15s scaleY. While it transforms it
+   is composited, and iOS Safari does not rasterise an ancestor's border-radius
+   onto a composited child — so for the length of the animation the card's
+   corners render SQUARE, then snap round when the layer is destroyed. The
+   card already carries [transform:translateZ(0)] for exactly this reason (see
+   service-grid.tsx); it is enough on desktop Safari and is not on iOS.
+
+   Two fixes, because they cover different ground:
+
+   1. border-radius: inherit on the mask itself. It is always a direct child
+      of the rounded card, so this rounds the panel whether or not the parent
+      manages to clip it. Cheap, and it fixes the same flash anywhere the
+      curtain still runs.
+
+   2. display: none below md. That removes the second of waiting as well as
+      the flash, which is what he actually asked for.
+
+   The quieter reveals stay on phones: .rv-up, .rv-num, .rv-ghost and .rv-zoom
+   fade and settle without covering anything, so they cost no wait and cannot
+   flash a corner. If the remaining fade still reads as a delay, this same
+   block takes them too. */
+.rv-mask {
+  border-radius: inherit;
+}
+
+@media (max-width: 767.98px) {
+  .rv-mask {
+    display: none;
+  }
+}
+
 /* Two red pulses on a required field the donor missed — the silent stand-in
    for the removed "Påkrevd" label. Two, not a loop: it points, then stops.
    Under reduced motion the border simply holds red for the same beat. */
