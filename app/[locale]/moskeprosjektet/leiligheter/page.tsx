@@ -315,12 +315,9 @@ export default async function ApartmentsPage({
                first two items spanning three and the last three spanning
                two, gives 2 + 3 in two rows.
 
-               The first two are also drawn larger — a taller arch and a
-               bigger title — so the rows read as a hierarchy rather than a
-               grid that ran out of items. The three below keep their arch
-               and their name; their one-line gloss is the thing that goes,
-               because at 118px a column it wraps to four lines and the
-               height this change is meant to save comes straight back.
+               All five are drawn at one size and show their name only —
+               see the note on the plate below. The split is a shape, not a
+               ranking.
 
                max-sm:, NOT max-md:. The band from 640 to 767 is on
                sm:grid-cols-3 and `sm:` is emitted after `max-md:`, so a
@@ -346,39 +343,28 @@ export default async function ApartmentsPage({
                 >
                   {/* The arch: the building's own doorway shape as the icon
                      plate. */}
-                  <span
-                    className={cn(
-                      'grid place-items-center rounded-t-full rounded-b-xl bg-paper-deep/60 md:h-[4.5rem] md:w-16',
-                      lead ? 'h-16 w-[3.5rem] max-sm:h-[4.75rem] max-sm:w-[4.25rem]' : 'h-16 w-[3.5rem] max-sm:h-[3.25rem] max-sm:w-11',
-                    )}
-                  >
-                    <QualityIcon
-                      name={k}
-                      className={cn('text-gold-deep', lead ? 'h-6 w-6 max-sm:h-7 max-sm:w-7' : 'h-6 w-6 max-sm:h-5 max-sm:w-5')}
-                    />
+                  {/* All five the same size, and names only (client,
+                     2026-09-30: "why extra text for the top 2 ... show
+                     headings only in all and dont make them too big").
+                     The first pass enlarged the leading pair and kept their
+                     gloss, which made the two rows a hierarchy — he does not
+                     want one. The rows are now just a shape: two wider
+                     columns, three narrower, one type size throughout.
+
+                     The gloss goes on phones for all five rather than three.
+                     It is a real loss there — "Klasserom for barn og unge,
+                     1.–7. klasse" is only said here — and it is his call;
+                     everything is intact from sm. */}
+                  <span className="grid h-16 w-[3.5rem] place-items-center rounded-t-full rounded-b-xl bg-paper-deep/60 max-sm:h-[3.5rem] max-sm:w-12 md:h-[4.5rem] md:w-16">
+                    <QualityIcon name={k} className="h-6 w-6 text-gold-deep max-sm:h-[1.35rem] max-sm:w-[1.35rem]" />
                   </span>
-                  <span
-                    className={cn(
-                      'mt-3 font-mono tracking-[0.14em] text-gold-deep',
-                      lead ? 'text-[0.6875rem]' : 'text-[0.6875rem] max-sm:mt-2 max-sm:text-[0.625rem]',
-                    )}
-                  >
+                  <span className="mt-3 font-mono text-[0.6875rem] tracking-[0.14em] text-gold-deep max-sm:mt-2.5 max-sm:text-[0.625rem]">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <h3
-                    className={cn(
-                      'mt-1 max-w-[16ch] font-serif leading-tight text-ink',
-                      lead ? 'text-[1.02rem] max-sm:text-[1.15rem]' : 'text-[1.02rem] max-sm:text-[0.9rem]',
-                    )}
-                  >
+                  <h3 className="mt-1 max-w-[16ch] font-serif text-[1.02rem] leading-tight text-ink max-sm:text-[0.95rem]">
                     {t(`quality.items.${k}.title`)}
                   </h3>
-                  <p
-                    className={cn(
-                      'mt-1.5 max-w-[22ch] text-[12.5px] leading-snug text-ink-60',
-                      !lead && 'max-sm:hidden',
-                    )}
-                  >
+                  <p className="mt-1.5 max-w-[22ch] text-[12.5px] leading-snug text-ink-60 max-sm:hidden">
                     {t(`quality.items.${k}.body`)}
                   </p>
                 </li>
