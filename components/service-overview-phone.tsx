@@ -102,22 +102,31 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
               </p>
               <span aria-hidden className="h-px w-10 bg-gold-deep/45" />
             </div>
+            {/* ── A BULLET, NOT AN ICON (client, 2026-09-30) ─────────────
+               The mockup gave each card a little drawing of what it
+               describes. Doing that honestly means 54 of them — three for
+               each of eighteen services — and this repo already records
+               where that road goes: eight service marks were drawn once and
+               the client's verdict was that they look fake, which they did.
+               A generic star in a circle was the compromise, and he did not
+               like that either, rightly: it said nothing about the item it
+               sat beside.
+
+               So the card carries the gold diamond the site already uses as
+               its bullet, at the size the lost tile leaves room for. It is
+               the page's own mark rather than a new one, and it claims
+               nothing about the item. */}
             <ul className="mt-6 space-y-3.5">
               {offer.map((o) => (
                 <li
                   key={o.title}
-                  className="flex items-start gap-4 rounded-2xl border border-gold-deep/20 bg-paper px-4 py-5"
+                  className="flex items-start gap-3.5 rounded-2xl border border-gold-deep/20 bg-paper px-5 py-5"
                 >
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-paper-2">
-                    <StarGlyph className="h-[1.35rem] w-[1.35rem] text-gold-deep" />
-                  </span>
-                  <div className="min-w-0 pt-0.5">
-                    <p className="flex gap-2.5 font-serif text-[1.15rem] leading-[1.25] text-ink">
-                      <span aria-hidden className="mt-[0.55rem] block h-1.5 w-1.5 shrink-0 rotate-45 bg-gold-deep" />
-                      <span>{o.title}</span>
-                    </p>
+                  <span aria-hidden className="mt-[0.5rem] block h-2 w-2 shrink-0 rotate-45 bg-gold-deep" />
+                  <div className="min-w-0">
+                    <p className="font-serif text-[1.15rem] leading-[1.3] text-ink">{o.title}</p>
                     {o.body && (
-                      <p className="mt-2 ps-[1rem] text-[0.875rem] leading-[1.55] text-ink-60">{o.body}</p>
+                      <p className="mt-2 text-[0.875rem] leading-[1.55] text-ink-60">{o.body}</p>
                     )}
                   </div>
                 </li>
