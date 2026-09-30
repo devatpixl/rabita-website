@@ -729,7 +729,28 @@ export const SERVICE_STORY: Partial<
   // Client, Bildeplassering (2026-09-19). pexels-tahir-osman — tawaf at the Kaaba.
   // PORTRAIT, so it is registered in PORTRAIT_PHOTOS below or the frame
   // renders 4:3 and crops the Kaaba out of its own picture.
-  'hajj-umrah': { src: '/photos/subj-hajj-kaaba.webp', objectClass: 'object-[50%_55%]' },
+  // ── RECUT LANDSCAPE (2026-09-30) ───────────────────────────────────
+  // The 1200x1500 was his Bildeplassering pick and it is 0.80, so in a 2:1
+  // opener it was cropped to 40% of its height and the Kaaba filled the
+  // frame. The pexels original he chose is 4160x6240, which has the room for
+  // a full-width 1.8 band: the Kaaba's gold-banded cloth, the arches and the
+  // lanterns, and the tawaf blurred with motion below it.
+  //
+  // object-center, and the 50%_55% steer is gone with the portrait it was
+  // measured against — a landscape source in a wide box wants centre.
+  //
+  // Same photograph, recut, not replaced. subj-hajj-kaaba.webp stays as the
+  // 4:5 this reverts to.
+  // A phone source too, for the same reason shahada has one: a 1.8 file in a
+  // 0.617 box shows 34% of its width, which would put the reader inside the
+  // Kaaba's cloth. The phone file is the original at 0.83 — 74% of its width
+  // survives — so the Kaaba, the lanterns and the tawaf all stay in frame.
+  'hajj-umrah': {
+    src: '/photos/subj-hajj-kaaba-wide.webp',
+    objectClass: 'object-center',
+    srcPhone: '/photos/subj-hajj-kaaba-phone.webp',
+    objectClassPhone: 'object-[50%_45%]',
+  },
   // The source was saved on its side and rendered on its side (client,
   // 2026-09-10: "why is this image rotated?"). The turn is baked into the
   // file now, so the news-events card that also uses it is fixed with it.

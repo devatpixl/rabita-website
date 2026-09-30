@@ -65,7 +65,8 @@ import { SERVICE_CONTACT, SERVICE_IMAGE, SERVICE_STORY, type ServiceKey } from '
 // What is left is the services still on portrait files. counselling has no
 // landscape frame to move to; hajj-umrah was never changed.
 const HERO_POSITION: Partial<Record<ServiceKey, string>> = {
-  'hajj-umrah': '50% 45%',
+  // hajj-umrah lost its entry on 2026-09-30 when its source became a 1.8
+  // landscape — the same reason skole, shahada, janaza and koran lost theirs.
   counselling: '50% 45%',
 };
 
