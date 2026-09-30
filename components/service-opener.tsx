@@ -47,13 +47,25 @@ import { SERVICE_CONTACT, SERVICE_IMAGE, SERVICE_STORY, type ServiceKey } from '
 //   counselling hands and cups at 40–65%                          → 45%
 // Landscape sources keep SERVICE_STORY's own objectClass. On a phone the box
 // is portrait and shows most of the frame, so these barely move anything.
+// Per-service vertical steer, for PORTRAIT sources only.
+//
+// ── WHY THREE ENTRIES LEFT ON 2026-09-30 ──────────────────────────────────
+// Every number here was measured against a 4:5 file. In a wide box a tall
+// source is cropped on its height, and these push the visible band up so the
+// subject is not cut off at the chin.
+//
+// shahada, janaza and koran all became landscape on 2026-09-30, and a number
+// tuned for a 0.8 source is actively wrong on a 1.33 one: 22% on the new
+// shahada file put the band on the crown of his head, which is how the client
+// saw it. They now fall through to their own objectClass, which is
+// object-center, and centre is right for a landscape source in a wide box.
+//
+// skole lost its entry on 2026-09-29 for the same reason.
+//
+// What is left is the services still on portrait files. counselling has no
+// landscape frame to move to; hajj-umrah was never changed.
 const HERO_POSITION: Partial<Record<ServiceKey, string>> = {
-  janaza: '50% 25%',
-  shahada: '50% 22%',
   'hajj-umrah': '50% 45%',
-  // skole no longer needs one: its hero source became a 5313x3125 landscape
-  // on 2026-09-29 (the client's own 4.png), so there is no portrait to steer.
-  koran: '50% 35%',
   counselling: '50% 45%',
 };
 
