@@ -169,12 +169,13 @@ export async function ServiceOpener({ s, crumb }: { s: ServiceKey; crumb: string
                was right that it is too much there: the hero stops being an
                opening and becomes a paragraph.
                
-               The phone line keeps the two claims that do the work — first
-               call on the services this very page is about, and that it
-               costs nothing — plus the link. The newsletter, the invitations
-               and the vote are not dropped from the site; they are on
-               /bli-medlem, which is where the link goes, and they are still
-               here in full from md. Same sentence, fewer clauses. */}
+               The phone line carries two benefits and the link. It named
+               "gratis" until 2026-09-30, when the client asked for that out
+               of the phone copy and for a benefit back in its place — so the
+               newsletter and the invitations return and the price claim goes.
+               The vote is the one clause still only on md and up, and on
+               /bli-medlem, which is where the link goes. Same sentence,
+               fewer clauses — not a different offer. */}
             {(() => {
               const linkFmt = {
                 link: (chunks: React.ReactNode) => (

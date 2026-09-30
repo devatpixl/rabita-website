@@ -105,9 +105,12 @@ export function PrayerTimesWidget() {
       <PhoneRail today={today} now={now} passed={passed} t={t} />
       <DeskRail today={today} nextKey={next?.key ?? null} countdown={countdown} t={t} />
 
-      {/* Jumu'ah keeps its place from lg. It is a weekly fact rather than a
-         today fact, so it is the first thing to yield width, not the times. */}
-      <span className="hidden shrink-0 whitespace-nowrap font-mono text-[12px] uppercase tracking-[0.08em] tabular-nums text-ink-60 lg:inline xl:text-[13px]">
+      {/* Jumu'ah keeps its place from xl, not lg. It is a weekly fact rather
+         than a today fact, so it is the first thing to yield width, not the
+         times — and at lg it was not yielding, it was overflowing: measured
+         at 1024 the rail ran 146px past its container. It fits from 1280 with
+         48px to spare. */}
+      <span className="hidden shrink-0 whitespace-nowrap font-mono text-[12px] uppercase tracking-[0.08em] tabular-nums text-ink-60 xl:inline 2xl:text-[13px]">
         {t('jumua')} {joinJumuah(jumuah)}
       </span>
 
@@ -271,14 +274,24 @@ function DeskRail({
   t: (k: string) => string;
 }) {
   return (
-    <ul className="hidden flex-1 md:flex md:justify-start md:gap-x-4 lg:gap-x-5 xl:gap-x-7">
+    <ul className="hidden flex-1 md:flex md:justify-start md:gap-x-3 lg:gap-x-4 xl:gap-x-5 2xl:gap-x-7">
       {ORDER.map((key) => {
         const isNext = nextKey === key;
         const isSunrise = key === 'sunrise';
         return (
           <li
             key={key}
-            className="flex items-baseline gap-2 whitespace-nowrap font-mono text-[12px] uppercase tracking-[0.08em] tabular-nums xl:text-[13px]"
+            // ── 13px FROM 2xl, NOT xl (2026-09-30) ────────────────────
+            // At exactly 1280 two things happened at once: xl bumped the
+            // type to 13px and Jumu'ah was already showing from lg. Measured
+            // there, the chevron started at x=1296 on a 1280 viewport — the
+            // rail ran off the screen. The client saw the squeezed version of
+            // this on a MacBook.
+            //
+            // Moving the bump to 2xl leaves 1280-1535 on 12px, which is what
+            // the six times plus a weekly Friday line actually fit in. Below
+            // lg Jumu'ah is hidden anyway and there was never a problem.
+            className="flex items-baseline gap-2 whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.06em] tabular-nums lg:text-[12px] lg:tracking-[0.08em] 2xl:text-[13px]"
           >
             <span className={isNext ? 'text-gold-deep' : 'text-ink-60'}>
               {t(`names.${key}`)}
