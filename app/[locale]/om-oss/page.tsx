@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ArchMark } from '@/components/marks';
 import { AnnualReports } from '@/components/annual-reports';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
@@ -304,7 +305,16 @@ export default async function AboutPage({
 
             <Link
               href={`/${locale}/moskeprosjektet`}
-              className="group mt-10 inline-flex min-h-11 items-center gap-3 border-t border-ink/15 pt-6 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink transition-colors hover:text-gold-deep"
+              /* ── A PILL ON PHONES (client, 2026-09-30) ─────────────────
+                 From md this is a text link under a hairline, which is right
+                 in a two-column spread where the rule closes the measure. On
+                 a phone there is no second column for the rule to close, so
+                 it read as a stray line with a link hanging off it. The
+                 client's design has it as a bordered pill instead, which is
+                 also the shape every other action on this site takes. The
+                 hairline goes with it — `max-md:border-t-0`, since the border
+                 is unprefixed. */
+              className="group mt-10 inline-flex min-h-11 items-center gap-3 border-t border-ink/15 pt-6 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink transition-colors hover:text-gold-deep max-md:mt-9 max-md:rounded-full max-md:border max-md:border-t max-md:border-gold-deep/45 max-md:px-6 max-md:py-3.5 max-md:pt-3.5 max-md:text-gold-deep"
             >
               {tpo('cta')}
               <span
@@ -314,6 +324,23 @@ export default async function AboutPage({
                 &rarr;
               </span>
             </Link>
+
+            {/* ── THE ARCH, UNDER THE ACTION (client, 2026-09-30) ────────
+               His design closes this section with a mihrab drawn in line, a
+               star over its point. ArchMark is that drawing and it already
+               exists in this repo — niche, jambs, columns and the hanging
+               lamp — and it was on this very section until 2026-09-23, when
+               it was removed from the DESKTOP for competing with the arcade
+               photograph across the spread.
+
+               Nothing competes with it on a phone: there is no second column
+               and the photograph is not there. So it comes back here only,
+               centred under the action, at 25% gold — a closing device
+               rather than an illustration. */}
+            <span aria-hidden className="mt-11 flex flex-col items-center md:hidden">
+              <span className="mb-1 block h-2.5 w-2.5 rotate-45 bg-gold-deep/55" />
+              <ArchMark className="-mt-5 h-28 w-auto text-gold-deep/30" />
+            </span>
           </SectionBody>
         </div>
       </section>
