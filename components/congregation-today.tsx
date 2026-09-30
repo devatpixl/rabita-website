@@ -768,8 +768,38 @@ function TextBlock({
           <FigureInline figure={figure} />
         </div>
       )}
+      {/* ── ONE SENTENCE ON A PHONE (client, 2026-09-30: "show lesser
+         text here on mobiles only") ─────────────────────────────────────
+         Measured first: nothing here runs past two lines today, at 390 or
+         360, in any of the three locales. So this is not a wrapping fix, it
+         is less text — and the only text I can take away without writing
+         any is a trailing second sentence.
+
+         Two of the thirteen have one: `education` ("... Waiting lists in
+         every class.") and `youth` ("... Safe places for the youngest."),
+         in all three locales. The other eleven are single sentences already
+         and are untouched by this — they render identically.
+
+         Split on sentence-end + space, never on the Arabic comma: several
+         Arabic strings use ، inside one sentence and splitting there would
+         cut them mid-clause. Same expression as service-overview-phone.tsx.
+
+         Paired branch rather than a clamp: a line-clamp truncates with an
+         ellipsis mid-word, and the full text is the client's and belongs on
+         the laptop where there is room for it. */}
       <p
-        className="text-ink-60"
+        className="text-ink-60 md:hidden"
+        style={{
+          marginTop: '14px',
+          fontSize: 'clamp(14px, 1.1vw, 15px)',
+          lineHeight: 1.62,
+          maxWidth: '62ch',
+        }}
+      >
+        {sentence.split(/(?<=[.!?])\s+/)[0] ?? sentence}
+      </p>
+      <p
+        className="text-ink-60 hidden md:block"
         style={{
           marginTop: '14px',
           fontSize: 'clamp(14px, 1.1vw, 15px)',
