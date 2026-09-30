@@ -626,14 +626,36 @@ export function CongregationToday() {
            (down from 20) so the larger heading above fits the budget
            at 1280×800. */}
         <div
-          className="mt-4 mx-auto max-w-6xl w-full px-6 max-md:order-2 max-md:mb-6"
+          // max-md:mb-1, was mb-6. Measured at 390 after the link went
+          // sr-only: 70px stood between the last line of the sentence and the
+          // top of the photograph, and only 32 of it was the rail's own space
+          // for the big numeral. The rest was 14px of leftover floor and 24px
+          // of this margin, both of which were sized for a line that is no
+          // longer drawn.
+          className="mt-4 mx-auto max-w-6xl w-full px-6 max-md:order-2 max-md:mb-1"
           aria-live="polite"
         >
           {/* Fixed height, so a one-line service and a two-line one with a
              figure occupy the same space and nothing below the carousel
              moves as the cards change. Sized for title + figure line + two
-             lines of sentence + the link. */}
-          <div className="mx-auto text-center" style={{ maxWidth: '62ch', minHeight: '11.5rem' }}>
+             lines of sentence + the link.
+             
+             On phones the link is sr-only, so the box no longer has to
+             reserve room for it. It was a third of the height: 11.5rem held
+             184px for about 126px of content, and that surplus is the empty
+             band the client was looking at. Moved off the inline style,
+             because an inline minHeight cannot be overridden by a class.
+
+             8.75rem is 140px, measured rather than picked: the tallest of
+             the thirteen slides is 126px (nikah) in Norwegian and English
+             and 103px in Arabic, at both 360 and 390. That leaves 14px of
+             headroom, so a translation can grow a little without the rail
+             below starting to jump again — which is the whole reason this
+             box has a floor. */}
+          <div
+            className="mx-auto text-center min-h-[11.5rem] max-md:min-h-[8.75rem]"
+            style={{ maxWidth: '62ch' }}
+          >
             {reduced ? (
               <TextBlock
                 title={t(`slides.${activeKey}.title` as never)}
@@ -714,9 +736,24 @@ function TextBlock({
       >
         {sentence}
       </p>
+      {/* ── OFF THE SCREEN ON PHONES, BUT NOT OUT OF THE PAGE ────────────
+         The client asked for "Read more" gone from the phone (2026-09-30),
+         and visually it is. It cannot simply be deleted there, though: the
+         centre card's photograph IS a link to the same page, but it carries
+         aria-hidden and tabIndex -1 on purpose — see the note on it — so
+         that a screen reader is not offered the same href twice. Hide this
+         line with `hidden` and a phone has a section of thirteen services
+         with no route out of it for anyone not using a pointer.
+
+         `sr-only` takes it out of the flow, so the space closes exactly as
+         `hidden` would, while keeping it in the accessibility tree. The
+         photograph remains the visible affordance, and it is a real anchor,
+         so tapping it still works. `focus-visible:not-sr-only` brings the
+         line back the moment it is tabbed to, which is what stops this being
+         the hidden-focusable trap it would otherwise be. */}
       <Link
         href={href}
-        className="group mt-4 inline-flex min-h-11 items-center gap-2 text-[14px] font-semibold text-ink transition-colors hover:text-gold-deep"
+        className="group mt-4 inline-flex min-h-11 items-center gap-2 text-[14px] font-semibold text-ink transition-colors hover:text-gold-deep max-md:sr-only focus-visible:not-sr-only"
       >
         <span className="border-b border-gold pb-0.5">{linkLabel}</span>
         <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">
