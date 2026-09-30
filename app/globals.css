@@ -855,7 +855,12 @@ body.sheet-open {
    is derived from it. */
 @media (max-width: 767.98px) {
   :root {
-    --cong-card-h: clamp(300px, 44svh, 420px);
+    /* 44svh -> 50svh, 420 -> 460 (client, 2026-09-30: "the card here should
+       be a little more bigger"). The room came from the same screenshot round:
+       the figure line went off the phone and the text box floor with it, 140px
+       -> 104px, so 36 of the 51px this adds was already free. At 390x844 the
+       card goes 371 -> 422. */
+    --cong-card-h: clamp(320px, 50svh, 460px);
   }
 }
 
