@@ -207,7 +207,18 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
                 <span
                   className={cn(
                     'font-mono text-[0.6875rem] uppercase tracking-[0.18em]',
-                    passed ? 'text-ink-40' : 'text-ink-60',
+                    // ── PASSED IS GREEN-GREY, NOT PALE GREY (2026-09-30) ──
+                    // ink-40 is #A09F9C, a warm grey, and against this warm
+                    // paper it read as washed out — the client's word was
+                    // dull. ink-60 is #5B6157, which is the site's OWN green:
+                    // a desaturated sage that is already the secondary text
+                    // colour everywhere else here. Cooler, greener and much
+                    // more legible, and it introduces no new brand colour.
+                    //
+                    // The passed/upcoming distinction survives on the FIGURE
+                    // below, which stays ink-60 against ink — the names were
+                    // never carrying it alone.
+                    passed ? 'text-ink-60' : 'text-ink-60',
                   )}
                 >
                   {tv(`names.${key}`)}
@@ -215,7 +226,10 @@ export function PrayerBoard({ eyebrow }: { eyebrow?: string }) {
                 <span
                   className={cn(
                     'shrink-0 font-serif text-[1.55rem] leading-none tabular-nums',
-                    passed ? 'text-ink-40' : 'text-ink',
+                    // Same move on the figure: ink-60's green-grey instead of
+                    // ink-40's washed grey, against ink for the ones still to
+                    // come. That contrast is what says which have been.
+                    passed ? 'text-ink-60' : 'text-ink',
                   )}
                 >
                   {today ? today[key] : '—'}
