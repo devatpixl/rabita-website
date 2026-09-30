@@ -121,7 +121,14 @@ export default async function ServiceDetail({
                  generic fallback. No promise of days: that number is the
                  client's to give, and a promise he cannot keep is worse
                  than none. */}
-              <aside className="mt-12 md:col-span-5 md:mt-0 md:border-s md:border-rule md:ps-10 lg:ps-14">
+              {/* max-md:hidden (client, 2026-09-30: "remove this in all
+                 services, under the form ... from mobiles only"). From md it
+                 is the column BESIDE the form, which is what it was drawn to
+                 be — three short lines in the space the form leaves. Stacked
+                 on a phone it is not that: it is three more paragraphs after
+                 the send button, telling someone who has just been asked to
+                 act what will happen if they do. Kept in full from md. */}
+              <aside className="mt-12 max-md:hidden md:col-span-5 md:mt-0 md:border-s md:border-rule md:ps-10 lg:ps-14">
                 <h3 className="font-serif text-[clamp(1.3rem,1.9vw,1.55rem)] leading-[1.18] text-ink">{t('detail.next')}</h3>
                 <ol className="mt-5">
                   {(t.raw('detail.nextSteps') as string[]).map((line, i, arr) => {

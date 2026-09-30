@@ -357,13 +357,25 @@ export function ContactFab() {
           // where it sat on the credit line. Everything from sm: up is
           // untouched.
           //
-          // The floor is min-h-11 — 44px, the tap-target minimum — and the
-          // word stays. Dropping to an icon-only disc would take less room
-          // again, but the word IS the design here (see above), and a bare
-          // speech bubble is the stock-widget look this was drawn to avoid.
-          className="pointer-events-auto inline-flex min-h-11 items-center gap-2 rounded-full bg-gold-deep ps-4 pe-5 text-paper sm:min-h-[3.25rem] sm:gap-2.5 sm:ps-5 sm:pe-6 shadow-[0_8px_28px_-8px_rgba(26,26,24,0.6)] transition-[background-color,transform] duration-200 hover:bg-ink hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-deep/60 focus-visible:ring-offset-2 focus-visible:ring-offset-paper motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+          // ── AND ON A PHONE IT IS NOW THE DISC AFTER ALL (2026-09-30) ──
+          // The note above argued against exactly this, and the client has
+          // asked for it: "this button can become round and small with just
+          // the icon ... its taking too much space now on mobile, on laptops
+          // let it stay like it is now."
+          //
+          // He is right about the space. The pill floats over the foot of
+          // every page, and on a 390px screen a worded pill covers a third of
+          // the width of whatever is under it — which since the phone pass is
+          // usually a card or a photograph rather than empty paper.
+          //
+          // 44px square, which is the tap-target minimum, so it gives up
+          // width without giving up reach. The word is not deleted, it goes
+          // `sr-only`: the button keeps its accessible name, so a screen
+          // reader still hears "Spørsmål?" rather than an unnamed button.
+          // Everything from sm: up is exactly as it was.
+          className="pointer-events-auto inline-flex min-h-11 items-center gap-2 rounded-full bg-gold-deep ps-4 pe-5 text-paper max-sm:h-11 max-sm:w-11 max-sm:justify-center max-sm:gap-0 max-sm:ps-0 max-sm:pe-0 sm:min-h-[3.25rem] sm:gap-2.5 sm:ps-5 sm:pe-6 shadow-[0_8px_28px_-8px_rgba(26,26,24,0.6)] transition-[background-color,transform] duration-200 hover:bg-ink hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-deep/60 focus-visible:ring-offset-2 focus-visible:ring-offset-paper motion-reduce:transition-none motion-reduce:hover:translate-y-0"
         >
-          <svg viewBox="0 0 20 20" className="h-4 w-4 shrink-0 sm:h-[18px] sm:w-[18px]" aria-hidden>
+          <svg viewBox="0 0 20 20" className="h-4 w-4 shrink-0 max-sm:h-[19px] max-sm:w-[19px] sm:h-[18px] sm:w-[18px]" aria-hidden>
             <path
               d="M17 11.5a2.5 2.5 0 01-2.5 2.5H7l-4 3v-3H4.5A2.5 2.5 0 012 11.5v-6A2.5 2.5 0 014.5 3h10A2.5 2.5 0 0117 5.5z"
               fill="none"
@@ -372,7 +384,7 @@ export function ContactFab() {
               strokeLinejoin="round"
             />
           </svg>
-          <span className="text-[13.5px] font-semibold sm:text-[15px]">{t('open')}</span>
+          <span className="text-[13.5px] font-semibold max-sm:sr-only sm:text-[15px]">{t('open')}</span>
         </motion.button>
       )}
     </div>
