@@ -628,7 +628,23 @@ export const SERVICE_STORY: Partial<
   // is: it is not from the client's 2026-09-29 delivery, which I searched by
   // content across all 1021 files with no match. Against a 0.75 file that
   // crops to a strip in a wide frame, soft beats wrong.
-  janaza: { src: '/photos/subj-janaza.webp', objectClass: 'object-center' },
+  //
+  // ── THE WINDOW MOVES UP (client, 2026-09-30) ──────────────────────
+  // "move a bit up as its too lower and cant see heads of people". He is
+  // right and the arithmetic says why. The file is 1.5; a laptop hero box is
+  // 2.0-2.4, so object-cover matches WIDTH and shows 62-75% of the height.
+  // object-center therefore opened the window at 18.75% of the frame, and
+  // the heads in this photograph sit at 12-20% - so it cut them off at the
+  // top edge, which is what he photographed.
+  //
+  // 20% opens it at 7.5% instead: the heads and a little of the wall above
+  // them are inside, and the feet go instead, which no one misses in a
+  // photograph about standing prayer.
+  //
+  // Phones are untouched by this and it is not a judgement, it is the same
+  // arithmetic: in the phone box (0.617) a 1.5 file matches HEIGHT, so the
+  // whole height is already shown and the vertical position does nothing.
+  janaza: { src: '/photos/subj-janaza.webp', objectClass: 'object-[50%_20%]' },
   // Client, Bildeplassering (2026-09-19), IMG_8833 — his Seksjonsbilde for
   // Shahada. Cut 400px down from a 3648x5472: that window puts the face
   // larger and sets the lit crescent beside his head rather than crowding the

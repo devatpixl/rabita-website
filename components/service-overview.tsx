@@ -38,7 +38,13 @@ export async function ServiceOverview({ s }: { s: ServiceKey }) {
 
       <Section tone="paper" className="max-md:hidden md:py-section-lg">
         <SectionBody>
-          <div className="border-t border-ink pt-8 md:grid md:grid-cols-12 md:gap-12 md:pt-10 lg:gap-16">
+          {/* The full-measure ink rule that opened this section is gone
+             (client, 2026-09-30: "remove this horizontal line ... make sure
+             white so it looks good"). It drew a hard line straight under the
+             hero's curve, which is two edges doing the same job in 60px, and
+             the curve is the one he asked for. The padding stays, so nothing
+             below it moves. */}
+          <div className="pt-8 md:grid md:grid-cols-12 md:gap-12 md:pt-10 lg:gap-16">
             <div className="md:col-span-5">
               <Eyebrow tone="gold-deep">{t('detail.about')}</Eyebrow>
               <h2 className="mt-5 max-w-[14ch] font-serif text-[clamp(1.9rem,3.4vw,3rem)] leading-[1.08] tracking-[-0.015em] text-balance text-ink md:[font-variation-settings:'opsz'_144]">

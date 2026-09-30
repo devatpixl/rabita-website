@@ -6,9 +6,7 @@ import { HALL_HOST, HallBackdrop } from '@/components/hall-backdrop';
 import { ServiceOpener } from '@/components/service-opener';
 import { ServiceOverview } from '@/components/service-overview';
 import { ServiceRelated } from '@/components/service-related';
-import { CAMPAIGN } from '@/lib/campaign';
 import {
-  SERVICE_CONTACT,
   SERVICE_KEYS,
   SERVICE_PAGES,
   type ServiceKey,
@@ -74,7 +72,6 @@ export default async function ServiceDetail({
   // practical register beside it → the membership band → three related
   // services. The phone gets a standing Send button.
   const crumb = tnav(isTeaching ? 'items.teaching' : 'items.services');
-  const email = SERVICE_CONTACT[s]?.email ?? CAMPAIGN.contactEmail;
   return (
     <main>
       {/* Full-bleed photographic hero with the contact strip on its
@@ -97,14 +94,22 @@ export default async function ServiceDetail({
             <div className="mt-10 md:grid md:grid-cols-12 md:items-center md:gap-12 lg:gap-16">
               <div className="md:col-span-7">
                 <RequestForm subject={s as RequestSubject} card rule={false} />
-                {/* islamic.no closes its form on "eller kontakt oss direkte";
-                   one line, the same address the hero's second action carries. */}
-                <p className="mt-5 text-[14px] leading-snug text-ink-60">
-                  {t('detail.orWrite')}{' '}
-                  <a href={`mailto:${email}`} className="font-semibold text-ink underline decoration-gold underline-offset-4 hover:text-gold-deep">
-                    {email}
-                  </a>
-                </p>
+                {/* ── THE E-MAIL LINE UNDER THE FORM IS GONE ─────────────
+                   Client, 2026-09-30: "you invented these mails, remove
+                   these lines from all services". It read "Prefer e-mail?
+                   Write to <address>" and printed SERVICE_CONTACT's address
+                   for the service, or post@rabita.no where there is none.
+
+                   Removed on all eighteen, which is one deletion because
+                   they share this page. detail.orWrite stays in the message
+                   files unreferenced, which is this repo's convention.
+
+                   NOTE FOR WHOEVER PICKS THIS UP: no invented address is
+                   DISPLAYED anywhere after this, but SERVICE_CONTACT still
+                   supplies the mailto target behind the hero's "Skriv til
+                   oss" on seven services. That map is still open with the
+                   client — see its own comment, which records that the
+                   addresses were read off rabita.no. */}
               </div>
 
               {/* ── WHAT HAPPENS NEXT ─────────────────────────────────
