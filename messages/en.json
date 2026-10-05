@@ -2756,14 +2756,14 @@
         "orgNr": "Organisation number",
         "members": "Members",
         "address": "Address",
-        "hours": "Open",
+        "hours": "Open for prayer",
         "bank": "Bank account",
         "eyebrow": "Official information",
         "register": "Everything on record about the organisation",
         "copy": "Copy",
         "copied": "Copied"
       },
-      "hours": "Every day, 06:00 to 22:00"
+      "hours": "Fajr, Dhuhr to Isha"
     }
   },
   "calendar": {

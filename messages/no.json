@@ -2760,14 +2760,14 @@
         "orgNr": "Organisasjonsnummer",
         "members": "Medlemmer",
         "address": "Adresse",
-        "hours": "Åpent",
+        "hours": "Åpent for bønn",
         "bank": "Bankkonto",
         "eyebrow": "Offisiell informasjon",
         "register": "Alt du trenger å vite om organisasjonen",
         "copy": "Kopier",
         "copied": "Kopiert"
       },
-      "hours": "Hver dag, 06:00 til 22:00"
+      "hours": "Fajr, Dhuhr til Isha"
     }
   },
   "calendar": {
