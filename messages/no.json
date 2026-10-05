@@ -1296,7 +1296,7 @@
     "lede": "Ny moské og kultursenter i Calmeyers gate 8. Rammer, budsjett og tidsplan er offentlige.",
     "facts": {
       "heading": "Nøkkeltall",
-      "building": "Samlet areal",
+      "building": "Bruksareal",
       "floors": "Etasjer",
       "architect": "Arkitekt",
       "facilitiesLabel": "Fasiliteter",
@@ -2857,7 +2857,7 @@
     "briefShort": "Det gamle bygget er revet, og byggingen av vår nye moské er i gang. I Calmeyers gate 8 reiser vi en av Europas største nye moskéer, med bønnesal over tre etasjer, skole, bibliotek, kafé, restaurant, ungdomsklubb, flerbrukshall og takterrasse fordelt på over 6 000 kvadratmeter og sju etasjer. Dette blir et samlingspunkt for tro, læring og fellesskap i generasjoner fremover.",
     "cta": "Se moskeprosjektet",
     "figures": {
-      "area": "Samlet areal",
+      "area": "Bruksareal",
       "floors": "Etasjer",
       "apartments": "Leiligheter",
       "buildTime": "Byggetid",
@@ -3291,7 +3291,7 @@
   "followUs": {
     "eyebrow": "Følg oss",
     "title": "Huset er åpent — også <em>på nett</em>.",
-    "lede": "Bilder, kunngjøringer og korte klipp fra moskeen. Følg med der du allerede er.",
+    "lede": "Bilder, kunngjøringer og korte klipp fra hverdagen i Rabita. Følg med der du allerede er.",
     "action": "Følg",
     "channels": {
       "instagram": {
