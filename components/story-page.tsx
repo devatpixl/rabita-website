@@ -113,11 +113,14 @@ export function StoryColophon({
   hours: string;
   labels: ColophonLabels;
 }) {
-  // visitAddress already ends in the city ("Sørligata 8a, Oslo"), so
-  // appending visitPostal printed the city twice. Split rather than retype.
+  // visitStreet, not visitAddress: the latter ends in the city, so printing it
+  // above visitPostal gives "Sørligata 8a, Oslo / 0577 Oslo". This file solved
+  // that with a local split until 2026-10-06, when the same bug was found
+  // still live in the footer, /kontakt and prayer-visit; the split became a
+  // constant and all four now share it. See CAMPAIGN.visitStreet.
   // The VISITING address, not the plot: this colophon sits at the foot of six
   // pages telling a reader where Rabita is.
-  const street = CAMPAIGN.visitAddress.split(',')[0].trim();
+  const street = CAMPAIGN.visitStreet;
 
   // Derived from the org number in the cell above it, so the link and the
   // figure can never disagree.

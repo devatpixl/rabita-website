@@ -215,7 +215,7 @@ export function Footer({ map }: { map?: ReactNode }) {
                 <div className="flex min-w-0 flex-1 items-baseline gap-3 sm:block">
                   <dt className={cn(DT, 'w-20 shrink-0 sm:w-auto')}>{t('findUs.address')}</dt>
                   <dd className="min-w-0 flex-1 text-[14px] leading-snug text-paper sm:mt-1 sm:text-body">
-                    {CAMPAIGN.visitAddress} <span className="text-paper/60">· {CAMPAIGN.visitPostal}</span>
+                    {CAMPAIGN.visitStreet} <span className="text-paper/60">· {CAMPAIGN.visitPostal}</span>
                   </dd>
                 </div>
               </div>

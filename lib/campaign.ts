@@ -151,6 +151,18 @@ export const CAMPAIGN = Object.freeze({
   // Brønnøysund holds, which may be a third value again — both still print
   // `address` and are deliberately left alone pending the client's answer.
   visitAddress: 'Sørligata 8a, Oslo',
+  // The street ALONE, for the places that print the postal line underneath.
+  //
+  // visitAddress already ends in the city, so "{visitAddress} · {visitPostal}"
+  // rendered "Sørligata 8a, Oslo · 0577 Oslo" — Oslo twice, under the word
+  // "Adresse", in the footer of every page and on /kontakt. story-page.tsx hit
+  // this first and solved it locally with `visitAddress.split(',')[0]`; the
+  // other three call sites never got the same treatment, so the bug stayed
+  // live. One constant instead of the same split copied four times.
+  //
+  // visitAddress is NOT retired: /om-oss, the prayer calendar and the calendar
+  // footer print it on its own, where the city belongs in the string.
+  visitStreet: 'Sørligata 8a',
   visitPostal: '0577 Oslo',
   address: 'Calmeyers gate 8, Oslo',
   postalCity: '0183 Oslo',

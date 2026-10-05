@@ -91,7 +91,22 @@ export default async function LocaleLayout({
               <FindUsGoogle
                 locale={locale}
                 variant="map"
-                place="project"
+                /* Sørligata, NOT Calmeyers gate. The client's written
+                   instruction (Tekst (endelig) Sept 2026, quoted in full on
+                   the `place` prop in find-us-google.tsx) is that the footer
+                   map shows where the congregation IS — "Dette gjelder
+                   footeren på ALLE sider" — while the Moskeprosjektet and
+                   Leiligheter maps keep showing what is being BUILT.
+
+                   This said "project" from 2026-09-28, when the footer moved
+                   from the place embed to the landmark map, until 2026-10-06.
+                   The prop existed and carried the instruction; only the call
+                   site was wrong, so the footer printed "Sørligata 8a" over a
+                   map centred on the building site 900 m away. He raised it a
+                   second time on 2026-10-05 ("vi er ikke på denne adressen
+                   nå"). Changing this back without him asking would break the
+                   September instruction again. */
+                place="visit"
                 className="mx-auto max-w-[36rem] xl:max-w-none"
               />
             }

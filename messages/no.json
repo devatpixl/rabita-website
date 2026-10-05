@@ -1098,8 +1098,8 @@
       "isha": "Isha",
       "jumua": "Jumu'ah (fredag)"
     },
-    "photoAlt": "En besøkende ved inngangen til Rabita i Calmeyers gate",
-    "photoCaption": "Døra i Calmeyers gate. Kom som du er, så viser noen deg rundt."
+    "photoAlt": "En besøkende ved inngangen til Rabita",
+    "photoCaption": "Døra til moskeen. Kom som du er, så viser noen deg rundt."
   },
   "events": {
     "eyebrow": "NESTE ARRANGEMENT",
@@ -1296,7 +1296,7 @@
     "lede": "Ny moské og kultursenter i Calmeyers gate 8. Rammer, budsjett og tidsplan er offentlige.",
     "facts": {
       "heading": "Nøkkeltall",
-      "building": "Bygg",
+      "building": "Samlet areal",
       "floors": "Etasjer",
       "architect": "Arkitekt",
       "facilitiesLabel": "Fasiliteter",
@@ -2657,8 +2657,8 @@
         "eyebrow": "Besøk oss",
         "title": "Kom og se stedet.",
         "lede": "Skoleklasser, universitetsgrupper, naboer og alle som er nysgjerrige. Du trenger ingen grunn, og du trenger ikke være muslim.",
-        "caption": "Folk utenfor inngangen i Calmeyers gate 8",
-        "captionDoorway": "Inngangen i Calmeyers gate 8a, med folk samlet utenfor",
+        "caption": "Folk utenfor inngangen til moskeen",
+        "captionDoorway": "Inngangen til moskeen, med folk samlet utenfor",
         "facts": [
           {
             "term": "Adresse",
@@ -2857,7 +2857,7 @@
     "briefShort": "Det gamle bygget er revet, og byggingen av vår nye moské er i gang. I Calmeyers gate 8 reiser vi en av Europas største nye moskéer, med bønnesal over tre etasjer, skole, bibliotek, kafé, restaurant, ungdomsklubb, flerbrukshall og takterrasse fordelt på over 6 000 kvadratmeter og sju etasjer. Dette blir et samlingspunkt for tro, læring og fellesskap i generasjoner fremover.",
     "cta": "Se moskeprosjektet",
     "figures": {
-      "area": "Bruksareal",
+      "area": "Samlet areal",
       "floors": "Etasjer",
       "apartments": "Leiligheter",
       "buildTime": "Byggetid",
@@ -3291,7 +3291,7 @@
   "followUs": {
     "eyebrow": "Følg oss",
     "title": "Huset er åpent — også <em>på nett</em>.",
-    "lede": "Bilder, kunngjøringer og korte klipp fra Calmeyers gate 8. Følg med der du allerede er.",
+    "lede": "Bilder, kunngjøringer og korte klipp fra moskeen. Følg med der du allerede er.",
     "action": "Følg",
     "channels": {
       "instagram": {

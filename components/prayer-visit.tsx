@@ -56,7 +56,7 @@ export async function PrayerVisit() {
                   <dt className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-60">
                     {t('addressLabel')}
                   </dt>
-                  <dd className="mt-2 font-serif text-card text-ink">{CAMPAIGN.visitAddress}</dd>
+                  <dd className="mt-2 font-serif text-card text-ink">{CAMPAIGN.visitStreet}</dd>
                   <dd className="text-body text-ink-60">{CAMPAIGN.visitPostal}</dd>
                 </div>
                 <div>
