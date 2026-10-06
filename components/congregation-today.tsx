@@ -396,17 +396,27 @@ export function CongregationToday() {
            align-items: baseline; the indicator wrapper's vertical
            centre is nudged onto the statement's text baseline (see
            the transform inside). */}
-        {/* ── PHONES PUT THE WORDS ABOVE THE PICTURE (client, 2026-09-29) ──
-           "the image should be down and the text should be up". The DOM
-           order is statement, rail, dots, caption — which on a phone means
-           you meet a photograph before you are told what it is of.
+        {/* ── THE PHONE FOLLOWS THE DESKTOP ORDER AGAIN (2026-10-06) ──────
+           statement, rail, dots, caption — the DOM order, with no `order`
+           overrides on any of the four children at any width.
 
-           Done with `order` on the four children rather than by moving the
-           markup: the rail is an absolutely-positioned deck inside a
-           fixed-height relative box, and lifting it in the DOM would mean
-           duplicating it. order is inert from md, so the desktop row is
-           untouched. */}
-        <div className="mx-auto max-w-6xl w-full px-6 max-md:order-1">
+           Client, Mobilversjon: "ville kanskje satt teksten under hver
+           bildet slik som på nettsiden slik at det ikke blir rott mellom
+           «våre tjenester» og teksten til hver kategori."
+
+           THIS UNDOES HALF OF 2026-09-29, and only half. That round applied
+           "the image should be down and the text should be up" to this
+           carousel with order-1..4, which lifted the CAPTION above the rail
+           as well as the statement. But the statement was already first in
+           the DOM — it needed no help — so the only thing those four classes
+           actually achieved was stacking the per-card title and sentence
+           directly beneath the section heading. Two blocks of text under one
+           heading, and no way to tell at a glance which belonged to which:
+           his "rott".
+
+           The 29 September instruction still holds where it was aimed. The
+           section heading is above the picture, as it always was. */}
+        <div className="mx-auto max-w-6xl w-full px-6">
           <div className="flex items-baseline justify-between" style={{ gap: '32px' }}>
             {/* ── THE SIZE LIVES IN CLASSES, NOT THE STYLE OBJECT ────────
                Client, 2026-09-30: "the heading of our services is too small
@@ -458,7 +468,7 @@ export function CongregationToday() {
            any viewport; overflow-y stays visible so the active card's
            numeral bleeds above the top edge. */}
         <div
-          className="relative max-md:order-3"
+          className="relative"
           style={{
             marginTop: '32px',
             width: '100vw',
@@ -641,7 +651,7 @@ export function CongregationToday() {
            the picture it describes; under the rail it reads as a caption for
            what you are looking at, and it is where the thumb already is. */}
         <div
-          className="mt-5 flex items-center justify-center md:hidden max-md:order-4"
+          className="mt-5 flex items-center justify-center md:hidden"
           style={{ columnGap: '6px' }}
           role="tablist"
           aria-label={t('carouselLabel')}
@@ -660,7 +670,7 @@ export function CongregationToday() {
           // for the big numeral. The rest was 14px of leftover floor and 24px
           // of this margin, both of which were sized for a line that is no
           // longer drawn.
-          className="mt-4 mx-auto max-w-6xl w-full px-6 max-md:order-2 max-md:mb-1"
+          className="mt-4 mx-auto max-w-6xl w-full px-6 max-md:mb-1"
           aria-live="polite"
         >
           {/* Fixed height, so a one-line service and a two-line one with a
