@@ -380,34 +380,46 @@ export function NavBar() {
           <LanguageSwitcher />
         </div>
         {/* Phone give button. The utility strip is hidden below md and the
-           floating bar only arrives after 40vh, so until now a phone had no
-           way to give from the chrome at all on first paint. Icon only, with
-           the label carried by aria-label, which is what innocents.no does
-           with its donate glyph at this width. */}
-        {/* ── THE WORD, NOT JUST THE HEART (client, 2026-09-29) ───────────
-           "this heart button doesn't look like it's asking for a donation".
-           He is right, and the note above is where it went wrong: a bare
-           glyph with the label carried by aria-label is legible to a screen
-           reader and to nobody else. A heart on its own is a like, a
-           favourite, a saved item — every other product on a phone has
-           taught people that. Only the word says give.
+           floating bar only arrives after 40vh, so without this a phone has
+           no way to give from the chrome at all on first paint.
 
-           So the icon keeps its place and the label comes out of the
-           attribute and onto the button. aria-label goes with it: the
-           visible text is now the accessible name, and re-adding a longer
-           one ("Gi en gave") would leave voice control matching a phrase
-           that is not on screen. "Gi" is a prefix of it, so label-in-name
-           still holds.
+           ── IT WAS A HEART, THEN A HEART PLUS "Gi", NOW A WORD ───────────
+           Three rounds, and each one removed a thing that was not working.
 
-           Measured at 360px, the narrowest phone worth designing for: the
-           lockup is 150, this pill ~88 and the burger 44, inside 328 of
-           usable width. */}
+           1. ICON ONLY, label in aria-label (innocents.no does this). Client,
+              2026-09-29: "this heart button doesn't look like it's asking for
+              a donation." Correct — a heart on a phone is a like, a
+              favourite, a saved item. Every other product has taught people
+              that. Only the word says give.
+           2. HEART + "Gi". Client, Mobilversjon 2026-10-06: "Gi knappen bør
+              hete noe annet. Ser lite attraktiv ut." Also correct: a bare
+              imperative verb is abrupt in Norwegian in a way that "Give" and
+              "تبرّع" are not, so this was a Norwegian-only problem.
+           3. "Doner", no heart — the user's pick from four rendered at 360px.
+
+           THE HEART HAD TO GO FOR THE WORD TO FIT, and that is the right
+           trade on its own terms. Measured in Chrome at 360px, the narrowest
+           phone worth designing for: the pill is 65px with "Gi" and the
+           wordmark "Oslo Sentralmoské" ends 21px short of it. "Doner" with
+           the heart is 90px and COLLIDES with the wordmark; without it, 70px
+           and the 21px of air comes back. "Gi gave" without the heart was
+           79px / 12px and was the runner-up.
+
+           The glyph was never carrying the meaning — point 1 above is the
+           client saying so. Dropping it costs nothing a word does not
+           already do, in all three locales.
+
+           aria-label stays off: the visible text is the accessible name, and
+           adding a longer one ("Gi en gave") would leave voice control
+           matching a phrase that is not on screen.
+
+           HeartIcon is deleted, not left unreferenced — see the note where
+           it used to live, below ChevronIcon's neighbours. */}
         <button
           type="button"
           onClick={() => openGiveSheet()}
-          className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-gold-deep px-4 text-[13px] font-semibold text-paper transition-colors active:scale-[0.98] md:hidden"
+          className="inline-flex min-h-10 items-center rounded-full bg-gold-deep px-4 text-[13px] font-semibold text-paper transition-colors active:scale-[0.98] md:hidden"
         >
-          <HeartIcon className="h-3.5 w-3.5" />
           {t('giveShort')}
         </button>
 
@@ -437,13 +449,10 @@ export function NavBar() {
   );
 }
 
-function HeartIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
-      <path d="M12 21s-7.5-4.7-9.6-9A5.3 5.3 0 0 1 12 6.6 5.3 5.3 0 0 1 21.6 12c-2.1 4.3-9.6 9-9.6 9Z" />
-    </svg>
-  );
-}
+// HeartIcon lived here until 2026-10-06, when the phone give pill dropped the
+// glyph to make room for "Doner" (see the note on that button). Deleted rather
+// than left unreferenced so lint stays clean; it was eight lines and the path
+// is one `d` attribute in git history at 33f1fc2^ if it is ever wanted back.
 
 function ChevronIcon({ className }: { className?: string }) {
   return (
