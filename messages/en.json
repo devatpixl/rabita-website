@@ -1294,7 +1294,7 @@
     "lede": "A new mosque and cultural centre at Calmeyers gate 8. Programme, budget and timeline are public.",
     "facts": {
       "heading": "Key figures",
-      "building": "Floor area (BRA)",
+      "building": "Total area",
       "floors": "Floors",
       "architect": "Architect",
       "facilitiesLabel": "Facilities",
@@ -2855,7 +2855,7 @@
     "briefShort": "The old building has been demolished, and construction of our new mosque is under way. In Calmeyers gate 8 we are raising one of Europe’s largest new mosques, with a prayer hall across three floors, a school, a library, a café, a restaurant, a youth club, a multi-purpose hall and a roof terrace across over 6,000 square metres and seven floors. It will be a gathering place for faith, learning and community for generations to come.",
     "cta": "See the mosque project",
     "figures": {
-      "area": "Floor area (BRA)",
+      "area": "Total area",
       "floors": "Floors",
       "apartments": "Apartments",
       "buildTime": "Build time",

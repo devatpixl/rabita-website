@@ -1298,7 +1298,7 @@
     "lede": "Ny moské og kultursenter i Calmeyers gate 8. Rammer, budsjett og tidsplan er offentlige.",
     "facts": {
       "heading": "Nøkkeltall",
-      "building": "Bruksareal",
+      "building": "Samlet areal",
       "floors": "Etasjer",
       "architect": "Arkitekt",
       "facilitiesLabel": "Fasiliteter",
@@ -2859,7 +2859,7 @@
     "briefShort": "Det gamle bygget er revet, og byggingen av vår nye moské er i gang. I Calmeyers gate 8 reiser vi en av Europas største nye moskéer, med bønnesal over tre etasjer, skole, bibliotek, kafé, restaurant, ungdomsklubb, flerbrukshall og takterrasse fordelt på over 6 000 kvadratmeter og sju etasjer. Dette blir et samlingspunkt for tro, læring og fellesskap i generasjoner fremover.",
     "cta": "Se moskeprosjektet",
     "figures": {
-      "area": "Bruksareal",
+      "area": "Samlet areal",
       "floors": "Etasjer",
       "apartments": "Leiligheter",
       "buildTime": "Byggetid",
