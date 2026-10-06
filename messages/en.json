@@ -80,17 +80,17 @@
       "prayer": [],
       "services": [
         {
-          "label": "Shahada",
+          "label": "Becoming Muslim",
           "blurb": "An open conversation about Islam, and guidance if you want to take shahada.",
           "href": "/tjenester/shahada"
         },
         {
-          "label": "Nikah",
+          "label": "Marriage",
           "blurb": "The religious ceremony, once the marriage is registered.",
           "href": "/tjenester/nikah"
         },
         {
-          "label": "Janaza",
+          "label": "Funeral",
           "blurb": "The Janazah prayer in the mosque, and guidance for the family.",
           "href": "/tjenester/janaza"
         },
@@ -147,7 +147,7 @@
           "href": "/tjenester/koran"
         },
         {
-          "label": "Calligraphy and geometry",
+          "label": "The calligraphy and geometry school",
           "blurb": "Courses in Islamic calligraphy and geometric art.",
           "href": "/tjenester/kurs"
         },
@@ -162,7 +162,7 @@
           "href": "/tjenester/arabisk"
         },
         {
-          "label": "Norwegian",
+          "label": "A course in Norwegian",
           "blurb": "Norwegian classes for adults who fall outside the ordinary provision.",
           "href": "/tjenester/norsk"
         }

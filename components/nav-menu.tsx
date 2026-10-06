@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import Image from 'next/image';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { useLocale, useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
@@ -436,10 +437,37 @@ export function MobileNav() {
                   exit={{ x: '100%' }}
                   transition={{ type: 'spring', stiffness: 260, damping: 30 }}
                 >
+                  {/* ── THE MARK COMES WITH THE WORDMARK (client, Mobilversjon
+                     2026-10-06): "Sette inn figuren ved siden av logoen."
+
+                     The drawer header printed the two text lines alone, so
+                     opening the menu dropped the rosette that the header, the
+                     footer lockup and the phone footer all carry beside those
+                     exact words. The menu was the one place the lockup came
+                     apart.
+
+                     Same asset and same order as components/footer.tsx —
+                     mark, then orgName over wordmark — at 32px rather than
+                     the footer's 44, because this row is 56px tall and sits
+                     against a close button.
+
+                     alt="" and aria-hidden: the words next to it are the
+                     accessible name, so the mark is decorative here and must
+                     not be announced twice. */}
                   <div className="flex shrink-0 items-center justify-between px-5 py-4">
-                    <span className="flex flex-col font-serif leading-tight">
-                      <span className="text-[15px] font-medium text-paper">{t('orgName')}</span>
-                      <span className="text-[13px] italic text-paper/55">{t('wordmark')}</span>
+                    <span className="flex items-center gap-2.5">
+                      <Image
+                        src="/logo/rabita-mark-256.png"
+                        alt=""
+                        aria-hidden
+                        width={32}
+                        height={32}
+                        className="h-8 w-8 shrink-0"
+                      />
+                      <span className="flex flex-col font-serif leading-tight">
+                        <span className="text-[15px] font-medium text-paper">{t('orgName')}</span>
+                        <span className="text-[13px] italic text-paper/55">{t('wordmark')}</span>
+                      </span>
                     </span>
                     <button
                       type="button"
