@@ -43,14 +43,36 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
     ? (t.raw(`items.${s}.steps`) as { title: string; body: string }[])
     : [];
   const lede = t(`items.${s}.offerLede`);
-  // The plate quotes the FIRST sentence of his lede, which is the line that
-  // carries the invitation; the rest qualifies it and reads as a paragraph.
-  const sentences = lede.split(/(?<=[.!?])\s+/);
-  const pull = sentences[0] ?? lede;
-  // ...and the REST of that lede becomes the offer section's standfirst. It
-  // was being dropped on phones entirely, which is both a waste of his words
-  // and the reason that section had a heading and then bare cards.
-  const offerLedeRest = sentences.slice(1).join(' ').trim();
+  // ── THE PLATE NO LONGER QUOTES THE LEDE (client, Mobilversjon 2026-10-06)
+  //
+  // "Gjelder alle undersidene. Kanskje litt mye tekst? Vurdere å fjerne den
+  // andre bolken eller slå sammen med første teksten?" — he boxed the plate
+  // on /tjenester/janaza, directly under the About paragraph.
+  //
+  // It quoted the lede's FIRST sentence on the assumption that this is the
+  // line carrying the invitation. Checked across all eighteen services, that
+  // assumption holds for exactly ONE of them (shahada). Four have an
+  // invitation at all — nikah, janaza, hajj-umrah and shahada — and in three
+  // of those it is the SECOND sentence. The other thirteen have no invitation
+  // in the lede whatsoever.
+  //
+  // So on seventeen pages out of eighteen the plate was quoting a
+  // DESCRIPTION, immediately under a paragraph describing the same service.
+  // On janaza the body ends "Rabita tilbyr gjennomføring av Janazah-bønn i
+  // moskeen" and the plate opened "Ved dødsfall bistår vi familien med
+  // janazah-bønn i moskeen" — which is the repetition he is pointing at.
+  //
+  // NOTHING OF HIS IS DELETED. The whole lede now goes where the tail of it
+  // already went: the standfirst over "Hva vi tilbyr", which is the section
+  // those sentences actually describe. The plate keeps the page's single
+  // action and stops restating the paragraph above it.
+  //
+  // Done by moving rather than by rule. Picking the invitation sentence
+  // automatically would mean matching "ta kontakt" and its English and
+  // Arabic equivalents, which is a content heuristic in three languages for
+  // the benefit of four pages — and it would still leave thirteen plates
+  // quoting a description.
+  const offerLedeRest = lede.trim();
   const body = t.has(`items.${s}.longBodyShort`)
     ? t(`items.${s}.longBodyShort`)
     : t.has(`items.${s}.longBody`)
@@ -78,11 +100,10 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
 
           {/* The plate: his own invitation, set as the one quiet claim on the
              screen, with the page's single action under it. */}
-          <div className="mt-7 rounded-2xl bg-paper-2 px-5 py-6">
-            <p className="mt-4 font-serif text-[1.2rem] leading-[1.35] text-ink">{pull}</p>
+          <div className="mt-7 rounded-2xl bg-paper-2 px-5 py-5">
             <a
               href="#enquiry"
-              className="group mt-5 inline-flex min-h-11 items-center gap-2 text-[0.9375rem] font-semibold text-gold-deep"
+              className="group inline-flex min-h-11 items-center gap-2 text-[0.9375rem] font-semibold text-gold-deep"
             >
               <span className="border-b border-gold-deep/50 pb-1">{t('detail.request')}</span>
               <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">
