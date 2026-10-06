@@ -377,8 +377,12 @@ export function CongregationToday() {
     );
   });
 
+  // border-t border-rule: paper under Historie's paper-2 is an 8-point step
+  // and does not read as a boundary (client, Mobilversjon point 12 — see the
+  // note in apartments-sold.tsx for the measured grounds and why the seam
+  // goes only where the two tones are close).
   return (
-    <Section id="menigheten-i-dag" tone="paper" className="scroll-mt-20 !py-0">
+    <Section id="menigheten-i-dag" tone="paper" className="scroll-mt-20 !py-0 border-t border-rule">
       {/* Sized to its content, not to the viewport. The old
          min-height: 100svh centred the block in a full screen, and with the
          caption now a fixed height the leftover became a band of empty

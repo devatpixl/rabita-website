@@ -179,8 +179,47 @@ export function ApartmentsSold({ locale }: { locale: string }) {
   if (SLIDES.length === 0) return null;
   const active = SLIDES[i];
 
+  // ── A SEAM WHERE THE GROUNDS ARE CLOSE (client, Mobilversjon 2026-10-06)
+  //
+  // Point 12: "overgangene mellom vær seksjon må være tydligere. Nå når man
+  // scroller ned faller seksjonene litt i hverandre uten klare skille ...
+  // gjelder spesielt mellom våre tjenester, moskeprosjektet, leilighetene,
+  // innsamlede midler, sosiale medier."
+  //
+  // Measured grounds down the phone page:
+  //
+  //     Våre tjenester      paper    250,248,244
+  //     Moskeprosjektet     dusk      22, 36, 46
+  //     Leilighetene        dusk      22, 36, 46
+  //     Innsamlede midler   paper-2  242,238,231
+  //     Sosiale medier      sage     227,234,228
+  //
+  // A hairline goes ONLY where the two grounds are close enough that the
+  // boundary does not read on its own: paper-2 -> paper (8 points),
+  // dusk -> dusk (none at all) and paper-2 -> sage (15). The pale -> dark
+  // transitions already separate themselves, and ruling those too would add
+  // a line where there is no problem.
+  //
+  // Colour follows the site's own convention rather than a new token:
+  // border-rule on pale grounds, border-paper/15 on dark ones.
+  //
+  // /15 AND NOT /12, WHICH IS WHAT THE FOOTER ASKS FOR AND DOES NOT GET.
+  // Tailwind's default opacity scale is 0/5/10/20/25/... — there is no 12,
+  // so `border-paper/12` generates no rule and the element falls back to the
+  // default border colour, #E5E7EB. Confirmed in the built stylesheet: /10,
+  // /15, /20, /25 and /30 are all emitted and /12 is absent, and footer.tsx
+  // line 439 computes to rgb(229,231,235) today for exactly this reason.
+  // That footer line is a separate pre-existing bug and is left alone here.
+  //
+  // WHAT THIS IS NOT. A first attempt gave this section bg-ink to break the
+  // dusk-on-dusk pair, and the user caught it: ink is the body-text colour
+  // and is used as a section ground nowhere on the site (paper 17, paper-2
+  // 14, dusk 13, sage 3, paper-deep 1 — ink 0). The palette has exactly one
+  // dark ground, so two adjacent dark sections cannot be told apart by tone
+  // without inventing a colour. A seam is how this system already separates
+  // things, so it is what it gets.
   return (
-    <section id="solgte-leiligheter" className="bg-dusk py-section-md [@media(min-width:768px)_and_(max-height:900px)]:!py-8">
+    <section id="solgte-leiligheter" className="border-t border-paper/15 bg-dusk py-section-md [@media(min-width:768px)_and_(max-height:900px)]:!py-8">
       {/* ── A WIDER MEASURE, FROM xl UP ───────────────────────────────
            Client, 2026-09-20: "in desktops large screens, why so conjested?
            make it big and all for larger desktop screens".

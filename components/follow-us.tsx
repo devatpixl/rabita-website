@@ -49,7 +49,9 @@ export async function FollowUs() {
   return (
     <section
       aria-labelledby="follow-us-heading"
-      className="bg-[#e3eae4] py-12 text-ink md:py-section-md"
+      /* border-t border-rule: sage under the campaign meter's paper-2 is a
+         15-point step (client, Mobilversjon point 12). */
+      className="border-t border-rule bg-[#e3eae4] py-12 text-ink md:py-section-md"
     >
       <SectionBody>
         {/* The "Follow us" eyebrow came out on 2026-08-31 (client). The
