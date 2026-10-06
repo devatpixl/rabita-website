@@ -3321,7 +3321,7 @@
   "prayerBoard": {
     "nextLabel": "Next prayer",
     "progressLabel": "{name} in {m}m",
-    "jumuahHeading": "Jumu'ah",
+    "jumuahHeading": "Friday prayer",
     "jumuahNote": "Duration 30 minutes.",
     "jumuahImams": "Open to everyone — men, women and children",
     "glanceHeading": "Today at a glance",
@@ -3329,7 +3329,7 @@
     "khutbaNo": "Khutba in Norwegian",
     "khutbaAr": "Khutba in Arabic",
     "khutbaLine": "{time} {lang} khutba",
-    "khateebLabel": "This week's khateeb",
+    "khateebLabel": "This week's imam",
     "khateebPlaceholder": "The rota is not set yet",
     "langNo": "Norwegian",
     "langAr": "Arabic",

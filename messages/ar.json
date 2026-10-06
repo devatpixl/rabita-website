@@ -3321,7 +3321,7 @@
   "prayerBoard": {
     "nextLabel": "الصلاة القادمة",
     "progressLabel": "{name} بعد {m} دقيقة",
-    "jumuahHeading": "الجمعة",
+    "jumuahHeading": "صلاة الجمعة",
     "jumuahNote": "المدة ٣٠ دقيقة.",
     "jumuahImams": "مفتوح للجميع — رجالًا ونساءً وأطفالًا",
     "glanceHeading": "اليوم",
@@ -3329,7 +3329,7 @@
     "khutbaNo": "خطبة بالنرويجية",
     "khutbaAr": "خطبة بالعربية",
     "khutbaLine": "{time} خطبة {lang}",
-    "khateebLabel": "خطيب هذا الأسبوع",
+    "khateebLabel": "إمام هذا الأسبوع",
     "khateebPlaceholder": "لم تُحدَّد المناوبة بعد",
     "langNo": "بالنرويجية",
     "langAr": "بالعربية",

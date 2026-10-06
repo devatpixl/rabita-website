@@ -94,7 +94,30 @@ function mapDay(row: IrnDay): PrayerDay {
   };
 }
 
-/** The months to keep live: this one and the two after it. */
+/**
+ * The months to keep live: this one and the THREE after it.
+ *
+ * Was three (this + two) until 2026-10-06. Client, Mobilversjon: "Kanskje ha
+ * fire neste månedene slik at det blir fire bokser og ikke tre?" — he is
+ * looking at /bonnetider/kalender, where oktober/november/desember lays out
+ * as two boxes and a widow.
+ *
+ * THE FOURTH BOX WILL NOT APPEAR YET, and that is not this code. IRN has not
+ * published 2027: /prayertimes/181/2027/1/ answers 200 with an empty array,
+ * as do February and June, while 2026/12 returns its 31 days. Checked
+ * 2026-10-06 against the live API.
+ *
+ * So this is armed rather than fixed. The moment IRN generates January the
+ * fourth month appears on its own, with no deploy — the empty-month catch
+ * below already treats "not generated yet" as normal rather than as failure.
+ *
+ * ⚠ THE REAL PROBLEM IS NOT THE FOURTH BOX. Both sources stop on 2026-12-31:
+ * IRN has nothing beyond it, and the static PRAYER_DAYS fallback in
+ * lib/prayer-times.ts ends there too. On 1 January 2027 this page has NO
+ * prayer times at all — not three boxes instead of four, zero — on the page
+ * the client says most visitors come for. Fixing that needs IRN to publish,
+ * or a regenerated fallback table. Roughly twelve weeks' notice as of today.
+ */
 function monthsFrom(now: Date, count: number): { y: number; m: number }[] {
   return Array.from({ length: count }, (_, i) => {
     const d = new Date(now.getFullYear(), now.getMonth() + i, 1);
@@ -130,7 +153,7 @@ export const getPrayerData = cache(async (): Promise<PrayerData> => {
   try {
     const [months, mosque] = await Promise.all([
       Promise.all(
-        monthsFrom(now, 3).map(({ y, m }) =>
+        monthsFrom(now, 4).map(({ y, m }) =>
           irnGet<IrnDay[]>(cfg, `/prayertimes/${cfg.locationId}/${y}/${m}/`).catch((err) => {
             // A month IRN has not generated yet is not a failure of the feed.
             console.warn(`[irn] month ${y}-${m} unavailable:`, (err as Error).message);

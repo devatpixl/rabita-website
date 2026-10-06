@@ -3317,7 +3317,7 @@
   "prayerBoard": {
     "nextLabel": "Neste bønn",
     "progressLabel": "{name} om {m}m",
-    "jumuahHeading": "Jumu'ah",
+    "jumuahHeading": "Fredagsbønn",
     "jumuahNote": "Varighet 30 minutter.",
     "jumuahImams": "Åpent for alle — menn, kvinner og barn",
     "glanceHeading": "I dag",
@@ -3325,7 +3325,7 @@
     "khutbaNo": "Norsk khutba",
     "khutbaAr": "Arabisk khutba",
     "khutbaLine": "{time} {lang} khutba",
-    "khateebLabel": "Ukas khatib",
+    "khateebLabel": "Ukas imam",
     "khateebPlaceholder": "Fast rota er ikke satt ennå",
     "langNo": "norsk",
     "langAr": "arabisk",
