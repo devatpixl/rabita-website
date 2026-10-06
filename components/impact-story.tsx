@@ -312,13 +312,34 @@ export function ImpactStory() {
              The picture plus its counter is about 300px at 390 wide, so
              anything less would leave chapter four permanently behind it.
 
-             THE LEAD-IN STAYS, at 18vh rather than 12. It used to clear a
-             photo pinned at the top; it now buys chapter one its turn in the
-             trigger band. Without it the first chapter sat above the band
-             before the section had finished arriving, and the counter read
-             02/04 three hundred pixels in. The 38vh between chapters is
-             untouched — that spacing IS the pacing of the animation. */}
-          <ol className="mt-[12vh] space-y-[38vh] pb-[16vh] max-md:order-1 max-md:mt-[18vh] max-md:pb-[26rem] md:col-span-6 md:mt-0 md:space-y-44 md:pt-[36vh] md:pb-[34vh]">
+             THE LEAD-IN IS 8vh, down from 18 (client, Mobilversjon
+             2026-10-06): "Historie: Tror det er bedre at man får opp teksten
+             først når man scroller ned og ikke bildet først. Siden det blir
+             mye bilder."
+
+             He had already moved the photograph to the foot on 2026-09-29,
+             and that worked — once you are inside the section the text is
+             above the picture. What he is describing is the ENTRY. The
+             sticky block pins to the bottom of the viewport the moment any
+             of this section appears, and it is opaque with z-[1], so an
+             18vh runway left chapter one's headline 46px BEHIND it. For the
+             first ~150px of scrolling a phone saw a photograph, a band of
+             empty paper, and nothing to read — directly after the
+             photo-filled DETTE ER RABITA letterform. Hence "det blir mye
+             bilder".
+
+             Measured at 390x844, heading-to-photo clearance at entry:
+             18vh -46px (hidden), 14vh -12 (hidden), 12vh +5, 10vh +22,
+             8vh +39, 6vh +55. 8vh is the most lead-in that still clears it
+             with room to spare.
+
+             WHAT THE OLD NOTE WARNED ABOUT WAS CHECKED. The counter does
+             NOT jump early: approached from above it reads 01/04 at -400,
+             -200 and 0, same as 18vh did, and first turns at +200 instead of
+             +400. Chapter one keeps its turn in the trigger band; it just
+             starts it sooner. The 38vh between chapters is untouched — that
+             spacing IS the pacing of the animation. */}
+          <ol className="mt-[12vh] space-y-[38vh] pb-[16vh] max-md:order-1 max-md:mt-[8vh] max-md:pb-[26rem] md:col-span-6 md:mt-0 md:space-y-44 md:pt-[36vh] md:pb-[34vh]">
             {CHAPTERS.map((c, i) => (
               <li
                 key={c.key}
