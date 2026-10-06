@@ -202,6 +202,61 @@ export function ImpactStory() {
     return () => io.disconnect();
   }, []);
 
+  // ── THE PHOTOGRAPH WAITS FOR THE WORDS (client, Mobilversjon 2026-10-06)
+  //
+  // "Tror det er bedre at man får opp teksten først når man scroller ned og
+  // ikke bildet først. Siden det blir mye bilder."
+  //
+  // "Får opp ... først" is about what ENTERS VIEW first, not about stacking
+  // order — the picture has sat under the text since 2026-09-29. The problem
+  // is that `sticky bottom-0` pins the block to the foot of the viewport the
+  // instant ANY of this section appears, so the photograph was on screen
+  // before a single word was, arriving straight out of the photo-filled
+  // DETTE ER RABITA letterform above. By the time a reader reaches Historie
+  // they have had nothing but pictures, which is his "det blir mye bilder".
+  //
+  // So on phones the block is transparent until the first chapter has
+  // reached the reading band — the same band the cross-fade already uses, so
+  // the picture appears exactly when chapter one is being read rather than
+  // on a second guess at a threshold. One-way: once shown it stays shown,
+  // because a photograph blinking out under a reader scrolling back up is a
+  // worse fault than showing it slightly early on a return visit.
+  //
+  // Nothing moves. The block keeps its size and position and only changes
+  // opacity, so no chapter reflows when it appears, and the text behind it
+  // is simply visible through it in the meantime.
+  //
+  // NOT ON DESKTOP, where the photo is in its own column and never covered
+  // the text, and NOT under prefers-reduced-motion, where a fade is the
+  // thing being opted out of.
+  const [photoShown, setPhotoShown] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const narrow = window.matchMedia('(max-width: 767px)').matches;
+    const prefers = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!narrow || prefers) {
+      setPhotoShown(true);
+      return;
+    }
+    const el = panelsRef.current.get(CHAPTERS[0].key);
+    if (!el) {
+      setPhotoShown(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setPhotoShown(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: '-28% 0px -54% 0px', threshold: 0 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   const activeIndex = CHAPTERS.findIndex((c) => c.key === active);
 
   return (
@@ -238,7 +293,12 @@ export function ImpactStory() {
              tall section, is the whole way through. order-2 puts it there
              visually; the DOM keeps the photo first so the desktop grid, where
              this is simply column one, is untouched. */}
-          <div className="sticky top-[68px] z-[1] bg-paper-2 pb-4 max-md:order-2 max-md:top-auto max-md:bottom-0 max-md:pt-3 max-md:pb-20 md:static md:col-span-6 md:bg-transparent md:pb-0">
+          <div
+            aria-hidden={!photoShown}
+            className={`sticky top-[68px] z-[1] bg-paper-2 pb-4 max-md:order-2 max-md:top-auto max-md:bottom-0 max-md:pt-3 max-md:pb-20 md:static md:col-span-6 md:bg-transparent md:pb-0 max-md:transition-opacity max-md:duration-[600ms] max-md:ease-out motion-reduce:max-md:transition-none ${
+              photoShown ? 'max-md:opacity-100' : 'max-md:pointer-events-none max-md:opacity-0'
+            }`}
+          >
             {/* A 40px dissolve on the block's top edge, phones only. The
                chapter above scrolls up into the pinned photograph and was
                being sliced through the middle of a headline — a clean cut
