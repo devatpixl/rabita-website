@@ -40,6 +40,7 @@ import { cn } from '@/lib/cn';
 type Slide = {
   id: string;
   unit: string;
+  sold: boolean;
   priceNok: number;
   rooms: number;
   m2: number;
@@ -50,11 +51,36 @@ type Slide = {
 // the image id and the measured areas, APARTMENTS has `rooms` and is the
 // snapshot that decides what counts as sold. Neither is derived from the
 // other, so the join happens here rather than being duplicated into one file.
-const SLIDES: Slide[] = APARTMENT_UNITS.filter((u) => u.sold).map((u) => {
+//
+// ── ONE SOLD, TWO FOR SALE (client, Mobilversjon 2026-10-06) ─────────────
+// "Både på pc og mobilversjonen vises kun de solgte leilighetene. Hvis kun
+// tre leiligheter vises så bør en av de være solgt og de to andre usolgte."
+//
+// It used to be `.filter(u => u.sold)` — every slide stamped SOLGT. That came
+// from 2026-09-18 ("legge til noen av de solgte leilighetene på forsiden for
+// å vise salg") and Tekst (endelig)'s "for å vise sosialt bevis", and it
+// overshot: a section that shows a buyer three things none of which can be
+// bought is proof of sales at the cost of the sale.
+//
+// One sold still does the proof. The two beside it are what is actually on
+// offer, and the deck keeps the count of three it was designed around.
+//
+// ORDER IS HIS, not a new rule. APARTMENT_UNITS is interleaved by his own
+// instruction of 2026-09-18 ("mix the sold ones, like after first some show
+// this and then gap then 2nd sold and another at end"), so taking the first
+// sold and the first two unsold in file order keeps his sequence rather than
+// sorting by price or size, which would be a judgement he has not made.
+const PICKED = [
+  ...APARTMENT_UNITS.filter((u) => u.sold).slice(0, 1),
+  ...APARTMENT_UNITS.filter((u) => !u.sold).slice(0, 2),
+].sort((a, b) => APARTMENT_UNITS.indexOf(a) - APARTMENT_UNITS.indexOf(b));
+
+const SLIDES: Slide[] = PICKED.map((u) => {
   const row = APARTMENTS.find((a) => a.unit === u.unit);
   return {
     id: u.id,
     unit: u.unit,
+    sold: u.sold === true,
     priceNok: u.priceNok,
     rooms: row?.rooms ?? 0,
     m2: u.braM2,
@@ -340,10 +366,14 @@ export function ApartmentsSold({ locale }: { locale: string }) {
             }}
           />
 
-          {/* The stamp, same instrument as the rail's. */}
+          {/* The stamp, same instrument as the rail's — and ONLY on the one
+             slide that is sold (client, Mobilversjon 2026-10-06). It used to
+             print on every slide because every slide was sold. */}
+          {active.sold && (
           <span className="absolute start-5 top-5 z-10 -rotate-[8deg] rounded-[2px] border border-gold/70 bg-dusk/85 px-3 py-1.5 font-mono text-[0.625rem] font-medium uppercase leading-none tracking-[0.32em] text-gold-soft shadow-[0_4px_16px_-6px_rgba(22,36,46,0.85)] backdrop-blur-[8px] rtl:rotate-[8deg] sm:px-3.5 sm:py-2 sm:text-[0.6875rem]">
             {t('stamp')}
           </span>
+          )}
 
           {/* The facts, keyed so they re-mount and re-run their reveal when
              the slide changes. */}
@@ -416,11 +446,11 @@ export function ApartmentsSold({ locale }: { locale: string }) {
             </ul>
             </div>
 
-            {/* Three dots for three flats. The mock drew five, which is the
-               kind of thing a generated image does — there are three sold
-               units and the count is read from the data everywhere else on
-               this page, so five would be the one number here that was
-               decoration. */}
+            {/* One dot per slide, which is three — one sold and two for
+               sale since 2026-10-06. The mock drew five, which is the kind of
+               thing a generated image does: the count is read from the data
+               everywhere else on this page, so five would be the one number
+               here that was decoration. */}
             <div className="flex items-center gap-2 pt-6">
               {SLIDES.map((s, n) => (
                 <button
