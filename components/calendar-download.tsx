@@ -40,8 +40,37 @@ export async function CalendarDownload() {
           {/* The months as one ruled register, not a grid of tinted boxes:
              five items never divide evenly into a grid, and the last row
              always left a hole. Same row pattern the key-figures registers
-             use, so it reads as part of the same system. */}
-          <ul className="self-center border-t border-ink max-md:mt-2 max-md:grid max-md:grid-cols-2 max-md:gap-2 max-md:border-t-0 max-md:[&>li:last-child:nth-child(odd)]:col-span-2 md:col-span-7">
+             use, so it reads as part of the same system. (Desktop only — the
+             phone grid below is a different problem, see the next note.) */}
+          {/* ── THREE ACROSS ON PHONES (client, Mobilversjon 2026-10-06) ─────
+             "Kanskje ha fire neste månedene slik at det blir fire bokser og
+             ikke tre?"
+
+             He cannot have four. IRN has not published 2027 —
+             /prayertimes/181/2027/1/ answers 200 with an empty array — so
+             there are three months of data and no fourth to show. lib/irn.ts
+             now asks for four so the box appears the day they generate it.
+
+             What he is actually looking at is the WIDOW. Two columns with a
+             lone third item spanning both read as a layout that came up
+             short, and the old `[&>li:last-child:nth-child(odd)]:col-span-2`
+             is what produced it.
+
+             THE TWO-COLUMN GRID WAS NOT WRONG — it was built for four, and at
+             four it is a clean 2x2. The widow is a symptom of the missing
+             month, not of the CSS. Three across is therefore a deliberate
+             trade: it is right for the three months that exist today and
+             will itself leave a 3+1 widow the moment IRN publishes. Chosen
+             with that understood (user, 2026-10-06: "looks good for now").
+
+             Measured at 390: each box is 108px and the label wraps to two
+             lines, "oktober" over "2026", with no overflow and no
+             truncation in any of the three month names.
+
+             WHEN THE FOURTH MONTH ARRIVES, the count-proof answer is one
+             column — three or four or twelve all read as a list, which is
+             the same conclusion the desktop register above reached. */}
+          <ul className="self-center border-t border-ink max-md:mt-2 max-md:grid max-md:grid-cols-3 max-md:gap-2 max-md:border-t-0 md:col-span-7">
             {months.map((key) => (
               <li key={key}>
                 <Link
