@@ -360,10 +360,58 @@ export async function Hero() {
               {t('subhead')}
             </p>
 
-            <div className="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            {/* ── THE PROJECT, IN ONE SENTENCE — PHONES ONLY ───────────────
+               Client, Mobilversjon 2026-10-06, points 3 and 4: "Bør stå en
+               setning om moskeprosjektet etter 1987" with his own wording,
+               and "Istedenfor se moskeprosjektet -> som tar mye av
+               oppmerksomheten fra Fortsett baksen under doner, så holder det
+               med en lenke på teksten «Les mer her.»"
+
+               Those are one change. The phone hero carried a gold
+               "Se moskeprosjektet ->" button directly above HeroGive's gold
+               "Fortsett", so the first screen asked for two different things
+               in the same colour and weight. His fix removes the button and
+               puts the project into a sentence, with the link carried by the
+               words — which also fills the gap the button leaves, because the
+               phone hero never showed `subhead` and went from the 1987 line
+               straight to a CTA.
+
+               PHONE ONLY (md:hidden), the user's explicit call: on a laptop
+               the giving card sits in its own column rather than stacked
+               under this text, so the two buttons are not competing and
+               "Se moskeprosjektet" stays the page's primary action there.
+
+               Two keys, not one rich string: the link text is its own value
+               so a translator sees exactly what is clickable without reading
+               markup. Underlined rather than gold-on-dusk — this has to read
+               as a link inside a sentence, not as a third button. */}
+            <p className="mt-4 max-w-[46ch] text-body text-paper/80 md:hidden">
+              {t('projectLine')}{' '}
               <Link
                 href={`/${locale}/moskeprosjektet`}
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gold-deep px-6 py-3 text-[15px] font-semibold text-paper transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99] sm:justify-start"
+                /* whitespace-nowrap: "Read more here." is three words and
+                   was breaking after "more", leaving "here." alone on the
+                   next line with the underline split across both. The link
+                   now moves to the next line whole or not at all. Norwegian
+                   fits on the second line either way; English and Arabic are
+                   longer and this is what keeps them tidy. */
+                className="whitespace-nowrap font-semibold text-paper underline decoration-gold/70 underline-offset-4 transition-colors hover:text-gold"
+              >
+                {t('projectLink')}
+              </Link>
+            </p>
+
+            <div className="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+              {/* GONE BELOW md (client, Mobilversjon 2026-10-06, point 4) —
+                 it sat in gold directly above HeroGive's gold "Fortsett".
+                 The sentence above now carries this destination as a text
+                 link on phones; from md the giving card moves into its own
+                 column and this goes back to being the page's primary CTA.
+                 max-md: rather than a min- variant so the button keeps its
+                 unprefixed inline-flex at every width it is shown at. */}
+              <Link
+                href={`/${locale}/moskeprosjektet`}
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gold-deep px-6 py-3 text-[15px] font-semibold text-paper transition-colors duration-200 ease-out hover:bg-ink active:scale-[0.99] max-md:hidden sm:justify-start"
               >
                 {t('cta.primary')}
                 <ArrowIcon className="h-3.5 w-3.5" />
