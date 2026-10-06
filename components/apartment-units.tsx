@@ -232,10 +232,33 @@ export function ApartmentUnits() {
         </a>
 
         <div className="relative mt-10 md:mt-14">
-          {/* Arrows in the page gutter rather than over the plates — at
-             -inset-x-14 they clear the rail by 8px at 1280 and 48px at 1920.
-             Below xl there is no gutter to use and the rail swipes. */}
-          <div className="pointer-events-none absolute inset-y-0 -inset-x-14 z-20 hidden items-center justify-between xl:flex">
+          {/* ── ARROWS AT EVERY WIDTH (client, Mobilversjon 2026-10-06) ─────
+             "Bør kanskje være piler OGSÅ på leilighetene slik at det er
+             logisk at man skal trykke seg videre."
+
+             "Også" is the word that settles it: he is comparing with the
+             room-photo viewer further down the same page, which carries ‹ ›
+             over the image — and he screenshotted those arrows beside this
+             note. The two buttons were already the same object visually,
+             same size, border, dusk fill and gold hover; only the PLACEMENT
+             differed, and only this one hid itself on a phone.
+
+             From xl they sit in the page gutter, where -inset-x-14 clears the
+             rail by 8px at 1280 and 48px at 1920. Below that there is no
+             gutter, so they come inside the rail and overlay the card edges —
+             which is exactly what the viewer he pointed at does.
+
+             He also wrote "med mindre man kan scrolle", and you can: the card
+             is 76% of the viewport with snap-center, so the next apartment
+             peeks 130px in. That was read as permission to skip the arrows;
+             the user overruled it, correctly. He asked for them and sent a
+             picture of the ones he meant. The peek and the counter stay —
+             three cues costs nothing and he has raised this family of point
+             twice.
+
+             pointer-events-none on the wrapper, auto on the buttons, so the
+             strip does not eat swipes across the middle of the card. */}
+          <div className="pointer-events-none absolute inset-y-0 inset-x-2 z-20 flex items-center justify-between xl:-inset-x-14">
             <RailArrow dir="prev" label={t('prev')} onClick={() => step(-1)} />
             <RailArrow dir="next" label={t('next')} onClick={() => step(1)} />
           </div>
