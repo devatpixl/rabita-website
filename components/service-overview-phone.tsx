@@ -110,15 +110,28 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
              paragraph, which is what it is: you have just been told what
              this service is, and this is the one thing to do about it.
 
-             mt-6 rather than the plate's mt-7, because the gold underline
-             now hangs off body text instead of off a card edge. min-h-11
-             stays — it is a 44px touch target with no card around it to
-             catch a near miss. */}
+             IT IS A FILLED PILL, NOT AN UNDERLINED LINK (user, same day:
+             "A rounded box cta would be better? In golden or green,
+             whatever rest are of, use that color"). Gold, not green: the
+             config says why — the three sages are grounds and hairlines,
+             "all of them far too pale to fill a button", and dusk only
+             looks green (#16242E is blue-dominant). bg-gold-deep is the
+             site's primary action and the most-used filled pill on it by a
+             distance, 45 call sites against the next colour's 21.
+
+             The class string is lifted verbatim from the existing pair in
+             hero.tsx and service-opener.tsx — min-h-12, px-6 py-3, 15px
+             semibold on paper, hover to the lighter gold — so this is the
+             same button the rest of the site already uses rather than a new
+             one shaped like it. The arrow keeps its hover nudge.
+
+             mt-6 rather than the plate's mt-7: the pill now sits against
+             body text instead of a card edge. */}
           <a
             href="#enquiry"
-            className="group mt-6 inline-flex min-h-11 items-center gap-2 text-[0.9375rem] font-semibold text-gold-deep"
+            className="group mt-6 inline-flex min-h-12 items-center gap-2 rounded-full bg-gold-deep px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:bg-gold"
           >
-            <span className="border-b border-gold-deep/50 pb-1">{t('detail.request')}</span>
+            {t('detail.request')}
             <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">
               &rarr;
             </span>
