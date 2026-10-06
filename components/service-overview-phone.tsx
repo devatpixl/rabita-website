@@ -98,19 +98,31 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
           </h2>
           {body && <p className="mt-5 text-[1rem] leading-[1.62] text-ink-60">{body}</p>}
 
-          {/* The plate: his own invitation, set as the one quiet claim on the
-             screen, with the page's single action under it. */}
-          <div className="mt-7 rounded-2xl bg-paper-2 px-5 py-5">
-            <a
-              href="#enquiry"
-              className="group inline-flex min-h-11 items-center gap-2 text-[0.9375rem] font-semibold text-gold-deep"
-            >
-              <span className="border-b border-gold-deep/50 pb-1">{t('detail.request')}</span>
-              <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">
-                &rarr;
-              </span>
-            </a>
-          </div>
+          {/* ── THE ACTION SITS UNDER THE PARAGRAPH, NOT IN A PLATE ────────
+             It was a rounded paper-2 card holding a pulled quote with the
+             link beneath it. The quote came out on 2026-10-06 (see the note
+             on offerLedeRest above), which left a box around nothing but a
+             link — and a box around a link is just a box (user, same day:
+             "The cta, why in separate box, adjust that under the
+             paragraph").
+
+             So the plate goes and the link reads as the end of the
+             paragraph, which is what it is: you have just been told what
+             this service is, and this is the one thing to do about it.
+
+             mt-6 rather than the plate's mt-7, because the gold underline
+             now hangs off body text instead of off a card edge. min-h-11
+             stays — it is a 44px touch target with no card around it to
+             catch a near miss. */}
+          <a
+            href="#enquiry"
+            className="group mt-6 inline-flex min-h-11 items-center gap-2 text-[0.9375rem] font-semibold text-gold-deep"
+          >
+            <span className="border-b border-gold-deep/50 pb-1">{t('detail.request')}</span>
+            <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">
+              &rarr;
+            </span>
+          </a>
         </SectionBody>
       </Section>
 
