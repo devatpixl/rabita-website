@@ -6,7 +6,6 @@ import { useLocale, useTranslations } from 'next-intl';
 import type { PrayerDay } from '@/lib/prayer-times';
 import type { AppLocale } from '@/i18n/routing';
 import { cn } from '@/lib/cn';
-import { hijriDate } from '@/lib/hijri';
 import { VISIT } from '@/lib/location';
 import { PRAYER_PANEL_ID } from './prayer-panel-provider';
 import { joinJumuah, usePrayerData, usePrayerDay, usePrayerDayAfter } from './prayer-data-provider';
@@ -105,11 +104,17 @@ export function PrayerPanelBody() {
 
   const nextKey = info?.nextKey ?? null;
 
-  // Moved here from the utility strip on 2026-09-22, when the strip gave its
-  // width to all six prayer times. A Hijri date is something you read once,
-  // not something you arrive for, so it belongs behind the chevron with the
-  // rest of the detail rather than in front of the times.
-  const hijri = useMemo(() => (now ? hijriDate(locale, now) : ''), [locale, now]);
+  // THE HIJRI DATE USED TO BE COMPUTED HERE. It moved into this panel from
+  // the utility strip on 2026-09-22, when the strip gave its width to all six
+  // prayer times, and it came out of the panel on 2026-10-06 (client,
+  // Mobilversjon: "For mye tekst under bønnetidene").
+  //
+  // The reasoning that moved it here is the reasoning that ended up removing
+  // it: a Hijri date is something you read once, not something you arrive
+  // for. /bonnetider still prints it beside the day band, which is the page
+  // somebody opens when they want the date rather than the next prayer.
+  //
+  // Restoring it is one useMemo over hijriDate(locale, now) and a span.
 
   return (
     <div
@@ -185,12 +190,34 @@ export function PrayerPanelBody() {
              anything printed beside a prayer time is read by somebody
              working out where to be at 19:22. Sending them to a hole in the
              ground is the one mistake this panel must not make. */}
-          <p className="text-[14px] text-ink-60">
-            <span className="tabular-nums">
-              {t('names.jumua')} {joinJumuah(jumuah)}
+          {/* ── FRIDAY FIRST, THEN THE VENUE (client, Mobilversjon 2026-10-06)
+             "For mye tekst under bønnetidene. Det viktigste er at
+             fredagsbønnetidene kommer tydelig fram. Bør stå fredagsbønn ikke
+             jumua."
+
+             It was one run-on line — Jumu'ah, the address and the hijri date
+             at the same size, separated by middots — so the one figure he
+             calls det viktigste read as the first third of a list.
+
+             Now the Friday times are their own line in the ink colour and
+             the venue sits under them at 13px. Nothing is bigger than the
+             six times above; the weight comes from being alone on a line.
+
+             THE HIJRI DATE IS GONE, at his instruction and the user's call
+             over dropping the address too. It is the one item here nobody
+             arrives looking for, and /bonnetider still prints it beside the
+             day band. lib/hijri is no longer imported here; that page keeps
+             its own import, so nothing about the date is lost from the site.
+
+             `names.jumua` is "Jumu'ah"; `jumua` is "Fredagsbønn". The right
+             word was in the file the whole time and this line read the wrong
+             key. names.jumua still labels the prayer board, where it sits in
+             a column of transliterated prayer names and belongs. */}
+          <p className="text-[14px]">
+            <span className="tabular-nums text-ink">
+              {t('jumua')} {joinJumuah(jumuah)}
             </span>
-            <span> · {VISIT.address}</span>
-            {hijri && <span className="tabular-nums"> · {hijri}</span>}
+            <span className="block text-[13px] text-ink-60">{VISIT.address}</span>
           </p>
           <Link
             href={`/${locale}/bonnetider`}
