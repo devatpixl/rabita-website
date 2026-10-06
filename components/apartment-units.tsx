@@ -51,8 +51,10 @@ export function ApartmentUnits() {
   const n = APARTMENT_UNITS.length;
   const [active, setActive] = useState(0);
   const wrap = (i: number) => ((i % n) + n) % n;
-  /** Absolute — the dots. */
-  const go = useCallback((to: number) => setActive(wrap(to)), [n]); // eslint-disable-line react-hooks/exhaustive-deps
+  // `go`, the absolute jump, lived here for the dot row. It went with the dots
+  // on 2026-10-06 — nothing else called it, and the arrows have always used
+  // the relative `step` below for the reason documented there. Restoring a
+  // tappable index means bringing it back: one useCallback over setActive.
   /** Relative — the arrows. Functional update, NOT go(active + 1): `active`
    *  in that expression is the value captured by the render the click handler
    *  was created in, so two clicks before React re-renders both compute the
@@ -82,8 +84,64 @@ export function ApartmentUnits() {
     // three times (client, 2026-09-13). Aligning every time means one press
     // is always one card.
     const left = Math.max(0, el.offsetLeft - rail.offsetLeft - 4);
+    programmatic.current = true;
     rail.scrollTo({ left, behavior: 'smooth' });
   }, [active]);
+  // ── THE RAIL REPORTS BACK (2026-10-06) ──────────────────────────────────
+  // `active` was WRITE-ONLY on a phone. Nothing but the arrows ever set it,
+  // and the arrows are xl-only, so no matter how far you swiped the indicator
+  // stayed on card one. Fifteen dashes with a gold mark that never moved is a
+  // large part of why the client called them odd (Mobilversjon: "Prikkene
+  // under ser litt rart ut") — the row was not just small, it was wrong.
+  //
+  // So the rail now reports its own position. Nearest card to the rail's left
+  // edge wins, read on scroll through rAF so a swipe costs one measurement a
+  // frame rather than one per scroll event.
+  //
+  // THE FEEDBACK LOOP IS THE THING TO WATCH. The effect above scrolls the
+  // rail when `active` changes, and this sets `active` when the rail scrolls.
+  // `programmatic` breaks it: the effect raises the flag, and the listener
+  // ignores everything until the rail has been still for 120ms. Without it a
+  // smooth scroll feeds its own intermediate frames back as new indices and
+  // the rail fights the arrows.
+  const programmatic = useRef(false);
+  useEffect(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+    let frame = 0;
+    let idle: ReturnType<typeof setTimeout>;
+    const read = () => {
+      frame = 0;
+      if (programmatic.current) return;
+      const kids = [...rail.children] as HTMLElement[];
+      if (!kids.length) return;
+      const x = rail.scrollLeft + rail.offsetLeft;
+      let best = 0;
+      let bestD = Infinity;
+      kids.forEach((el, i) => {
+        const d = Math.abs(el.offsetLeft - x - 4);
+        if (d < bestD) {
+          bestD = d;
+          best = i;
+        }
+      });
+      setActive((a) => (a === best ? a : best));
+    };
+    const onScroll = () => {
+      clearTimeout(idle);
+      idle = setTimeout(() => {
+        programmatic.current = false;
+      }, 120);
+      if (!frame) frame = requestAnimationFrame(read);
+    };
+    rail.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      rail.removeEventListener('scroll', onScroll);
+      clearTimeout(idle);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, []);
+
   const nf = new Intl.NumberFormat('nb-NO');
   const num = (n: number) => nf.format(n);
   // Ceiling heights keep both decimals — the plan sheet says "ca 2,40 m", and
@@ -317,28 +375,46 @@ export function ApartmentUnits() {
           ))}
           </ul>
 
-          {/* Dots, so the rail says how long it is on a phone where the
-             arrows are not there. */}
-          <ol className="mt-5 flex items-center justify-center gap-2 xl:hidden">
-            {APARTMENT_UNITS.map((u, i) => (
-              <li key={u.id}>
-                <button
-                  type="button"
-                  onClick={() => go(i)}
-                  aria-label={u.unit}
-                  aria-current={i === active ? 'true' : undefined}
-                  className="grid h-7 w-5 place-items-center"
-                >
-                  <span
-                    className={cn(
-                      'block h-[2px] rounded-full transition-all',
-                      i === active ? 'w-5 bg-gold' : 'w-2.5 bg-paper/25',
-                    )}
-                  />
-                </button>
-              </li>
-            ))}
-          </ol>
+          {/* ── A COUNTER, NOT FIFTEEN DASHES (client, Mobilversjon
+             2026-10-06): "Prikkene under ser litt rart ut."
+
+             He is right, and the cause is the count. Dots work to about
+             eight; at fifteen they spanned 342 of 390px as 2px dashes, which
+             reads as a scrollbar track or a ruler rather than as navigation
+             — and the active one, 5px of gold at the far left, was the least
+             visible thing in the row.
+
+             THE SAME SENTENCE ALSO ASKS FOR ARROWS, conditionally: "Bør
+             kanskje være piler ... med mindre man kan scrolle." You can
+             scroll, and visibly so — the card is 76% of the viewport with
+             snap-center, so the next apartment peeks 130px into the screen.
+             That peek is a stronger affordance than any 40px arrow laid over
+             the photograph being sold, so the condition he set is already
+             met and no arrows are added. They stay from xl, where the page
+             gutter has room for them outside the rail.
+
+             NN / NN is this site's own device for exactly this — nine
+             components use it, from impact-story's 01 / 04 to the services
+             index at 01 / 13 — so it is house vocabulary rather than a new
+             pattern, and unlike dots it does not care how long the list is.
+             The rule under it carries the position the dots used to.
+
+             WHAT IS LOST: tapping a dot to jump. At fifteen items those were
+             5px targets, the cards themselves are focusable, and the arrows
+             return at xl. Worth the trade. */}
+          <div className="mt-5 flex items-center justify-center gap-4 xl:hidden">
+            <p className="font-mono text-[0.6875rem] uppercase tabular-nums tracking-[0.28em] text-gold-soft">
+              {String(active + 1).padStart(2, '0')}
+              <span className="text-paper/40"> / </span>
+              {String(APARTMENT_UNITS.length).padStart(2, '0')}
+            </p>
+            <span aria-hidden className="relative h-px w-24 overflow-hidden bg-paper/20">
+              <span
+                className="absolute inset-y-0 start-0 bg-gold transition-[width] duration-300 ease-out"
+                style={{ width: `${((active + 1) / APARTMENT_UNITS.length) * 100}%` }}
+              />
+            </span>
+          </div>
         </div>
       </SectionBody>
 
