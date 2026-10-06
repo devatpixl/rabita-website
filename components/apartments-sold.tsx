@@ -218,8 +218,45 @@ export function ApartmentsSold({ locale }: { locale: string }) {
   // dark ground, so two adjacent dark sections cannot be told apart by tone
   // without inventing a colour. A seam is how this system already separates
   // things, so it is what it gets.
+  // ── BOUNDARY RHYTHM, PHONES (client, Mobilversjon 2026-10-06, point 12)
+  //
+  // "overgangene mellom vær seksjon må være tydligere. Nå når man scroller ned
+  // faller seksjonene litt i hverandre uten klare skille."
+  //
+  // The complaint is SYMMETRY, not quantity. The three sections at the tight
+  // seams ran 60/60, 40/40 and 48/48 — three evenly split pairs in a row, so
+  // nothing told the eye which section owned the gap and the tail of one sat
+  // as close to the seam as the head of the next. Two of those boundaries
+  // already carried 92 and 100px; more air alone would not have answered it.
+  //
+  // So: 2:1, weighted above. 64/32 is the house pair, 80/32 where the
+  // arriving section meets a weak or absent tone step and the air has to do
+  // what contrast is not doing. Measured tone steps at each seam:
+  //
+  //     Våre tjenester  -> Moskeprosjektet   paper -> photo -> dusk
+  //     Moskeprosjektet -> Leilighetene      dusk -> dusk, NONE      <- 80
+  //     Leilighetene    -> Innsamlede        full flip to paper-2
+  //     Innsamlede      -> Sosiale medier    paper-2 -> sage, 15pt   <- 80
+  //     Sosiale medier  -> Nyhetsbrev        full flip to dusk
+  //
+  // NOT section-lg/section-sm. Those are the site's DESKTOP maximum and two
+  // comments exist to keep them off phones — see primitives.tsx on
+  // py-section-md being "most of a thumb's travel between one idea and the
+  // next" and the 2026-09-29 phone step-down. 72/48 is also only 1.5:1, which
+  // at 390px reads as 120px of nothing rather than as a decision. pt-16/pb-8/
+  // pt-20 are Tailwind's base scale, already carrying the phone rhythm on
+  // these same sections (py-10, py-12, pt-14, pb-8).
+  //
+  // Net page height +32px, against a documented campaign to shorten the phone
+  // page. Boundary air moves from 75-110 to 99-126.
+  //
+  // PARTITIONED AT 768, not overridden: the unprefixed py-* is gone and each
+  // side has its own arm, so no two padding utilities share a media query.
+  // lib/cn.ts is clsx only, so a later class does not beat an earlier one —
+  // partitioning means correctness never depends on sort order, and no `!`
+  // is needed.
   return (
-    <section id="solgte-leiligheter" className="border-t border-paper/15 bg-dusk py-section-md [@media(min-width:768px)_and_(max-height:900px)]:!py-8">
+    <section id="solgte-leiligheter" className="border-t border-paper/15 bg-dusk max-md:pt-20 max-md:pb-8 md:py-section-md [@media(min-width:768px)_and_(max-height:900px)]:!py-8">
       {/* ── A WIDER MEASURE, FROM xl UP ───────────────────────────────
            Client, 2026-09-20: "in desktops large screens, why so conjested?
            make it big and all for larger desktop screens".

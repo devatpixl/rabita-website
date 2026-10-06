@@ -129,6 +129,21 @@ export async function ProjectOverview() {
          section becomes one plate with the words on it. Desktop already
          composes that way via md:absolute on the image; this is the phone
          catching up, not a new idea. */}
+      {/* ── max-md:pt-0 IS LOAD-BEARING. DO NOT GIVE THIS TOP PADDING ──────
+         When the four other home sections took a phone boundary rhythm on
+         2026-10-06 (client, Mobilversjon point 12) this one deliberately did
+         not, and the reason is mechanical: `pt` and `max-md:-mt-28` sit on the
+         SAME element, so any top padding cancels the lift pixel for pixel.
+         72px of it would leave a net lift of 40 instead of 112 and drop the
+         eyebrow and headline off the foot scrim they stand on — re-creating
+         the broken section the client reported on 2026-09-29.
+
+         This section's top edge is not a seam. It is a 292px photograph, and
+         the crop plus the scrim already buy what a `pt` buys elsewhere: a
+         heading that arrives with room.
+
+         max-md:pb-8 is untouched, and is where the other four sections get
+         their bottom value — 32px is this file's number, not a new one. */}
       <div className="relative mx-auto flex min-h-0 max-w-6xl flex-col px-6 pb-10 pt-10 max-md:-mt-28 max-md:pb-8 max-md:pt-0 md:min-h-[min(88svh,52rem)] md:justify-between md:pb-24 md:pt-24">
         {/* Words, on the reading side. */}
         {/* max-md:contents dissolves this wrapper on phones ONLY, so its children

@@ -84,7 +84,7 @@ export async function CampaignMeter() {
   }));
 
   return (
-    <section id="byggeregnskap" aria-labelledby="meter-heading" className="bg-paper-2 py-10 md:py-section-md lg:py-section-lg">
+    <section id="byggeregnskap" aria-labelledby="meter-heading" className="bg-paper-2 max-md:pt-16 max-md:pb-8 md:py-section-md lg:py-section-lg">
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
         <h2 id="meter-heading" className="font-serif text-section text-balance text-ink">
           {t.rich('eyebrow', {

@@ -387,13 +387,13 @@ export function CongregationToday() {
          min-height: 100svh centred the block in a full screen, and with the
          caption now a fixed height the leftover became a band of empty
          paper above the heading on every laptop. */}
-      <div
-        className="flex flex-col"
-        style={{
-          paddingTop: '64px',
-          paddingBottom: '40px',
-        }}
-      >
+      {/* Was an inline style={{paddingTop:'64px', paddingBottom:'40px'}} until
+         2026-10-06. Same numbers, now as classes on the same element: pt-16
+         is 64px and md:pb-10 is 40px, so DESKTOP IS BYTE-IDENTICAL, while the
+         phone bottom steps to 32 for the boundary rhythm (see the note in
+         apartments-sold.tsx). An inline declaration cannot be beaten by a
+         class, so this had to move for the phone arm to exist at all. */}
+      <div className="flex flex-col pt-16 max-md:pb-8 md:pb-10">
         {/* Statement + indicator row — one row, container-bound.
            Statement is the section heading (h2). Serif display size
            with the address as a gold-italic accent. Row uses
