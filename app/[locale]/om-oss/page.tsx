@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { OgeeMark } from '@/components/marks';
 import { AnnualReports } from '@/components/annual-reports';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
@@ -325,25 +324,30 @@ export default async function AboutPage({
               </span>
             </Link>
 
-            {/* ── THE ARCH, UNDER THE ACTION (client, 2026-09-30) ────────
-               ── AN OGEE DOME, NOT A MIHRAB (client, 2026-09-30) ────────
-               First pass used ArchMark, which is a mihrab: a niche on two
-               columns with a lamp hung in it, seen from INSIDE the hall. His
-               words were "a shape og gumbad/minar" — the dome seen from
-               outside, which is a different drawing, and he was right that
-               what I put there was something else.
+            {/* ── THE OGEE DOME IS GONE (client, Mobilversjon 2026-10-06:
+               "Om oss: Fjern symbol. Resten ser bra ut.") ─────────────────
 
-               OgeeMark is that shape: the onion profile drawn twice, under a
-               four-point star, with the finial built in rather than stacked
-               on top. See components/marks.tsx.
+               It stood here, phones only, under the "Se moskeprosjektet"
+               link at the foot of Historien: a 128px ogee profile drawn
+               twice under a four-point star, in gold-deep at 45%.
 
-               Phones only. On a laptop the arcade photograph runs across the
-               spread and a second device would compete with it — which is
-               exactly why the mihrab was taken off this section's desktop on
+               HE ASKED FOR IT HIMSELF on 2026-09-30 — "a shape og
+               gumbad/minar" — after rejecting a mihrab as the wrong drawing.
+               Six days later he wants it off, and the rest of the page
+               "ser bra ut", so this is the one thing he is changing here.
+               Not a misunderstanding on either pass; he has seen it in
+               place and decided against it.
+
+               It was decoration, which is the honest reason it goes without
+               argument: the section already ends on a real action, and a
+               mark under a link is a second full stop.
+
+               OgeeMark itself stays in components/marks.tsx with its two
+               siblings and is now unused — restoring this is the import and
+               these four lines. The desktop never had it; the arcade
+               photograph runs across that spread and a second device would
+               compete with it, which is why the mihrab came off desktop on
                2026-09-23. */}
-            <span aria-hidden className="mt-11 flex justify-center md:hidden">
-              <OgeeMark className="h-32 w-auto text-gold-deep/45" />
-            </span>
           </SectionBody>
         </div>
       </section>
