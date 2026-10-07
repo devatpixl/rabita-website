@@ -69,14 +69,16 @@ export default async function ServicesIndex({
       {/* Medlemskap (client, ticket "Nettside medlemskap", 2026-09-18:
          "tjenester en egen fane for medlemskap"). It is in the Tjenester
          menu beside the eleven above, and this strip is its place on the
-         index. Not a tile in the grid: the grid is photographs of things
+         index. It points at /bli-medlem since 2026-10-06, when the two
+         membership pages became one — see the redirect note in
+         next.config.ts. Not a tile in the grid: the grid is photographs of things
          the mosque does for you, and membership is a signpost to three
          pages, so a full-width strip under the grid says what it is
          without pretending to be a twelfth service. */}
       <Section pad="tight" className="!pt-0">
         <SectionBody>
           <Link
-            href={`/${locale}/tjenester/medlemskap`}
+            href={`/${locale}/bli-medlem`}
             className="group grid gap-5 rounded-2xl bg-paper-2 p-7 ring-1 ring-ink/[0.06] transition-colors hover:bg-paper-deep sm:grid-cols-12 sm:items-center sm:p-8"
           >
             <div className="sm:col-span-9">

@@ -1,9 +1,7 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
 import { Accent } from '@/components/accent';
-import { MembershipRecognition } from '@/components/membership-recognition';
 import { MembershipSignup } from '@/components/membership-signup';
 import { Section, SectionBody } from '@/components/primitives';
 import { PageBand } from '@/components/page-band';
@@ -61,6 +59,44 @@ export default async function JoinPage({
   const t = await getTranslations({ locale, namespace: 'joinPage' });
   const tm = await getTranslations({ locale, namespace: 'membership' });
   const ts = await getTranslations({ locale, namespace: 'storyPages' });
+  // membershipHub — the copy that used to live on /tjenester/medlemskap,
+  // which now redirects here. `tm` is already the `membership` namespace.
+  const th = await getTranslations({ locale, namespace: 'membershipHub' });
+
+  // The three signposts, in his own order from the 2026-09-18 ticket:
+  // "1. Utmelding, 2. Dobbelt medlemskap, 3. Donasjon."
+  const UTMELDING_TOOL = 'https://utmelding.rabita.no';
+  const BRREG = 'https://www.brreg.no/';
+  const ROWS: {
+    key: 'leave' | 'dual' | 'give';
+    heading: string;
+    body: string;
+    links: { label: string; href: string; external?: boolean }[];
+  }[] = [
+    {
+      key: 'leave',
+      heading: th('leave.heading'),
+      body: th('leave.body'),
+      links: [{ label: th('leave.cta'), href: `/${locale}/utmelding` }],
+    },
+    {
+      key: 'dual',
+      heading: th('dual.heading'),
+      // p1 only. p2/p3/p4 are 81 words on how the grant is split; /utmelding
+      // carries that in full and the first link below goes there.
+      body: th('dual.p1'),
+      links: [
+        { label: th('dual.toolCta'), href: UTMELDING_TOOL, external: true },
+        { label: th('dual.checkCta'), href: BRREG, external: true },
+      ],
+    },
+    {
+      key: 'give',
+      heading: th('give.heading'),
+      body: th('give.body'),
+      links: [{ label: th('give.cta'), href: `/${locale}/gi-en-gave` }],
+    },
+  ];
 
   return (
     <main>
@@ -214,7 +250,17 @@ export default async function JoinPage({
                       <span className="block font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60">
                         {t(`points.${k}.title`)}
                       </span>
-                      <span className="mt-1.5 block text-[15px] leading-snug text-ink">
+                      {/* The body is md-and-up (client, Mobilversjon
+                         2026-10-06: "det er veldig mye tekst, spesielt på
+                         mobilversjonen"). The four titles — Gratis
+                         medlemskap, Din stemme teller, Du bidrar til
+                         fellesskapet, Tilgang til aktiviteter og tjenester —
+                         are each a complete reason on their own, and 62
+                         words of qualification under them is the single
+                         largest block of prose between a reader and the
+                         form. Nothing is deleted: it returns at md, where
+                         there is a column for it. */}
+                      <span className="mt-1.5 hidden text-[15px] leading-snug text-ink md:block">
                         {t(`points.${k}.body`)}
                       </span>
                     </span>
@@ -252,51 +298,97 @@ export default async function JoinPage({
          (utmelding.rabita.no — leaving OTHER communities, not Rabita); the
          second is the longer explanation on the membership page. "Litt
          info", so it is a paragraph, not a section with a picture. */}
+      {/* ── THE DUAL-MEMBERSHIP SECTION IS GONE (client, Mobilversjon
+         2026-10-06: "Finnes nå to forskjellige sider. Bør bare være en. OG
+         det er veldig mye tekst") ──────────────────────────────────────
+
+         It said the same thing as membershipHub.dual on
+         /tjenester/medlemskap, which is now folded into this page as row 02
+         of "Allerede medlem?" below — better, because that version carries
+         both actions (the utmelding tool and the Brønnøysund check) where
+         this one carried a 41-word paragraph and two links.
+
+         joinPage.dual.* stays in all three locales, unused. */}
+
+      {/* ── ALLEREDE MEDLEM? — THE THREE SIGNPOSTS, FOLDED IN ───────────
+         Client, Mobilversjon 2026-10-06: "Finnes nå to forskjellige sider.
+         Bør bare være en."
+
+         /tjenester/medlemskap was three blocks — utmelding, dobbelt
+         medlemskap, donasjon — on a full service-page template with its own
+         hero, offer heading and lede. That page now redirects here and its
+         three blocks arrive as this one compact register.
+
+         WHY IT SITS BELOW THE FORM. All three are for people who are
+         ALREADY members: leaving, being registered twice, giving on top.
+         Above the form they would answer questions a non-member has not
+         asked yet, in front of the one thing the page exists to do.
+
+         WHAT CAME ACROSS AND WHAT DID NOT. Each row keeps its number, label,
+         heading and actions. dual.p2/p3/p4 did not — 81 words explaining how
+         the state grant is split, which /utmelding carries in full and row
+         02 links to. dual.p1 stays because it is the fact that makes the row
+         make sense at all.
+
+         The hub's own hero, offerTitle and offerLede are not here either:
+         they introduced a page that no longer exists. membershipHub.* stays
+         whole in all three locales. */}
       <Section pad="tight" tone="paper">
         <SectionBody>
-          <div className="grid gap-6 border-y border-rule py-8 md:grid-cols-12 md:gap-10 md:py-10">
-            <div className="md:col-span-4">
-              <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">{t('dual.eyebrow')}</p>
-              <h2 className="mt-3 font-serif text-[clamp(1.35rem,2.2vw,1.7rem)] leading-tight text-ink">{t('dual.heading')}</h2>
-            </div>
-            <div className="md:col-span-8">
-              <p className="max-w-[58ch] text-body leading-relaxed text-ink-60">{t('dual.body')}</p>
-              <div className="mt-5 flex flex-wrap gap-3">
-                <a
-                  href="https://utmelding.rabita.no"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/25 px-5 text-[14px] font-semibold text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper"
-                >
-                  {t('dual.tool')}
-                  <span aria-hidden className="rtl:rotate-180">&rarr;</span>
+          <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
+            {th('offerTitle')}
+          </p>
+          <ul className="mt-6 divide-y divide-rule border-y border-rule">
+            {ROWS.map(({ key, heading, body, links }) => (
+              <li key={key} className="py-6 md:grid md:grid-cols-12 md:gap-8">
+                <p className="font-mono text-[0.75rem] tabular-nums tracking-[0.14em] text-gold-deep md:col-span-2">
+                  {th(`${key}.index`)}
+                </p>
+                <div className="mt-2 md:col-span-10 md:mt-0">
+                  <h2 className="font-serif text-[1.3rem] leading-tight text-ink">{heading}</h2>
+                  <p className="mt-2 max-w-[60ch] text-[15px] leading-relaxed text-ink-60">{body}</p>
+                  <div className="mt-4 flex flex-wrap gap-x-6 gap-y-3">
+                    {links.map((l) => (
+                      <a
+                        key={l.label}
+                        href={l.href}
+                        {...(l.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+                        className="group inline-flex min-h-11 items-center gap-2 text-[0.9375rem] font-semibold text-gold-deep"
+                      >
+                        <span className="border-b border-gold-deep/50 pb-1">{l.label}</span>
+                        <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">
+                          &rarr;
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 text-[14px] text-ink-60">
+            {th.rich('contact.cta', {
+              a: (c) => (
+                <a href={`mailto:${CAMPAIGN.membershipEmail}`} className="font-semibold text-ink underline decoration-gold/70 underline-offset-4">
+                  {c}
                 </a>
-                <Link
-                  href={`/${locale}/tjenester/medlemskap#dobbelt-medlemskap`}
-                  className="inline-flex min-h-11 items-center px-2 text-[14px] font-semibold text-ink underline decoration-gold-deep/50 underline-offset-4 transition-colors hover:decoration-ink"
-                >
-                  {t('dual.more')}
-                </Link>
-              </div>
-              <p className="mt-4 text-[13.5px] text-ink-60">
-                {t.rich('dual.contact', {
-                  email: CAMPAIGN.membershipEmail,
-                  a: (chunks) => (
-                    <a href={`mailto:${CAMPAIGN.membershipEmail}`} className="text-ink underline decoration-gold-deep/50 underline-offset-4 hover:decoration-ink">
-                      {chunks}
-                    </a>
-                  ),
-                })}
-              </p>
-            </div>
-          </div>
+              ),
+              email: CAMPAIGN.membershipEmail,
+            })}
+          </p>
         </SectionBody>
       </Section>
 
-      {/* Last, deliberately — see the note at the top of the component. The
-         form comes first for the reader who arrived ready to join; this is
-         for the one who reached the bottom without signing. */}
-      <MembershipRecognition locale={locale} />
+      {/* ── "KJENNER DU DEG IGJEN?" IS GONE (same note) ──────────────────
+         Four rhetorical questions — ro til bønn, barnas tilhørighet, et
+         fellesskap som inspirerer, lære mer om troen — plus a lede and a
+         closing line. Ninety-six words that restate the four reasons above
+         as questions, after the reader has already been given them and
+         walked past the form.
+
+         It is the one block on this page that argues rather than informs,
+         which is what makes it the right thing to lose when he says there is
+         too much text. joinPage.recognition.* and the component both stay. */}
     </main>
   );
 }

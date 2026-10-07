@@ -65,7 +65,31 @@ const nextConfig: NextConfig = {
       // the trap recorded below for /undervisning and veivisere.
       {
         source: '/:locale(no|en|ar)/medlemskap',
-        destination: '/:locale/tjenester/medlemskap',
+        destination: '/:locale/bli-medlem',
+        permanent: true,
+      },
+      // ── ONE MEMBERSHIP PAGE, NOT TWO (client, Mobilversjon 2026-10-06) ──
+      // "De to sidene som kanskje er dårlig er medlemssidene. Finnes nå to
+      // forskjellige sider. Bør bare være en."
+      //
+      // /bli-medlem survives because the whole site already points at it —
+      // 15 inbound references against 3, including the header CTA, the nav
+      // drawer and every service page's membership line. Its three blocks
+      // (utmelding, dobbelt medlemskap, donasjon) now live there as the
+      // "Allerede medlem?" register under the form.
+      //
+      // THE PAGE FILE IS DELETED, NOT SHADOWED. A redirect whose source is
+      // still a live route runs before routing and makes the page
+      // unreachable at its own address — the trap recorded for /undervisning
+      // and veivisere a few lines down.
+      //
+      // The 2026-09-18 ticket asked for membership as a tab under Tjenester.
+      // That still works: nav.menu.services and the index strip on
+      // /tjenester both point here now, so the entry point he asked for is
+      // intact and lands on the real page.
+      {
+        source: '/:locale(no|en|ar)/tjenester/medlemskap',
+        destination: '/:locale/bli-medlem',
         permanent: true,
       },
       // The /undervisning 308 that stood here is GONE, not edited (client,
