@@ -279,7 +279,8 @@
     "chipAriaGift": "Velg {gift} — {amount} kroner",
     "amountLabel": "Beløp",
     "paymentLogosMore": "og flere",
-    "questionShort": "Bygg moskeen med oss"
+    "questionShort": "Bygg moskeen med oss",
+    "failed": "Betalingen kunne ikke startes. Prøv igjen, eller gi med Vipps til 29656."
   },
   "meter": {
     "lattice": "Hvert merke er 1 000 000 kr",

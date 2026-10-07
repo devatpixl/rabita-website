@@ -279,7 +279,8 @@
     "chipAriaGift": "Choose {gift} — {amount} kroner",
     "amountLabel": "Amount",
     "paymentLogosMore": "and more",
-    "questionShort": "Help build the mosque"
+    "questionShort": "Help build the mosque",
+    "failed": "We could not start the payment. Please try again, or give with Vipps to 29656."
   },
   "meter": {
     "lattice": "Each mark is 1 000 000 kr",

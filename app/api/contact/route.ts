@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
+import { backendConfigured, postToBackend } from '@/lib/backend';
+
 // The contact panel's endpoint (client, Gjøremål 2026-09-15).
 //
 // THIS ONE ACTUALLY DELIVERS — which makes it the odd one out. Every other
@@ -38,6 +40,27 @@ export async function POST(req: Request) {
   const parsed = schema.safeParse(await req.json().catch(() => null));
   if (!parsed.success) {
     return NextResponse.json({ ok: false, error: 'invalid_payload' }, { status: 400 });
+  }
+
+  // Straight to the backend when it is wired up: the submission is persisted
+  // there and staff are e-mailed from there. Its status is passed through
+  // UNCHANGED, which matters most for 503 not_configured — this form answers
+  // that by opening a prefilled mailto: draft, and swallowing it would turn a
+  // failed send into a silent one.
+  //
+  // Without a backend this falls through to the Resend path below, exactly as
+  // before. That is what lets this branch deploy while the VPS is being built.
+  if (backendConfigured()) {
+    const { ok, status, data } = await postToBackend('/api/v1/contact', parsed.data);
+    if (ok) return NextResponse.json({ ok: true, id: data?.id });
+    if (status) {
+      return NextResponse.json(
+        { ok: false, error: (data?.error as string) ?? 'send_failed' },
+        { status },
+      );
+    }
+    // status 0 means the backend was unreachable, not that it refused. Fall
+    // through to Resend rather than losing the message.
   }
   const { question, email, name, phone, locale } = parsed.data;
 

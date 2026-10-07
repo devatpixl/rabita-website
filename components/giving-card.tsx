@@ -218,6 +218,7 @@ export function GivingCard({
   const [step, setStep] = useState<Step>(1);
   const [entered, setEntered] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   
 
@@ -339,26 +340,31 @@ const TOTAL_STEPS = 3;
       onSubmit(payload);
       return;
     }
-    // TODO(payments): wire real Vipps / card / AvtaleGiro / bank
-    // integration here. Right now /api/donations is a stub and there
-    // is no payment SDK installed. Do not fake success — surface the
-    // TODO in the UI (see stateBanner below) and log the payload for
-    // dev only.
+    // Standalone card — no sheet wrapping it, so this one posts for itself.
+    // /api/donations proxies to the Django backend, which creates the payment
+    // in Vipps and answers with the URL to send the donor to.
     setSubmitting(true);
     try {
-      // eslint-disable-next-line no-console
-      console.info('[givingCard] submit stub — no payment backend', payload);
-      await fetch('/api/donations', {
+      const res = await fetch('/api/donations', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
-          amount: payload.amount,
-          frequency: payload.frequency,
-          isZakat: payload.isZakat,
-          isAnonymous: payload.isAnonymous,
-          purpose,
-        }),
+        body: JSON.stringify({ ...payload, purpose, locale }),
       });
+      const data = (await res.json().catch(() => null)) as
+        | { ok?: boolean; redirectUrl?: string }
+        | null;
+
+      // Leave for Vipps if the backend gave us somewhere to go. A full
+      // navigation, not router.push — we are handing the browser to another
+      // app and it comes back to /takk with a reference.
+      if (data?.redirectUrl) {
+        window.location.href = data.redirectUrl;
+        return;
+      }
+      if (!res.ok || data?.ok === false) {
+        setFailed(true);
+        return;
+      }
       router.push(`/${locale}/takk`);
     } finally {
       setSubmitting(false);
@@ -569,6 +575,20 @@ const TOTAL_STEPS = 3;
       </AnimatedHeight>
 
       {/* Footer buttons — back (ghost) + primary. */}
+      {/* Payment could not be started. Sits directly above the actions so it is
+         the last thing read before the button is pressed again, and the donor's
+         amount and details are untouched behind it. */}
+      {failed && (
+        <p
+          role="alert"
+          className={cn(
+            'rounded-lg border border-gold-deep/30 bg-gold-deep/[0.07] px-4 py-2.5 text-[13.5px] leading-snug text-ink',
+            compact ? 'mx-5 mb-2' : 'mx-4 mb-2 sm:mx-6',
+          )}
+        >
+          {t('failed')}
+        </p>
+      )}
       <div className={cn('flex items-center gap-3', compact ? 'px-5 pb-3' : cn('px-4 pb-3 max-sm:pb-2.5 sm:px-6 sm:pb-4', fit && FIT.actions))}>
         {step > 1 && (
           <button

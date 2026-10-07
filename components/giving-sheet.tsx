@@ -57,6 +57,10 @@ export function GivingSheet() {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
+  // There was no failure state in this flow at all before the backend existed:
+  // a rejected fetch threw out of the handler and the donor was sent to the
+  // thank-you page having given nothing.
+  const [failed, setFailed] = useState(false);
   const [initialAmount, setInitialAmount] = useState<number | undefined>();
   const returnToRef = useRef<string | undefined>(undefined);
   const purposeRef = useRef<GivePurpose>('general');
@@ -113,19 +117,46 @@ export function GivingSheet() {
     if (submitting) return;
     setSubmitting(true);
     try {
-      await fetch('/api/donations', {
+      const back = returnToRef.current;
+      const res = await fetch('/api/donations', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ ...payload, purpose: purposeRef.current }),
+        body: JSON.stringify({
+          ...payload,
+          purpose: purposeRef.current,
+          locale,
+          // Where Vipps sends them back to. It has to be a URL: the browser
+          // leaves for the Vipps app, so the in-memory ref below cannot
+          // survive the round trip — the note under RETURN_FLAG said as much
+          // before any of this existed.
+          returnTo: back ? new URL(back, window.location.origin).toString() : '',
+        }),
       });
+      const data = (await res.json().catch(() => null)) as
+        | { ok?: boolean; redirectUrl?: string }
+        | null;
+
+      // THE HANDOFF. Vipps is where the money is actually given, so if the
+      // backend hands us a URL we leave for it and nothing below runs. No
+      // router.push: this is a full navigation out of the app.
+      if (data?.redirectUrl) {
+        window.location.href = data.redirectUrl;
+        return;
+      }
+
+      if (!res.ok || data?.ok === false) {
+        // Keep the sheet open and say so. Until the backend existed there was
+        // no failure state here at all — a rejected fetch threw out of the
+        // handler and the donor was pushed to the thank-you page regardless.
+        setFailed(true);
+        return;
+      }
+
       close();
-      const back = returnToRef.current;
       returnToRef.current = undefined;
       if (back) {
         // Staying put is the whole point, so do not navigate at all — just
-        // tell the opener. `back` still matters for the real Vipps
-        // integration, where the provider leaves the browser and returns to
-        // that URL; the query flag is read on mount in that case.
+        // tell the opener.
         window.dispatchEvent(new CustomEvent(GIVE_COMPLETE_EVENT));
         return;
       }
@@ -191,6 +222,17 @@ export function GivingSheet() {
          the dialog itself in vh, and this only matters on desktop, where
          the two agree. */}
       <div className="max-h-[calc(100vh-7rem)] overflow-y-auto">
+        {/* Payment failed, so the sheet stays open and says so. The donor's
+           choices are untouched behind this — they retry, they do not start
+           again. Sits above the card rather than replacing it for that reason. */}
+        {failed && (
+          <p
+            role="alert"
+            className="mx-6 mt-6 rounded-lg border border-gold-deep/30 bg-gold-deep/[0.07] px-4 py-3 text-[14px] leading-snug text-ink"
+          >
+            {t('failed')}
+          </p>
+        )}
         {/* A figure passed in means the sheet was opened from a card that
            names its own amount; the card then shows that figure alone. */}
         <GivingCard onSubmit={handleSubmit} initialAmount={initialAmount} fixedAmount={typeof initialAmount === 'number'} fit />

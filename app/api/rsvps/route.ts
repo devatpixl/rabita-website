@@ -1,11 +1,14 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
-// RSVP capture. Phase 2 stub — returns a synthetic id. Wire to Prisma's
-// Rsvp model in Phase 3 (schema already includes name, email, phone,
-// count, newsletterOptIn, eventId). Phone is optional at both UI and
-// API layers. Newsletter opt-in defaults to false and must be
-// user-ticked — GDPR requires opt-in consent for marketing.
+import { backendConfigured, postToBackend } from '@/lib/backend';
+
+// TWO CALLERS, TWO SHAPES. rsvp-sheet.tsx sends everything; the event detail
+// page sends only slug/name/email/count. The defaults below are what makes one
+// endpoint serve both — do not make phone or newsletterOptIn required.
+//
+// newsletterOptIn defaults false and is never pre-checked in the UI. GDPR: an
+// omitted field is not consent.
 
 const schema = z.object({
   slug: z.string().min(1).max(120),
@@ -21,5 +24,10 @@ export async function POST(req: Request) {
   if (!parsed.success) {
     return NextResponse.json({ ok: false, error: 'invalid_payload' }, { status: 400 });
   }
-  return NextResponse.json({ ok: true, id: 'rsvp_' + Date.now() });
+  if (!backendConfigured()) {
+    return NextResponse.json({ ok: true, id: 'rsvp_' + Date.now() });
+  }
+  const { ok, data } = await postToBackend('/api/v1/rsvps', parsed.data);
+  if (!ok) return NextResponse.json({ ok: false, error: 'unavailable' }, { status: 502 });
+  return NextResponse.json({ ok: true, id: data?.id });
 }
