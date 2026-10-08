@@ -147,18 +147,21 @@ const LABEL_BOX_H = 110;
 const LABEL_GAP = 20;
 const LABEL_TYPE_DESKTOP = 32;
 
-const CHIP_W = 460;
-// 240, not 200: three lines at the larger type is 180 units before padding
-// and border, and a foreignObject CLIPS to its box rather than overflowing
-// it — an under-sized box silently shaves the third line off.
-const CHIP_H = 240;
-// 46, not 34 (client, 2026-09-14: "some labels are too small... its tiny
-// now"). These are viewBox units and the layer is a meet-fit, so the rendered
-// size is LABEL_TYPE x (pane width / 1258): 34 measured 9.8px on a 389px
-// viewport, which is below anything you would set body copy at. 46 lands at
-// about 13px there and 14.6px on a 430px Pro Max — medium-small, as asked,
-// rather than merely less tiny.
-const LABEL_TYPE = 46;
+const CHIP_W = 430;
+// Three lines plus chrome, and a foreignObject CLIPS to its box rather than
+// overflowing it — an under-sized box silently shaves the third line off, so
+// this stays generous. 210 at the 2026-10-08 type and padding.
+const CHIP_H = 210;
+// 42, down from 46 (2026-10-08: the plates were covering too much of the
+// drawing on a phone) and still well clear of the 34 that drew the original
+// complaint — client, 2026-09-14: "some labels are too small... its tiny now".
+//
+// These are viewBox units on a meet-fit layer, so rendered size is
+// LABEL_TYPE x (pane width / 1258). On a 389px viewport: 34 measured 9.8px,
+// 46 measured 14.2px, 42 measures 13.0px. The type is NOT where the weight
+// was, which is why it only comes down four units — see the padding and
+// border below, which is where the real reduction is.
+const LABEL_TYPE = 42;
 
 // The phone name-plate. Identical either way except for the element and a
 // small gold count when a room has more than one photograph — the affordance
@@ -304,9 +307,16 @@ export function FloorMarkers({ floorKey, active }: { floorKey: string; active: b
                   textAlign: 'center',
                   background: '#16242E',
                   color: '#FAF8F4',
-                  border: '4px solid #9B7F4A',
+                  // THE PLATE SHRANK HERE, NOT IN THE TYPE (2026-10-08).
+                  // Measured on a 390px phone: each plate was 27px tall and
+                  // the ring alone was 4 of its units on every side. Text is
+                  // what has to stay legible; the ring and the padding around
+                  // it are what was eating the drawing. 20->14 and 12->8 and
+                  // 4->2.5 takes a plate from 27px to about 21px tall and
+                  // ~6px off its width, with the word inside it unchanged.
+                  border: '2.5px solid #9B7F4A',
                   borderRadius: '999px',
-                  padding: '12px 20px',
+                  padding: '8px 14px',
                   fontFamily: 'var(--font-mono), ui-monospace, monospace',
                   fontSize: `${LABEL_TYPE}px`,
                   lineHeight: 1.3,
