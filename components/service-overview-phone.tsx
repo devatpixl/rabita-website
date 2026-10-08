@@ -98,44 +98,31 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
           </h2>
           {body && <p className="mt-5 text-[1rem] leading-[1.62] text-ink-60">{body}</p>}
 
-          {/* ── THE ACTION SITS UNDER THE PARAGRAPH, NOT IN A PLATE ────────
-             It was a rounded paper-2 card holding a pulled quote with the
-             link beneath it. The quote came out on 2026-10-06 (see the note
-             on offerLedeRest above), which left a box around nothing but a
-             link — and a box around a link is just a box (user, same day:
-             "The cta, why in separate box, adjust that under the
-             paragraph").
+          {/* ── NO ACTION HERE (client, 2026-10-08, boxing this button on
+             the janaza page: "remove the cta as already many are there").
 
-             So the plate goes and the link reads as the end of the
-             paragraph, which is what it is: you have just been told what
-             this service is, and this is the one thing to do about it.
+             He is right, and it is worse than redundant. Measured on a phone
+             at /tjenester/janaza: TWO links to #enquiry, at y=591 and y=1086,
+             both reading "Send henvendelse", 495px apart. The first is in the
+             dark opener he has just scrolled past; this was the second. The
+             form itself is further down the same page, so the page asked
+             three times.
 
-             IT IS A FILLED PILL, NOT AN UNDERLINED LINK (user, same day:
-             "A rounded box cta would be better? In golden or green,
-             whatever rest are of, use that color"). Gold, not green: the
-             config says why — the three sages are grounds and hairlines,
-             "all of them far too pale to fill a button", and dusk only
-             looks green (#16242E is blue-dominant). bg-gold-deep is the
-             site's primary action and the most-used filled pill on it by a
-             distance, 45 call sites against the next colour's 21.
+             This section's job is to say what the service IS. The opener
+             above already carries the action, and the form below is the
+             action. A button in between is the page interrupting its own
+             explanation to repeat an offer it has already made — which on a
+             funeral page is the worst place on the site to do it.
 
-             The class string is lifted verbatim from the existing pair in
-             hero.tsx and service-opener.tsx — min-h-12, px-6 py-3, 15px
-             semibold on paper, hover to the lighter gold — so this is the
-             same button the rest of the site already uses rather than a new
-             one shaped like it. The arrow keeps its hover nudge.
+             THE PILL ITSELF STAYS IN THE CODEBASE, on the opener. It was
+             made a filled gold pill on 2026-10-06 at the user's request ("a
+             rounded box cta would be better? in golden"), and that decision
+             is unaffected — this removes a duplicate instance, not the
+             pattern. `detail.request` is still used by the opener and by the
+             desktop overview.
 
-             mt-6 rather than the plate's mt-7: the pill now sits against
-             body text instead of a card edge. */}
-          <a
-            href="#enquiry"
-            className="group mt-6 inline-flex min-h-12 items-center gap-2 rounded-full bg-gold-deep px-6 py-3 text-[15px] font-semibold text-paper transition-colors hover:bg-gold"
-          >
-            {t('detail.request')}
-            <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">
-              &rarr;
-            </span>
-          </a>
+             Phones only, as asked: service-overview.tsx is untouched and its
+             desktop layout has no second button in this position. */}
         </SectionBody>
       </Section>
 
