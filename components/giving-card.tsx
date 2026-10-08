@@ -15,7 +15,6 @@ import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import {
   AMOUNT_PRESETS,
-  PHONE_PRESETS,
   PRESET_GIFT_KEYS,
   DEFAULT_AMOUNT,
   DEFAULT_FREQUENCY,
@@ -747,10 +746,8 @@ function StepAmount({
   locale,
   t,
 }: StepAmountProps) {
-  // Phones show a subset of the amounts in one row; laptops the full set in
-  // a 2×2 (2026-10-09). See PHONE_PRESETS in lib/campaign.ts.
-  const onPhone = (a: number) => PHONE_PRESETS.includes(a);
-  const phoneThree = presets.filter(onPhone).length === 3;
+  // Three amounts share one row (2026-10-09). See AMOUNT_PRESETS.
+  const threeUp = presets.length === 3;
   return (
     <fieldset className="border-0 p-0 m-0">
       <legend className="sr-only">{t('question')}</legend>
@@ -787,12 +784,21 @@ function StepAmount({
       {/* Amount boxes — 2×2, the amount set large in serif with the
          period as a small suffix, one box tagged as recommended. */}
       {!hidePresets && (
+      // ── THE CARD'S WIDTH DECIDES, NOT THE SCREEN'S ────────────────────────
+      // Three in a row needs about 86px a box — the 360px phone, the
+      // narrowest that fits, gives 91. The card is not the same width on every
+      // page at a given screen: beside the hero headline at 768-1000px it is
+      // only 193-246px wide (56-74px a box), while /gi-en-gave at 768 is 292.
+      // A breakpoint would have to be wrong for one of them. A container query
+      // asks the card itself: three across from 272px of grid (17rem — set
+      // so /moskeprosjektet on a 360px phone, 278px, makes it), and below
+      // that — only the hero cards on small laptops — the three stack in one
+      // column rather than be squeezed. Written as an arbitrary variant,
+      // because the project has no container-queries plugin and this is the
+      // same idiom it already uses for [@media(...)]: classes.
+      <div className="[container-type:inline-size]">
       <div
-        // Three across on a phone, two across from md (2026-10-09). Partitioned
-        // at the breakpoint rather than overridden — lib/cn is clsx only, so
-        // two grid-cols classes sharing a media range would be decided by sort
-        // order. Every class is spelled out because Tailwind scans source text.
-        className={cn('grid md:grid-cols-2', phoneThree ? 'max-md:grid-cols-3' : 'max-md:grid-cols-2', compact ? 'mt-1 mb-2 gap-2' : cn('mt-1 mb-2 gap-2 max-sm:gap-x-1.5 max-sm:gap-y-[1.125rem] sm:mt-0 sm:mb-3 sm:gap-3', fit && FIT.presetGrid))}
+        className={cn('grid', threeUp ? 'grid-cols-1 [@container(min-width:17rem)]:grid-cols-3' : 'grid-cols-2', compact ? 'mt-1 mb-2 gap-2' : cn('mt-1 mb-2 gap-2 max-sm:gap-x-1.5 max-sm:gap-y-[1.125rem] sm:mt-0 sm:mb-3 sm:gap-3', fit && FIT.presetGrid))}
         role="radiogroup"
         aria-label={t('customLabel')}
       >
@@ -822,13 +828,19 @@ function StepAmount({
               }}
               className={cn(
                 'relative flex flex-col justify-center gap-0.5 rounded-tile text-start transition-colors',
-                compact ? 'min-h-[3rem] px-3 py-2' : cn('min-h-[3.25rem] px-3 py-2 max-sm:min-h-[2.75rem] max-sm:py-1.5 sm:min-h-[4.25rem] sm:px-4 sm:py-3', fit && FIT.presetCell),
-                // A third of the row is ~97px on a 390px phone; 10px a side
-                // instead of 12 is what leaves room for "1 000 kr".
-                phoneThree && 'max-md:px-2.5',
-                'md:max-lg:px-2.5',
-                // Not one of the phone's three: present from md only.
-                phoneThree && !onPhone(amount) && 'max-md:hidden',
+                // Three-up: 10px a side at every width, which is what leaves room
+                // for "1 000 kr" in a third of the row. Chosen as a whole string
+                // rather than layered over px-3/sm:px-4 — lib/cn is clsx only,
+                // so two padding classes in one media range would be decided by
+                // stylesheet order.
+                compact
+                  ? 'min-h-[3rem] px-3 py-2'
+                  : cn(
+                      threeUp
+                        ? 'min-h-[3.25rem] px-2.5 py-2 max-sm:min-h-[2.75rem] max-sm:py-1.5 sm:min-h-[4.25rem] sm:py-3'
+                        : 'min-h-[3.25rem] px-3 py-2 max-sm:min-h-[2.75rem] max-sm:py-1.5 sm:min-h-[4.25rem] sm:px-4 sm:py-3 md:max-lg:px-2.5',
+                      fit && FIT.presetCell,
+                    ),
                 // Selected is an OUTLINE in the brand gold, not a solid
                 // ink fill. Filled, the chosen amount was the only dark
                 // object on a light card — it read as a hole punched in the
@@ -899,9 +911,8 @@ function StepAmount({
                   {gift}
                 </span>
               )}
-              {/* /mnd UNDER the sum below lg, BESIDE it from lg (1024px).
-
-                 Phones: three share a row (see PHONE_PRESETS).
+              {/* /mnd UNDER the sum whenever three share a row; for a four-preset
+                 2×2, under it below lg and BESIDE it from lg (1024px).
 
                  768-1023 — A BUG THAT PREDATES 2026-10-09. The 2×2 there sits in
                  the hero's narrow card column, so a tile is 93-119px, and
@@ -913,8 +924,17 @@ function StepAmount({
                  three-up tile on a phone has about 70 inside its padding —
                  measured, it ran out of the box. Stacked, each line needs
                  under 70, and the period is still said. */}
-              <span className="flex max-lg:flex-col max-lg:items-start max-lg:gap-0.5 lg:items-baseline lg:gap-1.5">
-                <span className={cn('whitespace-nowrap font-serif leading-none tabular-nums', compact ? 'text-[1.15rem]' : 'text-[1.15rem] sm:text-[1.35rem] md:max-lg:text-[1.15rem]')}>
+              <span
+                className={cn(
+                  'flex',
+                  threeUp
+                    ? // stacked into one column (narrow card): a box is the full
+                      // card wide, so /mnd sits beside the sum; three across: under it
+                      'items-baseline gap-1.5 [@container(min-width:17rem)]:flex-col [@container(min-width:17rem)]:items-start [@container(min-width:17rem)]:gap-0.5'
+                    : 'max-lg:flex-col max-lg:items-start max-lg:gap-0.5 lg:items-baseline lg:gap-1.5',
+                )}
+              >
+                <span className={cn('whitespace-nowrap font-serif leading-none tabular-nums', compact || threeUp ? 'text-[1.15rem]' : 'text-[1.15rem] sm:text-[1.35rem] md:max-lg:text-[1.15rem]')}>
                   {formatAmount(locale, amount)} kr
                 </span>
                 {frequency === 'monthly' && (
@@ -924,6 +944,7 @@ function StepAmount({
             </button>
           );
         })}
+      </div>
       </div>
       )}
 

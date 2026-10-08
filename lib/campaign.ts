@@ -384,27 +384,24 @@ export const FOUNDATION_WALL_THRESHOLD_NOK = 10_000;
 // the join between them, and it is keyed by AMOUNT — so changing an amount
 // here without changing its key leaves the tile unlabelled rather than
 // mislabelled, which is the failure worth having.
-export const AMOUNT_PRESETS = [100, 300, 500, 1_000] as const;
-
-// ── ON A PHONE: THREE IN ONE ROW (client, Mobilversjon 2026-10-06; decided
-// 2026-10-09) ──────────────────────────────────────────────────────────────
-// «Rekkefølgen på donasjonsboksene bør være intensjonell» and «…tre mindre
-// bokser på en rad ved siden av hverandre? Men det blir kanskje for lite?»
+// ── THREE, ON EVERY DEVICE (client, Mobilversjon 2026-10-06; decided by the
+// user 2026-10-09) ─────────────────────────────────────────────────────────
+// «Rekkefølgen på donasjonsboksene bør være intensjonell. Gjelder både pc og
+// mobilversjon.» and «…tre mindre bokser på en rad ved siden av hverandre?»
 //
-// In a 2×2 the recommended 500 sits bottom-left, the least prominent cell.
-// Three in one row, low to high, puts it in the MIDDLE. Shown to the client as
-// «I dag / Forslag» and chosen.
+// In the old 2×2 the recommended 500 sat bottom-left, the least prominent
+// cell. Three in one row, low to high, puts it in the MIDDLE. Shown to the
+// client as «I dag / Forslag» and chosen.
 //
-// PHONES ONLY, BY DECISION (user, 2026-10-09: "keep it like before on laptop,
-// on phone only this 3 in 1 row"). The three-in-a-row line is in a document
-// titled Mobilversjon and does not say PC; the laptop keeps the four amounts
-// and the 2×2 it had. The amounts therefore differ by device: 100 (Murstein)
-// is a button on a laptop and goes through «Annet beløp» on a phone. That was
-// put to the user before choosing and accepted.
+// It went phone-only for an hour and came back to every device the same day
+// ("laptop also 3 in a row"): one set of amounts on every screen, rather than
+// 100 kr being a button on a laptop and only an «Annet beløp» on a phone.
 //
-// The card lays itself out from the two lists — counts drive the columns — so
-// changing either list needs no layout edit.
-export const PHONE_PRESETS: readonly number[] = [300, 500, 1_000];
+// 100 (Murstein) is the amount that goes. «Annet beløp» sits directly under
+// the row and takes any figure; the key stays in PRESET_GIFT_KEYS and the name
+// in messages. The card lays itself out from the COUNT, so putting 100 back at
+// the front of this array restores the 2×2 with no layout edit.
+export const AMOUNT_PRESETS = [300, 500, 1_000] as const;
 
 export const PRESET_GIFT_KEYS: Readonly<Record<number, 'brick' | 'lamp' | 'quran' | 'carpet'>> =
   Object.freeze({
