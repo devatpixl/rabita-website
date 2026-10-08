@@ -202,36 +202,29 @@ export function ProjectGallery({ only }: { only?: SlideKey[] } = {}) {
         </div>
       </div>
 
-      {/* ── A RULE, NOT TWELVE DASHES (client, Mobilversjon 2026-10-06, under
-         Leiligheter: "Prikkene under ser litt rart ut", and again on
-         2026-10-08 with this exact row boxed in red).
+      {/* ── NOTHING UNDER THE FRAME ON PHONES (client, Mobilversjon
+         2026-10-06, under Leiligheter: "Prikkene under ser litt rart ut",
+         repeated 2026-10-08 with that row boxed in red).
 
-         The same sentence and the same fix as apartment-units, on the other
-         carousel — that one was changed on 2026-10-06 and this one was
-         missed, which is why he had to say it twice.
+         There were twelve dashes here. Dots work to about eight; at twelve
+         they read as a ruler, and the active one was a 5px mark in a 240px
+         row — the least visible thing in it. The count is not even fixed,
+         since `only` narrows this gallery per page, so the row had to look
+         right at four and at twelve.
 
-         Dots work to about eight. At twelve they read as a ruler, and the
-         active one is a 5px mark in a 240px row — the least visible thing in
-         it. The count is also not fixed: `only` can narrow this gallery to
-         any subset, so a dot row has to look right at four and at twelve.
+         A progress rule replaced them first, and then went too. THE COUNTER
+         IS ALREADY ON THE PHOTOGRAPH — "01 / 12 · LEILIGHETENE" — so a rule
+         repeats the one thing it could have said, and a hairline under the
+         frame is still an object under the frame, which is what he was
+         pointing at. He asked for the dots to go, not for a replacement.
 
-         NO COUNTER IS ADDED HERE, unlike apartment-units. This carousel
-         already prints "01 / 12 · LEILIGHETENE" over the photograph itself,
-         so the position is on screen twice the moment you add one. The rule
-         alone carries what the dots carried.
+         Position comes from the counter, movement from the arrows directly
+         above, and the thumbnail strip from sm keeps direct access to any
+         slide on every wider screen.
 
-         WHAT IS LOST: tapping a dot to jump straight to slide seven. They
-         were 20px targets on a 12-item row, the arrows sit right above, and
-         the thumbnail strip from sm keeps direct access on every wider
-         screen. Worth the trade. */}
-      <div className="mt-4 flex justify-center sm:hidden">
-        <span aria-hidden className="relative h-px w-28 overflow-hidden bg-ink/15">
-          <span
-            className="absolute inset-y-0 start-0 bg-gold-deep transition-[width] duration-300 ease-out"
-            style={{ width: `${((i + 1) / slides.length) * 100}%` }}
-          />
-        </span>
-      </div>
+         WHAT IS LOST: tapping a dot to jump straight to slide seven, on
+         phones only. They were 20px targets in a row he had twice called
+         odd-looking. */}
       {/* From sm: thumbnails, the whole set at a glance, current one framed in gold. */}
       {/* py, not just pb. Setting overflow-x promotes overflow-y from visible
          to auto, so this strip clips vertically whether or not it is asked to
