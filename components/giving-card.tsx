@@ -15,6 +15,7 @@ import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import {
   AMOUNT_PRESETS,
+  PHONE_PRESETS,
   PRESET_GIFT_KEYS,
   DEFAULT_AMOUNT,
   DEFAULT_FREQUENCY,
@@ -746,8 +747,10 @@ function StepAmount({
   locale,
   t,
 }: StepAmountProps) {
-  // Three amounts share one row (2026-10-09). See AMOUNT_PRESETS.
-  const threeUp = presets.length === 3;
+  // Phones show a subset of the amounts in one row; laptops the full set in
+  // a 2×2 (2026-10-09). See PHONE_PRESETS in lib/campaign.ts.
+  const onPhone = (a: number) => PHONE_PRESETS.includes(a);
+  const phoneThree = presets.filter(onPhone).length === 3;
   return (
     <fieldset className="border-0 p-0 m-0">
       <legend className="sr-only">{t('question')}</legend>
@@ -785,12 +788,11 @@ function StepAmount({
          period as a small suffix, one box tagged as recommended. */}
       {!hidePresets && (
       <div
-        // Three across when there are three (2026-10-09, see AMOUNT_PRESETS),
-        // two across when there are four. The column count follows the list
-        // rather than being fixed, so restoring a fourth amount restores the
-        // 2×2 by itself. Both classes are spelled out in full because
-        // Tailwind scans source text and would never generate a built one.
-        className={cn('grid', threeUp ? 'grid-cols-3' : 'grid-cols-2', compact ? 'mt-1 mb-2 gap-2' : cn('mt-1 mb-2 gap-2 max-sm:gap-x-1.5 max-sm:gap-y-[1.125rem] sm:mt-0 sm:mb-3 sm:gap-3', fit && FIT.presetGrid))}
+        // Three across on a phone, two across from md (2026-10-09). Partitioned
+        // at the breakpoint rather than overridden — lib/cn is clsx only, so
+        // two grid-cols classes sharing a media range would be decided by sort
+        // order. Every class is spelled out because Tailwind scans source text.
+        className={cn('grid md:grid-cols-2', phoneThree ? 'max-md:grid-cols-3' : 'max-md:grid-cols-2', compact ? 'mt-1 mb-2 gap-2' : cn('mt-1 mb-2 gap-2 max-sm:gap-x-1.5 max-sm:gap-y-[1.125rem] sm:mt-0 sm:mb-3 sm:gap-3', fit && FIT.presetGrid))}
         role="radiogroup"
         aria-label={t('customLabel')}
       >
@@ -821,9 +823,12 @@ function StepAmount({
               className={cn(
                 'relative flex flex-col justify-center gap-0.5 rounded-tile text-start transition-colors',
                 compact ? 'min-h-[3rem] px-3 py-2' : cn('min-h-[3.25rem] px-3 py-2 max-sm:min-h-[2.75rem] max-sm:py-1.5 sm:min-h-[4.25rem] sm:px-4 sm:py-3', fit && FIT.presetCell),
-                // A third of the row is 97px on a 390px phone; 10px a side
+                // A third of the row is ~97px on a 390px phone; 10px a side
                 // instead of 12 is what leaves room for "1 000 kr".
-                threeUp && 'max-sm:px-2.5',
+                phoneThree && 'max-md:px-2.5',
+                'md:max-lg:px-2.5',
+                // Not one of the phone's three: present from md only.
+                phoneThree && !onPhone(amount) && 'max-md:hidden',
                 // Selected is an OUTLINE in the brand gold, not a solid
                 // ink fill. Filled, the chosen amount was the only dark
                 // object on a light card — it read as a hole punched in the
@@ -894,13 +899,22 @@ function StepAmount({
                   {gift}
                 </span>
               )}
-              {/* /mnd UNDER the sum when three share a row, beside it when
-                 two do. On one line "1 000 kr /mnd" needs ~106px and a
+              {/* /mnd UNDER the sum below lg, BESIDE it from lg (1024px).
+
+                 Phones: three share a row (see PHONE_PRESETS).
+
+                 768-1023 — A BUG THAT PREDATES 2026-10-09. The 2×2 there sits in
+                 the hero's narrow card column, so a tile is 93-119px, and
+                 "1 000 kr /mnd" on one line overflowed it. Measured on the card
+                 as it was before that day: OVERFLOW at 768, 820 and 900, fitting
+                 only from 1024. The user asked for the laptop to stay "like
+                 before"; from 1024 it is exactly that, and below it only the
+                 period moves and the sum takes the phone's size, so nothing spills. On one line "1 000 kr /mnd" needs ~106px and a
                  three-up tile on a phone has about 70 inside its padding —
                  measured, it ran out of the box. Stacked, each line needs
                  under 70, and the period is still said. */}
-              <span className={cn('flex', threeUp ? 'flex-col items-start gap-0.5' : 'items-baseline gap-1.5')}>
-                <span className={cn('whitespace-nowrap font-serif leading-none tabular-nums', compact ? 'text-[1.15rem]' : 'text-[1.15rem] sm:text-[1.35rem]')}>
+              <span className="flex max-lg:flex-col max-lg:items-start max-lg:gap-0.5 lg:items-baseline lg:gap-1.5">
+                <span className={cn('whitespace-nowrap font-serif leading-none tabular-nums', compact ? 'text-[1.15rem]' : 'text-[1.15rem] sm:text-[1.35rem] md:max-lg:text-[1.15rem]')}>
                   {formatAmount(locale, amount)} kr
                 </span>
                 {frequency === 'monthly' && (
