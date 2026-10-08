@@ -2783,7 +2783,8 @@
     "panelHeading": "Last ned kalender",
     "panelBody": "Én måned per ark, med hijri-dato og fredagsbønn. Åpne måneden du vil ha og lagre den som PDF, eller skriv den ut.",
     "panelEyebrow": "Kalender",
-    "panelHeadingRich": "Hele måneden, <em>på ett ark</em>."
+    "panelHeadingRich": "Hele måneden, <em>på ett ark</em>.",
+    "monthPending": "Kommer"
   },
   "cta": {
     "prayer": {

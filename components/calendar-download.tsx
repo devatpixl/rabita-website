@@ -23,6 +23,30 @@ export async function CalendarDownload() {
   const months = calendarMonths(days);
   const fmt = new Intl.DateTimeFormat(localeTag(l), { month: 'long', year: 'numeric' });
 
+  // ── FOUR BOXES, EVEN WHEN THERE IS NOT A FOURTH MONTH ────────────────────
+  // Client, Mobilversjon 2026-10-06: "Kanskje ha fire neste månedene slik at
+  // det blir fire bokser og ikke tre?" — asked again 2026-10-08, knowing the
+  // fourth is empty.
+  //
+  // IRN has not generated 2027. /prayertimes/181/2027/1/ answers 200 with an
+  // empty array, so calendarMonths — which derives the list from the days that
+  // exist — returns three. lib/irn.ts already requests four, so the day they
+  // publish, January fills itself and nothing here has to change.
+  //
+  // Until then the fourth is padded in and marked unavailable, because the
+  // alternative is worse than a placeholder: /bonnetider/kalender?m=2027-01
+  // does NOT 404 — an unknown month silently falls back to the first one it
+  // has, so a working-looking link would quietly show October under a January
+  // label. A box that plainly says "kommer" is honest; a link that lies is not.
+  const SHOW = 4;
+  const available = new Set(months);
+  const shown = [...months];
+  while (shown.length < SHOW && shown.length > 0) {
+    const [y, m] = shown[shown.length - 1].split('-').map(Number);
+    const next = new Date(y, m, 1);
+    shown.push(`${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, '0')}`);
+  }
+
   return (
     <section id="kalender" className="scroll-mt-24 bg-paper py-section-sm">
       <SectionBody>
@@ -70,25 +94,47 @@ export async function CalendarDownload() {
              WHEN THE FOURTH MONTH ARRIVES, the count-proof answer is one
              column — three or four or twelve all read as a list, which is
              the same conclusion the desktop register above reached. */}
-          <ul className="self-center border-t border-ink max-md:mt-2 max-md:grid max-md:grid-cols-3 max-md:gap-2 max-md:border-t-0 md:col-span-7">
-            {months.map((key) => (
-              <li key={key}>
-                <Link
-                  href={`/${l}/bonnetider/kalender?m=${key}`}
-                  className="group flex min-h-[3.75rem] items-center justify-between gap-4 border-b border-rule px-1 text-ink transition-colors duration-200 max-md:min-h-11 max-md:justify-center max-md:rounded-full max-md:border max-md:border-rule max-md:px-4 hover:px-3 hover:text-gold-deep"
-                >
-                  <span className="font-serif text-[1.15rem] leading-none max-md:text-[1rem]">
-                    {fmt.format(new Date(`${key}-01T00:00:00`))}
-                  </span>
-                  <span
-                    aria-hidden
-                    className="shrink-0 text-ink-60 transition-transform duration-200 max-md:hidden group-hover:translate-x-1 group-hover:text-gold-deep rtl:rotate-180 rtl:group-hover:-translate-x-1"
-                  >
-                    &rarr;
-                  </span>
-                </Link>
-              </li>
-            ))}
+          <ul className="self-center border-t border-ink max-md:mt-2 max-md:grid max-md:grid-cols-2 max-md:gap-2 max-md:border-t-0 md:col-span-7">
+            {shown.map((key) => {
+              const label = fmt.format(new Date(`${key}-01T00:00:00`));
+              const ready = available.has(key);
+              const row =
+                'group flex min-h-[3.75rem] items-center justify-between gap-4 border-b border-rule px-1 transition-colors duration-200 max-md:min-h-11 max-md:justify-center max-md:rounded-full max-md:border max-md:border-rule max-md:px-4';
+              return (
+                <li key={key}>
+                  {ready ? (
+                    <Link href={`/${l}/bonnetider/kalender?m=${key}`} className={`${row} text-ink hover:px-3 hover:text-gold-deep`}>
+                      <span className="font-serif text-[1.15rem] leading-none max-md:text-[1rem]">{label}</span>
+                      <span
+                        aria-hidden
+                        className="shrink-0 text-ink-60 transition-transform duration-200 max-md:hidden group-hover:translate-x-1 group-hover:text-gold-deep rtl:rotate-180 rtl:group-hover:-translate-x-1"
+                      >
+                        &rarr;
+                      </span>
+                    </Link>
+                  ) : (
+                    // Not a link and not focusable: there is nothing behind it
+                    // yet. aria-disabled rather than hiding it, so a screen
+                    // reader is told the same thing the dimming says.
+                    <span aria-disabled className={`${row} cursor-default text-ink-60 max-md:border-dashed`}>
+                      <span className="whitespace-nowrap font-serif text-[1.15rem] leading-none text-ink-60 max-md:text-[1rem]">
+                        {label}
+                      </span>
+                      {/* The word is md-and-up. At 390 a pill is 167px and
+                         "januar 2027" alone is about 95 of them — adding
+                         "KOMMER" beside it wrapped the month onto two lines
+                         and made the fourth box taller than the three it sits
+                         with. The dashed border and the muted type carry the
+                         same signal in the space available; the screen reader
+                         still gets aria-disabled either way. */}
+                      <span className="hidden shrink-0 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-ink-60 md:inline">
+                        {tc('monthPending')}
+                      </span>
+                    </span>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </SectionBody>

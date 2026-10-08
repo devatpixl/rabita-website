@@ -2779,7 +2779,8 @@
     "panelHeading": "Download the calendar",
     "panelBody": "One month per sheet, with the Hijri date and Friday prayer. Open the month you want and save it as a PDF, or print it.",
     "panelEyebrow": "Calendar",
-    "panelHeadingRich": "The whole month, <em>on one sheet</em>."
+    "panelHeadingRich": "The whole month, <em>on one sheet</em>.",
+    "monthPending": "Coming"
   },
   "cta": {
     "prayer": {
