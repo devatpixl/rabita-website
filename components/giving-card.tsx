@@ -746,6 +746,8 @@ function StepAmount({
   locale,
   t,
 }: StepAmountProps) {
+  // Three amounts share one row (2026-10-09). See AMOUNT_PRESETS.
+  const threeUp = presets.length === 3;
   return (
     <fieldset className="border-0 p-0 m-0">
       <legend className="sr-only">{t('question')}</legend>
@@ -783,7 +785,12 @@ function StepAmount({
          period as a small suffix, one box tagged as recommended. */}
       {!hidePresets && (
       <div
-        className={cn('grid grid-cols-2', compact ? 'mt-1 mb-2 gap-2' : cn('mt-1 mb-2 gap-2 max-sm:gap-x-1.5 max-sm:gap-y-[1.125rem] sm:mt-0 sm:mb-3 sm:gap-3', fit && FIT.presetGrid))}
+        // Three across when there are three (2026-10-09, see AMOUNT_PRESETS),
+        // two across when there are four. The column count follows the list
+        // rather than being fixed, so restoring a fourth amount restores the
+        // 2×2 by itself. Both classes are spelled out in full because
+        // Tailwind scans source text and would never generate a built one.
+        className={cn('grid', threeUp ? 'grid-cols-3' : 'grid-cols-2', compact ? 'mt-1 mb-2 gap-2' : cn('mt-1 mb-2 gap-2 max-sm:gap-x-1.5 max-sm:gap-y-[1.125rem] sm:mt-0 sm:mb-3 sm:gap-3', fit && FIT.presetGrid))}
         role="radiogroup"
         aria-label={t('customLabel')}
       >
@@ -814,6 +821,9 @@ function StepAmount({
               className={cn(
                 'relative flex flex-col justify-center gap-0.5 rounded-tile text-start transition-colors',
                 compact ? 'min-h-[3rem] px-3 py-2' : cn('min-h-[3.25rem] px-3 py-2 max-sm:min-h-[2.75rem] max-sm:py-1.5 sm:min-h-[4.25rem] sm:px-4 sm:py-3', fit && FIT.presetCell),
+                // A third of the row is 97px on a 390px phone; 10px a side
+                // instead of 12 is what leaves room for "1 000 kr".
+                threeUp && 'max-sm:px-2.5',
                 // Selected is an OUTLINE in the brand gold, not a solid
                 // ink fill. Filled, the chosen amount was the only dark
                 // object on a light card — it read as a hole punched in the
@@ -884,7 +894,12 @@ function StepAmount({
                   {gift}
                 </span>
               )}
-              <span className="flex items-baseline gap-1.5">
+              {/* /mnd UNDER the sum when three share a row, beside it when
+                 two do. On one line "1 000 kr /mnd" needs ~106px and a
+                 three-up tile on a phone has about 70 inside its padding —
+                 measured, it ran out of the box. Stacked, each line needs
+                 under 70, and the period is still said. */}
+              <span className={cn('flex', threeUp ? 'flex-col items-start gap-0.5' : 'items-baseline gap-1.5')}>
                 <span className={cn('whitespace-nowrap font-serif leading-none tabular-nums', compact ? 'text-[1.15rem]' : 'text-[1.15rem] sm:text-[1.35rem]')}>
                   {formatAmount(locale, amount)} kr
                 </span>

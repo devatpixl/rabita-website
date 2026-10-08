@@ -384,7 +384,22 @@ export const FOUNDATION_WALL_THRESHOLD_NOK = 10_000;
 // the join between them, and it is keyed by AMOUNT — so changing an amount
 // here without changing its key leaves the tile unlabelled rather than
 // mislabelled, which is the failure worth having.
-export const AMOUNT_PRESETS = [100, 300, 500, 1_000] as const;
+//
+// ── THREE, NOT FOUR (client, Mobilversjon 2026-10-06, approved 2026-10-09) ──
+// «Rekkefølgen på donasjonsboksene bør være intensjonell» and «…tre mindre
+// bokser på en rad ved siden av hverandre? Men det blir kanskje for lite?»
+//
+// Four in a 2×2 put the recommended 500 bottom-left — the least prominent
+// cell — so the order said nothing. Three in one row, low to high, puts it in
+// the MIDDLE, which is where the eye lands and the option a three-up giving
+// form is built around. Shown to the client as «I dag / Forslag» side by side
+// and chosen on 2026-10-09.
+//
+// 100 (Murstein) is the one that goes. It is not lost: «Annet beløp» sits
+// directly under the row and takes any figure. Its key stays in
+// PRESET_GIFT_KEYS and its name stays in messages, so restoring it is putting
+// 100 back at the front of this array — the card lays itself out by count.
+export const AMOUNT_PRESETS = [300, 500, 1_000] as const;
 
 export const PRESET_GIFT_KEYS: Readonly<Record<number, 'brick' | 'lamp' | 'quran' | 'carpet'>> =
   Object.freeze({
