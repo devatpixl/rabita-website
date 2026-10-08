@@ -256,7 +256,7 @@ export function ApartmentsSold({ locale }: { locale: string }) {
   // partitioning means correctness never depends on sort order, and no `!`
   // is needed.
   return (
-    <section id="solgte-leiligheter" className="border-t border-paper/15 bg-dusk max-md:pt-20 max-md:pb-8 md:py-section-md [@media(min-width:768px)_and_(max-height:900px)]:!py-8">
+    <section id="solgte-leiligheter" className="border-t border-paper/15 bg-dusk max-md:border-paper/30 max-md:pt-20 max-md:pb-8 md:py-section-md [@media(min-width:768px)_and_(max-height:900px)]:!py-8">
       {/* ── A WIDER MEASURE, FROM xl UP ───────────────────────────────
            Client, 2026-09-20: "in desktops large screens, why so conjested?
            make it big and all for larger desktop screens".

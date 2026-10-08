@@ -259,6 +259,24 @@ export function ImpactStory() {
 
   const activeIndex = CHAPTERS.findIndex((c) => c.key === active);
 
+  // ── A RULE AT THE TOP, PHONES ONLY (client, Mobilversjon, repeated
+  // 2026-10-08): "overgangene mellom vær seksjon må være tydligere ...
+  // seksjonene faller litt i hverandre uten klare skille."
+  //
+  // Measured at 390 before changing anything: four of the eight front-page
+  // sections already opened with a hairline and four did not, so the device
+  // existed and was simply not applied consistently. A reader scrolling past
+  // an inconsistent signal reads no signal at all.
+  //
+  // A RULE, NOT A LABEL. The obvious alternative was to give every section an
+  // eyebrow — but the "Follow us" one was REMOVED at the client's own request
+  // on 2026-08-31 ("the label was only repeating the section back to itself"),
+  // so adding labels back would solve this complaint by reopening that one. A
+  // rule says "new chapter" without a word, needs no copy decision, and is
+  // already the house device on the four sections that have it.
+  //
+  // max-md only: the desktop has wider gutters and does not run together, and
+  // he is describing scrolling.
   return (
     /* pt-14 on phones: "Dette er Rabita" now ends on a full-bleed
        photograph that is cut off by the section boundary, and this section
@@ -268,7 +286,7 @@ export function ImpactStory() {
        phones the band below that card supplied the gap. Desktop needs
        nothing: the story photo is centred in a 100svh column there, so it
        already has air above it. */
-    <section id="menigheten-forteller" className="bg-paper-2 pt-14 pb-section-sm md:pt-0">
+    <section id="menigheten-forteller" className="bg-paper-2 pt-14 pb-section-sm max-md:border-t max-md:border-rule md:pt-0">
       <SectionBody>
         <div className="max-md:flex max-md:flex-col md:grid md:gap-10 md:grid-cols-12">
           {/* Sticky photo column */}

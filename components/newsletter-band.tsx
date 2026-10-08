@@ -74,8 +74,26 @@ export function NewsletterBand() {
   // that answers the real objection and it converts, but nobody has told us
   // how often Rabita actually sends. A cadence we promise and they break is
   // worse than none. Add it the day he gives a real number.
+  // ── A RULE AT THE TOP, PHONES ONLY (client, Mobilversjon, repeated
+  // 2026-10-08): "overgangene mellom vær seksjon må være tydligere ...
+  // seksjonene faller litt i hverandre uten klare skille."
+  //
+  // Measured at 390 before changing anything: four of the eight front-page
+  // sections already opened with a hairline and four did not, so the device
+  // existed and was simply not applied consistently. A reader scrolling past
+  // an inconsistent signal reads no signal at all.
+  //
+  // A RULE, NOT A LABEL. The obvious alternative was to give every section an
+  // eyebrow — but the "Follow us" one was REMOVED at the client's own request
+  // on 2026-08-31 ("the label was only repeating the section back to itself"),
+  // so adding labels back would solve this complaint by reopening that one. A
+  // rule says "new chapter" without a word, needs no copy decision, and is
+  // already the house device on the four sections that have it.
+  //
+  // max-md only: the desktop has wider gutters and does not run together, and
+  // he is describing scrolling.
   return (
-    <section data-print-hide className="star-texture relative isolate overflow-hidden bg-dusk py-10 text-paper md:py-14">
+    <section data-print-hide className="star-texture relative isolate overflow-hidden bg-dusk py-10 text-paper max-md:border-t max-md:border-paper/15 md:py-14">
       {/* NO SEPARATE WATERMARK. The first draft floated an oversized
          rabita-mark in the corner at 4%; .star-texture already tiles that
          same mark across the whole band as its ground, so it was the same
