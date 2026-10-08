@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { ServiceOverviewPhone } from './service-overview-phone';
 import { Eyebrow, Section, SectionBody, SectionHeading } from './primitives';
 import { MotionRise } from './motion-rise';
+import { cn } from '@/lib/cn';
 import type { ServiceKey } from '@/lib/services';
 
 /**
@@ -82,21 +83,45 @@ export async function ServiceOverview({ s }: { s: ServiceKey }) {
           <SectionBody>
             <SectionHeading>{t('detail.steps')}</SectionHeading>
             <MotionRise>
-              {/* A LIST, not columns (client, 2026-09-28, pointing at the
-                 offer row: "this maybe in points but in list order"). One
-                 step per ruled row, the disc at the start, the title and
-                 the body side by side from md so a row stays one line deep
-                 where the text allows. */}
-              <ol className="mt-10 border-t border-ink/20 md:mt-12">
+              {/* COLUMNS DIVIDED BY HAIRLINES, each opened by the numbered
+                 disc — the shape this page had at cc0c626 and which the
+                 client asked for again on 2026-10-08, sending a screenshot of
+                 that pilot beside the list that replaced it.
+
+                 THE LIST WAS ALSO HIS. On 2026-09-28, pointing at the offer
+                 row, he asked for "points but in list order", and the ruled
+                 list is what that produced. Both are recorded here because
+                 the next person to read this will otherwise undo one of them
+                 believing it was never asked for.
+
+                 What makes the columns work now and not then: the step bodies
+                 were cut by a third on 2026-10-08. The screenshot he sent
+                 shows the OLD text in these columns — four lines in a 230px
+                 measure, which is what made them look cramped. At 45
+                 characters they sit in two.
+
+                 Column count follows step count. Four of the eighteen
+                 services have four steps and the rest have three; a hardcoded
+                 grid-cols-4 leaves a fourteen-page hole where the fourth
+                 column should be. Both classes are spelled out in full
+                 because Tailwind scans source text and would never generate
+                 a template-built one. */}
+              <ol
+                className={cn(
+                  'mt-10 grid gap-y-8 md:mt-12 md:gap-y-0',
+                  steps.length === 4 ? 'md:grid-cols-4' : 'md:grid-cols-3',
+                )}
+              >
                 {steps.map((st, i) => (
-                  <li key={st.title} className="flex gap-5 border-b border-rule py-6 md:gap-8 md:py-7">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-deep font-mono text-[0.85rem] font-medium tabular-nums text-paper">
+                  <li
+                    key={st.title}
+                    className="md:border-s md:border-ink/15 md:px-7 md:first:border-s-0 md:first:ps-0 lg:px-9 lg:first:ps-0"
+                  >
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-deep font-mono text-[0.85rem] font-medium tabular-nums text-paper">
                       {i + 1}
                     </span>
-                    <div className="pt-1.5 md:grid md:flex-1 md:grid-cols-12 md:gap-8 md:pt-2">
-                      <h3 className="font-serif text-[1.3rem] leading-[1.25] text-balance text-ink md:col-span-5 md:text-[1.4rem]">{st.title}</h3>
-                      <p className="mt-2 max-w-[56ch] text-body text-ink-60 md:col-span-7 md:mt-0">{st.body}</p>
-                    </div>
+                    <h3 className="mt-7 font-serif text-[1.3rem] leading-[1.25] text-balance text-ink">{st.title}</h3>
+                    <p className="mt-3 text-[15px] leading-relaxed text-ink-60">{st.body}</p>
                   </li>
                 ))}
               </ol>
