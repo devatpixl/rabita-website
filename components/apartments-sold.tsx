@@ -12,6 +12,7 @@ import { Accent } from './accent';
 import { LinkVT } from './link-vt';
 import { cn } from '@/lib/cn';
 import { PlateFoot } from './plate-foot';
+import { ChapterMark } from './chapter-mark';
 
 // The sold flats, on the home page (client, 2026-09-18: "legge til noen av de
 // solgte leilighetene på forsiden for å vise salg").
@@ -292,7 +293,10 @@ export function ApartmentsSold({ locale }: { locale: string }) {
            sentence rewrites itself. */}
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <Eyebrow tone="gold" className="mb-4">{t('eyebrow')}</Eyebrow>
+            {/* Phones: the chapter mark, which carries the same word plus the
+               rosette every other chapter opens with. Desktop: unchanged. */}
+            <ChapterMark chapter="apartments" tone="dark" className="mb-4" />
+            <Eyebrow tone="gold" className="mb-4 max-md:hidden">{t('eyebrow')}</Eyebrow>
             <h2
               className="display-opsz max-w-[20ch] font-serif text-balance text-paper"
               style={{

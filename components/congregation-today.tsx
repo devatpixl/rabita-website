@@ -11,6 +11,7 @@ import type { AppLocale } from '@/i18n/routing';
 import { Section } from './primitives';
 import { Accent } from './accent';
 import { cn } from '@/lib/cn';
+import { ChapterMark } from './chapter-mark';
 
 // §4.07 — one-screen carousel section, five cards, full-bleed row.
 //
@@ -421,6 +422,10 @@ export function CongregationToday() {
            The 29 September instruction still holds where it was aimed. The
            section heading is above the picture, as it always was. */}
         <div className="mx-auto max-w-6xl w-full px-6">
+          {/* Above the heading row, not inside it: the row is a flex with
+             items-baseline, and the mark dropped in as a sibling sat BESIDE
+             the headline in the first prototype. See chapter-mark.tsx. */}
+          <ChapterMark chapter="services" className="mb-4" />
           <div className="flex items-baseline justify-between" style={{ gap: '32px' }}>
             {/* ── THE SIZE LIVES IN CLASSES, NOT THE STYLE OBJECT ────────
                Client, 2026-09-30: "the heading of our services is too small

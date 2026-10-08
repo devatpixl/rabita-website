@@ -5,6 +5,7 @@ import { CAMPAIGN } from '@/lib/campaign';
 import { Accent } from './accent';
 import type { AppLocale } from '@/i18n/routing';
 import { FigureIcon } from './figure-icons';
+import { ChapterMark } from './chapter-mark';
 
 // The building, introduced on the homepage — as a plate, not a slide.
 //
@@ -153,7 +154,13 @@ export async function ProjectOverview() {
            been — the words column must not become a flex parent there, or the
            margins inside it stop collapsing. */}
         <div className="max-w-xl max-md:contents">
-          <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
+          {/* On a phone the address gives way to the chapter mark. This also
+             settles the open Mobilversjon point — «Skal ikke stå Calmeyers
+             gate 8 siden vi ikke er på denne adressen nå» — on the screen he
+             reviews on; the desktop keeps the address, where it names the
+             building site beside the drawing of it. */}
+          <ChapterMark chapter="project" tone="dark" />
+          <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold max-md:hidden">
             {CAMPAIGN.address}
           </p>
           <h2

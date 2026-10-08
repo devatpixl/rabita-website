@@ -3571,5 +3571,12 @@
     "body": "News from the building site, a look into life at the mosque, and invitations to events and activities.",
     "note": "You can unsubscribe at any time.",
     "done": "Thank you. Your address is registered."
+  },
+  "chapters": {
+    "services": "Services",
+    "project": "The mosque project",
+    "apartments": "The apartments",
+    "fundraising": "Fundraising",
+    "social": "Follow us"
   }
 }

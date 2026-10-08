@@ -74,7 +74,22 @@ export default async function LocaleLayout({
             <UtilityStrip />
             <NavBar />
           </PrayerPanelProvider>
-          <div id="main" className="pb-16 md:pb-0">{children}</div>
+          {/* ── NO PADDING HERE (2026-10-08) ─────────────────────────────
+             This carried pb-16 on phones. The body is bg-paper, so those
+             64px painted a CREAM BAND between every page's last section and
+             the dusk newsletter band below — measured on 15 routes, visible on
+             8 of them. Worst on /arrangementer and /gi-en-gave, whose last
+             section is itself dusk: dark, then a cream stripe, then dark
+             again. That is the client's "the colour transitions aren't
+             smooth", on every page, not just the front one.
+
+             It reads as clearance for ContactFab, but it protects nothing: the
+             newsletter band and the footer always follow #main, so when the
+             reader reaches the end, the fab is floating over the footer — never
+             over the last section. On the 7 routes where it was paper on paper
+             it was only extra padding, and each of those sections keeps its own
+             bottom padding (verified after removal). */}
+          <div id="main">{children}</div>
           {/* The newsletter band, on every page, as the top of the footer
              (user, 2026-09-28: "add send newsletter in the footer like in
              aktuelt page, so attach that to top of footer everywhere"). It

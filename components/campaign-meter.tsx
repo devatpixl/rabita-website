@@ -8,6 +8,7 @@ import { Counter } from './counter';
 import { GiveCTA } from './give-cta';
 import { Accent } from './accent';
 import { PhasePopover, type PhaseStep } from './phase-popover';
+import { ChapterMark } from './chapter-mark';
 
 // Byggeregnskap, rebuilt 2026-08-30 on the pattern every large fundraising
 // platform has converged on (GoFundMe, Kickstarter, JustGiving, charity:
@@ -111,6 +112,7 @@ export async function CampaignMeter() {
   return (
     <section id="byggeregnskap" aria-labelledby="meter-heading" className="bg-paper-2 max-md:pt-16 max-md:pb-8 md:py-section-md lg:py-section-lg">
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
+        <ChapterMark chapter="fundraising" className="mb-4" />
         <h2 id="meter-heading" className="font-serif text-section text-balance text-ink">
           {t.rich('eyebrow', {
             em: (chunks) => <Accent surface="paper">{chunks}</Accent>,

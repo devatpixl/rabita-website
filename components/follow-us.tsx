@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { Accent } from './accent';
 import { SectionBody } from './primitives';
 import { CHANNELS, CHANNEL_RGB, ChannelMark } from './social-marks';
+import { ChapterMark } from './chapter-mark';
 
 // "Follow us", closing the homepage (client, 2026-08-31).
 //
@@ -58,6 +59,15 @@ export async function FollowUs() {
            headline and the three channel cards already say what this is, so
            the label was only repeating the section back to itself. The
            translation stays in messages/*.json under followUs.eyebrow. */}
+        {/* ── A LABEL HERE AGAIN, ON PHONES, AND ON PURPOSE ──────────────
+           The "Follow us" eyebrow came out on 2026-08-31 because it was a
+           lone label repeating the headline back to itself. This is not that:
+           it is the fifth of five identical chapter openers, and the
+           consistency is the point — a section that opened differently would
+           be the one place the system breaks. The client's newer complaint
+           (2026-10-08) names social media explicitly among the sections that
+           blend. Desktop still has no label here. */}
+        <ChapterMark chapter="social" className="mb-4" />
         <h2
           id="follow-us-heading"
           className="max-w-2xl font-serif text-section text-balance text-ink"
