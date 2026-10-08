@@ -11,6 +11,7 @@ import { Eyebrow, SectionBody } from './primitives';
 import { Accent } from './accent';
 import { LinkVT } from './link-vt';
 import { cn } from '@/lib/cn';
+import { PlateFoot } from './plate-foot';
 
 // The sold flats, on the home page (client, 2026-09-18: "legge til noen av de
 // solgte leilighetene på forsiden for å vise salg").
@@ -256,7 +257,7 @@ export function ApartmentsSold({ locale }: { locale: string }) {
   // partitioning means correctness never depends on sort order, and no `!`
   // is needed.
   return (
-    <section id="solgte-leiligheter" className="border-t border-paper/15 bg-dusk max-md:border-paper/30 max-md:pt-20 max-md:pb-8 md:py-section-md [@media(min-width:768px)_and_(max-height:900px)]:!py-8">
+    <section id="solgte-leiligheter" className="relative border-t border-paper/15 bg-dusk max-md:border-paper/30 max-md:pb-20 max-md:pt-20 md:py-section-md [@media(min-width:768px)_and_(max-height:900px)]:!py-8">
       {/* ── A WIDER MEASURE, FROM xl UP ───────────────────────────────
            Client, 2026-09-20: "in desktops large screens, why so conjested?
            make it big and all for larger desktop screens".
@@ -593,6 +594,35 @@ export function ApartmentsSold({ locale }: { locale: string }) {
           ))}
         </ul>
       </SectionBody>
+      {/* ── THE DARK BLOCK HANDS OVER ON A CURVE, PHONES ONLY ─────────────
+         Client, 2026-10-08, boxing this boundary in red: the colour change
+         from one section to the next is abrupt.
+
+         He is right about this one specifically. Of the eight front-page
+         sections this is the ONLY dark-to-light flip — dusk #16242E straight
+         onto paper-2 #F2EEE7, the full width, on a hard edge. Everything
+         else on the page steps between two light tones or arrives into dark
+         behind a photograph.
+
+         NOT A GRADIENT. PlateFoot is already this site's answer to exactly
+         this edge: a shallow sweep filled with the colour of what comes NEXT,
+         so the light rises into the dusk rather than the dusk stopping short.
+         It runs on /moskeprosjektet and on /moskeprosjektet/leiligheter, and
+         the client asked for it on wide screens too on 2026-09-30 — so this
+         is his own device, moved to the one place on the front page that has
+         the same problem.
+
+         Fill is the literal paper-2 hex because an SVG fill cannot read a
+         Tailwind class, and it must be the tone BELOW, not this section's.
+         If campaign-meter's ground ever changes, this changes with it.
+
+         pb-8 became pb-20 on phones to clear the 48px curve; without it the
+         last row of unit labels sits inside the sweep. */}
+      <PlateFoot
+        fill="#F2EEE7"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] block h-12 w-full md:hidden"
+      />
+
     </section>
   );
 }

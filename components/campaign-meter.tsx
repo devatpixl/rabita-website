@@ -101,8 +101,15 @@ export async function CampaignMeter() {
   //
   // max-md only: the desktop has wider gutters and does not run together, and
   // he is describing scrolling.
+  //
+  // ── EXCEPT HERE, WHERE THE RULE CAME BACK OFF (2026-10-08) ──────────────
+  // The section above this one is the page's only dark-to-light flip, and it
+  // now hands over on a PlateFoot curve. A hairline across the top of this
+  // section drew a hard line a few pixels under that sweep and undid it — two
+  // devices doing one job, and the louder one winning. The curve IS this
+  // section's opener. Every other section keeps its rule.
   return (
-    <section id="byggeregnskap" aria-labelledby="meter-heading" className="bg-paper-2 max-md:border-t max-md:border-rule max-md:pt-16 max-md:pb-8 md:py-section-md lg:py-section-lg">
+    <section id="byggeregnskap" aria-labelledby="meter-heading" className="bg-paper-2 max-md:pt-16 max-md:pb-8 md:py-section-md lg:py-section-lg">
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
         <h2 id="meter-heading" className="font-serif text-section text-balance text-ink">
           {t.rich('eyebrow', {
