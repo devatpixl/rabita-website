@@ -635,6 +635,32 @@ export function ApartmentsSold({ locale }: { locale: string }) {
         fill="#F2EEE7"
         className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] block h-12 w-full md:hidden"
       />
+      {/* ── THE CREAM CARRIES ON 20px PAST THE SECTION (user, 2026-10-08,
+         circling a line under the curve: "why this horizontal line?").
+
+         There is no border here; two things draw it.
+
+         1. THE RISE. CampaignMeter sits in a MotionRise wrapper on the front
+            page, which starts it 18px low and lifts it when it enters view.
+            Until then there is a 12px GAP between this section and it, and the
+            body's lighter paper (#FAF8F4) shows through between two paper-2
+            surfaces — a pale band that reads as a rule. Measured: 12px at
+            +60, +250 and +1200ms with this section's foot at the bottom of the
+            viewport, which is exactly where a reader's eye is when it shows.
+
+         2. THE HALF PIXEL. This section's foot measured at 812.484px, and a
+            fractional edge antialiases into a grey hairline — the same seam
+            plate-foot.tsx records on the client's iPhone on 2026-09-30.
+
+         One strip answers both: solid paper-2, 1px over the curve's base and
+         20px below the section, covering the whole 18px rise. The section has
+         no overflow-hidden, so it paints into the gap; once the meter arrives
+         it paints over the strip in the same colour, so nothing changes at
+         rest. md:hidden with the curve it belongs to. */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 -bottom-5 z-[1] block h-[21px] bg-[#F2EEE7] md:hidden"
+      />
 
     </section>
   );
