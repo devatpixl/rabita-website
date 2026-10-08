@@ -257,8 +257,17 @@ export function ApartmentsSold({ locale }: { locale: string }) {
   // lib/cn.ts is clsx only, so a later class does not beat an earlier one —
   // partitioning means correctness never depends on sort order, and no `!`
   // is needed.
+  // ── NO HAIRLINE ABOVE THIS SECTION ON PHONES (user, 2026-10-08,
+  // circling it: "why this horizontal line comes? remove it").
+  //
+  // It was there to separate two dusk sections in a row — the palette has one
+  // dark ground, so tone cannot — and was strengthened from paper/15 to /30
+  // earlier the same day. ChapterMark now opens this section with the rosette
+  // and LEILIGHETENE, which is a stronger break than any line and says what
+  // the break is for. A line above a named chapter is two devices doing one
+  // job. Desktop keeps the original faint /15 rule.
   return (
-    <section id="solgte-leiligheter" className="relative border-t border-paper/15 bg-dusk max-md:border-paper/30 max-md:pb-20 max-md:pt-20 md:py-section-md [@media(min-width:768px)_and_(max-height:900px)]:!py-8">
+    <section id="solgte-leiligheter" className="relative border-t border-paper/15 bg-dusk max-md:border-t-0 max-md:pb-20 max-md:pt-20 md:py-section-md [@media(min-width:768px)_and_(max-height:900px)]:!py-8">
       {/* ── A WIDER MEASURE, FROM xl UP ───────────────────────────────
            Client, 2026-09-20: "in desktops large screens, why so conjested?
            make it big and all for larger desktop screens".
