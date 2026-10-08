@@ -113,22 +113,24 @@ export async function CalendarDownload() {
                       </span>
                     </Link>
                   ) : (
-                    // Not a link and not focusable: there is nothing behind it
-                    // yet. aria-disabled rather than hiding it, so a screen
-                    // reader is told the same thing the dimming says.
-                    <span aria-disabled className={`${row} cursor-default text-ink-60 max-md:border-dashed`}>
-                      <span className="whitespace-nowrap font-serif text-[1.15rem] leading-none text-ink-60 max-md:text-[1rem]">
+                    // IDENTICAL TO THE THREE ABOVE (user, 2026-10-08: "dont
+                    // change the design of january, even if no link, just make
+                    // it look the same"). Same classes, same type, same arrow.
+                    //
+                    // Still not a link, and that part is not cosmetic:
+                    // /bonnetider/kalender?m=2027-01 does NOT 404 — an unknown
+                    // month silently falls back to the first one it has, so a
+                    // real link would open OCTOBER under a January label.
+                    // Doing nothing is better than showing the wrong month.
+                    //
+                    // aria-disabled carries what the styling no longer does,
+                    // so a screen reader is not told this leads somewhere.
+                    <span aria-disabled className={`${row} cursor-default text-ink`}>
+                      <span className="whitespace-nowrap font-serif text-[1.15rem] leading-none max-md:text-[1rem]">
                         {label}
                       </span>
-                      {/* The word is md-and-up. At 390 a pill is 167px and
-                         "januar 2027" alone is about 95 of them — adding
-                         "KOMMER" beside it wrapped the month onto two lines
-                         and made the fourth box taller than the three it sits
-                         with. The dashed border and the muted type carry the
-                         same signal in the space available; the screen reader
-                         still gets aria-disabled either way. */}
-                      <span className="hidden shrink-0 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-ink-60 md:inline">
-                        {tc('monthPending')}
+                      <span aria-hidden className="shrink-0 text-ink-60 max-md:hidden rtl:rotate-180">
+                        &rarr;
                       </span>
                     </span>
                   )}
