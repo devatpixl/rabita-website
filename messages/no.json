@@ -1810,19 +1810,19 @@
         "steps": [
           {
             "title": "Prøvingsattest fra Skatteetaten",
-            "body": "Søk om prøving av ekteskapsvilkår hos Skatteetaten. Attesten må være på plass før vielsen."
+            "body": "Søk hos Skatteetaten. Attesten må være på plass før vielsen."
           },
           {
             "title": "Borgerlig vigsel",
-            "body": "Ekteskapet inngås hos en vigsler med vigselsrett, for eksempel tinghuset. Rabita har per i dag ikke vigselsrett."
+            "body": "Hos tinghuset eller en annen vigsler. Rabita har ikke vigselsrett."
           },
           {
             "title": "Avtal dato med oss",
-            "body": "Ta kontakt tidlig, så finner vi en dato som passer."
+            "body": "Ta kontakt tidlig, så finner vi en dato."
           },
           {
             "title": "Nikah i moskeen",
-            "body": "Seremonien gjennomføres i moskeen, ledet av imam. Ta med gyldig vigselsattest."
+            "body": "Ledet av imam. Ta med gyldig vigselsattest."
           }
         ],
         "facts": [
@@ -1853,15 +1853,15 @@
         "steps": [
           {
             "title": "Ta kontakt så snart som mulig",
-            "body": "Ring eller skriv til oss ved dødsfall, så hjelper vi dere videre."
+            "body": "Ring eller skriv, så hjelper vi dere videre."
           },
           {
             "title": "Begravelsesbyrå",
-            "body": "For praktisk og juridisk hjelp anbefaler vi Al-Khidmat Begravelsesbyrå eller Muslimsk Begravelsesbyrå."
+            "body": "Vi anbefaler Al-Khidmat eller Muslimsk Begravelsesbyrå."
           },
           {
             "title": "Janazah-bønn i moskeen",
-            "body": "Familie og fellesskap samles til janazah-bønn, ledet av en imam."
+            "body": "Familie og fellesskap samles, ledet av en imam."
           },
           {
             "title": "Støtte til pårørende",
@@ -1891,15 +1891,15 @@
         "steps": [
           {
             "title": "En uforpliktende samtale",
-            "body": "Ta kontakt, så avtaler vi et møte i moskeen. Du trenger ikke å ha bestemt deg."
+            "body": "Vi avtaler et møte. Du trenger ikke å ha bestemt deg."
           },
           {
             "title": "Shahada",
-            "body": "Trosbekjennelsen avlegges i moskeen, med vitner om du ønsker det."
+            "body": "Avlegges i moskeen, med vitner om du ønsker det."
           },
           {
             "title": "Oppfølging og fellesskap",
-            "body": "Kurs for nye muslimer hver fredag, og et fellesskap å høre til i."
+            "body": "Kurs hver fredag, og et fellesskap å høre til i."
           }
         ],
         "nextLast": "Vi avtaler et møte i moskeen."
@@ -1924,15 +1924,15 @@
         "steps": [
           {
             "title": "Ta kontakt",
-            "body": "Skriv kort hva samtalen bør handle om, og når det passer for deg. Tjenesten er gratis."
+            "body": "Skriv kort hva det gjelder, og når det passer. Gratis."
           },
           {
             "title": "Samtalen",
-            "body": "Fortrolig samtale med imam eller kvinnelig rådgiver. Alt behandles konfidensielt."
+            "body": "Med imam eller kvinnelig rådgiver. Alt er fortrolig."
           },
           {
             "title": "Megling",
-            "body": "Når begge parter ønsker det, kan vi være en nøytral part i konfliktsituasjoner."
+            "body": "Når begge parter ønsker det, kan vi være nøytral part."
           }
         ],
         "nextLast": "Vi finner en tid som passer."
@@ -1957,15 +1957,15 @@
         "steps": [
           {
             "title": "Ta kontakt med Hajj- og umrah-kontoret",
-            "body": "Kontoret holder til i Rabitas lokaler. Hør om neste reise."
+            "body": "Kontoret holder til i Rabitas lokaler."
           },
           {
             "title": "Informasjonsmøte",
-            "body": "Informasjon og veiledning før både hajj og umrah."
+            "body": "Veiledning før både hajj og umrah."
           },
           {
             "title": "Forberedelseskurs",
-            "body": "Kurs før avreise, for både hajj og umrah."
+            "body": "Før avreise, for både hajj og umrah."
           },
           {
             "title": "Reisen",
@@ -1998,7 +1998,7 @@
           },
           {
             "title": "Plass i en klasse",
-            "body": "Vi svarer om ledig plass. Nye medlemmer av Rabita prioriteres."
+            "body": "Medlemmer av Rabita prioriteres."
           },
           {
             "title": "Undervisning i helgen",
@@ -2027,11 +2027,11 @@
         "steps": [
           {
             "title": "Ta kontakt",
-            "body": "Alder, nivå, og om det gjelder barn eller voksen."
+            "body": "Alder og nivå."
           },
           {
             "title": "Egne grupper",
-            "body": "Barn mellom 6 og 15 år og voksne over 16 år har egne grupper."
+            "body": "Barn 6–15 år og voksne over 16 år."
           },
           {
             "title": "Forkunnskap",
@@ -2039,7 +2039,7 @@
           },
           {
             "title": "Undervisningen",
-            "body": "Å lære å lese riktig (tajweed), å memorere og å forstå."
+            "body": "Lese riktig (tajweed), memorere og forstå."
           }
         ]
       },
@@ -2067,7 +2067,7 @@
           },
           {
             "title": "To kurs",
-            "body": "Arabisk kalligrafi og islamsk geometri, ledet av erfarne kunstnere."
+            "body": "Arabisk kalligrafi og islamsk geometri."
           },
           {
             "title": "For alle nivåer",
@@ -2103,7 +2103,7 @@
           },
           {
             "title": "Møtet",
-            "body": "Unge veivisere svarer på spørsmål om tro, identitet og livet som muslim i Norge."
+            "body": "Spørsmål om tro, identitet og livet som muslim i Norge."
           }
         ],
         "nextLast": "Vi avtaler besøket."
@@ -2128,15 +2128,15 @@
         "steps": [
           {
             "title": "Ta kontakt",
-            "body": "Nivået ditt i norsk i dag, og hva du ønsker å bruke språket til."
+            "body": "Nivået ditt i dag, og hva du vil bruke språket til."
           },
           {
             "title": "Gratis for voksne",
-            "body": "Norskundervisning for voksne som faller utenfor de ordinære tilbudene."
+            "body": "For voksne som faller utenfor de ordinære tilbudene."
           },
           {
             "title": "Hverdagsspråk",
-            "body": "Samtaletrening og samfunnskunnskap, med fokus på deltakelse i samfunnet."
+            "body": "Samtaletrening og samfunnskunnskap."
           }
         ]
       },
@@ -2160,11 +2160,11 @@
         "steps": [
           {
             "title": "Ta kontakt",
-            "body": "Alder på den unge, og hva slags aktivitet det gjelder."
+            "body": "Alder, og hvilken aktivitet det gjelder."
           },
           {
             "title": "Drevet av og for ungdom",
-            "body": "NUM er Rabitas egen ungdomsorganisasjon, med et selvstendig styre."
+            "body": "NUM er Rabitas ungdomsorganisasjon, med eget styre."
           },
           {
             "title": "Aktivitetene",
@@ -2200,7 +2200,7 @@
           },
           {
             "title": "For hele familien",
-            "body": "Samlinger der barna bygger vennskap og opplever å være en del av et større fellesskap."
+            "body": "Barna bygger vennskap og blir del av et større fellesskap."
           }
         ]
       },
@@ -2224,11 +2224,11 @@
         "steps": [
           {
             "title": "Les om fosterhjem",
-            "body": "Bufdir har samlet informasjon om ordningen på bufdir.no/fosterhjem."
+            "body": "Bufdir har samlet informasjonen på bufdir.no/fosterhjem."
           },
           {
             "title": "En uforpliktende samtale",
-            "body": "Vi forklarer hvordan ordningen fungerer og svarer på det du lurer på."
+            "body": "Vi forklarer hvordan ordningen fungerer."
           },
           {
             "title": "Videre til rett instans",
@@ -2265,7 +2265,7 @@
           },
           {
             "title": "Følg med",
-            "body": "Sted og tid annonseres på nytt foran hver høytid. Tidligere holdt på Hersleb skole, i Ekeberghallen og på Rådhusplassen."
+            "body": "Sted og tid annonseres foran hver høytid."
           }
         ]
       },
@@ -2289,11 +2289,11 @@
         "steps": [
           {
             "title": "Ta kontakt",
-            "body": "Alder på barnet, og om det gjelder jente- eller guttegruppa."
+            "body": "Barnets alder, og jente- eller guttegruppa."
           },
           {
             "title": "To aldersgrupper",
-            "body": "Jenter i Fokus og Gutter i Fokus, 10 til 13 år og 14 til 18 år."
+            "body": "Jenter i Fokus og Gutter i Fokus. 10–13 og 14–18 år."
           },
           {
             "title": "Det grunnleggende",
@@ -2334,7 +2334,7 @@
           },
           {
             "title": "Kom gjerne alene",
-            "body": "Åpent også for deg som er født muslim, og for deg som ikke er muslim."
+            "body": "Også for deg som er født muslim, eller ikke er muslim."
           },
           {
             "title": "Spørsmål",
@@ -2362,7 +2362,7 @@
         "steps": [
           {
             "title": "Ta kontakt",
-            "body": "For voksne over 16 år. Fortell nivået ditt, og om du har lest arabisk før."
+            "body": "For voksne over 16 år. Fortell nivået ditt."
           },
           {
             "title": "Nivå 1",
@@ -2394,7 +2394,7 @@
         "steps": [
           {
             "title": "Ta kontakt",
-            "body": "Hør når neste treff finner sted, eller si fra at du vil være med."
+            "body": "Hør når neste treff er, eller si fra at du vil være med."
           },
           {
             "title": "I moskeen",

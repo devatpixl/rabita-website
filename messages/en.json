@@ -1806,19 +1806,19 @@
         "steps": [
           {
             "title": "Certificate from Skatteetaten",
-            "body": "Apply to Skatteetaten for the certificate of no impediment. It must be in place before the wedding."
+            "body": "Apply to Skatteetaten. The certificate must be in place before the wedding."
           },
           {
             "title": "Civil wedding",
-            "body": "The marriage is entered into before a registrar with the authority to marry, for example the courthouse. Rabita does not currently hold that authority."
+            "body": "At the courthouse or another registrar. Rabita does not hold that authority."
           },
           {
             "title": "Agree a date with us",
-            "body": "Get in touch early and we will find a date that suits you."
+            "body": "Get in touch early and we will find a date."
           },
           {
             "title": "Nikah in the mosque",
-            "body": "The ceremony takes place in the mosque, led by an imam. Bring the valid marriage certificate."
+            "body": "Led by an imam. Bring the valid marriage certificate."
           }
         ],
         "facts": [
@@ -1849,15 +1849,15 @@
         "steps": [
           {
             "title": "Get in touch as soon as possible",
-            "body": "Call or write to us when someone has died, and we will help you onward."
+            "body": "Call or write, and we will help you onward."
           },
           {
             "title": "Funeral home",
-            "body": "For practical and legal help we recommend Al-Khidmat Begravelsesbyrå or Muslimsk Begravelsesbyrå."
+            "body": "We recommend Al-Khidmat or Muslimsk Begravelsesbyrå."
           },
           {
             "title": "Janazah prayer in the mosque",
-            "body": "Family and community gather for the janazah prayer, led by an imam."
+            "body": "Family and community gather, led by an imam."
           },
           {
             "title": "Support for the bereaved",
@@ -1887,15 +1887,15 @@
         "steps": [
           {
             "title": "An informal conversation",
-            "body": "Get in touch and we will arrange a meeting in the mosque. You do not need to have decided anything."
+            "body": "We arrange a meeting. You do not need to have decided anything."
           },
           {
             "title": "Shahada",
-            "body": "The declaration of faith is made in the mosque, with witnesses if you wish."
+            "body": "Made in the mosque, with witnesses if you wish."
           },
           {
             "title": "Follow-up and community",
-            "body": "A course for new Muslims every Friday, and a community to belong to."
+            "body": "A course every Friday, and a community to belong to."
           }
         ],
         "nextLast": "We arrange a meeting in the mosque."
@@ -1920,15 +1920,15 @@
         "steps": [
           {
             "title": "Get in touch",
-            "body": "Tell us briefly what the conversation should be about, and when suits you. The service is free."
+            "body": "Tell us briefly what it is about, and when suits you. Free."
           },
           {
             "title": "The conversation",
-            "body": "A confidential conversation with an imam or a female counsellor. Everything is treated in confidence."
+            "body": "With an imam or a female counsellor. Everything is confidential."
           },
           {
             "title": "Mediation",
-            "body": "When both parties wish it, we can act as a neutral party in a conflict."
+            "body": "When both parties wish it, we can act as a neutral party."
           }
         ],
         "nextLast": "We find a time that suits you."
@@ -1953,15 +1953,15 @@
         "steps": [
           {
             "title": "Contact the Hajj and Umrah office",
-            "body": "The office is based in Rabita’s premises. Ask about the next journey."
+            "body": "The office is based in Rabita’s premises."
           },
           {
             "title": "Information meeting",
-            "body": "Information and guidance before both hajj and umrah."
+            "body": "Guidance before both hajj and umrah."
           },
           {
             "title": "Preparation course",
-            "body": "A course before departure, for both hajj and umrah."
+            "body": "Before departure, for both hajj and umrah."
           },
           {
             "title": "The journey",
@@ -1994,7 +1994,7 @@
           },
           {
             "title": "A place in a class",
-            "body": "We reply about available places. New members of Rabita are given priority."
+            "body": "Members of Rabita are given priority."
           },
           {
             "title": "Weekend teaching",
@@ -2023,11 +2023,11 @@
         "steps": [
           {
             "title": "Get in touch",
-            "body": "Age, level, and whether it is for a child or an adult."
+            "body": "Age and level."
           },
           {
             "title": "Separate groups",
-            "body": "Children aged 6 to 15 and adults over 16 have their own groups."
+            "body": "Children 6–15 and adults over 16."
           },
           {
             "title": "Prerequisite",
@@ -2035,7 +2035,7 @@
           },
           {
             "title": "The teaching",
-            "body": "Reading correctly (tajweed), memorising, and understanding."
+            "body": "Reading correctly (tajweed), memorising and understanding."
           }
         ]
       },
@@ -2063,7 +2063,7 @@
           },
           {
             "title": "Two courses",
-            "body": "Arabic calligraphy and Islamic geometry, led by experienced artists."
+            "body": "Arabic calligraphy and Islamic geometry."
           },
           {
             "title": "All levels",
@@ -2099,7 +2099,7 @@
           },
           {
             "title": "The meeting",
-            "body": "Young guides answer questions about faith, identity and life as a Muslim in Norway."
+            "body": "Questions about faith, identity and life as a Muslim in Norway."
           }
         ],
         "nextLast": "We arrange the visit."
@@ -2124,15 +2124,15 @@
         "steps": [
           {
             "title": "Get in touch",
-            "body": "Your level of Norwegian today, and what you want to use the language for."
+            "body": "Your level today, and what you want to use the language for."
           },
           {
             "title": "Free for adults",
-            "body": "Norwegian classes for adults who fall outside the ordinary provision."
+            "body": "For adults who fall outside the ordinary provision."
           },
           {
             "title": "Everyday language",
-            "body": "Conversation practice and civic knowledge, with the focus on taking part in society."
+            "body": "Conversation practice and civic knowledge."
           }
         ]
       },
@@ -2156,11 +2156,11 @@
         "steps": [
           {
             "title": "Get in touch",
-            "body": "The young person’s age, and what kind of activity it concerns."
+            "body": "Age, and which activity it concerns."
           },
           {
             "title": "Run by and for young people",
-            "body": "NUM is Rabita’s own youth organisation, with its own board."
+            "body": "NUM is Rabita’s youth organisation, with its own board."
           },
           {
             "title": "The activities",
@@ -2196,7 +2196,7 @@
           },
           {
             "title": "For the whole family",
-            "body": "Gatherings where children build friendships and feel part of a larger community."
+            "body": "Children build friendships and become part of a larger community."
           }
         ]
       },
@@ -2220,11 +2220,11 @@
         "steps": [
           {
             "title": "Read about foster care",
-            "body": "Bufdir has gathered information about the scheme at bufdir.no/fosterhjem."
+            "body": "Bufdir has gathered the information at bufdir.no/fosterhjem."
           },
           {
             "title": "An informal conversation",
-            "body": "We explain how the scheme works and answer your questions."
+            "body": "We explain how the scheme works."
           },
           {
             "title": "On to the right agency",
@@ -2261,7 +2261,7 @@
           },
           {
             "title": "Stay tuned",
-            "body": "Place and time are announced afresh before each Eid. Previously held at Hersleb school, Ekeberghallen and Rådhusplassen."
+            "body": "Place and time are announced before each Eid."
           }
         ]
       },
@@ -2285,11 +2285,11 @@
         "steps": [
           {
             "title": "Get in touch",
-            "body": "The child’s age, and whether it is the girls’ or the boys’ group."
+            "body": "The child’s age, and the girls’ or the boys’ group."
           },
           {
             "title": "Two age groups",
-            "body": "Jenter i Fokus and Gutter i Fokus, ages 10 to 13 and 14 to 18."
+            "body": "Jenter i Fokus and Gutter i Fokus. Ages 10–13 and 14–18."
           },
           {
             "title": "The basics",
@@ -2330,7 +2330,7 @@
           },
           {
             "title": "Come alone if you like",
-            "body": "Open also to those born Muslim, and to those who are not Muslim."
+            "body": "Also for those born Muslim, and those who are not."
           },
           {
             "title": "Questions",
@@ -2358,7 +2358,7 @@
         "steps": [
           {
             "title": "Get in touch",
-            "body": "For adults over 16. Tell us your level, and whether you have read Arabic before."
+            "body": "For adults over 16. Tell us your level."
           },
           {
             "title": "Level 1",
@@ -2390,7 +2390,7 @@
         "steps": [
           {
             "title": "Get in touch",
-            "body": "Ask when the next gathering is, or let us know you want to join."
+            "body": "Ask when the next gathering is, or say you’d like to join."
           },
           {
             "title": "In the mosque",
