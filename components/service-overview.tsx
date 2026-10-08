@@ -94,6 +94,10 @@ export async function ServiceOverview({ s }: { s: ServiceKey }) {
                  the next person to read this will otherwise undo one of them
                  believing it was never asked for.
 
+                 COLUMNS ARE FINAL (user, 2026-10-08: "we want in columns how
+                 it is now"). Do not return this to a list without a new,
+                 explicit instruction.
+
                  What makes the columns work now and not then: the step bodies
                  were cut by a third on 2026-10-08. The screenshot he sent
                  shows the OLD text in these columns — four lines in a 230px
