@@ -798,7 +798,18 @@ function StepAmount({
       // same idiom it already uses for [@media(...)]: classes.
       <div className="[container-type:inline-size]">
       <div
-        className={cn('grid', threeUp ? 'grid-cols-1 [@container(min-width:17rem)]:grid-cols-3' : 'grid-cols-2', compact ? 'mt-1 mb-2 gap-2' : cn('mt-1 mb-2 gap-2 max-sm:gap-x-1.5 max-sm:gap-y-[1.125rem] sm:mt-0 sm:mb-3 sm:gap-3', fit && FIT.presetGrid))}
+        className={cn('grid', threeUp ? 'grid-cols-1 [@container(min-width:17rem)]:grid-cols-3' : 'grid-cols-2', compact
+            ? 'mt-1 mb-2 gap-2'
+            : cn(
+                'mt-1 mb-2 gap-2 max-sm:gap-x-1.5 max-sm:gap-y-[1.125rem] sm:mb-3 sm:gap-3',
+                // Room for the RECOMMENDED tab, which rises ~9px above its tile
+                // (half its height plus its 2px ring). Above the row: the
+                // toggle's margin falls to 6px on short laptops, so the grid
+                // adds 4. Between rows, for the one-column stack: 12px, marked
+                // important so the short-screen fit rules (6px) cannot undo it.
+                threeUp ? 'sm:mt-1 sm:!gap-y-3' : 'sm:mt-0',
+                fit && FIT.presetGrid,
+              ))}
         role="radiogroup"
         aria-label={t('customLabel')}
       >
@@ -837,7 +848,10 @@ function StepAmount({
                   ? 'min-h-[3rem] px-3 py-2'
                   : cn(
                       threeUp
-                        ? 'min-h-[3.25rem] px-2.5 py-2 max-sm:min-h-[2.75rem] max-sm:py-1.5 sm:min-h-[4.25rem] sm:py-3'
+                        ? // !pt: the corner tab dips 6.5px into the tile, and the
+                          // short-screen fit rules would otherwise pull the top
+                          // padding down to 6px and put the noun under it.
+                          'min-h-[3.25rem] px-2.5 py-2 max-sm:min-h-[2.75rem] max-sm:py-1.5 sm:min-h-[4.25rem] sm:py-3 !pt-[10px]'
                         : 'min-h-[3.25rem] px-3 py-2 max-sm:min-h-[2.75rem] max-sm:py-1.5 sm:min-h-[4.25rem] sm:px-4 sm:py-3 md:max-lg:px-2.5',
                       fit && FIT.presetCell,
                     ),
@@ -883,14 +897,38 @@ function StepAmount({
                 // in the row gutter, which is widened to 18px to hold it.
                 // That reads as a tab above the tile it belongs to, costs
                 // 12px of card height once, and cannot collide with anything
-                // in any locale. From sm the tile is 68px tall with 12px of
-                // padding and the original overlap has always been fine.
+                // in any locale.
+                //
+                // ── AND NOW ON EVERY SCREEN (user, 2026-10-09: "make sure on
+                // all screens recommended doesn't cover the costs") ──────────
+                // This used to say that from sm "the original overlap has
+                // always been fine". With three to a row it was not. Measured
+                // on 50 cases — five pages, ten screen sizes — 21 failed, every
+                // one from 640px up: the badge reached 11px into the tile and
+                // sat on the gift noun in ALL THREE languages (Koran / A
+                // Qur'an / مصحف), not only English. The short-laptop fit rules
+                // trim the tile's top padding to 6-8px, and three-up tiles are
+                // narrow enough that English RECOMMENDED (89px at the old size)
+                // ran out of a 89-91px tile on both sides. In the one-column
+                // stack on small laptops it also lay across the tile above.
+                //
+                // First answer: lift it clear above the tile, centred. It
+                // stopped covering anything — and looked detached, a label
+                // floating over nothing (user, same day: "why odd a bit?
+                // should be in top right corner of the 500 kr").
+                //
+                // So: a TAB ON THE TOP-RIGHT CORNER, straddling the border —
+                // half above the edge, half below, pinned to the end so it
+                // mirrors to the top-LEFT in Arabic. At the phone's 8px it is
+                // ~13px tall, so 6.5px dips inside the tile; the tile's top
+                // padding is held at 10px for three-up (see the cell), so the
+                // gift noun always starts below it. Narrowest English case:
+                // RECOMMENDED ~70px in an 89px tile — it overlaps the noun's
+                // COLUMN but never its LINE, which is what keeps it clear.
                 <span
                   className={cn(
-                    'absolute -top-2 end-3 rounded-full bg-gold-deep font-mono uppercase tracking-[0.14em] text-paper',
+                    'absolute end-2 top-0 -translate-y-1/2 whitespace-nowrap rounded-full bg-gold-deep px-1.5 py-0 font-mono text-[8px] uppercase leading-[1.6] tracking-[0.06em] text-paper',
                     'shadow-[0_0_0_2px_var(--tw-shadow-color)] shadow-paper',
-                    compact ? 'px-1.5 py-px text-[8px] leading-[1.6]' : 'px-2 py-0.5 text-[9px] leading-[1.5]',
-                    'max-sm:-top-[15px] max-sm:end-2 max-sm:px-1.5 max-sm:py-0 max-sm:text-[8px] max-sm:leading-[1.6] max-sm:tracking-[0.06em]',
                   )}
                 >
                   {t('wizard.recommended')}
