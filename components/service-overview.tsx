@@ -45,14 +45,24 @@ export async function ServiceOverview({ s }: { s: ServiceKey }) {
              hero's curve, which is two edges doing the same job in 60px, and
              the curve is the one he asked for. The padding stays, so nothing
              below it moves. */}
-          <div className="pt-8 md:grid md:grid-cols-12 md:gap-12 md:pt-10 lg:gap-16">
+          {/* CENTRED ON THE HEADING (user, 2026-10-09: "why is this text on
+             right more up than the heading? … align it so it's in the middle
+             vertically to the heading"). The right column used to start at
+             the eyebrow's top, which was fine while two paragraphs filled
+             the height; with one short paragraph it floated 45px above the
+             heading's middle. items-center centres it on the whole left
+             block, and the right column's top padding (the eyebrow's height
+             plus its gap, 2.1rem) moves that centre down onto the heading
+             itself. Measured on nikah (shortest) and veivisere (longest):
+             within 2px of the heading's middle. */}
+          <div className="pt-8 md:grid md:grid-cols-12 md:items-center md:gap-12 md:pt-10 lg:gap-16">
             <div className="md:col-span-5">
               <Eyebrow tone="gold-deep">{t('detail.about')}</Eyebrow>
               <h2 className="mt-5 max-w-[14ch] font-serif text-[clamp(1.9rem,3.4vw,3rem)] leading-[1.08] tracking-[-0.015em] text-balance text-ink md:[font-variation-settings:'opsz'_144]">
                 {t(`items.${s}.offerTitle`)}
               </h2>
             </div>
-            <div className="mt-7 md:col-span-7 md:mt-0 md:pt-1">
+            <div className="mt-7 md:col-span-7 md:mt-0 md:pt-[2.1rem]">
               {/* ONE PARAGRAPH, NOT TWO (client, revised Mobilversjon text,
                  2026-10-09: «For mye tekst. Fiks dette slik at det blir
                  enklere for leseren å se gjennom siden»). longBody and the
