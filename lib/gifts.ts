@@ -74,14 +74,26 @@ export const GIFTS: readonly Gift[] = [
 ];
 
 /** The two sections, in the order they are shown. */
-export const GIFT_SECTIONS: readonly GiftSection[] = ['named', 'parts'];
+// PARTS FIRST, THEN THE NAMED PLACES (user, 2026-10-09: "swap the rows, then
+// it would be in ascending order of prices").
+//
+// Answers the client's «Rekkefølgen på donasjonsboksene bør være intensjonell»
+// as it reads on THIS section: with the named places on top it went 25 000 →
+// 50 000 → 100 000 and then fell back to 2 000 → 5 000 → 10 000, which looks
+// like an accident rather than an order. Swapped, the whole section climbs
+// 2 000 → 100 000 and ends on Stifter.
+//
+// Only the section order moved. Each row was already ascending (giftsIn
+// below), and each label travels with its own row.
+export const GIFT_SECTIONS: readonly GiftSection[] = ['parts', 'named'];
 
 // ASCENDING WITHIN A SECTION (user, 2026-09-28: "keep row order same, but in
 // column use ascending order according to prices"). GIFTS above stays in
 // his written order, largest first, because that is the order the list was
 // agreed in; the rows on the page read 25 000 → 50 000 → 100 000 and
-// 2 000 → 5 000 → 10 000, the cheapest way in first. The sections keep
-// their order: the named places above, the parts of the building below.
+// 2 000 → 5 000 → 10 000, the cheapest way in first. Since 2026-10-09 the
+// parts of the building come first and the named places second — see
+// GIFT_SECTIONS above.
 export function giftsIn(section: GiftSection): readonly Gift[] {
   return GIFTS.filter((g) => g.section === section).sort((a, b) => a.amountNok - b.amountNok);
 }
