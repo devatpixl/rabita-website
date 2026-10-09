@@ -147,7 +147,7 @@
           "href": "/tjenester/koran"
         },
         {
-          "label": "The calligraphy and geometry school",
+          "label": "Calligraphy and geometry",
           "blurb": "Courses in Islamic calligraphy and geometric art.",
           "href": "/tjenester/kurs"
         },
@@ -2040,7 +2040,7 @@
         ]
       },
       "kurs": {
-        "title": "The calligraphy and <em>geometry school</em>",
+        "title": "Calligraphy and <em>geometry</em>",
         "body": "Explore Islamic art and geometry through courses, workshops and creative activities.",
         "longBody": "Art and beauty have held an important place in the Islamic tradition for centuries. At Rabita we want to keep that tradition alive and within reach of new generations, through courses where traditional craft, history, precision and creative work meet.",
         "offerTitle": "Explore Islamic art",

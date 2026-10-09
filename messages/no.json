@@ -147,7 +147,7 @@
           "href": "/tjenester/koran"
         },
         {
-          "label": "Kalligrafi og geometriskolen",
+          "label": "Kalligrafi og geometri",
           "blurb": "Kurs i islamsk kalligrafi og geometrisk kunst.",
           "href": "/tjenester/kurs"
         },
@@ -2044,7 +2044,7 @@
         ]
       },
       "kurs": {
-        "title": "Kalligrafi- og <em>geometriskolen</em>",
+        "title": "Kalligrafi og <em>geometri</em>",
         "body": "Utforsk islamsk kunst og geometri gjennom kurs, workshops og kreative aktiviteter.",
         "longBody": "Kunst og skjønnhet har gjennom århundrer hatt en viktig plass i den islamske tradisjonen. I Rabita ønsker vi å holde denne rike kunsttradisjonen levende og gjøre den tilgjengelig for nye generasjoner, gjennom kurs der tradisjonelt håndverk, historie, presisjon og kreativ utfoldelse møtes.",
         "offerTitle": "Utforsk islamsk kunst",
