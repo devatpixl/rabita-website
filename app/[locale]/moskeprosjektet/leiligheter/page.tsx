@@ -4,7 +4,6 @@ import { apartmentStats } from '@/lib/apartments';
 import { Accent } from '@/components/accent';
 import { ApartmentUnits } from '@/components/apartment-units';
 import { FindUsGoogle } from '@/components/find-us-google';
-import { ProjectGallery } from '@/components/project-gallery';
 import { RequestForm } from '@/components/request-form';
 import { VideoHero } from '@/components/video-hero';
 import { cn } from '@/lib/cn';
@@ -190,52 +189,13 @@ export default async function ApartmentsPage({
          came for. */}
       <ApartmentUnits />
 
-      {/* Contained, in the same band as the project page's (client,
-         2026-09-13: "make the images in appartments also same, fix the
-         appartment format"). It had been left bare while that one sat in a
-         SectionBody, so this gallery ran edge to edge and the plate cropped
-         differently — two designs for one component. The wrapper IS the fix:
-         the component has no opinion about its own width.
-
-         THIRD, ahead of "kvalitet og møteplasser" (client, 2026-09-13:
-         "erstatte en av seksjonene med leilighetene, og plasser som nummer
-         3"). The renders used to sit fourth, after the facilities thread,
-         which meant the page argued for the homes twice in words before it
-         showed you one. */}
-      <section className="bg-paper-2 pt-14 pb-section-md md:pt-20">
-        <SectionBody>
-          <ProjectGallery
-            // Apartment-led since 2026-09-15. Five of the seven are now the
-            // inside of the flats, which is what a buyer on this page is
-            // deciding on; minaret and garden stay so the building the flats
-            // sit in is still in the reel. The project page is untouched — it
-            // passes no `only` and renders SLIDES in its own order.
-            only={[
-              // Twelve slides, every one of them the client's own render of
-              // these flats. minaret and garden dropped from THIS page on
-              // 2026-09-15: his folder carries the same subjects shot from
-              // the apartments themselves — apartmentRoof, apartmentCourtyard
-              // and apartmentDusk, which has the lit minaret in frame. The
-              // project page still renders both; it passes no `only`.
-              //
-              // Ordered inside-out: the flats, then the balcony at dusk, then
-              // the building they sit in.
-              'apartmentLiving',
-              'apartmentAttic',
-              'apartmentFamily',
-              'apartmentGreen',
-              'apartmentBalcony',
-              'apartmentCalligraphy',
-              'apartmentArt',
-              'apartmentKitchen',
-              'apartmentDusk',
-              'apartmentFacade',
-              'apartmentRoof',
-              'apartmentCourtyard',
-            ]}
-          />
-        </SectionBody>
-      </section>
+      {/* ── THE ROOM-PHOTO VIEWER IS GONE (client, revised Mobilversjon text,
+         2026-10-09): «Fjerne bildene under leilighetene» — remove the
+         pictures under the apartments. His page-5 screenshot shows exactly
+         this: the apartment card, its dots, and under it the room viewer with
+         ‹ ›. The user chose phone AND laptop. Every card above already opens
+         onto its own render and plan, so the flats are still shown; the
+         project page keeps its own ProjectGallery. */}
 
       {/* ── kvalitet og møteplasser ─────────────────────────────────────
          Rebuilt to the client's mock (2026-09-04): heading beside the
