@@ -303,13 +303,21 @@ function GiftCard({
              "maybe lighten the tint at bottom also so clearly shows the
              image"). It tops out at 0.80; the type gets its contrast from a
              shadow on the glyphs instead, which costs the photograph
-             nothing. */}
+             nothing.
+
+             ── DARKER BEHIND THE TEXT (client, revised Mobilversjon text,
+             2026-10-09: «Legg inn mørkere bakgrunn slik at teksten synes»;
+             preview approved by the user the same day). The two requests are
+             about different halves of the card, so both hold: the top 28% is
+             unchanged and the photograph still shows there; from 44% down,
+             where the amount, title, line and button sit, the tint rises
+             earlier and settles at 0.90-0.94 instead of 0.78-0.82. */}
           <span
             aria-hidden
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(180deg, rgba(22,36,46,0.04) 0%, rgba(22,36,46,0.08) 30%, rgba(22,36,46,0.36) 46%, rgba(22,36,46,0.64) 63%, rgba(22,36,46,0.78) 84%, rgba(22,36,46,0.82) 100%)',
+                'linear-gradient(180deg, rgba(22,36,46,0.04) 0%, rgba(22,36,46,0.10) 28%, rgba(22,36,46,0.50) 44%, rgba(22,36,46,0.80) 58%, rgba(22,36,46,0.90) 78%, rgba(22,36,46,0.94) 100%)',
             }}
           />
 
