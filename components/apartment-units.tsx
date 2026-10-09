@@ -325,6 +325,28 @@ export function ApartmentUnits() {
                   }}
                 />
 
+                {/* ── THE CARD'S NUMBER, TOP CORNER (client, revised Mobilversjon
+                   text, 2026-10-09): «Fjerne prikker under kortene og heller
+                   legge inn eks 1 av 15 oppe i et hjørne på kortet hvis det
+                   blir fint.» The user's refinement: just the number, done in
+                   a modern way — and of two previews (a round badge, or a
+                   large thin numeral straight on the photo) chose the badge.
+                   The numeral alone vanished on the bright ceilings these
+                   renders open on; the badge brings its own ground, the same
+                   dusk glass as the rail's ‹ › arrows.
+
+                   It replaces the «01 / 15» row that stood under the rail
+                   below xl, which was itself the stand-in for the dots.
+
+                   END corner: the SOLGT stamp holds the start corner, so the
+                   two never meet, and both mirror together in Arabic. */}
+                <span
+                  aria-hidden
+                  className="absolute end-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-full bg-dusk/70 font-serif text-[1.05rem] leading-none tabular-nums text-paper ring-1 ring-inset ring-paper/20 backdrop-blur-sm"
+                >
+                  {i + 1}
+                </span>
+
                 {/* SOLGT — a STAMP, not a label.
                    
                    The first version was a filled gold pill and it was wrong:
@@ -398,46 +420,6 @@ export function ApartmentUnits() {
           ))}
           </ul>
 
-          {/* ── A COUNTER, NOT FIFTEEN DASHES (client, Mobilversjon
-             2026-10-06): "Prikkene under ser litt rart ut."
-
-             He is right, and the cause is the count. Dots work to about
-             eight; at fifteen they spanned 342 of 390px as 2px dashes, which
-             reads as a scrollbar track or a ruler rather than as navigation
-             — and the active one, 5px of gold at the far left, was the least
-             visible thing in the row.
-
-             THE SAME SENTENCE ALSO ASKS FOR ARROWS, conditionally: "Bør
-             kanskje være piler ... med mindre man kan scrolle." You can
-             scroll, and visibly so — the card is 76% of the viewport with
-             snap-center, so the next apartment peeks 130px into the screen.
-             That peek is a stronger affordance than any 40px arrow laid over
-             the photograph being sold, so the condition he set is already
-             met and no arrows are added. They stay from xl, where the page
-             gutter has room for them outside the rail.
-
-             NN / NN is this site's own device for exactly this — nine
-             components use it, from impact-story's 01 / 04 to the services
-             index at 01 / 13 — so it is house vocabulary rather than a new
-             pattern, and unlike dots it does not care how long the list is.
-             The rule under it carries the position the dots used to.
-
-             WHAT IS LOST: tapping a dot to jump. At fifteen items those were
-             5px targets, the cards themselves are focusable, and the arrows
-             return at xl. Worth the trade. */}
-          <div className="mt-5 flex items-center justify-center gap-4 xl:hidden">
-            <p className="font-mono text-[0.6875rem] uppercase tabular-nums tracking-[0.28em] text-gold-soft">
-              {String(active + 1).padStart(2, '0')}
-              <span className="text-paper/40"> / </span>
-              {String(APARTMENT_UNITS.length).padStart(2, '0')}
-            </p>
-            <span aria-hidden className="relative h-px w-24 overflow-hidden bg-paper/20">
-              <span
-                className="absolute inset-y-0 start-0 bg-gold transition-[width] duration-300 ease-out"
-                style={{ width: `${((active + 1) / APARTMENT_UNITS.length) * 100}%` }}
-              />
-            </span>
-          </div>
         </div>
       </SectionBody>
 
