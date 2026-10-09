@@ -6,7 +6,6 @@ import { useLocale, useTranslations } from 'next-intl';
 import type { PrayerDay } from '@/lib/prayer-times';
 import type { AppLocale } from '@/i18n/routing';
 import { cn } from '@/lib/cn';
-import { VISIT } from '@/lib/location';
 import { PRAYER_PANEL_ID } from './prayer-panel-provider';
 import { joinJumuah, usePrayerData, usePrayerDay, usePrayerDayAfter } from './prayer-data-provider';
 
@@ -213,11 +212,14 @@ export function PrayerPanelBody() {
              word was in the file the whole time and this line read the wrong
              key. names.jumua still labels the prayer board, where it sits in
              a column of transliterated prayer names and belongs. */}
-          <p className="text-[14px]">
-            <span className="tabular-nums text-ink">
-              {t('jumua')} {joinJumuah(jumuah)}
-            </span>
-            <span className="block text-[13px] text-ink-60">{VISIT.address}</span>
+          {/* ── AND NOW FRIDAY ALONE (client, revised Mobilversjon text,
+             2026-10-09): «FJERNE ALT tekst utenom Jummah --> Skriv fredagsbønn
+             istedenfor Jummah» — remove all text except Jummah. The address
+             line under it goes; the link stays because he named it himself
+             («Pilen bør hete … «se bønnetider»»). The address is still on
+             /bonnetider and in the footer, so nobody loses it. */}
+          <p className="text-[14px] tabular-nums text-ink">
+            {t('jumua')} {joinJumuah(jumuah)}
           </p>
           <Link
             href={`/${locale}/bonnetider`}
