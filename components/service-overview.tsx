@@ -53,8 +53,15 @@ export async function ServiceOverview({ s }: { s: ServiceKey }) {
               </h2>
             </div>
             <div className="mt-7 md:col-span-7 md:mt-0 md:pt-1">
+              {/* ONE PARAGRAPH, NOT TWO (client, revised Mobilversjon text,
+                 2026-10-09: «For mye tekst. Fiks dette slik at det blir
+                 enklere for leseren å se gjennom siden»). longBody and the
+                 offer lede under it said the same thing twice — on nikah
+                 "must already be legally married" and then "once the
+                 marriage has been registered". They are now one paragraph of
+                 at most two sentences in longBody, and offerLede is gone
+                 from the content. Every fact in either survives. */}
               {hasLong && <p className="text-[clamp(1.0625rem,1.2vw,1.25rem)] leading-[1.6] text-ink">{t(`items.${s}.longBody`)}</p>}
-              <p className="mt-5 max-w-[60ch] text-body text-ink-60">{t(`items.${s}.offerLede`)}</p>
             </div>
           </div>
 

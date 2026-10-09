@@ -23,9 +23,8 @@ import type { ServiceKey } from '@/lib/services';
  * ── WHAT IS REAL COPY AND WHAT IS NOT ────────────────────────────────────
  * Everything rendered here is the client's own text. Two keys are new and
  * both are compressions of his sentences, not new claims:
- *   items.<s>.longBodyShort  — the opening paragraph at phone length. Falls
- *                              back to longBody where a service has none, so
- *                              the other seventeen keep working untouched.
+ *   (items.<s>.longBodyShort, the phone-length paragraph, was retired on
+ *   2026-10-09 when every longBody was cut to two sentences.)
  *   detail.journey           — a label, "Your journey", above "How it works".
  *
  * The mockup also carried a headline and a lede over the offer cards, and a
@@ -42,42 +41,15 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
   const steps = t.has(`items.${s}.steps`)
     ? (t.raw(`items.${s}.steps`) as { title: string; body: string }[])
     : [];
-  const lede = t(`items.${s}.offerLede`);
-  // ── THE PLATE NO LONGER QUOTES THE LEDE (client, Mobilversjon 2026-10-06)
-  //
-  // "Gjelder alle undersidene. Kanskje litt mye tekst? Vurdere å fjerne den
-  // andre bolken eller slå sammen med første teksten?" — he boxed the plate
-  // on /tjenester/janaza, directly under the About paragraph.
-  //
-  // It quoted the lede's FIRST sentence on the assumption that this is the
-  // line carrying the invitation. Checked across all eighteen services, that
-  // assumption holds for exactly ONE of them (shahada). Four have an
-  // invitation at all — nikah, janaza, hajj-umrah and shahada — and in three
-  // of those it is the SECOND sentence. The other thirteen have no invitation
-  // in the lede whatsoever.
-  //
-  // So on seventeen pages out of eighteen the plate was quoting a
-  // DESCRIPTION, immediately under a paragraph describing the same service.
-  // On janaza the body ends "Rabita tilbyr gjennomføring av Janazah-bønn i
-  // moskeen" and the plate opened "Ved dødsfall bistår vi familien med
-  // janazah-bønn i moskeen" — which is the repetition he is pointing at.
-  //
-  // NOTHING OF HIS IS DELETED. The whole lede now goes where the tail of it
-  // already went: the standfirst over "Hva vi tilbyr", which is the section
-  // those sentences actually describe. The plate keeps the page's single
-  // action and stops restating the paragraph above it.
-  //
-  // Done by moving rather than by rule. Picking the invitation sentence
-  // automatically would mean matching "ta kontakt" and its English and
-  // Arabic equivalents, which is a content heuristic in three languages for
-  // the benefit of four pages — and it would still leave thirteen plates
-  // quoting a description.
-  const offerLedeRest = lede.trim();
-  const body = t.has(`items.${s}.longBodyShort`)
-    ? t(`items.${s}.longBodyShort`)
-    : t.has(`items.${s}.longBody`)
-      ? t(`items.${s}.longBody`)
-      : null;
+  // ── NO LEDE OVER THE OFFER ANY MORE (client, revised Mobilversjon text,
+  // 2026-10-09: «For mye tekst. Fiks dette …»). On 6 Oct the lede had been
+  // moved here, under «Slik kan vi støtte deg», so the plate above stopped
+  // quoting it. It was still a second paragraph restating the About text,
+  // and on a phone the two filled a screen before anything could be scanned.
+  // Both are now one paragraph of at most two sentences in longBody, shown
+  // under About; offerLede and longBodyShort are gone from the content, and
+  // this section goes straight from its heading to the list.
+  const body = t.has(`items.${s}.longBody`) ? t(`items.${s}.longBody`) : null;
 
   return (
     <div className="md:hidden">
@@ -161,9 +133,6 @@ export async function ServiceOverviewPhone({ s }: { s: ServiceKey }) {
                 em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
               })}
             </h2>
-            {offerLedeRest && (
-              <p className="mt-4 text-[1rem] leading-[1.62] text-ink-60">{offerLedeRest}</p>
-            )}
             {/* ── A BULLET, NOT AN ICON (client, 2026-09-30) ─────────────
                The mockup gave each card a little drawing of what it
                describes. Doing that honestly means 54 of them — three for

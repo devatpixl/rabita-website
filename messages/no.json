@@ -1793,9 +1793,8 @@
       "nikah": {
         "title": "<em>Nikah</em> (islamsk vielse)",
         "body": "Hjelp med planlegging og gjennomføring av ekteskapsseremoni.",
-        "longBody": "Nikah er den islamske ekteskapsinngåelsen, der brudeparet inngår ekteskap med hverandre i tråd med islamske prinsipper. Rabita tilbyr gjennomføring av religiøs nikah i moskeen ved imam. Paret må allerede være juridisk gift og fremlegge gyldig vigselsattest.",
+        "longBody": "Nikah er den islamske vielsen, ledet av imam i moskeen. Paret må allerede være juridisk gift og ta med gyldig vigselsattest.",
         "offerTitle": "En seremoni dere vil huske",
-        "offerLede": "Vi bistår med planlegging og gjennomføring av selve den religiøse seremonien, etter at ekteskapet er registrert. Ta kontakt tidlig, så finner vi en dato som passer.",
         "offer": [
           {
             "title": "Veiledning før ekteskap"
@@ -1836,9 +1835,8 @@
       "janaza": {
         "title": "<em>Janaza</em> (begravelse)",
         "body": "Støtte og veiledning ved dødsfall og islamsk gravferd.",
-        "longBody": "I islamsk tro har også livets avslutning en verdig og viktig ramme. Når et menneske går bort, samles familie og fellesskap til Janazah-bønnen — muslimenes siste bønn for den avdøde og en siste avskjed før gravleggingen. Rabita tilbyr gjennomføring av Janazah-bønn i moskeen, ledet av en imam.",
+        "longBody": "Janazah-bønnen er muslimenes siste bønn for den avdøde, før gravleggingen. Vi holder den i moskeen, ledet av imam, og veileder familien gjennom hele prosessen.",
         "offerTitle": "Vi er her i den vanskeligste tiden",
-        "offerLede": "Ved dødsfall bistår vi familien med janazah-bønn i moskeen og veiledning gjennom hele prosessen. Ta kontakt så snart som mulig, så hjelper vi dere videre.",
         "offer": [
           {
             "title": "Veiledning ved dødsfall"
@@ -1873,10 +1871,8 @@
       "shahada": {
         "title": "<em>Shahada</em> (bli muslim)",
         "body": "Veiledning og gjennomføring for dem som ønsker å bli muslim.",
-        "longBody": "Er du nysgjerrig på islam, ønsker å lære mer om troen eller har spørsmål du gjerne vil snakke med noen om? Hos Rabita er du velkommen til en åpen og uforpliktende samtale. Uansett hvor du befinner deg i denne prosessen, møter vi deg med respekt og på dine egne premisser.",
-        "longBodyShort": "Nysgjerrig på islam, eller ønsker du noen å snakke med? Hos Rabita er du velkommen til å stille spørsmål og utforske i ditt eget tempo, helt uforpliktende.",
+        "longBody": "Nysgjerrig på islam, eller ønsker du noen å snakke med? Hos Rabita er du velkommen til en uforpliktende samtale, enten du vil lære mer, trenger veiledning eller vil avlegge shahada.",
         "offerTitle": "Interessert i islam?",
-        "offerLede": "Du trenger ikke å ha bestemt deg for noe for å ta kontakt. Noen ønsker mer kunnskap, andre ønsker veiledning, og noen har kommet frem til at de vil avlegge shahada.",
         "offer": [
           {
             "title": "Samtale og veiledning om islam"
@@ -1907,9 +1903,8 @@
       "counselling": {
         "title": "Samtaler og <em>megling</em>",
         "body": "Rådgivning, konfliktløsning og støtte i krevende situasjoner.",
-        "longBody": "Livet kan by på perioder der konflikter, samlivsutfordringer eller andre livskriser blir vanskelige å håndtere alene. Rabita tilbyr fortrolige samtaler og megling med imam eller kvinnelig rådgiver. Samtalene bygger på tillit og behandles konfidensielt.",
+        "longBody": "Rabita tilbyr fortrolige samtaler og megling med imam eller kvinnelig rådgiver, enten det gjelder familie, ekteskap eller andre livskriser. Alle henvendelser behandles diskret.",
         "offerTitle": "Et fortrolig rom for vanskelige samtaler",
-        "offerLede": "Enten det gjelder familie, ekteskap eller andre utfordringer, tilbyr vi samtaler med imam eller kvinnelig rådgiver. Alle henvendelser behandles diskret.",
         "offer": [
           {
             "title": "Individuelle samtaler"
@@ -1940,9 +1935,8 @@
       "hajj-umrah": {
         "title": "Hajj og <em>umrah</em>",
         "body": "Informasjon, forberedelse og veiledning før pilegrimsreisen.",
-        "longBody": "Hajj, pilegrimsreisen til Mekka, er islams femte søyle og en plikt for enhver muslim som har fysisk og økonomisk mulighet til å gjennomføre reisen. Umrah er den mindre pilegrimsreisen og kan gjennomføres gjennom store deler av året. Hajj- og umrah-kontoret holder til i Rabitas lokaler og drives av et engasjert team av frivillige med lang erfaring.",
+        "longBody": "Hajj- og umrah-kontoret i Rabitas lokaler gir veiledning før både hajj og umrah, og organiserer umrah-reiser flere ganger i året. Kontoret drives av erfarne frivillige.",
         "offerTitle": "Trygg forberedelse til pilegrimsreisen",
-        "offerLede": "Våre samarbeidspartnere i Hajj og umrah-kontoret gir informasjon og veiledning før både hajj og umrah, og organiserer egne umrah-reiser flere ganger i året. Ta kontakt for å høre mer om neste reise.",
         "offer": [
           {
             "title": "Informasjonsmøter"
@@ -1977,9 +1971,8 @@
       "skole": {
         "title": "<em>Rabita skole</em>",
         "body": "Helgeskole for barn og ungdom med undervisning i arabisk og islam.",
-        "longBody": "Rabitas arabiske skole er et helgeundervisningstilbud for barn og unge i alderen 6–16 år, og et av våre største og mest etablerte tilbud til barn og familier. I 2025 hadde skolen 225 elever fordelt på 13 klasser.",
+        "longBody": "Rabitas arabiske skole er helgeundervisning for barn og unge fra 6 til 16 år, der språk, tro og identitet hører sammen. I 2025 hadde skolen 225 elever i 13 klasser.",
         "offerTitle": "Mer enn undervisning",
-        "offerLede": "Hos oss skal barna få et sted hvor språk, tro, identitet og fellesskap hører naturlig sammen. Vi legger stor vekt på kvalitet i undervisningen og på lærere som er faglig sterke og gode rollemodeller.",
         "offer": [
           {
             "title": "Arabiskundervisning"
@@ -2010,9 +2003,8 @@
       "koran": {
         "title": "<em>Koranskolen</em>",
         "body": "Koranundervisning for barn, ungdom og voksne med vekt på korrekt resitasjon, memorering og forståelse.",
-        "longBody": "Undervisning i Koranen: å lære utenat, og å lære å lese på riktig måte — tajweed. Barn mellom 6 og 15 år og voksne over 16 år har egne grupper.",
+        "longBody": "Undervisning i Koranen, med vekt på riktig resitasjon (tajweed), memorering og forståelse. Barn fra 6 til 15 år og voksne over 16 år har egne grupper.",
         "offerTitle": "Å lære Koranen, riktig og med forståelse",
-        "offerLede": "Vi legger vekt på korrekt resitasjon (tajweed), memorering og forståelse, for både barn og voksne.",
         "offer": [
           {
             "title": "Tajweed og resitasjon"
@@ -2046,9 +2038,8 @@
       "kurs": {
         "title": "Kalligrafi og <em>geometri</em>",
         "body": "Utforsk islamsk kunst og geometri gjennom kurs, workshops og kreative aktiviteter.",
-        "longBody": "Kunst og skjønnhet har gjennom århundrer hatt en viktig plass i den islamske tradisjonen. I Rabita ønsker vi å holde denne rike kunsttradisjonen levende og gjøre den tilgjengelig for nye generasjoner, gjennom kurs der tradisjonelt håndverk, historie, presisjon og kreativ utfoldelse møtes.",
+        "longBody": "Kurs i arabisk kalligrafi og islamsk geometri, ledet av erfarne kunstnere, som holder en rik kunsttradisjon levende. Åpent for både nybegynnere og viderekomne.",
         "offerTitle": "Utforsk islamsk kunst",
-        "offerLede": "Vi tilbyr kurs i arabisk kalligrafi og islamsk geometri, ledet av erfarne kunstnere. Åpent for både nybegynnere og viderekomne.",
         "offer": [
           {
             "title": "Arabisk kalligrafi"
@@ -2078,9 +2069,8 @@
       "veivisere": {
         "title": "Muslimske <em>veivisere</em>",
         "body": "Brobygging, dialogarbeid og kunnskapsformidling om islam og muslimer.",
-        "longBody": "Muslimske veivisere er et dialog- og kunnskapstiltak som skal forebygge fordommer og diskriminering mot norske muslimer. Gjennom skolebesøk møter unge muslimske veivisere elever ansikt til ansikt og snakker åpent om tro, identitet, tilhørighet og hvordan det er å vokse opp og leve som muslim i Norge.",
+        "longBody": "Unge muslimske veivisere besøker skoler over hele landet og snakker åpent med elever om tro, identitet og å vokse opp som muslim i Norge. Målet er mindre fordommer og mer forståelse, og vi tar også imot besøk i moskeen.",
         "offerTitle": "Møter som bygger forståelse",
-        "offerLede": "Våre veivisere besøker skoler over hele landet for å svare på spørsmål om tro og identitet, og bidra til mindre fordommer og mer forståelse. Vi tar også imot besøk i moskéen.",
         "offer": [
           {
             "title": "Skolebesøk"
@@ -2111,9 +2101,8 @@
       "norsk": {
         "title": "Kurs i <em>norsk</em>",
         "body": "Gratis norskundervisning og veiledning for voksne som ønsker å styrke sine språkferdigheter og samfunnskunnskap.",
-        "longBody": "Å kunne språket i landet man bor i handler om langt mer enn å kunne gjøre seg forstått. Det handler om å kunne snakke med barnas skole, forstå et brev fra det offentlige, søke arbeid, ta utdanning, følge samfunnsdebatten og delta i samfunnet på egne premisser.",
+        "longBody": "Gratis norskundervisning for voksne som faller utenfor de ordinære tilbudene. Vi legger vekt på hverdagsspråket du trenger for å delta i samfunnet.",
         "offerTitle": "Et springbrett inn i samfunnet",
-        "offerLede": "Vi tilbyr gratis norskundervisning for voksne som faller utenfor de ordinære tilbudene, med fokus på hverdagsspråk og samfunnsdeltakelse.",
         "offer": [
           {
             "title": "Norskundervisning"
@@ -2143,9 +2132,8 @@
       "ungdom": {
         "title": "<em>Norges Unge Muslimer</em> (NUM)",
         "body": "Aktiviteter og fellesskap for ungdom.",
-        "longBody": "Unge mennesker trenger mer enn et sted å være. De trenger fellesskap, gode rollemodeller, kunnskap og arenaer hvor de kan utvikle seg, ta ansvar og kjenne at de hører til. Norges Unge Muslimer er Rabitas ungdomsorganisasjon og har et selvstendig styre.",
+        "longBody": "Norges Unge Muslimer (NUM) er Rabitas ungdomsorganisasjon, drevet av og for ungdom, med eget styre. Her møtes unge til sosiale kvelder, leirer og faglige arrangementer.",
         "offerTitle": "Fellesskap for ungdom",
-        "offerLede": "NUM er Rabitas egen ungdomsorganisasjon, drevet av og for ungdom. Her møtes unge til sosiale kvelder, leirer og faglige arrangementer.",
         "offer": [
           {
             "title": "Ungdomskvelder"
@@ -2175,9 +2163,8 @@
       "barn-og-familie": {
         "title": "Barn og <em>familier</em>",
         "body": "Tilbud og aktiviteter som styrker familieliv, oppvekst og fellesskap.",
-        "longBody": "Rabita skal være et sted hvor også barna får gode minner, bygger vennskap og opplever gleden ved å være en del av et større fellesskap. Derfor arrangerer vi gjennom året en rekke aktiviteter og møteplasser for barn og familier.",
+        "longBody": "Gjennom året arrangerer vi turer, verksteder og samlinger for barn og familier. Her skal barna få gode minner, bygge vennskap og kjenne at de hører til.",
         "offerTitle": "Gode opplevelser, sammen",
-        "offerLede": "Gjennom året arrangerer vi turer, verksteder og samlinger som gir barn og foreldre gode opplevelser sammen, og styrker båndene i familien.",
         "offer": [
           {
             "title": "Familieaktiviteter"
@@ -2207,9 +2194,8 @@
       "fosterhjem": {
         "title": "<em>Fosterfamilie</em>",
         "body": "Informasjon og veiledning for familier som vurderer fosterhjem.",
-        "longBody": "Det finnes barn og unge i Oslo som av ulike grunner ikke kan bo sammen med sine foreldre, og som trenger et trygt og stabilt hjem. Blant dem finnes også barn med muslimsk bakgrunn som venter på en familie som kan gi dem omsorg, trygghet og tilhørighet.",
+        "longBody": "Også i Oslo venter barn med muslimsk bakgrunn på et trygt og stabilt hjem. Gjennom prosjektet Bro til omsorg informerer og veileder vi familier som ønsker å bli fosterhjem.",
         "offerTitle": "Et trygt hjem gjør en forskjell",
-        "offerLede": "Gjennom prosjektet Bro til omsorg informerer og veileder vi familier som ønsker å bli fosterhjem for barn med muslimsk bakgrunn.",
         "offer": [
           {
             "title": "Informasjon om fosterhjem"
@@ -2240,9 +2226,8 @@
       "id-for-alle": {
         "title": "Id <em>for alle</em>",
         "body": "Åpne og inkluderende id-arrangementer for hele familien.",
-        "longBody": "Rabita inviterer hele familien til en dag fylt med aktiviteter, lek og god stemning for både store og små. Id for alle har vært holdt flere steder i byen — blant annet på Hersleb skole, i Ekeberghallen og på Rådhusplassen — og annonseres på nytt foran hver høytid.",
+        "longBody": "Våre id-feiringer samler tusenvis til en festlig dag med fellesbønn, aktiviteter og god mat for hele familien. Id for alle annonseres på nytt foran hver høytid.",
         "offerTitle": "En dag for hele familien",
-        "offerLede": "Våre id-feiringer samler tusenvis av mennesker fra ulike bakgrunner til en trygg og festlig dag med fellesbønn, aktiviteter og god mat.",
         "offer": [
           {
             "title": "Felles id-bønn"
@@ -2272,9 +2257,8 @@
       "kurs-islam": {
         "title": "Kurs i <em>islam</em>",
         "body": "Grunnleggende undervisning i islamsk tro og praksis.",
-        "longBody": "Undervisning i islam for ulike målgrupper. Jenter i Fokus og Gutter i Fokus tar for seg det grunnleggende — bønn, rituell vask og tawhid — i to aldersgrupper: 10 til 13 år og 14 til 18 år.",
+        "longBody": "Jenter i Fokus og Gutter i Fokus gir en solid innføring i bønn, rituell vask og tawhid. To aldersgrupper: 10 til 13 år og 14 til 18 år.",
         "offerTitle": "Grunnleggende kunnskap i trygge rammer",
-        "offerLede": "Kurset gir barn og ungdom en solid innføring i islamsk tro og praksis, tilpasset egne aldersgrupper.",
         "offer": [
           {
             "title": "Islamsk troslære"
@@ -2304,9 +2288,8 @@
       "kurs-konvertitter": {
         "title": "Kurs for <em>konvertitter</em>",
         "body": "Islamkurs for nye muslimer, hver fredag. Åpent for alle som vil lære.",
-        "longBody": "Et kurs i grunnleggende islamkunnskap, laget for nye muslimer. Vi spiser sammen, og kurset er åpent for alle som har interesse av å lære — også for deg som er født muslim, og for deg som ikke er muslim.",
+        "longBody": "Et kurs i grunnleggende islamkunnskap for nye muslimer, uten at du må kunne noe fra før. Vi spiser sammen, og alle som vil lære er velkomne, også alene.",
         "offerTitle": "Et sted å begynne",
-        "offerLede": "Kurset tar for seg det grunnleggende uten å forutsette at du kan noe fra før. Du kan komme alene.",
         "offer": [
           {
             "title": "Hver fredag",
@@ -2345,9 +2328,8 @@
       "arabisk": {
         "title": "Kurs i <em>arabisk</em>",
         "body": "Arabiskopplæring for voksne på ulike nivåer, fra nybegynner til viderekommende.",
-        "longBody": "Undervisning i arabisk for voksne over 16 år, på to nivåer. Nivå 1 begynner med alfabetet. Nivå 2 bygger videre med grammatikk, ordforråd og lesing av sammenhengende tekst.",
+        "longBody": "Arabiskundervisning for voksne over 16 år, på to nivåer. Nivå 1 begynner med alfabetet, nivå 2 bygger videre med grammatikk, ordforråd og lesing.",
         "offerTitle": "Fra første ord til flyt",
-        "offerLede": "Vi tilbyr arabiskopplæring på to nivåer, for voksne som ønsker å lære eller styrke språket.",
         "offer": [
           {
             "title": "Nybegynnernivå"
@@ -2377,9 +2359,8 @@
       "kvinnetreff": {
         "title": "<em>Kvinnetreff</em>",
         "body": "Faglige, sosiale og åndelige tilbud for kvinner i alle aldre.",
-        "longBody": "Kvinnetreff er en egen møteplass for kvinner i Rabita, med rom for samtale, undervisning og sosialt fellesskap. Treffene arrangeres i moskeen. Ta kontakt for å høre når det neste finner sted, eller for å si fra at du vil være med.",
+        "longBody": "Kvinnetreff er en egen møteplass for kvinner i moskeen, med foredrag, samtale og sosialt fellesskap. Ta kontakt for å høre når neste treff er.",
         "offerTitle": "Et fellesskap for kvinner i alle aldre",
-        "offerLede": "Hos oss møtes kvinner til foredrag, sosiale samlinger og faglige tilbud i et trygt og inkluderende miljø.",
         "offer": [
           {
             "title": "Foredrag og kurs"

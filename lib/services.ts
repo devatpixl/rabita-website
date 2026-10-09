@@ -978,7 +978,7 @@ export const SERVICE_GROUP_OF: Record<
 // later, we will just uncomment those".
 //
 // So the copy is already in messages/{no,en,ar}.json under
-// servicesIndex.items.<key> — title, body, longBody, offerTitle, offerLede
+// servicesIndex.items.<key> — title, body, longBody, offerTitle (offerLede was merged into longBody on 2026-10-09)
 // and four offer items each, in all three languages — plus a
 // requestForm.notes.<key> line so the enquiry form has its hint. None of it
 // renders: every consumer reads SERVICE_KEYS or SERVICE_GROUPS, and neither
