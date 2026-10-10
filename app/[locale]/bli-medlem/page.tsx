@@ -145,7 +145,14 @@ export default async function JoinPage({
         // minutt.» — replacing ledeShort, which led with the vote. md: arms
         // restate the band's defaults, so laptops are unchanged.
         ledePhone={t('v2.heroLine')}
-        titleClass="max-md:text-[2.55rem] max-md:leading-[1.02] max-md:tracking-[-0.02em] md:text-[clamp(1.65rem,3vw,2.3rem)]"
+        // «BLI MEDLEM» over «MEDLEMSKAP» on phones, and larger (user,
+        // 2026-10-10: "bli-medlem better? and also make it larger, so it also
+        // stands out and rest heading a little smaller maybe so well placed 3
+        // things"). The label says what the page is FOR; the headline steps
+        // down 2.55 → 2.2rem so label, headline and line read as three.
+        kickerPhone={t('formEyebrow')}
+        kickerClass="max-md:text-[0.9375rem] max-md:font-medium max-md:tracking-[0.2em]"
+        titleClass="max-md:mt-3 max-md:text-[2.2rem] max-md:leading-[1.04] max-md:tracking-[-0.02em] md:text-[clamp(1.65rem,3vw,2.3rem)]"
         ledeClass="max-md:mt-4 max-md:text-[1.0625rem] max-md:font-medium max-md:text-paper/90"
         image="/photos/story-members.webp"
         alt={ts('pages.membership.caption')}

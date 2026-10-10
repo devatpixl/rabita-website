@@ -108,6 +108,9 @@ export type PageBandProps = {
   ledePhone?: string;
   /** Extra lede classes (the "over" layout only), e.g. a phone size step. */
   ledeClass?: string;
+  /** A different kicker below md, and extra kicker classes ("over" only). */
+  kickerPhone?: string;
+  kickerClass?: string;
   /** Overrides the plate's min-height. The services index uses it to stand
    *  taller than the eleven pages it is the parent of. */
   heightClass?: string;
@@ -136,9 +139,10 @@ export function BandWords({
   rule = 'bg-gold/40',
   titleClass,
   ledeClass,
+  kickerClass,
   className,
 }: {
-  kicker: string;
+  kicker: ReactNode;
   kickerNote?: string;
   title: ReactNode;
   lede?: ReactNode;
@@ -146,11 +150,13 @@ export function BandWords({
   titleClass?: string;
   /** Extra classes for the lede — e.g. a phone-only size step. */
   ledeClass?: string;
+  /** Extra classes for the kicker line. */
+  kickerClass?: string;
   className?: string;
 }) {
   return (
     <div className={cn('relative z-10', className)}>
-      <p className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
+      <p className={cn('flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold', kickerClass)}>
         <span>{kicker}</span>
         {kickerNote && (
           <>
@@ -199,6 +205,8 @@ export function PageBand({
   titleClass,
   ledePhone,
   ledeClass,
+  kickerPhone,
+  kickerClass,
   heightClass,
   imagePhone,
   objectClassPhone,
@@ -327,7 +335,17 @@ export function PageBand({
                   />
                 )}
                 <BandWords
-                  kicker={kicker}
+                  kicker={
+                    kickerPhone ? (
+                      <>
+                        <span className="md:hidden">{kickerPhone}</span>
+                        <span className="hidden md:inline">{kicker}</span>
+                      </>
+                    ) : (
+                      kicker
+                    )
+                  }
+                  kickerClass={kickerClass}
                   kickerNote={kickerNote}
                   title={title}
                   lede={
