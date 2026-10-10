@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAMPAIGN } from '@/lib/campaign';
 import { Accent } from '@/components/accent';
 import { Faq } from '@/components/faq';
+import { RosetteMark } from '@/components/marks';
 import { FigureIcon, type FigureIconName } from '@/components/figure-icons';
 import { PageBand } from '@/components/page-band';
 import { Eyebrow, Section, SectionBody, SectionHeading } from '@/components/primitives';
@@ -52,6 +53,7 @@ export default async function UtmeldingPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'utmeldingPage' });
+  const th = await getTranslations({ locale, namespace: 'membershipHub' });
 
   return (
     <main>
@@ -71,7 +73,105 @@ export default async function UtmeldingPage({
         mark="none"
         tone="warm"
         objectClass="object-[70%_50%]"
+        // ── PHONES, AS /bli-medlem (user, 2026-10-10: "like we made components
+        // and cards and points good in bli-medlem and wavy image at top, make
+        // this page also good like that"). Taller plate, the site's curve
+        // into the paper below, «UTMELDING» as the label and larger, the
+        // headline larger. All max-md: arms; md keeps the band's defaults.
+        footCurve="#FAF8F4"
+        heightClass="min-h-[26rem] md:min-h-[15rem]"
+        kickerPhone={th('leave.eyebrow')}
+        kickerClass="max-md:text-[0.9375rem] max-md:font-medium max-md:tracking-[0.2em]"
+        titleClass="max-md:mt-3 max-md:text-[2.2rem] max-md:leading-[1.04] max-md:tracking-[-0.02em] md:text-[clamp(1.65rem,3vw,2.3rem)]"
+        ledeClass="max-md:mt-4 max-md:text-[1.0625rem] max-md:text-paper/90"
+        className="max-md:pb-0"
       />
+
+      {/* ── PHONES ──────────────────────────────────────────────────────
+         The same language as the /bli-medlem phone page: plain points (gold
+         square, serif title, one paragraph) instead of three boxed cards; his
+         "your choice" block as a dusk card instead of a sage plate with a
+         full-height photograph; the FAQ unchanged; the form in a card of its
+         own without the photograph that sat empty above it at this width.
+         Every word is his (the mock he drafted, 2026-09-18). Laptop below is
+         untouched. No ids here — the laptop tree keeps them. */}
+      <div className="md:hidden">
+        <Section tone="paper" className="pt-4">
+          <SectionBody>
+            <p className="flex items-center gap-3 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
+              <span aria-hidden className="h-px w-6 shrink-0 bg-gold-deep/50" />
+              {t('before.eyebrow')}
+            </p>
+            <h2 className="mt-4 font-serif text-[1.75rem] leading-[1.1] tracking-[-0.01em] text-balance text-ink">
+              {t('before.heading')}
+            </h2>
+            <p className="mt-3 text-[15px] leading-relaxed text-ink-60">{t('before.lede')}</p>
+            <ul className="mt-6 divide-y divide-rule border-y border-rule">
+              {CARDS.map((k) => (
+                <li key={k} className="flex items-start gap-3.5 py-5">
+                  <span aria-hidden className="mt-[0.6rem] block h-1.5 w-1.5 shrink-0 rotate-45 bg-gold-deep" />
+                  <span className="block min-w-0">
+                    <span className="block font-serif text-[1.2rem] leading-snug text-ink">{t(`before.items.${k}.title`)}</span>
+                    <span className="mt-1 block text-[15px] leading-relaxed text-ink-60">{t(`before.items.${k}.body`)}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </SectionBody>
+        </Section>
+
+        <Section tone="paper" className="pt-0">
+          <SectionBody>
+            <div className="relative isolate overflow-hidden rounded-[1.75rem] bg-dusk p-7 text-paper">
+              <RosetteMark
+                aria-hidden
+                className="pointer-events-none absolute -bottom-12 -end-12 -z-10 h-56 w-56 text-paper/[0.06]"
+              />
+              <p className="flex items-center gap-3 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-gold">
+                <span aria-hidden className="h-px w-5 shrink-0 bg-gold/60" />
+                {t('choice.eyebrow')}
+              </p>
+              <h2 className="mt-4 font-serif text-[1.55rem] leading-[1.15] text-paper">{t('choice.heading')}</h2>
+              <p className="mt-3 text-[15px] leading-relaxed text-paper/75">{t('choice.body')}</p>
+              <p className="mt-6 text-[14px] leading-snug text-paper/70">{t('choice.prompt')}</p>
+              <a
+                href={`mailto:${CAMPAIGN.membershipEmail}`}
+                className="group mt-3 flex min-h-12 items-center justify-between gap-3 rounded-full bg-gold px-5 text-[15px] font-semibold text-dusk transition-colors hover:bg-paper"
+              >
+                {t('choice.cta')}
+                <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5 rtl:rotate-180">&rarr;</span>
+              </a>
+            </div>
+          </SectionBody>
+        </Section>
+
+        <Section tone="paper" className="pt-0">
+          <SectionBody>
+            <p className="flex items-center gap-3 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
+              <span aria-hidden className="h-px w-6 shrink-0 bg-gold-deep/50" />
+              {t('faq.eyebrow')}
+            </p>
+            <h2 className="mt-4 font-serif text-[1.75rem] leading-[1.1] tracking-[-0.01em] text-balance text-ink">
+              {t('faq.heading')}
+            </h2>
+            <Faq
+              className="mt-6"
+              items={FAQ.map((k) => ({ id: `m-${k}`, q: t(`faq.items.${k}.q`), a: t(`faq.items.${k}.a`) }))}
+            />
+          </SectionBody>
+        </Section>
+
+        <Section tone="paper" className="pt-0">
+          <SectionBody>
+            <div className="overflow-hidden rounded-[1.75rem] bg-paper-2 ring-1 ring-gold-deep/15 shadow-[0_1px_2px_rgba(26,26,24,0.03),0_30px_80px_-50px_rgba(26,26,24,0.28)]">
+              <UtmeldingForm />
+            </div>
+          </SectionBody>
+        </Section>
+      </div>
+
+      {/* ── LAPTOP: the page as it was. ─────────────────────────────────── */}
+      <div className="hidden md:block">
 
       {/* Three cards, his section two. Text on paper-2 plates with a small
          disc for the icon — the mock's own shape. No numbers, no rules. */}
@@ -168,6 +268,7 @@ export default async function UtmeldingPage({
           </div>
         </SectionBody>
       </Section>
+      </div>
     </main>
   );
 }
