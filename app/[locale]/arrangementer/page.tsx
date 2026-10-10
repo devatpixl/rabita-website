@@ -63,6 +63,9 @@ export default async function EventsPage({
         mark="rosette"
         tone="warm"
         padBottom="none"
+        // Phones end on the site's curve into the paper below (user,
+        // 2026-10-10: every hero ends on the wave).
+        footCurve="#FAF8F4"
       >
         <p className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">
           {tv('pages.events.caption')}

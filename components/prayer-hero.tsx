@@ -6,6 +6,7 @@ import { ClockIcon } from './prayer-board';
 import { usePrayerWindow } from './use-prayer-window';
 import { PRAYER_ORDER, type PrayerKey } from '@/lib/prayer-window';
 import { cn } from '@/lib/cn';
+import { PlateFoot } from './plate-foot';
 
 // The phone masthead for /bonnetider (2026-09-29).
 //
@@ -82,7 +83,7 @@ export function PrayerHero({ title }: { title: string }) {
       <div aria-hidden className="absolute inset-0 bg-dusk/55" />
       <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-dusk via-dusk/80 to-dusk/35" />
 
-      <div className="relative flex min-h-[23rem] flex-col justify-end px-6 pb-7 pt-10">
+      <div className="relative flex min-h-[23rem] flex-col justify-end px-6 pb-16 pt-10">
         {/* The masthead line: the page's name, and the day it is answering
            for. THE HIJRI DATE BECOMES VISIBLE ON PHONES HERE — in the board
            below it is `hidden md:block`, so until now the one place on the
@@ -129,6 +130,10 @@ export function PrayerHero({ title }: { title: string }) {
 
         {today ? <DayBand today={today} nextKey={win?.next ?? null} nowMinutes={nowMinutes} /> : null}
       </div>
+      {/* Ends on the site's curve into the paper below (user, 2026-10-10:
+         every hero ends on the wave). pb-16 above keeps the day band clear
+         of it. This hero is phone-only already. */}
+      <PlateFoot fill="#FAF8F4" className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] block h-12 w-full" />
     </section>
   );
 }

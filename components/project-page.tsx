@@ -163,7 +163,7 @@ export function ProjectHero({
               // their words at the top of it — on the clearest part of the
               // picture, which is the one place the old horizontal ramp had
               // been covering for them.
-              <SectionBody className="relative py-section-md max-md:pt-[9.5rem]">{children}</SectionBody>
+              <SectionBody className={cn('relative py-section-md max-md:pt-[9.5rem]', footCurve && 'max-md:pb-20')}>{children}</SectionBody>
             );
         return (
       <Body>
@@ -281,10 +281,17 @@ export function ProjectHero({
 
          z-[2] puts it over the photograph but the card still sits above it:
          the card is inside Body, which is z-10. */}
+      {/* PHONES TOO, when there is no aside (user, 2026-10-10: every hero
+         ends on the wave). With an aside (/moskeprosjektet) the phone already
+         has its own curve on top of the card, and the section foot there is
+         the card, so the md-only rule stands for that one. */}
       {footCurve && (
         <PlateFoot
           fill={footCurve}
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] hidden h-14 w-full md:block"
+          className={cn(
+            'pointer-events-none absolute inset-x-0 bottom-0 z-[2] w-full',
+            aside ? 'hidden h-14 md:block' : 'block h-12 md:h-14',
+          )}
         />
       )}
     </section>

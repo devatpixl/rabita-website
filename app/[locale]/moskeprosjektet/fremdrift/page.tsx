@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Accent } from '@/components/accent';
+import { PlateFoot } from '@/components/plate-foot';
 import { ProgressPhases } from '@/components/progress-phases';
 import { ProgressTimeline } from '@/components/progress-timeline';
 import { Section, SectionBody } from '@/components/primitives';
@@ -78,7 +79,7 @@ export default async function FremdriftPage({
           <div className="absolute inset-0 bg-gradient-to-t from-dusk via-dusk/55 to-transparent" />
         </div>
 
-        <div className="relative mx-auto w-full max-w-6xl px-6 pb-16 pt-28 md:pb-20 md:pt-32">
+        <div className="relative mx-auto w-full max-w-6xl px-6 pb-20 pt-28 md:pb-20 md:pt-32">
           <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold">
             {t('heroEyebrow')}
           </p>
@@ -87,6 +88,9 @@ export default async function FremdriftPage({
           </h1>
           <p className="mt-6 max-w-[52ch] text-body text-paper/80">{t('heroLede')}</p>
         </div>
+        {/* Phones end on the site's curve into the paper below (user,
+           2026-10-10: every hero ends on the wave). */}
+        <PlateFoot fill="#FAF8F4" className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] block h-12 w-full md:hidden" />
       </section>
 
       {/* The six years, pinned and scrolled. */}
