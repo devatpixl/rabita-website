@@ -50,6 +50,10 @@ import { FigureIcon, type FigureIconName } from '@/components/figure-icons';
 // it — his four replace the set, they do not extend it.
 // His four, in his order (Tekst (endelig), «Hvorfor bli medlem?»).
 const POINTS = ['free', 'vote', 'support', 'access'] as const;
+// Phones: «Din stemme teller» removed (user, 2026-10-10: "remove your vote
+// counts from the bli medlem points in 1st section"). Laptop keeps POINTS —
+// that page stays as it was unless asked.
+const PHONE_POINTS = ['free', 'support', 'access'] as const;
 // Laptop layout (the pre-redesign page) only.
 const POINT_ICONS: FigureIconName[] = ['check', 'people', 'building'];
 
@@ -202,7 +206,7 @@ export default async function JoinPage({
              Hairlines between them on a phone so four short items still
              read as a list; four across from lg. */}
           <ul className="mt-7 divide-y divide-rule border-y border-rule sm:grid sm:grid-cols-2 sm:gap-x-10 sm:divide-y-0 sm:border-0 lg:mt-10 lg:grid-cols-4 lg:gap-x-8">
-            {POINTS.map((k) => (
+            {PHONE_POINTS.map((k) => (
               <li key={k} className="flex items-start gap-3.5 py-5 sm:py-4">
                 <span aria-hidden className="mt-[0.6rem] block h-1.5 w-1.5 shrink-0 rotate-45 bg-gold-deep" />
                 <span className="block min-w-0">
