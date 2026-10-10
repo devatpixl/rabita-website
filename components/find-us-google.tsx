@@ -56,6 +56,13 @@ const VISIT_MAP_MID = '1mMioQY6DD_zeSaSuG0FciUU3Sw2fkUw';
 // the frame's centre (z15 ≈ 2.4 m/px here).
 const VISIT_CENTRE = `${(VISIT.lat + 0.0007).toFixed(6)},${VISIT.lon}`;
 const VISIT_ZOOM = 15;
+// Phones one step further out (user, 2026-10-10, with a screenshot of the
+// map zoomed to here: "show the footer map a bit zoomed out so it looks like
+// this, else it is looking a bit odd") — at 15 a 330px frame showed one
+// street and no place names. At 14 the crop offset doubles in metres
+// (~4.8 m/px), so the centre moves ~160 m north to keep the pin mid-frame.
+const VISIT_ZOOM_PHONE = 14;
+const VISIT_CENTRE_PHONE = `${(VISIT.lat + 0.0014).toFixed(6)},${VISIT.lon}`;
 
 /** Height of the My Maps title bar, which is cropped away. Measured on the
  *  rendered embed (getBoundingClientRect on the bar, 2026-09-28): 67px, not
@@ -221,10 +228,10 @@ export async function FindUsGoogle({
           ) : place === 'visit-styled' ? (
             // Sørligata on the footer's own My Map, so it carries the same
             // base style as the Leiligheter map. Same title-bar crop as below.
-            // One opening view: there is a single pin, centred at any width.
+            // Two opening views: z15 from sm, z14 on phones.
             <MyMapsFrame
               src={`https://www.google.com/maps/d/embed?mid=${VISIT_MAP_MID}&ehbc=2E312F&ll=${VISIT_CENTRE}&z=${VISIT_ZOOM}`}
-              phoneSrc={`https://www.google.com/maps/d/embed?mid=${VISIT_MAP_MID}&ehbc=2E312F&ll=${VISIT_CENTRE}&z=${VISIT_ZOOM}`}
+              phoneSrc={`https://www.google.com/maps/d/embed?mid=${VISIT_MAP_MID}&ehbc=2E312F&ll=${VISIT_CENTRE_PHONE}&z=${VISIT_ZOOM_PHONE}`}
               title={t('mapTitle')}
               style={{ marginTop: `-${HEADER_PX}px`, height: `calc(100% + ${HEADER_PX}px)` }}
               className="block w-full border-0"
