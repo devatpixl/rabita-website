@@ -2916,7 +2916,8 @@
       "cards": {
         "vote": "You get a vote at the annual meeting and help elect the board.",
         "support": "Your membership strengthens Rabita and helps realise the new mosque building.",
-        "access": "Teaching, family activities and events throughout the year."
+        "access": "Teaching, family activities and events throughout the year.",
+        "free": "No fee and no hidden costs."
       },
       "free": {
         "figure": "0 kr",

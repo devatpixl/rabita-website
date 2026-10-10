@@ -2912,7 +2912,8 @@
       "cards": {
         "vote": "Du får stemmerett på årsmøtet og er med på å velge styret.",
         "support": "Medlemskapet ditt styrker Rabita og bidrar til å realisere det nye moskébygget.",
-        "access": "Undervisning, familieaktiviteter og arrangementer gjennom hele året."
+        "access": "Undervisning, familieaktiviteter og arrangementer gjennom hele året.",
+        "free": "Ingen kontingent og ingen skjulte kostnader."
       },
       "free": {
         "figure": "0 kr",

@@ -46,8 +46,8 @@ import { RosetteMark } from '@/components/marks';
 // Tilgang til aktiviteter og tjenester. The old `updates` and `renewal`
 // points are not on his list and were dropped from the message files with
 // it — his four replace the set, they do not extend it.
-// Three of his four as cards; `free` is the fourth, set apart (see WHY).
-const CARDS = ['vote', 'support', 'access'] as const;
+// His four, in his order (Tekst (endelig), «Hvorfor bli medlem?»).
+const POINTS = ['free', 'vote', 'support', 'access'] as const;
 
 const UTMELDING_TOOL = 'https://utmelding.rabita.no';
 // Brønnøysund's «Min side», where a person sees which faith community they
@@ -138,42 +138,41 @@ export default async function JoinPage({
             {t('headline')}
           </h2>
 
-          <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:mt-10 lg:grid-cols-4 lg:gap-4">
-            {CARDS.map((k) => (
-              <li
-                key={k}
-                className="flex items-start gap-4 rounded-[1.25rem] border border-gold-deep/35 bg-paper px-5 py-6 shadow-[0_1px_0_rgba(155,127,74,0.06)] lg:flex-col lg:gap-5 lg:px-6 lg:py-7"
-              >
-                <span aria-hidden className="mt-[0.55rem] block h-2 w-2 shrink-0 rotate-45 bg-gold-deep lg:mt-0" />
+          {/* POINTS, NOT CARDS (user, 2026-10-10: "at start where small
+             points, I don't think cards needed there — it shows too much
+             usage of cards"). The service pages' "Hva vi tilbyr" register:
+             the rotated gold square, a serif title, one line — no box. His
+             four, in his order (Tekst (endelig), «Hvorfor bli medlem?»).
+             Hairlines between them on a phone so four short items still
+             read as a list; four across from lg. */}
+          <ul className="mt-7 divide-y divide-rule border-y border-rule sm:grid sm:grid-cols-2 sm:gap-x-10 sm:divide-y-0 sm:border-0 lg:mt-10 lg:grid-cols-4 lg:gap-x-8">
+            {POINTS.map((k) => (
+              <li key={k} className="flex items-start gap-3.5 py-5 sm:py-4">
+                <span aria-hidden className="mt-[0.6rem] block h-1.5 w-1.5 shrink-0 rotate-45 bg-gold-deep" />
                 <span className="block min-w-0">
                   <span className="block font-serif text-[1.2rem] leading-snug text-ink">{t(`points.${k}.title`)}</span>
-                  <span className="mt-1.5 block text-[15px] leading-relaxed text-ink-60">{t(`v2.cards.${k}`)}</span>
+                  <span className="mt-1 block text-[15px] leading-relaxed text-ink-60">{t(`v2.cards.${k}`)}</span>
                 </span>
               </li>
             ))}
-
-            {/* The free card: the figure carries it. "0 kr" in the gold of
-               the gift ladder's amounts, then the sentence, then the one
-               place on the page that asks for more than a membership. */}
-            <li className="flex flex-col rounded-[1.25rem] bg-paper-deep px-5 py-6 ring-1 ring-inset ring-gold-deep/20 lg:px-6 lg:py-7">
-              {/* dir="ltr": an amount reads "0 kr" in every locale — in Arabic the
-                 bidi algorithm otherwise flips it to "kr 0". self-start keeps
-                 it on the reading side. */}
-              <span dir="ltr" className="self-start font-serif text-[2.6rem] leading-none tabular-nums text-gold-deep">{t('v2.free.figure')}</span>
-              <span className="mt-3 block font-serif text-[1.2rem] leading-snug text-ink">{t('v2.free.title')}</span>
-              <span className="mt-1.5 block text-[15px] leading-relaxed text-ink-60">{t('v2.free.body')}</span>
-              <span className="mt-4 block border-t border-gold-deep/20 pt-4 text-[14px] leading-snug text-ink">
-                {t('v2.free.give')}{' '}
-                <Link
-                  href={`/${locale}/gi-en-gave`}
-                  className="group inline-flex items-center gap-1.5 whitespace-nowrap font-semibold text-gold-deep underline decoration-gold-deep/40 underline-offset-4 hover:text-ink"
-                >
-                  {th('give.cta')}
-                  <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5 rtl:rotate-180">&rarr;</span>
-                </Link>
-              </span>
-            </li>
           </ul>
+
+          {/* The page's one ask beyond membership — the client's own
+             signpost list (2026-09-18: «1. Utmelding, 2. Dobbelt medlemskap,
+             3. Donasjon»). One line, not a block. */}
+          <p className="mt-6 flex items-start gap-3 text-[15px] leading-snug text-ink">
+            <span aria-hidden className="mt-[0.6rem] block h-px w-6 shrink-0 bg-gold-deep/60" />
+            <span>
+              {t('v2.free.give')}{' '}
+              <Link
+                href={`/${locale}/gi-en-gave`}
+                className="group inline-flex items-center gap-1.5 whitespace-nowrap font-semibold text-gold-deep underline decoration-gold-deep/40 underline-offset-4 hover:text-ink"
+              >
+                {th('give.cta')}
+                <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5 rtl:rotate-180">&rarr;</span>
+              </Link>
+            </span>
+          </p>
         </SectionBody>
       </Section>
 
