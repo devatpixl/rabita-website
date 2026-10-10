@@ -50,10 +50,16 @@ import { FigureIcon, type FigureIconName } from '@/components/figure-icons';
 // it — his four replace the set, they do not extend it.
 // His four, in his order (Tekst (endelig), «Hvorfor bli medlem?»).
 const POINTS = ['free', 'vote', 'support', 'access'] as const;
-// Phones: «Din stemme teller» removed (user, 2026-10-10: "remove your vote
-// counts from the bli medlem points in 1st section"). Laptop keeps POINTS —
-// that page stays as it was unless asked.
-const PHONE_POINTS = ['free', 'support', 'access'] as const;
+// Phones: four points on what a member actually gets (user, 2026-10-10,
+// pointing at islamic.no's Community / Instruction / Activities / Support:
+// "use the best points from here, only text and heading, style as ours").
+// The four TOPICS are taken; the sentences are not — each one is written from
+// Rabita's own services and the client's own phrases («inkluderende
+// fellesskap på tvers av generasjoner og bakgrunner», «samtaler med imam
+// eller kvinnelig rådgiver»), so every claim is true of Rabita and none is
+// another mosque's copy. "Support" becomes Veiledning — Rabita's equivalent
+// is the counselling service. Laptop keeps POINTS unless asked.
+const PHONE_POINTS = ['community', 'teaching', 'activities', 'guidance'] as const;
 // Laptop layout (the pre-redesign page) only.
 const POINT_ICONS: FigureIconName[] = ['check', 'people', 'building'];
 
@@ -237,8 +243,8 @@ export default async function JoinPage({
               <li key={k} className="flex items-start gap-3.5 py-5 sm:py-4">
                 <span aria-hidden className="mt-[0.6rem] block h-1.5 w-1.5 shrink-0 rotate-45 bg-gold-deep" />
                 <span className="block min-w-0">
-                  <span className="block font-serif text-[1.2rem] leading-snug text-ink">{t(`points.${k}.title`)}</span>
-                  <span className="mt-1 block text-[15px] leading-relaxed text-ink-60">{t(`v2.cards.${k}`)}</span>
+                  <span className="block font-serif text-[1.2rem] leading-snug text-ink">{t(`v2.why.${k}.title`)}</span>
+                  <span className="mt-1 block text-[15px] leading-relaxed text-ink-60">{t(`v2.why.${k}.body`)}</span>
                 </span>
               </li>
             ))}

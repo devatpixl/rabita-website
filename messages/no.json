@@ -2931,7 +2931,25 @@
         "body": "Vi hjelper gjerne med alt som gjelder medlemskapet.",
         "cta": "Kontakt oss"
       },
-      "heroLine": "Som medlem er du med på å forme fremtiden til Rabita og blir en del av et aktivt fellesskap."
+      "heroLine": "Som medlem er du med på å forme fremtiden til Rabita og blir en del av et aktivt fellesskap.",
+      "why": {
+        "community": {
+          "title": "Fellesskap",
+          "body": "Bli en del av et varmt og inkluderende fellesskap, på tvers av generasjoner og bakgrunner."
+        },
+        "teaching": {
+          "title": "Undervisning",
+          "body": "Koranskole, arabisk og kurs i islam for barn, unge og voksne."
+        },
+        "activities": {
+          "title": "Aktiviteter",
+          "body": "Familieaktiviteter, ungdomsarbeid i NUM og feiring av høytidene gjennom året."
+        },
+        "guidance": {
+          "title": "Veiledning",
+          "body": "Samtaler og veiledning med imam eller kvinnelig rådgiver."
+        }
+      }
     },
     "formBodyLaptop": "Det tar bare ett minutt å registrere seg. Fyll ut skjemaet nedenfor og bli en del av fellesskapet."
   },
