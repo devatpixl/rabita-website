@@ -7,6 +7,7 @@ import { GivingCard } from './giving-card';
 import { HeroCampaign } from './hero-campaign';
 import { HeroSentinel } from './campaign-strip';
 import { Accent } from './accent';
+import { cn } from '@/lib/cn';
 
 // §4.01. Full-bleed dark plane. The photograph is a Rabita-owned image
 // of four FRIVILLIG volunteers at a street iftar under the bridge in
@@ -262,7 +263,19 @@ export async function Hero() {
               // five short ones and overran the section's height cap. Pretty
               // only guards the last line, so the measure still fills but
               // "adresse." is not left orphaned on its own.
-              className="display-opsz font-serif text-paper text-pretty"
+              // ── PHONES: THE BIG STACK (user, 2026-10-10: "keep the words, but
+              // make heading style interesting" → chose "big stack" of three
+              // previews). The words are the client's own, twice over
+              // (Tekst (endelig) «NY TEKST», and Mobilversjon 2026-10-06
+              // «Forslag: Åpenhet, kunnskap og fellesskap»), so only the type
+              // changes: 34px → 2.85rem, one phrase per line —
+              // «Åpenhet, / kunnskap og / fellesskap». The hero is
+              // bottom-anchored, so it grows UP into the photograph and the
+              // credit line, «Les mer her» and the raised figure do not move;
+              // checked at 390 and 360. Size, leading and tracking moved from
+              // the inline style into classes so they can be partitioned at
+              // md — laptop values are unchanged.
+              className="display-opsz font-serif text-paper text-pretty max-md:text-[2.85rem] max-md:leading-[1] max-md:tracking-[-0.025em] md:text-[clamp(2.125rem,min(6.2vw,9.2vh),6.5rem)] md:leading-[0.99] md:tracking-[-0.03em]"
               style={{
                 // 128px at 1920, up from 96. innocents.no runs
                 // clamp(52px, 9.4vw, 140px) and lands at 140, which is most
@@ -278,9 +291,8 @@ export async function Hero() {
                 // The vh term stays so a short laptop does not get a headline
                 // sized for a 27 inch monitor: at 1280x800 this resolves to
                 // 88px, not 128.
-                fontSize: 'clamp(2.125rem, min(6.2vw, 9.2vh), 6.5rem)',
-                lineHeight: 0.99,
-                letterSpacing: '-0.03em',
+                // Size, leading and tracking now live in the className above
+                // (md: arms carry these exact values).
                 // No max width: the grid column is the measure. A tighter
                 // cap would stop two short phrases ever sharing a line, which
                 // is what keeps this to four lines instead of five.
@@ -289,7 +301,10 @@ export async function Hero() {
             >
               {phrases(t('headlineBefore')).map((phrase, i) => (
                 <Fragment key={i}>
-                  <span className={phrase.length <= NOWRAP_MAX ? 'whitespace-nowrap' : undefined}>
+                  {/* One phrase per line on phones — not in Arabic, where the
+                     headline is a single phrase and its «و» is bound to the
+                     accent word that follows; forcing a break would split them. */}
+                  <span className={cn(phrase.length <= NOWRAP_MAX && 'whitespace-nowrap', !isRtl && 'max-md:block')}>
                     {phrase}
                   </span>{' '}
                 </Fragment>
@@ -306,7 +321,7 @@ export async function Hero() {
                   {t('headlineAccent')}
                 </em>
               ) : (
-                <span className="whitespace-nowrap">
+                <span className="whitespace-nowrap max-md:block">
                   <Accent surface="dusk">{t('headlineAccent')}</Accent>
                 </span>
               )}
