@@ -5,8 +5,6 @@ import { Accent } from '@/components/accent';
 import { PageHeading } from '@/components/page-heading';
 import { ServiceGrid } from '@/components/service-grid';
 import { ServicePicker } from '@/components/service-picker';
-import { Section, SectionBody } from '@/components/primitives';
-import Link from 'next/link';
 import { SERVICE_PAGES } from '@/lib/services';
 
 export default async function ServicesIndex({
@@ -66,33 +64,11 @@ export default async function ServicesIndex({
         picker={<ServicePicker items={SERVICE_PAGES.tjenester} />}
       />
 
-      {/* Medlemskap (client, ticket "Nettside medlemskap", 2026-09-18:
-         "tjenester en egen fane for medlemskap"). It is in the Tjenester
-         menu beside the eleven above, and this strip is its place on the
-         index. It points at /bli-medlem since 2026-10-06, when the two
-         membership pages became one — see the redirect note in
-         next.config.ts. Not a tile in the grid: the grid is photographs of things
-         the mosque does for you, and membership is a signpost to three
-         pages, so a full-width strip under the grid says what it is
-         without pretending to be a twelfth service. */}
-      <Section pad="tight" className="!pt-0">
-        <SectionBody>
-          <Link
-            href={`/${locale}/bli-medlem`}
-            className="group grid gap-5 rounded-2xl bg-paper-2 p-7 ring-1 ring-ink/[0.06] transition-colors hover:bg-paper-deep sm:grid-cols-12 sm:items-center sm:p-8"
-          >
-            <div className="sm:col-span-9">
-              <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">{t('membershipStrip.eyebrow')}</p>
-              <p className="mt-2 font-serif text-[clamp(1.3rem,2.2vw,1.7rem)] leading-tight text-ink">{t('membershipStrip.heading')}</p>
-              <p className="mt-2 text-[15px] text-ink-60">{t('membershipStrip.body')}</p>
-            </div>
-            <p className="inline-flex items-center gap-2 text-[14px] font-semibold text-ink sm:col-span-3 sm:justify-self-end">
-              {t('membershipStrip.cta')}
-              <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">&rarr;</span>
-            </p>
-          </Link>
-        </SectionBody>
-      </Section>
+      {/* The «Medlemskap» strip that stood here is removed (user,
+         2026-10-10: "remove the membership from services"). The client's
+         revised Mobilversjon text dropped his 6 Oct line «Legge medlemskap
+         inn på tjenestesiden». Membership is reached from the header's
+         «Bli medlem». membershipStrip.* stays in the locale files. */}
 
       {/* The "Coming in person" band (ServiceVisit) was removed on 2026-08-31:
          it repeated verbatim on this page, the services index and all eleven
