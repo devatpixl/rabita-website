@@ -126,6 +126,9 @@ export default async function JoinPage({
         tone="warm"
         objectClass="object-[50%_30%]"
         padBottom="none"
+        // Phones: the plate hands over on the site's curve, into the paper
+        // directly beneath it (sampled #FAF8F4 under the plate at 390).
+        footCurve="#FAF8F4"
       >
         <p className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-60">
           {ts('pages.membership.caption')}

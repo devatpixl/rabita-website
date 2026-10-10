@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { SectionBody } from './primitives';
 import { ArchMark, ElevationMark, OrbitMark, RosetteMark } from './marks';
 import { BandFeature } from './band-feature';
+import { PlateFoot } from './plate-foot';
 import { cn } from '@/lib/cn';
 
 // The band the prayer page opens on, made reusable and given a phone design.
@@ -305,6 +306,8 @@ export function PageBand({
                   // sets all four sides itself.
                   'relative flex flex-col justify-end p-6 md:max-w-[38rem] md:justify-center md:py-9 md:ps-10 md:pe-8 lg:ps-12',
                   heightClass ?? 'min-h-[19rem] md:min-h-[15rem]',
+                  // Room for the curve below, so it never runs under the lede.
+                  footCurve && 'max-md:pb-16',
                 )}
               >
                 {Mark && (
@@ -322,6 +325,20 @@ export function PageBand({
                   titleClass={titleClass}
                 />
               </div>
+              {/* ── THE CURVE ON THE OVER PLATE, PHONES ONLY (user,
+                 2026-10-10, on /bli-medlem: "make this image wavy from bottom
+                 like other images"). Same PlateFoot as the feature bands;
+                 `footCurve` is the fill of what comes NEXT. Phones only
+                 because only there is this plate full-bleed — from md it is a
+                 rounded card inside the page, and a wave under a rounded card
+                 is two edges doing one job. Opt-in: the six other "over"
+                 call sites pass nothing and are unchanged. */}
+              {footCurve && (
+                <PlateFoot
+                  fill={footCurve}
+                  className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] block h-12 w-full md:hidden"
+                />
+              )}
             </>
           ) : (
             // ── split ────────────────────────────────────────────────────
