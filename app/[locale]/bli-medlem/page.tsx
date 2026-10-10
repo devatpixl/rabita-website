@@ -253,6 +253,14 @@ export default async function JoinPage({
          client's own ticket, 2026-09-18, «dobbelt medlemskap»). */}
       <Section id="meld-inn" tone="paper-2" className="relative isolate overflow-hidden">
         <div aria-hidden className="star-texture star-texture--light pointer-events-none absolute inset-0 -z-10" />
+        {/* NO HARD EDGE (user, 2026-10-10: "this colour cutoff is not smooth,
+           blend it as gradient perfectly so it doesn't look like a cut off").
+           The sections above and below are paper (#FAF8F4); this one is
+           paper-2 (#F2EEE7). Each end now fades from paper into this
+           section's ground over 8rem, so the tone arrives and leaves instead
+           of starting at a line. Above the texture, below the content. */}
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-paper to-transparent" />
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-paper to-transparent" />
         <SectionBody>
           <div className="grid items-start gap-5 lg:grid-cols-12 lg:gap-8">
             {/* Form FIRST, the dual-membership card under it (user,
