@@ -121,7 +121,7 @@ export default async function LocaleLayout({
                    second time on 2026-10-05 ("vi er ikke på denne adressen
                    nå"). Changing this back without him asking would break the
                    September instruction again. */
-                place="visit"
+                place="visit-styled"
                 className="mx-auto max-w-[36rem] xl:max-w-none"
               />
             }

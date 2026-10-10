@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { cn } from '@/lib/cn';
-import { DIRECTIONS_URL, LANDMARKS, ROUTES, VISIT_EMBED_QUERY } from '@/lib/location';
+import { DIRECTIONS_URL, LANDMARKS, ROUTES, VISIT, VISIT_EMBED_QUERY } from '@/lib/location';
 import { MyMapsFrame } from './my-maps-frame';
 
 // The apartments map, as a real Google map (client, 2026-09-15: "Real google
@@ -42,6 +42,20 @@ import { MyMapsFrame } from './my-maps-frame';
 // off the critical path — it sits well below the fold.
 
 const MAP_MID = '1IE-Lk2r5dkb-hqk8RV0oV8So1UIsPKg';
+
+/** THE FOOTER'S OWN MY MAP (user, 2026-10-10: the footer map in the same
+ *  design as the Leiligheter map, with the footer's location and pin as they
+ *  are). One placemark, Sørligata 8a — the address the client requires in
+ *  every footer — and nothing else. A SEPARATE map on purpose: MAP_MID above
+ *  is the live Leiligheter map, which the client said must not change, and
+ *  any edit to a My Map goes live with no deploy. */
+const VISIT_MAP_MID = '1mMioQY6DD_zeSaSuG0FciUU3Sw2fkUw';
+// ~80 m NORTH of the door. The title-bar crop pulls the iframe up 67px, so
+// the iframe's centre sits ~33px above the frame's; centring on the door put
+// the pin above the middle. Moving the view north brings the pin down onto
+// the frame's centre (z15 ≈ 2.4 m/px here).
+const VISIT_CENTRE = `${(VISIT.lat + 0.0007).toFixed(6)},${VISIT.lon}`;
+const VISIT_ZOOM = 15;
 
 /** Height of the My Maps title bar, which is cropped away. Measured on the
  *  rendered embed (getBoundingClientRect on the bar, 2026-09-28): 67px, not
@@ -114,7 +128,7 @@ export async function FindUsGoogle({
 }: {
   locale: string;
   variant?: 'full' | 'map';
-  place?: 'visit' | 'project';
+  place?: 'visit' | 'visit-styled' | 'project';
   className?: string;
 }) {
   const t = await getTranslations({ locale, namespace: 'footer.findUs' });
@@ -202,6 +216,17 @@ export async function FindUsGoogle({
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               style={{ height: '100%' }}
+              className="block w-full border-0"
+            />
+          ) : place === 'visit-styled' ? (
+            // Sørligata on the footer's own My Map, so it carries the same
+            // base style as the Leiligheter map. Same title-bar crop as below.
+            // One opening view: there is a single pin, centred at any width.
+            <MyMapsFrame
+              src={`https://www.google.com/maps/d/embed?mid=${VISIT_MAP_MID}&ehbc=2E312F&ll=${VISIT_CENTRE}&z=${VISIT_ZOOM}`}
+              phoneSrc={`https://www.google.com/maps/d/embed?mid=${VISIT_MAP_MID}&ehbc=2E312F&ll=${VISIT_CENTRE}&z=${VISIT_ZOOM}`}
+              title={t('mapTitle')}
+              style={{ marginTop: `-${HEADER_PX}px`, height: `calc(100% + ${HEADER_PX}px)` }}
               className="block w-full border-0"
             />
           ) : (
