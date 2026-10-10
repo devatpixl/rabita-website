@@ -1690,7 +1690,8 @@
       "submitFree": "Join",
       "submitPay": "Join and pay 1 000 kr",
       "note": "You do not need a national ID number to become a member.",
-      "under15": "I am registering a child under 15"
+      "under15": "I am registering a child under 15",
+      "noteLaptop": "National identity number is not required for membership. Privacy applies."
     },
     "done": {
       "title": "You are registered.",
@@ -2938,7 +2939,8 @@
         "body": "We are happy to help with anything about your membership.",
         "cta": "Contact us"
       }
-    }
+    },
+    "formBodyLaptop": "Registering takes a minute. Fill in the form below and become part of the community."
   },
   "utmeldingPage": {
     "eyebrow": "Membership",

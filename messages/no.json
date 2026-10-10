@@ -1694,7 +1694,8 @@
       "submitFree": "Meld meg inn",
       "submitPay": "Meld inn og betal 1 000 kr",
       "note": "Du trenger ikke fødselsnummer for å bli medlem.",
-      "under15": "Jeg melder inn et barn under 15 år"
+      "under15": "Jeg melder inn et barn under 15 år",
+      "noteLaptop": "Fødselsnummer trengs ikke for å bli medlem. Personvern gjelder."
     },
     "done": {
       "title": "Vi har registrert deg.",
@@ -2934,7 +2935,8 @@
         "body": "Vi hjelper gjerne med alt som gjelder medlemskapet.",
         "cta": "Kontakt oss"
       }
-    }
+    },
+    "formBodyLaptop": "Det tar bare ett minutt å registrere seg. Fyll ut skjemaet nedenfor og bli en del av fellesskapet."
   },
   "utmeldingPage": {
     "eyebrow": "Medlemskap",

@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/cn';
 import Image from 'next/image';
 import { Field, VALUE } from './request-form';
+import { FigureIcon } from './figure-icons';
 
 // The signup card. Same shape as the giving card in the hero — a bordered
 // panel on the right of a dark split — because that pairing is the site's
@@ -105,14 +106,29 @@ export function MembershipSignup() {
           <h2 className="mt-3 font-serif text-[clamp(1.35rem,2.4vw,1.75rem)] leading-tight text-ink">
             {tj('formLede')}
           </h2>
-          <p className="mt-1.5 text-[15px] text-ink-60">{tj('formBody')}</p>
+          {/* Phone: the redesign's short line. md+: the original, unchanged
+             (user, 2026-10-10: "Revert laptop"). */}
+          <p className="mt-1.5 text-[15px] text-ink-60">
+            <span className="md:hidden">{tj('formBody')}</span>
+            <span className="hidden md:inline">{tj('formBodyLaptop')}</span>
+          </p>
 
-          {/* The ruled «gratis» line that stood here is gone (bli-medlem
-             redesign, 2026-10-10): the page now has a card of its own that
-             says it — «0 kr · Medlemskap er gratis.» — directly above. It
-             was the fourth "free" on one page. */}
+          {/* The ruled «gratis» line — md+ only. The phone redesign says it
+             in its first point (Gratis medlemskap), so there it would be the
+             second "free" in one screen; the laptop page is the original,
+             where this line has always stood (user, 2026-10-10: "Revert
+             laptop"). */}
+          <p className="mt-6 hidden items-start gap-3 border-y border-gold-deep/15 py-4 text-[14px] leading-snug text-ink md:flex">
+            <span
+              aria-hidden
+              className="mt-px grid h-6 w-6 shrink-0 place-items-center rounded-full bg-gold-deep/15 text-gold-deep"
+            >
+              <FigureIcon name="check" className="h-[14px] w-[14px]" />
+            </span>
+            {tj('freeNote')}
+          </p>
 
-          <h3 className="mt-7 font-serif text-[1.15rem] text-ink">{t('form.heading')}</h3>
+          <h3 className="mt-7 font-serif text-[1.15rem] text-ink md:mt-8">{t('form.heading')}</h3>
           {/* Two up from sm, which is the reference's grid and also the
              shape autofill expects: name beside email, phone beside the
              rest. */}
@@ -182,7 +198,10 @@ export function MembershipSignup() {
             </span>
           </button>
 
-          <p className="mt-3.5 text-[12px] leading-snug text-ink-60">{t('form.note')}</p>
+          <p className="mt-3.5 text-[12px] leading-snug text-ink-60">
+            <span className="md:hidden">{t('form.note')}</span>
+            <span className="hidden md:inline">{t('form.noteLaptop')}</span>
+          </p>
         </form>
 
         {/* The plate. Inside the panel, not beside it, so the panel stays one
