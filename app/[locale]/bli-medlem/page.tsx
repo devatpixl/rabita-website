@@ -299,8 +299,11 @@ export default async function JoinPage({
          donation moved up into the free card. */}
       <Section tone="paper" className="pt-10 pb-14 md:pt-14 md:pb-section-md">
         <SectionBody>
-          <div className="grid gap-3 md:grid-cols-2 md:gap-4">
-            <div className="flex flex-col rounded-[1.25rem] border border-gold-deep/35 bg-paper px-6 py-7 shadow-[0_1px_0_rgba(155,127,74,0.06)]">
+          {/* Plain text, no card (user, 2026-10-10: "don't keep this in card,
+             the leaving part"). The change of ground from the section above
+             is the separation; no rule needed. */}
+          <div>
+            <div className="flex flex-col">
               <p className="flex items-center gap-3 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-gold-deep">
                 <span aria-hidden className="block h-2 w-2 shrink-0 rotate-45 bg-gold-deep" />
                 {th('leave.eyebrow')}
@@ -316,29 +319,8 @@ export default async function JoinPage({
               </Link>
             </div>
 
-            <div className="flex flex-col rounded-[1.25rem] bg-paper-deep px-6 py-7 ring-1 ring-inset ring-gold-deep/20">
-              <p className="flex items-center gap-3 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-gold-deep">
-                <span aria-hidden className="block h-2 w-2 shrink-0 rotate-45 bg-gold-deep" />
-                {CAMPAIGN.membershipEmail}
-              </p>
-              <h3 className="mt-4 font-serif text-[1.35rem] leading-snug text-ink">{t('v2.questions.title')}</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-ink-60">{t('v2.questions.body')}</p>
-              <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
-                <Link
-                  href={`/${locale}/kontakt`}
-                  className="group inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-5 text-[14px] font-semibold text-paper transition-colors hover:bg-gold-deep"
-                >
-                  {t('v2.questions.cta')}
-                  <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5 rtl:rotate-180">&rarr;</span>
-                </Link>
-                <a
-                  href={`mailto:${CAMPAIGN.membershipEmail}`}
-                  className="text-[14px] font-medium text-ink underline decoration-ink/30 underline-offset-4 hover:text-gold-deep"
-                >
-                  {CAMPAIGN.membershipEmail}
-                </a>
-              </div>
-            </div>
+            {/* The «Har du spørsmål?» card that stood here is removed (user,
+               2026-10-10: "remove this"). */}
           </div>
         </SectionBody>
       </Section>
