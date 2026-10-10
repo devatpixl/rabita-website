@@ -150,6 +150,9 @@ export default async function JoinPage({
         // stands out and rest heading a little smaller maybe so well placed 3
         // things"). The label says what the page is FOR; the headline steps
         // down 2.55 → 2.2rem so label, headline and line read as three.
+        // The caption below is laptop-only; hide its wrapper too, or its
+        // 24px margin sits empty between the curve and the first section.
+        childrenClass="max-md:hidden"
         kickerPhone={t('formEyebrow')}
         kickerClass="max-md:text-[0.9375rem] max-md:font-medium max-md:tracking-[0.2em]"
         titleClass="max-md:mt-3 max-md:text-[2.2rem] max-md:leading-[1.04] max-md:tracking-[-0.02em] md:text-[clamp(1.65rem,3vw,2.3rem)]"
@@ -207,7 +210,7 @@ export default async function JoinPage({
          cards and the fourth — Gratis medlemskap — as the card that ends
          the row, set apart, because "what does it cost" is the one a reader
          checks first. Each card is a title and one line. */}
-      <Section tone="paper" className="pt-12 md:pt-section-md">
+      <Section tone="paper" className="pt-4">
         <SectionBody>
           <p className="flex items-center gap-3 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
             <span aria-hidden className="h-px w-6 shrink-0 bg-gold-deep/50" />

@@ -111,6 +111,9 @@ export type PageBandProps = {
   /** A different kicker below md, and extra kicker classes ("over" only). */
   kickerPhone?: string;
   kickerClass?: string;
+  /** Classes for the wrapper around `children` — e.g. max-md:hidden when the
+   *  children are laptop-only, so their 24px margin does not stay behind. */
+  childrenClass?: string;
   /** Overrides the plate's min-height. The services index uses it to stand
    *  taller than the eleven pages it is the parent of. */
   heightClass?: string;
@@ -207,6 +210,7 @@ export function PageBand({
   ledeClass,
   kickerPhone,
   kickerClass,
+  childrenClass,
   heightClass,
   imagePhone,
   objectClassPhone,
@@ -431,7 +435,7 @@ export function PageBand({
           )}
         </div>
 
-        {children && <div className="mt-6 md:mt-8">{children}</div>}
+        {children && <div className={cn('mt-6 md:mt-8', childrenClass)}>{children}</div>}
       </SectionBody>
     </section>
   );
