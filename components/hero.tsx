@@ -371,8 +371,18 @@ export async function Hero() {
                `hero.subheadShort` stays in the message files unreferenced,
                which is this repo's convention for copy the client wrote and
                may want back. */}
+            {/* ── SMALL LAPTOPS GET THE SHORTER PARAGRAPH (user, 2026-10-10,
+               on a 13" MacBook: "too much paragraph text … reduce by
+               removing or summarising 2-3 lines, so most info still there").
+               hero.subheadLaptop keeps all three of the client's ideas — open
+               to everyone, what is offered, the bridge to wider society — and
+               drops «feiring av høytider og mye mer» and the «inkluderende
+               fellesskap på tvers av generasjoner» clause: 52 → 33 words.
+               Large screens (2xl, 1536px+) keep his full text — the user:
+               "in desktops ok". */}
             <p className="mt-4 hidden max-w-[52ch] text-body text-paper/70 md:block">
-              {t('subhead')}
+              <span className="2xl:hidden">{t('subheadLaptop')}</span>
+              <span className="hidden 2xl:inline">{t('subhead')}</span>
             </p>
 
             {/* ── THE PROJECT, IN ONE SENTENCE — PHONES ONLY ───────────────
