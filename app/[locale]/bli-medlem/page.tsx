@@ -153,6 +153,11 @@ export default async function JoinPage({
         // The caption below is laptop-only; hide its wrapper too, or its
         // 24px margin sits empty between the curve and the first section.
         childrenClass="max-md:hidden"
+        // Taller on phones (user, 2026-10-10, chose preview A of three: 304
+        // → 416px). story-members.webp is a 2.33:1 panorama, so the band
+        // already showed its full height; a taller band zooms in on the
+        // faces rather than revealing more picture. md keeps 15rem.
+        heightClass="min-h-[26rem] md:min-h-[15rem]"
         kickerPhone={t('formEyebrow')}
         kickerClass="max-md:text-[0.9375rem] max-md:font-medium max-md:tracking-[0.2em]"
         titleClass="max-md:mt-3 max-md:text-[2.2rem] max-md:leading-[1.04] max-md:tracking-[-0.02em] md:text-[clamp(1.65rem,3vw,2.3rem)]"
