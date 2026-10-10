@@ -1686,8 +1686,7 @@
       "submitFree": "Join",
       "submitPay": "Join and pay 1 000 kr",
       "note": "You do not need a national ID number to become a member.",
-      "under15": "I am registering a child under 15",
-      "noteLaptop": "National identity number is not required for membership. Privacy applies."
+      "under15": "I am registering a child under 15"
     },
     "done": {
       "title": "You are registered.",
@@ -2953,9 +2952,11 @@
           "title": "Guidance",
           "body": "Conversations and guidance with an imam or a female counsellor."
         }
+      },
+      "give": {
+        "body": "Membership is free. The mosque project is funded on top of that by gifts – large and small, once or every month."
       }
-    },
-    "formBodyLaptop": "Registering takes a minute. Fill in the form below and become part of the community."
+    }
   },
   "utmeldingPage": {
     "eyebrow": "Membership",

@@ -49,7 +49,6 @@ import { FigureIcon, type FigureIconName } from '@/components/figure-icons';
 // points are not on his list and were dropped from the message files with
 // it — his four replace the set, they do not extend it.
 // His four, in his order (Tekst (endelig), «Hvorfor bli medlem?»).
-const POINTS = ['free', 'vote', 'support', 'access'] as const;
 // Phones: four points on what a member actually gets (user, 2026-10-10,
 // pointing at islamic.no's Community / Instruction / Activities / Support:
 // "use the best points from here, only text and heading, style as ours").
@@ -58,10 +57,16 @@ const POINTS = ['free', 'vote', 'support', 'access'] as const;
 // fellesskap på tvers av generasjoner og bakgrunner», «samtaler med imam
 // eller kvinnelig rådgiver»), so every claim is true of Rabita and none is
 // another mosque's copy. "Support" becomes Veiledning — Rabita's equivalent
-// is the counselling service. Laptop keeps POINTS unless asked.
-const PHONE_POINTS = ['community', 'teaching', 'activities', 'guidance'] as const;
+// is the counselling service. Laptop uses the same four since 2026-10-10
+// ("yes do it" — same text on laptop, laptop design kept), with icons.
+const WHY_POINTS = ['community', 'teaching', 'activities', 'guidance'] as const;
 // Laptop layout (the pre-redesign page) only.
-const POINT_ICONS: FigureIconName[] = ['check', 'people', 'building'];
+const WHY_ICONS: Record<(typeof WHY_POINTS)[number], FigureIconName> = {
+  community: 'people',
+  teaching: 'check',
+  activities: 'calendar',
+  guidance: 'person',
+};
 
 const UTMELDING_TOOL = 'https://utmelding.rabita.no';
 // Brønnøysund's «Min side», where a person sees which faith community they
@@ -87,7 +92,6 @@ export default async function JoinPage({
   // ── LAPTOP ONLY from here: the pre-redesign page's three signposts. ──
   // The three signposts, in his own order from the 2026-09-18 ticket:
   // "1. Utmelding, 2. Dobbelt medlemskap, 3. Donasjon."
-  const BRREG = 'https://www.brreg.no/';
   const ROWS: {
     key: 'leave' | 'dual' | 'give';
     heading: string;
@@ -97,7 +101,7 @@ export default async function JoinPage({
     {
       key: 'leave',
       heading: th('leave.heading'),
-      body: th('leave.body'),
+      body: t('v2.leave.body'),
       links: [{ label: th('leave.cta'), href: `/${locale}/utmelding` }],
     },
     {
@@ -105,16 +109,16 @@ export default async function JoinPage({
       heading: th('dual.heading'),
       // p1 only. p2/p3/p4 are 81 words on how the grant is split; /utmelding
       // carries that in full and the first link below goes there.
-      body: th('dual.p1'),
+      body: t('v2.elsewhere.body'),
       links: [
         { label: th('dual.toolCta'), href: UTMELDING_TOOL, external: true },
-        { label: th('dual.checkCta'), href: BRREG, external: true },
+        { label: th('dual.checkCta'), href: BRREG_MINSIDE, external: true },
       ],
     },
     {
       key: 'give',
       heading: th('give.heading'),
-      body: th('give.body'),
+      body: t('v2.give.body'),
       links: [{ label: th('give.cta'), href: `/${locale}/gi-en-gave` }],
     },
   ];
@@ -136,11 +140,11 @@ export default async function JoinPage({
          line that was already written for exactly this job. The full lede
          moves down beside the card. No new copy. */}
       <PageBand
-        kicker={ts('pages.membership.eyebrow')}
+        kicker={t('formEyebrow')}
         title={tm.rich('headline', {
           em: (chunks) => <Accent surface="dusk">{chunks}</Accent>,
         })}
-        lede={t('ledeShort')}
+        lede={t('v2.heroLine')}
         // ── PHONES: A BIGGER HEADLINE AND ONE LINE (user, 2026-10-10:
         // "make the heading better, remove sub text of you get a vote, and
         // make heading and the one line text bigger and better and eye
@@ -150,7 +154,6 @@ export default async function JoinPage({
         // own hero copy, «Det er gratis å bli medlem, og det tar bare ett
         // minutt.» — replacing ledeShort, which led with the vote. md: arms
         // restate the band's defaults, so laptops are unchanged.
-        ledePhone={t('v2.heroLine')}
         // «BLI MEDLEM» over «MEDLEMSKAP» on phones, and larger (user,
         // 2026-10-10: "bli-medlem better? and also make it larger, so it also
         // stands out and rest heading a little smaller maybe so well placed 3
@@ -164,7 +167,6 @@ export default async function JoinPage({
         // already showed its full height; a taller band zooms in on the
         // faces rather than revealing more picture. md keeps 15rem.
         heightClass="min-h-[26rem] md:min-h-[15rem]"
-        kickerPhone={t('formEyebrow')}
         kickerClass="max-md:text-[0.9375rem] max-md:font-medium max-md:tracking-[0.2em]"
         titleClass="max-md:mt-3 max-md:text-[2.2rem] max-md:leading-[1.04] max-md:tracking-[-0.02em] md:text-[clamp(1.65rem,3vw,2.3rem)]"
         ledeClass="max-md:mt-4 max-md:text-[1.0625rem] max-md:font-medium max-md:text-paper/90"
@@ -239,7 +241,7 @@ export default async function JoinPage({
              Hairlines between them on a phone so four short items still
              read as a list; four across from lg. */}
           <ul className="mt-7 divide-y divide-rule border-y border-rule sm:grid sm:grid-cols-2 sm:gap-x-10 sm:divide-y-0 sm:border-0 lg:mt-10 lg:grid-cols-4 lg:gap-x-8">
-            {PHONE_POINTS.map((k) => (
+            {WHY_POINTS.map((k) => (
               <li key={k} className="flex items-start gap-3.5 py-5 sm:py-4">
                 <span aria-hidden className="mt-[0.6rem] block h-1.5 w-1.5 shrink-0 rotate-45 bg-gold-deep" />
                 <span className="block min-w-0">
@@ -436,7 +438,7 @@ export default async function JoinPage({
             <div className="order-2 lg:order-1 lg:col-span-4 lg:self-center">
               <p className="flex items-center gap-3 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
                 <span aria-hidden className="h-px w-6 shrink-0 bg-gold-deep/50" />
-                {ts('pages.membership.eyebrow')}
+                {t('v2.whyEyebrow')}
               </p>
               {/* One sentence, and nothing under it (client, 2026-09-13:
                  "reduce some text, not so overly written" — on a phone this
@@ -455,45 +457,31 @@ export default async function JoinPage({
               </h2>
 
               <ul className="mt-9 grid gap-x-8 gap-y-7 sm:grid-cols-3 lg:grid-cols-1">
-                {POINTS.map((k, i) => (
+                {WHY_POINTS.map((k) => (
                   <li key={k} className="flex items-start gap-4">
                     <span
                       aria-hidden
                       className="mt-0.5 grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gold-deep/[0.09] text-gold-deep ring-1 ring-gold-deep/15"
                     >
-                      <FigureIcon name={POINT_ICONS[i] ?? 'check'} className="h-5 w-5" />
+                      <FigureIcon name={WHY_ICONS[k]} className="h-5 w-5" />
                     </span>
                     <span className="block min-w-0">
                       <span className="block font-mono text-[0.625rem] uppercase tracking-[0.18em] text-ink-60">
-                        {t(`points.${k}.title`)}
+                        {t(`v2.why.${k}.title`)}
                       </span>
-                      {/* The body is md-and-up (client, Mobilversjon
-                         2026-10-06: "det er veldig mye tekst, spesielt på
-                         mobilversjonen"). The four titles — Gratis
-                         medlemskap, Din stemme teller, Du bidrar til
-                         fellesskapet, Tilgang til aktiviteter og tjenester —
-                         are each a complete reason on their own, and 62
-                         words of qualification under them is the single
-                         largest block of prose between a reader and the
-                         form. Nothing is deleted: it returns at md, where
-                         there is a column for it. */}
+                      {/* The body is md-and-up; this tree only renders from
+                         md. Same four points as the phone (WHY_POINTS). */}
                       <span className="mt-1.5 hidden text-[15px] leading-snug text-ink md:block">
-                        {t(`points.${k}.body`)}
+                        {t(`v2.why.${k}.body`)}
                       </span>
                     </span>
                   </li>
                 ))}
               </ul>
 
-              <p className="mt-10 flex items-center gap-4 text-[13px] text-ink-60">
-                <span aria-hidden className="h-px w-10 shrink-0 bg-gold-deep/40" />
-                {t('members', {
-                  // members + 1: "become member number X" is the NEXT number,
-                  // not the current count. Derived so it cannot drift from
-                  // the 4 344 the carousel and the Om oss figures print.
-                  count: (CAMPAIGN.members + 1).toLocaleString(locale === 'ar' ? 'ar-EG' : locale === 'en' ? 'en-GB' : 'nb-NO'),
-                })}
-              </p>
+              {/* «Bli medlem nummer 4 345» removed (2026-10-10): the repo
+                 carries three different member totals (4 344, 4 200, «over
+                 4 300»), so the line cannot be trusted. */}
             </div>
 
             <div className="order-1 lg:order-2 lg:col-span-8 lg:self-center">

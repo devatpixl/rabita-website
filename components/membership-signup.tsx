@@ -106,12 +106,7 @@ export function MembershipSignup() {
           <h2 className="mt-3 font-serif text-[clamp(1.35rem,2.4vw,1.75rem)] leading-tight text-ink">
             {tj('formLede')}
           </h2>
-          {/* Phone: the redesign's short line. md+: the original, unchanged
-             (user, 2026-10-10: "Revert laptop"). */}
-          <p className="mt-1.5 text-[15px] text-ink-60">
-            <span className="md:hidden">{tj('formBody')}</span>
-            <span className="hidden md:inline">{tj('formBodyLaptop')}</span>
-          </p>
+          <p className="mt-1.5 text-[15px] text-ink-60">{tj('formBody')}</p>
 
           {/* The ruled «gratis» line — md+ only. The phone redesign says it
              in its first point (Gratis medlemskap), so there it would be the
@@ -198,10 +193,7 @@ export function MembershipSignup() {
             </span>
           </button>
 
-          <p className="mt-3.5 text-[12px] leading-snug text-ink-60">
-            <span className="md:hidden">{t('form.note')}</span>
-            <span className="hidden md:inline">{t('form.noteLaptop')}</span>
-          </p>
+          <p className="mt-3.5 text-[12px] leading-snug text-ink-60">{t('form.note')}</p>
         </form>
 
         {/* The plate. Inside the panel, not beside it, so the panel stays one

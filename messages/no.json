@@ -1690,8 +1690,7 @@
       "submitFree": "Meld meg inn",
       "submitPay": "Meld inn og betal 1 000 kr",
       "note": "Du trenger ikke fødselsnummer for å bli medlem.",
-      "under15": "Jeg melder inn et barn under 15 år",
-      "noteLaptop": "Fødselsnummer trengs ikke for å bli medlem. Personvern gjelder."
+      "under15": "Jeg melder inn et barn under 15 år"
     },
     "done": {
       "title": "Vi har registrert deg.",
@@ -2949,9 +2948,11 @@
           "title": "Veiledning",
           "body": "Samtaler og veiledning med imam eller kvinnelig rådgiver."
         }
+      },
+      "give": {
+        "body": "Medlemskapet er gratis. Moskeprosjektet finansieres i tillegg av gaver – store og små, én gang eller hver måned."
       }
-    },
-    "formBodyLaptop": "Det tar bare ett minutt å registrere seg. Fyll ut skjemaet nedenfor og bli en del av fellesskapet."
+    }
   },
   "utmeldingPage": {
     "eyebrow": "Medlemskap",
