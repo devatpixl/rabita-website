@@ -5,7 +5,8 @@ import { CAMPAIGN } from '@/lib/campaign';
 import { formatAmount } from '@/lib/format';
 import { AnimatedProgress } from '@/components/animated-progress';
 import { SectionBody } from '@/components/primitives';
-import { Accent } from '@/components/accent';
+import { ThanksStatus } from '@/components/thanks-status';
+import { Suspense } from 'react';
 import type { AppLocale } from '@/i18n/routing';
 
 // The site's own thank-you page, rebuilt 2026-09-14 ("make this page modern
@@ -122,31 +123,16 @@ export default async function ThankYouPage({
 
         <SectionBody className="relative">
           <div className="max-w-[46rem]">
-            {/* The mark. A gift acknowledged deserves a seal on it rather
-               than a line of small text announcing itself. */}
-            <Image
-              src="/logo/rabita-mark-256.png"
-              alt=""
-              width={56}
-              height={56}
-              aria-hidden
-              className="h-14 w-14"
-            />
-            <p className="mt-7 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-gold-deep">
-              {t('eyebrow')}
-            </p>
-            <h1 className="mt-4 font-serif text-display leading-[1.02] text-balance text-ink">
-              {t.rich('headlineRich', {
-                em: (chunks) => <Accent surface="paper">{chunks}</Accent>,
-              })}
-            </h1>
-            <p className="mt-6 max-w-[52ch] text-body leading-relaxed text-ink-60">
-              {t('receipt')}
-            </p>
-          </div>
-        </SectionBody>
-      </section>
-
+            {/* THE WORDS DEPEND ON WHAT VIPPS SAID — see components/thanks-status.tsx.
+               The meter, certificate and share row are passed in as `after`
+               and only render on a confirmed gift. useSearchParams needs a
+               Suspense boundary in a server page; the fallback keeps the
+               seal so nothing jumps. */}
+            <Suspense fallback={<Seal />}>
+              <ThanksStatus
+                locale={locale}
+                after={
+                  <>
       {/* ── 2. what the gift joined ─────────────────────────────────────
          The total was a bare fraction on one line, which is a number a reader
          has to do arithmetic on. As a meter it answers the only question a
@@ -267,7 +253,30 @@ export default async function ThankYouPage({
 
       {/* Conversion event stub. Replaces with GA4/Meta Conversions API in phase 2. */}
       <ConversionPing />
+                  </>
+                }
+              >
+                <Seal />
+              </ThanksStatus>
+            </Suspense>
+          </div>
+        </SectionBody>
+      </section>
+
     </main>
+  );
+}
+
+function Seal() {
+  return (
+    <Image
+      src="/logo/rabita-mark-256.png"
+      alt=""
+      width={56}
+      height={56}
+      aria-hidden
+      className="h-14 w-14"
+    />
   );
 }
 

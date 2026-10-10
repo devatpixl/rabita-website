@@ -2619,12 +2619,48 @@
     "eyebrow": "Thank you",
     "headline": "Thank you. Your gift is registered.",
     "headlineRich": "Thank you. Your gift is <em>registered</em>.",
-    "receipt": "A receipt has been sent to the email you provided. You will also find it in your account.",
+    "receipt": "We will send a receipt to the email you provided.",
     "nextMilestone": "Next milestone: the foundation is poured in Q2 2026. We will send you a photo from the site when it happens.",
     "sharePrompt": "Share the campaign with two people you know. It is the simplest way to help further.",
     "shareWhatsapp": "Share on WhatsApp",
     "shareEmail": "Share by email",
-    "back": "Back to the front page"
+    "back": "Back to the front page",
+    "status": {
+      "checking": {
+        "eyebrow": "Confirming",
+        "headlineRich": "We are confirming your <em>payment</em>.",
+        "body": "This normally takes a few seconds."
+      },
+      "pending": {
+        "eyebrow": "Confirming",
+        "headlineRich": "Still waiting for <em>Vipps</em>.",
+        "body": "The payment is not confirmed yet. Try refreshing in a moment, or contact us if it does not resolve.",
+        "refresh": "Check again"
+      },
+      "monthlyOk": {
+        "eyebrow": "Thank you",
+        "headlineRich": "Thank you. Your monthly gift is <em>active</em>.",
+        "body": "The agreement is approved in Vipps. You can change or stop it at any time in the Vipps app."
+      },
+      "cancelled": {
+        "eyebrow": "Not completed",
+        "headlineRich": "The payment was <em>not completed</em>.",
+        "body": "No money was charged. It is safe to try again.",
+        "retry": "Try again",
+        "contact": "Contact us"
+      },
+      "notFound": {
+        "eyebrow": "Status",
+        "headlineRich": "We cannot find your <em>payment</em>.",
+        "body": "If you just paid, it may take a moment before it is registered with us. Feel free to contact us and we will check.",
+        "contact": "Contact us"
+      },
+      "none": {
+        "eyebrow": "Thank you",
+        "headlineRich": "Thank you. We have <em>received</em> what you sent.",
+        "body": "We will get in touch if we need anything more from you."
+      }
+    }
   },
   "visitPages": {
     "crumb": "Visit us",

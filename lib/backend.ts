@@ -49,3 +49,26 @@ export async function postToBackend(
     clearTimeout(timer);
   }
 }
+
+/**
+ * GET from the backend, for reads the browser must not make directly (it has
+ * no backend origin — see BACKEND_URL above). Same timeout and failure shape
+ * as postToBackend: a network error is {ok:false, status:0}.
+ */
+export async function getFromBackend(
+  path: string,
+  timeoutMs = 12_000,
+): Promise<{ ok: boolean; status: number; data: Record<string, unknown> | null }> {
+  if (!backendConfigured()) return { ok: false, status: 0, data: null };
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(`${BACKEND_URL}${path}`, { signal: controller.signal, cache: 'no-store' });
+    const data = await res.json().catch(() => null);
+    return { ok: res.ok, status: res.status, data };
+  } catch {
+    return { ok: false, status: 0, data: null };
+  } finally {
+    clearTimeout(timer);
+  }
+}

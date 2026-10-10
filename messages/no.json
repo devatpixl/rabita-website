@@ -2623,12 +2623,48 @@
     "eyebrow": "Takk",
     "headline": "Takk. Gaven din er registrert.",
     "headlineRich": "Takk. Gaven din er <em>registrert</em>.",
-    "receipt": "Kvittering er sendt til e-posten du oppga. Du finner den også under Min side.",
+    "receipt": "Vi sender kvittering til e-posten du oppga.",
     "nextMilestone": "Neste milepæl: fundamentet støpes i Q2 2026. Vi sender deg et bilde fra tomten når det skjer.",
     "sharePrompt": "Del kampanjen med to personer du kjenner. Det er den enkleste måten å hjelpe videre på.",
     "shareWhatsapp": "Del på WhatsApp",
     "shareEmail": "Del på e-post",
-    "back": "Tilbake til forsiden"
+    "back": "Tilbake til forsiden",
+    "status": {
+      "checking": {
+        "eyebrow": "Bekrefter",
+        "headlineRich": "Vi bekrefter <em>betalingen</em>.",
+        "body": "Dette tar normalt noen sekunder."
+      },
+      "pending": {
+        "eyebrow": "Bekrefter",
+        "headlineRich": "Vi venter fortsatt på <em>Vipps</em>.",
+        "body": "Betalingen er ikke bekreftet ennå. Prøv å oppdatere siden om et øyeblikk, eller ta kontakt hvis det ikke løser seg.",
+        "refresh": "Sjekk på nytt"
+      },
+      "monthlyOk": {
+        "eyebrow": "Takk",
+        "headlineRich": "Takk. Den månedlige gaven din er <em>aktiv</em>.",
+        "body": "Avtalen er godkjent i Vipps. Du kan endre eller stoppe den når som helst i Vipps-appen."
+      },
+      "cancelled": {
+        "eyebrow": "Ikke fullført",
+        "headlineRich": "Betalingen ble <em>ikke fullført</em>.",
+        "body": "Ingen penger er trukket. Det er trygt å prøve igjen.",
+        "retry": "Prøv igjen",
+        "contact": "Kontakt oss"
+      },
+      "notFound": {
+        "eyebrow": "Status",
+        "headlineRich": "Vi finner ikke <em>betalingen</em>.",
+        "body": "Hvis du nettopp betalte, kan det ta et øyeblikk før den er registrert hos oss. Ta gjerne kontakt, så sjekker vi.",
+        "contact": "Kontakt oss"
+      },
+      "none": {
+        "eyebrow": "Takk",
+        "headlineRich": "Takk. Vi har <em>mottatt</em> det du sendte.",
+        "body": "Vi tar kontakt hvis vi trenger noe mer fra deg."
+      }
+    }
   },
   "visitPages": {
     "crumb": "Besøk oss",
