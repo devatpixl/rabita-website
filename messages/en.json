@@ -1689,7 +1689,7 @@
       "guardianPhone": "Guardian's phone",
       "submitFree": "Join",
       "submitPay": "Join and pay 1 000 kr",
-      "note": "National identity number is not required for membership. Privacy applies.",
+      "note": "You do not need a national ID number to become a member.",
       "under15": "I am registering a child under 15"
     },
     "done": {
@@ -2901,7 +2901,7 @@
         "Long tables laid for iftar"
       ]
     },
-    "formBody": "Registering takes a minute. Fill in the form below and become part of the community.",
+    "formBody": "Fill in the form and you are part of the community.",
     "boxBody": "As a member you get priority access to our services and activities.",
     "dual": {
       "eyebrow": "Dual membership",
@@ -2910,6 +2910,33 @@
       "tool": "Resign from another faith community",
       "more": "Read more about dual membership",
       "contact": "Questions? Write to <a>{email}</a>"
+    },
+    "v2": {
+      "whyEyebrow": "Why become a member?",
+      "cards": {
+        "vote": "You get a vote at the annual meeting and help elect the board.",
+        "support": "Your membership strengthens Rabita and helps realise the new mosque building.",
+        "access": "Teaching, family activities and events throughout the year."
+      },
+      "free": {
+        "figure": "0 kr",
+        "title": "Membership is free.",
+        "body": "No fee and no hidden costs.",
+        "give": "Want to give more? Every gift goes to the new mosque building."
+      },
+      "elsewhere": {
+        "title": "Are you a member somewhere else?",
+        "body": "You can only be a member of one faith community at a time. If you are listed in two places, neither receives state support for you.",
+        "check": "Check where you are a member"
+      },
+      "leave": {
+        "body": "Membership is voluntary, and leaving is free."
+      },
+      "questions": {
+        "title": "Any questions?",
+        "body": "We are happy to help with anything about your membership.",
+        "cta": "Contact us"
+      }
     }
   },
   "utmeldingPage": {

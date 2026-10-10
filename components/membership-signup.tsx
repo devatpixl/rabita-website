@@ -5,7 +5,6 @@ import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/cn';
 import Image from 'next/image';
 import { Field, VALUE } from './request-form';
-import { FigureIcon } from './figure-icons';
 
 // The signup card. Same shape as the giving card in the hero — a bordered
 // panel on the right of a dark split — because that pairing is the site's
@@ -85,7 +84,7 @@ export function MembershipSignup() {
        bg-paper/85 with a blur so the texture and the wash behind the section
        carry faintly through it, which is what keeps it from reading as a
        white rectangle dropped on a photograph. */
-    <div className="overflow-hidden rounded-[1.75rem] bg-paper/85 ring-1 ring-gold-deep/12 shadow-[0_1px_2px_rgba(26,26,24,0.03),0_30px_80px_-50px_rgba(26,26,24,0.28)] backdrop-blur-sm">
+    <div className="overflow-hidden rounded-[1.75rem] bg-paper/85 ring-1 ring-gold-deep/15 shadow-[0_1px_2px_rgba(26,26,24,0.03),0_30px_80px_-50px_rgba(26,26,24,0.28)] backdrop-blur-sm">
       {/* The plate takes a FIXED measure, not a fraction. At 1fr of a
            1.45/1 split the form came out 367px wide inside a 621px panel,
            which left each of the three tiles 94px — "Voting" wrapped under
@@ -108,22 +107,12 @@ export function MembershipSignup() {
           </h2>
           <p className="mt-1.5 text-[15px] text-ink-60">{tj('formBody')}</p>
 
-          {/* What the three tiles used to occupy: one sentence saying the
-             thing they were there to let you choose between. Ruled top and
-             bottom so it reads as a statement of terms rather than a caption,
-             and set in the panel's own voice — no badge, no box, nothing that
-             looks like a control, because there is nothing here to pick. */}
-          <p className="mt-6 flex items-start gap-3 border-y border-gold-deep/15 py-4 text-[14px] leading-snug text-ink">
-            <span
-              aria-hidden
-              className="mt-px grid h-6 w-6 shrink-0 place-items-center rounded-full bg-gold-deep/15 text-gold-deep"
-            >
-              <FigureIcon name="check" className="h-[14px] w-[14px]" />
-            </span>
-            {tj('freeNote')}
-          </p>
+          {/* The ruled «gratis» line that stood here is gone (bli-medlem
+             redesign, 2026-10-10): the page now has a card of its own that
+             says it — «0 kr · Medlemskap er gratis.» — directly above. It
+             was the fourth "free" on one page. */}
 
-          <h3 className="mt-8 font-serif text-[1.15rem] text-ink">{t('form.heading')}</h3>
+          <h3 className="mt-7 font-serif text-[1.15rem] text-ink">{t('form.heading')}</h3>
           {/* Two up from sm, which is the reference's grid and also the
              shape autofill expects: name beside email, phone beside the
              rest. */}

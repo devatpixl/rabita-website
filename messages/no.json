@@ -1693,7 +1693,7 @@
       "guardianPhone": "Telefon til foresatt",
       "submitFree": "Meld meg inn",
       "submitPay": "Meld inn og betal 1 000 kr",
-      "note": "Fødselsnummer trengs ikke for å bli medlem. Personvern gjelder.",
+      "note": "Du trenger ikke fødselsnummer for å bli medlem.",
       "under15": "Jeg melder inn et barn under 15 år"
     },
     "done": {
@@ -2897,7 +2897,7 @@
         "Lange bord dekket til iftar"
       ]
     },
-    "formBody": "Det tar bare ett minutt å registrere seg. Fyll ut skjemaet nedenfor og bli en del av fellesskapet.",
+    "formBody": "Fyll ut skjemaet, så er du en del av fellesskapet.",
     "boxBody": "Som medlem får du prioritert tilgang til våre tjenester og aktiviteter.",
     "dual": {
       "eyebrow": "Dobbelt medlemskap",
@@ -2906,6 +2906,33 @@
       "tool": "Meld deg ut av et annet trossamfunn",
       "more": "Les mer om dobbelt medlemskap",
       "contact": "Spørsmål? Skriv til <a>{email}</a>"
+    },
+    "v2": {
+      "whyEyebrow": "Hvorfor bli medlem?",
+      "cards": {
+        "vote": "Du får stemmerett på årsmøtet og er med på å velge styret.",
+        "support": "Medlemskapet ditt styrker Rabita og bidrar til å realisere det nye moskébygget.",
+        "access": "Undervisning, familieaktiviteter og arrangementer gjennom hele året."
+      },
+      "free": {
+        "figure": "0 kr",
+        "title": "Medlemskap er gratis.",
+        "body": "Ingen kontingent og ingen skjulte kostnader.",
+        "give": "Vil du gi mer? Hver gave går til det nye moskébygget."
+      },
+      "elsewhere": {
+        "title": "Er du medlem et annet sted?",
+        "body": "Du kan bare være medlem i ett trossamfunn om gangen. Står du oppført to steder, får ingen av dem statsstøtte for deg.",
+        "check": "Sjekk hvor du er medlem"
+      },
+      "leave": {
+        "body": "Medlemskap er frivillig, og det er gratis å melde seg ut."
+      },
+      "questions": {
+        "title": "Har du spørsmål?",
+        "body": "Vi hjelper gjerne med alt som gjelder medlemskapet.",
+        "cta": "Kontakt oss"
+      }
     }
   },
   "utmeldingPage": {
