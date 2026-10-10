@@ -107,8 +107,14 @@ export default async function JoinPage({
     {
       key: 'dual',
       heading: th('dual.heading'),
-      // p1 only. p2/p3/p4 are 81 words on how the grant is split; /utmelding
-      // carries that in full and the first link below goes there.
+      // The short version (v2.elsewhere.body). NOT repeated elsewhere: the
+      // client's dual.p1-p4 also said Brreg compares lists every New Year,
+      // that privacy means only the member can resign elsewhere, and that
+      // membership then counts from the next New Year. /utmelding does NOT
+      // carry those (checked 2026-10-10 — an earlier note said it did). Left
+      // out on purpose: the client's ask (2026-09-18) was "litt info … viktig
+      // at de melder seg ut av annet trossamfunn … link til
+      // utmelding.rabita.no", which this covers. Keys stay in membershipHub.
       body: t('v2.elsewhere.body'),
       links: [
         { label: th('dual.toolCta'), href: UTMELDING_TOOL, external: true },
