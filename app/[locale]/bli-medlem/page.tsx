@@ -135,6 +135,18 @@ export default async function JoinPage({
           em: (chunks) => <Accent surface="dusk">{chunks}</Accent>,
         })}
         lede={t('ledeShort')}
+        // ── PHONES: A BIGGER HEADLINE AND ONE LINE (user, 2026-10-10:
+        // "make the heading better, remove sub text of you get a vote, and
+        // make heading and the one line text bigger and better and eye
+        // catching"). The headline is the client's own («NY TEKST: Din
+        // stemme former fremtiden vår.», Tekst (endelig)), so only its size
+        // changes. The line under it is ALSO his — the last sentence of his
+        // own hero copy, «Det er gratis å bli medlem, og det tar bare ett
+        // minutt.» — replacing ledeShort, which led with the vote. md: arms
+        // restate the band's defaults, so laptops are unchanged.
+        ledePhone={t('v2.heroLine')}
+        titleClass="max-md:text-[2.55rem] max-md:leading-[1.02] max-md:tracking-[-0.02em] md:text-[clamp(1.65rem,3vw,2.3rem)]"
+        ledeClass="max-md:mt-4 max-md:text-[1.0625rem] max-md:font-medium max-md:text-paper/90"
         image="/photos/story-members.webp"
         alt={ts('pages.membership.caption')}
         layout="over"

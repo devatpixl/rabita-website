@@ -103,6 +103,11 @@ export type PageBandProps = {
   priority?: boolean;
   /** For a page that has earned a bigger headline than the rest. */
   titleClass?: string;
+  /** A different lede below md (the "over" layout only). The `lede` prop
+   *  still renders from md, so laptops are unchanged. */
+  ledePhone?: string;
+  /** Extra lede classes (the "over" layout only), e.g. a phone size step. */
+  ledeClass?: string;
   /** Overrides the plate's min-height. The services index uses it to stand
    *  taller than the eleven pages it is the parent of. */
   heightClass?: string;
@@ -130,14 +135,17 @@ export function BandWords({
   lede,
   rule = 'bg-gold/40',
   titleClass,
+  ledeClass,
   className,
 }: {
   kicker: string;
   kickerNote?: string;
   title: ReactNode;
-  lede?: string;
+  lede?: ReactNode;
   rule?: string;
   titleClass?: string;
+  /** Extra classes for the lede — e.g. a phone-only size step. */
+  ledeClass?: string;
   className?: string;
 }) {
   return (
@@ -164,7 +172,7 @@ export function BandWords({
         {title}
       </h1>
       {lede && (
-        <p className="mt-3 max-w-[46ch] text-[14px] leading-snug text-paper/75 md:mt-2 md:text-[13px]">
+        <p className={cn('mt-3 max-w-[46ch] text-[14px] leading-snug text-paper/75 md:mt-2 md:text-[13px]', ledeClass)}>
           {lede}
         </p>
       )}
@@ -189,6 +197,8 @@ export function PageBand({
   sizes,
   priority = true,
   titleClass,
+  ledePhone,
+  ledeClass,
   heightClass,
   imagePhone,
   objectClassPhone,
@@ -320,9 +330,19 @@ export function PageBand({
                   kicker={kicker}
                   kickerNote={kickerNote}
                   title={title}
-                  lede={lede}
+                  lede={
+                    ledePhone ? (
+                      <>
+                        <span className="md:hidden">{ledePhone}</span>
+                        <span className="hidden md:inline">{lede}</span>
+                      </>
+                    ) : (
+                      lede
+                    )
+                  }
                   rule={t.rule}
                   titleClass={titleClass}
+                  ledeClass={ledeClass}
                 />
               </div>
               {/* ── THE CURVE ON THE OVER PLATE, PHONES ONLY (user,
