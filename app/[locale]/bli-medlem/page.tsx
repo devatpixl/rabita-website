@@ -229,22 +229,9 @@ export default async function JoinPage({
             ))}
           </ul>
 
-          {/* The page's one ask beyond membership — the client's own
-             signpost list (2026-09-18: «1. Utmelding, 2. Dobbelt medlemskap,
-             3. Donasjon»). One line, not a block. */}
-          <p className="mt-6 flex items-start gap-3 text-[15px] leading-snug text-ink">
-            <span aria-hidden className="mt-[0.6rem] block h-px w-6 shrink-0 bg-gold-deep/60" />
-            <span>
-              {t('v2.free.give')}{' '}
-              <Link
-                href={`/${locale}/gi-en-gave`}
-                className="group inline-flex items-center gap-1.5 whitespace-nowrap font-semibold text-gold-deep underline decoration-gold-deep/40 underline-offset-4 hover:text-ink"
-              >
-                {th('give.cta')}
-                <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5 rtl:rotate-180">&rarr;</span>
-              </Link>
-            </span>
-          </p>
+          {/* The «Vil du gi mer? … Gi en gave →» line that stood here is
+             removed (user, 2026-10-10: "remove this also"). The site-wide
+             Doner button stays in the header. */}
         </SectionBody>
       </Section>
 
@@ -258,6 +245,11 @@ export default async function JoinPage({
         <div aria-hidden className="star-texture star-texture--light pointer-events-none absolute inset-0 -z-10" />
         <SectionBody>
           <div className="grid items-start gap-5 lg:grid-cols-12 lg:gap-8">
+            {/* Form FIRST, the dual-membership card under it (user,
+               2026-10-10: "bring form up in place of this card"). */}
+            <div className="lg:col-span-8">
+              <MembershipSignup />
+            </div>
             <aside className="relative isolate overflow-hidden rounded-[1.75rem] bg-dusk p-7 text-paper sm:p-8 lg:col-span-4">
               <RosetteMark
                 aria-hidden
@@ -285,12 +277,11 @@ export default async function JoinPage({
                 className="group mt-4 inline-block text-[14px] font-medium leading-snug text-paper/85 underline decoration-paper/30 underline-offset-4 hover:text-gold"
               >
                 {th('dual.toolCta')}
-                <span aria-hidden className="ms-1.5 inline-block transition-transform duration-200 group-hover:translate-x-0.5 rtl:rotate-180">&rarr;</span>
+                {/* A plain inline span opened by a no-break space, so the
+                   arrow can never wrap onto a line of its own. */}
+                <span aria-hidden>&nbsp;{locale === 'ar' ? '\u2190' : '\u2192'}</span>
               </a>
             </aside>
-            <div className="lg:col-span-8">
-              <MembershipSignup />
-            </div>
           </div>
         </SectionBody>
       </Section>
