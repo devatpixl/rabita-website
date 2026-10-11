@@ -36,6 +36,18 @@ export const MOBILE_CANDIDATES: Candidate[] = [
   { src: '/photos/brand-eid-2x.webp', pos: '50% 60%' },
   { src: '/photos/zoom-minaret.webp', pos: '50% 55%' },
   { src: '/photos/subj-skole-klassebilde.webp', pos: '50% 40%' },
+  // ── the user's nine, 2026-10-11 (public/hero/cand/) ──────────────────
+  // All nine are landscape, so a phone's 4:5 frame keeps only a ~35% slice of
+  // the width: the x value is the whole crop. Set from the contact sheet.
+  { src: '/hero/cand/c01.webp', pos: '78% 40%' }, // imam from behind, right; hall left
+  { src: '/hero/cand/c02.webp', pos: '14% 45%' }, // imam at the lectern, far left
+  { src: '/hero/cand/c03.webp', pos: '50% 50%' }, // rows in sujud, Vallhall
+  { src: '/hero/cand/c04.webp', pos: '45% 50%' }, // crowd, hands raised
+  { src: '/hero/cand/c05.webp', pos: '55% 50%' }, // crowd, volunteers in vests
+  { src: '/hero/cand/c06.webp', pos: '50% 50%' }, // hall, rows standing
+  { src: '/hero/cand/c07.webp', pos: '45% 50%' }, // hall, front row + volunteers
+  { src: '/hero/cand/c08.webp', pos: '50% 70%' }, // Sørligata door, umbrellas; people at the foot
+  { src: '/hero/cand/c09.webp', pos: '50% 55%' }, // Vallhall from the stands
 ];
 
 export const DESKTOP_CANDIDATES: Candidate[] = [
@@ -48,6 +60,17 @@ export const DESKTOP_CANDIDATES: Candidate[] = [
   { src: '/photos/prayer-congregation.webp', pos: '50% 50%' },
   { src: '/photos/zoom-minaret.webp', pos: '50% 50%' },
   { src: '/photos/story-facade-night.webp', pos: '50% 50%' },
+  // ── the user's nine, 2026-10-11 ───────────────────────────────────────
+  // 3:2 sources in a ~2:1 frame crop only top/bottom, so only y matters here.
+  { src: '/hero/cand/c01.webp', pos: '50% 40%' },
+  { src: '/hero/cand/c02.webp', pos: '50% 45%' },
+  { src: '/hero/cand/c03.webp', pos: '50% 50%' },
+  { src: '/hero/cand/c04.webp', pos: '50% 45%' },
+  { src: '/hero/cand/c05.webp', pos: '50% 45%' },
+  { src: '/hero/cand/c06.webp', pos: '50% 50%' },
+  { src: '/hero/cand/c07.webp', pos: '50% 45%' },
+  { src: '/hero/cand/c08.webp', pos: '50% 60%' },
+  { src: '/hero/cand/c09.webp', pos: '50% 55%' },
 ];
 
 function readParam(): number {
