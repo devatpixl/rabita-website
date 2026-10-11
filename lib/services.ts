@@ -57,7 +57,13 @@ export const SERVICE_IMAGE: Record<ServiceKey, string> = {
   // svc-services is a mixed-gender hall. An architectural render of the
   // lattice claims nothing about who attends. Swap it the day a real
   // photograph arrives.
-  kvinnetreff: '/photos/svc-wudu.webp',
+  // ── REPLACED 2026-10-11, on the user's pick ──────────────────────────
+  // Three women in conversation under the globe lamps, photographed over
+  // the shoulders of the circle — the gathering itself, not a room. From
+  // iftar_-27.jpg (Muslimsk Dialognettverk's frame; their mark sat in the
+  // foot and the bottom 7% is cropped off), saved 1600 wide. The wudu frame
+  // stays on disk; reverting is this one line.
+  kvinnetreff: '/photos/svc-kvinnetreff-samtale.webp',
   // Client-generated, 2026-09-23. Replaces subj-nikah.webp at 1086x724 — the
   // same defect the old janaza card had: landscape, and undersized for a card
   // that renders ~595px wide portrait. The old file stays on disk unused.
@@ -350,6 +356,9 @@ export const SERVICE_PAGES = {
 // against 0.02 for janaza) and the least interesting half of the frame.
 // Pulling the crop toward the inline start keeps the man and drops the screen.
 export const SERVICE_FOCUS: Partial<Record<ServiceKey, string>> = {
+  // 3:2 source in the 4:3 card: the three faces sit left of centre at
+  // ~40% height; 42% keeps all three with the dark shoulders framing them.
+  kvinnetreff: '42% 40%',
     // Still 40% after the 2026-09-23 swap, by luck rather than design: the
     // rings sit at 40% of the new frame too. 896x1200 into 4:5 loses 80px of
     // height, so this steers very little either way.
