@@ -37,7 +37,7 @@ export const MOBILE_CANDIDATES: Candidate[] = [
   // ── the user's nine, 2026-10-11 (public/hero/cand/) ──────────────────
   // All nine are landscape, so a phone's 4:5 frame keeps only a ~35% slice of
   // the width: the x value is the whole crop. Set from the contact sheet.
-  { src: '/hero/cand/c01.webp', pos: '78% 40%' }, // imam from behind, right; hall left
+  { src: '/hero/cand/c01.webp', pos: '0% 30%' }, // imam from behind, LEFT edge; hall right (file mirrored 2026-10-11, user: "imam looks on left")
   { src: '/hero/cand/c02.webp', pos: '14% 45%' }, // imam at the lectern, far left
   { src: '/hero/cand/c03.webp', pos: '50% 50%' }, // rows in sujud, Vallhall
   { src: '/hero/cand/c04.webp', pos: '45% 50%' }, // crowd, hands raised
@@ -55,7 +55,7 @@ export const DESKTOP_CANDIDATES: Candidate[] = [
   { src: '/photos/hero-iftar.webp', pos: '50% 45%' },
   // ── the user's nine, 2026-10-11 ───────────────────────────────────────
   // 3:2 sources in a ~2:1 frame crop only top/bottom, so only y matters here.
-  { src: '/hero/cand/c01.webp', pos: '50% 40%' },
+  { src: '/hero/cand/c01.webp', pos: '0% 30%' }, // mirrored; the imam is the left 40% of the frame
   { src: '/hero/cand/c02.webp', pos: '50% 45%' },
   { src: '/hero/cand/c03.webp', pos: '50% 50%' },
   { src: '/hero/cand/c04.webp', pos: '50% 45%' },
