@@ -7,6 +7,7 @@ import { GivingCard } from './giving-card';
 import { HeroCampaign } from './hero-campaign';
 import { HeroSentinel } from './campaign-strip';
 import { Accent } from './accent';
+import { HeroPhotoPicker } from './hero-photo-picker';
 import { cn } from '@/lib/cn';
 
 // §4.01. Full-bleed dark plane. The photograph is a Rabita-owned image
@@ -47,6 +48,11 @@ export const HERO_ART = {
 //
 // The old files stay in /public/hero, untouched: volunteers-gateiftar is
 // still the sharper photograph and putting it back is these two lines.
+// TEMPORARY (user, 2026-10-11): swappable hero photos with ‹ › arrows so the
+// client can pick the final one. See components/hero-photo-picker.tsx. Set
+// to false to go back to the fixed HERO_IMAGE below.
+const HERO_PICKER = true;
+
 const HERO_IMAGE = {
   desktop: '/hero/eid-congregation-16x9.jpg',
   mobile: '/hero/eid-congregation-4x5.jpg',
@@ -194,10 +200,15 @@ export async function Hero() {
          headline, the lede and both buttons below the fold. A visitor met a
          picture and nothing else. It is a background now, the way the desktop
          hero and innocents.no both do it, with the content over the top. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 overflow-hidden"
-      >
+      {/* No aria-hidden on this wrapper: the photographs are alt="" and the
+         scrims are empty divs, so there is nothing to hide — and while the
+         temporary picker lives in here, its ‹ › buttons must stay reachable
+         by keyboard and screen reader. */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {HERO_PICKER ? (
+          <HeroPhotoPicker filter={IMAGE_FILTER} scaleMobile={HERO_ART.scaleMobile} />
+        ) : (
+          <>
         <Image
           src={HERO_IMAGE.mobile}
           alt=""
@@ -213,7 +224,6 @@ export async function Hero() {
             filter: IMAGE_FILTER,
           }}
         />
-        <div className="absolute inset-0 md:hidden" style={{ background: SCRIM_MOBILE }} />
         <Image
           src={HERO_IMAGE.desktop}
           alt=""
@@ -229,6 +239,9 @@ export async function Hero() {
             filter: IMAGE_FILTER,
           }}
         />
+          </>
+        )}
+        <div className="absolute inset-0 md:hidden" style={{ background: SCRIM_MOBILE }} />
         <div className="absolute inset-0 hidden md:block" style={{ background: scrimHorizontal(isRtl) }} />
         <div className="absolute inset-0 hidden md:block" style={{ background: SCRIM_VERTICAL }} />
         <div
