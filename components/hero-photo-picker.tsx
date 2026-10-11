@@ -98,7 +98,7 @@ export function HeroPhotoPicker({ filter, scaleMobile }: { filter: string; scale
   const go = (delta: number) => setI((cur) => { const next = (cur + delta + max) % max; writeParam(next); return next; });
 
   const btn =
-    'grid h-8 w-8 place-items-center rounded-full text-paper transition-colors hover:bg-paper/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold';
+    'grid h-8 w-8 place-items-center rounded-full text-paper text-[1.25rem] leading-none transition-colors hover:bg-paper/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold md:h-10 md:w-10 md:text-[1.6rem]';
 
   return (
     <>
@@ -136,17 +136,23 @@ export function HeroPhotoPicker({ filter, scaleMobile }: { filter: string; scale
       />
       {/* The control. pointer-events-auto because the wrapper around the
          photographs is pointer-events-none; z-20 to sit above the hero's
-         content layer (z-10) so the corner is clickable. Top-right on
-         phones (the photo's own corner), bottom-right from md. */}
+         content layer (z-10) so the corner is clickable. TOP-RIGHT of the
+         photo at every width — it was bottom-right from md, which on a
+         laptop whose window is shorter than the hero sat below the fold,
+         next to the chat bubble (user, 2026-10-11: "can't swap? where
+         arrows"). From md it sits top-LEFT: the giving card rises to within
+         40px of the header on 1280×720 / 1366×768 windows and a top-right
+         control would overlap it; the headline on the left starts 100px+
+         lower at every size. Larger from md so it reads at a glance. */}
       <div
-        className="pointer-events-auto absolute end-4 top-4 z-20 flex items-center gap-0.5 rounded-full bg-dusk/70 p-1 text-paper ring-1 ring-paper/20 backdrop-blur-sm md:top-auto md:bottom-5 md:end-6"
+        className="pointer-events-auto absolute end-4 top-4 z-20 flex items-center gap-0.5 rounded-full bg-dusk/70 p-1 text-paper ring-1 ring-paper/20 backdrop-blur-sm md:end-auto md:start-8 md:top-4 md:gap-1 md:p-1.5"
         role="group"
         aria-label="Bytt foto"
       >
         <button type="button" className={btn} onClick={() => go(-1)} aria-label="Forrige foto">
           <span aria-hidden className="rtl:rotate-180">&lsaquo;</span>
         </button>
-        <span className="min-w-[4.5ch] text-center font-mono text-[0.6875rem] tabular-nums tracking-[0.12em]">
+        <span className="min-w-[4.5ch] text-center font-mono text-[0.6875rem] tabular-nums tracking-[0.12em] md:min-w-[5.5ch] md:text-[0.8125rem]">
           <span className="md:hidden">{(i % MOBILE_CANDIDATES.length) + 1} / {MOBILE_CANDIDATES.length}</span>
           <span className="hidden md:inline">{(i % DESKTOP_CANDIDATES.length) + 1} / {DESKTOP_CANDIDATES.length}</span>
         </span>
