@@ -20,7 +20,10 @@ import Image from 'next/image';
 // HERO_ART), and delete this file.
 //
 // Candidate order is the shortlist from the 2026-10-10 review of all 245
-// library photos; index 0 is the current photo on each list. BOTH LISTS ARE
+// library photos, minus five the user rejected on 2026-10-11 (laptop 4, 6,
+// 7, 8, 9: congregation close-up, two faces, prayer-hall interior, minaret
+// render, facade render — and the same positions on the phone list, so the
+// two stay equal); index 0 is the current photo on each list. BOTH LISTS ARE
 // THE SAME LENGTH on purpose: one index drives both, and the number in
 // ?foto= must match the counter on every screen.
 
@@ -30,12 +33,7 @@ export const MOBILE_CANDIDATES: Candidate[] = [
   { src: '/hero/eid-congregation-4x5.jpg', pos: '32% 42%' },
   { src: '/photos/community/mother-child.webp', pos: '50% 30%' },
   { src: '/hero/volunteers-gateiftar-4x5.jpg', pos: '50% 40%' },
-  { src: '/photos/story-khutbah.webp', pos: '50% 40%' },
   { src: '/photos/community/womens-circle.webp', pos: '50% 35%' },
-  { src: '/photos/svc-ungdom-leir.webp', pos: '50% 45%' },
-  { src: '/photos/brand-eid-2x.webp', pos: '50% 60%' },
-  { src: '/photos/zoom-minaret.webp', pos: '50% 55%' },
-  { src: '/photos/subj-skole-klassebilde.webp', pos: '50% 40%' },
   // ── the user's nine, 2026-10-11 (public/hero/cand/) ──────────────────
   // All nine are landscape, so a phone's 4:5 frame keeps only a ~35% slice of
   // the width: the x value is the whole crop. Set from the contact sheet.
@@ -54,12 +52,7 @@ export const DESKTOP_CANDIDATES: Candidate[] = [
   { src: '/hero/eid-congregation-16x9.jpg', pos: '32% 42%', scale: 1.45 },
   { src: '/hero/volunteers-gateiftar-16x9.jpg', pos: '50% 40%' },
   { src: '/photos/brand-eid-2x.webp', pos: '50% 55%' },
-  { src: '/photos/news-eid-congregation.webp', pos: '50% 45%' },
   { src: '/photos/hero-iftar.webp', pos: '50% 45%' },
-  { src: '/photos/visit-eid.webp', pos: '50% 40%' },
-  { src: '/photos/prayer-congregation.webp', pos: '50% 50%' },
-  { src: '/photos/zoom-minaret.webp', pos: '50% 50%' },
-  { src: '/photos/story-facade-night.webp', pos: '50% 50%' },
   // ── the user's nine, 2026-10-11 ───────────────────────────────────────
   // 3:2 sources in a ~2:1 frame crop only top/bottom, so only y matters here.
   { src: '/hero/cand/c01.webp', pos: '50% 40%' },
