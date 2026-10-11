@@ -187,7 +187,12 @@ export const SERVICE_IMAGE: Record<ServiceKey, string> = {
   // Id/_NKD9507.jpg at 3500x2333 — a father painting a small child's face at
   // the Eid bazaar — cut to 4:5 from x=0.35 so he stays in frame behind her.
   // svc-barn-familie-bobler.webp is kept; reverting is this one line.
-  'barn-og-familie': '/photos/svc-barn-familie-ansiktsmaling.webp',
+  // ── REPLACED 2026-10-11, on the user's pick ──────────────────────────
+  // A Rabita workshop: five children along a table sorting coloured sweets
+  // into bowls — the activity, not a festival. 484847138_…_n.jpg at
+  // 1536x2048, saved at 1400 wide. svc-barn-familie-ansiktsmaling.webp is
+  // kept; reverting is this one line.
+  'barn-og-familie': '/photos/svc-barn-familie-verksted.webp',
   // Rabita's own foster-care information meeting: the imam presenting
   // "Behovet i Oslo" to a room. The doc says Rabita's role here is to
   // inform and to be a bridge, and this is that, being done.
@@ -370,7 +375,10 @@ export const SERVICE_FOCUS: Partial<Record<ServiceKey, string>> = {
     veivisere: '50% 38%',
     ungdom: '50% 45%',
     // Mascots and faces sit high; the phone card is 4:3 and crops height.
-    'barn-og-familie': '50% 30%',
+    // 2026-10-11, workshop photo (portrait in a landscape card): the five
+    // heads sit in the upper third, the sweets across the middle; 40% keeps
+    // both, centre would crop the two boys at the far end.
+    'barn-og-familie': '50% 40%',
     fosterhjem: '38% 55%',
     'id-for-alle': '50% 40%',
     // Centre. Both this source and the card crop WIDTH, not height, so the
