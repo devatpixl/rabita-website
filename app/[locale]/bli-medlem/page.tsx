@@ -7,6 +7,7 @@ import { MembershipSignup } from '@/components/membership-signup';
 import { Section, SectionBody } from '@/components/primitives';
 import { PageBand } from '@/components/page-band';
 import { RosetteMark } from '@/components/marks';
+import { GiveSheetLink } from '@/components/give-sheet-link';
 import { FigureIcon, type FigureIconName } from '@/components/figure-icons';
 
 // The join flow, on its own route.
@@ -559,19 +560,31 @@ export default async function JoinPage({
                   <h2 className="font-serif text-[1.3rem] leading-tight text-ink">{heading}</h2>
                   <p className="mt-2 max-w-[60ch] text-[15px] leading-relaxed text-ink-60">{body}</p>
                   <div className="mt-4 flex flex-wrap gap-x-6 gap-y-3">
-                    {links.map((l) => (
-                      <a
-                        key={l.label}
-                        href={l.href}
-                        {...(l.external ? { target: '_blank', rel: 'noreferrer' } : {})}
-                        className="group inline-flex min-h-11 items-center gap-2 text-[0.9375rem] font-semibold text-gold-deep"
-                      >
-                        <span className="border-b border-gold-deep/50 pb-1">{l.label}</span>
-                        <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">
-                          &rarr;
-                        </span>
-                      </a>
-                    ))}
+                    {links.map((l) => {
+                      const cls = 'group inline-flex min-h-11 items-center gap-2 text-[0.9375rem] font-semibold text-gold-deep';
+                      const inner = (
+                        <>
+                          <span className="border-b border-gold-deep/50 pb-1">{l.label}</span>
+                          <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">
+                            &rarr;
+                          </span>
+                        </>
+                      );
+                      // The donation row opens the giving sheet in place
+                      // (user, 2026-10-11) rather than leaving for /gi-en-gave.
+                      return key === 'give' ? (
+                        <GiveSheetLink key={l.label} href={l.href} className={cls}>{inner}</GiveSheetLink>
+                      ) : (
+                        <a
+                          key={l.label}
+                          href={l.href}
+                          {...(l.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+                          className={cls}
+                        >
+                          {inner}
+                        </a>
+                      );
+                    })}
                   </div>
                 </div>
               </li>
