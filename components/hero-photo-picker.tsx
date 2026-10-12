@@ -31,16 +31,16 @@ type Candidate = { src: string; pos: string; scale?: number };
 
 export const MOBILE_CANDIDATES: Candidate[] = [
   { src: '/hero/eid-congregation-4x5.jpg', pos: '32% 42%' },
-  { src: '/photos/community/mother-child.webp', pos: '50% 30%' },
-  { src: '/hero/volunteers-gateiftar-4x5.jpg', pos: '50% 40%' },
+  { src: '/hero/cand/c03.webp', pos: '50% 50%' }, // rows in sujud, Vallhall
+  { src: '/hero/cand/c04.webp', pos: '45% 50%' }, // crowd, hands raised
   // ── the user's nine, 2026-10-11 (public/hero/cand/) ──────────────────
   // All nine are landscape, so a phone's 4:5 frame keeps only a ~35% slice of
   // the width: the x value is the whole crop. Set from the contact sheet.
+  { src: '/hero/cand/c06.webp', pos: '50% 50%' }, // hall, rows standing
+  { src: '/photos/community/mother-child.webp', pos: '50% 30%' },
+  { src: '/hero/volunteers-gateiftar-4x5.jpg', pos: '50% 40%' },
   { src: '/hero/cand/c01.webp', pos: '0% 30%' }, // imam from behind, LEFT edge; hall right (file mirrored 2026-10-11, user: "imam looks on left")
   { src: '/hero/cand/c02.webp', pos: '14% 45%' }, // imam at the lectern, far left
-  { src: '/hero/cand/c03.webp', pos: '50% 50%' }, // rows in sujud, Vallhall
-  { src: '/hero/cand/c04.webp', pos: '45% 50%' }, // crowd, hands raised
-  { src: '/hero/cand/c06.webp', pos: '50% 50%' }, // hall, rows standing
   { src: '/hero/cand/c07.webp', pos: '45% 50%' }, // hall, front row + volunteers
   { src: '/hero/cand/c08.webp', pos: '50% 70%' }, // Sørligata door, umbrellas; people at the foot
   // ── added 2026-10-12 (user: "add m2 and m3"), portrait sources, crops
