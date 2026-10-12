@@ -22,10 +22,10 @@ import Image from 'next/image';
 // Candidate order is the shortlist from the 2026-10-10 review of all 245
 // library photos, minus five the user rejected on 2026-10-11 (laptop 4, 6,
 // 7, 8, 9: congregation close-up, two faces, prayer-hall interior, minaret
-// render, facade render — and the same positions on the phone list, so the
-// two stay equal); index 0 is the current photo on each list. BOTH LISTS ARE
-// THE SAME LENGTH on purpose: one index drives both, and the number in
-// ?foto= must match the counter on every screen.
+// render, facade render — and the same positions on the phone list); then on
+// 2026-10-12 phone-only cuts of 4, 6, 10 and 14 (women's circle, the
+// un-mirrored imam, a crowd, the hall from the stands). The lists are now
+// separate selections of different lengths; index 0 is the current photo. 
 
 type Candidate = { src: string; pos: string; scale?: number };
 
@@ -33,20 +33,16 @@ export const MOBILE_CANDIDATES: Candidate[] = [
   { src: '/hero/eid-congregation-4x5.jpg', pos: '32% 42%' },
   { src: '/photos/community/mother-child.webp', pos: '50% 30%' },
   { src: '/hero/volunteers-gateiftar-4x5.jpg', pos: '50% 40%' },
-  { src: '/photos/community/womens-circle.webp', pos: '50% 35%' },
   // ── the user's nine, 2026-10-11 (public/hero/cand/) ──────────────────
   // All nine are landscape, so a phone's 4:5 frame keeps only a ~35% slice of
   // the width: the x value is the whole crop. Set from the contact sheet.
   { src: '/hero/cand/c01.webp', pos: '0% 30%' }, // imam from behind, LEFT edge; hall right (file mirrored 2026-10-11, user: "imam looks on left")
-  { src: '/hero/cand/c01-orig.webp', pos: '100% 30%' }, // the same frame un-mirrored, imam RIGHT — so the client sees both (user, 2026-10-11)
   { src: '/hero/cand/c02.webp', pos: '14% 45%' }, // imam at the lectern, far left
   { src: '/hero/cand/c03.webp', pos: '50% 50%' }, // rows in sujud, Vallhall
   { src: '/hero/cand/c04.webp', pos: '45% 50%' }, // crowd, hands raised
-  { src: '/hero/cand/c05.webp', pos: '55% 50%' }, // crowd, volunteers in vests
   { src: '/hero/cand/c06.webp', pos: '50% 50%' }, // hall, rows standing
   { src: '/hero/cand/c07.webp', pos: '45% 50%' }, // hall, front row + volunteers
   { src: '/hero/cand/c08.webp', pos: '50% 70%' }, // Sørligata door, umbrellas; people at the foot
-  { src: '/hero/cand/c09.webp', pos: '50% 55%' }, // Vallhall from the stands
 ];
 
 export const DESKTOP_CANDIDATES: Candidate[] = [
@@ -89,8 +85,18 @@ export function HeroPhotoPicker({ filter, scaleMobile }: { filter: string; scale
 
   const m = MOBILE_CANDIDATES[i % MOBILE_CANDIDATES.length];
   const d = DESKTOP_CANDIDATES[i % DESKTOP_CANDIDATES.length];
-  const max = Math.max(MOBILE_CANDIDATES.length, DESKTOP_CANDIDATES.length);
-  const go = (delta: number) => setI((cur) => { const next = (cur + delta + max) % max; writeParam(next); return next; });
+  // The two lists are separate selections since 2026-10-12 (the user trimmed
+  // the phone list only), so they are different lengths. The arrows wrap on
+  // whichever list this screen is showing — md is 768px, Tailwind's default
+  // — and ?foto=N means "photo N on this device".
+  const go = (delta: number) =>
+    setI((cur) => {
+      const wide = typeof window !== 'undefined' && window.matchMedia('(min-width: 768px)').matches;
+      const len = wide ? DESKTOP_CANDIDATES.length : MOBILE_CANDIDATES.length;
+      const next = (((cur % len) + delta) % len + len) % len;
+      writeParam(next);
+      return next;
+    });
 
   const btn =
     'grid h-8 w-8 place-items-center rounded-full text-paper text-[1.25rem] leading-none transition-colors hover:bg-paper/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold md:h-10 md:w-10 md:text-[1.6rem]';
