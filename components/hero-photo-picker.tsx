@@ -37,16 +37,16 @@ export const MOBILE_CANDIDATES: Candidate[] = [
   // All nine are landscape, so a phone's 4:5 frame keeps only a ~35% slice of
   // the width: the x value is the whole crop. Set from the contact sheet.
   { src: '/hero/cand/c06.webp', pos: '50% 50%' }, // hall, rows standing
+  { src: '/photos/story-khutbah.webp', pos: '70% 25%' }, // imam at the minbar
   { src: '/photos/community/mother-child.webp', pos: '50% 30%' },
   { src: '/hero/volunteers-gateiftar-4x5.jpg', pos: '50% 40%' },
   { src: '/hero/cand/c01.webp', pos: '0% 30%' }, // imam from behind, LEFT edge; hall right (file mirrored 2026-10-11, user: "imam looks on left")
   { src: '/hero/cand/c02.webp', pos: '14% 45%' }, // imam at the lectern, far left
   { src: '/hero/cand/c07.webp', pos: '45% 50%' }, // hall, front row + volunteers
-  { src: '/hero/cand/c08.webp', pos: '50% 70%' }, // Sørligata door, umbrellas; people at the foot
   // ── added 2026-10-12 (user: "add m2 and m3"), portrait sources, crops
   // tuned so the subject stands in the clear top half above the headline ──
+  { src: '/hero/cand/c08.webp', pos: '50% 70%' }, // Sørligata door, umbrellas; people at the foot
   { src: '/photos/svc-shahada-adhan-phone.webp', pos: '35% 30%' }, // the adhan, crescent behind
-  { src: '/photos/story-khutbah.webp', pos: '70% 25%' }, // imam at the minbar
 ];
 
 export const DESKTOP_CANDIDATES: Candidate[] = [
