@@ -43,6 +43,10 @@ export const MOBILE_CANDIDATES: Candidate[] = [
   { src: '/hero/cand/c06.webp', pos: '50% 50%' }, // hall, rows standing
   { src: '/hero/cand/c07.webp', pos: '45% 50%' }, // hall, front row + volunteers
   { src: '/hero/cand/c08.webp', pos: '50% 70%' }, // Sørligata door, umbrellas; people at the foot
+  // ── added 2026-10-12 (user: "add m2 and m3"), portrait sources, crops
+  // tuned so the subject stands in the clear top half above the headline ──
+  { src: '/photos/svc-shahada-adhan-phone.webp', pos: '35% 30%' }, // the adhan, crescent behind
+  { src: '/photos/story-khutbah.webp', pos: '70% 25%' }, // imam at the minbar
 ];
 
 export const DESKTOP_CANDIDATES: Candidate[] = [
