@@ -94,7 +94,10 @@ export async function CalendarDownload() {
              WHEN THE FOURTH MONTH ARRIVES, the count-proof answer is one
              column — three or four or twelve all read as a list, which is
              the same conclusion the desktop register above reached. */}
-          <ul className="self-center border-t border-ink max-md:mt-2 max-md:grid max-md:grid-cols-2 max-md:gap-2 max-md:border-t-0 md:col-span-7">
+          {/* Phones: one month per row, in calendar order, 8px apart (user,
+             2026-10-14: "4 boxes vertically stacked … ascending order … not so
+             much space in between"). Was a 2×2 grid. Laptop unchanged. */}
+          <ul className="self-center border-t border-ink max-md:mt-2 max-md:flex max-md:flex-col max-md:gap-2 max-md:border-t-0 md:col-span-7">
             {shown.map((key) => {
               const label = fmt.format(new Date(`${key}-01T00:00:00`));
               const ready = available.has(key);

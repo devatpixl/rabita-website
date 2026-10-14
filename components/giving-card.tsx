@@ -624,7 +624,7 @@ const TOTAL_STEPS = 3;
       {/* Payment marks in place of the tax-deduction line (client request
          2026-08-30). Monochrome, so five brands read as one quiet row. */}
       <footer className={cn('border-t border-rule bg-paper-2/40', compact ? 'px-5 py-2' : cn('px-4 py-2 max-sm:py-1.5 sm:px-6 sm:py-3', fit && FIT.footer))}>
-        <PaymentLogos label={t('paymentLogosAria')} more={t('paymentLogosMore')} />
+        <PaymentLogos label={t('paymentLogosAria')} />
       </footer>
     </div>
   );
@@ -1195,37 +1195,29 @@ function MethodMark({
 // brand orange.
 // ─────────────────────────────────────────────────────────────────
 const PAYMENT_MARKS = [
-  { key: 'vipps', name: 'Vipps', w: 'w-16' },
-  { key: 'visa', name: 'Visa', w: 'w-12' },
-  { key: 'mastercard', name: 'Mastercard', w: 'w-9' },
-  // phoneOnly:false — the two wallets come off below sm. Five marks are
-  // 276px of logo plus 80px of gaps in a ~308px strip, so the row wrapped to
-  // two lines on every phone. Vipps, Visa and Mastercard are the three that
-  // answer "can I pay the way I normally do"; the wallets are named in full
-  // on the payment step two taps later, and the trailing "og flere" says
-  // they exist.
-  { key: 'applepay', name: 'Apple Pay', w: 'w-12', phone: false },
-  { key: 'googlepay', name: 'Google Pay', w: 'w-20', phone: false },
+  // `w` from sm up (unchanged); `wPhone` below sm. ALL FIVE ON PHONES since
+  // 2026-10-14 (client, via the user: he did not like «AND MORE» — "put
+  // logos of what left, but make sure it doesn't go out of frame"). The row
+  // had dropped the two wallets below sm because five marks at laptop size
+  // are 276px of logo + 80px of gaps in a ~308px strip and wrapped. At phone
+  // size they are 216px + 4×10px of gaps = 256px, one line, inside the
+  // strip down to a 320px screen. Laptop sizes untouched.
+  { key: 'vipps', name: 'Vipps', w: 'w-16', wPhone: 'max-sm:w-12' },
+  { key: 'visa', name: 'Visa', w: 'w-12', wPhone: 'max-sm:w-9' },
+  { key: 'mastercard', name: 'Mastercard', w: 'w-9', wPhone: 'max-sm:w-7' },
+  { key: 'applepay', name: 'Apple Pay', w: 'w-12', wPhone: 'max-sm:w-10' },
+  { key: 'googlepay', name: 'Google Pay', w: 'w-20', wPhone: 'max-sm:w-16' },
 ] as const;
 
-function PaymentLogos({ label, more }: { label: string; more: string }) {
+function PaymentLogos({ label }: { label: string }) {
   return (
-    <ul aria-label={label} className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 max-sm:gap-x-4">
+    <ul aria-label={label} className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 max-sm:flex-nowrap max-sm:gap-x-2.5">
       {PAYMENT_MARKS.map((m) => (
-        <li
-          key={m.key}
-          className={cn('flex items-center', 'phone' in m && m.phone === false && 'max-sm:hidden')}
-          role="img"
-          aria-label={m.name}
-        >
+        <li key={m.key} className="flex shrink-0 items-center" role="img" aria-label={m.name}>
           {/* eslint-disable-next-line @next/next/no-img-element -- static same-origin SVG */}
-          <img src={`/payments/${m.key}.svg`} alt="" className={cn('h-8 object-contain max-sm:h-6', m.w)} aria-hidden />
+          <img src={`/payments/${m.key}.svg`} alt="" className={cn('h-8 object-contain max-sm:h-5', m.w, m.wPhone)} aria-hidden />
         </li>
       ))}
-      {/* Phones only, and deliberately text rather than a sixth mark: a
-         display:none logo leaves the accessibility tree with it, so without
-         this line a phone would claim Rabita takes three methods. */}
-      <li className="hidden font-mono text-[10px] uppercase tracking-[0.12em] text-ink-60 max-sm:block">{more}</li>
     </ul>
   );
 }
